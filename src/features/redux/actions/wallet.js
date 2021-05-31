@@ -146,28 +146,6 @@ const generateProviderOptions = (wallet, clients) => {
                     },
                 },
             },
-            'custom-binance': {
-                display: {
-                    name: 'Binance',
-                    description: 'Binance Chain Wallet',
-                    logo: require('../../../images/wallets/binance-wallet.png').default,
-                },
-                package: 'binance',
-                connector: async (ProviderPackage, options) => {
-                    const provider = window.BinanceChain;
-                    await provider.enable();
-                    return provider;
-                },
-            },
-            'custom-math': {
-                display: {
-                    name: 'Math',
-                    description: 'Math Wallet',
-                    logo: require('../../../images/wallets/math-wallet.svg').default,
-                },
-                package: 'math',
-                connector: connectors.injected,
-            },
             'custom-twt': {
                 display: {
                     name: 'Trust',
@@ -185,7 +163,30 @@ const generateProviderOptions = (wallet, clients) => {
                 },
                 package: 'safepal',
                 connector: connectors.injected,
-            }};
+            },
+            'custom-math': {
+                display: {
+                    name: 'Math',
+                    description: 'Math Wallet',
+                    logo: require('../../../images/wallets/math-wallet.svg').default,
+                },
+                package: 'math',
+                connector: connectors.injected,
+            },
+            'custom-binance': {
+                display: {
+                    name: 'Binance',
+                    description: 'Binance Chain Wallet',
+                    logo: require('../../../images/wallets/binance-wallet.png').default,
+                },
+                package: 'binance',
+                connector: async (ProviderPackage, options) => {
+                    const provider = window.BinanceChain;
+                    await provider.enable();
+                    return provider;
+                },
+            },
+        };
 
         const newlist = []
         for(const key in list) {
