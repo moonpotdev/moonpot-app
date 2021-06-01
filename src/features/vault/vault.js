@@ -37,20 +37,23 @@ const Vault = () => {
     const [withdrawOpen, setWithdrawOpen] = React.useState(false);
 
     let { id } = useParams();
-    let vault = {};
-    const vaultReducer = useSelector(state => state.vaultReducer);
+    let item = {};
+    const {vault, wallet} = useSelector(state => ({
+        vault: state.vaultReducer,
+        wallet: state.walletReducer,
+    }));
 
     React.useEffect(() => {
         dispatch(reduxActions.vault.fetchPools(false));
         dispatch(reduxActions.wallet.fetchRpc());
     }, [dispatch]);
 
-    vault = getVault(vaultReducer.pools, id);
+    item = getVault(vault.pools, id);
 
-    if(vault) {
+    if(item) {
         isLoading = false;
     } else {
-        if(vaultReducer.lastUpdated > 0) {
+        if(vault.lastUpdated > 0) {
             history.push('/error');
         }
     }
@@ -63,7 +66,7 @@ const Vault = () => {
             </Container>
             ) : (
             <Container maxWidth="lg">
-                <Typography className={classes.title}>Deposit <span>{vault.name}</span>, earn 147% APY and a chance to win $587,338</Typography>
+                <Typography className={classes.title}>Deposit <span>{item.name}</span>, earn 147% APY and a chance to win $587,338</Typography>
                 <Box className={classes.potItem}>
                     <Grid container>
                         <Grid item xs={4}>
@@ -80,12 +83,16 @@ const Vault = () => {
                             <Typography className={classes.subTitle} align={'right'} style={{textDecoration: 'underline'}}>Interest Rate</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography className={classes.potUsd}><span>Win</span> $14,625 in {vault.name}</Typography>
+                            <Typography className={classes.potUsd}><span>Win</span> $14,625 in {item.name}</Typography>
                             <Typography className={classes.potCrypto}>USD value of <span>16,400 Cake</span> prize</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                                <TextField className={classes.input} placeholder="Enter Cake Amount" InputProps={{disableUnderline: true, classes: {root: classes.inputRoot}}} />
+                            <TextField disabled={!wallet.address} className={classes.input} placeholder="Enter Cake Amount" InputProps={{disableUnderline: true, classes: {root: classes.inputRoot}}} />
+                            {wallet.address ? (
                                 <Button className={classes.actionBtn} variant={'contained'} color="primary">Deposit</Button>
+                            ) : (
+                                <Button className={classes.actionBtn} variant={'contained'} color="primary">Connect Wallet</Button>
+                            )}
                         </Grid>
                         <Grid item xs={12}>
                             <Typography className={classes.timelockRemaining}>Two Weeks</Typography>
@@ -99,8 +106,13 @@ const Vault = () => {
                         <AnimateHeight duration={ 500 } height={ withdrawOpen ? 'auto' : 0 }>
                             <Grid item xs={12}>
                                 <Typography className={classes.withdrawPenaltyWarning}>You can withdraw upto <span>2.52 CAKE</span> without any Fairplay Penalty.</Typography>
-                                <TextField className={classes.input} placeholder="2.52 CAKE" InputProps={{disableUnderline: true, classes: {root: classes.inputRoot}}} />
-                                <Button className={classes.actionBtn} variant={'contained'} color="primary">Withdraw</Button>
+                                <TextField disabled={!wallet.address} className={classes.input} placeholder="2.52 CAKE" InputProps={{disableUnderline: true, classes: {root: classes.inputRoot}}} />
+                                {wallet.address ? (
+                                    <Button className={classes.actionBtn} variant={'contained'} color="primary">Withdraw</Button>
+                                ) : (
+                                    <Button className={classes.actionBtn} variant={'contained'} color="primary">Connect Wallet</Button>
+                                )}
+
                             </Grid>
                         </AnimateHeight>
 
