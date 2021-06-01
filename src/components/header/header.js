@@ -13,18 +13,19 @@ import {
 import styles from "./styles"
 import WalletContainer from "./components/WalletContainer";
 import CustomDropdown from "../customDropdown";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles(styles);
 
 const Header = () => {
+    const { i18n } = useTranslation();
     const history = useHistory();
     const dispatch = useDispatch();
     const walletReducer = useSelector(state => state.walletReducer);
     const classes = useStyles();
 
     const handleLanguageSwitch = (value) => {
-        dispatch(reduxActions.wallet.setLanguage(value));
-        history.push('/');
+        i18n.changeLanguage(value).then(() => dispatch(reduxActions.wallet.setLanguage(value)));
     }
 
     const handleCurrencySwitch = (value) => {
