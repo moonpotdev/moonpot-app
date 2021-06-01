@@ -7,6 +7,7 @@ import {Button, Container, Grid, makeStyles, Typography} from "@material-ui/core
 import Box from '@material-ui/core/Box';
 import styles from "./styles"
 import {isEmpty} from "../../helpers/utils";
+import {Trans, useTranslation} from "react-i18next";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -45,6 +46,7 @@ const UseSortableData = (items, config = null) => {
 };
 
 const Dashboard = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const {vault, wallet} = useSelector(state => ({
         vault: state.vaultReducer,
@@ -86,8 +88,8 @@ const Dashboard = () => {
             return (
                 <React.Fragment>
                     <Grid item xs={7} className={classes.empty}>
-                        <Typography variant={"body1"}>You don't have any finished Pots yet.</Typography>
-                        <Typography variant={"body1"}>Ziggy will let you know about them here, as soon as you do.</Typography>
+                        <Typography variant={"body1"}>{t('DashboardEmpty1')}</Typography>
+                        <Typography variant={"body1"}>{t('DashboardEmpty2')}</Typography>
                     </Grid>
                     <Grid item xs={5}>
                         <img alt="Ziggy" src={require('../../images/ziggy/emptydeposit.svg').default} />
@@ -107,20 +109,20 @@ const Dashboard = () => {
                             <Grid item xs={12}>
                                 <Box display={"flex"}>
                                     <Box mr={5} mb={2} className={classes.split}>
-                                        <Typography variant={"h1"} align={"right"}>16.4k CAKE</Typography>
-                                        <Typography variant={"h3"} align={"right"}>CAKE PRIZE</Typography>
+                                        <Typography variant={"h2"} align={"right"}>16.4k {item.rewardToken}</Typography>
+                                        <Typography variant={"h3"} align={"right"}>{item.name} {t('prize')}</Typography>
                                         <Typography className={classes.seperator} variant={"h2"} align={"right"}>3d 23h 14min</Typography>
-                                        <Typography variant={"h3"} align={"right"}>Next Draw</Typography>
+                                        <Typography variant={"h3"} align={"right"}>{t('nextDraw')}</Typography>
                                         <Typography className={classes.seperator} variant={"h2"} align={"right"}>May 14 2021</Typography>
-                                        <Typography variant={"h3"} align={"right"}>My Fairplay Unlock</Typography>
+                                        <Typography variant={"h3"} align={"right"}>{t('fairplayUnlock')}</Typography>
                                     </Box>
                                     <Box ml={5} mb={2} className={classes.split}>
-                                        <Typography variant={"h2"}>2.52 CAKE</Typography>
-                                        <Typography variant={"h3"}>My Deposit</Typography>
+                                        <Typography variant={"h2"}>2.52 {item.depositToken}</Typography>
+                                        <Typography variant={"h3"}>{t('myDeposit')}</Typography>
                                         <Typography className={classes.seperator} variant={"h2"}>147% APY</Typography>
-                                        <Typography variant={"h3"}>My Interest Rate</Typography>
+                                        <Typography variant={"h3"}>{t('interestRate')}</Typography>
                                         <Typography className={classes.seperator} variant={"h2"}>1 in 420000</Typography>
-                                        <Typography variant={"h3"}>My Odds</Typography>
+                                        <Typography variant={"h3"}>{t('myOdds')}</Typography>
                                     </Box>
                                 </Box>
                             </Grid>
@@ -128,13 +130,13 @@ const Dashboard = () => {
                                 <Grid container>
                                     <Grid item xs={6}>
                                         <Box p={1}>
-                                            <Button className={classes.btn} variant={'contained'} color="primary">Withdraw</Button>
+                                            <Button className={classes.btn} variant={'contained'} color="primary">{t('buttons.withdraw')}</Button>
                                         </Box>
 
                                     </Grid>
                                     <Grid item xs={6}>
                                         <Box p={1}>
-                                            <Button className={classes.btn} variant={'contained'} color="primary">Deposit More</Button>
+                                            <Button className={classes.btn} variant={'contained'} color="primary">{t('buttons.depositMore')}</Button>
                                         </Box>
                                     </Grid>
                                 </Grid>
@@ -150,14 +152,16 @@ const Dashboard = () => {
         <React.Fragment>
             {wallet.address ? (
                 <Container maxWidth="xl">
-                    <Typography className={classes.h1}>You're in one <span>Moonpot</span>, with<br /> the chance to win $914,279</Typography>
+                    <Typography className={classes.h1}>
+                        <Trans i18nKey="DashboardTitle" values={{count: "one", amount: "$914,279"}} />
+                    </Typography>
                     <Box>
                         <Box display="flex">
                             <Box p={1}>
-                                <Button variant={"outlined"} color={sortConfig.status === 'active' ? 'primary' : 'default'} onClick={() => setFilter({status: 'active'})}>My Active Pots</Button>
+                                <Button variant={"outlined"} color={sortConfig.status === 'active' ? 'primary' : 'default'} onClick={() => setFilter({status: 'active'})}>{t('buttons.myActivePots')}</Button>
                             </Box>
                             <Box p={1}>
-                                <Button variant={"outlined"} color={sortConfig.status !== 'active' ? 'primary' : 'default'} onClick={() => setFilter({status: 'eol'})}>My Finished Pots</Button>
+                                <Button variant={"outlined"} color={sortConfig.status !== 'active' ? 'primary' : 'default'} onClick={() => setFilter({status: 'eol'})}>{t('buttons.myFinishedPots')}</Button>
                             </Box>
                         </Box>
                         <Grid container>
@@ -166,13 +170,13 @@ const Dashboard = () => {
                             )}
                         </Grid>
                         <Box textAlign={"center"} p={3}>
-                            <Button variant={"outlined"} onClick={() => {history.push('/')}}>Play in More Pots</Button>
+                            <Button variant={"outlined"} onClick={() => {history.push('/')}}>{t('buttons.playInMorePots')}</Button>
                         </Box>
                     </Box>
                 </Container>
             ) : (
                 <Box textAlign={"center"} p={3}>
-                    <Button variant={"outlined"}>Connect Wallet</Button>
+                    <Button variant={"outlined"}>{t('buttons.connectWallet')}</Button>
                 </Box>
             )}
         </React.Fragment>

@@ -5,6 +5,7 @@ import reduxActions from "../../../../features/redux/actions";
 import {useDispatch, useSelector} from "react-redux";
 import Loader from "../../../loader";
 import {useHistory} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles(styles);
 
@@ -13,6 +14,7 @@ const formatAddress = (addr) => {
 }
 
 const WalletContainer = () => {
+    const { t } = useTranslation();
     const classes = useStyles();
     const walletReducer = useSelector(state => state.walletReducer);
     const dispatch = useDispatch();
@@ -41,7 +43,7 @@ const WalletContainer = () => {
                             <Box className={classes.icon}>
                                 <img alt="Ziggy" src={require('../../../../images/bsc.svg').default} />
                             </Box>
-                            {walletReducer.address ? formatAddress(walletReducer.address) : 'Connect Wallet'}
+                            {walletReducer.address ? formatAddress(walletReducer.address) : t('buttons.connectWallet')}
                         </React.Fragment>
                     )}
                 </Grid>
@@ -51,7 +53,7 @@ const WalletContainer = () => {
                     <Box className={classes.icon}>
                         <img alt="Ziggy" src={require('../../../../images/ziggy.svg').default} />
                     </Box>
-                    My Moonpots
+                    {t('buttons.myMoonpots')}
                 </Button>
             ) : '' }
         </Box>
