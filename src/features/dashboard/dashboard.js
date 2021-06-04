@@ -1,8 +1,6 @@
 import * as React from "react";
 import { useHistory } from 'react-router-dom';
-import {useDispatch, useSelector} from "react-redux";
-import reduxActions from "../redux/actions";
-
+import {useSelector} from "react-redux";
 import {Button, Container, Grid, makeStyles, Typography} from "@material-ui/core"
 import Box from '@material-ui/core/Box';
 import styles from "./styles"
@@ -47,7 +45,6 @@ const UseSortableData = (items, config = null) => {
 
 const Dashboard = () => {
     const { t } = useTranslation();
-    const dispatch = useDispatch();
     const {vault, wallet} = useSelector(state => ({
         vault: state.vaultReducer,
         wallet: state.walletReducer,
@@ -56,11 +53,6 @@ const Dashboard = () => {
     const history = useHistory();
     const classes = useStyles();
     const {items, sortConfig, setFilter} = UseSortableData(vault.pools, defaultFilter);
-
-    React.useEffect(() => {
-        dispatch(reduxActions.vault.fetchPools());
-        dispatch(reduxActions.wallet.fetchRpc());
-    }, [dispatch]);
 
     const filter = () => {
         if(items.length > 0) {
@@ -130,13 +122,13 @@ const Dashboard = () => {
                                 <Grid container>
                                     <Grid item xs={6}>
                                         <Box p={1}>
-                                            <Button className={classes.btn} variant={'contained'} color="primary">{t('buttons.withdraw')}</Button>
+                                            <Button onClick={() => {history.push({pathname: '/pot/' + (item.id), withdrawOpen: true})}} className={classes.btn} variant={'contained'} color="primary">{t('buttons.withdraw')}</Button>
                                         </Box>
 
                                     </Grid>
                                     <Grid item xs={6}>
                                         <Box p={1}>
-                                            <Button className={classes.btn} variant={'contained'} color="primary">{t('buttons.depositMore')}</Button>
+                                            <Button onClick={() => {history.push('/pot/' + (item.id))}} className={classes.btn} variant={'contained'} color="primary">{t('buttons.depositMore')}</Button>
                                         </Box>
                                     </Grid>
                                 </Grid>

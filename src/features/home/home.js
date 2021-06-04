@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useHistory } from 'react-router-dom';
-import {useDispatch, useSelector} from "react-redux";
-import reduxActions from "../redux/actions";
+import {useSelector} from "react-redux";
 
 import {Button, Container, Grid, makeStyles, Typography} from "@material-ui/core"
 import Box from '@material-ui/core/Box';
@@ -56,7 +55,6 @@ const UseSortableData = (items, config = null) => {
 
 const Home = () => {
     const { t } = useTranslation();
-    const dispatch = useDispatch();
     const {vault} = useSelector(state => ({
         vault: state.vaultReducer,
     }));
@@ -64,11 +62,6 @@ const Home = () => {
     const history = useHistory();
     const classes = useStyles();
     const {items, sortConfig, setFilter} = UseSortableData(vault.pools, defaultFilter);
-
-    React.useEffect(() => {
-        dispatch(reduxActions.vault.fetchPools());
-        dispatch(reduxActions.wallet.fetchRpc());
-    }, [dispatch]);
 
     const filter = () => {
         if(items.length > 0) {

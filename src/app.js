@@ -20,6 +20,8 @@ export default function App() {
     const theme = appTheme();
 
     React.useEffect(() => {
+        dispatch(reduxActions.vault.fetchPools());
+        dispatch(reduxActions.wallet.fetchRpc());
         dispatch(reduxActions.wallet.createWeb3Modal());
     }, [dispatch]);
 
