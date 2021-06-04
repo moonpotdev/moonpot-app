@@ -16,7 +16,7 @@ const Footer = () => {
                     <Typography className={classes.beefy}>{t('footerPoweredBy')} <Link href={"https://beefy.finance"}>Beefy.Finance</Link> <img alt="Beefy Finance" src={require('../../images/beefy.svg').default} /></Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <Button className={classes.footerBtn} variant={'outlined'} color={'primary'}>{t('buttons.ziggyMoonpotGuide')}</Button>
+                    <Button href={"https://docs.moonpot.com"} className={classes.footerBtn} variant={'outlined'} color={'primary'}>{t('buttons.ziggyMoonpotGuide')}</Button>
                     <Button className={classes.footerBtn} variant={'outlined'} color={'primary'}>{t('buttons.moonpotStats')}</Button>
                 </Grid>
                 <Grid className={classes.footerIcons} item xs={12}>

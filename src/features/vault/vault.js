@@ -1,9 +1,8 @@
 import * as React from "react";
-import {useParams} from "react-router";
+import {useLocation, useParams} from "react-router";
 import {useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import AnimateHeight from 'react-animate-height';
-import reduxActions from "../redux/actions";
 import Loader from "../../components/loader";
 import {
     Container,
@@ -33,10 +32,10 @@ const getVault = (pools, id) => {
 
 const Vault = () => {
     const { t } = useTranslation();
-    const dispatch = useDispatch();
+    const location = useLocation();
     const history = useHistory();
     const classes = useStyles();
-    const [withdrawOpen, setWithdrawOpen] = React.useState(false);
+    const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
 
     let { id } = useParams();
     let item = {};
@@ -44,11 +43,6 @@ const Vault = () => {
         vault: state.vaultReducer,
         wallet: state.walletReducer,
     }));
-
-    React.useEffect(() => {
-        dispatch(reduxActions.vault.fetchPools(false));
-        dispatch(reduxActions.wallet.fetchRpc());
-    }, [dispatch]);
 
     item = getVault(vault.pools, id);
 
