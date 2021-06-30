@@ -54,6 +54,7 @@ const styles = (theme) => ({
     empty: {
         color: '#E1DDEA',
         padding: '20px',
+        textAlign: 'center',
         '& .MuiTypography-body1': {
             paddingTop: '10px',
             fontSize: '16px',

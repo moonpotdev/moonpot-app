@@ -127,7 +127,7 @@ const styles = (theme) => ({
     ziggyMaintenance: {
         textAlign: 'center',
         marginTop: '-75px',
-    }
+    },
 });
 
 export default styles;
