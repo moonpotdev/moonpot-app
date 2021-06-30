@@ -79,7 +79,7 @@ const Dashboard = () => {
         if(filtered.length === 0) {
             return (
                 <React.Fragment>
-                    <Grid item xs={7} className={classes.empty}>
+                    <Grid item xs={7} direction="column" alignItems="center" className={classes.empty} >
                         <Typography variant={"body1"}>{t('DashboardEmpty1')}</Typography>
                         <Typography variant={"body1"}>{t('DashboardEmpty2')}</Typography>
                     </Grid>
@@ -156,7 +156,7 @@ const Dashboard = () => {
                                 <Button variant={"outlined"} color={sortConfig.status !== 'active' ? 'primary' : 'default'} onClick={() => setFilter({status: 'eol'})}>{t('buttons.myFinishedPots')}</Button>
                             </Box>
                         </Box>
-                        <Grid container>
+                        <Grid container direction="column" alignItems={"center"}>
                             {items.length === 0 ? '' : (
                                 <ShowMyPots items={items} />
                             )}
