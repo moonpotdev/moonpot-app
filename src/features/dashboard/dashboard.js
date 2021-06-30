@@ -148,7 +148,7 @@ const Dashboard = () => {
                         <Trans i18nKey="DashboardTitle" values={{count: "one", amount: "$914,279"}} />
                     </Typography>
                     <Box>
-                        <Box display="flex">
+                        <Box display="flex" justifyContent="center">
                             <Box p={1}>
                                 <Button variant={"outlined"} color={sortConfig.status === 'active' ? 'primary' : 'default'} onClick={() => setFilter({status: 'active'})}>{t('buttons.myActivePots')}</Button>
                             </Box>

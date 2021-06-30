@@ -16,6 +16,15 @@ const appTheme = () => {
                     },
                 },
             },
+            MuiGrid: {
+                container: {
+                    width: '100%',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    boxSizing: 'border-box',
+                    justifyContent: 'center',
+                },
+            },
             MuiButton: {
                 root: {
                     borderRadius: 20,
