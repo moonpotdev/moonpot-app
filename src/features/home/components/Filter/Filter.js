@@ -20,7 +20,7 @@ const Filter = ({sortConfig, setFilter}) => {
 
     return (
         <React.Fragment>
-            <Box display="flex">
+            <Box display="flex" justifyContent="center">
                 <Box p={1}>
                     <Button variant={"outlined"} color={state.vault === 'main' ? 'primary' : 'default'} onClick={() => handleChange('vault', 'main')}>{t('buttons.mainPots')}</Button>
                 </Box>
