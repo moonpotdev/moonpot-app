@@ -18,7 +18,7 @@
   "homeJoinCommunityTitle": "Join the <br />Community",
   "homeJoinCommunityBody": "There are no community pots yet.<br />You can suggest a new pot in one of our channels, or join our devs to build one for your favorite project.",
   "vaultLoadingMessage": "Getting vault data...",
-  "vaultTitle": "Deposit <span>{{name}}</span>, earn {{apy}} APY and a chance to win {{amount}}",
+  "vaultTitle": "Deposit <span>{{name}}</span>, earn {{apy}} APY<br /> and a chance to win {{amount}}",
   "vaultWithdrawPenaltyWarning": "You can withdraw upto <span>{{amount}} {{coin}}</span> without any Fairplay Penalty.",
   "DashboardEmpty1": "You don't have any finished Pots yet.",
   "DashboardEmpty2": "Ziggy will let you know as soon as you do.",
