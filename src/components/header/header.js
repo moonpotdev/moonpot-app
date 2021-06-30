@@ -46,10 +46,6 @@ const Header = () => {
                     </Box>
                     <List component="nav" aria-labelledby="main navigation" className={classes.navDisplayFlex}>
                         <WalletContainer />
-                        <Box textAlign={'right'}>
-                            <CustomDropdown list={{'usd': 'USD', 'eur': 'EUR', 'gbp': 'GBP'}} selected={walletReducer.currency} handler={(e) => {handleCurrencySwitch(e.target.value)}} css={{marginLeft: 10}} />
-                            <CustomDropdown list={{'en': 'EN', 'fr': 'FR'}} selected={walletReducer.language} handler={(e) => {handleLanguageSwitch(e.target.value)}} css={{marginLeft: 10}} />
-                        </Box>
                     </List>
                 </Container>
             </Toolbar>
