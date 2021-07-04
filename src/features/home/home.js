@@ -1,11 +1,9 @@
 import * as React from "react";
 import { useHistory } from 'react-router-dom';
 import {useSelector} from "react-redux";
-
 import {Button, Container, Grid, makeStyles, Typography} from "@material-ui/core"
 import Box from '@material-ui/core/Box';
 import styles from "./styles"
-import {isEmpty} from "../../helpers/utils";
 import Filter from "./components/Filter";
 import {Trans, useTranslation} from "react-i18next";
 
@@ -15,21 +13,28 @@ const defaultFilter = {
     direction: 'desc',
     deposited: false,
     vault: 'main', // main or community
+    retired: false,
 }
 
-const UseSortableData = (items, config = null) => {
-    const storage = localStorage.getItem('moonSortConfig');
-    const [sortConfig, setSortConfig] = React.useState(storage === null ? config : JSON.parse(storage));
+const Home = () => {
+    const { t } = useTranslation();
+    const {vault} = useSelector(state => ({
+        vault: state.vaultReducer,
+    }));
+
+    const history = useHistory();
+    const classes = useStyles();
+    const storage = localStorage.getItem('homeSortConfig');
+    const [sortConfig, setSortConfig] = React.useState(storage === null ? defaultFilter : JSON.parse(storage));
+    const [filtered, setFiltered] = React.useState([]);
 
     React.useEffect(() => {
-        localStorage.setItem('moonSortConfig', JSON.stringify(sortConfig));
-    }, [sortConfig]);
+        localStorage.setItem('homeSortConfig', JSON.stringify(sortConfig));
 
-    const sortedItems = React.useMemo(() => {
-        let sortableItems = isEmpty(items) ? [] : [...items];
+        let data = [];
 
-        if (sortConfig !== null) {
-            sortableItems.sort((a, b) => {
+        const sorted = (items) => {
+            return items.sort((a, b) => {
                 if(sortConfig.key === 'name') {
                     if (a[sortConfig.key].toUpperCase() < b[sortConfig.key].toUpperCase()) {
                         return sortConfig.direction === 'asc' ? -1 : 1;
@@ -43,49 +48,35 @@ const UseSortableData = (items, config = null) => {
                 }
             });
         }
-        return sortableItems;
-    }, [items, sortConfig]);
+        const check = (item) => {
+            if(item.status !== (sortConfig.retired ? 'eol' : 'active')) {
+                return false;
+            }
 
-    const setFilter = (obj) => {
-        setSortConfig({ ...sortConfig, ...obj});
-    }
+            if(sortConfig.deposited && item.deposited === 0) {
+                return false;
+            }
 
-    return { items: sortedItems, sortConfig, setFilter};
-};
+            if(sortConfig.vault !== 'all' && sortConfig.vault !== item.vaultType) {
+                return false;
+            }
 
-const Home = () => {
-    const { t } = useTranslation();
-    const {vault} = useSelector(state => ({
-        vault: state.vaultReducer,
-    }));
-
-    const history = useHistory();
-    const classes = useStyles();
-    const {items, sortConfig, setFilter} = UseSortableData(vault.pools, defaultFilter);
-
-    const filter = () => {
-        if(items.length > 0) {
-
-            const filtered = items.filter((item) => {
-                if(item.status !== (sortConfig.retired ? 'eol' : 'active')) {
-                    return false;
-                }
-
-                if(sortConfig.deposited && item.deposited === 0) {
-                    return false;
-                }
-
-                if(sortConfig.vault !== 'all' && sortConfig.vault !== item.vaultType) {
-                    return false;
-                }
-
-                return item;
-            });
-
-            return filtered;
+            return item;
         }
-        return false;
-    };
+
+        for (const [, item] of Object.entries(vault.pools)) {
+            if(check(item)) {
+                data.push(item);
+            }
+        }
+
+        if (sortConfig !== null) {
+            data = sorted(data);
+        }
+
+        setFiltered(data);
+
+    }, [sortConfig, vault.pools]);
 
     return (
         <React.Fragment>
@@ -94,10 +85,10 @@ const Home = () => {
                     <Trans i18nKey="homeTitle" values={{amount: '$914,279'}} />
                 </Typography>
                 <Box>
-                    <Filter sortConfig={sortConfig} setFilter={setFilter} />
+                    <Filter sortConfig={sortConfig} setSortConfig={setSortConfig} defaultFilter={defaultFilter} />
                     <Grid container>
-                    {items.length === 0 ? '' : (
-                        filter().map(item => (
+                    {filtered.length === 0 ? '' : (
+                        filtered.map(item => (
                             <Box className={classes.potItem} key={item.id}>
                                 <Grid container>
                                     <Grid item xs={4}>
@@ -115,7 +106,7 @@ const Home = () => {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Typography className={classes.potUsd}><span>{t('win')}</span> $14,625 in {item.name}</Typography>
-                                        <Typography className={classes.potCrypto}>USD {t('valueOf')} <span>0.27 BTC-LP</span> {t('prize')}</Typography>
+                                        <Typography className={classes.potCrypto}>USD {t('value')} <span>0.27 BTC-LP</span> {t('prize')}</Typography>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Button className={classes.play} variant={'contained'} color="primary" onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.play')}</Button>
