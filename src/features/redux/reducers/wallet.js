@@ -1,3 +1,6 @@
+import {config} from '../../../config/config';
+import Web3 from "web3";
+
 const initialLanguage = () => {
     const storage = localStorage.getItem('site_language');
     return storage === null ? 'en' : storage;
@@ -8,14 +11,46 @@ const initialCurrency = () => {
     return storage === null ? 'usd' : storage;
 }
 
+const initialNetwork = () => {
+    const storage = localStorage.getItem('network');
+    return storage === null ? 'bsc' : storage;
+}
+
+const initialRpc = () => {
+    const rpc = [];
+
+    for(let network in config) {
+        const c = config[network].rpc;
+        rpc[network] = new Web3(c[~~(c.length * Math.random())]);
+    }
+
+    return rpc;
+}
+
+const initialAction = () => {
+    return {result: null, data: null};
+}
+
+const initialExplorer = () => {
+    const explorers = [];
+
+    for(let key in config) {
+        explorers[key] = config[key].explorerUrl;
+    }
+
+    return explorers;
+}
+
 const initialState = {
-    network: 'bsc',
+    network: initialNetwork(),
     language: initialLanguage(),
     currency: initialCurrency(),
-    rpc: null,
+    rpc: initialRpc(),
     web3modal: null,
     address: null,
     pending: false,
+    explorer: initialExplorer(),
+    action: initialAction(),
 }
 
 const walletReducer = (state = initialState, action) => {
@@ -41,10 +76,12 @@ const walletReducer = (state = initialState, action) => {
                 ...state,
                 web3modal: action.payload.data,
             }
-        case "WALLET_RPC":
+        case "SET_NETWORK":
             return {
                 ...state,
-                rpc: action.payload.rpc,
+                network: action.payload.network,
+                clients: action.payload.clients,
+                rpc: false,
             }
         case "SET_LANGUAGE":
             return {
@@ -55,6 +92,16 @@ const walletReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currency: action.payload.currency,
+            }
+        case "WALLET_ACTION":
+            return {
+                ...state,
+                action: {result: action.payload.result, data: action.payload.data},
+            }
+        case "WALLET_ACTION_RESET":
+            return {
+                ...state,
+                action: initialAction(),
             }
         default:
             return state

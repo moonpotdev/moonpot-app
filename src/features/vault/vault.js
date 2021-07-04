@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useLocation, useParams} from "react-router";
 import {useHistory} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import AnimateHeight from 'react-animate-height';
 import Loader from "../../components/loader";
 import {
@@ -15,20 +15,9 @@ import {
 import styles from "./styles"
 import {ArrowDropDown, ArrowDropUp} from '@material-ui/icons';
 import {Trans, useTranslation} from "react-i18next";
+import {isEmpty} from "../../helpers/utils";
 
 const useStyles = makeStyles(styles);
-let isLoading = true;
-
-const getVault = (pools, id) => {
-    if(pools.length === 0) {
-        return false;
-    }
-    for(let key in pools) {
-        if(pools[key].id === id) {
-            return pools[key];
-        }
-    }
-}
 
 const Vault = () => {
     const { t } = useTranslation();
@@ -38,21 +27,29 @@ const Vault = () => {
     const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
 
     let { id } = useParams();
-    let item = {};
     const {vault, wallet} = useSelector(state => ({
         vault: state.vaultReducer,
         wallet: state.walletReducer,
     }));
 
-    item = getVault(vault.pools, id);
+    const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = React.useState(true);
+    const [item, setVaultData] = React.useState(null);
+    const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
 
-    if(item) {
-        isLoading = false;
-    } else {
-        if(vault.lastUpdated > 0) {
+    React.useEffect(() => {
+        if(!isEmpty(vault.pools) && vault.pools[id]) {
+            setVaultData(vault.pools[id]);
+        } else {
             history.push('/error');
         }
-    }
+    }, [vault.pools, id, history]);
+
+    React.useEffect(() => {
+        if(item) {
+            setIsLoading(false);
+        }
+    }, [item]);
 
     return (
         <div className="App">
@@ -83,7 +80,7 @@ const Vault = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Typography className={classes.potUsd}><span>{t('win')}</span> $14,625 in {item.name}</Typography>
-                                <Typography className={classes.potCrypto}>USD {t('valueOf')} <span>16,400 Cake</span> {t('prize')}</Typography>
+                                <Typography className={classes.potCrypto}>USD {t('value')} <span>16,400 Cake</span> {t('prize')}</Typography>
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField disabled={!wallet.address} className={classes.input} placeholder={t('enterCoinAmount', {coin: item.depositToken})} InputProps={{disableUnderline: true, classes: {root: classes.inputRoot}}} />

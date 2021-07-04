@@ -24,7 +24,7 @@
   "DashboardEmpty2": "Ziggy will let you know as soon as you do.",
   "DashboardTitle": "You're in {{count}} <span>Moonpot</span>, with<br /> the chance to win {{amount}}",
   "win": "Win",
-  "valueOf": "value of",
+  "value": "value of",
   "prize": "prize",
   "withdraw": "Withdraw",
   "nextWeeklyDraw": "Next Weekly Draw",

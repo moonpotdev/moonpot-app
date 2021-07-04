@@ -1,16 +1,19 @@
 import {config} from '../../../config/config';
-import {WALLET_CONNECT_BEGIN, WALLET_CONNECT_DONE, WALLET_CREATE_MODAL, WALLET_RPC} from "../constants";
+import {
+    WALLET_ACTION,
+    WALLET_ACTION_RESET,
+    WALLET_CONNECT_BEGIN,
+    WALLET_CONNECT_DONE,
+    WALLET_CREATE_MODAL,
+} from "../constants";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal, {connectors} from "web3modal";
 const Web3 = require('web3');
+const erc20Abi = require('../../../config/abi/erc20.json');
+const vaultAbi = require('../../../config/abi/vault.json');
 
-const fetchRpc = () => {
-    return async (dispatch) => {
-        const c = config.rpc;
-        const rpc = await new Web3(c[~~(c.length * Math.random())]);
-
-        return dispatch({type: WALLET_RPC, payload: {rpc: rpc}});
-    };
+const getClientsForNetwork = async (net) => {
+    return config[net].rpc;
 }
 
 const setLanguage = (value) => {
@@ -25,6 +28,43 @@ const setCurrency = (value) => {
         localStorage.setItem('site_currency', value);
         dispatch({type: "SET_CURRENCY", payload: {currency: value}});
     }
+}
+
+const getAvailableNetworks = () => {
+    const names = [];
+    const ids = [];
+
+    for(const net in config) {
+        names.push(net);
+        ids.push(config[net].chainId);
+    }
+
+    return [names, ids];
+}
+
+const checkNetworkSupport = (networkId) => {
+    const [, ids] = getAvailableNetworks();
+    return ids.includes(networkId);
+}
+
+const getNetworkAbbr = (networkId) => {
+    const [names, ids] = getAvailableNetworks();
+    return ids.includes(networkId) ? names[ids.indexOf(networkId)] : null;
+}
+
+const setNetwork = (net) => {
+    console.log('redux setNetwork called.');
+
+    return async (dispatch, getState) => {
+        const state = getState();
+        if(state.walletReducer.network !== net) {
+            const clients = await getClientsForNetwork(net);
+            localStorage.setItem('network', net);
+
+            dispatch({type: "SET_NETWORK", payload: {network: net, clients: clients}});
+            dispatch(createWeb3Modal());
+        }
+    };
 }
 
 const connect = () => {
@@ -54,7 +94,10 @@ const connect = () => {
             provider.on('chainChanged', async (chainId) => {
                 console.log('chainChanged');
                 const networkId = web3.utils.isHex(chainId) ? web3.utils.hexToNumber(chainId) : chainId;
-                if(networkId !== config.chainId) {
+                if(checkNetworkSupport(networkId)) {
+                    const net = getNetworkAbbr(networkId);
+                    dispatch(setNetwork(net));
+                } else {
                     await close();
                     console.log('show nice modal: Wallet network not supported: ' + networkId);
                 }
@@ -82,14 +125,20 @@ const connect = () => {
                 networkId = 56;
             }
 
-            if(networkId === config.chainId) {
+            if(networkId === config[state.walletReducer.network].chainId) {
                 const accounts = await web3.eth.getAccounts();
-                dispatch({type: WALLET_RPC, payload: {rpc: web3}});
+                //dispatch({type: WALLET_RPC, payload: {rpc: web3}}); => TODO: set same rpc as connected wallet to rpc[network] for consistency
                 dispatch({type: WALLET_CONNECT_DONE, payload: {address: accounts[0]}});
             } else {
                 await close();
-                await provider.request({method: 'wallet_addEthereumChain', params: [config.walletSettings]});
-                dispatch(connect());
+                if(checkNetworkSupport(networkId) && provider) {
+                    await provider.request({method: 'wallet_addEthereumChain', params: [config[state.walletReducer.network].walletSettings]});
+                    dispatch(connect())
+                } else {
+                    // todo: show error to user for unsupported network
+                    alert('show nice modal: Wallet network not supported: ' + networkId);
+                    throw Error('Network not supported, check chainId.');
+                }
             }
         } catch(err) {
             console.log('connect error', err);
@@ -109,10 +158,137 @@ const disconnect = () => {
     }
 }
 
+const approval = (network, tokenAddr, contractAddr) => {
+    return async (dispatch, getState) => {
+        dispatch({type: WALLET_ACTION_RESET});
+        const state = getState();
+        const address = state.walletReducer.address;
+        const provider = await state.walletReducer.web3modal.connect();
+
+        if(address && provider) {
+            const web3 = await new Web3(provider);
+            const contract = new web3.eth.Contract(erc20Abi, tokenAddr);
+            const maxAmount = Web3.utils.toWei('8000000000', 'ether');
+
+            contract.methods
+                .approve(contractAddr, maxAmount)
+                .send({ from: address })
+                .on('transactionHash', function (hash) {
+                    dispatch({type: WALLET_ACTION, payload: {result: 'success_pending', data: {spender: contractAddr, maxAmount: maxAmount, hash: hash}}});
+                })
+                .on('receipt', function (receipt) {
+                    dispatch({type: WALLET_ACTION, payload: {result: 'success', data: {spender: contractAddr, maxAmount: maxAmount, receipt: receipt}}});
+                })
+                .on('error', function (error) {
+                    dispatch({type: WALLET_ACTION, payload: {result: 'error', data: {spender: contractAddr, error: error.message}}});
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    }
+}
+
+const deposit = (network, contractAddr, amount, max) => {
+    return async (dispatch, getState) => {
+        dispatch({type: WALLET_ACTION_RESET});
+        const state = getState();
+        const address = state.walletReducer.address;
+        const provider = await state.walletReducer.web3modal.connect();
+
+        if(address && provider) {
+            const web3 = await new Web3(provider);
+            const contract = new web3.eth.Contract(vaultAbi, contractAddr);
+
+            if(max) {
+                contract.methods
+                    .depositAll()
+                    .send({ from: address })
+                    .on('transactionHash', function (hash) {
+                        dispatch({type: WALLET_ACTION, payload: {result: 'success_pending', data: {spender: contractAddr, amount: amount, hash: hash}}});
+                    })
+                    .on('receipt', function (receipt) {
+                        dispatch({type: WALLET_ACTION, payload: {result: 'success', data: {spender: contractAddr, amount: amount, receipt: receipt}}});
+                    })
+                    .on('error', function (error) {
+                        dispatch({type: WALLET_ACTION, payload: {result: 'error', data: {spender: contractAddr, error: error.message}}});
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            } else {
+                contract.methods
+                    .deposit(amount)
+                    .send({ from: address })
+                    .on('transactionHash', function (hash) {
+                        dispatch({type: WALLET_ACTION, payload: {result: 'success_pending', data: {spender: contractAddr, amount: amount, hash: hash}}});
+                    })
+                    .on('receipt', function (receipt) {
+                        dispatch({type: WALLET_ACTION, payload: {result: 'success', data: {spender: contractAddr, amount: amount, receipt: receipt}}});
+                    })
+                    .on('error', function (error) {
+                        dispatch({type: WALLET_ACTION, payload: {result: 'error', data: {spender: contractAddr, error: error.message}}});
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+        }
+    }
+}
+
+const withdraw = (network, contractAddr, amount, max) => {
+    return async (dispatch, getState) => {
+        dispatch({type: WALLET_ACTION_RESET});
+        const state = getState();
+        const address = state.walletReducer.address;
+        const provider = await state.walletReducer.web3modal.connect();
+
+        if (address && provider) {
+            const web3 = await new Web3(provider);
+            const contract = new web3.eth.Contract(vaultAbi, contractAddr);
+
+            if(max) {
+                contract.methods
+                    .withdrawAll()
+                    .send({ from: address })
+                    .on('transactionHash', function (hash) {
+                        dispatch({type: WALLET_ACTION, payload: {result: 'success_pending', data: {spender: contractAddr, amount: amount, hash: hash}}});
+                    })
+                    .on('receipt', function (receipt) {
+                        dispatch({type: WALLET_ACTION, payload: {result: 'success', data: {spender: contractAddr, amount: amount, receipt: receipt}}});
+                    })
+                    .on('error', function (error) {
+                        dispatch({type: WALLET_ACTION, payload: {result: 'error', data: {spender: contractAddr, error: error.message}}});
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            } else {
+                contract.methods
+                    .withdraw(amount)
+                    .send({ from: address })
+                    .on('transactionHash', function (hash) {
+                        dispatch({type: WALLET_ACTION, payload: {result: 'success_pending', data: {spender: contractAddr, amount: amount, hash: hash}}});
+                    })
+                    .on('receipt', function (receipt) {
+                        dispatch({type: WALLET_ACTION, payload: {result: 'success', data: {spender: contractAddr, amount: amount, receipt: receipt}}});
+                    })
+                    .on('error', function (error) {
+                        dispatch({type: WALLET_ACTION, payload: {result: 'error', data: {spender: contractAddr, error: error.message}}});
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+        }
+    }
+}
+
 const createWeb3Modal = () => {
     return async (dispatch, getState) => {
         const state = getState();
-        const clients = config.rpc;
+        const clients = await getClientsForNetwork(state.walletReducer.network);
         const web3Modal = new Web3Modal(generateProviderOptions(state.walletReducer, clients));
 
         dispatch({type: WALLET_CREATE_MODAL, payload: {data: web3Modal}});
@@ -127,8 +303,8 @@ const createWeb3Modal = () => {
 }
 
 const generateProviderOptions = (wallet, clients) => {
-    const networkId = config.chainId;
-    const supported = config.supportedWallets;
+    const networkId = config[wallet.network].chainId;
+    const supported = config[wallet.network].supportedWallets;
 
     const generateCustomConnectors = () => {
         const list = {
@@ -199,19 +375,22 @@ const generateProviderOptions = (wallet, clients) => {
     }
 
     return {
-        network: config.providerName,
+        network: config[wallet.network].providerName,
         cacheProvider: true,
         providerOptions: generateCustomConnectors(),
     }
 }
 
 const obj = {
-    fetchRpc,
+    setNetwork,
     createWeb3Modal,
     connect,
     disconnect,
     setLanguage,
     setCurrency,
+    approval,
+    deposit,
+    withdraw,
 }
 
 export default obj
