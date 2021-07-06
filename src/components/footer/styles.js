@@ -21,8 +21,10 @@ const styles = (theme) => ({
         }
     },
     footerBtn: {
-        width: '100%',
+        width: '184px',
         marginBottom: '20px',
+        color: '#CDCDE4',
+        borderColor: '#CDCDE4',
         [theme.breakpoints.up('sm')]: {
             width: 'auto',
             marginLeft: '10px',

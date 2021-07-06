@@ -35,6 +35,8 @@ const appTheme = () => {
             },
             MuiButton: {
                 root: {
+                    width: '169px',
+                    height: '34px',
                     borderRadius: 20,
                     borderWidth: '2px',
                     color: '#ffffff',
@@ -43,19 +45,22 @@ const appTheme = () => {
                     paddingBottom: '2px',
                 },
                 outlined: {
-                    borderWidth: '2px',
-                    borderColor: '#7F7FB3',
+                    border: '2px solid #7F7FB3',
+                    boxSizing: 'border-box',
+                    borderRadius: '20px',
                     color: '#7F7FB3',
                     fontWeight: 500,
-                    paddingTop: '2px',
-                    paddingBottom: '2px',
+                    fontSize: '15px',
+                    lineHeight: '17.24px',
                 },
                 outlinedPrimary: {
-                    borderWidth: '2px',
-                    borderColor: '#F3BA2E',
+                    border: '2px solid #F3BA2E',
+                    boxSizing: 'border-box',
+                    borderRadius: '20px',
+                    color: '#F3BA2E',
                     fontWeight: 500,
-                    paddingTop: '2px',
-                    paddingBottom: '2px',
+                    fontSize: '15px',
+                    lineHeight: '17.24px',
                     '&:hover': {
                         borderWidth: '2px',
                     }
