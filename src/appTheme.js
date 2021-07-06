@@ -6,13 +6,21 @@ const appTheme = () => {
             primary: {
                 main: '#F3BA2E',
                 contrastText: '#ffffff',
-            }
+            },
+            notFocused: {
+                main: '#7F7FB3',
+            },
+            info: {
+                main: '#CDCDE4',
+                contrastText: '#ffffff',
+            },
+            
         },
         overrides: {
             MuiCssBaseline: {
                 '@global': {
                     body: {
-                        backgroundColor: '#6753DB',
+                        backgroundColor: '#303050',
                     },
                 },
             },
@@ -36,7 +44,8 @@ const appTheme = () => {
                 },
                 outlined: {
                     borderWidth: '2px',
-                    borderColor: '#9F8FFF',
+                    borderColor: '#7F7FB3',
+                    color: '#7F7FB3',
                     fontWeight: 500,
                     paddingTop: '2px',
                     paddingBottom: '2px',
@@ -50,7 +59,7 @@ const appTheme = () => {
                     '&:hover': {
                         borderWidth: '2px',
                     }
-                }
+                },
             },
         },
     });
