@@ -15,8 +15,8 @@
     "play": "Play"
   },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br /> and a chance to win {{amount}}",
-  "homeJoinCommunityTitle": "Join the <br />Community",
-  "homeJoinCommunityBody": "There are no community pots yet.<br />You can suggest a new pot in one of our channels, or join our devs to build one for your favorite project.",
+  "homeJoinCommunityTitle": "Join the Community",
+  "homeJoinCommunityBody": "There are no community pots yet. You can suggest a new pot in one of our <br />channels, or join our devs to build one for your favorite project.",
   "vaultLoadingMessage": "Getting vault data...",
   "vaultTitle": "Deposit <span>{{name}}</span>, earn {{apy}} APY<br /> and a chance to win {{amount}}",
   "vaultWithdrawPenaltyWarning": "You can withdraw upto <span>{{amount}} {{coin}}</span> without any Fairplay Penalty.",

@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import styles from "./styles"
 import Filter from "./components/Filter";
 import {Trans, useTranslation} from "react-i18next";
+import { textAlign } from "@material-ui/system";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -113,7 +114,7 @@ const Home = () => {
                                         <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.play')}</Button>
                                     </Grid>
                                     <Grid item xs={8}>
-                                        <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '10000', amount: '$1000'})}</Typography>
+                                        <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '10,000', amount: '$1000'})}</Typography>
                                     </Grid>
                                 </Grid>
                             </Box>
@@ -124,16 +125,16 @@ const Home = () => {
                                 <Grid container>
                                     <Grid item xs={12}>
                                         <Box className={classes.ziggyMaintenance}>
-                                            <img alt="Ziggy Maintenance" src={require('../../images/ziggy/maintenance.svg').default} />
+                                            <img alt="Ziggy Maintenance" height="100px" src={require('../../images/ziggy/maintenance.svg').default} />
                                         </Box>
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <h1>
-                                            <Trans i18nKey="homeJoinCommunityTitle" />
-                                        </h1>
-                                        <p>
+                                        <Typography className={classes.communityTitle}>
+                                            <Trans i18nKey="homeJoinCommunityTitle"/>
+                                        </Typography>
+                                        <Typography className={classes.communityDescription}>
                                             <Trans i18nKey="homeJoinCommunityBody" />
-                                        </p>
+                                        </Typography>
                                     </Grid>
                                 </Grid>
                             </Box>

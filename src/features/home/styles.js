@@ -78,12 +78,13 @@ const styles = (theme) => ({
         }
     },
     potCrypto: {
-        fontWeight: 500,
-        fontSize: '10px',
-        color: '#ffffff',
+        fontWeight: 700,
+        fontSize: '12px',
+        lineHeight: '20px',
+        color: '#EBF3F9',
         textAlign: 'right',
         '& span': {
-            color: '#DFDDE7',
+            color: '#FFFFFF',
         }
     },
     play: {
@@ -107,33 +108,32 @@ const styles = (theme) => ({
         top: 'calc(50% - 20px/2 + 124px)',
     },
     communityItem: {
-        backgroundColor: '#ffffff',
-        width: '330px',
         margin: '105px auto 0px auto',
         borderRadius: '10px',
         padding: '0 25px',
-        '& h1': {
-            fontWeight: 500,
-            fontSize: '40px',
-            lineHeight: '46px',
-            padding: 0,
-            margin: 0,
-        },
-        '& p': {
-            fontWeight: 500,
-            fontSize: '16px',
-            lineHeight: '30px',
-            letterSpacing: '0.45px',
-            color: '#595465',
-        },
         [theme.breakpoints.up('sm')]: {
             marginLeft: '20px',
             marginRight: '20px',
         },
     },
+    communityTitle: {
+        fontWeight: 400,
+        fontSize: '25px',
+        lineHeight: '36px',
+        color: '#FFFFFF',
+        textAlign: 'center',
+    },
+    communityDescription: {
+        fontWeight: 400,
+        fontSize: '15px',
+        lineHeight: '24px',
+        color: '#C7C3D5',
+        textAlign: 'center',
+    },
     ziggyMaintenance: {
         textAlign: 'center',
-        marginTop: '-75px',
+        marginTop: '-55px',
+        marginBottom: '25px',
     },
 });
 

@@ -23,6 +23,8 @@ const styles = (theme) => ({
     footerBtn: {
         width: '184px',
         marginBottom: '20px',
+        paddingLeft: '85px',
+        paddingRight: '85px',
         color: '#CDCDE4',
         borderColor: '#CDCDE4',
         [theme.breakpoints.up('sm')]: {
