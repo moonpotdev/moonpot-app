@@ -9,8 +9,8 @@ const styles = (theme) => ({
         lineHeight: '14px',
         color: '#ffffff',
         letterSpacing: '0.34px',
-        marginTop: '40px',
-        marginBottom: '20px',
+        marginTop: '16px',
+        marginBottom: '100px',
         '& .MuiLink-root': {
             color: '#ffffff',
             textDecoration: 'underline',
