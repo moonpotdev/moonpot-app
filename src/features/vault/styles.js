@@ -74,14 +74,25 @@ const styles = (theme) => ({
         }
     },
     input: {
-        fontWeight: 700,
-        fontSize: '20px',
         border: '4px solid #8A7CE3',
         borderRadius: '5px',
         width: '100%',
         backgroundColor: '#C5BDF5',
         padding: 0,
-        marginTop: '20px',
+        position: 'relative',
+        '& .MuiInputBase-input': {
+            fontWeight: 700,
+            fontSize: '20px',
+            padding: '8px 12px',
+        },
+        '& .MuiButton-root': {
+            color: '#ffffff',
+            backgroundColor: '#8A7CE3',
+            position: 'absolute',
+            top: '5px',
+            right: '5px',
+            padding: '3px',
+        }
     },
     inputRoot: {
         fontWeight: 700,
@@ -128,6 +139,17 @@ const styles = (theme) => ({
             padding: '4px',
             borderRadius: '5px',
         }
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalContent: {
+        maxWidth: 500,
+        backgroundColor: '#fff',
+        borderRadius: '20px',
+        padding: '20px',
     }
 });
 
