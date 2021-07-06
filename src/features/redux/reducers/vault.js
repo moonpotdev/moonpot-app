@@ -12,7 +12,7 @@ const initialPools = () => {
         for (const key in data.pools) {
             const pool = data.pools[key];
 
-            pool['deposited'] = 0;
+            pool['network'] = net;
             pool['balance'] = 0;
             pool['daily'] = 0;
             pool['apy'] = 0;

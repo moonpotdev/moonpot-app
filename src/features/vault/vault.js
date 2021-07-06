@@ -10,12 +10,15 @@ import {
     Grid,
     Typography,
     Box,
-    Button, TextField, Link
+    Link
 } from "@material-ui/core"
 import styles from "./styles"
 import {ArrowDropDown, ArrowDropUp} from '@material-ui/icons';
 import {Trans, useTranslation} from "react-i18next";
 import {isEmpty} from "../../helpers/utils";
+import reduxActions from "../redux/actions";
+import Deposit from "./components/Deposit";
+import Withdraw from "./components/Withdraw";
 
 const useStyles = makeStyles(styles);
 
@@ -24,7 +27,6 @@ const Vault = () => {
     const location = useLocation();
     const history = useHistory();
     const classes = useStyles();
-    const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
 
     let { id } = useParams();
     const {vault, wallet} = useSelector(state => ({
@@ -33,9 +35,27 @@ const Vault = () => {
     }));
 
     const dispatch = useDispatch();
+    const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
     const [isLoading, setIsLoading] = React.useState(true);
     const [item, setVaultData] = React.useState(null);
     const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
+
+    const handleWalletConnect = () => {
+        if(!wallet.address) {
+            dispatch(reduxActions.wallet.connect());
+        }
+    }
+
+    const updateItemData = () => {
+        if(wallet.address && item) {
+            //dispatch(reduxActions.vault.fetchPools(item));
+            dispatch(reduxActions.balance.fetchBalances(item));
+        }
+    }
+
+    const resetFormData = () => {
+        setFormData({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
+    }
 
     React.useEffect(() => {
         if(!isEmpty(vault.pools) && vault.pools[id]) {
@@ -50,6 +70,27 @@ const Vault = () => {
             setIsLoading(false);
         }
     }, [item]);
+
+    /*React.useEffect(() => {
+        if(item && prices.lastUpdated > 0) {
+            dispatch(reduxActions.vault.fetchPools(item));
+        }
+    }, [dispatch, item, prices.lastUpdated]);*/
+
+    React.useEffect(() => {
+        if(item && wallet.address) {
+            dispatch(reduxActions.balance.fetchBalances(item));
+        }
+    }, [dispatch, item, wallet.address]);
+
+    /*React.useEffect(() => {
+        if(item) {
+            setInterval(() => {
+                dispatch(reduxActions.vault.fetchPools(item));
+                dispatch(reduxActions.balance.fetchBalances(item));
+            }, 60000);
+        }
+    }, [item, dispatch]);*/
 
     return (
         <div className="App">
@@ -83,12 +124,14 @@ const Vault = () => {
                                 <Typography className={classes.potCrypto}>USD {t('value')} <span>16,400 Cake</span> {t('prize')}</Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField disabled={!wallet.address} className={classes.input} placeholder={t('enterCoinAmount', {coin: item.depositToken})} InputProps={{disableUnderline: true, classes: {root: classes.inputRoot}}} />
-                                {wallet.address ? (
-                                    <Button className={classes.actionBtn} variant={'contained'} color="primary">{t('buttons.deposit')}</Button>
-                                ) : (
-                                    <Button className={classes.actionBtn} variant={'contained'} color="primary">{t('buttons.connectWallet')}</Button>
-                                )}
+                                <Deposit
+                                    item={item}
+                                    handleWalletConnect={handleWalletConnect}
+                                    formData={formData}
+                                    setFormData={setFormData}
+                                    updateItemData={updateItemData}
+                                    resetFormData={resetFormData}
+                                />
                             </Grid>
                             <Grid item xs={12}>
                                 <Typography className={classes.timelockRemaining}>Two Weeks</Typography>
@@ -101,23 +144,20 @@ const Vault = () => {
                             </Grid>
                             <AnimateHeight duration={ 500 } height={ withdrawOpen ? 'auto' : 0 }>
                                 <Grid item xs={12}>
-                                    <Typography className={classes.withdrawPenaltyWarning}>
-                                        <Trans i18nKey="vaultWithdrawPenaltyWarning" values={{amount: '2.52', coin: item.rewardToken}} />
-                                    </Typography>
-                                    <TextField disabled={!wallet.address} className={classes.input} placeholder="2.52 CAKE" InputProps={{disableUnderline: true, classes: {root: classes.inputRoot}}} />
-                                    {wallet.address ? (
-                                        <Button className={classes.actionBtn} variant={'contained'} color="primary">{t('buttons.withdraw')}</Button>
-                                    ) : (
-                                        <Button className={classes.actionBtn} variant={'contained'} color="primary">{t('buttons.connectWallet')}</Button>
-                                    )}
-
+                                    <Withdraw
+                                        item={item}
+                                        handleWalletConnect={handleWalletConnect}
+                                        formData={formData}
+                                        setFormData={setFormData}
+                                        updateItemData={updateItemData}
+                                        resetFormData={resetFormData}
+                                    />
                                 </Grid>
                             </AnimateHeight>
 
                         </Grid>
                     </Box>
                 </Grid>
-                
             </Container>
             )}
         </div>
