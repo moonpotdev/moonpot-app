@@ -46,7 +46,7 @@ const Header = () => {
                         {walletReducer.address ? (
                             <img alt="Moonpot" src={require('../../images/moonpot-notext.svg').default} />
                         ) : (
-                            <img alt="Moonpot" src={require('../../images/moonpot.svg').default} />
+                            <img alt="Moonpot" height="36px" src={require('../../images/moonpot-dot-com.png').default} />
                         )}
                     </Box>
                     <List component="nav" aria-labelledby="main navigation" className={classes.navList}>
