@@ -2,7 +2,7 @@ const styles = (theme) => ({
     h1: {
         fontSize: '22px',
         lineHeight: '34px',
-        fontWeight: 500,
+        fontWeight: 400,
         color: '#ffffff',
         padding: '30px 0',
         textAlign: 'center',
@@ -30,7 +30,8 @@ const styles = (theme) => ({
         width: '118px',
         '& .MuiTypography-h1': {
             fontSize: '20px',
-            fontWeight: 700,
+            fontFamily: 'Ubuntu',
+            fontWeight: 400,
             color: '#ffffff',
         },
         '& .MuiTypography-h2': {
