@@ -11,8 +11,9 @@ const styles = (theme) => ({
         }
     },
     potItem: {
-        backgroundColor: '#8A7CE3',
-        width: '330px',
+        backgroundColor: '#345675',
+        height: '316px',
+        width: '354px',
         margin: '80px auto 0px auto',
         borderRadius: '10px',
         padding: '10px',
@@ -23,26 +24,28 @@ const styles = (theme) => ({
     },
     potImage: {
         width: '100%',
-        textAlign: 'center',
-        marginTop: '-48px',
+        marginTop: '10px',
+        marginLeft: '10px',
     },
     countdown: {
         fontWeight: 700,
-        fontSize: '14px',
-        lineHeight: '16px',
+        fontSize: '18px',
+        lineHeight: '24px',
+        letterSpacing: '0.2px',
         color: '#ffffff',
     },
     subTitle: {
-        fontWeight: 500,
+        fontWeight: 700,
         fontSize: '10px',
-        lineHeight: '12px',
-        color: '#DFDDE7',
-        letterSpacing: '0.6px',
+        lineHeight: '20px',
+        color: '#EBF3F9',
+        letterSpacing: '1px',
+        textTransform: 'uppercase',
     },
     apy: {
         fontWeight: 700,
-        fontSize: '12px',
-        lineHeight: '14px',
+        fontSize: '18px',
+        lineHeight: '24px',
         color: '#ffffff',
         textAlign: 'right',
     },
@@ -53,13 +56,23 @@ const styles = (theme) => ({
         color: '#DFDDE7',
         letterSpacing: '0.6px',
     },
+    potUsdTop: {
+        marginTop: '10px',
+        fontWeight: 700,
+        fontSize: '24px',
+        lineHeight: '27.58px',
+        letterSpacing: '0.6px',
+        color: '#ffffff',
+        '& span': {
+            color: '#DFDDE7'
+        }
+    },
     potUsd: {
         fontWeight: 700,
-        fontSize: '26px',
-        lineHeight: '30px',
+        fontSize: '24px',
+        lineHeight: '27.58px',
+        letterSpacing: '0.6px',
         color: '#ffffff',
-        textAlign: 'center',
-        paddingTop: '10px',
         '& span': {
             color: '#DFDDE7'
         }
@@ -74,30 +87,24 @@ const styles = (theme) => ({
         }
     },
     play: {
-        border: 'solid 4px #B38922',
+        backgroundColor: '#FFFFFF',
+        border: 'solid #FFFFFF',
+        borderRadius: '8px',
         width: '100%',
+        height: '48px',
         fontWeight: 700,
-        fontSize: '20px',
-        margin: '20px 0',
-        paddingTop: '2px',
-        paddingBottom: '2px',
-    },
-    oddsChance: {
-        fontWeight: 700,
-        fontSize: '12px',
-        lineHeight: '14px',
-        textAlign: 'right',
-        color: '#ffffff',
-        '& span': {
-            color: '#DFDDE7',
-        }
+        fontSize: '15px',
+        letterSpacing: '0.2px',
+        color: '#3675A2',
     },
     oddsPerDeposit: {
-        fontWeight: 500,
-        fontSize: '10px',
-        lineHeight: '12px',
-        textAlign: 'right',
+        fontWeight: 300,
+        fontSize: '12px',
+        lineHeight: '20px',
+        textAlign: 'center',
         color: '#DFDDE7',
+        left: 'calc(50% - 188px/2)',
+        top: 'calc(50% - 20px/2 + 124px)',
     },
     communityItem: {
         backgroundColor: '#ffffff',

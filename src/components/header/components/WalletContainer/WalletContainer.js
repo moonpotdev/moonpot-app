@@ -32,7 +32,7 @@ const WalletContainer = () => {
 
     return (
         <Box className={classes.btnWrapper}>
-            <Button variant={'outlined'} onClick={handleWalletConnect}>
+            <Button variant={'outlinedPrimary'} onClick={handleWalletConnect}>
                 <Grid container direction="row" alignItems="center">
                     {walletReducer.pending ? (
                         <Box className={classes.loading}>
@@ -40,16 +40,13 @@ const WalletContainer = () => {
                         </Box>
                     ) : (
                         <React.Fragment>
-                            <Box className={classes.icon}>
-                                <img alt="Ziggy" src={require('../../../../images/bsc.svg').default} />
-                            </Box>
                             {walletReducer.address ? formatAddress(walletReducer.address) : t('buttons.connectWallet')}
                         </React.Fragment>
                     )}
                 </Grid>
             </Button>
             {walletReducer.address ? (
-                <Button onClick={() => {history.push('/my-moonpots')}} variant={'outlined'} style={{marginLeft: 10}}>
+                <Button onClick={() => {history.push('/my-moonpots')}} variant={'outlinedPrimary'} style={{marginLeft: 10}}>
                     <Box className={classes.icon}>
                         <img alt="Ziggy" src={require('../../../../images/ziggy.svg').default} />
                     </Box>

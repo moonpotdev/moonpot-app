@@ -90,30 +90,30 @@ const Home = () => {
                     {filtered.length === 0 ? '' : (
                         filtered.map(item => (
                             <Box className={classes.potItem} key={item.id}>
-                                <Grid container>
-                                    <Grid item xs={4}>
-                                        <Typography className={classes.countdown}>1d 23h 15m</Typography>
-                                        <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
-                                    </Grid>
+                                <Grid container spacing={3}>
                                     <Grid item xs={4}>
                                         <Box className={classes.potImage}>
                                             <img alt="Moonpot" src={require('../../images/pots/bitcoin.svg').default} />
                                         </Box>
                                     </Grid>
-                                    <Grid item xs={4}>
-                                        <Typography className={classes.apy}>10% APY</Typography>
+                                    <Grid item xs={7}>
+                                        <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $14,625</Typography>
+                                        <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}</Typography>
+                                        <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} <span>0.27 BTC-LP</span> {t('prize')}</Typography>
+                                    </Grid>
+                                    <Grid item xs={5}>
+                                        <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
+                                        <Typography className={classes.countdown}>1d 23h 15m</Typography>
+                                    </Grid>
+                                    <Grid item xs={5}>
                                         <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.rewardToken}</Typography>
+                                        <Typography className={classes.apy} align={'right'}>10% APY</Typography>
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <Typography className={classes.potUsd}><span>{t('win')}</span> $14,625 in {item.name}</Typography>
-                                        <Typography className={classes.potCrypto}>USD {t('value')} <span>0.27 BTC-LP</span> {t('prize')}</Typography>
+                                    <Grid item xs={11}>
+                                        <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.play')}</Button>
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <Button className={classes.play} variant={'contained'} color="primary" onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.play')}</Button>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Typography className={classes.oddsChance}>1 in 10,000</Typography>
-                                        <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {amount: '$1000'})}</Typography>
+                                    <Grid item xs={8}>
+                                        <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '10000', amount: '$1000'})}</Typography>
                                     </Grid>
                                 </Grid>
                             </Box>

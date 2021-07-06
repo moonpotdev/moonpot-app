@@ -2,7 +2,7 @@
   "buttons": {
     "connectWallet": "Connect Wallet",
     "myMoonpots": "My Moonpots",
-    "ziggyMoonpotGuide": "Ziggy's Moonpot Guide",
+    "ziggyMoonpotGuide": "Ziggy's Guide to Moonpot",
     "moonpotStats": "Moonpot Stats",
     "deposit": "Deposit",
     "withdraw": "Withdraw",
@@ -14,7 +14,7 @@
     "communityPots": "Community Pots",
     "play": "Play"
   },
-  "homeTitle": "Deposit <span>crypto</span>, earn interest<br /> and a chance to win {{amount}}",
+  "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br /> and a chance to win {{amount}}",
   "homeJoinCommunityTitle": "Join the <br />Community",
   "homeJoinCommunityBody": "There are no community pots yet.<br />You can suggest a new pot in one of our channels, or join our devs to build one for your favorite project.",
   "vaultLoadingMessage": "Getting vault data...",
@@ -36,6 +36,6 @@
   "myDeposit": "My Deposit",
   "myOdds": "My Odds",
   "earn": "Earn",
-  "oddsPerDeposit": "Odds Per {{amount}} Deposit",
+  "oddsPerDeposit": "1 in {{odds}} odds per {{amount}} deposit",
   "footerPoweredBy": "Powered by"
 }
