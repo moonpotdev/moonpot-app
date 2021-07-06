@@ -33,6 +33,11 @@ const Header = () => {
         history.push('/');
     }
 
+    const customDropdownCss = {
+        marginRight: '25px',
+        float: 'right',
+    } 
+
     return (
         <AppBar className={classes.navHeader} position="static">
             <Toolbar>
@@ -44,7 +49,11 @@ const Header = () => {
                             <img alt="Moonpot" src={require('../../images/moonpot.svg').default} />
                         )}
                     </Box>
-                    <List component="nav" aria-labelledby="main navigation" className={classes.navDisplayFlex}>
+                    <List component="nav" aria-labelledby="main navigation" className={classes.navList}>
+                        <Box>
+                            <CustomDropdown list={{'usd': 'USD', 'eur': 'EUR', 'gbp': 'GBP'}} selected={walletReducer.currency} handler={(e) => {handleCurrencySwitch(e.target.value)}} css={customDropdownCss} />
+                            <CustomDropdown list={{'en': 'EN', 'fr': 'FR'}} selected={walletReducer.language} handler={(e) => {handleLanguageSwitch(e.target.value)}} css={customDropdownCss} />
+                        </Box>
                         <WalletContainer />
                     </List>
                 </Container>

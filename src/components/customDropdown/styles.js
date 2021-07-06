@@ -2,15 +2,13 @@ const styles = (theme) => ({
     selectWrapper: {
         '& .MuiSelect-root': {
             fontWeight: 500,
-            fontSize: '12px',
-            color: '#ffffff',
+            fontSize: '15px',
+            color: '#CDCDE4',
         },
         '& .MuiSelect-icon': {
-            color: '#ffffff',
+            color: '#CDCDE4',
         },
-        '& .MuiInput-underline:before': {
-            borderColor: '#ffffff',
-        },
+
     }
 })
 

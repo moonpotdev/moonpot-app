@@ -22,6 +22,10 @@ const styles = (theme) => ({
         paddingTop: 0,
         paddingBottom: 0,
     },
+    navList: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
 })
 
 export default styles;
