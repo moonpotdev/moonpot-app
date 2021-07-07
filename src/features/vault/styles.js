@@ -10,11 +10,12 @@ const styles = (theme) => ({
             color: '#F3BA2E'
         }
     },
-    potItem: {
-        backgroundColor: '#ffffff',
-        width: '330px',
-        margin: '60px auto 0px auto',
-        borderRadius: '10px',
+    vaultPotItem: {
+        backgroundColor: '#345675',
+        height: '431px',
+        width: '452px',
+        margin: '80px auto 0px auto',
+        borderRadius: '16px',
         padding: '10px',
         [theme.breakpoints.up('sm')]: {
             marginLeft: '20px',
@@ -23,54 +24,67 @@ const styles = (theme) => ({
     },
     potImage: {
         width: '100%',
-        textAlign: 'center',
-        marginTop: '-48px',
+        marginTop: '10px',
+        marginLeft: '10px',
     },
     countdown: {
         fontWeight: 700,
-        fontSize: '14px',
-        lineHeight: '16px',
-        color: '#172734',
+        fontSize: '18px',
+        lineHeight: '24px',
+        letterSpacing: '0.2px',
+        color: '#ffffff',
     },
     subTitle: {
-        fontWeight: 500,
+        fontWeight: 700,
         fontSize: '10px',
-        lineHeight: '12px',
-        color: '#595465',
-        letterSpacing: '0.6px',
+        lineHeight: '20px',
+        color: '#EBF3F9',
+        letterSpacing: '1px',
+        textTransform: 'uppercase',
     },
     apy: {
         fontWeight: 700,
-        fontSize: '12px',
-        lineHeight: '14px',
-        color: '#172734',
+        fontSize: '18px',
+        lineHeight: '24px',
+        color: '#ffffff',
         textAlign: 'right',
     },
     earn: {
         fontWeight: 500,
         fontSize: '10px',
         lineHeight: '12px',
-        color: '#172734',
+        color: '#DFDDE7',
         letterSpacing: '0.6px',
+    },
+    potUsdTop: {
+        marginTop: '10px',
+        fontWeight: 700,
+        fontSize: '24px',
+        lineHeight: '27.58px',
+        letterSpacing: '0.6px',
+        color: '#ffffff',
+        '& span': {
+            color: '#DFDDE7'
+        }
     },
     potUsd: {
         fontWeight: 700,
-        fontSize: '26px',
-        lineHeight: '30px',
-        color: '#000000',
-        textAlign: 'center',
-        paddingTop: '10px',
+        fontSize: '24px',
+        lineHeight: '27.58px',
+        letterSpacing: '0.6px',
+        color: '#ffffff',
         '& span': {
-            color: '#595465'
+            color: '#DFDDE7'
         }
     },
     potCrypto: {
-        fontWeight: 500,
-        fontSize: '10px',
-        color: '#595465',
+        fontWeight: 700,
+        fontSize: '12px',
+        lineHeight: '20px',
+        color: '#EBF3F9',
         textAlign: 'right',
         '& span': {
-            color: '#000000',
+            color: '#FFFFFF',
         }
     },
     input: {
