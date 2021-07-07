@@ -12,7 +12,7 @@ const styles = (theme) => ({
     },
     vaultPotItem: {
         backgroundColor: '#345675',
-        height: '431px',
+        height: '100%',
         width: '452px',
         margin: '80px auto 0px auto',
         borderRadius: '16px',
@@ -88,24 +88,17 @@ const styles = (theme) => ({
         }
     },
     input: {
-        border: '4px solid #8A7CE3',
-        borderRadius: '5px',
+        border: '2px solid #6B96BD',
+        borderRadius: '8px',
         width: '100%',
-        backgroundColor: '#C5BDF5',
-        padding: 0,
-        position: 'relative',
+        backgroundColor: '#3F688D',
         '& .MuiInputBase-input': {
             fontWeight: 700,
             fontSize: '20px',
-            padding: '8px 12px',
         },
         '& .MuiButton-root': {
             color: '#ffffff',
-            backgroundColor: '#8A7CE3',
-            position: 'absolute',
-            top: '5px',
-            right: '5px',
-            padding: '3px',
+            backgroundColor: '#6B96BD',
         }
     },
     inputRoot: {
@@ -140,6 +133,18 @@ const styles = (theme) => ({
             position: 'absolute',
             right: '-4px',
         }
+    },
+    potsMaxButton: {
+        backgroundColor: '#6B96BD',
+        textTransform: 'uppercase',
+        width: '60px',
+        borderRadius: '4px',
+
+    },
+    tokenIcon: {
+        borderRadius: '25px',
+        margin: '5px',
+        
     },
     withdrawPenaltyWarning: {
         fontSize: '16px',

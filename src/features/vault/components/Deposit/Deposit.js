@@ -105,10 +105,10 @@ const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemDa
 
     return (
         <React.Fragment>
-            <Typography>Balance: {state.balance} {item.token}</Typography>
             <Paper component="form" className={classes.input}>
+                <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default} />
                 <InputBase placeholder={t('enterCoinAmount', {coin: item.token})} value={formData.deposit.amount} onChange={(e) => handleInput(e.target.value)} />
-                <Button onClick={handleMax}>Max</Button>
+                <Button className={classes.potsMaxButton} onClick={handleMax}>Max</Button>
             </Paper>
             {wallet.address ? (
                     <Button onClick={handleDeposit} className={classes.actionBtn} variant={'contained'} color="primary" disabled={formData.deposit.amount <= 0}>Deposit {formData.deposit.max ? ('All') : ''}</Button>

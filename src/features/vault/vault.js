@@ -101,7 +101,7 @@ const Vault = () => {
             ) : (
             <Container maxWidth="lg">
                 <Typography className={classes.title}>
-                    <Trans i18nKey="vaultTitle" values={{name: item.name, apy: '147%', amount: '$587,338'}} />
+                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: '147%', amount: '$587,338'}} />
                 </Typography>
                 <Grid container>
                     <Box className={classes.vaultPotItem}>
@@ -117,11 +117,11 @@ const Vault = () => {
                                 <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} <span>16,400 Cake</span> {t('prize')}</Typography>
                             </Grid>
                             <Grid item xs={5}>
-                                <Typography className={classes.countdown}>1d 23h 15m</Typography>
-                                <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
+                                <Typography className={classes.subTitle} align={"left"}>{t('nextWeeklyDraw')}</Typography>
+                                <Typography className={classes.countdown} align={"left"}>1d 23h 15m</Typography>
                             </Grid>
                             
-                            <Grid item xs={5}>
+                            <Grid item xs={6}>
                                 <Typography className={classes.subTitle} align={'right'}>{t('earnToken')} {item.token}</Typography>
                                 <Typography className={classes.apy}>10% APY</Typography>
                             </Grid>

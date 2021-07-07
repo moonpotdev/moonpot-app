@@ -90,6 +90,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
 
     return (
         <React.Fragment>
+            <Typography>Balance: {state.balance} {item.token}</Typography>
             <Typography className={classes.withdrawPenaltyWarning}>
                 <Trans i18nKey="vaultWithdrawPenaltyWarning" values={{amount: state.balance, coin: item.token}} />
             </Typography>
