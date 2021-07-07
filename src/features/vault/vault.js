@@ -104,26 +104,28 @@ const Vault = () => {
                     <Trans i18nKey="vaultTitle" values={{name: item.name, apy: '147%', amount: '$587,338'}} />
                 </Typography>
                 <Grid container>
-                    <Box className={classes.potItem}>
-                        <Grid container>
-                            <Grid item xs={4}>
-                                <Typography className={classes.countdown}>1d 23h 15m</Typography>
-                                <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
-                            </Grid>
+                    <Box className={classes.vaultPotItem}>
+                        <Grid container spacing={3}>
                             <Grid item xs={4}>
                                 <Box className={classes.potImage}>
                                     <img alt="Moonpot" src={require('../../images/pots/bitcoin.svg').default} />
                                 </Box>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={7}>
+                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $14,625</Typography>
+                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}</Typography>
+                                <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} <span>16,400 Cake</span> {t('prize')}</Typography>
+                            </Grid>
+                            <Grid item xs={5}>
+                                <Typography className={classes.countdown}>1d 23h 15m</Typography>
+                                <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
+                            </Grid>
+                            
+                            <Grid item xs={5}>
+                                <Typography className={classes.subTitle} align={'right'}>{t('earnToken')} {item.token}</Typography>
                                 <Typography className={classes.apy}>10% APY</Typography>
-                                <Typography className={classes.subTitle} align={'right'} style={{textDecoration: 'underline'}}>{t('interestRate')}</Typography>
                             </Grid>
-                            <Grid item xs={12}>
-                                <Typography className={classes.potUsd}><span>{t('win')}</span> $14,625 in {item.name}</Typography>
-                                <Typography className={classes.potCrypto}>USD {t('value')} <span>16,400 Cake</span> {t('prize')}</Typography>
-                            </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={11}>
                                 <Deposit
                                     item={item}
                                     handleWalletConnect={handleWalletConnect}
@@ -133,7 +135,7 @@ const Vault = () => {
                                     resetFormData={resetFormData}
                                 />
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={8}>
                                 <Typography className={classes.timelockRemaining}>Two Weeks</Typography>
                             </Grid>
                             <Grid item xs={6}>

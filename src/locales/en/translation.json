@@ -30,6 +30,7 @@
   "nextWeeklyDraw": "Next Weekly Draw",
   "nextDraw": "Next Draw",
   "interestRate": "Interest Rate",
+  "earnToken": "Earn {{token}}",
   "enterCoinAmount": "Enter {{coin}} Amount",
   "fairplayTimelock": "Fairplay Timelock",
   "fairplayUnlock": "My Fairplay Unlock",
