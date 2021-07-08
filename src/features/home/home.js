@@ -94,13 +94,13 @@ const Home = () => {
                                 <Grid container spacing={3}>
                                     <Grid item xs={4}>
                                         <Box className={classes.potImage}>
-                                            <img alt="Moonpot" src={require('../../images/pots/bitcoin.svg').default} />
+                                            <img alt="Moonpot" src={require('../../images/pots/cake.svg').default} />
                                         </Box>
                                     </Grid>
                                     <Grid item xs={7}>
-                                        <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $14,625</Typography>
+                                        <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $90,000</Typography>
                                         <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}</Typography>
-                                        <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} <span>0.27 BTC-LP</span> {t('prize')}</Typography>
+                                        <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} <span>1600.00 {item.token} </span> {t('prize')}</Typography>
                                     </Grid>
                                     <Grid item xs={5}>
                                         <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
@@ -114,7 +114,7 @@ const Home = () => {
                                         <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.play')}</Button>
                                     </Grid>
                                     <Grid item xs={8}>
-                                        <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '10,000', amount: '$1000'})}</Typography>
+                                        <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '40,000', amount: '$1000'})}</Typography>
                                     </Grid>
                                 </Grid>
                             </Box>

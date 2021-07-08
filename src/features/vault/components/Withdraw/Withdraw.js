@@ -1,4 +1,4 @@
-import {Button, InputBase, makeStyles, Paper, Typography} from "@material-ui/core";
+import {Grid, Button, InputBase, makeStyles, Paper, Typography} from "@material-ui/core";
 import {Trans, useTranslation} from "react-i18next";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -90,20 +90,50 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
 
     return (
         <React.Fragment>
-            <Typography>Balance: {state.balance} {item.token}</Typography>
-            <Typography className={classes.withdrawPenaltyWarning}>
-                <Trans i18nKey="vaultWithdrawPenaltyWarning" values={{amount: state.balance, coin: item.token}} />
-            </Typography>
-            <Paper component="form" className={classes.input}>
-                <InputBase placeholder="0.00" value={formData.withdraw.amount} onChange={(e) => handleInput(e.target.value)} />
-                <Button onClick={handleMax}>Max</Button>
-            </Paper>
-            {wallet.address ? (
-                    <Button onClick={handleWithdraw} className={classes.actionBtn} variant={'contained'} color="primary" disabled={formData.withdraw.amount <= 0}>Withdraw {formData.withdraw.max ? ('All') : ''}</Button>
-            ) : (
-                <Button onClick={handleWalletConnect} className={classes.actionBtn} variant={'contained'} color="primary">{t('buttons.connectWallet')}</Button>
-            )}
-            <Steps item={item} steps={steps} handleClose={handleClose} />
+            <Grid container spacing={2}>
+                <Grid item xs={4} align={"left"}>
+                    <Typography className={classes.withdrawItemText}>{t('fairplayUnlock')}</Typography>
+                </Grid>
+                <Grid item xs={7} align={"right"}>
+                    <Typography className={classes.withdrawItemValue}>14d 00h 00m</Typography>
+                </Grid>
+                <Grid item xs={4} align={"left"}>
+                    <Typography className={classes.withdrawItemText}>{t('yourDeposit')}</Typography>
+                </Grid>
+                <Grid item xs={7} align={"right"}>
+                    <Typography className={classes.withdrawItemValue}>{state.balance} {item.token}</Typography>
+                </Grid>
+                <Grid item xs={11}>
+                    <Paper component="form" className={classes.input}>
+                        <Grid container spacing={1}>
+                            <Grid item xs={2} alignItems={"center"} justifyContent={"center"}>
+                                <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default} />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <InputBase placeholder={t('enterCoinAmount', {coin: item.token})} value={formData.withdraw.amount} onChange={(e) => handleInput(e.target.value)} />
+                            </Grid>
+                            <Grid item xs={4} align={"right"}>
+                                <Button className={classes.potsMaxButton} onClick={handleMax}>Max</Button>
+                            </Grid>
+                        </Grid> 
+                    </Paper>
+                </Grid>
+                <Grid item xs={11}>
+                    {wallet.address ? (
+                            <Button onClick={handleWithdraw} className={formData.withdraw.amount > 0 ? classes.enabledActionBtn : classes.disabledActionBtn} variant={'contained'} disabled={formData.withdraw.amount > 0}>Withdraw {formData.withdraw.max ? ('All') : ''}</Button>
+                    ) : (
+                        <Button onClick={handleWalletConnect} className={classes.connectWalletBtn} variant={'contained'}>{t('buttons.connectWallet')}</Button>
+                    )}
+                    <Steps item={item} steps={steps} handleClose={handleClose} />
+                </Grid>
+                
+                <Grid item xs={11}>
+                    <Typography className={classes.withdrawPenaltyWarning}>
+                        <Trans i18nKey="vaultWithdrawPenaltyWarning" values={{token: item.token}} />
+                    </Typography>
+                </Grid>
+                
+            </Grid>
         </React.Fragment>
     );
 };
