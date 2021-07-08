@@ -25,6 +25,7 @@ const appTheme = () => {
                     body: {
                         backgroundColor: '#303050',
                     },
+                    overflowX: 'hidden',
                 },
             },
             MuiGrid: {

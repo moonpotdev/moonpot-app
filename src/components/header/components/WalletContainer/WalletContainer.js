@@ -32,7 +32,7 @@ const WalletContainer = () => {
 
     return (
         <Box className={classes.btnWrapper}>
-            <Button variant={'outlinedPrimary'} onClick={handleWalletConnect}>
+            <Button className={classes.wallet} onClick={handleWalletConnect}>
                 <Grid container direction="row" alignItems="center">
                     {walletReducer.pending ? (
                         <Box className={classes.loading}>

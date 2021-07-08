@@ -1,14 +1,16 @@
 const styles = (theme) => ({
     logo: {
         cursor: 'pointer',
-        marginLeft: '7.5%',
+        paddingLeft: '7.5%',
     },
     navHeader: {
+        width: '100%',
         backgroundColor: 'transparent',
         border: 'none',
         boxShadow: 'none',
         paddingTop: '20px',
         position: 'static',
+        marginLeft: '0px',
         '& .MuiToolbar-root': {
             padding: 0,
         },
@@ -35,6 +37,13 @@ const styles = (theme) => ({
         lineHeight: '17px',
         letterSpacing: '0.6px',
         color: '#FFFFFF',
+    },
+    wallet: {
+        width: '50%',
+    },
+    navList: {
+        display: 'flex',
+        justifyContent: 'flex-end',
     },
 })
 
