@@ -11,6 +11,7 @@ import Web3Modal, {connectors} from "web3modal";
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
 const vaultAbi = require('../../../config/abi/vault.json');
+const gateKeeperAbi = require('../../../config/abi/gatekeeper.json');
 
 const getClientsForNetwork = async (net) => {
     return config[net].rpc;
@@ -198,11 +199,11 @@ const deposit = (network, contractAddr, amount, max) => {
 
         if(address && provider) {
             const web3 = await new Web3(provider);
-            const contract = new web3.eth.Contract(vaultAbi, contractAddr);
+            const contract = new web3.eth.Contract(gateKeeperAbi, contractAddr);
 
             if(max) {
                 contract.methods
-                    .depositAll()
+                    .depositAll('0x0000000000000000000000000000000000000000')
                     .send({ from: address })
                     .on('transactionHash', function (hash) {
                         dispatch({type: WALLET_ACTION, payload: {result: 'success_pending', data: {spender: contractAddr, amount: amount, hash: hash}}});
@@ -218,7 +219,7 @@ const deposit = (network, contractAddr, amount, max) => {
                     });
             } else {
                 contract.methods
-                    .deposit(amount)
+                    .depositMoonPot(amount, '0x0000000000000000000000000000000000000000')
                     .send({ from: address })
                     .on('transactionHash', function (hash) {
                         dispatch({type: WALLET_ACTION, payload: {result: 'success_pending', data: {spender: contractAddr, amount: amount, hash: hash}}});
@@ -250,7 +251,7 @@ const withdraw = (network, contractAddr, amount, max) => {
 
             if(max) {
                 contract.methods
-                    .withdrawAll()
+                    .withdrawAllInstantly()
                     .send({ from: address })
                     .on('transactionHash', function (hash) {
                         dispatch({type: WALLET_ACTION, payload: {result: 'success_pending', data: {spender: contractAddr, amount: amount, hash: hash}}});
@@ -266,7 +267,7 @@ const withdraw = (network, contractAddr, amount, max) => {
                     });
             } else {
                 contract.methods
-                    .withdraw(amount)
+                    .withdrawAllInstantly()
                     .send({ from: address })
                     .on('transactionHash', function (hash) {
                         dispatch({type: WALLET_ACTION, payload: {result: 'success_pending', data: {spender: contractAddr, amount: amount, hash: hash}}});
