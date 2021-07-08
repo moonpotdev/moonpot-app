@@ -45,14 +45,6 @@ const WalletContainer = () => {
                     )}
                 </Grid>
             </Button>
-            {walletReducer.address ? (
-                <Button onClick={() => {history.push('/my-moonpots')}} variant={'outlinedPrimary'} style={{marginLeft: 10}}>
-                    <Box className={classes.icon}>
-                        <img alt="Ziggy" src={require('../../../../images/ziggy.svg').default} />
-                    </Box>
-                    {t('buttons.myMoonpots')}
-                </Button>
-            ) : '' }
         </Box>
     )
 }

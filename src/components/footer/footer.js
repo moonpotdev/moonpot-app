@@ -15,7 +15,7 @@ const Footer = () => {
                 <Grid item xs={12}>
                     <Typography className={classes.beefy}>{t('footerPoweredBy')} <Link href={"https://beefy.finance"}>Beefy.Finance</Link> <img alt="Beefy Finance" src={require('../../images/beefy.svg').default} /></Typography>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={10}>
                     <Button href={"https://docs.moonpot.com"} className={classes.footerBtn} variant={'outlined'} size={'small'}>{t('buttons.ziggyMoonpotGuide')}</Button>
                 </Grid>
                 <Grid className={classes.footerIcons} item xs={12}>
@@ -23,7 +23,6 @@ const Footer = () => {
                     <Link href={"a"}><img alt="Telegram" src={require('../../images/icons/telegram.svg').default} /></Link>
                     <Link href={"a"}><img alt="Discord" src={require('../../images/icons/discord.svg').default} /></Link>
                     <Link href={"a"}><img alt="Youtube" src={require('../../images/icons/youtube.svg').default} /></Link>
-                    <Link href={"a"}><img alt="Medium" src={require('../../images/icons/medium.svg').default} /></Link>
                     <Link href={"a"}><img alt="Twitter" src={require('../../images/icons/twitter.svg').default} /></Link>
                 </Grid>
             </Grid>
