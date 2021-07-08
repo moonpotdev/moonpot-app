@@ -90,7 +90,6 @@ const styles = (theme) => ({
     },
     play: {
         backgroundColor: '#FFFFFF',
-        border: 'solid #FFFFFF',
         borderRadius: '8px',
         width: '100%',
         height: '48px',

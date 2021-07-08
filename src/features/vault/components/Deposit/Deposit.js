@@ -111,7 +111,7 @@ const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemDa
                         <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default} />
                     </Grid>
                     <Grid item xs={6}>
-                    <InputBase placeholder={t('enterCoinAmount', {coin: item.token})} value={formData.deposit.amount} onChange={(e) => handleInput(e.target.value)} />
+                        <InputBase placeholder={t('enterCoinAmount', {coin: item.token})} value={formData.deposit.amount} onChange={(e) => handleInput(e.target.value)} />
                     </Grid>
                     <Grid item xs={4} align={"right"}>
                         <Button className={classes.potsMaxButton} onClick={handleMax}>Max</Button>
@@ -120,9 +120,9 @@ const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemDa
                 </Grid>
             </Paper>
             {wallet.address ? (
-                    <Button onClick={handleDeposit} className={classes.actionBtn} variant={'contained'} color="primary" disabled={formData.deposit.amount <= 0}>Deposit {formData.deposit.max ? ('All') : ''}</Button>
+                    <Button onClick={handleDeposit} className={formData.deposit.amount < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={formData.deposit.amount <= 0}>Deposit {formData.deposit.max ? ('All') : ''}</Button>
             ) : (
-                <Button onClick={handleWalletConnect} className={classes.actionBtn} variant={'contained'} color="primary">{t('buttons.connectWallet')}</Button>
+                <Button onClick={handleWalletConnect} className={classes.connectWalletBtn} variant={'contained'}>{t('buttons.connectWallet')}</Button>
             )}
             <Steps item={item} steps={steps} handleClose={handleClose} />
         </React.Fragment>

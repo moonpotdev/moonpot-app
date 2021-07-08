@@ -10,10 +10,11 @@ import {
     Grid,
     Typography,
     Box,
-    Link
+    Link,
+    Divider,
 } from "@material-ui/core"
 import styles from "./styles"
-import {ArrowDropDown, ArrowDropUp} from '@material-ui/icons';
+import {ExpandMore, ExpandLess} from '@material-ui/icons';
 import {Trans, useTranslation} from "react-i18next";
 import {isEmpty} from "../../helpers/utils";
 import reduxActions from "../redux/actions";
@@ -92,7 +93,7 @@ const Vault = () => {
         }
     }, [item, dispatch]);*/
 
-    
+
 
     return (
         <div className="App">
@@ -107,16 +108,16 @@ const Vault = () => {
                 </Typography>
                 <Grid container>
                     <Box className={classes.vaultPotItem}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={4}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={4} align={"left"}>
                                 <Box className={classes.potImage}>
-                                    <img alt="Moonpot" src={require('../../images/pots/bitcoin.svg').default} />
+                                    <img alt="Moonpot" src={require('../../images/pots/cake.svg').default} />
                                 </Box>
                             </Grid>
                             <Grid item xs={7}>
-                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $14,625</Typography>
+                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $90,000</Typography>
                                 <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}</Typography>
-                                <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} <span>16,400 Cake</span> {t('prize')}</Typography>
+                                <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} <span>1600.00 {item.token} </span> {t('prize')}</Typography>
                             </Grid>
                             <Grid item xs={5}>
                                 <Typography className={classes.subTitle} align={"left"}>{t('nextWeeklyDraw')}</Typography>
@@ -138,13 +139,16 @@ const Vault = () => {
                                 />
                             </Grid>
                             <Grid item xs={8}>
-                                <Typography className={classes.timelockRemaining}>Two Weeks</Typography>
+                                <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '40,000', amount: '$1000'})}</Typography>
                             </Grid>
-                            <Grid item xs={6}>
-                                <Link href={"a"} className={classes.link}>{t('fairplayTimelock')}</Link>
+                            <Grid item xs={11}>
+                                <Divider className={classes.divider}></Divider>
                             </Grid>
-                            <Grid item xs={6} style={{textAlign: 'right'}}>
-                                <Link onClick={() => {setWithdrawOpen(!withdrawOpen)}} className={classes.link} style={{paddingRight: '15px'}}>{t('withdraw')} {withdrawOpen ? (<ArrowDropUp />) : (<ArrowDropDown />)}</Link>
+                            <Grid item xs={9} align={"left"}>
+                                <Typography className={classes.withdrawText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{t('withdraw')} </Typography>
+                            </Grid>
+                            <Grid item xs={2} align={"right"}>
+                                <Link onClick={() => {setWithdrawOpen(!withdrawOpen)}} className={classes.expandToggle}>{withdrawOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                             </Grid>
                             <AnimateHeight duration={ 500 } height={ withdrawOpen ? 'auto' : 0 }>
                                 <Grid item xs={12}>
