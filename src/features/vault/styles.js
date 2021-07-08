@@ -141,6 +141,23 @@ const styles = (theme) => ({
         color: 'rgba(54, 117, 162, 0.4)',
         margin: '16px 0 8px 0',
     },
+    actionBtn: {
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        borderRadius: '8px',
+        height: '48px',
+        width: '100%',
+        fontWeight: 700,
+        fontStyle: 'Bold',
+        fontSize: '15px',
+        lineHeight: '139%',
+        letterSpacing: '0.2px',
+        color: 'rgba(54, 117, 162, 0.4)',
+        margin: '16px 0 8px 0',
+        '& .Mui-disabled': {
+            color: '#FFFFFF',
+        }
+
+    },
     connectWalletBtn: {
         backgroundColor: '#FFFFFF',
         borderRadius: '8px',

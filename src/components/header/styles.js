@@ -1,12 +1,14 @@
 const styles = (theme) => ({
     logo: {
         cursor: 'pointer',
+        marginLeft: '7.5%',
     },
     navHeader: {
         backgroundColor: 'transparent',
         border: 'none',
         boxShadow: 'none',
         paddingTop: '20px',
+        position: 'static',
         '& .MuiToolbar-root': {
             padding: 0,
         },
@@ -25,6 +27,14 @@ const styles = (theme) => ({
     navList: {
         display: 'flex',
         justifyContent: 'flex-end',
+    },
+    navLink: {
+        textTransform: 'uppercase',
+        fontWeight: 500,
+        fontSize: '15px',
+        lineHeight: '17px',
+        letterSpacing: '0.6px',
+        color: '#FFFFFF',
     },
 })
 
