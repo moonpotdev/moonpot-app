@@ -53,7 +53,7 @@ const Header = () => {
                         </Box>
                     </Grid>
                     
-                    <Grid item xs={6} align={"center"}>
+                    <Grid item xs={5} align={"center"}>
                         <Button className={classes.navLink} onClick={() => {history.push('/')}}>
                             {t('buttons.moonpots')}
                         </Button>
@@ -66,7 +66,7 @@ const Header = () => {
                     </Grid>
                     
                     
-                    <Grid item xs={3}>
+                    <Grid item xs={3} css={{paddingRight: '20px'}}>
                         <Grid container spacing={1}>
                             <Grid item xs={3}>
                                 <CustomDropdown list={{'usd': 'USD', 'eur': 'EUR', 'gbp': 'GBP'}} selected={walletReducer.currency} handler={(e) => {handleCurrencySwitch(e.target.value)}} css={customDropdownCss} />

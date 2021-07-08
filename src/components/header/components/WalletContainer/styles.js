@@ -13,12 +13,17 @@ const styles = (theme) => ({
         backgroundColor: '#8374DA',
         opacity: 0.75,
         borderRadius: '11px',
-        marginRight: '5px',
         lineHeight: '28px',
     },
     loading: {
         paddingTop: '5px',
         paddingBottom: '5px',
+    },
+    wallet: {
+        color: '#F3BA2E',
+        border: '2px solid #F3BA2E',
+        boxSizing: 'border-box',
+        borderRadius: '38px',
     }
 });
 
