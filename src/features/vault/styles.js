@@ -15,12 +15,15 @@ const styles = (theme) => ({
         height: '100%',
         width: '452px',
         margin: '80px auto 0px auto',
+        marginTop: '56px',
         borderRadius: '16px',
         padding: '10px',
         [theme.breakpoints.up('sm')]: {
             marginLeft: '20px',
             marginRight: '20px',
         },
+        boxShadow: '0px 12px 24px rgba(0, 0, 0, 0.4)', 
+
     },
     potImage: {
         width: '100%',
@@ -57,11 +60,11 @@ const styles = (theme) => ({
         letterSpacing: '0.6px',
     },
     potUsdTop: {
-        marginTop: '10px',
         fontWeight: 700,
         fontSize: '24px',
         lineHeight: '27.58px',
         letterSpacing: '0.6px',
+        marginTop: '10px',
         color: '#ffffff',
         '& span': {
             color: '#DFDDE7'
@@ -92,14 +95,19 @@ const styles = (theme) => ({
         borderRadius: '8px',
         width: '100%',
         backgroundColor: '#3F688D',
-        '& .MuiInputBase-input': {
-            fontWeight: 700,
-            fontSize: '20px',
+        alignItems: 'center',
+        '& .MuiInputBase-root': {
+            alignItems: 'center',
+            height: '100%',
         },
-        '& .MuiButton-root': {
-            color: '#ffffff',
-            backgroundColor: '#6B96BD',
-        }
+        '& .MuiInputBase-input': {
+            fontWeight: 500,
+            fontSize: '15px',
+            lineHeight: '24px',
+            height: '100%',
+            letterSpacing: '0.2px',
+            color: '#AAC3D9',
+        },
     },
     inputRoot: {
         fontWeight: 700,
@@ -107,17 +115,22 @@ const styles = (theme) => ({
         padding: '0 10px',
     },
     actionBtn: {
-        border: 'solid 4px #B38922',
+        backgroundColor: '#FFFFFF',
+        borderRadius: '8px',
+        height: '48px',
         width: '100%',
         fontWeight: 700,
-        fontSize: '20px',
-        margin: '12px 0 20px 0',
-        paddingTop: '2px',
-        paddingBottom: '2px',
+        fontStyle: 'Bold',
+        fontSize: '15px',
+        lineHeight: '139%',
+        letterSpacing: '0.2px',
+        color: '#345675',
+        verticalAlign: 'center',
+        margin: '16px 0 20px 0',
     },
     timelockRemaining: {
-        fontSize: '12px',
         fontWeight: 700,
+        fontSize: '12px',
         lineHeight: '14px',
         color: '#172734',
     },
@@ -139,11 +152,12 @@ const styles = (theme) => ({
         textTransform: 'uppercase',
         width: '60px',
         borderRadius: '4px',
+        margin: '10px',
 
     },
     tokenIcon: {
         borderRadius: '25px',
-        margin: '5px',
+        margin: '15px',
         
     },
     withdrawPenaltyWarning: {

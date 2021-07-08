@@ -1,4 +1,4 @@
-import {Button, InputBase, makeStyles, Paper, Typography} from "@material-ui/core";
+import {Button, Grid, InputBase, makeStyles, Paper} from "@material-ui/core";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import reduxActions from "../../../redux/actions";
@@ -106,9 +106,18 @@ const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemDa
     return (
         <React.Fragment>
             <Paper component="form" className={classes.input}>
-                <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default} />
-                <InputBase placeholder={t('enterCoinAmount', {coin: item.token})} value={formData.deposit.amount} onChange={(e) => handleInput(e.target.value)} />
-                <Button className={classes.potsMaxButton} onClick={handleMax}>Max</Button>
+                <Grid container spacing={1}>
+                    <Grid item xs={2} alignItems={"center"} justifyContent={"center"}>
+                        <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default} />
+                    </Grid>
+                    <Grid item xs={6}>
+                    <InputBase placeholder={t('enterCoinAmount', {coin: item.token})} value={formData.deposit.amount} onChange={(e) => handleInput(e.target.value)} />
+                    </Grid>
+                    <Grid item xs={4} align={"right"}>
+                        <Button className={classes.potsMaxButton} onClick={handleMax}>Max</Button>
+                    </Grid>
+                    
+                </Grid>
             </Paper>
             {wallet.address ? (
                     <Button onClick={handleDeposit} className={classes.actionBtn} variant={'contained'} color="primary" disabled={formData.deposit.amount <= 0}>Deposit {formData.deposit.max ? ('All') : ''}</Button>

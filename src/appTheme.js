@@ -16,6 +16,9 @@ const appTheme = () => {
             },
             
         },
+        typography: {
+            fontFamily: `"Ubuntu", "Roboto"`,
+        },
         overrides: {
             MuiCssBaseline: {
                 '@global': {

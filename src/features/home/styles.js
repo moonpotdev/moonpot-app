@@ -21,6 +21,7 @@ const styles = (theme) => ({
             marginLeft: '20px',
             marginRight: '20px',
         },
+        boxShadow: '0px 12px 24px rgba(0, 0, 0, 0.4)',
     },
     potImage: {
         width: '100%',
