@@ -12,7 +12,7 @@
         "type":"address"
       },
       {
-        "internalType":"address",
+        "internalType":"contract IERC20Upgradeable",
         "name":"_underlying",
         "type":"address"
       },
@@ -61,6 +61,21 @@
       }
     ],
     "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+      {
+        "internalType":"address",
+        "name":"referrer",
+        "type":"address"
+      }
+    ],
+    "name":"depositAll",
+    "outputs":[
+
+    ],
+    "stateMutability":"nonpayable",
     "type":"function"
   },
   {
@@ -135,12 +150,72 @@
     "name":"underlying",
     "outputs":[
       {
-        "internalType":"address",
+        "internalType":"contract IERC20Upgradeable",
         "name":"",
         "type":"address"
       }
     ],
     "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+      {
+        "internalType":"address",
+        "name":"user",
+        "type":"address"
+      }
+    ],
+    "name":"userTotalBalance",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+      {
+        "internalType":"address",
+        "name":"user",
+        "type":"address"
+      }
+    ],
+    "name":"userYieldBalance",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"withdrawAllInstantly",
+    "outputs":[
+
+    ],
+    "stateMutability":"nonpayable",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"withdrawAllTimelock",
+    "outputs":[
+
+    ],
+    "stateMutability":"nonpayable",
     "type":"function"
   },
   {

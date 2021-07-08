@@ -1,6 +1,6 @@
 import {HOME_FETCH_POOLS_BEGIN} from "../constants";
 
-const moonpotAbi = require('../../../config/abi/moonpot.json');
+const gateKeeperAbi = require('../../../config/abi/gatekeeper.json');
 
 const getPoolsSingle = async (item, state, dispatch) => {
     console.log('redux getPoolsSingle() processing...');
