@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, useHistory } from "react-router
 import appTheme from "./appTheme.js";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import { ThemeProvider, CssBaseline, Grid, Button, makeStyles } from "@material-ui/core";
+import { ThemeProvider, CssBaseline, AppBar, Toolbar, Grid, Box, Button, makeStyles } from "@material-ui/core";
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import {useDispatch, useSelector} from "react-redux";
 import reduxActions from "./features/redux/actions";
@@ -14,6 +14,7 @@ import CustomDropdown from "./components/customDropdown";
 import { createMemoryHistory } from "history";
 import MobileHeader from "./components/mobileHeader";
 import Media from "react-media";
+import {styles, burgerMenuStyles} from "./styles.js";
 
 const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
@@ -24,65 +25,7 @@ const PageNotFound = () => {
 
 }
 
-const burgerMenuStyles = {
-    bmBurgerButton: {
-      position: 'fixed',
-      width: '20px',
-      height: '20px',
-      right: '2.5%',
-      top: '5%',
-      color: '#FFFFFF',
-    },
-    bmBurgerBars: {
-      background: '#FFFFFF'
-    },
-    bmBurgerBarsHover: {
-      background: '#a90000'
-    },
-    bmCrossButton: {
-      height: '24px',
-      width: '24px',
-      right: '2.5%',
-      top: '5%',
-    },
-    bmCross: {
-      background: '#bdc3c7'
-    },
-    bmMenuWrap: {
-      position: 'fixed',
-      height: '100%',
-      width: '100%',
-    },
-    bmMenu: {
-      background: '#262640',
-      padding: '2.5em 1.5em 0',
-      fontSize: '1.15em'
-    },
-    bmMorphShape: {
-      fill: '#373a47'
-    },
-    bmItemList: {
-      color: '#b8b7ad',
-      padding: '0.8em'
-    },
-    bmItem: {
-      display: 'inline-block'
-    },
-    bmOverlay: {
-      background: 'rgba(0, 0, 0, 0.3)'
-    },
-    wallet: {
-        borderColor: '#FFFFFF',
-        width: '90%',
-    },
-    navLink: {
-        color: '#FFFFFF',
-        backgroundColor: 'transparent',
-        fontWeight: 500,
-        fontSize: '21px',
-        lineHeight: '24.13px',
-    },
-}
+
 
 const Context = React.createContext();
 
@@ -93,7 +36,17 @@ const Provider = (props) => {
         <Context.Provider value={{
             isMenuOpen: menuOpenState,
             toggleMenu: () => setMenuOpenState(!menuOpenState),
-            stateChangeHandler: (newState) => setMenuOpenState(newState.isOpen)
+            stateChangeHandler: (newState) => {
+                setMenuOpenState(newState.isOpen);
+                
+                let nextLogoState = ( newState.isOpen ) ? "none" : "";
+                let stateTimeout = ( newState.isOpen ) ? 0 : 250;
+                
+                setTimeout(function(){
+                    document.getElementById("logo").style.display = nextLogoState;
+
+                }, stateTimeout);
+            }
           }}>
             {props.children}
           </Context.Provider>
@@ -119,6 +72,9 @@ const menuDropdowns = {
         lineHeight: '24.13px',
     },
 };
+
+// const useStyles = makeStyles(styles);
+
 const Navigation = () => {
     const ctx = useContext(Context)
 
@@ -126,6 +82,7 @@ const Navigation = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const walletReducer = useSelector(state => state.walletReducer);
+    // const classes = useStyles();
 
     const handleLanguageSwitch = (value) => {
         i18n.changeLanguage(value).then(() => dispatch(reduxActions.wallet.setLanguage(value)));
@@ -135,8 +92,12 @@ const Navigation = () => {
         dispatch(reduxActions.wallet.setCurrency(value));
         history.push('/');
     }
-    const classes = makeStyles(
-        ({
+    const styles = ({
+            moonpotImage: {
+                margin: '16px 24px',
+                height: '36px',
+                display: 'absolute',
+            },
             mobileNav: {
                 color: '#FFFFFF',
                 backgroundColor: 'transparent',
@@ -148,53 +109,66 @@ const Navigation = () => {
                 borderColor: '#FFFFFF',
                 width: '90%',
             },
-        })
+        }
     );
+    const useStyles = makeStyles(styles);
+    const classes = useStyles();
   
     return (
-        <Menu 
-            customBurgerIcon={ <MenuRoundedIcon/> }
-            isOpen={ctx.isMenuOpen}
-            onStateChange={(state) => ctx.stateChangeHandler(state)}
-            styles={ burgerMenuStyles }
-        >
-            <Grid
-            container
-            direction="column"
-            justifyContent="space-evenly"
-            spacing={3}
+        <React.Fragment>
+                <Box id="logo" onClick={() => {history.push('/')}}>
+                    {walletReducer.address ? (
+                        <img alt="Moonpot" src={require('./images/moonpot-notext.svg').default} />
+                    ) : (
+                        <img alt="Moonpot" className={classes.moonpotImage} src={require('./images/moonpot-dot-com.png').default}/>
+                    )}
+                </Box>
+            <Menu 
+                customBurgerIcon={ <MenuRoundedIcon/> }
+                isOpen={ctx.isMenuOpen}
+                onStateChange={(state) => ctx.stateChangeHandler(state)}
+                styles={ burgerMenuStyles }
             >
-                <Grid item xs={10} style={{height: '15%'}}>
-                    
-                </Grid>
-                <Grid item xs={10} align={"left"}>
-                    <Button onClick={() => {history.push('/')}} css={navLinks}>
-                        {t('buttons.moonpots')}
-                    </Button>
-                </Grid>
-                <Grid item xs={10} align={"left"}>
-
-                    <Button className={classes.mobileNav} onClick={() => {history.push('/my-moonpots')}}>
-                        {t('buttons.myPots')}
-                    </Button>
+                <Grid
+                container
+                direction="column"
+                justifyContent="space-evenly"
+                spacing={3}
+                >
+                    <Grid item xs={10} style={{height: '15%'}}>
                         
+                    </Grid>
+                    <Grid item xs={10} align={"left"}>
+                        <Button onClick={() => {history.push('/')}} css={navLinks}>
+                            {t('buttons.moonpots')}
+                        </Button>
+                    </Grid>
+                    <Grid item xs={10} align={"left"}>
+
+                        <Button className={classes.mobileNav} onClick={() => {history.push('/my-moonpots')}}>
+                            {t('buttons.myPots')}
+                        </Button>
+                            
+                    </Grid>
+                    <Grid item xs={10} align={"left"}>
+                        <Button className={classes.mobileNav} href={"https://docs.moonpot.com"}>
+                            {t('buttons.docs')}
+                        </Button>
+                    </Grid>
+                    <Grid item xs={8} align={"left"}>
+                        <CustomDropdown list={{'usd': 'USD', 'eur': 'EUR', 'gbp': 'GBP'}} selected={walletReducer.currency} handler={(e) => {handleCurrencySwitch(e.target.value)}} css={menuDropdowns}/>
+                    </Grid>
+                    <Grid item xs={8} align={"left"}>
+                        <CustomDropdown list={{'en': 'EN', 'fr': 'FR'}} selected={walletReducer.language} handler={(e) => {handleLanguageSwitch(e.target.value)}}/>
+                    </Grid>
+                    <Grid item xs={12} className={classes.wallet} align={"center"}>
+                        <WalletContainer />
+                    </Grid>
                 </Grid>
-                <Grid item xs={10} align={"left"}>
-                    <Button className={classes.mobileNav} href={"https://docs.moonpot.com"}>
-                        {t('buttons.docs')}
-                    </Button>
-                </Grid>
-                <Grid item xs={8} align={"left"}>
-                    <CustomDropdown list={{'usd': 'USD', 'eur': 'EUR', 'gbp': 'GBP'}} selected={walletReducer.currency} handler={(e) => {handleCurrencySwitch(e.target.value)}} css={menuDropdowns}/>
-                </Grid>
-                <Grid item xs={8} align={"left"}>
-                    <CustomDropdown list={{'en': 'EN', 'fr': 'FR'}} selected={walletReducer.language} handler={(e) => {handleLanguageSwitch(e.target.value)}}/>
-                </Grid>
-                <Grid item xs={12} className={classes.wallet} align={"center"}>
-                    <WalletContainer />
-                </Grid>
-            </Grid>
-        </Menu>
+            </Menu>
+        </React.Fragment>
+                    
+        
     )
   }
 
