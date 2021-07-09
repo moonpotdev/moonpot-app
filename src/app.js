@@ -210,7 +210,7 @@ export default function App() {
             <Router history={createMemoryHistory()}>
                 <Provider>
                     <React.Suspense fallback={<div className="loader"/>}>
-                    { window.innerWidth > 700 ? (
+                    { window.innerWidth < 700 ? (
                             <Navigation />
                     ) : (
                         <Header />
