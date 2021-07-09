@@ -117,11 +117,7 @@ const Navigation = () => {
     return (
         <React.Fragment>
                 <Box id="logo" onClick={() => {history.push('/')}}>
-                    {walletReducer.address ? (
-                        <img alt="Moonpot" src={require('./images/moonpot-notext.svg').default} />
-                    ) : (
-                        <img alt="Moonpot" className={classes.moonpotImage} src={require('./images/moonpot-dot-com.png').default}/>
-                    )}
+                    <img alt="Moonpot" className={classes.moonpotImage} src={require('./images/moonpot-dot-com.png').default}/>
                 </Box>
             <Menu 
                 customBurgerIcon={ <MenuRoundedIcon/> }
@@ -171,7 +167,11 @@ const Navigation = () => {
                     <Grid item xs={8} align={"left"}>
                         <CustomDropdown list={{'en': 'EN', 'fr': 'FR'}} selected={walletReducer.language} handler={(e) => {handleLanguageSwitch(e.target.value)}}/>
                     </Grid>
-                    <Grid item xs={12} className={classes.wallet} align={"center"}>
+                    <Grid item xs={12} className={classes.wallet} align={"center"} onClick={() => {
+                        {
+                            (walletReducer.address ? void 0 : ctx.toggleMenu())
+                        }
+                    }}>
                         <WalletContainer />
                     </Grid>
                 </Grid>
