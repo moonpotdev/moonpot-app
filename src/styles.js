@@ -1,8 +1,19 @@
 const styles = () => ({
     moonpotImage: {
-        backgroundColor: 'red',
-        width: '200px',
+        margin: '16px 24px',
+        height: '36px',
         display: 'absolute',
+    },
+    mobileNavItem: {
+        color: '#FFFFFF',
+        backgroundColor: 'transparent',
+        fontWeight: 500,
+        fontSize: '21px',
+        lineHeight: '24px',
+        marginBottom: '32px',
+    },
+    mobileNavWallet: {
+        width: '90%',
     }
 })
 
@@ -48,7 +59,7 @@ const burgerMenuStyles = {
       padding: '0.8em'
     },
     bmItem: {
-      display: 'inline-block'
+      display: 'flex'
     },
     bmOverlay: {
       background: 'rgba(0, 0, 0, 0.3)'

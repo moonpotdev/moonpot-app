@@ -45,11 +45,7 @@ const Header = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={3} align={"left"}>
                         <Box className={classes.logo} onClick={() => {history.push('/')}}>
-                            {walletReducer.address ? (
-                                <img alt="Moonpot" src={require('../../images/moonpot-notext.svg').default} />
-                            ) : (
-                                <img alt="Moonpot" height="36px" src={require('../../images/moonpot-dot-com.png').default} />
-                            )}
+                            <img alt="Moonpot" height="36px" src={require('../../images/moonpot-dot-com.png').default} />
                         </Box>
                     </Grid>
                     

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, useHistory } from "react-router
 import appTheme from "./appTheme.js";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import { ThemeProvider, CssBaseline, AppBar, Toolbar, Grid, Box, Button, makeStyles } from "@material-ui/core";
+import { ThemeProvider, CssBaseline, AppBar, Toolbar, Grid, Box, Button, Link, makeStyles } from "@material-ui/core";
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import {useDispatch, useSelector} from "react-redux";
 import reduxActions from "./features/redux/actions";
@@ -53,28 +53,6 @@ const Provider = (props) => {
     )
 };
 
-const navLinks = {
-    navLink: {
-        color: '#FFFFFF',
-        backgroundColor: 'transparent',
-        fontWeight: 500,
-        fontSize: '21px',
-        lineHeight: '24.13px',
-    },
-};
-
-const menuDropdowns = {
-    menuDropdowns: {
-        color: '#FFFFFF',
-        backgroundColor: 'transparent',
-        fontWeight: 500,
-        fontSize: '21px',
-        lineHeight: '24.13px',
-    },
-};
-
-// const useStyles = makeStyles(styles);
-
 const Navigation = () => {
     const ctx = useContext(Context)
 
@@ -92,25 +70,7 @@ const Navigation = () => {
         dispatch(reduxActions.wallet.setCurrency(value));
         history.push('/');
     }
-    const styles = ({
-            moonpotImage: {
-                margin: '16px 24px',
-                height: '36px',
-                display: 'absolute',
-            },
-            mobileNav: {
-                color: '#FFFFFF',
-                backgroundColor: 'transparent',
-                fontWeight: 500,
-                fontSize: '21px',
-                lineHeight: '24px',
-            },
-            wallet: {
-                borderColor: '#FFFFFF',
-                width: '90%',
-            },
-        }
-    );
+
     const useStyles = makeStyles(styles);
     const classes = useStyles();
   
@@ -135,39 +95,43 @@ const Navigation = () => {
                         
                     </Grid>
                     <Grid item xs={10} align={"left"}>
-                        <Button 
+                        <Link
+                        className={classes.mobileNavItem} 
                         onClick={() => {
                             history.push('/');
                             ctx.toggleMenu();
-                        }} 
-                        css={navLinks}>
-                            {t('buttons.moonpots')}
-                        </Button>
+                        }}>
+                            {t('buttons.mobilePotsNav')}
+                        </Link>
                     </Grid>
                     <Grid item xs={10} align={"left"}>
 
-                        <Button className={classes.mobileNav} onClick={() => {
+                        <Link className={classes.mobileNavItem} onClick={() => {
                             history.push('/my-moonpots');
                             ctx.toggleMenu();
                         }}>
                             {t('buttons.myPots')}
-                        </Button>
+                        </Link>
                             
                     </Grid>
                     <Grid item xs={10} align={"left"}>
-                        <Button className={classes.mobileNav} href={"https://docs.moonpot.com"} onClick={() => {
+                        <Link className={classes.mobileNavItem} href={"https://docs.moonpot.com"} onClick={() => {
                             ctx.toggleMenu();
                         }}>
                             {t('buttons.docs')}
-                        </Button>
+                        </Link>
                     </Grid>
-                    <Grid item xs={8} align={"left"}>
-                        <CustomDropdown list={{'usd': 'USD', 'eur': 'EUR', 'gbp': 'GBP'}} selected={walletReducer.currency} handler={(e) => {handleCurrencySwitch(e.target.value)}} css={menuDropdowns}/>
+                    <Grid item xs={10} align={"left"}>
+                        <CustomDropdown list={{'usd': 'USD', 'eur': 'EUR', 'gbp': 'GBP'}} selected={walletReducer.currency} handler={(e) => {handleCurrencySwitch(e.target.value)}}/>
                     </Grid>
-                    <Grid item xs={8} align={"left"}>
+                    <Grid item xs={10} align={"left"}>
                         <CustomDropdown list={{'en': 'EN', 'fr': 'FR'}} selected={walletReducer.language} handler={(e) => {handleLanguageSwitch(e.target.value)}}/>
                     </Grid>
-                    <Grid item xs={12} className={classes.wallet} align={"center"} onClick={() => {
+                </Grid>
+                <Grid 
+                container
+                alignItems="flex-end">
+                    <Grid item xs={12} className={classes.mobileNavWallet} align={"center"} onClick={() => {
                         {
                             (walletReducer.address ? void 0 : ctx.toggleMenu())
                         }
@@ -196,7 +160,7 @@ export default function App() {
             <Router history={createMemoryHistory()}>
                 <Provider>
                     <React.Suspense fallback={<div className="loader"/>}>
-                    <Media query="(max-width: 768px)">
+                    <Media query="(max-width: 1280px)">
                         {matches =>
                             matches ? (
                                 <Navigation /> 
