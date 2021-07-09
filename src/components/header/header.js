@@ -9,6 +9,7 @@ import {
     Container,
     Grid,
     Button,
+    Link,
     List,
     Box,
 } from "@material-ui/core";
@@ -50,15 +51,15 @@ const Header = () => {
                     </Grid>
                     
                     <Grid item xs={5} align={"center"}>
-                        <Button className={classes.navLink} onClick={() => {history.push('/')}}>
+                        <Link className={classes.navLink} onClick={() => {history.push('/')}}>
                             {t('buttons.moonpots')}
-                        </Button>
-                        <Button className={classes.navLink} onClick={() => {history.push('/my-moonpots')}}>
+                        </Link>
+                        <Link className={classes.navLink} onClick={() => {history.push('/my-moonpots')}}>
                             {t('buttons.myPots')}
-                        </Button>
-                        <Button className={classes.navLink} href={"https://docs.moonpot.com"}>
+                        </Link>
+                        <Link className={classes.navLink} href={"https://docs.moonpot.com"}>
                             {t('buttons.docs')}
-                        </Button>
+                        </Link>
                     </Grid>
                     
                     

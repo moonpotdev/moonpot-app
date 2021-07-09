@@ -37,6 +37,7 @@ const styles = (theme) => ({
         lineHeight: '17px',
         letterSpacing: '0.6px',
         color: '#FFFFFF',
+        padding: '32px',
     },
     wallet: {
         width: '50%',
