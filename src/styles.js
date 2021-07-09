@@ -28,7 +28,7 @@ const burgerMenuStyles = {
       top: '2.5%',
     },
     bmCross: {
-      background: '#bdc3c7'
+      background: '#FFFFFF'
     },
     bmMenuWrap: {
       position: 'fixed',

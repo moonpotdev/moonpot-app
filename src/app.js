@@ -139,19 +139,29 @@ const Navigation = () => {
                         
                     </Grid>
                     <Grid item xs={10} align={"left"}>
-                        <Button onClick={() => {history.push('/')}} css={navLinks}>
+                        <Button 
+                        onClick={() => {
+                            history.push('/');
+                            ctx.toggleMenu();
+                        }} 
+                        css={navLinks}>
                             {t('buttons.moonpots')}
                         </Button>
                     </Grid>
                     <Grid item xs={10} align={"left"}>
 
-                        <Button className={classes.mobileNav} onClick={() => {history.push('/my-moonpots')}}>
+                        <Button className={classes.mobileNav} onClick={() => {
+                            history.push('/my-moonpots');
+                            ctx.toggleMenu();
+                        }}>
                             {t('buttons.myPots')}
                         </Button>
                             
                     </Grid>
                     <Grid item xs={10} align={"left"}>
-                        <Button className={classes.mobileNav} href={"https://docs.moonpot.com"}>
+                        <Button className={classes.mobileNav} href={"https://docs.moonpot.com"} onClick={() => {
+                            ctx.toggleMenu();
+                        }}>
                             {t('buttons.docs')}
                         </Button>
                     </Grid>
