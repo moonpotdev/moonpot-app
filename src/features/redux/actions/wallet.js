@@ -11,7 +11,7 @@ import Web3Modal, {connectors} from "web3modal";
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
 const vaultAbi = require('../../../config/abi/vault.json');
-const gateKeeperAbi = require('../../../config/abi/gatekeeper.json');
+const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 
 const getClientsForNetwork = async (net) => {
     return config[net].rpc;
@@ -199,7 +199,7 @@ const deposit = (network, contractAddr, amount, max) => {
 
         if(address && provider) {
             const web3 = await new Web3(provider);
-            const contract = new web3.eth.Contract(gateKeeperAbi, contractAddr);
+            const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);
 
             if(max) {
                 contract.methods

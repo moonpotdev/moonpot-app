@@ -61,8 +61,8 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
 
     React.useEffect(() => {
         let amount = 0;
-        if(wallet.address && !isEmpty(balance.tokens[item.rewardAddress])) {
-            amount = byDecimals(new BigNumber(balance.tokens[item.rewardAddress].balance).multipliedBy(byDecimals(item.pricePerShare)), item.tokenDecimals).toFixed(8);
+        if(wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
+            amount = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance).multipliedBy(byDecimals(item.pricePerShare)), item.tokenDecimals).toFixed(8);
         }
         setState({balance: amount});
     }, [wallet.address, item, balance]);
