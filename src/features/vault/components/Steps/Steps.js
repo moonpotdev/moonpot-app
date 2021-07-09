@@ -44,11 +44,11 @@ const Steps = ({item, steps, handleClose}) => {
                             )}
                             <Typography>Funds are on the way</Typography>
                             <Box mt={1} textAlign={"center"}>
-                                <Button variant={"outlined"} color={"primary"} href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.receipt.transactionHash} target="_blank">View on Explorer</Button> <Button className={classes.finishedBtn} onClick={handleClose}>Close Dialog</Button>
+                                <Button variant={"outlined"} color={"primary"} href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.receipt.transactionHash} target="_blank">View on Explorer</Button> <Button variant={"outlined"} color={"primary"} onClick={handleClose}>Close Dialog</Button>
                             </Box>
                         </Box>
                         <Box mt={2} textAlign={"center"}>
-                            <Button variant={"outlined"} color={"primary"}>Go to my portfolio <ArrowRight /></Button>
+                            <Button variant={"outlined"} color={"primary"} href={"/my-moonpots"}>Go to my portfolio <ArrowRight /></Button>
                         </Box>
                     </Box>
                 ) : (
