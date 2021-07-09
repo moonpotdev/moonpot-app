@@ -2,17 +2,17 @@ import {config} from '../../../config/config';
 import Web3 from "web3";
 
 const initialLanguage = () => {
-    const storage = localStorage.getItem('site_language');
+    const storage = localStorage.getItem('moon_site_language');
     return storage === null ? 'en' : storage;
 }
 
 const initialCurrency = () => {
-    const storage = localStorage.getItem('site_currency');
+    const storage = localStorage.getItem('moon_site_currency');
     return storage === null ? 'usd' : storage;
 }
 
 const initialNetwork = () => {
-    const storage = localStorage.getItem('network');
+    const storage = localStorage.getItem('moon_networks');
     return storage === null ? 'bsc' : storage;
 }
 

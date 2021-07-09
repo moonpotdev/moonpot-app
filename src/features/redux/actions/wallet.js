@@ -18,14 +18,14 @@ const getClientsForNetwork = async (net) => {
 
 const setLanguage = (value) => {
     return async (dispatch) => {
-        localStorage.setItem('site_language', value);
+        localStorage.setItem('moon_site_language', value);
         dispatch({type: "SET_LANGUAGE", payload: {language: value}});
     }
 }
 
 const setCurrency = (value) => {
     return async (dispatch) => {
-        localStorage.setItem('site_currency', value);
+        localStorage.setItem('moon_site_currency', value);
         dispatch({type: "SET_CURRENCY", payload: {currency: value}});
     }
 }
