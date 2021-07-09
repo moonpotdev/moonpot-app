@@ -10,7 +10,6 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal, {connectors} from "web3modal";
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
-const vaultAbi = require('../../../config/abi/vault.json');
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 
 const getClientsForNetwork = async (net) => {
