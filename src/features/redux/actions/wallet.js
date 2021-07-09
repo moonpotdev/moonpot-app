@@ -247,7 +247,7 @@ const withdraw = (network, contractAddr, amount, max) => {
 
         if (address && provider) {
             const web3 = await new Web3(provider);
-            const contract = new web3.eth.Contract(vaultAbi, contractAddr);
+            const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);
 
             if(max) {
                 contract.methods
