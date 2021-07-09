@@ -22,6 +22,12 @@ const getBalancesSingle = async (item, state, dispatch) => {
         address: item.tokenAddress,
     });
 
+    allowance.push({
+        allowance: tokenContract.methods.allowance(address, item.contractAddress),
+        token: item.token,
+        spender: item.contractAddress,
+    });
+
     const gateContract = new web3[item.network].eth.Contract(gateManagerAbi, item.contractAddress);
 
     calls.push({
@@ -30,9 +36,11 @@ const getBalancesSingle = async (item, state, dispatch) => {
         address: item.rewardAddress,
     });
 
+    const prizeContract = new web3[item.network].eth.Contract(erc20Abi, item.rewardAddress);
+
     allowance.push({
-        allowance: tokenContract.methods.allowance(address, item.contractAddress),
-        token: item.token,
+        allowance: prizeContract.methods.allowance(address, item.contractAddress),
+        token: item.rewardToken,
         spender: item.contractAddress,
     });
 

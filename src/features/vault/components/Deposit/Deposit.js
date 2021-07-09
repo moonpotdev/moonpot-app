@@ -40,7 +40,7 @@ const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemDa
             if(!state.allowance) {
                 steps.push({
                     step: "approve",
-                    message: "Approval transaction happens once per vault.",
+                    message: "Approval transaction happens once per pot.",
                     action: () => dispatch(reduxActions.wallet.approval(
                         item.network,
                         item.tokenAddress,

@@ -19,7 +19,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
         wallet: state.walletReducer,
         balance: state.balanceReducer,
     }));
-    const [state, setState] = React.useState({balance: 0});
+    const [state, setState] = React.useState({balance: 0, allowance: 0});
     const [steps, setSteps] = React.useState({modal: false, currentStep: -1, items: [], finished: false});
 
     const handleInput = (val) => {
@@ -36,6 +36,19 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
     const handleWithdraw = () => {
         const steps = [];
         if(wallet.address) {
+            if(!state.allowance) {
+                steps.push({
+                    step: "approve",
+                    message: "Approval transaction happens once per pot.",
+                    action: () => dispatch(reduxActions.wallet.approval(
+                        item.network,
+                        item.rewardAddress,
+                        item.contractAddress
+                    )),
+                    pending: false,
+                });
+            }
+
             const amount = new BigNumber(formData.withdraw.amount).dividedBy(byDecimals(item.pricePerShare, item.tokenDecimals)).toFixed(8);
             steps.push({
                 step: "withdraw",
@@ -61,10 +74,12 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
 
     React.useEffect(() => {
         let amount = 0;
+        let approved = 0;
         if(wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
-            amount = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance).multipliedBy(byDecimals(item.pricePerShare)), item.tokenDecimals).toFixed(8);
+            amount = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance), item.tokenDecimals).toFixed(8);
+            approved = balance.tokens[item.rewardToken].allowance[item.contractAddress];
         }
-        setState({balance: amount});
+        setState({balance: amount, allowance: approved});
     }, [wallet.address, item, balance]);
 
     React.useEffect(() => {

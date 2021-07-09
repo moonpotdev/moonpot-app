@@ -31,8 +31,17 @@ const Steps = ({item, steps, handleClose}) => {
                 {steps.finished ? (
                     <Box className={classes.modalContent}>
                         <Box p={8} className={classes.finishedCard}>
-                            <Typography variant={"h2"}>{byDecimals(new BigNumber(wallet.action.data.amount).multipliedBy(byDecimals(item.pricePerShare)), item.tokenDecimals).toFixed(8)}</Typography>
-                            <Typography variant={"h2"}>withdraw confirmed</Typography>
+                            {steps.items[steps.currentStep].step === 'deposit' ? (
+                                <React.Fragment>
+                                    <Typography variant={"h2"}>{byDecimals(new BigNumber(wallet.action.data.amount), item.tokenDecimals).toFixed(8)} {item.token}</Typography>
+                                    <Typography variant={"h2"}>deposit confirmed</Typography>
+                                </React.Fragment>
+                            ) : (
+                                <React.Fragment>
+                                    <Typography variant={"h2"}>{byDecimals(new BigNumber(wallet.action.data.amount).multipliedBy(byDecimals(item.pricePerShare)), item.tokenDecimals).toFixed(8)} {item.token}</Typography>
+                                    <Typography variant={"h2"}>withdraw confirmed</Typography>
+                                </React.Fragment>
+                            )}
                             <Typography>Funds are on the way</Typography>
                             <Box mt={1} textAlign={"center"}>
                                 <Button variant={"outlined"} color={"primary"} href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.receipt.transactionHash} target="_blank">View on Explorer</Button> <Button className={classes.finishedBtn} onClick={handleClose}>Close Dialog</Button>
