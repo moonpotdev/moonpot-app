@@ -11,11 +11,14 @@ const initialTokens = () => {
         for (const key in data.pools) {
             tokens[data.pools[key].token] = {
                 balance: 0,
-                allowance: {[data.pools[key].contractAddress]: 0}
+                allowance: {[data.pools[key].contractAddress]: 0},
+                address: data.pools[key].tokenAddress,
             }
 
-            if(data.pools[key].tokenAddress) {
-                tokens[data.pools[key].token]['address'] = data.pools[key].tokenAddress;
+            tokens[data.pools[key].rewardToken] = {
+                balance: 0,
+                allowance: {[data.pools[key].contractAddress]: 0},
+                address: data.pools[key].rewardAddress,
             }
         }
     }

@@ -5,6 +5,7 @@ import {isEmpty} from "../../../helpers/utils";
 
 const erc20Abi = require('../../../config/abi/erc20.json');
 const multicallAbi = require('../../../config/abi/multicall.json');
+const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 
 const getBalancesSingle = async (item, state, dispatch) => {
     console.log('redux getBalancesSingle() processing...');
@@ -19,6 +20,14 @@ const getBalancesSingle = async (item, state, dispatch) => {
         amount: tokenContract.methods.balanceOf(address),
         token: item.token,
         address: item.tokenAddress,
+    });
+
+    const gateContract = new web3[item.network].eth.Contract(gateManagerAbi, item.contractAddress);
+
+    calls.push({
+        amount: gateContract.methods.userTotalBalance(address),
+        token: item.rewardToken,
+        address: item.rewardAddress,
     });
 
     allowance.push({
