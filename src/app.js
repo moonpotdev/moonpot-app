@@ -83,6 +83,7 @@ const Navigation = () => {
                 customBurgerIcon={ <MenuRoundedIcon/> }
                 isOpen={ctx.isMenuOpen}
                 onStateChange={(state) => ctx.stateChangeHandler(state)}
+                disableAutoFocus
                 styles={ burgerMenuStyles }
             >
                 <Grid
