@@ -13,6 +13,7 @@ import WalletContainer from "./components/header/components/WalletContainer";
 import CustomDropdown from "./components/customDropdown";
 import { createMemoryHistory } from "history";
 import MobileHeader from "./components/mobileHeader";
+import Media from "react-media";
 
 const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
@@ -211,13 +212,15 @@ export default function App() {
             <Router history={createMemoryHistory()}>
                 <Provider>
                     <React.Suspense fallback={<div className="loader"/>}>
-                    { window.innerWidth > 0 ? (
-                            <Navigation /> 
-                            // Still using version in app.js currently
-                            // Will refactor out to component later
-                    ) : (
-                        <Header />
-                    )}
+                    <Media query="(max-width: 768px)">
+                        {matches =>
+                            matches ? (
+                                <Navigation /> 
+                            ) : (
+                                <Header />
+                            )
+                        }
+                    </Media>
                     
                         <Switch>
                             <Route exact path="/" key={Date.now()}>
