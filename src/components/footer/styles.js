@@ -21,7 +21,7 @@ const styles = (theme) => ({
         }
     },
     footerBtn: {
-        width: '50%',
+        width: '75%',
         marginBottom: '20px',
         paddingLeft: '10%',
         paddingRight: '10%',
