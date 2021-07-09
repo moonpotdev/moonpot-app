@@ -211,8 +211,10 @@ export default function App() {
             <Router history={createMemoryHistory()}>
                 <Provider>
                     <React.Suspense fallback={<div className="loader"/>}>
-                    { window.innerWidth > 700 ? (
-                            <Navigation />
+                    { window.innerWidth > 0 ? (
+                            <Navigation /> 
+                            // Still using version in app.js currently
+                            // Will refactor out to component later
                     ) : (
                         <Header />
                     )}
