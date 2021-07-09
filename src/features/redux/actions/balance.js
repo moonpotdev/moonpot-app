@@ -77,27 +77,20 @@ const getBalancesAll = async (state, dispatch) => {
     }
 
     for (let key in pools) {
-        if(isEmpty(pools[key].tokenAddress)) {
-            const tokenContract = new web3[pools[key].network].eth.Contract(multicallAbi, multicall[pools[key].network].contract);
-            calls[pools[key].network].push({
-                amount: tokenContract.methods.getEthBalance(address),
-                token: pools[key].token,
-            });
-        } else {
-            const tokenContract = new web3[pools[key].network].eth.Contract(erc20Abi, pools[key].tokenAddress);
-            calls[pools[key].network].push({
-                amount: tokenContract.methods.balanceOf(address),
-                token: pools[key].token,
-                address: pools[key].tokenAddress,
-            });
+        const tokenContract = new web3[pools[key].network].eth.Contract(erc20Abi, pools[key].tokenAddress);
+        calls[pools[key].network].push({
+            amount: tokenContract.methods.balanceOf(address),
+            token: pools[key].token,
+            address: pools[key].tokenAddress,
+        });
 
-            const earnedTokenContract = new web3[pools[key].network].eth.Contract(erc20Abi, pools[key].earnedTokenAddress);
-            calls[pools[key].network].push({
-                amount: earnedTokenContract.methods.balanceOf(address),
-                token: pools[key].earnedToken,
-                address: pools[key].tokenAddress,
-            });
-        }
+        const gateContract = new web3[pools[key].network].eth.Contract(gateManagerAbi, pools[key].contractAddress);
+
+        calls[pools[key].network].push({
+            amount: gateContract.methods.userTotalBalance(address),
+            token: pools[key].rewardToken,
+            address: pools[key].rewardAddress,
+        });
     }
 
     let response = [];

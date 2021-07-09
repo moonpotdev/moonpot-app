@@ -1,25 +1,36 @@
 import * as React from "react";
 import { useHistory } from 'react-router-dom';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Button, Container, Grid, makeStyles, Typography} from "@material-ui/core"
 import Box from '@material-ui/core/Box';
 import styles from "./styles"
-import {isEmpty} from "../../helpers/utils";
 import {Trans, useTranslation} from "react-i18next";
+import reduxActions from "../redux/actions";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
     status: 'active',
 }
 
-const UseSortableData = (items, config = null) => {
-    const [sortConfig, setSortConfig] = React.useState(config);
+const Dashboard = () => {
+    const { t } = useTranslation();
+    const {vault, wallet, balance} = useSelector(state => ({
+        vault: state.vaultReducer,
+        wallet: state.walletReducer,
+        balance: state.balanceReducer,
+    }));
 
-    const sortedItems = React.useMemo(() => {
-        let sortableItems = isEmpty(items) ? [] : [...items];
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const classes = useStyles();
+    const [sortConfig, setSortConfig] = React.useState(defaultFilter);
+    const [filtered, setFiltered] = React.useState([]);
 
-        if (sortConfig !== null) {
-            sortableItems.sort((a, b) => {
+    React.useEffect(() => {
+        let data = [];
+
+        const sorted = (items) => {
+            return items.sort((a, b) => {
                 if(sortConfig.key === 'name') {
                     if (a[sortConfig.key].toUpperCase() < b[sortConfig.key].toUpperCase()) {
                         return sortConfig.direction === 'asc' ? -1 : 1;
@@ -33,112 +44,37 @@ const UseSortableData = (items, config = null) => {
                 }
             });
         }
-        return sortableItems;
-    }, [items, sortConfig]);
+        const check = (item) => {
+            if(item.status !== sortConfig.status) {
+                return false;
+            }
 
-    const setFilter = (obj) => {
-        setSortConfig({ ...sortConfig, ...obj});
-    }
+            if(Number(balance.tokens[item.rewardToken].balance) === 0) {
+                return false;
+            }
 
-    return { items: sortedItems, sortConfig, setFilter};
-};
-
-const Dashboard = () => {
-    const { t } = useTranslation();
-    const {vault, wallet} = useSelector(state => ({
-        vault: state.vaultReducer,
-        wallet: state.walletReducer,
-    }));
-
-    const history = useHistory();
-    const classes = useStyles();
-    const {items, sortConfig, setFilter} = UseSortableData(vault.pools, defaultFilter);
-
-    const filter = () => {
-        if(items.length > 0) {
-            const filtered = items.filter((item) => {
-                if(item.status !== sortConfig.status) {
-                    return false;
-                }
-
-                /*if(item.deposited === 0) {
-                    return false;
-                }*/
-
-                return item;
-            });
-
-            return filtered;
+            return item;
         }
-        return false;
-    };
 
-    const ShowMyPots = ({items}) => {
-        const filtered = filter();
-
-        if(filtered.length === 0) {
-            return (
-                <React.Fragment>
-                    <Grid item xs={7} direction="column" alignItems="center" className={classes.empty} >
-                        <Typography variant={"body1"}>{t('DashboardEmpty1')}</Typography>
-                        <Typography variant={"body1"}>{t('DashboardEmpty2')}</Typography>
-                    </Grid>
-                    <Grid item xs={5}>
-                        <img alt="Ziggy" src={require('../../images/ziggy/emptydeposit.svg').default} />
-                    </Grid>
-                </React.Fragment>
-            );
-        } else {
-            return (
-                filtered.map(item => (
-                    <Box className={classes.potItem} key={item.id}>
-                        <Grid container>
-                            <Grid item xs={12}>
-                                <Box className={classes.potImage}>
-                                    <img alt="Moonpot" src={require('../../images/pots/bitcoin.svg').default} />
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Box display={"flex"}>
-                                    <Box mr={5} mb={2} className={classes.split}>
-                                        <Typography variant={"h2"} align={"right"}>16.4k {item.rewardToken}</Typography>
-                                        <Typography variant={"h3"} align={"right"}>{item.name} {t('prize')}</Typography>
-                                        <Typography className={classes.seperator} variant={"h2"} align={"right"}>3d 23h 14min</Typography>
-                                        <Typography variant={"h3"} align={"right"}>{t('nextDraw')}</Typography>
-                                        <Typography className={classes.seperator} variant={"h2"} align={"right"}>May 14 2021</Typography>
-                                        <Typography variant={"h3"} align={"right"}>{t('fairplayUnlock')}</Typography>
-                                    </Box>
-                                    <Box ml={5} mb={2} className={classes.split}>
-                                        <Typography variant={"h2"}>2.52 {item.depositToken}</Typography>
-                                        <Typography variant={"h3"}>{t('myDeposit')}</Typography>
-                                        <Typography className={classes.seperator} variant={"h2"}>147% APY</Typography>
-                                        <Typography variant={"h3"}>{t('interestRate')}</Typography>
-                                        <Typography className={classes.seperator} variant={"h2"}>1 in 420000</Typography>
-                                        <Typography variant={"h3"}>{t('myOdds')}</Typography>
-                                    </Box>
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Grid container>
-                                    <Grid item xs={6}>
-                                        <Box p={1}>
-                                            <Button onClick={() => {history.push({pathname: '/pot/' + (item.id), withdrawOpen: true})}} className={classes.btn} variant={'contained'} color="primary">{t('buttons.withdraw')}</Button>
-                                        </Box>
-
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <Box p={1}>
-                                            <Button onClick={() => {history.push('/pot/' + (item.id))}} className={classes.btn} variant={'contained'} color="primary">{t('buttons.depositMore')}</Button>
-                                        </Box>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                ))
-            )
+        for (const [, item] of Object.entries(vault.pools)) {
+            if(check(item)) {
+                data.push(item);
+            }
         }
-    }
+
+        if (sortConfig !== null) {
+            data = sorted(data);
+        }
+
+        setFiltered(data);
+
+    }, [sortConfig, vault.pools, balance]);
+
+    React.useEffect(() => {
+        if(wallet.address) {
+            dispatch(reduxActions.balance.fetchBalances());
+        }
+    }, [wallet.address]);
 
     return (
         <React.Fragment>
@@ -150,15 +86,44 @@ const Dashboard = () => {
                     <Box>
                         <Box display="flex" justifyContent="center">
                             <Box p={1}>
-                                <Button variant={"outlined"} color={sortConfig.status === 'active' ? 'primary' : 'default'} onClick={() => setFilter({status: 'active'})}>{t('buttons.myActivePots')}</Button>
+                                <Button variant={"outlined"} color={sortConfig.status === 'active' ? 'primary' : 'default'} onClick={() => setSortConfig({ ...sortConfig, status: 'active' })}>{t('buttons.myActivePots')}</Button>
                             </Box>
                             <Box p={1}>
-                                <Button variant={"outlined"} color={sortConfig.status !== 'active' ? 'primary' : 'default'} onClick={() => setFilter({status: 'eol'})}>{t('buttons.myFinishedPots')}</Button>
+                                <Button variant={"outlined"} color={sortConfig.status !== 'active' ? 'primary' : 'default'} onClick={() => setSortConfig({ ...sortConfig, status: 'eol' })}>{t('buttons.myFinishedPots')}</Button>
                             </Box>
                         </Box>
                         <Grid container direction="column" alignItems={"center"}>
-                            {items.length === 0 ? '' : (
-                                <ShowMyPots items={items} />
+                            {filtered.length === 0 ? '' : (
+                                filtered.map(item => (
+                                    <Box className={classes.potItem} key={item.id}>
+                                        <Grid container spacing={3}>
+                                            <Grid item xs={4}>
+                                                <Box className={classes.potImage}>
+                                                    <img alt="Moonpot" src={require('../../images/pots/cake.svg').default} />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item xs={7}>
+                                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $90,000</Typography>
+                                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}</Typography>
+                                                <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} <span>1600.00 {item.token} </span> {t('prize')}</Typography>
+                                            </Grid>
+                                            <Grid item xs={5}>
+                                                <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
+                                                <Typography className={classes.countdown}>1d 23h 15m</Typography>
+                                            </Grid>
+                                            <Grid item xs={5}>
+                                                <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.rewardToken}</Typography>
+                                                <Typography className={classes.apy} align={'right'}>10% APY</Typography>
+                                            </Grid>
+                                            <Grid item xs={11}>
+                                                <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.play')}</Button>
+                                            </Grid>
+                                            <Grid item xs={8}>
+                                                <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '40,000', amount: '$1000'})}</Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </Box>
+                                ))
                             )}
                         </Grid>
                         <Box textAlign={"center"} p={3}>
