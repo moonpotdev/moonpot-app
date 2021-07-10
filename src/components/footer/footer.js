@@ -19,11 +19,11 @@ const Footer = () => {
                     <Button href={"https://docs.moonpot.com"} className={classes.footerBtn} variant={'outlined'} size={'small'}>{t('buttons.ziggyMoonpotGuide')}</Button>
                 </Grid>
                 <Grid className={classes.footerIcons} item xs={12}>
-                    <Link href={"a"}><img alt="Github" src={require('../../images/icons/github.svg').default} /></Link>
-                    <Link href={"a"}><img alt="Telegram" src={require('../../images/icons/telegram.svg').default} /></Link>
-                    <Link href={"a"}><img alt="Discord" src={require('../../images/icons/discord.svg').default} /></Link>
-                    <Link href={"a"}><img alt="Youtube" src={require('../../images/icons/youtube.svg').default} /></Link>
-                    <Link href={"a"}><img alt="Twitter" src={require('../../images/icons/twitter.svg').default} /></Link>
+                    <Link href={"https://github.com/moonpotdev"}><img alt="Github" src={require('../../images/icons/github.svg').default} /></Link>
+                    <Link href={"https://t.me/moonpotdotcom"}><img alt="Telegram" src={require('../../images/icons/telegram.svg').default} /></Link>
+                    <Link href={"https://discord.gg/8YquFwfw3N"}><img alt="Discord" src={require('../../images/icons/discord.svg').default} /></Link>
+                    <Link href={"https://www.youtube.com/channel/UCCwZh5FBKusmzmT5Q3Yisdg"}><img alt="Youtube" src={require('../../images/icons/youtube.svg').default} /></Link>
+                    <Link href={"https://twitter.com/moonpotdotcom"}><img alt="Twitter" src={require('../../images/icons/twitter.svg').default} /></Link>
                 </Grid>
             </Grid>
         </React.Fragment>
