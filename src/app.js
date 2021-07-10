@@ -102,7 +102,7 @@ const Navigation = () => {
                             history.push('/');
                             ctx.toggleMenu();
                         }}>
-                            {t('buttons.mobilePotsNav')}
+                            {t('buttons.moonpots')}
                         </Link>
                     </Grid>
                     <Grid item xs={10} align={"left"}>

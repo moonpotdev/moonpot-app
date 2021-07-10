@@ -19,7 +19,7 @@ const styles = () => ({
 
 const burgerMenuStyles = {
     bmBurgerButton: {
-      position: 'fixed',
+      position: 'absolute',
       width: '36px',
       height: '36px',
       right: '2.5%',
