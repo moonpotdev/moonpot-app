@@ -1,7 +1,12 @@
 const styles = (theme) => ({
     footer: {
+        minHeight: '100%',
         padding: '8px 40px',
         textAlign: 'center',
+        flex: 1,
+        justifyContent: 'flex-end',
+        marginBottom: '32px',
+        // backgroundColor: 'red',
     },
     beefy: {
         fontWeight: 500,
@@ -34,6 +39,8 @@ const styles = (theme) => ({
         },
     },
     footerIcons: {
+        flex: 1,
+        justifyContent: 'flex-end',
         '& img': {
             padding: '0 10px',
         }
