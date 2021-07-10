@@ -1,9 +1,9 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { BrowserRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import appTheme from "./appTheme.js";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import { ThemeProvider, CssBaseline, AppBar, Toolbar, Grid, Box, Button, Link, makeStyles } from "@material-ui/core";
+import { ThemeProvider, CssBaseline, Grid, Box, Link, makeStyles } from "@material-ui/core";
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import {useDispatch, useSelector} from "react-redux";
 import reduxActions from "./features/redux/actions";
@@ -12,7 +12,7 @@ import {useTranslation} from "react-i18next";
 import WalletContainer from "./components/header/components/WalletContainer";
 import CustomDropdown from "./components/customDropdown";
 import { createMemoryHistory } from "history";
-import MobileHeader from "./components/mobileHeader";
+// import MobileHeader from "./components/mobileHeader";
 import Media from "react-media";
 import {styles, burgerMenuStyles} from "./styles.js";
 
@@ -133,9 +133,7 @@ const Navigation = () => {
                 container
                 alignItems="flex-end">
                     <Grid item xs={12} className={classes.mobileNavWallet} align={"center"} onClick={() => {
-                        {
                             (walletReducer.address ? void 0 : ctx.toggleMenu())
-                        }
                     }}>
                         <WalletContainer />
                     </Grid>
