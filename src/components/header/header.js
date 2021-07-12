@@ -6,11 +6,8 @@ import {
     makeStyles,
     AppBar,
     Toolbar,
-    Container,
     Grid,
-    Button,
     Link,
-    List,
     Box,
 } from "@material-ui/core";
 import styles from "./styles"

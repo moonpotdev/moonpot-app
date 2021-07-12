@@ -4,7 +4,6 @@ import styles from "./styles"
 import reduxActions from "../../../../features/redux/actions";
 import {useDispatch, useSelector} from "react-redux";
 import Loader from "../../../loader";
-import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles(styles);
@@ -18,7 +17,6 @@ const WalletContainer = () => {
     const classes = useStyles();
     const walletReducer = useSelector(state => state.walletReducer);
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const handleWalletConnect = () => {
         if(!walletReducer.address) {

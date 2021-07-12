@@ -78,7 +78,6 @@ const Dashboard = () => {
 
     return (
         <React.Fragment>
-            {wallet.address ? (
                 <Container maxWidth="xl">
                     <Typography className={classes.h1}>
                         <Trans i18nKey="DashboardTitle" values={{count: "one", amount: "$914,279"}} />
@@ -131,11 +130,6 @@ const Dashboard = () => {
                         </Box>
                     </Box>
                 </Container>
-            ) : (
-                <Box textAlign={"center"} p={3}>
-                    <Button variant={"outlined"}>{t('buttons.connectWallet')}</Button>
-                </Box>
-            )}
         </React.Fragment>
     );
 };

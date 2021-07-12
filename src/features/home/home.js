@@ -6,7 +6,6 @@ import Box from '@material-ui/core/Box';
 import styles from "./styles"
 import Filter from "./components/Filter";
 import {Trans, useTranslation} from "react-i18next";
-import { textAlign } from "@material-ui/system";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
