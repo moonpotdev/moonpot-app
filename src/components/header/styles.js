@@ -42,10 +42,6 @@ const styles = (theme) => ({
     wallet: {
         width: '50%',
     },
-    navList: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-    },
 })
 
 export default styles;
