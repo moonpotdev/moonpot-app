@@ -135,7 +135,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                 </Grid>
                 <Grid item xs={11}>
                     {wallet.address ? (
-                            <Button onClick={handleWithdraw} className={classes.actionBtn} disabled={formData.withdraw.amount <= 0}>Withdraw {formData.withdraw.max && formData.withdraw.amount > 0 ? ('All') : ''}</Button>
+                            <Button onClick={handleWithdraw} className={formData.withdraw.amount < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={formData.withdraw.amount <= 0}>Withdraw {formData.withdraw.max && formData.withdraw.amount > 0 ? ('All') : ''}</Button>
                     ) : (
                         <Button onClick={handleWalletConnect} className={classes.connectWalletBtn} variant={'contained'}>{t('buttons.connectWallet')}</Button>
                     )}

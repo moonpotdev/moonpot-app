@@ -8,25 +8,9 @@ const styles = (theme) => ({
         marginBottom: '32px',
         // backgroundColor: 'red',
     },
-    beefy: {
-        fontWeight: 500,
-        fontSize: '12px',
-        lineHeight: '14px',
-        color: '#ffffff',
-        letterSpacing: '0.34px',
-        marginTop: '16px',
-        marginBottom: '100px',
-        '& .MuiLink-root': {
-            color: '#ffffff',
-            textDecoration: 'underline',
-        },
-        '& img': {
-            marginBottom: '-5px',
-            marginLeft: '3px',
-        }
-    },
     footerBtn: {
-        width: '75%',
+        width: '100%',
+        marginTop: '56px',
         marginBottom: '20px',
         paddingLeft: '10%',
         paddingRight: '10%',
