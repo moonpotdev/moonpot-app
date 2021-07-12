@@ -166,6 +166,9 @@ const Vault = () => {
                         </Grid>
                     </Box>
                 </Grid>
+                <Grid item xs={12}>
+                    <Typography className={classes.beefy}>{t('footerPoweredBy')} <Link href={"https://beefy.finance"}>Beefy.Finance</Link> <img alt="Beefy Finance" src={require('../../images/beefy.svg').default} /></Typography>
+                </Grid>
             </Container>
             )}
         </div>

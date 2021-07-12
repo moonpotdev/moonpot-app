@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useHistory } from 'react-router-dom';
 import {useSelector} from "react-redux";
-import {Button, Container, Grid, makeStyles, Typography} from "@material-ui/core"
+import {Button, Link, Container, Grid, makeStyles, Typography} from "@material-ui/core"
 import Box from '@material-ui/core/Box';
 import styles from "./styles"
 import Filter from "./components/Filter";
@@ -89,34 +89,39 @@ const Home = () => {
                     <Grid container>
                     {filtered.length === 0 ? '' : (
                         filtered.map(item => (
-                            <Box className={classes.potItem} key={item.id}>
-                                <Grid container spacing={3}>
-                                    <Grid item xs={4}>
-                                        <Box className={classes.potImage}>
-                                            <img alt="Moonpot" src={require('../../images/pots/cake.svg').default} />
-                                        </Box>
+                            <React.Fragment>
+                                <Box className={classes.potItem} key={item.id}>
+                                    <Grid container spacing={3}>
+                                        <Grid item xs={4}>
+                                            <Box className={classes.potImage}>
+                                                <img alt="Moonpot" src={require('../../images/pots/cake.svg').default} />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $90,000</Typography>
+                                            <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}</Typography>
+                                            <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} <span>1600.00 {item.token} </span> {t('prize')}</Typography>
+                                        </Grid>
+                                        <Grid item xs={5}>
+                                            <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
+                                            <Typography className={classes.countdown}>1d 23h 15m</Typography>
+                                        </Grid>
+                                        <Grid item xs={5}>
+                                            <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.rewardToken}</Typography>
+                                            <Typography className={classes.apy} align={'right'}>10% APY</Typography>
+                                        </Grid>
+                                        <Grid item xs={11}>
+                                            <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.play')}</Button>
+                                        </Grid>
+                                        <Grid item xs={8}>
+                                            <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '40,000', amount: '$1000'})}</Typography>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={7}>
-                                        <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $90,000</Typography>
-                                        <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}</Typography>
-                                        <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} <span>1600.00 {item.token} </span> {t('prize')}</Typography>
-                                    </Grid>
-                                    <Grid item xs={5}>
-                                        <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
-                                        <Typography className={classes.countdown}>1d 23h 15m</Typography>
-                                    </Grid>
-                                    <Grid item xs={5}>
-                                        <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.rewardToken}</Typography>
-                                        <Typography className={classes.apy} align={'right'}>10% APY</Typography>
-                                    </Grid>
-                                    <Grid item xs={11}>
-                                        <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.play')}</Button>
-                                    </Grid>
-                                    <Grid item xs={8}>
-                                        <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '40,000', amount: '$1000'})}</Typography>
-                                    </Grid>
+                                </Box>
+                                <Grid item xs={12}>
+                                    <Typography className={classes.beefy}>{t('footerPoweredBy')} <Link href={"https://beefy.finance"}>Beefy.Finance</Link> <img alt="Beefy Finance" src={require('../../images/beefy.svg').default} /></Typography>
                                 </Grid>
-                            </Box>
+                            </React.Fragment>
                         ))
                     )}
                         {sortConfig.vault === 'community' ? (

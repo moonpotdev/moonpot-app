@@ -130,6 +130,24 @@ const styles = (theme) => ({
         color: '#C7C3D5',
         textAlign: 'center',
     },
+    beefy: {
+        fontWeight: 500,
+        fontSize: '12px',
+        lineHeight: '14px',
+        color: '#ffffff',
+        letterSpacing: '0.34px',
+        textAlign: 'center',
+        marginTop: '16px',
+        marginBottom: '100px',
+        '& .MuiLink-root': {
+            color: '#ffffff',
+            textDecoration: 'underline',
+        },
+        '& img': {
+            marginBottom: '-5px',
+            marginLeft: '3px',
+        }
+    },
     ziggyMaintenance: {
         textAlign: 'center',
         marginTop: '-55px',
