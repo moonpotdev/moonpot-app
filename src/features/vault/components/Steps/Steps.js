@@ -78,6 +78,7 @@ const Steps = ({item, steps, handleClose}) => {
                                         <Box textAlign={"center"}><Loader /></Box>
                                         <Box textAlign={"center"} mt={2}>
                                             <Button variant={"outlined"} color={"primary"} href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.hash} target="_blank">See deposit on Block Explorer</Button>
+                                            
                                         </Box>
                                     </Alert>
                                 ) : ''}

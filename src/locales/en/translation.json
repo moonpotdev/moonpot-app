@@ -10,7 +10,7 @@
     "mobilePotsNav": "Pots",
     "myPots": "My Pots",
     "myActivePots": "My Active Pots",
-    "myFinishedPots": "My Finished Pots",
+    "myPastPots": "My Past Pots",
     "playInMorePots": "Play in More Pots",
     "mainPots": "Main Pots",
     "communityPots": "Community Pots",
@@ -40,7 +40,10 @@
   "yourDeposit": "Your Deposit",
   "myDeposit": "My Deposit",
   "myOdds": "My Odds",
+  "odds": "1 in {{odds}}",
   "earn": "Earn",
   "oddsPerDeposit": "1 in {{odds}} odds per {{amount}} deposit",
+  "details": "Details",
+  "depositMore": "Deposit More",
   "footerPoweredBy": "Powered by"
 }
