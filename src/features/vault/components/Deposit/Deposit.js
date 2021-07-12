@@ -120,7 +120,10 @@ const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemDa
                 </Grid>
             </Paper>
             {wallet.address ? (
-                    <Button onClick={handleDeposit} className={formData.deposit.amount < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={formData.deposit.amount <= 0}>Deposit {formData.deposit.max && formData.deposit.amount > 0 ? ('All') : ''}</Button>
+                    <Button onClick={handleDeposit} className={formData.deposit.amount < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={formData.deposit.amount <= 0}>Deposit {
+                        formData.deposit.max && formData.deposit.amount > 0 ? ('All') : 
+                        ( formData.deposit.amount > 0 ) ? formData.deposit.amount + " " + item.token : ''
+                        }</Button>
             ) : (
                 <Button onClick={handleWalletConnect} className={classes.connectWalletBtn} variant={'contained'}>{t('buttons.connectWallet')}</Button>
             )}
