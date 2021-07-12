@@ -10,6 +10,21 @@ const styles = (theme) => ({
             color: '#F3BA2E'
         }
     },
+    vaultPotItem: {
+        backgroundColor: '#345675',
+        height: '100%',
+        width: '452px',
+        margin: '80px auto 0px auto',
+        marginTop: '56px',
+        borderRadius: '16px',
+        padding: '10px',
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: '20px',
+            marginRight: '20px',
+        },
+        boxShadow: '0px 12px 24px rgba(0, 0, 0, 0.4)', 
+
+    },
     potItem: {
         backgroundColor: '#7DAEDA',
         width: '330px',
@@ -23,8 +38,46 @@ const styles = (theme) => ({
     },
     potImage: {
         width: '100%',
-        textAlign: 'center',
-        marginTop: '-48px',
+        marginTop: '10px',
+        marginLeft: '10px',
+    },
+    potUsdTop: {
+        fontWeight: 700,
+        fontSize: '24px',
+        lineHeight: '27.58px',
+        letterSpacing: '0.6px',
+        marginTop: '10px',
+        color: '#ffffff',
+        '& span': {
+            color: '#DFDDE7'
+        }
+    },
+    potUsd: {
+        fontWeight: 700,
+        fontSize: '24px',
+        lineHeight: '27.58px',
+        letterSpacing: '0.6px',
+        color: '#ffffff',
+        '& span': {
+            color: '#DFDDE7'
+        }
+    },
+    myPotsNextWeeklyDrawText: {
+        fontWeight: 400,
+        fontSize: '12px',
+        lineHeight: '20px',
+        letterSpacing: '0.2px',
+        color: '#EBF3F9',
+        padding: 0,
+        margin: 0,
+        '& span': {
+            fontWeight: 700,
+        }
+    },
+    divider: {
+        color: '#436F97',
+        backgroundColor: '#436F97',
+        height: '2px',
     },
     split: {
         width: '118px',
