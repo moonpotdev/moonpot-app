@@ -262,14 +262,73 @@ const styles = (theme) => ({
     },
     modal: {
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        background: '#1D1D30',
+        boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2), 0px 12px 24px rgba(0, 0, 0, 0.4)',
+
     },
-    modalContent: {
+    modalForeground: {
         maxWidth: 500,
+        fontWeight: 500,
+        minHeight: '300px',
+        fontSize: '28px',
+        lineHeight: '36px',
+        letterSpacing: '0.6px',
+        display: 'flex',
+        color: '#6753DB',
         backgroundColor: '#fff',
-        borderRadius: '20px',
+        borderRadius: '16px',
         padding: '20px',
+        marginBottom: '32px',
+        marginLeft: '16px',
+        marginRight: '16px',
+    },
+    modalText: {
+        flexDirection: 'column',
+        flexWrap: 'nowrap',
+    },
+    transactionConfirmations: {
+        marginTop: '20px',
+        marginBottom: '16px',
+
+    },
+    stepsTitleText: {
+        fontSize: '28px',
+        lineHeight: '36px',
+        letterSpacing: '0.6px',
+        display: 'flex',
+        color: '#6753DB',
+        marginTop: '20px',
+        marginBottom: '16px',
+
+    },
+    successfulDepositAmountText: {
+        color: '#585464',
+        fontSize: '15px',
+        lineHeight: '24px',
+    },
+    confirmationImage: {
+        height: '120px',
+        marginTop: '-80px', 
+    },
+    viewMyMoonpots: {
+        backgroundColor: '#6753DB',
+        borderRadius: '8px',
+        fontWeight: 700,
+        fontSize: '15px',
+        lineHeight: '24px',
+        letterSpacing: '0.2px',
+        marginTop: '32px',
+        marginBottom: '12px',
+    },
+    blockExplorerLink: {
+        color: '#585464',
+        fontWeight: 400,
+        fontSize: '15px',
+        lineHeight: '24px',
+        letterSpacing: '0.2px',
     }
 });
 
