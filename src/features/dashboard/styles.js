@@ -74,10 +74,38 @@ const styles = (theme) => ({
             fontWeight: 700,
         }
     },
+    myDetailsText: {
+        color: '#EBF3F9',
+        fontWeight: 400,
+        fontSize: '12px',
+        lineHeight: '20px',
+        letterSpacing: '0.2px',
+        textTransform: 'capitalize',
+        marginBottom: '16px',
+    },
+    myDetailsValue: {
+        color: '#FFFFFF',
+        fontWeight: 700,
+        fontSize: '12px',
+        lineHeight: '20px',
+        letterSpacing: '0.2px',
+        marginBottom: '16px',
+    },
     divider: {
         color: '#436F97',
         backgroundColor: '#436F97',
         height: '2px',
+    },
+    dividerText: {
+        color: '#EBF3F9',
+        fontWeight: 700,
+        fontSize: '12px',
+        lineHeight: '20px',
+        letterSpacing: '1px',
+        textTransform: 'uppercase',
+    },
+    expandToggle: {
+        color: '#FFFFFF',
     },
     split: {
         width: '118px',
