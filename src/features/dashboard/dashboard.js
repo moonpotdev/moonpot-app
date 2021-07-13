@@ -1,4 +1,5 @@
 import * as React from "react";
+// import { useHistory } from 'react-router-dom';
 import {useLocation} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import AnimateHeight from 'react-animate-height';
@@ -9,9 +10,6 @@ import {useTranslation} from "react-i18next";
 import reduxActions from "../redux/actions";
 import Deposit from "../vault/components/Deposit";
 import Withdraw from "../vault/components/Withdraw";
-import BigNumber from "bignumber.js";
-import {isEmpty} from "../../helpers/utils";
-import {byDecimals} from "../../helpers/format";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -21,6 +19,7 @@ const defaultFilter = {
 const Dashboard = () => {
     const { t } = useTranslation();
     const location = useLocation();
+    // const history = useHistory();
     const {vault, wallet, balance} = useSelector(state => ({
         vault: state.vaultReducer,
         wallet: state.walletReducer,
@@ -37,8 +36,6 @@ const Dashboard = () => {
     const [filtered, setFiltered] = React.useState([]);
     const [item] = React.useState(null);
     const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
-
-    const [state, setState] = React.useState({balance: 0, allowance: 0});
 
     const handleWalletConnect = () => {
         if(!wallet.address) {
@@ -119,7 +116,7 @@ const Dashboard = () => {
                             {filtered.length === 0 ? 
                             
                                 <Box className={classes.noActivePots}>
-                                    <Grid container spacing={2} alignItems={"center"}>
+                                    <Grid container spacing={2}>
                                         <Grid item xs={5} align={"center"}>
                                             <img className={classes.noActivePotsImage} alt="No Active Moonpots" src={require('../../images/ziggy/noActivePots.svg').default} />
                                         </Grid>

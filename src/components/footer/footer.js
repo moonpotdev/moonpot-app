@@ -1,4 +1,4 @@
-import {Button, Grid, Link, makeStyles, Typography} from "@material-ui/core";
+import {Button, Grid, Link, makeStyles} from "@material-ui/core";
 import * as React from "react";
 import styles from "./styles";
 import {useTranslation} from "react-i18next";

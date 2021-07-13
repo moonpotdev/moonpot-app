@@ -89,8 +89,8 @@ const Home = () => {
                     <Grid container>
                     {filtered.length === 0 ? '' : (
                         filtered.map(item => (
-                            <React.Fragment>
-                                <Box className={classes.potItem} key={item.id}>
+                            <React.Fragment key={item.id}>
+                                <Box className={classes.potItem}>
                                     <Grid container spacing={3}>
                                         <Grid item xs={4}>
                                             <Box className={classes.potImage}>
@@ -107,7 +107,7 @@ const Home = () => {
                                             <Typography className={classes.countdown}>1d 23h 15m</Typography>
                                         </Grid>
                                         <Grid item xs={5}>
-                                            <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.rewardToken}</Typography>
+                                            <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.token}</Typography>
                                             <Typography className={classes.apy} align={'right'}>10% APY</Typography>
                                         </Grid>
                                         <Grid item xs={11}>
