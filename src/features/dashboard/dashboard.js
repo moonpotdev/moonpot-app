@@ -30,7 +30,6 @@ const Dashboard = () => {
     
     const dispatch = useDispatch();
     const classes = useStyles();
-    const [state, setState] = React.useState({balance: 0, allowance: 0});
     const [detailsOpen, setDetailsOpen] = React.useState(location.detailsOpen);
     const [depositOpen, setDepositOpen] = React.useState(location.depositOpen);
     const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
@@ -38,6 +37,8 @@ const Dashboard = () => {
     const [filtered, setFiltered] = React.useState([]);
     const [item] = React.useState(null);
     const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
+
+    const [state, setState] = React.useState({balance: 0, allowance: 0});
 
     const handleWalletConnect = () => {
         if(!wallet.address) {
@@ -115,7 +116,28 @@ const Dashboard = () => {
                             </Box>
                         </Box>
                         <Grid container>
-                            {filtered.length === 0 ? '' : (
+                            {filtered.length === 0 ? 
+                            
+                                <Box className={classes.noActivePots}>
+                                    <Grid container spacing={2} alignItems={"center"}>
+                                        <Grid item xs={5} align={"center"}>
+                                            <img className={classes.noActivePotsImage} alt="No Active Moonpots" src={require('../../images/ziggy/noActivePots.svg').default} />
+                                        </Grid>
+                                        <Grid item xs={8} align={"center"}>
+                                            <Typography className={classes.noActivePotsTitle}>{t('playWithMoonpot')}</Typography>
+                                        </Grid>
+                                        <Grid item xs={10} align={"center"}>
+                                            <Typography className={classes.noActivePotsText}>{t('youHaventEnteredMoonpots')}</Typography>
+                                        </Grid>
+                                        <Grid item xs={10} align={"center"}>
+                                            <Button className={classes.noActivePotsPlayButton}>{t('buttons.play')}</Button>
+                                        </Grid>
+                                    </Grid>
+
+                                </Box>
+                            
+                            
+                            : (
                                 filtered.map(item => (
                                     <Box className={classes.vaultPotItem} key={item.id}>
                                         <Grid container spacing={2}>
