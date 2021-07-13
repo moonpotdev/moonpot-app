@@ -1,6 +1,7 @@
 {
   "name": "moonpot-app",
-  "version": "0.0.1",
+  "homepage": ".",
+  "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "repository": "moonpotdev/moonpot-app",
