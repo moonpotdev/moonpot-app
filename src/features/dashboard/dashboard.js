@@ -117,16 +117,16 @@ const Dashboard = () => {
                             
                                 <Box className={classes.noActivePots}>
                                     <Grid container spacing={2}>
-                                        <Grid item xs={5} align={"center"}>
+                                        <Grid item xs={5}>
                                             <img className={classes.noActivePotsImage} alt="No Active Moonpots" src={require('../../images/ziggy/noActivePots.svg').default} />
                                         </Grid>
-                                        <Grid item xs={8} align={"center"}>
+                                        <Grid item xs={8}>
                                             <Typography className={classes.noActivePotsTitle}>{t('playWithMoonpot')}</Typography>
                                         </Grid>
-                                        <Grid item xs={10} align={"center"}>
+                                        <Grid item xs={10}>
                                             <Typography className={classes.noActivePotsText}>{t('youHaventEnteredMoonpots')}</Typography>
                                         </Grid>
-                                        <Grid item xs={10} align={"center"}>
+                                        <Grid item xs={10}>
                                             <Button 
                                             className={classes.noActivePotsPlayButton} 
                                             onClick={() => {history.push('/')}}
