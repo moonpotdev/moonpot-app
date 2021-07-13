@@ -1,5 +1,5 @@
 import * as React from "react";
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {useLocation} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import AnimateHeight from 'react-animate-height';
@@ -19,7 +19,7 @@ const defaultFilter = {
 const Dashboard = () => {
     const { t } = useTranslation();
     const location = useLocation();
-    // const history = useHistory();
+    const history = useHistory();
     const {vault, wallet, balance} = useSelector(state => ({
         vault: state.vaultReducer,
         wallet: state.walletReducer,
@@ -127,13 +127,17 @@ const Dashboard = () => {
                                             <Typography className={classes.noActivePotsText}>{t('youHaventEnteredMoonpots')}</Typography>
                                         </Grid>
                                         <Grid item xs={10} align={"center"}>
-                                            <Button className={classes.noActivePotsPlayButton}>{t('buttons.play')}</Button>
+                                            <Button 
+                                            className={classes.noActivePotsPlayButton} 
+                                            onClick={() => {history.push('/')}}
+                                            >
+                                                {t('buttons.play')}
+                                            </Button>
                                         </Grid>
                                     </Grid>
 
                                 </Box>
-                            
-                            
+
                             : (
                                 filtered.map(item => (
                                     <Box className={classes.vaultPotItem} key={item.id}>
