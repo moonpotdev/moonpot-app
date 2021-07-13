@@ -148,7 +148,7 @@ const Vault = () => {
                                 <Typography className={classes.withdrawText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{t('withdraw')} </Typography>
                             </Grid>
                             <Grid item xs={2} align={"right"}>
-                                <Link className={classes.expandToggle} onClick={() => {setWithdrawOpen(!withdrawOpen)}} className={classes.expandToggle}>{withdrawOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
+                                <Link className={classes.expandToggle} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{withdrawOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                             </Grid>
                             <Grid item xs={12}>
                                 <AnimateHeight duration={ 500 } height={ withdrawOpen ? 'auto' : 0 }>

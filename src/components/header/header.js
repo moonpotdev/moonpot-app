@@ -30,7 +30,6 @@ const Header = () => {
 
     const handleCurrencySwitch = (value) => {
         dispatch(reduxActions.wallet.setCurrency(value));
-        history.push('/');
     }
 
     const customDropdownCss = {
