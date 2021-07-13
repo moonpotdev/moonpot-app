@@ -1,15 +1,17 @@
 import * as React from "react";
-import { useHistory } from 'react-router-dom';
 import {useLocation} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import AnimateHeight from 'react-animate-height';
 import {Button, Link, Container, Grid, Box, makeStyles, Typography, Divider} from "@material-ui/core"
 import {ExpandMore, ExpandLess} from '@material-ui/icons';
 import styles from "./styles"
-import {Trans, useTranslation} from "react-i18next";
+import {useTranslation} from "react-i18next";
 import reduxActions from "../redux/actions";
 import Deposit from "../vault/components/Deposit";
 import Withdraw from "../vault/components/Withdraw";
+import BigNumber from "bignumber.js";
+import {isEmpty} from "../../helpers/utils";
+import {byDecimals} from "../../helpers/format";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -25,15 +27,16 @@ const Dashboard = () => {
         balance: state.balanceReducer,
     }));
 
-    const history = useHistory();
+    
     const dispatch = useDispatch();
     const classes = useStyles();
+    const [state, setState] = React.useState({balance: 0, allowance: 0});
     const [detailsOpen, setDetailsOpen] = React.useState(location.detailsOpen);
     const [depositOpen, setDepositOpen] = React.useState(location.depositOpen);
     const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
     const [sortConfig, setSortConfig] = React.useState(defaultFilter);
     const [filtered, setFiltered] = React.useState([]);
-    const [item, setVaultData] = React.useState(null);
+    const [item] = React.useState(null);
     const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
 
     const handleWalletConnect = () => {
@@ -130,62 +133,83 @@ const Dashboard = () => {
                                                 <Divider className={classes.divider}></Divider>
                                             </Grid>
                                             <Grid item xs={9} align={"left"}>
-                                                <Typography className={classes.detailsText} onClick={() => {setDetailsOpen(!detailsOpen)}}>{t('details')} </Typography>
+                                                <Typography className={classes.dividerText} onClick={() => {setDetailsOpen(!detailsOpen)}}>{t('details')} </Typography>
                                             </Grid>
                                             <Grid item xs={2} align={"right"}>
                                                 <Link onClick={() => {setDetailsOpen(!detailsOpen)}} className={classes.expandToggle}>{detailsOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                             </Grid>
-                                            <AnimateHeight duration={ 500 } height={ detailsOpen ? 'auto' : 0 }>
-                                                <Grid item xs={5}>
-                                                    <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.token}</Typography>
-                                                    <Typography className={classes.apy} align={'right'}>10% APY</Typography>
-                                                </Grid>
-                                                <Grid item xs={8}>
-                                                    <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '40,000', amount: '$1000'})}</Typography>
-                                                </Grid>
-                                            </AnimateHeight>
+                                            <Grid item xs={11}>
+                                                <AnimateHeight duration={ 500 } height={ detailsOpen ? 'auto' : 0 }>
+                                                    <Grid container justifyContent>
+                                                        <Grid item xs={6}>
+                                                            <Typography className={classes.myDetailsText} align={'left'}>{t('myDeposit')}</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography className={classes.myDetailsValue} align={'right'}>2.52 {item.token} <span>($32)</span></Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography className={classes.myDetailsText} align={'left'}>{t('myEarnings')}</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography className={classes.myDetailsValue} align={'right'}>0.001 {item.token} <span>($0.014)</span></Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography className={classes.myDetailsText} align={'left'}>{t('myInterestRate')}</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                        <Typography className={classes.myDetailsValue} align={'right'}>58% APY</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography className={classes.myDetailsText} align={'left'}>{t('myOdds')}</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography className={classes.myDetailsValue} align={"right"}>{t('odds', {odds: '40,000'})}</Typography>
+                                                        </Grid>
+                                                    </Grid>
+                                                </AnimateHeight>
+                                            </Grid>
                                             <Grid item xs={11}>
                                                 <Divider className={classes.divider}></Divider>
                                             </Grid>
                                             <Grid item xs={9} align={"left"}>
-                                                <Typography className={classes.depositMoreText} onClick={() => {setDepositOpen(!depositOpen)}}>{t('depositMore')} </Typography>
+                                                <Typography className={classes.dividerText} onClick={() => {setDepositOpen(!depositOpen)}}>{t('depositMore')} </Typography>
                                             </Grid>
                                             <Grid item xs={2} align={"right"}>
                                                 <Link onClick={() => {setDepositOpen(!depositOpen)}} className={classes.expandToggle}>{depositOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                             </Grid>
-                                            <AnimateHeight duration={ 500 } height={ depositOpen ? 'auto' : 0 }>
-                                                <Grid item xs={12}>
-                                                    <Deposit
-                                                        item={item}
-                                                        handleWalletConnect={handleWalletConnect}
-                                                        formData={formData}
-                                                        setFormData={setFormData}
-                                                        updateItemData={updateItemData}
-                                                        resetFormData={resetFormData}
-                                                    />
-                                                </Grid>
-                                            </AnimateHeight>
+                                            <Grid item xs={11}>
+                                                <AnimateHeight duration={ 500 } height={ depositOpen ? 'auto' : 0 }>
+                                                        <Deposit
+                                                            item={item}
+                                                            handleWalletConnect={handleWalletConnect}
+                                                            formData={formData}
+                                                            setFormData={setFormData}
+                                                            updateItemData={updateItemData}
+                                                            resetFormData={resetFormData}
+                                                        />
+                                                </AnimateHeight>
+                                            </Grid>
                                             <Grid item xs={11}>
                                                 <Divider className={classes.divider}></Divider>
                                             </Grid>
                                             <Grid item xs={9} align={"left"}>
-                                                <Typography className={classes.withdrawText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{t('withdraw')} </Typography>
+                                                <Typography className={classes.dividerText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{t('withdraw')} </Typography>
                                             </Grid>
                                             <Grid item xs={2} align={"right"}>
                                                 <Link onClick={() => {setWithdrawOpen(!withdrawOpen)}} className={classes.expandToggle}>{withdrawOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                             </Grid>
-                                            <AnimateHeight duration={ 500 } height={ withdrawOpen ? 'auto' : 0 }>
-                                                <Grid item xs={12}>
-                                                    <Withdraw
-                                                        item={item}
-                                                        handleWalletConnect={handleWalletConnect}
-                                                        formData={formData}
-                                                        setFormData={setFormData}
-                                                        updateItemData={updateItemData}
-                                                        resetFormData={resetFormData}
-                                                    />
-                                                </Grid>
-                                            </AnimateHeight>
+                                            <Grid item xs={12}>
+                                                <AnimateHeight duration={ 500 } height={ withdrawOpen ? 'auto' : 0 }>
+                                                        <Withdraw
+                                                            item={item}
+                                                            handleWalletConnect={handleWalletConnect}
+                                                            formData={formData}
+                                                            setFormData={setFormData}
+                                                            updateItemData={updateItemData}
+                                                            resetFormData={resetFormData}
+                                                        />
+                                                </AnimateHeight>
+                                            </Grid>
                                         </Grid>
                                     </Box>
                                 ))
