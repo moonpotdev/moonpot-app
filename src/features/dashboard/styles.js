@@ -12,6 +12,7 @@ const styles = (theme) => ({
     },
     noActivePots: {
         backgroundColor: '#FFFFFF',
+        textAlign: 'center',
         width: '100%',
         maxWidth: '350px',
         minHeight: '320px',
