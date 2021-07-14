@@ -136,7 +136,7 @@ const connect = () => {
                     dispatch(connect())
                 } else {
                     // todo: show error to user for unsupported network
-                    alert('show nice modal: Wallet network not supported: ' + networkId);
+                    //alert('show nice modal: Wallet network not supported: ' + networkId);
                     throw Error('Network not supported, check chainId.');
                 }
             }
