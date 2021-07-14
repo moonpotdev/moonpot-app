@@ -6,10 +6,10 @@ export const pools = [
         tokenAddress: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
         tokenDecimals: 18,
         rewardToken: 'potCAKE',
-        rewardAddress: '0x475E5B6160Ca3E78E2F21E3912899DEfA7803930',
-        contractAddress: '0xA5ecA4472ecAb0388E92E3A5E2A112E637ffE568',
+        rewardAddress: '0x01148c386017520d56f89AD55cd6c648cC2DD2E3',
+        contractAddress: '0x09D8CB7521E45ad17ABC739a79108465f2A1dd81',
         pricePerShare: 1,
         vaultType: 'main',
         status: 'active',
     },
-];
+  ];
