@@ -304,6 +304,12 @@ const styles = (theme) => ({
         marginBottom: '16px',
 
     },
+    pendingText: {
+        color: '#A5A1B0',
+        fontWeight: 400,
+        fontSize: '13px',
+        lineHeight: '24px',
+    },
     successfulDepositAmountText: {
         color: '#585464',
         fontSize: '15px',
@@ -312,6 +318,12 @@ const styles = (theme) => ({
     confirmationImage: {
         height: '120px',
         marginTop: '-80px', 
+    },
+    confirmTransactionText: {
+        color: '#585464',
+        fontWeight: 400,
+        fontSize: '15px',
+        lineHeight: '24px',
     },
     viewMyMoonpots: {
         backgroundColor: '#6753DB',
