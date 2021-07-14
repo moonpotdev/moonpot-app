@@ -23,7 +23,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
     const [steps, setSteps] = React.useState({modal: false, currentStep: -1, items: [], finished: false});
 
     const handleInput = (val) => {
-        const value = (parseFloat(val) > state.balance) ? state.balance : (parseFloat(val) < 0) ? 0 : stripExtraDecimals(val);
+        const value = (parseFloat(val) > state.balance) ? state.balance : (parseFloat(val) < 0) ? 0 : stripExtraDecimals(state.balance);
         setFormData({...formData, withdraw: {amount: value, max: new BigNumber(value).minus(state.balance).toNumber() === 0}});
     }
 
@@ -125,18 +125,18 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                                 <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default} />
                             </Grid>
                             <Grid item xs={6}>
-                                <InputBase placeholder={t('enterCoinAmount', {coin: item.token})} value={formData.withdraw.amount} onChange={(e) => handleInput(e.target.value)} />
+                                <InputBase disabled="disabled" placeholder={state.balance} value={state.balance} onChange={(e) => handleInput(e.target.value)} />
                             </Grid>
                             <Grid item xs={4} align={"right"}>
-                                <Button className={classes.potsMaxButton} onClick={handleMax}>Max</Button>
+
                             </Grid>
                         </Grid> 
                     </Paper>
                 </Grid>
                 <Grid item xs={11}>
                     {wallet.address ? (
-                            <Button onClick={handleWithdraw} className={formData.withdraw.amount < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={formData.withdraw.amount <= 0}>Withdraw {
-                                formData.withdraw.max && formData.withdraw.amount > 0 ? ('All') :
+                            <Button onClick={handleWithdraw} className={formData.withdraw.amount < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={state.balance <= 0}>Withdraw {
+                                state.balance > 0 ? ('All') :
                                     ( formData.withdraw.amount > 0 ) ? formData.withdraw.amount + " " + item.token : ''
                                 }</Button>
                     ) : (
