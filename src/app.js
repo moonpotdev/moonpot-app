@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { BrowserRouter as Router, Route, Switch, useHistory } from "react-router-dom";
+import { HashRouter, Route, Switch, useHistory } from "react-router-dom";
 import appTheme from "./appTheme.js";
 import Header from "./components/header";
 import Footer from "./components/footer";
@@ -22,10 +22,7 @@ const Dashboard = React.lazy(() => import(`./features/dashboard`));
 
 const PageNotFound = () => {
     return <div>Page not found.</div>;
-
 }
-
-
 
 const Context = React.createContext();
 
@@ -156,7 +153,7 @@ export default function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Router history={createMemoryHistory()}>
+            <HashRouter history={createMemoryHistory()}>
                 <Provider>
                     <React.Suspense fallback={<div className="loader"/>}>
                     <Media query="(max-width: 1100px)">
@@ -186,7 +183,7 @@ export default function App() {
                     </React.Suspense>
                     <Footer />
                 </Provider>
-            </Router>
+            </HashRouter>
         </ThemeProvider>
     );
 }
