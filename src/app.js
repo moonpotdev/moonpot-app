@@ -11,7 +11,7 @@ import {slide as Menu} from "react-burger-menu";
 import {useTranslation} from "react-i18next";
 import WalletContainer from "./components/header/components/WalletContainer";
 import CustomDropdown from "./components/customDropdown";
-import { createMemoryHistory } from "history";
+import { createHashHistory } from "history";
 // import MobileHeader from "./components/mobileHeader";
 import Media from "react-media";
 import {styles, burgerMenuStyles} from "./styles.js";
@@ -153,7 +153,7 @@ export default function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <HashRouter history={createMemoryHistory()}>
+            <HashRouter history={createHashHistory()}>
                 <Provider>
                     <React.Suspense fallback={<div className="loader"/>}>
                     <Media query="(max-width: 1100px)">
