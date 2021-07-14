@@ -10,6 +10,9 @@ import {useTranslation} from "react-i18next";
 import reduxActions from "../redux/actions";
 import Deposit from "../vault/components/Deposit";
 import Withdraw from "../vault/components/Withdraw";
+import BigNumber from "bignumber.js";
+import {byDecimals} from "../../helpers/format";
+import {isEmpty} from "../../helpers/utils";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -86,12 +89,19 @@ const Dashboard = () => {
 
         for (const [, item] of Object.entries(vault.pools)) {
             if(check(item)) {
+
+                let amount = 0;
+
+                if(wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
+                    item.userBalance = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance), item.tokenDecimals).toFixed(8);
+                };
                 data.push(item);
             }
         }
 
         if (sortConfig !== null) {
             data = sorted(data);
+            console.log(data)
         }
 
         setFiltered(data);
@@ -168,13 +178,13 @@ const Dashboard = () => {
                                                             <Typography className={classes.myDetailsText} align={'left'}>{t('myDeposit')}</Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
-                                                            <Typography className={classes.myDetailsValue} align={'right'}>2.52 {item.token} <span>($32)</span></Typography>
+                                                            <Typography className={classes.myDetailsValue} align={'right'}>{item.userBalance} {item.token}</Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
                                                             <Typography className={classes.myDetailsText} align={'left'}>{t('myEarnings')}</Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
-                                                            <Typography className={classes.myDetailsValue} align={'right'}>0.001 {item.token} <span>($0.014)</span></Typography>
+                                                            <Typography className={classes.myDetailsValue} align={'right'}>0 {item.token}</Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
                                                             <Typography className={classes.myDetailsText} align={'left'}>{t('myInterestRate')}</Typography>
