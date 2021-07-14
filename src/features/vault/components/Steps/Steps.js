@@ -44,7 +44,7 @@ const Steps = ({item, steps, handleClose}) => {
                             ) : (
                                 <React.Fragment>
                                     <Typography className={classes.stepsTitleText}>Withdraw Successful!</Typography>
-                                    <Typography className={classes.successfulDepositAmountText}>You have successfully withdrawn {byDecimals(new BigNumber(wallet.action.data.amount).multipliedBy(byDecimals(item.pricePerShare)), item.tokenDecimals).toFixed(8)} {item.token}</Typography>
+                                    <Typography className={classes.successfulDepositAmountText}>You have successfully withdrawn all of your {item.token}</Typography>
                                 </React.Fragment>
                             )}
                             <Box className={classes.viewMyMoonpots} textAlign={"center"}>
