@@ -42,7 +42,17 @@ const Header = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={3} align={"left"}>
                         <Box className={classes.logo} onClick={() => {history.push('/')}}>
-                            <img alt="Moonpot" height="36px" src={require('../../images/moonpot-dot-com.png').default} />
+                            <img 
+                            alt="Moonpot" 
+                            height="36px"
+                            src={require('../../images/header/moonpot-desktop-logo@4x.png').default}
+                            // srcset="
+                            //     src/images/header/moonpot-desktop-logo@4x.png 4x,
+                            //     src/images/header/moonpot-desktop-logo@3x.png 3x,
+                            //     src/images/header/moonpot-desktop-logo@2x.png 2x,
+                            //     src/images/header/moonpot-desktop-logo@1x.png 1x
+                            // " 
+                            />
                         </Box>
                     </Grid>
                     
