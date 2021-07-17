@@ -81,7 +81,7 @@ const Steps = ({item, steps, handleClose}) => {
                                         <Typography className={classes.pendingText}>Waiting for network to confirm transaction...</Typography>
                                         <Box textAlign={"center"}><Loader /></Box>
                                         <Box textAlign={"center"} mt={2}>
-                                            <Link className={classes.blockExplorerLink} variant={"outlined"} href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.hash} target="_blank">See deposit on Block Explorer <OpenInNew /></Link>
+                                            <Link className={classes.blockExplorerLink} variant={"outlined"} href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.hash} target="_blank">See transaction on Block Explorer <OpenInNew /></Link>
                                             
                                         </Box>
                                     </Alert>
