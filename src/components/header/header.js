@@ -45,13 +45,12 @@ const Header = () => {
                             <img 
                             alt="Moonpot" 
                             height="36px"
-                            src={require('../../images/header/moonpot-desktop-logo@4x.png').default}
-                            // srcset="
-                            //     src/images/header/moonpot-desktop-logo@4x.png 4x,
-                            //     src/images/header/moonpot-desktop-logo@3x.png 3x,
-                            //     src/images/header/moonpot-desktop-logo@2x.png 2x,
-                            //     src/images/header/moonpot-desktop-logo@1x.png 1x
-                            // " 
+                            srcset="
+                                images/header/moonpot-desktop-logo@4x.png 4x,
+                                images/header/moonpot-desktop-logo@3x.png 3x,
+                                images/header/moonpot-desktop-logo@2x.png 2x,
+                                images/header/moonpot-desktop-logo@1x.png 1x
+                            " 
                             />
                         </Box>
                     </Grid>
