@@ -126,7 +126,7 @@ const Vault = () => {
                             
                             <Grid item xs={6}>
                                 <Typography className={classes.subTitle} align={'right'}>{t('earnToken')} {item.token}</Typography>
-                                <Typography className={classes.apy}><span>55%</span> 78% APY</Typography>
+                                <Typography className={classes.apy}><span>{item.apy}%</span> 78% APY</Typography>
                             </Grid>
                             <Grid item xs={11}>
                                 <Divider className={classes.divider}/>

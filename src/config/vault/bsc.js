@@ -11,6 +11,7 @@ export const pools = [
         prizepoolAddress: '0x9AC868198AdD76D92d5398AA814797b6c438f61e',
         pricePerShare: 1,
         oracleId: 'Cake',
+        apyId: 'cake-cakev2',
         vaultType: 'main',
         status: 'active',
         sponsorProjectName: 'Beefy.Finance',
