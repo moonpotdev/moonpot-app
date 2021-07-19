@@ -97,7 +97,7 @@ const Vault = () => {
             ) : (
             <Container maxWidth="lg">
                 <Typography className={classes.title}>
-                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: '78%', amount: calculateTotalPrize(item, prices)}} />
+                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: (item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy), amount: calculateTotalPrize(item, prices)}} />
                 </Typography>
                 <Grid container>
                     <Box className={classes.vaultPotItem}>
@@ -249,7 +249,7 @@ const Vault = () => {
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
                                         <Typography className={classes.infoDetail} align={"left"}>
-                                            <span>55%</span> 78% APY
+                                            <span>{item.apy}%</span> {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
