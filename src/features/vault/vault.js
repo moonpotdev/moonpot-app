@@ -224,7 +224,9 @@ const Vault = () => {
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
                                         <Typography className={classes.infoMessage} align={"left"}>
-                                            <a>{item.sponsorProjectName} Vault Address <OpenInNew fontSize="small"/></a>
+                                            <a href="https://bscscan.com/address/0x97e5d50Fe0632A95b9cf1853E744E02f7D816677">
+                                                {item.sponsorProjectName} Vault Address <OpenInNew fontSize="small"/>
+                                            </a>
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
