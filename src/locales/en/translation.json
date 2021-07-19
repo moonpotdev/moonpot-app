@@ -37,6 +37,7 @@
   "withdraw": "Withdraw",
   "nextWeeklyDraw": "Next Weekly Draw",
   "nextDraw": "Next Draw",
+  "interest": "Interest",
   "interestRate": "Interest Rate",
   "earnToken": "Earn {{token}}",
   "enterCoinAmount": "Enter {{coin}} amount",
