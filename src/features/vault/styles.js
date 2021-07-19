@@ -13,7 +13,7 @@ const styles = (theme) => ({
     vaultPotItem: {
         backgroundColor: '#345675',
         height: '100%',
-        width: '452px',
+        width: 'min(100%, 500px)',
         margin: '80px auto 0px auto',
         marginTop: '56px',
         borderRadius: '16px',

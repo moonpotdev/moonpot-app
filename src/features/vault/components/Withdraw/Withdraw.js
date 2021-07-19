@@ -120,6 +120,14 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                 <Grid item xs={7} align={"right"}>
                     <Typography className={classes.withdrawItemValue}>{state.balance} {item.token}</Typography>
                 </Grid>
+                <Grid item xs={4} align={"left"}>
+                    <Typography className={classes.withdrawItemText}>
+                        <Trans i18nKey="mySponsorToken" values={{sponsorToken: item.sponsorToken}}/>
+                    </Typography>
+                </Grid>
+                <Grid item xs={7} align={"right"}>
+                    <Typography className={classes.withdrawItemValue}>? {item.sponsorToken}</Typography>
+                </Grid>
                 <Grid item xs={11}>
                     <Paper component="form" className={classes.input}>
                         <Grid container spacing={1}>
