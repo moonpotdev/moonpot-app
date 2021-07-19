@@ -13,7 +13,7 @@ const styles = (theme) => ({
     potItem: {
         backgroundColor: '#437098',
         height: 'auto',
-        width: '354px',
+        width: 'min(100%, 500px)',
         margin: '80px auto 0px auto',
         borderRadius: '10px',
         padding: '10px',
