@@ -142,7 +142,7 @@ const Home = () => {
                                             <Grid item xs={2} align={"right"}>
                                                 <Link className={classes.expandToggle} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                             </Grid>
-                                            <Grid item xs={12}>
+                                            <Grid item xs={11}>
                                                 <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                                     <Grid container spacing={1}>
                                                         <Grid item xs={3} align={"left"}>
