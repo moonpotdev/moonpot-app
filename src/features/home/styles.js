@@ -11,7 +11,7 @@ const styles = (theme) => ({
         }
     },
     potItem: {
-        backgroundColor: '#345675',
+        backgroundColor: '#437098',
         height: 'auto',
         width: '354px',
         margin: '80px auto 0px auto',
@@ -93,8 +93,8 @@ const styles = (theme) => ({
         }
     },
     divider: {
-        color: '#436F97',
-        backgroundColor: '#436F97',
+        color: '#5989B5',
+        backgroundColor: '#5989B5',
         height: '2px',
     },
     expandToggle: {
