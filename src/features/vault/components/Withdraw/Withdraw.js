@@ -106,14 +106,16 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
     return (
         <React.Fragment>
             <Grid container spacing={2}>
-                <Grid item xs={4} align={"left"}>
+                <Grid item xs={5} align={"left"}>
                     <Typography className={classes.withdrawItemText}>{t('fairplayUnlock')}</Typography>
                 </Grid>
-                <Grid item xs={7} align={"right"}>
+                <Grid item xs={6} align={"right"}>
                     <Typography className={classes.withdrawItemValue}>10d 00h 00m</Typography>
                 </Grid>
                 <Grid item xs={4} align={"left"}>
-                    <Typography className={classes.withdrawItemText}>{t('yourDeposit')}</Typography>
+                    <Typography className={classes.withdrawItemText}>
+                        <Trans i18nKey="myToken" values={{token: item.token}}/>
+                    </Typography>
                 </Grid>
                 <Grid item xs={7} align={"right"}>
                     <Typography className={classes.withdrawItemValue}>{state.balance} {item.token}</Typography>

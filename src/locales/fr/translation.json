@@ -47,6 +47,7 @@
   "myDetails": "My Details",
   "myDeposit": "My Deposit",
   "myEarnings": "My Earnings",
+  "myToken": "My {{token}}",
   "myInterestRate": "My Interest Rate",
   "myOdds": "My Odds",
   "potentialPrize": "Potential Prize",
