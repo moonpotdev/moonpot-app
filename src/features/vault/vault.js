@@ -139,10 +139,10 @@ const Vault = () => {
                             <Grid item xs={2} align={"right"}>
                                 <Link className={classes.expandToggle} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={11}>
                                 <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                     <Grid container spacing={1}>
-                                        <Grid item xs={3} align={"left"}>
+                                        <Grid item xs={4} align={"left"}>
                                             <Typography className={classes.prizeSplitWinners}>5 winners</Typography>
                                         </Grid>
                                         <Grid item xs={8} align={"right"}>
