@@ -11,6 +11,7 @@ import {ExpandMore, ExpandLess} from '@material-ui/icons';
 import reduxActions from "../redux/actions";
 import {calculateTotalPrize} from "../../helpers/format";
 import BigNumber from "bignumber.js";
+import Countdown from "../../components/Countdown";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -127,7 +128,7 @@ const Home = () => {
                                             </Grid>
                                             <Grid item xs={6}>
                                                 <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
-                                                <Typography className={classes.countdown}>2d 23h 15m</Typography>
+                                                <Typography className={classes.countdown}><Countdown expiresAt={item.expiresAt*1000} /></Typography>
                                             </Grid>
                                             <Grid item xs={5}>
                                                 <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.token}</Typography>

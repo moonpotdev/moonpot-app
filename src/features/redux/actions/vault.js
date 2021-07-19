@@ -5,6 +5,7 @@ import {config} from "../../../config/config";
 import {isEmpty} from "../../../helpers/utils";
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 const ecr20Abi = require('../../../config/abi/erc20.json');
+const prizeStrategyAbi = require('../../../config/abi/prizestrategy.json');
 
 const getPoolsSingle = async (item, state, dispatch) => {
     console.log('redux getPoolsSingle() processing...');
@@ -18,16 +19,21 @@ const getPoolsSingle = async (item, state, dispatch) => {
     const awardPrice = (pools[item.id].oracleId in prices) ? prices[pools[item.id].oracleId] : 0;
     const awardBalance = new BigNumber(awardQuery).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
 
+    const strategyContract = new web3[item.network].eth.Contract(prizeStrategyAbi, item.prizeStrategyAddress);
+    const expiresAt = await strategyContract.methods.prizePeriodEndAt().call();
+
+
     pools[item.id].awardBalance = awardBalance;
     pools[item.id].awardBalanceUsd = awardBalance.times(new BigNumber(awardPrice));
     pools[item.id].sponsorBalance = new BigNumber(0);
     pools[item.id].sponsorBalanceUsd = new BigNumber(0);
     pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toFixed(2)) : 0;
     pools[item.id].bonusApy = 0;
+    pools[item.id].expiresAt = expiresAt;
 
     if(!isEmpty(item.sponsorAddress)) {
         const sponsorContract = new web3[item.network].eth.Contract(ecr20Abi, item.sponsorAddress);
-        const sponsorQuery = await sponsorContract.methods.balanceOf(item.prizepoolAddress).call();
+        const sponsorQuery = await sponsorContract.methods.balanceOf(item.prizePoolAddress).call();
         const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
         const sponsorBalance = new BigNumber(sponsorQuery).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
 
@@ -66,11 +72,13 @@ const getPoolsAll = async (state, dispatch) => {
     const multicall = [];
     const calls = [];
     const sponsors = [];
+    const strategy = [];
 
     for(let key in web3) {
         multicall[key] = new MultiCall(web3[key], config[key].multicallAddress);
         calls[key] = [];
         sponsors[key] = [];
+        strategy[key] = [];
     }
 
     for (let key in pools) {
@@ -83,19 +91,25 @@ const getPoolsAll = async (state, dispatch) => {
             totalValueLocked: gateContract.methods.TVL(),
         });
 
+        const strategyContract = new web3[pool.network].eth.Contract(prizeStrategyAbi, pool.prizeStrategyAddress);
+        strategy[pool.network].push({
+            id: pool.id,
+            expiresAt: strategyContract.methods.prizePeriodEndAt(),
+        });
+
         if(!isEmpty(pool.sponsorAddress)) {
             const sponsorContract = new web3[pool.network].eth.Contract(ecr20Abi, pool.sponsorAddress);
             sponsors[pool.network].push({
                 id: pool.id,
-                sponsorBalance: sponsorContract.methods.balanceOf(pool.prizepoolAddress),
+                sponsorBalance: sponsorContract.methods.balanceOf(pool.prizePoolAddress),
             });
         }
     }
 
-
     const promises = [];
     for(const key in multicall) {
         promises.push(multicall[key].all([calls[key]]));
+        promises.push(multicall[key].all([strategy[key]]));
         promises.push(multicall[key].all([sponsors[key]]));
     }
     const results = await Promise.allSettled(promises);
@@ -135,7 +149,10 @@ const getPoolsAll = async (state, dispatch) => {
             }
 
             totalPrizesAvailable = totalPrizesAvailable.plus(awardBalanceUsd);
+        }
 
+        if(!isEmpty(item.expiresAt)) {
+            pools[item.id].expiresAt = item.expiresAt;
         }
 
         if(!isEmpty(item.sponsorBalance)) {

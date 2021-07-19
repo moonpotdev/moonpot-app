@@ -53,8 +53,8 @@ export function byDecimals(number, tokenDecimals = 18) {
   return new BigNumber(number).dividedBy(decimals);
 }
 
-export const formatCountdown = deadline => {
-  const time = deadline - new Date().getTime();
+export const formatCountdown = (currentTime, deadline) => {
+  const time = deadline - currentTime;
 
   const day = Math.floor(time / (1000 * 60 * 60 * 24))
       .toString()
@@ -65,11 +65,11 @@ export const formatCountdown = deadline => {
   const minutes = Math.floor((time / (1000 * 60)) % 60)
       .toString()
       .padStart(2, '0');
-  const seconds = Math.floor((time / 1000) % 60)
+  /*const seconds = Math.floor((time / 1000) % 60)
       .toString()
-      .padStart(2, '0');
+      .padStart(2, '0');*/
 
-  return `${day}day ${hours}:${minutes}:${seconds}`;
+  return `${day}day ${hours}h ${minutes}min`;
 };
 
 export const stripExtraDecimals = (f, decimals = 8) => {

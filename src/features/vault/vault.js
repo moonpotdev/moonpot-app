@@ -22,6 +22,7 @@ import Deposit from "./components/Deposit";
 import Withdraw from "./components/Withdraw";
 import {calculateTotalPrize} from "../../helpers/format";
 import BigNumber from "bignumber.js";
+import Countdown from "../../components/Countdown";
 
 const useStyles = makeStyles(styles);
 
@@ -122,7 +123,7 @@ const Vault = () => {
                             </Grid>
                             <Grid item xs={5}>
                                 <Typography className={classes.subTitle} align={"left"}>{t('nextWeeklyDraw')}</Typography>
-                                <Typography className={classes.countdown} align={"left"}>2d 23h 15m</Typography>
+                                <Typography className={classes.countdown} align={"left"}><Countdown expiresAt={item.expiresAt*1000} /> </Typography>
                             </Grid>
                             
                             <Grid item xs={6}>

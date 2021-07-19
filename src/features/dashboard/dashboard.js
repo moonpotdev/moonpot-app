@@ -13,6 +13,7 @@ import Withdraw from "../vault/components/Withdraw";
 import BigNumber from "bignumber.js";
 import {byDecimals, calculateTotalPrize} from "../../helpers/format";
 import {isEmpty} from "../../helpers/utils";
+import Countdown from "../../components/Countdown";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -174,7 +175,7 @@ const Dashboard = () => {
                                             <Grid item xs={7}>
                                                 <Typography className={classes.potUsdTop} align={"right"}>{calculateTotalPrize(item, prices)} <span>{t('in')}</span> {item.token}</Typography>
                                                 <Typography className={classes.potUsd} align={"right"}>& {item.sponsorToken} PRIZES</Typography>
-                                                <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span>2d 23h 14m</span></Typography>
+                                                <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown expiresAt={item.expiresAt*1000} /> </span></Typography>
                                             </Grid>
                                             <Grid item xs={11}>
                                                 <Divider className={classes.divider}/>
