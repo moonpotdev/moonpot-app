@@ -13,6 +13,7 @@ const styles = (theme) => ({
         border: 'none',
         boxShadow: 'none',
         paddingTop: '20px',
+        paddingBottom: '56px',
         position: 'static',
         marginLeft: '0px',
         '& .MuiToolbar-root': {
