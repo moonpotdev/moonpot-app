@@ -12,7 +12,7 @@ const styles = (theme) => ({
     },
     potItem: {
         backgroundColor: '#345675',
-        height: '316px',
+        height: 'auto',
         width: '354px',
         margin: '80px auto 0px auto',
         borderRadius: '10px',
@@ -30,7 +30,7 @@ const styles = (theme) => ({
     },
     countdown: {
         fontWeight: 700,
-        fontSize: '18px',
+        fontSize: '15px',
         lineHeight: '24px',
         letterSpacing: '0.2px',
         color: '#ffffff',
@@ -45,10 +45,14 @@ const styles = (theme) => ({
     },
     apy: {
         fontWeight: 700,
-        fontSize: '18px',
+        fontSize: '15px',
         lineHeight: '24px',
         color: '#ffffff',
         textAlign: 'right',
+        '& span': {
+            color: '#A0BBD5',
+            textDecoration: 'line-through',
+        }
     },
     earn: {
         fontWeight: 500,
@@ -60,8 +64,8 @@ const styles = (theme) => ({
     potUsdTop: {
         marginTop: '10px',
         fontWeight: 700,
-        fontSize: '24px',
-        lineHeight: '27.58px',
+        fontSize: '18px',
+        lineHeight: '20px',
         letterSpacing: '0.6px',
         color: '#ffffff',
         '& span': {
@@ -70,8 +74,8 @@ const styles = (theme) => ({
     },
     potUsd: {
         fontWeight: 700,
-        fontSize: '24px',
-        lineHeight: '27.58px',
+        fontSize: '18px',
+        lineHeight: '20px',
         letterSpacing: '0.6px',
         color: '#ffffff',
         '& span': {
@@ -87,6 +91,11 @@ const styles = (theme) => ({
         '& span': {
             color: '#FFFFFF',
         }
+    },
+    divider: {
+        color: '#436F97',
+        backgroundColor: '#436F97',
+        height: '2px',
     },
     play: {
         backgroundColor: '#FFFFFF',
@@ -106,6 +115,7 @@ const styles = (theme) => ({
         color: '#DFDDE7',
         left: 'calc(50% - 188px/2)',
         top: 'calc(50% - 20px/2 + 124px)',
+        paddingBottom: '24px',
     },
     communityItem: {
         margin: '105px auto 0px auto',

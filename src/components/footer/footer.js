@@ -13,7 +13,7 @@ const Footer = () => {
         <React.Fragment>
             <Grid className={classes.footer} container spacing={2}>
                 <Grid item xs={12}>
-                    <Button href={"https://docs.moonpot.com"} className={classes.footerBtn} variant={'outlined'} size={'small'}>{t('buttons.ziggyMoonpotGuide')}</Button>
+                    <Button href={"https://moonpot.com/alpha"} className={classes.footerBtn} variant={'outlined'} size={'small'}>{t('buttons.moonpotAlpha')}</Button>
                 </Grid>
                 <Grid className={classes.footerIcons} item xs={12}>
                     <Link href={"https://github.com/moonpotdev"}><img alt="Github" src={require('../../images/icons/github.svg').default} /></Link>

@@ -45,7 +45,7 @@ const appTheme = () => {
                     borderRadius: 20,
                     borderWidth: '2px',
                     color: '#ffffff',
-                    textTransform: 'capitalize',
+                    textTransform: 'none',
                     paddingTop: '2px',
                     paddingBottom: '2px',
                 },

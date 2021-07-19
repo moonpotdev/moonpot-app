@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useHistory } from 'react-router-dom';
 import {useSelector} from "react-redux";
-import {Button, Link, Container, Grid, makeStyles, Typography} from "@material-ui/core"
+import {Button, Link, Container, Grid, makeStyles, Typography, Divider} from "@material-ui/core"
 import Box from '@material-ui/core/Box';
 import styles from "./styles"
 import Filter from "./components/Filter";
@@ -94,24 +94,35 @@ const Home = () => {
                                     <Grid container spacing={3}>
                                         <Grid item xs={4}>
                                             <Box className={classes.potImage}>
-                                                <img alt="Moonpot" src={require('../../images/pots/cake.svg').default} />
+                                                <img 
+                                                alt="Moonpot"
+                                                srcset="
+                                                    images/pots/sponsored/cake@4x.png 4x,
+                                                    images/pots/sponsored/cake@3x.png 3x,
+                                                    images/pots/sponsored/cake@2x.png 2x,
+                                                    images/pots/sponsored/cake@1x.png 1x
+                                                "
+                                                />
                                             </Box>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $90,000</Typography>
-                                            <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}</Typography>
-                                            <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} <span>1600.00 {item.token} </span> {t('prize')}</Typography>
+                                            <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsoredToken}</Typography>
+                                            <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                                         </Grid>
                                         <Grid item xs={5}>
                                             <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
-                                            <Typography className={classes.countdown}>1d 23h 15m</Typography>
+                                            <Typography className={classes.countdown}>2d 23h 15m</Typography>
                                         </Grid>
                                         <Grid item xs={5}>
                                             <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.token}</Typography>
-                                            <Typography className={classes.apy} align={'right'}>10% APY</Typography>
+                                            <Typography className={classes.apy} align={'right'}><span>55%</span> 78% APY</Typography>
                                         </Grid>
                                         <Grid item xs={11}>
-                                            <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.play')}</Button>
+                                            <Divider className={classes.divider}></Divider>
+                                        </Grid>
+                                        <Grid item xs={11}>
+                                            <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.play')} {item.token}</Button>
                                         </Grid>
                                         <Grid item xs={8}>
                                             <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '40,000', amount: '$1000'})}</Typography>
@@ -119,7 +130,17 @@ const Home = () => {
                                     </Grid>
                                 </Box>
                                 <Grid item xs={12}>
-                                    <Typography className={classes.beefy}>{t('footerPoweredBy')} <Link href={"https://beefy.finance"}>Beefy.Finance</Link> <img alt="Beefy Finance" src={require('../../images/beefy.svg').default} /></Typography>
+                                    <Typography className={classes.beefy}>{t('footerPoweredBy')} <Link href={"https://beefy.finance"}>Beefy.Finance</Link> 
+                                    <img 
+                                    alt="Beefy Finance" 
+                                    srcset="
+                                        images/beefy/beefy-finance-bifi-logo@4x.png 4x,
+                                        images/beefy/beefy-finance-bifi-logo@3x.png 3x,
+                                        images/beefy/beefy-finance-bifi-logo@2x.png 2x,
+                                        images/beefy/beefy-finance-bifi-logo@1x.png 1x
+                                    "
+                                    />
+                                    </Typography>
                                 </Grid>
                             </React.Fragment>
                         ))
