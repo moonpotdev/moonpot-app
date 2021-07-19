@@ -119,16 +119,6 @@ const Navigation = () => {
                             {t('buttons.docs')}
                         </Link>
                     </Grid>
-                    <Grid item xs={10} align={"left"}>
-                        <CustomDropdown list={{'usd': 'USD', 'eur': 'EUR', 'gbp': 'GBP'}} selected={walletReducer.currency} handler={(e) => {handleCurrencySwitch(e.target.value)}}/>
-                    </Grid>
-                    <Grid item xs={10} align={"left"}>
-                        <CustomDropdown list={{'en': 'EN', 'fr': 'FR'}} selected={walletReducer.language} handler={(e) => {handleLanguageSwitch(e.target.value)}}/>
-                    </Grid>
-                </Grid>
-                <Grid 
-                container
-                alignItems="flex-end">
                     <Grid item xs={12} className={classes.mobileNavWallet} align={"center"} onClick={() => {
                             (walletReducer.address ? void 0 : ctx.toggleMenu())
                     }}>

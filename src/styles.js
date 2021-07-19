@@ -13,7 +13,13 @@ const styles = () => ({
         marginBottom: '32px',
     },
     mobileNavWallet: {
-        width: '90%',
+        width: '100%',
+        position: 'absolute',
+        bottom: '75px',
+        paddingTop: '24px',
+        left: '50%',
+        transform: 'translate(-50%, 0%)',
+
     }
 })
 
