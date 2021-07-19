@@ -11,7 +11,7 @@ import reduxActions from "../redux/actions";
 import Deposit from "../vault/components/Deposit";
 import Withdraw from "../vault/components/Withdraw";
 import BigNumber from "bignumber.js";
-import {byDecimals} from "../../helpers/format";
+import {byDecimals, calculateTotalPrize} from "../../helpers/format";
 import {isEmpty} from "../../helpers/utils";
 
 const useStyles = makeStyles(styles);
@@ -23,10 +23,11 @@ const Dashboard = () => {
     const { t } = useTranslation();
     const location = useLocation();
     const history = useHistory();
-    const {vault, wallet, balance} = useSelector(state => ({
+    const {vault, wallet, balance, prices} = useSelector(state => ({
         vault: state.vaultReducer,
         wallet: state.walletReducer,
         balance: state.balanceReducer,
+        prices: state.pricesReducer,
     }));
 
     
@@ -38,7 +39,6 @@ const Dashboard = () => {
     const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
     const [sortConfig, setSortConfig] = React.useState(defaultFilter);
     const [filtered, setFiltered] = React.useState([]);
-    const [item] = React.useState(null);
     const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
 
     const handleWalletConnect = () => {
@@ -48,9 +48,9 @@ const Dashboard = () => {
     }
 
     const updateItemData = () => {
-        if(wallet.address && item) {
-            //dispatch(reduxActions.vault.fetchPools(item));
-            dispatch(reduxActions.balance.fetchBalances(item));
+        if(wallet.address) {
+            dispatch(reduxActions.vault.fetchPools());
+            dispatch(reduxActions.balance.fetchBalances());
         }
     }
 
@@ -102,7 +102,6 @@ const Dashboard = () => {
 
         if (sortConfig !== null) {
             data = sorted(data);
-            console.log(data)
         }
 
         setFiltered(data);
@@ -110,10 +109,16 @@ const Dashboard = () => {
     }, [sortConfig, vault.pools, balance]);
 
     React.useEffect(() => {
+        if(prices.lastUpdated > 0) {
+            dispatch(reduxActions.vault.fetchPools());
+        }
+    }, [dispatch, prices.lastUpdated]);
+
+    React.useEffect(() => {
         if(wallet.address) {
             dispatch(reduxActions.balance.fetchBalances());
         }
-    }, [wallet.address]);
+    }, [dispatch, wallet.address]);
 
     return (
         <React.Fragment>
@@ -167,12 +172,12 @@ const Dashboard = () => {
                                             </Box>
                                             </Grid>
                                             <Grid item xs={7}>
-                                                <Typography className={classes.potUsdTop} align={"right"}>$90,000 <span>{t('in')}</span> {item.token}</Typography>
+                                                <Typography className={classes.potUsdTop} align={"right"}>{calculateTotalPrize(item, prices)} <span>{t('in')}</span> {item.token}</Typography>
                                                 <Typography className={classes.potUsd} align={"right"}>& {item.sponsorToken} PRIZES</Typography>
                                                 <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span>2d 23h 14m</span></Typography>
                                             </Grid>
                                             <Grid item xs={11}>
-                                                <Divider className={classes.divider}></Divider>
+                                                <Divider className={classes.divider}/>
                                             </Grid>
                                             <Grid item xs={9} align={"left"}>
                                                 <Typography className={classes.dividerText} onClick={() => {setDetailsOpen(!detailsOpen)}}>{t('myDetails')} </Typography>
@@ -189,13 +194,13 @@ const Dashboard = () => {
                                                             </Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
-                                                            <Typography className={classes.myDetailsValue} align={'right'}>{item.userBalance} {item.token} ($?)</Typography>
+                                                            <Typography className={classes.myDetailsValue} align={'right'}>{item.userBalance} {item.token} (${new BigNumber(item.userBalance).multipliedBy(prices.prices[item.oracleId]).toFixed(2)})</Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
                                                             <Typography className={classes.myDetailsText} align={'left'}>{t('myInterestRate')}</Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
-                                                            <Typography className={classes.myDetailsValue} align={"right"}><span>55%</span> 78% APY</Typography>
+                                                            <Typography className={classes.myDetailsValue} align={"right"}><span>{item.apy}%</span> {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
                                                             <Typography className={classes.myDetailsText} align={'left'}>{t('myOdds')}</Typography>
@@ -207,7 +212,7 @@ const Dashboard = () => {
                                                 </AnimateHeight>
                                             </Grid>
                                             <Grid item xs={11}>
-                                                <Divider className={classes.divider}></Divider>
+                                                <Divider className={classes.divider}/>
                                             </Grid>
                                             <Grid item xs={9} align={"left"}>
                                                 <Typography className={classes.dividerText} onClick={() => {setBonusOpen(!bonusOpen)}}>
@@ -244,7 +249,7 @@ const Dashboard = () => {
                                                 </AnimateHeight>
                                             </Grid>
                                             <Grid item xs={11}>
-                                                <Divider className={classes.divider}></Divider>
+                                                <Divider className={classes.divider}/>
                                             </Grid>
                                             <Grid item xs={9} align={"left"}>
                                                 <Typography className={classes.dividerText} onClick={() => {setDepositOpen(!depositOpen)}}>{t('depositMore')} </Typography>
@@ -270,7 +275,7 @@ const Dashboard = () => {
                                                 </AnimateHeight>
                                             </Grid>
                                             <Grid item xs={11}>
-                                                <Divider className={classes.divider}></Divider>
+                                                <Divider className={classes.divider}/>
                                             </Grid>
                                             <Grid item xs={9} align={"left"}>
                                                 <Typography className={classes.dividerText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{t('withdraw')} </Typography>
