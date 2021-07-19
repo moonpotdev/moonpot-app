@@ -7,7 +7,7 @@
         "type":"address"
       },
       {
-        "internalType":"contract PrizePoolInterface",
+        "internalType":"contract IPrizePool",
         "name":"_prizePool",
         "type":"address"
       },
@@ -19,6 +19,11 @@
       {
         "internalType":"address",
         "name":"_prizePoolControlledToken",
+        "type":"address"
+      },
+      {
+        "internalType":"address",
+        "name":"_rewardToken",
         "type":"address"
       }
     ],
@@ -43,6 +48,140 @@
     ],
     "name":"GateManagerDeposit",
     "type":"event"
+  },
+  {
+    "anonymous":false,
+    "inputs":[
+      {
+        "indexed":true,
+        "internalType":"address",
+        "name":"previousOwner",
+        "type":"address"
+      },
+      {
+        "indexed":true,
+        "internalType":"address",
+        "name":"newOwner",
+        "type":"address"
+      }
+    ],
+    "name":"OwnershipTransferred",
+    "type":"event"
+  },
+  {
+    "anonymous":false,
+    "inputs":[
+      {
+        "indexed":false,
+        "internalType":"uint256",
+        "name":"reward",
+        "type":"uint256"
+      }
+    ],
+    "name":"RewardAdded",
+    "type":"event"
+  },
+  {
+    "anonymous":false,
+    "inputs":[
+      {
+        "indexed":true,
+        "internalType":"address",
+        "name":"user",
+        "type":"address"
+      },
+      {
+        "indexed":false,
+        "internalType":"uint256",
+        "name":"reward",
+        "type":"uint256"
+      }
+    ],
+    "name":"RewardPaid",
+    "type":"event"
+  },
+  {
+    "anonymous":false,
+    "inputs":[
+      {
+        "indexed":true,
+        "internalType":"address",
+        "name":"user",
+        "type":"address"
+      },
+      {
+        "indexed":false,
+        "internalType":"uint256",
+        "name":"amount",
+        "type":"uint256"
+      }
+    ],
+    "name":"Staked",
+    "type":"event"
+  },
+  {
+    "anonymous":false,
+    "inputs":[
+      {
+        "indexed":true,
+        "internalType":"address",
+        "name":"user",
+        "type":"address"
+      },
+      {
+        "indexed":false,
+        "internalType":"uint256",
+        "name":"amount",
+        "type":"uint256"
+      }
+    ],
+    "name":"Withdrawn",
+    "type":"event"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"DURATION",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"TVL",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"awardBalance",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
   },
   {
     "inputs":[
@@ -100,6 +239,103 @@
   },
   {
     "inputs":[
+      {
+        "internalType":"address",
+        "name":"account",
+        "type":"address"
+      }
+    ],
+    "name":"earned",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"exitInstantly",
+    "outputs":[
+
+    ],
+    "stateMutability":"nonpayable",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"exitTimelock",
+    "outputs":[
+
+    ],
+    "stateMutability":"nonpayable",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"getReward",
+    "outputs":[
+
+    ],
+    "stateMutability":"nonpayable",
+    "type":"function"
+  },
+  {
+    "inputs":[
+      {
+        "internalType":"address",
+        "name":"_token",
+        "type":"address"
+      }
+    ],
+    "name":"inCaseTokensGetStuck",
+    "outputs":[
+
+    ],
+    "stateMutability":"nonpayable",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"lastTimeRewardApplicable",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"lastUpdateTime",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
 
     ],
     "name":"mooToken",
@@ -115,12 +351,57 @@
   },
   {
     "inputs":[
+      {
+        "internalType":"uint256",
+        "name":"reward",
+        "type":"uint256"
+      }
+    ],
+    "name":"notifyRewardAmount",
+    "outputs":[
+
+    ],
+    "stateMutability":"nonpayable",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"owner",
+    "outputs":[
+      {
+        "internalType":"address",
+        "name":"",
+        "type":"address"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"periodFinish",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
 
     ],
     "name":"prizePool",
     "outputs":[
       {
-        "internalType":"contract PrizePoolInterface",
+        "internalType":"contract IPrizePool",
         "name":"",
         "type":"address"
       }
@@ -147,6 +428,126 @@
     "inputs":[
 
     ],
+    "name":"renounceOwnership",
+    "outputs":[
+
+    ],
+    "stateMutability":"nonpayable",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"rewardPerToken",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"rewardPerTokenStored",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"rewardRate",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"rewardToken",
+    "outputs":[
+      {
+        "internalType":"contract IERC20Upgradeable",
+        "name":"",
+        "type":"address"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+      {
+        "internalType":"address",
+        "name":"",
+        "type":"address"
+      }
+    ],
+    "name":"rewards",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"totalSupply",
+    "outputs":[
+      {
+        "internalType":"uint256",
+        "name":"",
+        "type":"uint256"
+      }
+    ],
+    "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+      {
+        "internalType":"address",
+        "name":"newOwner",
+        "type":"address"
+      }
+    ],
+    "name":"transferOwnership",
+    "outputs":[
+
+    ],
+    "stateMutability":"nonpayable",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
     "name":"underlying",
     "outputs":[
       {
@@ -162,11 +563,11 @@
     "inputs":[
       {
         "internalType":"address",
-        "name":"user",
+        "name":"",
         "type":"address"
       }
     ],
-    "name":"userTotalBalance",
+    "name":"userRewardPerTokenPaid",
     "outputs":[
       {
         "internalType":"uint256",
@@ -185,7 +586,7 @@
         "type":"address"
       }
     ],
-    "name":"userYieldBalance",
+    "name":"userTotalBalance",
     "outputs":[
       {
         "internalType":"uint256",

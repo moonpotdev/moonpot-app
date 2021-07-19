@@ -82,3 +82,10 @@ export function convertAmountToRawNumber(value, decimals = 18) {
       .decimalPlaces(0, BigNumber.ROUND_DOWN)
       .toString(10);
 }
+
+export function calculateTotalPrize(item, prices) {
+  const amount = new BigNumber(item.awardBalance).times(prices.prices[item.oracleId]);
+  const sponsored = new BigNumber(10).times(prices.prices[item.sponsorToken]);
+
+  return "$" + amount.plus(sponsored).toFixed(0);
+}

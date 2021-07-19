@@ -10,9 +10,7 @@ import reduxActions from "./features/redux/actions";
 import {slide as Menu} from "react-burger-menu";
 import {useTranslation} from "react-i18next";
 import WalletContainer from "./components/header/components/WalletContainer";
-import CustomDropdown from "./components/customDropdown";
 import { createHashHistory } from "history";
-// import MobileHeader from "./components/mobileHeader";
 import Media from "react-media";
 import {styles, burgerMenuStyles} from "./styles.js";
 
@@ -53,20 +51,9 @@ const Provider = (props) => {
 const Navigation = () => {
     const ctx = useContext(Context)
 
-    const {i18n, t} = useTranslation();
+    const {t} = useTranslation();
     const history = useHistory();
-    const dispatch = useDispatch();
     const walletReducer = useSelector(state => state.walletReducer);
-    // const classes = useStyles();
-
-    const handleLanguageSwitch = (value) => {
-        i18n.changeLanguage(value).then(() => dispatch(reduxActions.wallet.setLanguage(value)));
-    }
-
-    const handleCurrencySwitch = (value) => {
-        dispatch(reduxActions.wallet.setCurrency(value));
-        history.push('/');
-    }
 
     const useStyles = makeStyles(styles);
     const classes = useStyles();
@@ -135,6 +122,13 @@ const Navigation = () => {
 export default function App() {
     const dispatch = useDispatch();
     const theme = appTheme();
+
+    React.useEffect(() => {
+        const initiate = async () => {
+            await dispatch(reduxActions.prices.fetchPrices());
+        }
+        return initiate();
+    }, [dispatch]);
 
     React.useEffect(() => {
         dispatch(reduxActions.wallet.createWeb3Modal());

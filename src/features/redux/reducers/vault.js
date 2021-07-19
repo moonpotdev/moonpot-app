@@ -3,6 +3,7 @@ import {
     HOME_FETCH_POOLS_DONE,
 } from "../constants";
 import {config} from "../../../config/config";
+import BigNumber from "bignumber.js";
 
 const initialPools = () => {
     const pools = [];
@@ -13,10 +14,10 @@ const initialPools = () => {
             const pool = data.pools[key];
 
             pool['network'] = net;
-            pool['balance'] = 0;
             pool['daily'] = 0;
             pool['apy'] = 0;
             pool['tvl'] = 0;
+            pool['awardBalance'] = new BigNumber(0);
 
             pools[pool.id] = pool;
         }
