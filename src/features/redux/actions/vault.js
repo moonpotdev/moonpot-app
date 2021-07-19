@@ -23,6 +23,7 @@ const getPoolsSingle = async (item, state, dispatch) => {
     pools[item.id].sponsorBalance = new BigNumber(0);
     pools[item.id].sponsorBalanceUsd = new BigNumber(0);
     pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toFixed(2)) : 0;
+    pools[item.id].bonusApy = 0;
 
     if(!isEmpty(item.sponsorAddress)) {
         const sponsorContract = new web3[item.network].eth.Contract(ecr20Abi, item.sponsorAddress);
@@ -30,8 +31,15 @@ const getPoolsSingle = async (item, state, dispatch) => {
         const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
         const sponsorBalance = new BigNumber(sponsorQuery).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
 
+        const rewardRate = new BigNumber(await gateContract.methods.rewardRate().call());
+        const TotalValueLocked = new BigNumber(await gateContract.methods.TVL().call());
+        const totalStakedUsd = TotalValueLocked.times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
+        const yearlyRewards = rewardRate.times(3600).times(24).times(365);
+        const yearlyRewardsInUsd = yearlyRewards.times(sponsorPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals))
+
         pools[item.id].sponsorBalance = sponsorBalance;
         pools[item.id].sponsorBalanceUsd = sponsorBalance.times(sponsorPrice);
+        pools[item.id].bonusApy = Number(yearlyRewardsInUsd.dividedBy(totalStakedUsd));
     }
 
     dispatch({
@@ -70,6 +78,8 @@ const getPoolsAll = async (state, dispatch) => {
         calls[pool.network].push({
             id: pool.id,
             awardBalance: gateContract.methods.awardBalance(),
+            rewardRate: gateContract.methods.rewardRate(),
+            totalValueLocked: gateContract.methods.TVL(),
         });
 
         if(!isEmpty(pool.sponsorAddress)) {
@@ -108,6 +118,18 @@ const getPoolsAll = async (state, dispatch) => {
             pools[item.id].awardBalance = awardBalance;
             pools[item.id].awardBalanceUsd = awardBalance.times(awardPrice);
             pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toFixed(2)) : 0;
+
+            if(!isEmpty(pools[item.id].sponsorToken)) {
+                const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
+                const rewardRate = new BigNumber(item.rewardRate);
+                const TotalValueLocked = new BigNumber(item.totalValueLocked);
+                const totalStakedUsd = TotalValueLocked.times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
+                const yearlyRewards = rewardRate.times(3600).times(24).times(365);
+                const yearlyRewardsInUsd = yearlyRewards.times(sponsorPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals))
+
+                pools[item.id].bonusApy = Number(yearlyRewardsInUsd.dividedBy(totalStakedUsd));
+            }
+
         }
 
         if(!isEmpty(item.sponsorBalance)) {

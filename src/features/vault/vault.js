@@ -21,6 +21,7 @@ import reduxActions from "../redux/actions";
 import Deposit from "./components/Deposit";
 import Withdraw from "./components/Withdraw";
 import {calculateTotalPrize} from "../../helpers/format";
+import BigNumber from "bignumber.js";
 
 const useStyles = makeStyles(styles);
 
@@ -126,7 +127,7 @@ const Vault = () => {
                             
                             <Grid item xs={6}>
                                 <Typography className={classes.subTitle} align={'right'}>{t('earnToken')} {item.token}</Typography>
-                                <Typography className={classes.apy}><span>{item.apy}%</span> 78% APY</Typography>
+                                <Typography className={classes.apy}><span>{item.apy}%</span> {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
                             </Grid>
                             <Grid item xs={11}>
                                 <Divider className={classes.divider}/>
