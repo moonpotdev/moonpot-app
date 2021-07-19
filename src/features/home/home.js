@@ -96,7 +96,7 @@ const Home = () => {
         <React.Fragment>
             <Container maxWidth="xl">
                 <Typography className={classes.h1}>
-                    <Trans i18nKey="homeTitle" values={{amount: '$914,279'}} />
+                    <Trans i18nKey="homeTitle" values={{amount: '$90,000'}} />
                 </Typography>
                 <Box>
                     <Filter sortConfig={sortConfig} setSortConfig={setSortConfig} defaultFilter={defaultFilter} />
