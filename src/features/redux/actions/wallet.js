@@ -250,7 +250,7 @@ const withdraw = (network, contractAddr, amount, max) => {
 
             if(max) {
                 contract.methods
-                    .withdrawAllInstantly()
+                    .exitInstantly()
                     .send({ from: address })
                     .on('transactionHash', function (hash) {
                         dispatch({type: WALLET_ACTION, payload: {result: 'success_pending', data: {spender: contractAddr, amount: amount, hash: hash}}});
@@ -266,7 +266,7 @@ const withdraw = (network, contractAddr, amount, max) => {
                     });
             } else {
                 contract.methods
-                    .withdrawAllInstantly()
+                    .exitInstantly()
                     .send({ from: address })
                     .on('transactionHash', function (hash) {
                         dispatch({type: WALLET_ACTION, payload: {result: 'success_pending', data: {spender: contractAddr, amount: amount, hash: hash}}});

@@ -4,19 +4,33 @@ import {MultiCall} from "eth-multicall";
 import {config} from "../../../config/config";
 import {isEmpty} from "../../../helpers/utils";
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
+const ecr20Abi = require('../../../config/abi/erc20.json');
 
 const getPoolsSingle = async (item, state, dispatch) => {
     console.log('redux getPoolsSingle() processing...');
     const web3 = state.walletReducer.rpc;
     const pools = state.vaultReducer.pools;
     const prices = state.pricesReducer.prices;
-    const price = (pools[item.id].oracleId in prices) ? prices[pools[item.id].oracleId] : 0;
 
     const gateContract = new web3[item.network].eth.Contract(gateManagerAbi, item.contractAddress);
     const awardQuery =  await gateContract.methods.awardBalance().call();
-    const awardBalance = new BigNumber(awardQuery);
+    const awardPrice = (pools[item.id].oracleId in prices) ? prices[pools[item.id].oracleId] : 0;
+    const awardBalance = new BigNumber(awardQuery).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
 
-    pools[item.id].awardBalance = awardBalance.dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals)).toFixed(8);
+    pools[item.id].awardBalance = awardBalance;
+    pools[item.id].awardBalanceUsd = awardBalance.times(new BigNumber(awardPrice));
+    pools[item.id].sponsorBalance = new BigNumber(0);
+    pools[item.id].sponsorBalanceUsd = new BigNumber(0);
+
+    if(!isEmpty(item.sponsorAddress)) {
+        const sponsorContract = new web3[item.network].eth.Contract(ecr20Abi, item.sponsorAddress);
+        const sponsorQuery = await sponsorContract.methods.balanceOf(item.prizepoolAddress).call();
+        const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
+        const sponsorBalance = new BigNumber(sponsorQuery).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
+
+        pools[item.id].sponsorBalance = sponsorBalance;
+        pools[item.id].sponsorBalanceUsd = sponsorBalance.times(sponsorPrice);
+    }
 
     dispatch({
         type: HOME_FETCH_POOLS_DONE,
@@ -40,10 +54,12 @@ const getPoolsAll = async (state, dispatch) => {
 
     const multicall = [];
     const calls = [];
+    const sponsors = [];
 
     for(let key in web3) {
         multicall[key] = new MultiCall(web3[key], config[key].multicallAddress);
         calls[key] = [];
+        sponsors[key] = [];
     }
 
     for (let key in pools) {
@@ -53,12 +69,21 @@ const getPoolsAll = async (state, dispatch) => {
             id: pool.id,
             awardBalance: gateContract.methods.awardBalance(),
         });
+
+        if(!isEmpty(pool.sponsorAddress)) {
+            const sponsorContract = new web3[pool.network].eth.Contract(ecr20Abi, pool.sponsorAddress);
+            sponsors[pool.network].push({
+                id: pool.id,
+                sponsorBalance: sponsorContract.methods.balanceOf(pool.prizepoolAddress),
+            });
+        }
     }
 
 
     const promises = [];
     for(const key in multicall) {
         promises.push(multicall[key].all([calls[key]]));
+        promises.push(multicall[key].all([sponsors[key]]));
     }
     const results = await Promise.allSettled(promises);
 
@@ -74,11 +99,21 @@ const getPoolsAll = async (state, dispatch) => {
 
     for(let i = 0; i < response.length; i++) {
         const item = response[i];
-        const price = (pools[item.id].oracleId in prices) ? prices[pools[item.id].oracleId] : 0;
-        const awardBalance = new BigNumber(item.awardBalance);
+        if(!isEmpty(item.awardBalance)) {
+            const awardPrice = (pools[item.id].oracleId in prices) ? prices[pools[item.id].oracleId] : 0;
+            const awardBalance = new BigNumber(item.awardBalance).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
 
-        pools[item.id].apy = (!isEmpty(apy) && item.id in apy) ? apy[item.id] : 0;
-        pools[item.id].awardBalance = awardBalance.dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals)).toFixed(8);
+            pools[item.id].awardBalance = awardBalance;
+            pools[item.id].awardBalanceUsd = awardBalance.times(awardPrice);
+        }
+
+        if(!isEmpty(item.sponsorBalance)) {
+            const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
+            const sponsorBalance = new BigNumber(item.sponsorBalance).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
+
+            pools[item.id].sponsorBalance = sponsorBalance;
+            pools[item.id].sponsorBalanceUsd = sponsorBalance.times(new BigNumber(sponsorPrice));
+        }
     }
 
     dispatch({
