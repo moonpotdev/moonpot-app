@@ -66,17 +66,6 @@ const styles = (theme) => ({
         boxShadow: '0px 12px 24px rgba(0, 0, 0, 0.4)', 
 
     },
-    potItem: {
-        backgroundColor: '#7DAEDA',
-        width: '330px',
-        margin: '80px auto 0px auto',
-        borderRadius: '10px',
-        padding: '10px',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: '20px',
-            marginRight: '20px',
-        },
-    },
     potImage: {
         width: '100%',
         marginTop: '10px',
@@ -84,8 +73,8 @@ const styles = (theme) => ({
     },
     potUsdTop: {
         fontWeight: 700,
-        fontSize: '24px',
-        lineHeight: '27.58px',
+        fontSize: '18px',
+        lineHeight: '20px',
         letterSpacing: '0.6px',
         marginTop: '10px',
         color: '#ffffff',
@@ -95,8 +84,8 @@ const styles = (theme) => ({
     },
     potUsd: {
         fontWeight: 700,
-        fontSize: '24px',
-        lineHeight: '27.58px',
+        fontSize: '18px',
+        lineHeight: '20px',
         letterSpacing: '0.6px',
         color: '#ffffff',
         '& span': {

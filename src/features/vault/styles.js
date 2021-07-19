@@ -33,7 +33,7 @@ const styles = (theme) => ({
     },
     countdown: {
         fontWeight: 700,
-        fontSize: '18px',
+        fontSize: '15px',
         lineHeight: '24px',
         letterSpacing: '0.2px',
         color: '#ffffff',
@@ -48,7 +48,7 @@ const styles = (theme) => ({
     },
     apy: {
         fontWeight: 700,
-        fontSize: '18px',
+        fontSize: '15px',
         lineHeight: '24px',
         color: '#ffffff',
         textAlign: 'right',
