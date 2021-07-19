@@ -310,6 +310,7 @@ const styles = (theme) => ({
         boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2), 0px 12px 24px -10px rgba(0, 0, 0, 0.4)',
         borderRadius: '16px',
         margin: '24px 0px',
+        padding: '12px 0px',
         width: 'min(100%, 452px)',
     },
     ziggyTimelock: {
@@ -337,9 +338,9 @@ const styles = (theme) => ({
         color: '#D9D9E8',
         fontWeight: 400,
         fontSize: '12px',
-        lineHeight: '20px',
+        lineHeight: '16px',
         letterSpacing: '0.2px',
-        padding: '24px',
+        padding: '12px 24px',
 
     },
     infoDetail: {
