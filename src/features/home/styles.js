@@ -97,6 +97,39 @@ const styles = (theme) => ({
         backgroundColor: '#436F97',
         height: '2px',
     },
+    expandToggle: {
+        color: '#FFFFFF',
+        alignText: 'right',
+        cursor: 'pointer',
+    },
+    prizeSplitText: {
+        fontWeight: 700,
+        fontSize: '12px',
+        fontStyle: 'Bold',
+        letterSpacing: '1px',
+        lineHeight: '145%',
+        textTransform: 'uppercase',
+        color: '#EBF3F9',
+        cursor: 'pointer',
+    },
+    prizeSplitWinners: {
+        fontWeight: 400,
+        fontSize: '10px',
+        lineHeight: '16px',
+        letterSpacing: '0.2px',
+        textTransform: 'capitalize',
+        color: '#EBF3F9',
+    },
+    prizeSplitValue: {
+        fontWeight: 400,
+        fontSize: '10px',
+        lineHeight: '16px',
+        letterSpacing: '0.2px',
+        color: '#FFF',
+        '& span': {
+            fontWeight: 700,
+        }
+    },
     play: {
         backgroundColor: '#FFFFFF',
         borderRadius: '8px',

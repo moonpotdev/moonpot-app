@@ -1,11 +1,13 @@
 import * as React from "react";
+import { useLocation } from "react-router";
 import { useHistory } from 'react-router-dom';
 import {useSelector} from "react-redux";
-import {Button, Link, Container, Grid, makeStyles, Typography, Divider} from "@material-ui/core"
-import Box from '@material-ui/core/Box';
+import AnimateHeight from 'react-animate-height';
+import {Button, Box, Link, Container, Grid, makeStyles, Typography, Divider} from "@material-ui/core"
 import styles from "./styles"
 import Filter from "./components/Filter";
 import {Trans, useTranslation} from "react-i18next";
+import {ExpandMore, ExpandLess} from '@material-ui/icons';
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -18,6 +20,7 @@ const defaultFilter = {
 
 const Home = () => {
     const { t } = useTranslation();
+    const location = useLocation();
     const {vault} = useSelector(state => ({
         vault: state.vaultReducer,
     }));
@@ -27,6 +30,7 @@ const Home = () => {
     const storage = localStorage.getItem('homeSortConfig');
     const [sortConfig, setSortConfig] = React.useState(storage === null ? defaultFilter : JSON.parse(storage));
     const [filtered, setFiltered] = React.useState([]);
+    const [prizeSplitOpen, setPrizeSplitOpen] = React.useState(location.prizeSplitOpen);
 
     React.useEffect(() => {
         localStorage.setItem('homeSortConfig', JSON.stringify(sortConfig));
@@ -117,6 +121,29 @@ const Home = () => {
                                         <Grid item xs={5}>
                                             <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.token}</Typography>
                                             <Typography className={classes.apy} align={'right'}><span>55%</span> 78% APY</Typography>
+                                        </Grid>
+                                        <Grid item xs={11}>
+                                            <Divider className={classes.divider}></Divider>
+                                        </Grid>
+                                        <Grid item xs={9} align={"left"}>
+                                            <Typography className={classes.prizeSplitText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeSplit')} </Typography>
+                                        </Grid>
+                                        <Grid item xs={2} align={"right"}>
+                                            <Link className={classes.expandToggle} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
+                                        </Grid>
+                                        <Grid xs={12}>
+                                            <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
+                                                <Grid container spacing={1}>
+                                                    <Grid item xs={3} align={"left"}>
+                                                        <Typography className={classes.prizeSplitWinners}>5 winners</Typography>
+                                                    </Grid>
+                                                    <Grid item xs={7} align={"right"}>
+                                                        <Typography className={classes.prizeSplitValue}>
+                                                        <span>1200 {item.token}</span> and <span>10 {item.sponsoredToken}</span> (20%)
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            </AnimateHeight>
                                         </Grid>
                                         <Grid item xs={11}>
                                             <Divider className={classes.divider}></Divider>
