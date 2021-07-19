@@ -13,5 +13,6 @@ export const pools = [
         status: 'active',
         sponsorProjectName: 'Beefy.Finance',
         sponsoredToken: 'BIFI',
+        oracleId: 'Cake',
     },
   ];

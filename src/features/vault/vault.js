@@ -20,6 +20,7 @@ import {isEmpty} from "../../helpers/utils";
 import reduxActions from "../redux/actions";
 import Deposit from "./components/Deposit";
 import Withdraw from "./components/Withdraw";
+import BigNumber from "bignumber.js";
 
 const useStyles = makeStyles(styles);
 
@@ -30,9 +31,10 @@ const Vault = () => {
     const classes = useStyles();
 
     let { id } = useParams();
-    const {vault, wallet} = useSelector(state => ({
+    const {vault, wallet, prices} = useSelector(state => ({
         vault: state.vaultReducer,
         wallet: state.walletReducer,
+        prices: state.pricesReducer,
     }));
 
     const dispatch = useDispatch();
@@ -59,6 +61,13 @@ const Vault = () => {
         setFormData({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
     }
 
+    const CalculateTotalPrize = () => {
+        const amount = new BigNumber(item.awardBalance).times(prices.prices[item.oracleId]);
+        const sponsored = new BigNumber(10).times(prices.prices[item.sponsoredToken]);
+
+        return "$" + amount.plus(sponsored).toFixed(0);
+    }
+
     React.useEffect(() => {
         if(!isEmpty(vault.pools) && vault.pools[id]) {
             setVaultData(vault.pools[id]);
@@ -73,26 +82,17 @@ const Vault = () => {
         }
     }, [item]);
 
-    /*React.useEffect(() => {
+    React.useEffect(() => {
         if(item && prices.lastUpdated > 0) {
             dispatch(reduxActions.vault.fetchPools(item));
         }
-    }, [dispatch, item, prices.lastUpdated]);*/
+    }, [dispatch, item, prices.lastUpdated]);
 
     React.useEffect(() => {
         if(item && wallet.address) {
             dispatch(reduxActions.balance.fetchBalances(item));
         }
     }, [dispatch, item, wallet.address]);
-
-    /*React.useEffect(() => {
-        if(item) {
-            setInterval(() => {
-                dispatch(reduxActions.vault.fetchPools(item));
-                dispatch(reduxActions.balance.fetchBalances(item));
-            }, 60000);
-        }
-    }, [item, dispatch]);*/
 
 
 
@@ -114,7 +114,7 @@ const Vault = () => {
                                 <Box className={classes.potImage}>
                                     <img 
                                     alt="Moonpot"
-                                    srcset="
+                                    srcSet="
                                         images/pots/sponsored/cake@4x.png 4x,
                                         images/pots/sponsored/cake@3x.png 3x,
                                         images/pots/sponsored/cake@2x.png 2x,
@@ -124,7 +124,7 @@ const Vault = () => {
                                 </Box>
                             </Grid>
                             <Grid item xs={7}>
-                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $90,000</Typography>
+                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> <CalculateTotalPrize /></Typography>
                                 <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsoredToken}</Typography>
                                 <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                             </Grid>
@@ -138,7 +138,7 @@ const Vault = () => {
                                 <Typography className={classes.apy}><span>55%</span> 78% APY</Typography>
                             </Grid>
                             <Grid item xs={11}>
-                                <Divider className={classes.divider}></Divider>
+                                <Divider className={classes.divider}/>
                             </Grid>
                             <Grid item xs={9} align={"left"}>
                                 <Typography className={classes.prizeSplitText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeSplit')} </Typography>
@@ -146,7 +146,7 @@ const Vault = () => {
                             <Grid item xs={2} align={"right"}>
                                 <Link className={classes.expandToggle} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                             </Grid>
-                            <Grid xs={12}>
+                            <Grid item xs={12}>
                                 <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                     <Grid container spacing={1}>
                                         <Grid item xs={3} align={"left"}>
@@ -154,7 +154,7 @@ const Vault = () => {
                                         </Grid>
                                         <Grid item xs={7} align={"right"}>
                                             <Typography className={classes.prizeSplitValue}>
-                                            <span>1200 {item.token}</span> and <span>10 {item.sponsoredToken}</span> (20%)
+                                            <span>{item.awardBalance.toString()} {item.token}</span> and <span>10 {item.sponsoredToken}</span> (20%)
                                             </Typography>
                                         </Grid>
                                     </Grid>
@@ -206,7 +206,7 @@ const Vault = () => {
                         <Typography className={classes.beefy}>{t('footerPoweredBy')} <Link href={"https://beefy.finance"}>Beefy.Finance</Link> 
                         <img 
                         alt="Beefy Finance" 
-                        srcset="
+                        srcSet="
                             images/beefy/beefy-finance-bifi-logo@4x.png 4x,
                             images/beefy/beefy-finance-bifi-logo@3x.png 3x,
                             images/beefy/beefy-finance-bifi-logo@2x.png 2x,
@@ -300,7 +300,7 @@ const Vault = () => {
                                         <Box className={classes.ziggyTimelock}>
                                             <img 
                                             alt="Ziggy"
-                                            srcset="
+                                            srcSet="
                                                 images/ziggy/timelock@4x.png 4x,
                                                 images/ziggy/timelock@3x.png 3x,
                                                 images/ziggy/timelock@2x.png 2x,
@@ -326,7 +326,7 @@ const Vault = () => {
                             <Box className={classes.ziggyPlay}>
                                 <img 
                                 alt="Ziggy"
-                                srcset="
+                                srcSet="
                                     images/ziggy/play@4x.png 4x,
                                     images/ziggy/play@3x.png 3x,
                                     images/ziggy/play@2x.png 2x,

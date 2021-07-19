@@ -1,13 +1,14 @@
 import * as React from "react";
 import { useLocation } from "react-router";
 import { useHistory } from 'react-router-dom';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import AnimateHeight from 'react-animate-height';
 import {Button, Box, Link, Container, Grid, makeStyles, Typography, Divider} from "@material-ui/core"
 import styles from "./styles"
 import Filter from "./components/Filter";
 import {Trans, useTranslation} from "react-i18next";
 import {ExpandMore, ExpandLess} from '@material-ui/icons';
+import reduxActions from "../redux/actions";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -21,8 +22,10 @@ const defaultFilter = {
 const Home = () => {
     const { t } = useTranslation();
     const location = useLocation();
-    const {vault} = useSelector(state => ({
+    const dispatch = useDispatch();
+    const {vault, prices} = useSelector(state => ({
         vault: state.vaultReducer,
+        prices: state.pricesReducer,
     }));
 
     const history = useHistory();
@@ -82,6 +85,15 @@ const Home = () => {
 
     }, [sortConfig, vault.pools]);
 
+    React.useEffect(() => {
+        if(prices.lastUpdated > 0) {
+            console.log(prices)
+            dispatch(reduxActions.vault.fetchPools());
+        }
+    }, [dispatch, prices.lastUpdated]);
+
+    console.log(filtered)
+
     return (
         <React.Fragment>
             <Container maxWidth="xl">
@@ -91,87 +103,87 @@ const Home = () => {
                 <Box>
                     <Filter sortConfig={sortConfig} setSortConfig={setSortConfig} defaultFilter={defaultFilter} />
                     <Grid container>
-                    {filtered.length === 0 ? '' : (
-                        filtered.map(item => (
-                            <React.Fragment key={item.id}>
-                                <Box className={classes.potItem}>
-                                    <Grid container spacing={3}>
-                                        <Grid item xs={4}>
-                                            <Box className={classes.potImage}>
-                                                <img 
-                                                alt="Moonpot"
-                                                srcset="
+                        {filtered.length === 0 ? '' : (
+                            filtered.map(item => (
+                                <React.Fragment key={item.id}>
+                                    <Box className={classes.potItem}>
+                                        <Grid container spacing={3}>
+                                            <Grid item xs={4}>
+                                                <Box className={classes.potImage}>
+                                                    <img
+                                                        alt="Moonpot"
+                                                        srcSet="
                                                     images/pots/sponsored/cake@4x.png 4x,
                                                     images/pots/sponsored/cake@3x.png 3x,
                                                     images/pots/sponsored/cake@2x.png 2x,
                                                     images/pots/sponsored/cake@1x.png 1x
                                                 "
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item xs={7}>
-                                            <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $90,000</Typography>
-                                            <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsoredToken}</Typography>
-                                            <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
-                                        </Grid>
-                                        <Grid item xs={6}>
-                                            <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
-                                            <Typography className={classes.countdown}>2d 23h 15m</Typography>
-                                        </Grid>
-                                        <Grid item xs={5}>
-                                            <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.token}</Typography>
-                                            <Typography className={classes.apy} align={'right'}><span>55%</span> 78% APY</Typography>
-                                        </Grid>
-                                        <Grid item xs={11}>
-                                            <Divider className={classes.divider}></Divider>
-                                        </Grid>
-                                        <Grid item xs={9} align={"left"}>
-                                            <Typography className={classes.prizeSplitText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeSplit')} </Typography>
-                                        </Grid>
-                                        <Grid item xs={2} align={"right"}>
-                                            <Link className={classes.expandToggle} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
-                                        </Grid>
-                                        <Grid xs={12}>
-                                            <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
-                                                <Grid container spacing={1}>
-                                                    <Grid item xs={3} align={"left"}>
-                                                        <Typography className={classes.prizeSplitWinners}>5 winners</Typography>
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item xs={7}>
+                                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $90,000</Typography>
+                                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsoredToken}</Typography>
+                                                <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
+                                            </Grid>
+                                            <Grid item xs={6}>
+                                                <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
+                                                <Typography className={classes.countdown}>2d 23h 15m</Typography>
+                                            </Grid>
+                                            <Grid item xs={5}>
+                                                <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.token}</Typography>
+                                                <Typography className={classes.apy} align={'right'}><span>55%</span> 78% APY</Typography>
+                                            </Grid>
+                                            <Grid item xs={11}>
+                                                <Divider className={classes.divider}/>
+                                            </Grid>
+                                            <Grid item xs={9} align={"left"}>
+                                                <Typography className={classes.prizeSplitText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeSplit')} </Typography>
+                                            </Grid>
+                                            <Grid item xs={2} align={"right"}>
+                                                <Link className={classes.expandToggle} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
+                                                    <Grid container spacing={1}>
+                                                        <Grid item xs={3} align={"left"}>
+                                                            <Typography className={classes.prizeSplitWinners}>5 winners</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={9} align={"right"}>
+                                                            <Typography className={classes.prizeSplitValue}>
+                                                                <span>{item.awardBalance.toString()} {item.token}</span> and <span>10 {item.sponsoredToken}</span> (20%)
+                                                            </Typography>
+                                                        </Grid>
                                                     </Grid>
-                                                    <Grid item xs={7} align={"right"}>
-                                                        <Typography className={classes.prizeSplitValue}>
-                                                        <span>1200 {item.token}</span> and <span>10 {item.sponsoredToken}</span> (20%)
-                                                        </Typography>
-                                                    </Grid>
-                                                </Grid>
-                                            </AnimateHeight>
+                                                </AnimateHeight>
+                                            </Grid>
+                                            <Grid item xs={11}>
+                                                <Divider className={classes.divider}/>
+                                            </Grid>
+                                            <Grid item xs={11}>
+                                                <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.playWith')} {item.token}</Button>
+                                            </Grid>
+                                            <Grid item xs={8}>
+                                                <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '40,000', amount: '$1000'})}</Typography>
+                                            </Grid>
                                         </Grid>
-                                        <Grid item xs={11}>
-                                            <Divider className={classes.divider}></Divider>
-                                        </Grid>
-                                        <Grid item xs={11}>
-                                            <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.playWith')} {item.token}</Button>
-                                        </Grid>
-                                        <Grid item xs={8}>
-                                            <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '40,000', amount: '$1000'})}</Typography>
-                                        </Grid>
-                                    </Grid>
-                                </Box>
-                                <Grid item xs={12}>
-                                    <Typography className={classes.beefy}>{t('footerPoweredBy')} <Link href={"https://beefy.finance"}>Beefy.Finance</Link> 
-                                    <img 
-                                    alt="Beefy Finance" 
-                                    srcset="
+                                    </Box>
+                                    <Grid item xs={12}>
+                                        <Typography className={classes.beefy}>{t('footerPoweredBy')} <Link href={"https://beefy.finance"}>Beefy.Finance</Link>
+                                            <img
+                                                alt="Beefy Finance"
+                                                srcSet="
                                         images/beefy/beefy-finance-bifi-logo@4x.png 4x,
                                         images/beefy/beefy-finance-bifi-logo@3x.png 3x,
                                         images/beefy/beefy-finance-bifi-logo@2x.png 2x,
                                         images/beefy/beefy-finance-bifi-logo@1x.png 1x
                                     "
-                                    />
-                                    </Typography>
-                                </Grid>
-                            </React.Fragment>
-                        ))
-                    )}
+                                            />
+                                        </Typography>
+                                    </Grid>
+                                </React.Fragment>
+                            ))
+                        )}
                         {sortConfig.vault === 'community' ? (
                             <Box className={classes.communityItem}>
                                 <Grid container>

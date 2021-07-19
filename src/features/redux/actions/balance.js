@@ -1,10 +1,8 @@
 import {MultiCall} from 'eth-multicall';
 import {BALANCE_FETCH_BALANCES_BEGIN, BALANCE_FETCH_BALANCES_DONE} from "../constants";
 import {config} from '../../../config/config';
-import {isEmpty} from "../../../helpers/utils";
 
 const erc20Abi = require('../../../config/abi/erc20.json');
-const multicallAbi = require('../../../config/abi/multicall.json');
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 
 const getBalancesSingle = async (item, state, dispatch) => {

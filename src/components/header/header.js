@@ -1,7 +1,5 @@
 import * as React from "react";
 import { useHistory } from 'react-router-dom';
-import {useDispatch, useSelector} from "react-redux";
-import reduxActions from "../../features/redux/actions";
 import {
     makeStyles,
     AppBar,
@@ -12,29 +10,14 @@ import {
 } from "@material-ui/core";
 import styles from "./styles"
 import WalletContainer from "./components/WalletContainer";
-import CustomDropdown from "../customDropdown";
 import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles(styles);
 
 const Header = () => {
-    const { i18n, t } = useTranslation();
+    const { t } = useTranslation();
     const history = useHistory();
-    const dispatch = useDispatch();
-    const walletReducer = useSelector(state => state.walletReducer);
     const classes = useStyles();
-
-    const handleLanguageSwitch = (value) => {
-        i18n.changeLanguage(value).then(() => dispatch(reduxActions.wallet.setLanguage(value)));
-    }
-
-    const handleCurrencySwitch = (value) => {
-        dispatch(reduxActions.wallet.setCurrency(value));
-    }
-
-    const customDropdownCss = {
-        marginRight: '25px',
-    } 
 
     return (
         <AppBar className={classes.navHeader} position="static">
@@ -45,7 +28,7 @@ const Header = () => {
                             <img 
                             alt="Moonpot" 
                             height="36px"
-                            srcset="
+                            srcSet="
                                 images/header/moonpot-desktop-logo@4x.png 4x,
                                 images/header/moonpot-desktop-logo@3x.png 3x,
                                 images/header/moonpot-desktop-logo@2x.png 2x,
