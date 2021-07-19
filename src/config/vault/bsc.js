@@ -11,5 +11,6 @@ export const pools = [
         pricePerShare: 1,
         vaultType: 'main',
         status: 'active',
+        sponsoredToken: 'BIFI',
     },
   ];
