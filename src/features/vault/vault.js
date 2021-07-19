@@ -21,6 +21,7 @@ import reduxActions from "../redux/actions";
 import Deposit from "./components/Deposit";
 import Withdraw from "./components/Withdraw";
 import BigNumber from "bignumber.js";
+import {calculateTotalPrize} from "../../helpers/format";
 
 const useStyles = makeStyles(styles);
 
@@ -61,13 +62,6 @@ const Vault = () => {
         setFormData({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
     }
 
-    const CalculateTotalPrize = () => {
-        const amount = new BigNumber(item.awardBalance).times(prices.prices[item.oracleId]);
-        const sponsored = new BigNumber(10).times(prices.prices[item.sponsoredToken]);
-
-        return "$" + amount.plus(sponsored).toFixed(0);
-    }
-
     React.useEffect(() => {
         if(!isEmpty(vault.pools) && vault.pools[id]) {
             setVaultData(vault.pools[id]);
@@ -94,8 +88,6 @@ const Vault = () => {
         }
     }, [dispatch, item, wallet.address]);
 
-
-
     return (
         <div className="App">
             {isLoading ? (
@@ -105,7 +97,7 @@ const Vault = () => {
             ) : (
             <Container maxWidth="lg">
                 <Typography className={classes.title}>
-                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: '78%', amount: '$90,000'}} />
+                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: '78%', amount: calculateTotalPrize(item, prices)}} />
                 </Typography>
                 <Grid container>
                     <Box className={classes.vaultPotItem}>
@@ -124,8 +116,8 @@ const Vault = () => {
                                 </Box>
                             </Grid>
                             <Grid item xs={7}>
-                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> <CalculateTotalPrize /></Typography>
-                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsoredToken}</Typography>
+                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> {calculateTotalPrize(item, prices)}</Typography>
+                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
                                 <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                             </Grid>
                             <Grid item xs={5}>
@@ -154,7 +146,7 @@ const Vault = () => {
                                         </Grid>
                                         <Grid item xs={7} align={"right"}>
                                             <Typography className={classes.prizeSplitValue}>
-                                            <span>{item.awardBalance.toString()} {item.token}</span> and <span>10 {item.sponsoredToken}</span> (20%)
+                                            <span>{item.awardBalance.toString()} {item.token}</span> and <span>10 {item.sponsorToken}</span> (20%)
                                             </Typography>
                                         </Grid>
                                     </Grid>

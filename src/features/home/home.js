@@ -9,6 +9,7 @@ import Filter from "./components/Filter";
 import {Trans, useTranslation} from "react-i18next";
 import {ExpandMore, ExpandLess} from '@material-ui/icons';
 import reduxActions from "../redux/actions";
+import {calculateTotalPrize} from "../../helpers/format";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -119,8 +120,8 @@ const Home = () => {
                                                 </Box>
                                             </Grid>
                                             <Grid item xs={7}>
-                                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $90,000</Typography>
-                                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsoredToken}</Typography>
+                                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> {calculateTotalPrize(item, prices)}</Typography>
+                                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
                                                 <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                                             </Grid>
                                             <Grid item xs={6}>
@@ -148,7 +149,7 @@ const Home = () => {
                                                         </Grid>
                                                         <Grid item xs={9} align={"right"}>
                                                             <Typography className={classes.prizeSplitValue}>
-                                                                <span>{item.awardBalance.toString()} {item.token}</span> and <span>10 {item.sponsoredToken}</span> (20%)
+                                                                <span>{item.awardBalance.toString()} {item.token}</span> and <span>10 {item.sponsorToken}</span> (20%)
                                                             </Typography>
                                                         </Grid>
                                                     </Grid>
