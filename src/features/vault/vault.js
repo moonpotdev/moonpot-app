@@ -105,7 +105,7 @@ const Vault = () => {
             ) : (
             <Container maxWidth="lg">
                 <Typography className={classes.title}>
-                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: '147%', amount: '$587,338'}} />
+                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: '78%', amount: '$90,000'}} />
                 </Typography>
                 <Grid container>
                     <Box className={classes.vaultPotItem}>
