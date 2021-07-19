@@ -18,7 +18,7 @@ const styles = (theme) => ({
         marginTop: '56px',
         borderRadius: '16px',
         padding: '10px',
-        marginBottom: '56px',
+        marginBottom: '4px',
         [theme.breakpoints.up('sm')]: {
             marginLeft: '20px',
             marginRight: '20px',
@@ -294,7 +294,7 @@ const styles = (theme) => ({
         letterSpacing: '0.34px',
         textAlign: 'center',
         marginTop: '16px',
-        marginBottom: '100px',
+        marginBottom: '56px',
         '& .MuiLink-root': {
             color: '#ffffff',
             textDecoration: 'underline',

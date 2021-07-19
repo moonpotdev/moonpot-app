@@ -200,9 +200,21 @@ const Vault = () => {
                                 </AnimateHeight>
                             </Grid>
 
-
                         </Grid>
                     </Box>
+                    <Grid item xs={12}>
+                        <Typography className={classes.beefy}>{t('footerPoweredBy')} <Link href={"https://beefy.finance"}>Beefy.Finance</Link> 
+                        <img 
+                        alt="Beefy Finance" 
+                        srcset="
+                            images/beefy/beefy-finance-bifi-logo@4x.png 4x,
+                            images/beefy/beefy-finance-bifi-logo@3x.png 3x,
+                            images/beefy/beefy-finance-bifi-logo@2x.png 2x,
+                            images/beefy/beefy-finance-bifi-logo@1x.png 1x
+                        "
+                        />
+                        </Typography>
+                    </Grid>
                     <Grid container>
                         <Grid item xs={12} align={"center"}>  
                             <Box className={classes.infoContainer}>
