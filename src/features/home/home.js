@@ -114,7 +114,7 @@ const Home = () => {
                                             <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsoredToken}</Typography>
                                             <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                                         </Grid>
-                                        <Grid item xs={5}>
+                                        <Grid item xs={6}>
                                             <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
                                             <Typography className={classes.countdown}>2d 23h 15m</Typography>
                                         </Grid>
