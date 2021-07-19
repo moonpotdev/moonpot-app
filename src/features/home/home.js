@@ -149,7 +149,7 @@ const Home = () => {
                                                         <Grid item xs={3} align={"left"}>
                                                             <Typography className={classes.prizeSplitWinners}>5 winners</Typography>
                                                         </Grid>
-                                                        <Grid item xs={9} align={"right"}>
+                                                        <Grid item xs={8} align={"right"}>
                                                             <Typography className={classes.prizeSplitValue}>
                                                                 <span>{item.awardBalance.toFixed(8)} {item.token}</span> and <span>{item.sponsorBalance.toFixed(0)} {item.sponsorToken}</span> (20%)
                                                             </Typography>
