@@ -47,6 +47,7 @@ const getPoolsSingle = async (item, state, dispatch) => {
         payload: {
             pools: pools,
             totalTvl: state.vaultReducer.totalTvl,
+            totalPrizesAvailable: state.vaultReducer.totalPrizesAvailable,
             isPoolsLoading: false,
             lastUpdated: new Date().getTime()
         }
@@ -109,14 +110,17 @@ const getPoolsAll = async (state, dispatch) => {
         response = [...response, ...result.value[0]];
     });
 
+    let totalPrizesAvailable = new BigNumber(0);
+
     for(let i = 0; i < response.length; i++) {
         const item = response[i];
         if(!isEmpty(item.awardBalance)) {
             const awardPrice = (pools[item.id].oracleId in prices) ? prices[pools[item.id].oracleId] : 0;
             const awardBalance = new BigNumber(item.awardBalance).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
+            const awardBalanceUsd = awardBalance.times(awardPrice);
 
             pools[item.id].awardBalance = awardBalance;
-            pools[item.id].awardBalanceUsd = awardBalance.times(awardPrice);
+            pools[item.id].awardBalanceUsd = awardBalanceUsd;
             pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toFixed(2)) : 0;
 
             if(!isEmpty(pools[item.id].sponsorToken)) {
@@ -130,14 +134,19 @@ const getPoolsAll = async (state, dispatch) => {
                 pools[item.id].bonusApy = Number(yearlyRewardsInUsd.dividedBy(totalStakedUsd));
             }
 
+            totalPrizesAvailable = totalPrizesAvailable.plus(awardBalanceUsd);
+
         }
 
         if(!isEmpty(item.sponsorBalance)) {
             const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
             const sponsorBalance = new BigNumber(item.sponsorBalance).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
+            const sponsorBalanceUsd = sponsorBalance.times(new BigNumber(sponsorPrice));
 
             pools[item.id].sponsorBalance = sponsorBalance;
-            pools[item.id].sponsorBalanceUsd = sponsorBalance.times(new BigNumber(sponsorPrice));
+            pools[item.id].sponsorBalanceUsd = sponsorBalanceUsd;
+
+            totalPrizesAvailable = totalPrizesAvailable.plus(sponsorBalanceUsd);
         }
     }
 
@@ -146,6 +155,7 @@ const getPoolsAll = async (state, dispatch) => {
         payload: {
             pools: pools,
             totalTvl: state.vaultReducer.totalTvl,
+            totalPrizesAvailable: totalPrizesAvailable,
             isPoolsLoading: false,
             lastUpdated: new Date().getTime()
         }

@@ -30,6 +30,7 @@ const initialPools = () => {
 const initialState = {
     pools: initialPools(),
     totalTvl: 0,
+    totalPrizesAvailable: 0,
     lastUpdated: 0,
     isPoolsLoading: false,
     isFirstTime: true,
@@ -47,6 +48,7 @@ const vaultReducer = (state = initialState, action) => {
                 ...state,
                 pools: action.payload.pools,
                 totalTvl: action.payload.totalTvl,
+                totalPrizesAvailable: action.payload.totalPrizesAvailable,
                 lastUpdated: action.payload.lastUpdated,
                 isPoolsLoading: action.payload.isPoolsLoading,
                 isFirstTime: false,
