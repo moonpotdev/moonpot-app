@@ -130,7 +130,7 @@ const Home = () => {
                                             </Grid>
                                             <Grid item xs={5}>
                                                 <Typography className={classes.subTitle} align={'right'}>{t('earn')} {item.token}</Typography>
-                                                <Typography className={classes.apy} align={'right'}><span>55%</span> 78% APY</Typography>
+                                                <Typography className={classes.apy} align={'right'}><span>{item.apy}%</span> 78% APY</Typography>
                                             </Grid>
                                             <Grid item xs={11}>
                                                 <Divider className={classes.divider}/>

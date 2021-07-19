@@ -11,6 +11,7 @@ const getPoolsSingle = async (item, state, dispatch) => {
     const web3 = state.walletReducer.rpc;
     const pools = state.vaultReducer.pools;
     const prices = state.pricesReducer.prices;
+    const apy = state.pricesReducer.apy;
 
     const gateContract = new web3[item.network].eth.Contract(gateManagerAbi, item.contractAddress);
     const awardQuery =  await gateContract.methods.awardBalance().call();
@@ -21,6 +22,7 @@ const getPoolsSingle = async (item, state, dispatch) => {
     pools[item.id].awardBalanceUsd = awardBalance.times(new BigNumber(awardPrice));
     pools[item.id].sponsorBalance = new BigNumber(0);
     pools[item.id].sponsorBalanceUsd = new BigNumber(0);
+    pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toFixed(2)) : 0;
 
     if(!isEmpty(item.sponsorAddress)) {
         const sponsorContract = new web3[item.network].eth.Contract(ecr20Abi, item.sponsorAddress);
@@ -105,6 +107,7 @@ const getPoolsAll = async (state, dispatch) => {
 
             pools[item.id].awardBalance = awardBalance;
             pools[item.id].awardBalanceUsd = awardBalance.times(awardPrice);
+            pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toFixed(2)) : 0;
         }
 
         if(!isEmpty(item.sponsorBalance)) {
