@@ -61,8 +61,8 @@ const styles = (theme) => ({
     },
     potUsdTop: {
         fontWeight: 700,
-        fontSize: '24px',
-        lineHeight: '27.58px',
+        fontSize: '18px',
+        lineHeight: '20px',
         letterSpacing: '0.6px',
         marginTop: '10px',
         color: '#ffffff',
@@ -72,8 +72,8 @@ const styles = (theme) => ({
     },
     potUsd: {
         fontWeight: 700,
-        fontSize: '24px',
-        lineHeight: '27.58px',
+        fontSize: '18px',
+        lineHeight: '20px',
         letterSpacing: '0.6px',
         color: '#ffffff',
         '& span': {
@@ -81,13 +81,42 @@ const styles = (theme) => ({
         }
     },
     potCrypto: {
-        fontWeight: 700,
+        fontWeight: 400,
         fontSize: '12px',
         lineHeight: '20px',
+        letterSpacing: '0.2px',
         color: '#EBF3F9',
         textAlign: 'right',
         '& span': {
             color: '#FFFFFF',
+        }
+    },
+    prizeSplitText: {
+        fontWeight: 700,
+        fontSize: '12px',
+        fontStyle: 'Bold',
+        letterSpacing: '1px',
+        lineHeight: '145%',
+        textTransform: 'uppercase',
+        color: '#EBF3F9',
+        cursor: 'pointer',
+    },
+    prizeSplitWinners: {
+        fontWeight: 400,
+        fontSize: '10px',
+        lineHeight: '16px',
+        letterSpacing: '0.2px',
+        textTransform: 'capitalize',
+        color: '#EBF3F9',
+    },
+    prizeSplitValue: {
+        fontWeight: 400,
+        fontSize: '10px',
+        lineHeight: '16px',
+        letterSpacing: '0.2px',
+        color: '#FFF',
+        '& span': {
+            fontWeight: 700,
         }
     },
     input: {
@@ -170,6 +199,16 @@ const styles = (theme) => ({
         letterSpacing: '0.2px',
         color: '#345675',
         margin: '16px 0 8px 0',
+    },
+    fairplayDepositMessage: {
+        color: '#EBF3F9',
+        fontSize: '10px',
+        lineHeight: '16px',
+        fontWeight: 400,
+        letterSpacing: '0.2px',
+        '& span': {
+            textDecoration: 'underline',
+        }
     },
     divider: {
         color: '#436F97',
@@ -259,6 +298,36 @@ const styles = (theme) => ({
             marginBottom: '-5px',
             marginLeft: '3px',
         }
+    },
+    infoContainer: {
+        backgroundColor: '#393960',
+        border: '2px solid #6753DB',
+        boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2), 0px 12px 24px -10px rgba(0, 0, 0, 0.4)',
+        borderRadius: '16px',
+        margin: '24px 0px',
+        width: 'min(100%, 452px)',
+    },
+    ziggyTimelock: {
+        padding: '24px',
+    },
+    fairplayTimelockRulesTitle: {
+        color: '#FAFAFC',
+        fontWeight: 500,
+        fontSize: '16px',
+        lineHeight: '20px',
+        letterSpacing: '0.6px',
+        padding: '16px 24px',
+    },
+    fairplayTimelockRulesMessage: {
+        color: '#D9D9E8',
+        fontWeight: 400,
+        fontSize: '12px',
+        lineHeight: '20px',
+        letterSpacing: '0.2px',
+        padding: '24px',
+    },
+    ziggyPlay: {
+        marginTop: '32px',
     },
     modal: {
         display: 'flex',
