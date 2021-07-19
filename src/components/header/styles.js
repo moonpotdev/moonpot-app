@@ -1,4 +1,8 @@
 const styles = (theme) => ({
+    logoContainer: {
+        display: 'flex',
+        alignItems: 'center',
+    },
     logo: {
         cursor: 'pointer',
         paddingLeft: '7.5%',
@@ -9,6 +13,7 @@ const styles = (theme) => ({
         border: 'none',
         boxShadow: 'none',
         paddingTop: '20px',
+        paddingBottom: '56px',
         position: 'static',
         marginLeft: '0px',
         '& .MuiToolbar-root': {
@@ -30,6 +35,11 @@ const styles = (theme) => ({
         display: 'flex',
         justifyContent: 'flex-end',
     },
+    navContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     navLink: {
         textTransform: 'uppercase',
         fontWeight: 500,
@@ -41,6 +51,10 @@ const styles = (theme) => ({
     },
     wallet: {
         width: '50%',
+    },
+    walletContainerContainer: {
+        display: 'flex',
+        alignItems: 'center',
     },
 })
 

@@ -40,7 +40,7 @@ const Header = () => {
         <AppBar className={classes.navHeader} position="static">
             <Toolbar>
                 <Grid container spacing={2}>
-                    <Grid item xs={3} align={"left"}>
+                    <Grid item className={classes.logoContainer} xs={3} align={"left"}>
                         <Box className={classes.logo} onClick={() => {history.push('/')}}>
                             <img 
                             alt="Moonpot" 
@@ -55,7 +55,7 @@ const Header = () => {
                         </Box>
                     </Grid>
                     
-                    <Grid item xs={5} align={"center"}>
+                    <Grid item className={classes.navContainer} xs={5} align={"center"}>
                         <Link className={classes.navLink} onClick={() => {history.push('/')}}>
                             {t('buttons.moonpots')}
                         </Link>
@@ -68,18 +68,10 @@ const Header = () => {
                     </Grid>
                     
                     
-                    <Grid item xs={3} css={{paddingRight: '20px'}}>
-                        <Grid container spacing={1}>
-                            <Grid item xs={3}>
-                                <CustomDropdown list={{'usd': 'USD', 'eur': 'EUR', 'gbp': 'GBP'}} selected={walletReducer.currency} handler={(e) => {handleCurrencySwitch(e.target.value)}} css={customDropdownCss} />
-                            </Grid>
-                            <Grid item xs={3}>
-                                <CustomDropdown list={{'en': 'EN', 'fr': 'FR'}} selected={walletReducer.language} handler={(e) => {handleLanguageSwitch(e.target.value)}} css={customDropdownCss} />
-                            </Grid>
-                            <Grid item xs={6}>
+                    <Grid item className={classes.walletContainerContainer} xs={3}>
+                            <Grid item xs={12} align={"right"}>
                                 <WalletContainer />
                             </Grid>
-                        </Grid>
                     </Grid>
                     
                 </Grid>
