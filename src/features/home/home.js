@@ -87,12 +87,9 @@ const Home = () => {
 
     React.useEffect(() => {
         if(prices.lastUpdated > 0) {
-            console.log(prices)
             dispatch(reduxActions.vault.fetchPools());
         }
     }, [dispatch, prices.lastUpdated]);
-
-    console.log(filtered)
 
     return (
         <React.Fragment>
