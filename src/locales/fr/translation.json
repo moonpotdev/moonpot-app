@@ -15,7 +15,8 @@
     "playInMorePots": "Play in More Pots",
     "mainPots": "Main Pots",
     "communityPots": "Community Pots",
-    "play": "Play with {{token}}",
+    "play": "Play",
+    "playWith": "Play with {{token}}",
     "docs": "Docs"
   },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br /> and a chance to win {{amount}}",
@@ -41,6 +42,7 @@
   "enterCoinAmount": "Enter {{coin}} amount",
   "fairplayTimelock": "Fairplay Timelock",
   "fairplayUnlock": "My Fairplay Unlock",
+  "fairplayDepositMessage": "There’s a 10 day Fairplay Timelock. If you want to withdraw earlier you’ll pay a 2.5%, or less, Fairness Fee. The fee reduces every second. <span>Learn more</span>",
   "yourDeposit": "Your Deposit",
   "myDetails": "My Details",
   "myDeposit": "My Deposit",

@@ -149,7 +149,7 @@ const Home = () => {
                                             <Divider className={classes.divider}></Divider>
                                         </Grid>
                                         <Grid item xs={11}>
-                                            <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.play')} {item.token}</Button>
+                                            <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.playWith')} {item.token}</Button>
                                         </Grid>
                                         <Grid item xs={8}>
                                             <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '40,000', amount: '$1000'})}</Typography>

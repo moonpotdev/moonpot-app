@@ -110,7 +110,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                     <Typography className={classes.withdrawItemText}>{t('fairplayUnlock')}</Typography>
                 </Grid>
                 <Grid item xs={7} align={"right"}>
-                    <Typography className={classes.withdrawItemValue}>14d 00h 00m</Typography>
+                    <Typography className={classes.withdrawItemValue}>10d 00h 00m</Typography>
                 </Grid>
                 <Grid item xs={4} align={"left"}>
                     <Typography className={classes.withdrawItemText}>{t('yourDeposit')}</Typography>

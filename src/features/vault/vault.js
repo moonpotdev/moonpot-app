@@ -14,7 +14,7 @@ import {
     Divider,
 } from "@material-ui/core"
 import styles from "./styles"
-import {ExpandMore, ExpandLess} from '@material-ui/icons';
+import {ExpandMore, ExpandLess, OpenInNew} from '@material-ui/icons';
 import {Trans, useTranslation} from "react-i18next";
 import {isEmpty} from "../../helpers/utils";
 import reduxActions from "../redux/actions";
@@ -37,6 +37,7 @@ const Vault = () => {
 
     const dispatch = useDispatch();
     const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
+    const [prizeSplitOpen, setPrizeSplitOpen] = React.useState(location.prizeSplitOpen);
     const [isLoading, setIsLoading] = React.useState(true);
     const [item, setVaultData] = React.useState(null);
     const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
@@ -111,22 +112,56 @@ const Vault = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={4} align={"left"}>
                                 <Box className={classes.potImage}>
-                                    <img alt="Moonpot" src={require('../../images/pots/cake.svg').default} />
+                                    <img 
+                                    alt="Moonpot"
+                                    srcset="
+                                        images/pots/sponsored/cake@4x.png 4x,
+                                        images/pots/sponsored/cake@3x.png 3x,
+                                        images/pots/sponsored/cake@2x.png 2x,
+                                        images/pots/sponsored/cake@1x.png 1x
+                                    "
+                                    />
                                 </Box>
                             </Grid>
                             <Grid item xs={7}>
                                 <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> $90,000</Typography>
-                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}</Typography>
-                                <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} <span>1600.00 {item.token} </span> {t('prize')}</Typography>
+                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsoredToken}</Typography>
+                                <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                             </Grid>
                             <Grid item xs={5}>
                                 <Typography className={classes.subTitle} align={"left"}>{t('nextWeeklyDraw')}</Typography>
-                                <Typography className={classes.countdown} align={"left"}>1d 23h 15m</Typography>
+                                <Typography className={classes.countdown} align={"left"}>2d 23h 15m</Typography>
                             </Grid>
                             
                             <Grid item xs={6}>
                                 <Typography className={classes.subTitle} align={'right'}>{t('earnToken')} {item.token}</Typography>
-                                <Typography className={classes.apy}>10% APY</Typography>
+                                <Typography className={classes.apy}><span>55%</span> 78% APY</Typography>
+                            </Grid>
+                            <Grid item xs={11}>
+                                <Divider className={classes.divider}></Divider>
+                            </Grid>
+                            <Grid item xs={9} align={"left"}>
+                                <Typography className={classes.prizeSplitText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeSplit')} </Typography>
+                            </Grid>
+                            <Grid item xs={2} align={"right"}>
+                                <Link className={classes.expandToggle} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
+                            </Grid>
+                            <Grid xs={12}>
+                                <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
+                                    <Grid container spacing={1}>
+                                        <Grid item xs={3} align={"left"}>
+                                            <Typography className={classes.prizeSplitWinners}>5 winners</Typography>
+                                        </Grid>
+                                        <Grid item xs={7} align={"right"}>
+                                            <Typography className={classes.prizeSplitValue}>
+                                            <span>1200 {item.token}</span> and <span>10 {item.sponsoredToken}</span> (20%)
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </AnimateHeight>
+                            </Grid>
+                            <Grid item xs={11}>
+                                <Divider className={classes.divider}></Divider>
                             </Grid>
                             <Grid item xs={11}>
                                 <Deposit
@@ -138,8 +173,10 @@ const Vault = () => {
                                     resetFormData={resetFormData}
                                 />
                             </Grid>
-                            <Grid item xs={8}>
-                                <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '40,000', amount: '$1000'})}</Typography>
+                            <Grid item xs={11}>
+                                <Typography className={classes.fairplayDepositMessage}>
+                                    <Trans i18nKey="fairplayDepositMessage"/>
+                                </Typography>
                             </Grid>
                             <Grid item xs={11}>
                                 <Divider className={classes.divider}></Divider>
@@ -163,8 +200,130 @@ const Vault = () => {
                                 </AnimateHeight>
                             </Grid>
 
+
                         </Grid>
                     </Box>
+                    <Grid container>
+                        <Grid item xs={12} align={"center"}>  
+                            <Box className={classes.infoContainer}>
+                                <Grid container>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoTitle} align={"left"}>
+                                            {item.token} Moonpot Strategy
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoMessage} align={"left"}>
+                                            <Trans i18nKey="moonpotStrategyMessage" values={{token: item.token, sponsor: item.sponsorProjectName}}/>
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoMessage} align={"left"}>
+                                            <a>{item.sponsorProjectName} Vault Address <OpenInNew fontSize="small"/></a>
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoMessage} align={"left"}>
+                                            <a>Moonpot Strategy Address <OpenInNew fontSize="small"/></a>
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} align={"center"}>  
+                            <Box className={classes.infoContainer}>
+                                <Grid container>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoTitle} align={"left"}>
+                                            APY Breakdown
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoSubHeader} align={"left"}>
+                                            Your {item.token} Interest
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoDetail} align={"left"}>
+                                            <span>55%</span> 78% APY
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoSubHeader} align={"left"}>
+                                            {item.token} Moonpot Prize Draw
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoDetail} align={"left"}>
+                                            40% APY
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoSubHeader} align={"left"}>
+                                            Ziggy's (Governance) Pot Interest
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoDetail} align={"left"}>
+                                            5% APY
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoSubHeader} align={"left"}>
+                                            Ziggy's (Governance) Prize Draw
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Typography className={classes.infoDetail} align={"left"}>
+                                            5% APY
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} align={"center"}>  
+                            <Box className={classes.infoContainer}>
+                                <Grid container>
+                                    <Grid item xs={12} align={"left"}>
+                                        <Box className={classes.ziggyTimelock}>
+                                            <img 
+                                            alt="Ziggy"
+                                            srcset="
+                                                images/ziggy/timelock@4x.png 4x,
+                                                images/ziggy/timelock@3x.png 3x,
+                                                images/ziggy/timelock@2x.png 2x,
+                                                images/ziggy/timelock@1x.png 1x
+                                            "
+                                            />
+                                        </Box>
+                                    </Grid>
+                                    <Grid item xs={12} align={"center"}>
+                                        <Typography className={classes.infoTitle} align={"left"}>
+                                            <Trans i18nKey="fairplayTimelockRules"/>
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} align={"center"}>
+                                        <Typography className={classes.infoMessage} align={"left"}>
+                                            <Trans i18nKey="fairplayTimelockRulesMessage"/>
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={11} align={"center"}>
+                            <Box className={classes.ziggyPlay}>
+                                <img 
+                                alt="Ziggy"
+                                srcset="
+                                    images/ziggy/play@4x.png 4x,
+                                    images/ziggy/play@3x.png 3x,
+                                    images/ziggy/play@2x.png 2x,
+                                    images/ziggy/play@1x.png 1x
+                                "
+                                />
+                            </Box>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Container>
             )}
