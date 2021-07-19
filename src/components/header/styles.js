@@ -48,6 +48,9 @@ const styles = (theme) => ({
         letterSpacing: '0.6px',
         color: '#FFFFFF',
         padding: '32px',
+        '&:hover': {
+            cursor: 'pointer'
+        }
     },
     wallet: {
         width: '50%',
