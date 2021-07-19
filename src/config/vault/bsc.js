@@ -8,6 +8,7 @@ export const pools = [
         rewardToken: 'potCAKE',
         rewardAddress: '0xD483c6d0eF626a9Cb69C3b4966a14de389aE05BD',
         contractAddress: '0x358Db8ebEf71B6Ef2aCD03892B0C861981fbEE04',
+        prizepoolAddress: '0x9AC868198AdD76D92d5398AA814797b6c438f61e',
         pricePerShare: 1,
         oracleId: 'Cake',
         vaultType: 'main',
@@ -15,5 +16,6 @@ export const pools = [
         sponsorProjectName: 'Beefy.Finance',
         sponsorToken: 'BIFI',
         sponsorAddress: '0xCa3F508B8e4Dd382eE878A314789373D80A5190A',
+        sponsorTokenDecimals: 18,
     },
   ];

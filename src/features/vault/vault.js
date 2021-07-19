@@ -20,7 +20,6 @@ import {isEmpty} from "../../helpers/utils";
 import reduxActions from "../redux/actions";
 import Deposit from "./components/Deposit";
 import Withdraw from "./components/Withdraw";
-import BigNumber from "bignumber.js";
 import {calculateTotalPrize} from "../../helpers/format";
 
 const useStyles = makeStyles(styles);
@@ -146,7 +145,7 @@ const Vault = () => {
                                         </Grid>
                                         <Grid item xs={7} align={"right"}>
                                             <Typography className={classes.prizeSplitValue}>
-                                            <span>{item.awardBalance.toString()} {item.token}</span> and <span>10 {item.sponsorToken}</span> (20%)
+                                            <span>{item.awardBalance.toFixed(8)} {item.token}</span> and <span>{item.sponsorBalance.toFixed(0)} {item.sponsorToken}</span> (20%)
                                             </Typography>
                                         </Grid>
                                     </Grid>
