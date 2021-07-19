@@ -33,6 +33,7 @@ const Dashboard = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const [detailsOpen, setDetailsOpen] = React.useState(location.detailsOpen);
+    const [bonusOpen, setBonusOpen] = React.useState(location.bonusOpen);
     const [depositOpen, setDepositOpen] = React.useState(location.depositOpen);
     const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
     const [sortConfig, setSortConfig] = React.useState(defaultFilter);
@@ -181,7 +182,7 @@ const Dashboard = () => {
                                             </Grid>
                                             <Grid item xs={11}>
                                                 <AnimateHeight duration={ 500 } height={ detailsOpen ? 'auto' : 0 }>
-                                                    <Grid container justifyContent>
+                                                    <Grid container>
                                                         <Grid item xs={6}>
                                                             <Typography className={classes.myDetailsText} align={'left'}>
                                                                 <Trans i18nKey="myToken" values={{token: item.token}}/>
@@ -202,6 +203,43 @@ const Dashboard = () => {
                                                         <Grid item xs={6}>
                                                             <Typography className={classes.myDetailsValue} align={"right"}>{t('odds', {odds: '266,666'})}</Typography>
                                                         </Grid>
+                                                    </Grid>
+                                                </AnimateHeight>
+                                            </Grid>
+                                            <Grid item xs={11}>
+                                                <Divider className={classes.divider}></Divider>
+                                            </Grid>
+                                            <Grid item xs={9} align={"left"}>
+                                                <Typography className={classes.dividerText} onClick={() => {setBonusOpen(!bonusOpen)}}>
+                                                    <Trans i18nKey="bonusTokenEarnings" values={{sponsorToken: item.sponsorToken}}/>
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={2} align={"right"}>
+                                                <Link onClick={() => {setBonusOpen(!bonusOpen)}} className={classes.expandToggle}>{bonusOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
+                                            </Grid>
+                                            <Grid item xs={11}>
+                                                <AnimateHeight duration={ 500 } height={ bonusOpen ? 'auto' : 0 }>
+                                                    <Grid container>
+                                                        <Grid item xs={6}>
+                                                            <Typography className={classes.myDetailsText} align={'left'}>
+                                                                <Trans i18nKey="myBonusEarnings"/>
+                                                            </Typography>
+                                                        </Grid>                                        
+                                                        <Grid item xs={6}>
+                                                            <Typography className={classes.myDetailsValue} align={'right'}>0.12 {item.sponsorToken} ($105.84)</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={12}>
+                                                            <Typography className={classes.myPotsInfoText} align={'left'}>
+                                                                <Trans i18nKey="bonusExtraInfo" values={{sponsorToken: item.sponsorToken}}/>
+                                                            </Typography>
+                                                        </Grid>
+                                                        <Grid item xs={12}>
+                                                            <Button onClick={console.log("Placeholder for bonus withdrawal")} className={0 < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={1 <= 0}>
+                                                                Withdraw Bonus {item.sponsorToken}
+                                                            </Button>
+                                                        </Grid>
+                            
+
                                                     </Grid>
                                                 </AnimateHeight>
                                             </Grid>
