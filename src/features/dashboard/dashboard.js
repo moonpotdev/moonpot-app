@@ -6,7 +6,7 @@ import AnimateHeight from 'react-animate-height';
 import {Button, Link, Container, Grid, Box, makeStyles, Typography, Divider} from "@material-ui/core"
 import {ExpandMore, ExpandLess} from '@material-ui/icons';
 import styles from "./styles"
-import {useTranslation} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import reduxActions from "../redux/actions";
 import Deposit from "../vault/components/Deposit";
 import Withdraw from "../vault/components/Withdraw";
@@ -153,20 +153,28 @@ const Dashboard = () => {
                                     <Box className={classes.vaultPotItem} key={item.id}>
                                         <Grid container spacing={2}>
                                             <Grid item xs={4} align={"left"}>
-                                                <Box className={classes.potImage}>
-                                                    <img alt="Moonpot" src={require('../../images/pots/cake.svg').default} />
-                                                </Box>
+                                            <Box className={classes.potImage}>
+                                                <img 
+                                                alt="Moonpot"
+                                                srcSet="
+                                                    images/pots/sponsored/cake@4x.png 4x,
+                                                    images/pots/sponsored/cake@3x.png 3x,
+                                                    images/pots/sponsored/cake@2x.png 2x,
+                                                    images/pots/sponsored/cake@1x.png 1x
+                                                "
+                                                />
+                                            </Box>
                                             </Grid>
                                             <Grid item xs={7}>
-                                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> 16000.00</Typography>
-                                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}</Typography>
-                                                <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('nextWeeklyDraw')}: <span>1d 23h 15m</span></Typography>
+                                                <Typography className={classes.potUsdTop} align={"right"}>$90,000 <span>{t('in')}</span> {item.token}</Typography>
+                                                <Typography className={classes.potUsd} align={"right"}>& {item.sponsorToken} PRIZES</Typography>
+                                                <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span>2d 23h 14m</span></Typography>
                                             </Grid>
                                             <Grid item xs={11}>
                                                 <Divider className={classes.divider}></Divider>
                                             </Grid>
                                             <Grid item xs={9} align={"left"}>
-                                                <Typography className={classes.dividerText} onClick={() => {setDetailsOpen(!detailsOpen)}}>{t('details')} </Typography>
+                                                <Typography className={classes.dividerText} onClick={() => {setDetailsOpen(!detailsOpen)}}>{t('myDetails')} </Typography>
                                             </Grid>
                                             <Grid item xs={2} align={"right"}>
                                                 <Link onClick={() => {setDetailsOpen(!detailsOpen)}} className={classes.expandToggle}>{detailsOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
@@ -175,28 +183,24 @@ const Dashboard = () => {
                                                 <AnimateHeight duration={ 500 } height={ detailsOpen ? 'auto' : 0 }>
                                                     <Grid container justifyContent>
                                                         <Grid item xs={6}>
-                                                            <Typography className={classes.myDetailsText} align={'left'}>{t('myDeposit')}</Typography>
+                                                            <Typography className={classes.myDetailsText} align={'left'}>
+                                                                <Trans i18nKey="myToken" values={{token: item.token}}/>
+                                                            </Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
-                                                            <Typography className={classes.myDetailsValue} align={'right'}>{item.userBalance} {item.token}</Typography>
-                                                        </Grid>
-                                                        <Grid item xs={6}>
-                                                            <Typography className={classes.myDetailsText} align={'left'}>{t('myEarnings')}</Typography>
-                                                        </Grid>
-                                                        <Grid item xs={6}>
-                                                            <Typography className={classes.myDetailsValue} align={'right'}>0 {item.token}</Typography>
+                                                            <Typography className={classes.myDetailsValue} align={'right'}>{item.userBalance} {item.token} ($?)</Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
                                                             <Typography className={classes.myDetailsText} align={'left'}>{t('myInterestRate')}</Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
-                                                        <Typography className={classes.myDetailsValue} align={'right'}>58% APY</Typography>
+                                                            <Typography className={classes.myDetailsValue} align={"right"}><span>55%</span> 78% APY</Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
                                                             <Typography className={classes.myDetailsText} align={'left'}>{t('myOdds')}</Typography>
                                                         </Grid>
                                                         <Grid item xs={6}>
-                                                            <Typography className={classes.myDetailsValue} align={"right"}>{t('odds', {odds: '40,000'})}</Typography>
+                                                            <Typography className={classes.myDetailsValue} align={"right"}>{t('odds', {odds: '266,666'})}</Typography>
                                                         </Grid>
                                                     </Grid>
                                                 </AnimateHeight>
@@ -220,6 +224,11 @@ const Dashboard = () => {
                                                             updateItemData={updateItemData}
                                                             resetFormData={resetFormData}
                                                         />
+                                                        <Grid item xs={11}>
+                                                            <Typography className={classes.depositMoreExtraInfo}>
+                                                                {t('depositMoreExtraInfo')}
+                                                            </Typography>
+                                                        </Grid>
                                                 </AnimateHeight>
                                             </Grid>
                                             <Grid item xs={11}>

@@ -131,6 +131,16 @@ const styles = (theme) => ({
         lineHeight: '20px',
         letterSpacing: '0.2px',
         marginBottom: '16px',
+        '& span': {
+            textDecoration: 'line-through',
+        }
+    },
+    depositMoreExtraInfo: {
+        fontWeight: 400,
+        fontSize: '12px',
+        lineHeight: '20px',
+        letterSpacing: '0.2px',
+        color: '#EBF3F9',
     },
     divider: {
         color: '#436F97',

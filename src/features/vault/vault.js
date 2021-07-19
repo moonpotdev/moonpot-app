@@ -116,7 +116,7 @@ const Vault = () => {
                             </Grid>
                             <Grid item xs={7}>
                                 <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> {calculateTotalPrize(item, prices)}</Typography>
-                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
+                                <Typography className={classes.potUsd} align={"right"}> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
                                 <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                             </Grid>
                             <Grid item xs={5}>

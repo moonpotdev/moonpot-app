@@ -285,6 +285,9 @@ const styles = (theme) => ({
         color: '#EBF3F9',
         letterSpacing: '0.2px',
         marginBottom: '20px',
+        '& span': {
+            textDecoration: "underline",
+        }
     },
     beefy: {
         fontWeight: 500,
