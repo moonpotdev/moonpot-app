@@ -53,7 +53,7 @@ const Steps = ({item, steps, handleClose}) => {
                                 </Button>
                             </Box>
                             <Box textAlign={"center"}>
-                                <Link className={classes.blockExplorerLink} variant={"outlined"} href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.receipt.transactionHash} target="_blank">See deposit on Block Explorer <OpenInNew /></Link> 
+                                <Link className={classes.blockExplorerLink} variant={"outlined"} href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.receipt.transactionHash} target="_blank">See transaction on Block Explorer <OpenInNew /></Link> 
                             </Box>
                         </Grid>
                     </Box>
