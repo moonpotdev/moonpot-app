@@ -18,6 +18,7 @@ const styles = (theme) => ({
         marginTop: '56px',
         borderRadius: '16px',
         padding: '10px',
+        marginBottom: '56px',
         [theme.breakpoints.up('sm')]: {
             marginLeft: '20px',
             marginRight: '20px',
@@ -51,6 +52,9 @@ const styles = (theme) => ({
         lineHeight: '24px',
         color: '#ffffff',
         textAlign: 'right',
+        '& span': {
+            textDecoration: 'line-through',
+        }
     },
     earn: {
         fontWeight: 500,
@@ -87,6 +91,7 @@ const styles = (theme) => ({
         letterSpacing: '0.2px',
         color: '#EBF3F9',
         textAlign: 'right',
+        paddingTop: '4px',
         '& span': {
             color: '#FFFFFF',
         }
@@ -310,7 +315,7 @@ const styles = (theme) => ({
     ziggyTimelock: {
         padding: '24px',
     },
-    fairplayTimelockRulesTitle: {
+    infoTitle: {
         color: '#FAFAFC',
         fontWeight: 500,
         fontSize: '16px',
@@ -318,13 +323,36 @@ const styles = (theme) => ({
         letterSpacing: '0.6px',
         padding: '16px 24px',
     },
-    fairplayTimelockRulesMessage: {
+    infoSubHeader: {
+        color: '#EBF3F9',
+        fontWeight: 700,
+        fontSize: '10px',
+        lineHeight: '16px',
+        letterSpacing: '1px',
+        textTransform: 'uppercase',
+        paddingTop: '20px',
+        paddingLeft: '24px',
+    },
+    infoMessage: {
         color: '#D9D9E8',
         fontWeight: 400,
         fontSize: '12px',
         lineHeight: '20px',
         letterSpacing: '0.2px',
         padding: '24px',
+
+    },
+    infoDetail: {
+        color: '#FAFAFC',
+        fontWeight: 700,
+        fontSize: '15px',
+        lineHeight: '24px',
+        paddingTop: '5px',
+        paddingBottom: '20px',
+        paddingLeft: '24px',
+        '& span': {
+            textDecoration: 'line-through',
+        }
     },
     ziggyPlay: {
         marginTop: '32px',
