@@ -249,7 +249,7 @@ const Vault = () => {
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
                                         <Typography className={classes.infoDetail} align={"left"}>
-                                            <span>{item.apy}%</span> {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY
+                                            50%
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
@@ -259,7 +259,7 @@ const Vault = () => {
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
                                         <Typography className={classes.infoDetail} align={"left"}>
-                                            40% APY
+                                            40%
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
@@ -269,7 +269,7 @@ const Vault = () => {
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
                                         <Typography className={classes.infoDetail} align={"left"}>
-                                            5% APY
+                                            5%
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
@@ -279,7 +279,7 @@ const Vault = () => {
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
                                         <Typography className={classes.infoDetail} align={"left"}>
-                                            5% APY
+                                            5%
                                         </Typography>
                                     </Grid>
                                 </Grid>
