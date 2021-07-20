@@ -213,6 +213,9 @@ const styles = (theme) => ({
         letterSpacing: '0.2px',
         '& span': {
             textDecoration: 'underline',
+        },
+        '& .MuiLink-root': {
+            cursor: 'pointer',
         }
     },
     divider: {
