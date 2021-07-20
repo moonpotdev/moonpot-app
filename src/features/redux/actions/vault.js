@@ -22,6 +22,8 @@ const getPoolsSingle = async (item, state, dispatch) => {
     const strategyContract = new web3[item.network].eth.Contract(prizeStrategyAbi, item.prizeStrategyAddress);
     const expiresAt = await strategyContract.methods.prizePeriodEndAt().call();
 
+    const ticketContract = new web3[item.network].eth.Contract(ecr20Abi, item.rewardAddress);
+    const totalTickets = await ticketContract.methods.totalSupply();
 
     pools[item.id].awardBalance = awardBalance;
     pools[item.id].awardBalanceUsd = awardBalance.times(new BigNumber(awardPrice));
@@ -30,6 +32,7 @@ const getPoolsSingle = async (item, state, dispatch) => {
     pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toFixed(2)) : 0;
     pools[item.id].bonusApy = 0;
     pools[item.id].expiresAt = expiresAt;
+    pools[item.id].totalTickets = totalTickets;
 
     if(!isEmpty(item.sponsorAddress)) {
         const sponsorContract = new web3[item.network].eth.Contract(ecr20Abi, item.sponsorAddress);
@@ -73,12 +76,14 @@ const getPoolsAll = async (state, dispatch) => {
     const calls = [];
     const sponsors = [];
     const strategy = [];
+    const ticket = [];
 
     for(let key in web3) {
         multicall[key] = new MultiCall(web3[key], config[key].multicallAddress);
         calls[key] = [];
         sponsors[key] = [];
         strategy[key] = [];
+        ticket[key] = [];
     }
 
     for (let key in pools) {
@@ -97,6 +102,12 @@ const getPoolsAll = async (state, dispatch) => {
             expiresAt: strategyContract.methods.prizePeriodEndAt(),
         });
 
+        const ticketContract = new web3[pool.network].eth.Contract(ecr20Abi, pool.rewardAddress);
+        ticket[pool.network].push({
+            id: pool.id,
+            totalTickets: ticketContract.methods.totalSupply()
+        })
+
         if(!isEmpty(pool.sponsorAddress)) {
             const sponsorContract = new web3[pool.network].eth.Contract(ecr20Abi, pool.sponsorAddress);
             sponsors[pool.network].push({
@@ -111,6 +122,7 @@ const getPoolsAll = async (state, dispatch) => {
         promises.push(multicall[key].all([calls[key]]));
         promises.push(multicall[key].all([strategy[key]]));
         promises.push(multicall[key].all([sponsors[key]]));
+        promises.push(multicall[key].all([ticket[key]]));
     }
     const results = await Promise.allSettled(promises);
 
@@ -153,6 +165,10 @@ const getPoolsAll = async (state, dispatch) => {
 
         if(!isEmpty(item.expiresAt)) {
             pools[item.id].expiresAt = item.expiresAt;
+        }
+
+        if(!isEmpty(item.totalTickets)) {
+            pools[item.id].totalTickets = item.totalTickets;
         }
 
         if(!isEmpty(item.sponsorBalance)) {

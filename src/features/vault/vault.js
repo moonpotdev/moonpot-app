@@ -100,6 +100,7 @@ const Vault = () => {
                 <Typography className={classes.title}>
                     <Trans i18nKey="vaultTitle" values={{name: item.token, apy: (item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy), amount: calculateTotalPrize(item, prices)}} />
                 </Typography>
+                
                 <Grid container>
                     <Box className={classes.vaultPotItem}>
                         <Grid container spacing={2}>
@@ -125,7 +126,6 @@ const Vault = () => {
                                 <Typography className={classes.subTitle} align={"left"}>{t('nextWeeklyDraw')}</Typography>
                                 <Typography className={classes.countdown} align={"left"}><Countdown expiresAt={item.expiresAt*1000} /> </Typography>
                             </Grid>
-                            
                             <Grid item xs={6}>
                                 <Typography className={classes.subTitle} align={'right'}>{t('interest')}</Typography>
                                 <Typography className={classes.apy}><span>{item.apy}%</span> {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
