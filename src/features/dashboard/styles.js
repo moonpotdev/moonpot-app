@@ -112,6 +112,7 @@ const styles = (theme) => ({
         letterSpacing: '0.2px',
         textTransform: 'capitalize',
         marginBottom: '16px',
+        padding: '0 12px',
     },
     myDetailsValue: {
         color: '#FFFFFF',
@@ -120,6 +121,7 @@ const styles = (theme) => ({
         lineHeight: '20px',
         letterSpacing: '0.2px',
         marginBottom: '16px',
+        padding: '0 12px',
         '& span': {
             textDecoration: 'line-through',
             opacity: 0.6,
@@ -131,6 +133,7 @@ const styles = (theme) => ({
         fontSize: '12px',
         lineHeight: '20px',
         letterSpacing: '0.2px',
+        padding: '0 12px',
     },
     enabledActionBtn: {
         backgroundColor: '#FFFFFF',

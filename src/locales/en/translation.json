@@ -66,5 +66,6 @@
   "details": "Details",
   "depositMore": "Deposit More",
   "depositMoreExtraInfo": "Depositing more CAKE will reset your Fairness Fee to a maximum of 2.5%, for your new deposit. Your Fairplay Timelock countdown will reset to 10 days, but you won't pay any additional Fairness Fees on your older deposits.",
-  "footerPoweredBy": "Powered by"
+  "footerPoweredBy": "Powered by",
+  "earningsBreakdown": "Earnings Breakdown"
 }

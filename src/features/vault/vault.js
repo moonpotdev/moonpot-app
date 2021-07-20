@@ -136,13 +136,13 @@ const Vault = () => {
                             <Grid item xs={11}>
                                 <Divider className={classes.divider}/>
                             </Grid>
-                            <Grid item xs={9} align={"left"}>
+                            <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
                                 <Typography className={classes.prizeSplitText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeSplit')} </Typography>
                             </Grid>
-                            <Grid item xs={2} align={"right"}>
+                            <Grid item xs={2} align={"right"} style={{paddingBottom: 0}}>
                                 <Link className={classes.expandToggle} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                             </Grid>
-                            <Grid item xs={11}>
+                            <Grid item xs={11} style={{padding: 0}}>
                                 <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                     <Grid container spacing={1}>
                                         <Grid item xs={4} align={"left"}>
@@ -247,7 +247,7 @@ const Vault = () => {
                                 <Grid container>
                                     <Grid item xs={12} align={"left"}>
                                         <Typography className={classes.infoTitle} align={"left"}>
-                                            APY Breakdown
+                                            {t('earningsBreakdown')}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
