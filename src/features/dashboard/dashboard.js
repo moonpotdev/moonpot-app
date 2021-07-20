@@ -24,14 +24,14 @@ const Dashboard = () => {
     const { t } = useTranslation();
     const location = useLocation();
     const history = useHistory();
-    const {vault, wallet, balance, prices} = useSelector(state => ({
+    const {vault, wallet, balance, prices, earned} = useSelector(state => ({
         vault: state.vaultReducer,
         wallet: state.walletReducer,
         balance: state.balanceReducer,
         prices: state.pricesReducer,
+        earned: state.earnedReducer,
     }));
 
-    
     const dispatch = useDispatch();
     const classes = useStyles();
     const [detailsOpen, setDetailsOpen] = React.useState(location.detailsOpen);
@@ -52,6 +52,7 @@ const Dashboard = () => {
         if(wallet.address) {
             dispatch(reduxActions.vault.fetchPools());
             dispatch(reduxActions.balance.fetchBalances());
+            dispatch(reduxActions.earned.fetchEarned());
         }
     }
 
@@ -96,7 +97,11 @@ const Dashboard = () => {
 
                 if(wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
                     item.userBalance = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance), item.tokenDecimals).toFixed(8);
-                };
+                }
+                if(wallet.address && !isEmpty(earned.earned[item.id])) {
+                    const amount = earned.earned[item.id][item.sponsorToken] ?? 0
+                    item.earned = byDecimals(new BigNumber(amount), item.sponsorTokenDecimals).toFixed(8);
+                }
                 data.push(item);
             }
         }
@@ -107,7 +112,7 @@ const Dashboard = () => {
 
         setFiltered(data);
 
-    }, [sortConfig, vault.pools, balance]);
+    }, [sortConfig, vault.pools, balance, earned]);
 
     React.useEffect(() => {
         if(prices.lastUpdated > 0) {
@@ -118,6 +123,7 @@ const Dashboard = () => {
     React.useEffect(() => {
         if(wallet.address) {
             dispatch(reduxActions.balance.fetchBalances());
+            dispatch(reduxActions.earned.fetchEarned());
         }
     }, [dispatch, wallet.address]);
 
@@ -230,9 +236,9 @@ const Dashboard = () => {
                                                             <Typography className={classes.myDetailsText} align={'left'}>
                                                                 <Trans i18nKey="myBonusEarnings"/>
                                                             </Typography>
-                                                        </Grid>                                        
+                                                        </Grid>
                                                         <Grid item xs={6}>
-                                                            <Typography className={classes.myDetailsValue} align={'right'}>0.12 {item.sponsorToken} ($105.84)</Typography>
+                                                            <Typography className={classes.myDetailsValue} align={'right'}>{item.earned} {item.sponsorToken} (${new BigNumber(item.earned).multipliedBy(prices.prices[item.sponsorToken]).toFixed(2)})</Typography>
                                                         </Grid>
                                                         <Grid item xs={12}>
                                                             <Typography className={classes.myPotsInfoText} align={'left'}>
