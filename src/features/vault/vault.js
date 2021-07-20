@@ -31,6 +31,7 @@ const Vault = () => {
     const location = useLocation();
     const history = useHistory();
     const classes = useStyles();
+    const fairPlayRef = React.useRef(null);
 
     let { id } = useParams();
     const {vault, wallet, prices} = useSelector(state => ({
@@ -56,6 +57,7 @@ const Vault = () => {
         if(wallet.address && item) {
             //dispatch(reduxActions.vault.fetchPools(item));
             dispatch(reduxActions.balance.fetchBalances(item));
+            dispatch(reduxActions.earned.fetchEarned(item));
         }
     }
 
@@ -86,6 +88,7 @@ const Vault = () => {
     React.useEffect(() => {
         if(item && wallet.address) {
             dispatch(reduxActions.balance.fetchBalances(item));
+            dispatch(reduxActions.earned.fetchEarned(item));
         }
     }, [dispatch, item, wallet.address]);
 
@@ -168,7 +171,7 @@ const Vault = () => {
                             </Grid>
                             <Grid item xs={11}>
                                 <Typography className={classes.fairplayDepositMessage}>
-                                    <Trans i18nKey="fairplayDepositMessage"/>
+                                    <Trans i18nKey="fairplayDepositMessage"/> <Link onClick={() => window.scrollTo(0, fairPlayRef.current.offsetTop)}>{t('buttons.learnMore')}</Link>
                                 </Typography>
                             </Grid>
                             <Grid item xs={11}>
@@ -230,9 +233,11 @@ const Vault = () => {
                                         </a>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoMessage} align={"left"}>
-                                            <a>Moonpot Strategy Address <OpenInNew fontSize="small"/></a>
-                                        </Typography>
+                                        <a href={`https://bscscan.com/address/${item.prizeStrategyAddress}`}>
+                                            <Typography className={classes.infoMessage} align={"left"}>
+                                                Moonpot Strategy Address <OpenInNew fontSize="small"/>
+                                            </Typography>
+                                        </a>
                                     </Grid>
                                 </Grid>
                             </Box>
@@ -288,7 +293,7 @@ const Vault = () => {
                                 </Grid>
                             </Box>
                         </Grid>
-                        <Grid item xs={12} align={"center"}>  
+                        <Grid item xs={12} align={"center"} ref={fairPlayRef}>
                             <Box className={classes.infoContainer}>
                                 <Grid container>
                                     <Grid item xs={12} align={"left"}>

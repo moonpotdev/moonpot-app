@@ -54,6 +54,7 @@ const styles = (theme) => ({
         textAlign: 'right',
         '& span': {
             textDecoration: 'line-through',
+            opacity: '0.6',
         }
     },
     earn: {
@@ -213,6 +214,9 @@ const styles = (theme) => ({
         letterSpacing: '0.2px',
         '& span': {
             textDecoration: 'underline',
+        },
+        '& .MuiLink-root': {
+            cursor: 'pointer',
         }
     },
     divider: {

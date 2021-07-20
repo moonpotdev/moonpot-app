@@ -44,7 +44,7 @@ const Steps = ({item, steps, handleClose}) => {
                             ) : (
                                 <React.Fragment>
                                     <Typography className={classes.stepsTitleText}>Withdraw Successful!</Typography>
-                                    <Typography className={classes.successfulDepositAmountText}>You have successfully withdrawn all of your {item.token}</Typography>
+                                    <Typography className={classes.successfulDepositAmountText}>You have successfully withdrawn all of your {steps.items[steps.currentStep].step === 'reward' ? item.sponsorToken : item.token}</Typography>
                                 </React.Fragment>
                             )}
                             <Box className={classes.viewMyMoonpots} textAlign={"center"}>

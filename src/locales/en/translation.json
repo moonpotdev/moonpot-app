@@ -17,7 +17,8 @@
     "communityPots": "Community Pots",
     "play": "Play",
     "playWith": "Play with {{token}}",
-    "docs": "Docs"
+    "docs": "Docs",
+    "learnMore": "Learn More"
   },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br /> and a chance to win ${{amount}}",
   "homeJoinCommunityTitle": "Join the Community",

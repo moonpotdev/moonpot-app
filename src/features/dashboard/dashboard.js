@@ -14,6 +14,7 @@ import BigNumber from "bignumber.js";
 import {byDecimals, calculateTotalPrize} from "../../helpers/format";
 import {isEmpty} from "../../helpers/utils";
 import Countdown from "../../components/Countdown";
+import Steps from "../vault/components/Steps";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -24,14 +25,14 @@ const Dashboard = () => {
     const { t } = useTranslation();
     const location = useLocation();
     const history = useHistory();
-    const {vault, wallet, balance, prices} = useSelector(state => ({
+    const {vault, wallet, balance, prices, earned} = useSelector(state => ({
         vault: state.vaultReducer,
         wallet: state.walletReducer,
         balance: state.balanceReducer,
         prices: state.pricesReducer,
+        earned: state.earnedReducer,
     }));
 
-    
     const dispatch = useDispatch();
     const classes = useStyles();
     const [detailsOpen, setDetailsOpen] = React.useState(location.detailsOpen);
@@ -41,6 +42,7 @@ const Dashboard = () => {
     const [sortConfig, setSortConfig] = React.useState(defaultFilter);
     const [filtered, setFiltered] = React.useState([]);
     const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
+    const [steps, setSteps] = React.useState({modal: false, currentStep: -1, items: [], finished: false});
 
     const handleWalletConnect = () => {
         if(!wallet.address) {
@@ -48,10 +50,32 @@ const Dashboard = () => {
         }
     }
 
+    const handleWithdrawBonus = (item) => {
+        if(wallet.address) {
+            const steps = [];
+            steps.push({
+                step: "reward",
+                message: "Confirm withdraw transaction on wallet to complete.",
+                action: () => dispatch(reduxActions.wallet.getReward(
+                    item.network,
+                    item.contractAddress
+                )),
+                pending: false,
+            });
+            setSteps({modal: true, currentStep: 0, items: steps, finished: false});
+        }
+    }
+
+    const handleClose = () => {
+        updateItemData();
+        setSteps({modal: false, currentStep: -1, items: [], finished: false});
+    }
+
     const updateItemData = () => {
         if(wallet.address) {
             dispatch(reduxActions.vault.fetchPools());
             dispatch(reduxActions.balance.fetchBalances());
+            dispatch(reduxActions.earned.fetchEarned());
         }
     }
 
@@ -96,7 +120,11 @@ const Dashboard = () => {
 
                 if(wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
                     item.userBalance = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance), item.tokenDecimals).toFixed(8);
-                };
+                }
+                if(wallet.address && !isEmpty(earned.earned[item.id])) {
+                    const amount = earned.earned[item.id][item.sponsorToken] ?? 0
+                    item.earned = byDecimals(new BigNumber(amount), item.sponsorTokenDecimals).toFixed(8);
+                }
                 data.push(item);
             }
         }
@@ -107,7 +135,7 @@ const Dashboard = () => {
 
         setFiltered(data);
 
-    }, [sortConfig, vault.pools, balance]);
+    }, [sortConfig, vault.pools, balance, earned]);
 
     React.useEffect(() => {
         if(prices.lastUpdated > 0) {
@@ -118,8 +146,30 @@ const Dashboard = () => {
     React.useEffect(() => {
         if(wallet.address) {
             dispatch(reduxActions.balance.fetchBalances());
+            dispatch(reduxActions.earned.fetchEarned());
         }
     }, [dispatch, wallet.address]);
+
+    React.useEffect(() => {
+        const index = steps.currentStep;
+        if(!isEmpty(steps.items[index]) && steps.modal) {
+            const items = steps.items;
+            if(!items[index].pending) {
+                items[index].pending = true;
+                items[index].action();
+                setSteps({...steps, items: items});
+            } else {
+                if(wallet.action.result === 'success' && !steps.finished) {
+                    const nextStep = index + 1;
+                    if(!isEmpty(items[nextStep])) {
+                        setSteps({...steps, currentStep: nextStep});
+                    } else {
+                        setSteps({...steps, finished: true});
+                    }
+                }
+            }
+        }
+    }, [steps, wallet.action]);
 
     return (
         <React.Fragment>
@@ -230,9 +280,9 @@ const Dashboard = () => {
                                                             <Typography className={classes.myDetailsText} align={'left'}>
                                                                 <Trans i18nKey="myBonusEarnings"/>
                                                             </Typography>
-                                                        </Grid>                                        
+                                                        </Grid>
                                                         <Grid item xs={6}>
-                                                            <Typography className={classes.myDetailsValue} align={'right'}>0.12 {item.sponsorToken} ($105.84)</Typography>
+                                                            <Typography className={classes.myDetailsValue} align={'right'}>{item.earned} {item.sponsorToken} (${new BigNumber(item.earned).multipliedBy(prices.prices[item.sponsorToken]).toFixed(2)})</Typography>
                                                         </Grid>
                                                         <Grid item xs={12}>
                                                             <Typography className={classes.myPotsInfoText} align={'left'}>
@@ -240,9 +290,10 @@ const Dashboard = () => {
                                                             </Typography>
                                                         </Grid>
                                                         <Grid item xs={12}>
-                                                            <Button onClick={console.log("Placeholder for bonus withdrawal")} className={0 < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={1 <= 0}>
+                                                            <Button onClick={() => handleWithdrawBonus(item)} className={item.earned <= 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned <= 0}>
                                                                 Withdraw Bonus {item.sponsorToken}
                                                             </Button>
+                                                            <Steps item={item} steps={steps} handleClose={handleClose} />
                                                         </Grid>
                             
 
@@ -267,6 +318,7 @@ const Dashboard = () => {
                                                             setFormData={setFormData}
                                                             updateItemData={updateItemData}
                                                             resetFormData={resetFormData}
+                                                            depositMore={true}
                                                         />
                                                         <Grid item xs={11}>
                                                             <Typography className={classes.depositMoreExtraInfo}>
