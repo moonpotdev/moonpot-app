@@ -318,6 +318,7 @@ const Dashboard = () => {
                                                             setFormData={setFormData}
                                                             updateItemData={updateItemData}
                                                             resetFormData={resetFormData}
+                                                            depositMore={true}
                                                         />
                                                         <Grid item xs={11}>
                                                             <Typography className={classes.depositMoreExtraInfo}>

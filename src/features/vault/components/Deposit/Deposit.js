@@ -11,7 +11,7 @@ import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles(styles);
 
-const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemData, resetFormData}) => {
+const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemData, resetFormData, depositMore = false}) => {
     const { t } = useTranslation();
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemDa
 
     const handleDeposit = () => {
         const steps = [];
-        if(wallet.address) {
+        if(wallet.address && formData.deposit.amount > 0) {
             if(!state.allowance) {
                 steps.push({
                     step: "approve",
@@ -120,9 +120,10 @@ const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemDa
                 </Grid>
             </Paper>
             {wallet.address ? (
-                    <Button onClick={handleDeposit} className={formData.deposit.amount < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={formData.deposit.amount <= 0}>Deposit {
-                        formData.deposit.max && formData.deposit.amount > 0 ? ('All') : 
-                        ( formData.deposit.amount > 0 ) ? formData.deposit.amount + " " + item.token : ''
+                    <Button onClick={handleDeposit} className={classes.enabledActionBtn} variant={'contained'} disabled={false}>Deposit {
+                        formData.deposit.max && formData.deposit.amount > 0 ? ('All') :
+                        ( formData.deposit.amount > 0 ) ? formData.deposit.amount + " " + item.token :
+                        depositMore ? 'More' : ''
                         }</Button>
             ) : (
                 <Button onClick={handleWalletConnect} className={classes.connectWalletBtn} variant={'contained'}>{t('buttons.connectWallet')}</Button>
