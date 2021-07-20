@@ -289,6 +289,7 @@ const styles = (theme) => ({
         color: '#EBF3F9',
         letterSpacing: '0.2px',
         marginBottom: '20px',
+        textAlign: 'center',
         '& span': {
             textDecoration: "underline",
         }
