@@ -119,12 +119,14 @@ const styles = (theme) => ({
         letterSpacing: '0.2px',
         textTransform: 'capitalize',
         color: '#EBF3F9',
+        padding: '12px',
     },
     prizeSplitValue: {
         fontWeight: 400,
         fontSize: '10px',
         lineHeight: '16px',
         letterSpacing: '0.2px',
+        padding: '12px',
         color: '#FFF',
         '& span': {
             fontWeight: 700,
