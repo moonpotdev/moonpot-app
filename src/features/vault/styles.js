@@ -54,6 +54,7 @@ const styles = (theme) => ({
         textAlign: 'right',
         '& span': {
             textDecoration: 'line-through',
+            opacity: '0.6',
         }
     },
     earn: {

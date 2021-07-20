@@ -122,6 +122,7 @@ const styles = (theme) => ({
         marginBottom: '16px',
         '& span': {
             textDecoration: 'line-through',
+            opacity: 0.6,
         }
     },
     myPotsInfoText: {
