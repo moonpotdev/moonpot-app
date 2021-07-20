@@ -8,6 +8,7 @@ import styles from "./styles"
 import Filter from "./components/Filter";
 import {Trans, useTranslation} from "react-i18next";
 import {ExpandMore, ExpandLess} from '@material-ui/icons';
+import { investmentOdds } from "../../helpers/utils";
 import reduxActions from "../redux/actions";
 import {calculateTotalPrize} from "../../helpers/format";
 import BigNumber from "bignumber.js";
@@ -93,13 +94,6 @@ const Home = () => {
             dispatch(reduxActions.vault.fetchPools());
         }
     }, [dispatch, prices.lastUpdated]);
-
-    const investmentOdds = (currentTvl, investment, winners) => {
-        const oddsOfWinningOnce = investment.dividedBy(currentTvl.plus(investment));
-        const oddsOfLosingOnce = BigNumber(1).minus(oddsOfWinningOnce);
-        const oddsOfWinningAtLeastOnce = BigNumber(1).minus(oddsOfLosingOnce.exponentiatedBy(winners));
-        return Math.ceil(1/Number(oddsOfWinningAtLeastOnce));
-    }
 
     return (
         <React.Fragment>
