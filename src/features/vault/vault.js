@@ -247,7 +247,7 @@ const Vault = () => {
                                 <Grid container>
                                     <Grid item xs={12} align={"left"}>
                                         <Typography className={classes.infoTitle} align={"left"}>
-                                            APY Breakdown
+                                            {t('earningsBreakdown')}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>

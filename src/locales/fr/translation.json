@@ -57,5 +57,6 @@
   "oddsPerDeposit": "1 in {{odds}} odds per {{amount}} deposit",
   "details": "Details",
   "depositMore": "Deposit More",
-  "footerPoweredBy": "Powered by"
+  "footerPoweredBy": "Powered by",
+  "earningsBreakdown": "Earnings Breakdown"
 }
