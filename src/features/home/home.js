@@ -94,6 +94,14 @@ const Home = () => {
         }
     }, [dispatch, prices.lastUpdated]);
 
+    const investmentOdds = (currentTvl, investment, winners) => {
+        const oddsOfWinningOnce = investment.dividedBy(currentTvl.plus(investment));
+        const oddsOfLosingOnce = BigNumber(1).minus(oddsOfWinningOnce);
+        const oddsOfWinningAtLeastOnce = BigNumber(1).minus(oddsOfLosingOnce.exponentiatedBy(winners));
+        // TODO: Turn percent into friendly odds. 
+        return oddsOfWinningAtLeastOnce.toFixed(2);
+    }
+
     return (
         <React.Fragment>
             <Container maxWidth="xl">

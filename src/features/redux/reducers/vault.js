@@ -19,6 +19,8 @@ const initialPools = () => {
             pool['tvl'] = 0;
             pool['awardBalance'] = new BigNumber(0);
             pool['sponsorBalance'] = new BigNumber(0);
+            pool['totalStakedUsd'] = new BigNumber(0);
+            pool['numberOfWinners'] = new BigNumber(0);
             pools[pool.id] = pool;
         }
     }

@@ -35,6 +35,7 @@ const getPoolsSingle = async (item, state, dispatch) => {
     pools[item.id].expiresAt = expiresAt;
     pools[item.id].numberOfWinners = numberOfWinners;
     pools[item.id].totalTickets = totalTickets;
+    pools[item.id].totalStakedUsd = new BigNumber(item.totalValueLocked).times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
 
     if(!isEmpty(item.sponsorAddress)) {
         const sponsorContract = new web3[item.network].eth.Contract(ecr20Abi, item.sponsorAddress);
@@ -151,7 +152,7 @@ const getPoolsAll = async (state, dispatch) => {
             pools[item.id].awardBalance = awardBalance;
             pools[item.id].awardBalanceUsd = awardBalanceUsd;
             pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toFixed(2)) : 0;
-
+            pools[item.id].totalStakedUsd = new BigNumber(item.totalValueLocked).times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
             if(!isEmpty(pools[item.id].sponsorToken)) {
                 const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
                 const rewardRate = new BigNumber(item.rewardRate);
