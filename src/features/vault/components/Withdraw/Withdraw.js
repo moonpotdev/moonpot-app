@@ -128,6 +128,22 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                 <Grid item xs={7} align={"right"}>
                     <Typography className={classes.withdrawItemValue}>{state.earned} {item.sponsorToken}</Typography>
                 </Grid>
+                <Grid item xs={4} align={"left"}>
+                    <Typography className={classes.withdrawItemText}>
+                        <Trans i18nKey="myFairplayTimelock"/>
+                    </Typography>
+                </Grid>
+                <Grid item xs={7} align={"right"}>
+                    <Typography className={classes.withdrawItemValue}>0d 0h 0m</Typography>
+                </Grid>
+                <Grid item xs={4} align={"left"}>
+                    <Typography className={classes.withdrawItemText}>
+                        <Trans i18nKey="myCurrentFairnessFee"/>
+                    </Typography>
+                </Grid>
+                <Grid item xs={7} align={"right"}>
+                    <Typography className={classes.withdrawItemValue}>? {item.token}</Typography>
+                </Grid>
                 <Grid item xs={11}>
                     <Paper component="form" className={classes.input}>
                         <Grid container spacing={1}>
