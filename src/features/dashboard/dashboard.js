@@ -54,7 +54,7 @@ const Dashboard = () => {
         if(wallet.address) {
             const steps = [];
             steps.push({
-                step: "withdraw",
+                step: "reward",
                 message: "Confirm withdraw transaction on wallet to complete.",
                 action: () => dispatch(reduxActions.wallet.getReward(
                     item.network,
