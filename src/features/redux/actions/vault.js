@@ -21,9 +21,10 @@ const getPoolsSingle = async (item, state, dispatch) => {
 
     const strategyContract = new web3[item.network].eth.Contract(prizeStrategyAbi, item.prizeStrategyAddress);
     const expiresAt = await strategyContract.methods.prizePeriodEndAt().call();
+    const numberOfWinners = await strategyContract.methods.numberOfWinners().call();
 
     const ticketContract = new web3[item.network].eth.Contract(ecr20Abi, item.rewardAddress);
-    const totalTickets = await ticketContract.methods.totalSupply();
+    const totalTickets = await ticketContract.methods.totalSupply().call();
 
     pools[item.id].awardBalance = awardBalance;
     pools[item.id].awardBalanceUsd = awardBalance.times(new BigNumber(awardPrice));
@@ -32,6 +33,7 @@ const getPoolsSingle = async (item, state, dispatch) => {
     pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toFixed(2)) : 0;
     pools[item.id].bonusApy = 0;
     pools[item.id].expiresAt = expiresAt;
+    pools[item.id].numberOfWinners = numberOfWinners;
     pools[item.id].totalTickets = totalTickets;
 
     if(!isEmpty(item.sponsorAddress)) {
@@ -100,12 +102,13 @@ const getPoolsAll = async (state, dispatch) => {
         strategy[pool.network].push({
             id: pool.id,
             expiresAt: strategyContract.methods.prizePeriodEndAt(),
+            numberOfWinners: strategyContract.methods.numberOfWinners(),
         });
 
         const ticketContract = new web3[pool.network].eth.Contract(ecr20Abi, pool.rewardAddress);
         ticket[pool.network].push({
             id: pool.id,
-            totalTickets: ticketContract.methods.totalSupply()
+            totalTickets: ticketContract.methods.totalSupply(),
         })
 
         if(!isEmpty(pool.sponsorAddress)) {
@@ -165,6 +168,7 @@ const getPoolsAll = async (state, dispatch) => {
 
         if(!isEmpty(item.expiresAt)) {
             pools[item.id].expiresAt = item.expiresAt;
+            pools[item.id].numberOfWinners = Number(item.numberOfWinners);
         }
 
         if(!isEmpty(item.totalTickets)) {
