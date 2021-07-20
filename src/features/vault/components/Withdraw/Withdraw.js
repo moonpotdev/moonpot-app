@@ -24,6 +24,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
     const [state, setState] = React.useState({balance: 0, allowance: 0});
     const [steps, setSteps] = React.useState({modal: false, currentStep: -1, items: [], finished: false});
     const [fairplayTimelock, setFairplayTimelock] = React.useState(0);
+    const [fairnessFee, setFairnessFee] = React.useState(0);
     const handleInput = (val) => {
         const value = (parseFloat(val) > state.balance) ? state.balance : (parseFloat(val) < 0) ? 0 : stripExtraDecimals(state.balance);
         setFormData({...formData, withdraw: {amount: value, max: new BigNumber(value).minus(state.balance).toNumber() === 0}});
@@ -102,16 +103,21 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
         return(`${day}day ${hours}h ${minutes}min`)
     }
 
-    const fairnessFee = () => {
+    React.useEffect(() => {
         const max = 10 * 3600 * 24 * 10 * 1000;
         let relativeFee = 0;
+        let userBalance = 0;
         
+        if(wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
+            userBalance = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance), item.tokenDecimals).toFixed(8);
+        }
+
         if (fairplayTimelock !== 0) {
             relativeFee = fairplayTimelock * 0.025 / max;
         } 
 
-        return BigNumber(relativeFee).times(BigNumber(item.userBalance)).toFixed(5);
-    }
+        setFairnessFee(BigNumber(relativeFee).times(BigNumber(userBalance)).toFixed(5));
+    })
 
     React.useEffect(() => {
         let amount = 0;
@@ -182,7 +188,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                     </Typography>
                 </Grid>
                 <Grid item xs={7} align={"right"}>
-                    <Typography className={classes.withdrawItemValue}>{fairnessFee()} {item.token}</Typography>
+                    <Typography className={classes.withdrawItemValue}>{fairnessFee} {item.token}</Typography>
                 </Grid>
                 <Grid item xs={11}>
                     <Paper component="form" className={classes.input}>
