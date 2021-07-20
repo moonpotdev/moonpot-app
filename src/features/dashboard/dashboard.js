@@ -14,6 +14,7 @@ import BigNumber from "bignumber.js";
 import {byDecimals, calculateTotalPrize} from "../../helpers/format";
 import {isEmpty} from "../../helpers/utils";
 import Countdown from "../../components/Countdown";
+import Steps from "../vault/components/Steps";
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -41,11 +42,33 @@ const Dashboard = () => {
     const [sortConfig, setSortConfig] = React.useState(defaultFilter);
     const [filtered, setFiltered] = React.useState([]);
     const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
+    const [steps, setSteps] = React.useState({modal: false, currentStep: -1, items: [], finished: false});
 
     const handleWalletConnect = () => {
         if(!wallet.address) {
             dispatch(reduxActions.wallet.connect());
         }
+    }
+
+    const handleWithdrawBonus = (item) => {
+        if(wallet.address) {
+            const steps = [];
+            steps.push({
+                step: "withdraw",
+                message: "Confirm withdraw transaction on wallet to complete.",
+                action: () => dispatch(reduxActions.wallet.getReward(
+                    item.network,
+                    item.contractAddress
+                )),
+                pending: false,
+            });
+            setSteps({modal: true, currentStep: 0, items: steps, finished: false});
+        }
+    }
+
+    const handleClose = () => {
+        updateItemData();
+        setSteps({modal: false, currentStep: -1, items: [], finished: false});
     }
 
     const updateItemData = () => {
@@ -126,6 +149,27 @@ const Dashboard = () => {
             dispatch(reduxActions.earned.fetchEarned());
         }
     }, [dispatch, wallet.address]);
+
+    React.useEffect(() => {
+        const index = steps.currentStep;
+        if(!isEmpty(steps.items[index]) && steps.modal) {
+            const items = steps.items;
+            if(!items[index].pending) {
+                items[index].pending = true;
+                items[index].action();
+                setSteps({...steps, items: items});
+            } else {
+                if(wallet.action.result === 'success' && !steps.finished) {
+                    const nextStep = index + 1;
+                    if(!isEmpty(items[nextStep])) {
+                        setSteps({...steps, currentStep: nextStep});
+                    } else {
+                        setSteps({...steps, finished: true});
+                    }
+                }
+            }
+        }
+    }, [steps, wallet.action]);
 
     return (
         <React.Fragment>
@@ -246,9 +290,10 @@ const Dashboard = () => {
                                                             </Typography>
                                                         </Grid>
                                                         <Grid item xs={12}>
-                                                            <Button onClick={console.log("Placeholder for bonus withdrawal")} className={0 < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={1 <= 0}>
+                                                            <Button onClick={() => handleWithdrawBonus(item)} className={item.earned <= 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned <= 0}>
                                                                 Withdraw Bonus {item.sponsorToken}
                                                             </Button>
+                                                            <Steps item={item} steps={steps} handleClose={handleClose} />
                                                         </Grid>
                             
 
