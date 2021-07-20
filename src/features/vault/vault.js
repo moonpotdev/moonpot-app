@@ -232,9 +232,11 @@ const Vault = () => {
                                         </a>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoMessage} align={"left"}>
-                                            <a>Moonpot Strategy Address <OpenInNew fontSize="small"/></a>
-                                        </Typography>
+                                        <a href={`https://bscscan.com/address/${item.prizeStrategyAddress}`}>
+                                            <Typography className={classes.infoMessage} align={"left"}>
+                                                Moonpot Strategy Address <OpenInNew fontSize="small"/>
+                                            </Typography>
+                                        </a>
                                     </Grid>
                                 </Grid>
                             </Box>
