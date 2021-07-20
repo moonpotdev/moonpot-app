@@ -98,8 +98,7 @@ const Home = () => {
         const oddsOfWinningOnce = investment.dividedBy(currentTvl.plus(investment));
         const oddsOfLosingOnce = BigNumber(1).minus(oddsOfWinningOnce);
         const oddsOfWinningAtLeastOnce = BigNumber(1).minus(oddsOfLosingOnce.exponentiatedBy(winners));
-        // TODO: Turn percent into friendly odds. 
-        return oddsOfWinningAtLeastOnce.toFixed(2);
+        return Math.ceil(1/Number(oddsOfWinningAtLeastOnce));
     }
 
     return (
@@ -172,7 +171,7 @@ const Home = () => {
                                                 <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.playWith')} {item.token}</Button>
                                             </Grid>
                                             <Grid item xs={8}>
-                                                <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: '40,000', amount: '$1000'})}</Typography>
+                                                <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: investmentOdds(item.totalStakedUsd, BigNumber(1000), item.numberOfWinners), amount: '$1000'})}</Typography>
                                             </Grid>
                                         </Grid>
                                     </Box>
