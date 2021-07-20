@@ -8,6 +8,7 @@ import styles from "../../styles";
 import reduxActions from "../../../redux/actions";
 import {isEmpty} from "../../../../helpers/utils";
 import Steps from "../Steps";
+import PrizePoolAbi from "../../../../config/abi/prizepool.json";
 
 const useStyles = makeStyles(styles);
 
@@ -15,14 +16,14 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
     const { t } = useTranslation();
     const classes = useStyles();
     const dispatch = useDispatch();
-    const {wallet, balance, earned} = useSelector(state => ({
+    const {wallet, balance, earned, vault} = useSelector(state => ({
         wallet: state.walletReducer,
         balance: state.balanceReducer,
         earned: state.earnedReducer,
     }));
     const [state, setState] = React.useState({balance: 0, allowance: 0});
     const [steps, setSteps] = React.useState({modal: false, currentStep: -1, items: [], finished: false});
-
+    const [fairplayTimelock, setFairplayTimelock] = React.useState(0);
     const handleInput = (val) => {
         const value = (parseFloat(val) > state.balance) ? state.balance : (parseFloat(val) < 0) ? 0 : stripExtraDecimals(state.balance);
         setFormData({...formData, withdraw: {amount: value, max: new BigNumber(value).minus(state.balance).toNumber() === 0}});
@@ -71,6 +72,45 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
         updateItemData();
         resetFormData();
         setSteps({modal: false, currentStep: -1, items: [], finished: false});
+    }
+
+    React.useEffect(() => {
+        const getData = async () => {
+            if (wallet.address) {
+                const prizePoolContract = new wallet.rpc[item.network].eth.Contract(PrizePoolAbi, item.prizePoolAddress);
+                const userFairPlayLockRemaining = await prizePoolContract.methods.userFairPlayLockRemaining(wallet.address, item.rewardAddress).call();      
+                setFairplayTimelock(Number(userFairPlayLockRemaining) * 1000); 
+            } else {
+                setFairplayTimelock(0); 
+            }
+        }
+
+        getData();
+    })
+
+    const formatTimelock = (time) => {
+        const day = Math.floor(time / (1000 * 60 * 60 * 24))
+            .toString()
+            .padStart(2, '0');
+        const hours = Math.floor((time / (1000 * 60 * 60)) % 24)
+            .toString()
+            .padStart(2, '0');
+        const minutes = Math.floor((time / (1000 * 60)) % 60)
+            .toString()
+            .padStart(2, '0');
+
+        return(`${day}day ${hours}h ${minutes}min`)
+    }
+
+    const fairnessFee = () => {
+        const max = 10 * 3600 * 24 * 10 * 1000;
+        let relativeFee = 0;
+        
+        if (fairplayTimelock !== 0) {
+            relativeFee = fairplayTimelock * 0.025 / max;
+        } 
+
+        return BigNumber(relativeFee).times(BigNumber(item.userBalance)).toFixed(5);
     }
 
     React.useEffect(() => {
@@ -134,7 +174,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                     </Typography>
                 </Grid>
                 <Grid item xs={7} align={"right"}>
-                    <Typography className={classes.withdrawItemValue}>0d 0h 0m</Typography>
+                    <Typography className={classes.withdrawItemValue}>{formatTimelock(fairplayTimelock)}</Typography>
                 </Grid>
                 <Grid item xs={4} align={"left"}>
                     <Typography className={classes.withdrawItemText}>
@@ -142,7 +182,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                     </Typography>
                 </Grid>
                 <Grid item xs={7} align={"right"}>
-                    <Typography className={classes.withdrawItemValue}>? {item.token}</Typography>
+                    <Typography className={classes.withdrawItemValue}>{fairnessFee()} {item.token}</Typography>
                 </Grid>
                 <Grid item xs={11}>
                     <Paper component="form" className={classes.input}>
