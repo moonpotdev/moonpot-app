@@ -15,9 +15,10 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
     const { t } = useTranslation();
     const classes = useStyles();
     const dispatch = useDispatch();
-    const {wallet, balance} = useSelector(state => ({
+    const {wallet, balance, earned} = useSelector(state => ({
         wallet: state.walletReducer,
         balance: state.balanceReducer,
+        earned: state.earnedReducer,
     }));
     const [state, setState] = React.useState({balance: 0, allowance: 0});
     const [steps, setSteps] = React.useState({modal: false, currentStep: -1, items: [], finished: false});
@@ -75,11 +76,16 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
     React.useEffect(() => {
         let amount = 0;
         let approved = 0;
+        let earnedBonus = 0;
         if(wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
             amount = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance), item.tokenDecimals).toFixed(8);
             approved = balance.tokens[item.rewardToken].allowance[item.contractAddress];
         }
-        setState({balance: amount, allowance: approved});
+        if(wallet.address && !isEmpty(earned.earned[item.id])) {
+            const earnedAmount = earned.earned[item.id][item.sponsorToken] ?? 0
+            earnedBonus = byDecimals(new BigNumber(earnedAmount), item.sponsorTokenDecimals).toFixed(8);
+        }
+        setState({balance: amount, allowance: approved, earned: earnedBonus});
     }, [wallet.address, item, balance]);
 
     React.useEffect(() => {
@@ -126,7 +132,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                     </Typography>
                 </Grid>
                 <Grid item xs={7} align={"right"}>
-                    <Typography className={classes.withdrawItemValue}>? {item.sponsorToken}</Typography>
+                    <Typography className={classes.withdrawItemValue}>{state.earned} {item.sponsorToken}</Typography>
                 </Grid>
                 <Grid item xs={11}>
                     <Paper component="form" className={classes.input}>
