@@ -101,7 +101,7 @@ const Vault = () => {
             ) : (
             <Container maxWidth="lg">
                 <Typography className={classes.title}>
-                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: (item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy), amount: calculateTotalPrize(item, prices)}} />
+                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: (item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy), amount: Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}} />
                 </Typography>
                 
                 <Grid container>
