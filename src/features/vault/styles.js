@@ -449,6 +449,9 @@ const styles = (theme) => ({
         fontSize: '15px',
         lineHeight: '24px',
         letterSpacing: '0.2px',
+    },
+    docsLink: {
+        textDecoration: 'none'
     }
 });
 

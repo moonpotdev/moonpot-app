@@ -25,7 +25,7 @@
   "homeJoinCommunityBody": "There are no community pots yet. You can suggest a new pot in one of our channels, or join our devs to build one for your favorite project.",
   "vaultLoadingMessage": "Getting vault data...",
   "vaultTitle": "Deposit <span>{{name}}</span>, earn <span>{{apy}}% APY</span><br /> and a chance to win {{amount}}",
-  "vaultWithdrawPenaltyWarning": "This withdrawal would be subject to the Fairplay Timelock Rules. Typically the timelock will be two weeks from deposit.",
+  "vaultWithdrawPenaltyWarning": "Fairplay Timelock rules apply.",
   "DashboardEmpty1": "You don't have any finished Pots yet.",
   "DashboardEmpty2": "Ziggy will let you know as soon as you do.",
   "DashboardTitle": "You're in {{count}} <span>Moonpot</span>, with<br /> the chance to win {{amount}}",

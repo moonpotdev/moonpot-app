@@ -216,13 +216,13 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                     )}
                     <Steps item={item} steps={steps} handleClose={handleClose} />
                 </Grid>
-                
                 <Grid item xs={11}>
-                    <Typography className={classes.withdrawPenaltyWarning}>
-                        <Trans i18nKey="vaultWithdrawPenaltyWarning" values={{token: item.token}} />
-                    </Typography>
+                    <a href="https://docs.moonpot.com/faq/moonpot-rules#can-i-withdraw-my-funds-at-any-time" target="_blank" rel="noopener noreferrer" className={classes.docsLink}>
+                        <Typography className={classes.withdrawPenaltyWarning}>
+                            <Trans i18nKey="vaultWithdrawPenaltyWarning" values={{token: item.token}} />
+                        </Typography>
+                    </a>
                 </Grid>
-                
             </Grid>
         </React.Fragment>
     );
