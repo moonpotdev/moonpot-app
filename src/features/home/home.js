@@ -123,7 +123,7 @@ const Home = () => {
                                                 </Box>
                                             </Grid>
                                             <Grid item xs={7}>
-                                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> {calculateTotalPrize(item, prices)}</Typography>
+                                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
                                                 <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
                                                 <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                                             </Grid>

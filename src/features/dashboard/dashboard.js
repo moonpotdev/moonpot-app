@@ -224,7 +224,7 @@ const Dashboard = () => {
                                             </Box>
                                             </Grid>
                                             <Grid item xs={7}>
-                                                <Typography className={classes.potUsdTop} align={"right"}>{calculateTotalPrize(item, prices)} <span>{t('in')}</span> {item.token}</Typography>
+                                                <Typography className={classes.potUsdTop} align={"right"}>${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()} <span>{t('in')}</span> {item.token}</Typography>
                                                 <Typography className={classes.potUsd} align={"right"}>& {item.sponsorToken} PRIZES</Typography>
                                                 <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown expiresAt={item.expiresAt*1000} /> </span></Typography>
                                             </Grid>
