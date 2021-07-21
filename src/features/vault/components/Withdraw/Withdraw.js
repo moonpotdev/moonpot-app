@@ -104,7 +104,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
     }
 
     React.useEffect(() => {
-        const max = 10 * 3600 * 24 * 10 * 1000;
+        const max = 3600 * 24 * 10 * 1000;
         let relativeFee = 0;
         let userBalance = 0;
         
@@ -113,7 +113,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
         }
 
         if (fairplayTimelock !== 0) {
-            relativeFee = fairplayTimelock * 0.25 / max;
+            relativeFee = fairplayTimelock * 0.025 / max;
         } 
 
         setFairnessFee(BigNumber(relativeFee).times(BigNumber(userBalance)).toFixed(10));
