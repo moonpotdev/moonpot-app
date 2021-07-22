@@ -51,7 +51,7 @@ const getPoolsSingle = async (item, state, dispatch) => {
 
         pools[item.id].sponsorBalance = sponsorBalance;
         pools[item.id].sponsorBalanceUsd = sponsorBalance.times(sponsorPrice);
-        pools[item.id].bonusApy = Number(yearlyRewardsInUsd.dividedBy(totalStakedUsd));
+        pools[item.id].bonusApy = Number(yearlyRewardsInUsd.multipliedBy(100).dividedBy(totalStakedUsd));
     }
 
     dispatch({
@@ -161,7 +161,7 @@ const getPoolsAll = async (state, dispatch) => {
                 const yearlyRewards = rewardRate.times(3600).times(24).times(365);
                 const yearlyRewardsInUsd = yearlyRewards.times(sponsorPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals))
 
-                pools[item.id].bonusApy = Number(yearlyRewardsInUsd.dividedBy(totalStakedUsd));
+                pools[item.id].bonusApy = Number(yearlyRewardsInUsd.multipliedBy(100).dividedBy(totalStakedUsd));
             }
 
             totalPrizesAvailable = totalPrizesAvailable.plus(awardBalanceUsd);
