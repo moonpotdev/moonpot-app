@@ -3,6 +3,7 @@ import BigNumber from "bignumber.js";
 import {MultiCall} from "eth-multicall";
 import {config} from "../../../config/config";
 import {isEmpty} from "../../../helpers/utils";
+import {byDecimals, formatTvl} from "../../../helpers/format";
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 const ecr20Abi = require('../../../config/abi/erc20.json');
 const prizeStrategyAbi = require('../../../config/abi/prizestrategy.json');
@@ -35,7 +36,13 @@ const getPoolsSingle = async (item, state, dispatch) => {
     pools[item.id].expiresAt = expiresAt;
     pools[item.id].numberOfWinners = numberOfWinners;
     pools[item.id].totalTickets = totalTickets;
-    pools[item.id].totalStakedUsd = new BigNumber(item.totalValueLocked).times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
+
+    const totalValueLocked = new BigNumber(await gateContract.methods.TVL().call());
+    const totalTokenStaked = byDecimals(totalValueLocked, pools[item.id].tokenDecimals);
+    
+    pools[item.id].totalTokenStaked = totalTokenStaked;
+    pools[item.id].totalStakedUsd = totalValueLocked.times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
+    pools[item.id].tvl = formatTvl(totalTokenStaked, awardPrice);
 
     if(!isEmpty(item.sponsorAddress)) {
         const sponsorContract = new web3[item.network].eth.Contract(ecr20Abi, item.sponsorAddress);
@@ -44,8 +51,7 @@ const getPoolsSingle = async (item, state, dispatch) => {
         const sponsorBalance = new BigNumber(sponsorQuery).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
 
         const rewardRate = new BigNumber(await gateContract.methods.rewardRate().call());
-        const TotalValueLocked = new BigNumber(await gateContract.methods.TVL().call());
-        const totalStakedUsd = TotalValueLocked.times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
+        const totalStakedUsd = totalValueLocked.times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
         const yearlyRewards = rewardRate.times(3600).times(24).times(365);
         const yearlyRewardsInUsd = yearlyRewards.times(sponsorPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals))
 
@@ -152,7 +158,13 @@ const getPoolsAll = async (state, dispatch) => {
             pools[item.id].awardBalance = awardBalance;
             pools[item.id].awardBalanceUsd = awardBalanceUsd;
             pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toFixed(2)) : 0;
-            pools[item.id].totalStakedUsd = new BigNumber(item.totalValueLocked).times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
+
+            const totalValueLocked = new BigNumber(item.totalValueLocked);
+            const totalTokenStaked = byDecimals(totalValueLocked, pools[item.id].tokenDecimals);
+            pools[item.id].totalTokenStaked = totalTokenStaked;
+            pools[item.id].totalStakedUsd = totalValueLocked.times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
+            pools[item.id].tvl = formatTvl(totalTokenStaked, awardPrice);
+
             if(!isEmpty(pools[item.id].sponsorToken)) {
                 const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
                 const rewardRate = new BigNumber(item.rewardRate);

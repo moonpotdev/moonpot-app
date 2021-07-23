@@ -97,6 +97,12 @@ const styles = (theme) => ({
             color: '#FFFFFF',
         }
     },
+    potDataPoint: {
+        fontWeight: 700,
+        fontSize: '15px',
+        lineHeight: '24px',
+        color: '#ffffff',
+    },
     prizeSplitText: {
         fontWeight: 700,
         fontSize: '12px',
