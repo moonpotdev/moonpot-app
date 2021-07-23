@@ -17,7 +17,7 @@ const getPoolsSingle = async (item, state, dispatch) => {
     const gateContract = new web3[item.network].eth.Contract(gateManagerAbi, item.contractAddress);
     const awardQuery =  await gateContract.methods.awardBalance().call();
     const awardPrice = (pools[item.id].oracleId in prices) ? prices[pools[item.id].oracleId] : 0;
-    const awardBalance = new BigNumber(awardQuery).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
+    const awardBalance = new BigNumber(awardQuery).times( new BigNumber(0.8)).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
 
     const strategyContract = new web3[item.network].eth.Contract(prizeStrategyAbi, item.prizeStrategyAddress);
     const expiresAt = await strategyContract.methods.prizePeriodEndAt().call();
@@ -146,7 +146,7 @@ const getPoolsAll = async (state, dispatch) => {
         const item = response[i];
         if(!isEmpty(item.awardBalance)) {
             const awardPrice = (pools[item.id].oracleId in prices) ? prices[pools[item.id].oracleId] : 0;
-            const awardBalance = new BigNumber(item.awardBalance).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
+            const awardBalance = new BigNumber(item.awardBalance).times( new BigNumber(0.8)).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
             const awardBalanceUsd = awardBalance.times(awardPrice);
 
             pools[item.id].awardBalance = awardBalance;
