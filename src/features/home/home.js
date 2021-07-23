@@ -10,8 +10,9 @@ import {Trans, useTranslation} from "react-i18next";
 import {ExpandMore, ExpandLess} from '@material-ui/icons';
 import { investmentOdds } from "../../helpers/utils";
 import reduxActions from "../redux/actions";
-import {calculateTotalPrize} from "../../helpers/format";
+import {byDecimals, calculateTotalPrize} from "../../helpers/format";
 import BigNumber from "bignumber.js";
+
 import Countdown from "../../components/Countdown";
 
 const useStyles = makeStyles(styles);
@@ -30,6 +31,7 @@ const Home = () => {
     const {vault, prices} = useSelector(state => ({
         vault: state.vaultReducer,
         prices: state.pricesReducer,
+
     }));
 
     const history = useHistory();
@@ -134,6 +136,10 @@ const Home = () => {
                                             <Grid item xs={5}>
                                                 <Typography className={classes.subTitle} align={'right'}>{t('interest')}</Typography>
                                                 <Typography className={classes.apy} align={'right'}><span>{item.apy}%</span> {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
+                                            </Grid>
+                                            <Grid item xs={11}>
+                                                <Typography className={classes.subTitle}>{t('tvl')}</Typography>
+                                                <Typography className={classes.potDataPoint}>{item.tvl}</Typography>
                                             </Grid>
                                             <Grid item xs={11}>
                                                 <Divider className={classes.divider}/>

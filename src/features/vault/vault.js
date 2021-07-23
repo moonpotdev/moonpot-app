@@ -134,6 +134,10 @@ const Vault = () => {
                                 <Typography className={classes.apy}><span>{item.apy}%</span> {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
                             </Grid>
                             <Grid item xs={11}>
+                                <Typography className={classes.subTitle}>{t('tvl')}</Typography>
+                                <Typography className={classes.potDataPoint}>{item.tvl}</Typography>
+                            </Grid>
+                            <Grid item xs={11}>
                                 <Divider className={classes.divider}/>
                             </Grid>
                             <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
