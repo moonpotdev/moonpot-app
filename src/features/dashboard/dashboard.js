@@ -374,7 +374,7 @@ const Dashboard = () => {
                                                         <Typography className={classes.potUsd} align={"right"}>Moonpot</Typography>
                                                         <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span>Closed</span></Typography>
                                                     </Grid>
-                                                    <Grid item xs={11} align={"left"} style={{paddingBottom: 16}}>
+                                                    <Grid item xs={11} align={"left"} style={{padding: '16px 0px'}}>
                                                         <Typography className={classes.dividerText}>{t('myDetails')} </Typography>
                                                     </Grid>
                                                     <Grid item xs={11} style={{padding: 0}}>
@@ -403,7 +403,7 @@ const Dashboard = () => {
                                                             </Grid>
                                                         </Grid>
                                                     </Grid>
-                                                    <Grid item xs={11} style={{padding: 0}}>
+                                                    <Grid item xs={12}>
                                                             <Grid container>
                                                                 
                                                                 <Grid item xs={12}>
@@ -422,7 +422,7 @@ const Dashboard = () => {
                                                                     </Typography>
                                                                 </Grid>
                                                                 <Grid item xs={12} style={{padding: '0 12px'}}>
-                                                                    <Button onClick={() => console.log("Placeholder for Move CAKE and Bonus BIFI")} className={item.earned <= 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned <= 0}>
+                                                                    <Button onClick={() => console.log("Placeholder for Move CAKE and Bonus BIFI")} className={item.earned <= 0 ? classes.disabledActionBtn : classes.eolMoveBtn} variant={'contained'} disabled={item.earned <= 0}>
                                                                         Move {item.token} and Withdraw {item.sponsorToken}
                                                                     </Button>
                                                                     <Steps item={item} steps={steps} handleClose={handleClose} />
@@ -451,12 +451,12 @@ const Dashboard = () => {
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
                                                     
-                                                    <Grid item xs={9} align={"left"}>
+                                                    <Grid item xs={9} align={"left"} style={{paddingLeft: 0}}>
                                                         <Typography className={classes.dividerText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>
                                                             <Trans i18nKey="withdrawTokenAndSponsorToken" values={{token: item.token, sponsorToken: item.sponsorToken}}/>
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={2} align={"right"}>
+                                                    <Grid item xs={2} align={"right"} style={{paddingRight: 0}}>
                                                         <Link onClick={() => {setWithdrawOpen(!withdrawOpen)}} className={classes.expandToggle}>{withdrawOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
                                                     <Grid item xs={12} style={{padding: 0}}>
@@ -475,10 +475,10 @@ const Dashboard = () => {
                                                     <Grid item xs={11}>
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
-                                                    <Grid item xs={9} align={"left"}>
+                                                    <Grid item xs={9} align={"left"} style={{paddingLeft: 0}}>
                                                         <Typography className={classes.dividerText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeWinners')} </Typography>
                                                     </Grid>
-                                                    <Grid item xs={2} align={"right"}>
+                                                    <Grid item xs={2} align={"right"} style={{paddingRight: 0}}>
                                                         <Link onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}} className={classes.expandToggle}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
                                                     <Grid item xs={12} style={{padding: 0}}>

@@ -1,4 +1,4 @@
-import {Grid, Button, InputBase, makeStyles, Paper, Typography} from "@material-ui/core";
+import {Grid, Box, Button, InputBase, makeStyles, Paper, Typography} from "@material-ui/core";
 import {Trans, useTranslation} from "react-i18next";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -162,7 +162,31 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                 retiredFlag ?
                 <React.Fragment>
                     <Grid item xs={11}>
-                        <Button onClick={console.log("Placeholder for Withdraw CAKE and BIFI")} className={formData.withdraw.amount < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={state.balance <= 0}>
+                        <Box className={classes.eolWithdrawWarningBox}>
+                            <Grid container>
+                            <Grid item xs={1}>
+                                <Box className={classes.warningIcon}>
+                                    <img 
+                                    alt={`Warning`}
+                                    srcSet={`
+                                    images/state/warning@4x.png 4x,
+                                    images/state/warning@3x.png 3x,
+                                    images/state/warning@2x.png 2x,
+                                    images/state/warning@1x.png 1x
+                                    `}
+                                    />
+                                </Box>
+                            </Grid>
+                            <Grid item xs={10}>
+                                <Trans className={classes.eolWithdrawWarning} i18nKey="eolWithdrawWarning" values={{token: item.token}}/>
+                               
+                            </Grid>
+                            
+                            </Grid>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={11}>
+                        <Button onClick={console.log("Placeholder for Withdraw CAKE and BIFI")} className={classes.eolWithdrawBtn}>
                             Withdraw {item.token} and {item.sponsorToken}
                         </Button>
                         <Steps item={item} steps={steps} handleClose={handleClose} />
