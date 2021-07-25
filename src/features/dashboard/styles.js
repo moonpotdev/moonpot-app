@@ -51,8 +51,8 @@ const styles = (theme) => ({
         marginTop: '24px',
         marginBottom: '24px',
     },
-    vaultPotItem: {
-        backgroundColor: '#345675',
+    activeMyPot: {
+        backgroundColor: '#70609A',
         height: '100%',
         width: 'min(100%, 500px)',
         margin: '80px auto 0px auto',
@@ -63,7 +63,59 @@ const styles = (theme) => ({
             marginLeft: '20px',
             marginRight: '20px',
         },
-        boxShadow: '0px 12px 24px rgba(0, 0, 0, 0.4)', 
+        boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2), 0px 12px 24px -10px rgba(0, 0, 0, 0.4)',
+        border: '2px solid #8A7EAF',
+        '& .MuiDivider-root': {
+            
+            color: '#8A7EAF',
+            backgroundColor: '#8A7EAF',
+            height: '2px',
+        },
+        '& .MuiPaper-root': {
+            background: '#8375A9',
+            border: '2px solid #B6ADCC',
+        },
+        '& .MuiInputBase-input': {
+            color: '#B6ADCC',
+            fontStyle: 'normal',
+            fontWeight: 500,
+            fontSize: '15px',
+            lineHeight: '24px',
+            letterSpacing: '0.2px',
+        },
+        '& .MuiButton-root': {
+            color: '#6F609A',
+        },
+        '& .MuiPaper-root .MuiButtonBase-root': {
+            background: '#B6ADCC',
+            color: 'rgba(255, 255, 255, 0.95)',
+        },
+        
+
+    },
+    eolMyPot: {
+        backgroundColor: '#594C7B',
+        height: '100%',
+        width: 'min(100%, 500px)',
+        margin: '80px auto 0px auto',
+        marginTop: '56px',
+        borderRadius: '16px',
+        padding: '10px',
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: '20px',
+            marginRight: '20px',
+        },
+        boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2), 0px 12px 24px -10px rgba(0, 0, 0, 0.4)', 
+        border: '2px solid #70609A',
+        '& .MuiDivider-root': {
+            
+            color: '#70609A',
+            backgroundColor: '#70609A',
+            height: '2px',
+        },
+        '& .MuiButtonBase-root': {
+            color: '#594C7B',
+        },
 
     },
     potImage: {
@@ -127,6 +179,27 @@ const styles = (theme) => ({
             opacity: 0.6,
         }
     },
+    potsItemText: {
+        color: '#EBF3F9',
+        fontWeight: 400,
+        fontSize: '12px',
+        lineHeight: '20px',
+        letterSpacing: '0.2px',
+        textTransform: 'capitalize',
+        margin: '12px 12px',
+    },
+    potsItemValue: {
+        color: '#FFFFFF',
+        fontWeight: 700,
+        fontSize: '12px',
+        lineHeight: '20px',
+        letterSpacing: '0.2px',
+        margin: '12px 12px',
+        '& span': {
+            textDecoration: 'line-through',
+            opacity: 0.6,
+        }
+    },
     myPotsInfoText: {
         color: '#EBF3F9',
         fontWeight: 400,
@@ -134,6 +207,22 @@ const styles = (theme) => ({
         lineHeight: '20px',
         letterSpacing: '0.2px',
         padding: '0 12px',
+    },
+    myPotsUpgradeText: {
+        color: '#EBF3F9',
+        fontWeight: 400,
+        fontSize: '12px',
+        lineHeight: '20px',
+        letterSpacing: '0.2px',
+        padding: '16px 12px',
+    },
+    learnMoreText: {
+        color: '#F3BA2E',
+        fontWeight: 400,
+        fontSize: '12px',
+        lineHeight: '20px',
+        letterSpacing: '0.2px',
+        padding: '16px 12px',
     },
     enabledActionBtn: {
         backgroundColor: '#FFFFFF',
@@ -167,11 +256,6 @@ const styles = (theme) => ({
         lineHeight: '20px',
         letterSpacing: '0.2px',
         color: '#EBF3F9',
-    },
-    divider: {
-        color: '#436F97',
-        backgroundColor: '#436F97',
-        height: '2px',
     },
     dividerText: {
         color: '#EBF3F9',
