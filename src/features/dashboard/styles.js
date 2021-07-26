@@ -206,6 +206,13 @@ const styles = (theme) => ({
             fontWeight: 700,
         }
     },
+    potsPrizeWinnersTransaction: {
+        fontSize: '12px',
+        lineHeight: '20px',
+        letterSpacing: '0.2px',
+        margin: '12px 12px',
+        color: '#F3BA2E',
+    },
     myPotsInfoText: {
         color: '#EBF3F9',
         fontWeight: 400,

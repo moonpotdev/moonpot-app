@@ -78,6 +78,12 @@
   "upgradeWhy": "We upgraded the {{token}} Moonpot in order to be able to add different Bonus rewards to all future Moonpots.",
   "upgradeNextSteps": "Because of the upgrade, you need to move your {{token}} to the new {{token}} Moonpot.  We have added a ${{amount}} {{boostToken}} Super Boost to the new {{token}} Moonpot to help make it worthwhile for you.",
   "learnMore": "Learn more",
-  "eolWithdrawWarning": "Withdrawing your {{token}}, instead of moving it to the new Moonpot, means you will miss out on future bonus earnings and your chance to win the next {{token}} Prize."
-
+  "eolWithdrawWarning": "Withdrawing your {{token}}, instead of moving it to the new Moonpot, means you will miss out on future bonus earnings and your chance to win the next {{token}} Prize.",
+  "winner1": "Winner 1",
+  "winner2": "Winner 2",
+  "winner3": "Winner 3",
+  "winner4": "Winner 4",
+  "winner5": "Winner 5",
+  "winners": "Winners",
+  "winningTransactions": "View Transactions"
 }

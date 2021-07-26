@@ -552,14 +552,28 @@ const Dashboard = () => {
                                                         <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                                             <Grid container>
 
-                                                            <Grid item xs={4} align={"left"}>
-                                                                <Typography className={classes.potsItemText}>5 winners</Typography>
-                                                            </Grid>
-                                                            <Grid item xs={8} align={"right"}>
-                                                                <Typography className={classes.potsPrizeWinners}>
-                                                                    <span>{item.awardBalance.times(0.2).toFixed(3)} {item.token}</span> and <span>{item.sponsorBalance.times(0.2).toFixed(3)} {item.sponsorToken}</span> each
-                                                                </Typography>
-                                                            </Grid>      
+                                                                <Grid item xs={4} align={"left"}>
+                                                                    <Typography className={classes.potsItemText}>5 winners</Typography>
+                                                                </Grid>
+                                                                <Grid item xs={8} align={"right"}>
+                                                                    <Typography className={classes.potsPrizeWinners}>
+                                                                        <span>{item.awardBalance.times(0.2).toFixed(3)} {item.token}</span> and <span>{item.sponsorBalance.times(0.2).toFixed(3)} {item.sponsorToken}</span> each
+                                                                    </Typography>
+                                                                </Grid>   
+
+                                                                <Grid item xs={6} align={"left"}>
+                                                                    <Typography className={classes.potsItemText}>
+                                                                        <Trans i18nKey="winners"/>
+                                                                    </Typography>
+                                                                </Grid>
+                                                                <Grid item xs={6} align={"right"}>
+                                                                    <Typography className={classes.potsPrizeWinnersTransaction}>
+                                                                        <Link href="https://bscscan.com/tx/0x770ddd1d57b19437a0cf563923cb3799d31a5ca3e20a3080e4286d4fede54109">
+                                                                            <Trans i18nKey="winningTransactions"/>
+                                                                        </Link>
+                                                                    </Typography>
+                                                                </Grid>   
+                                                                
                                                             </Grid>
                                                         </AnimateHeight>
                                                     </Grid> 
