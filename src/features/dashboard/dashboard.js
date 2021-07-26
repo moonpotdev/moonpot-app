@@ -51,6 +51,63 @@ const Dashboard = () => {
         }
     }
 
+    const handleMigrator = (item) => {
+        if(wallet.address) {
+            const steps = [];
+            const approved = balance.tokens[item.rewardToken].allowance[item.contractAddress];
+            if(!approved) {
+                steps.push({
+                    step: "approve",
+                    message: "Approval transaction happens once per pot.",
+                    action: () => dispatch(reduxActions.wallet.approval(
+                        item.network,
+                        item.rewardAddress,
+                        item.contractAddress
+                    )),
+                    pending: false,
+                });
+            }
+
+
+            steps.push({
+                step: "withdraw",
+                message: "Confirm withdraw transaction on wallet to complete.",
+                action: () => dispatch(reduxActions.wallet.withdraw(
+                    item.network,
+                    item.contractAddress,
+                    balance.tokens[item.rewardToken].balance,
+                    true
+                )),
+                pending: false,
+            });
+
+            steps.push({
+                step: "approve",
+                message: "Approval transaction happens once per pot.",
+                action: () => dispatch(reduxActions.wallet.approval(
+                    item.network,
+                    'new cake address',
+                    'new cake contract address'
+                )),
+                pending: false,
+            });
+
+            steps.push({
+                step: "deposit",
+                message: "Confirm deposit transaction on wallet to complete.",
+                action: () => dispatch(reduxActions.wallet.deposit(
+                    item.network,
+                    'new cake contract address',
+                    balance.tokens[item.rewardToken].balance,
+                    true
+                )),
+                pending: false,
+            });
+
+            setSteps({modal: true, currentStep: 0, items: steps, finished: false});
+        }
+    }
+
     const handleWithdrawBonus = (item) => {
         if(wallet.address) {
             const steps = [];
@@ -181,8 +238,8 @@ const Dashboard = () => {
                             </Box>
                         </Box>
                         <Grid container>
-                            {filtered.length === 0 ? 
-                            
+                            {filtered.length === 0 ?
+
                                 <Box className={classes.noActivePots}>
                                     <Grid container spacing={2}>
                                         <Grid item xs={5}>
@@ -195,8 +252,8 @@ const Dashboard = () => {
                                             <Typography className={classes.noActivePotsText}>{t('youHaventEnteredMoonpots')}</Typography>
                                         </Grid>
                                         <Grid item xs={10}>
-                                            <Button 
-                                            className={classes.noActivePotsPlayButton} 
+                                            <Button
+                                            className={classes.noActivePotsPlayButton}
                                             onClick={() => {history.push('/')}}
                                             >
                                                 {t('buttons.play')}
@@ -212,7 +269,7 @@ const Dashboard = () => {
                                         <Grid container spacing={2}>
                                             <Grid item xs={4} align={"left"}>
                                             <Box className={classes.potImage}>
-                                                <img 
+                                                <img
                                                 alt="Moonpot"
                                                 srcSet="
                                                     images/pots/sponsored/cake@4x.png 4x,
@@ -296,7 +353,7 @@ const Dashboard = () => {
                                                             </Button>
                                                             <Steps item={item} steps={steps} handleClose={handleClose} />
                                                         </Grid>
-                            
+
 
                                                     </Grid>
                                                 </AnimateHeight>
