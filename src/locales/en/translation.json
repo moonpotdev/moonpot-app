@@ -58,7 +58,7 @@
   "myEarnings": "My Earnings",
   "bonusTokenEarnings": "Bonus {{sponsorToken}} Earnings",
   "myBonusEarnings": "My Bonus Earnings",
-  "bonusExtraInfo": "You will continue to earn bonus {{sponsorToken}} until the end of the draw. You can claim it as many times as you like.",
+  "bonusExtraInfo": "You will continue to earn bonus {{sponsorToken}} and {{boostToken}} until the end of the draw. You can claim it as many times as you like.",
   "myToken": "My {{token}}",
   "mySponsorToken": "My {{sponsorToken}}",
   "myInterestRate": "My Interest Rate",
