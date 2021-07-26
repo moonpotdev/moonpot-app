@@ -551,16 +551,6 @@ const Dashboard = () => {
                                                     <Grid item xs={12}>
                                                         <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                                             <Grid container>
-
-                                                                <Grid item xs={4} align={"left"}>
-                                                                    <Typography className={classes.potsItemText}>5 winners</Typography>
-                                                                </Grid>
-                                                                <Grid item xs={8} align={"right"}>
-                                                                    <Typography className={classes.potsPrizeWinners}>
-                                                                        <span>{item.awardBalance.times(0.2).toFixed(3)} {item.token}</span> and <span>{item.sponsorBalance.times(0.2).toFixed(3)} {item.sponsorToken}</span> each
-                                                                    </Typography>
-                                                                </Grid>   
-
                                                                 <Grid item xs={6} align={"left"}>
                                                                     <Typography className={classes.potsItemText}>
                                                                         <Trans i18nKey="winners"/>
