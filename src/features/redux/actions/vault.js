@@ -219,7 +219,9 @@ const getPoolsAll = async (state, dispatch) => {
                 pools[item.id].bonusApy = Number(yearlyRewardsInUsd.multipliedBy(100).dividedBy(totalStakedUsd));
             }
 
-            totalPrizesAvailable = totalPrizesAvailable.plus(awardBalanceUsd);
+            if (pools[item.id].status === 'active') {
+                totalPrizesAvailable = totalPrizesAvailable.plus(awardBalanceUsd);
+            }
         }
 
         if(!isEmpty(item.expiresAt)) {
@@ -239,7 +241,9 @@ const getPoolsAll = async (state, dispatch) => {
             pools[item.id].sponsorBalance = sponsorBalance;
             pools[item.id].sponsorBalanceUsd = sponsorBalanceUsd;
 
-            totalPrizesAvailable = totalPrizesAvailable.plus(sponsorBalanceUsd);
+            if (pools[item.id].status === 'active') {
+                totalPrizesAvailable = totalPrizesAvailable.plus(sponsorBalanceUsd);
+            }
         }
     }
 
