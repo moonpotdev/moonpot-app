@@ -75,6 +75,6 @@
   "upgradeWhy": "We upgraded the {{token}} Moonpot in order to be able to add different Bonus rewards to all future Moonpots.",
   "upgradeNextSteps": "Because of the upgrade, you need to move your {{token}} to the new {{token}} Moonpot.  We have airdropped you some BNB to help with the transaction fees to move your {{token}}.",
   "learnMore": "Learn more",
-  "eolWithdrawWarning": "Withdrawing your {{token}}, instead of moving it to the new Moonpot, means you will miss out on future {{token}} and bonus earnings and your chance to win the next {{token}} Prize."
+  "eolWithdrawWarning": "Withdrawing your {{token}}, instead of moving it to the new Moonpot, means you will miss out on future bonus earnings and your chance to win the next {{token}} Prize."
 
 }
