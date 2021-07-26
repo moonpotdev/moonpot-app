@@ -279,7 +279,7 @@ const Dashboard = () => {
                                                     </Grid>
                                                     <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
                                                         <Typography className={classes.dividerText} onClick={() => {setBonusOpen(!bonusOpen)}}>
-                                                            <Trans i18nKey="bonusTokenEarnings" values={{sponsorToken: item.sponsorToken}}/>
+                                                            <Trans i18nKey="bonusEarnings"/>
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item xs={2} align={"right"} style={{paddingBottom: 0}}>
@@ -296,14 +296,22 @@ const Dashboard = () => {
                                                                 <Grid item xs={6}>
                                                                     <Typography className={classes.myDetailsValue} align={'right'}>{item.earned} {item.sponsorToken} (${new BigNumber(item.earned).multipliedBy(prices.prices[item.sponsorToken]).toFixed(2)})</Typography>
                                                                 </Grid>
+                                                                <Grid item xs={6}>
+                                                                    <Typography className={classes.myDetailsText} align={'left'}>
+                                                                        <Trans i18nKey="myBoostEarnings"/>
+                                                                    </Typography>
+                                                                </Grid>
+                                                                <Grid item xs={6}>
+                                                                    <Typography className={classes.myDetailsValue} align={'right'}>0 {item.boostToken} (${new BigNumber(item.boosted).multipliedBy(prices.prices[item.boostToken]).toFixed(2)})</Typography>
+                                                                </Grid>
                                                                 <Grid item xs={12}>
                                                                     <Typography className={classes.myPotsInfoText} align={'left'}>
-                                                                        <Trans i18nKey="bonusExtraInfo" values={{sponsorToken: item.sponsorToken}}/>
+                                                                        <Trans i18nKey="bonusExtraInfo" values={{sponsorToken: item.sponsorToken, boostToken: item.boostToken}}/>
                                                                     </Typography>
                                                                 </Grid>
                                                                 <Grid item xs={12} style={{padding: '0 12px'}}>
                                                                     <Button onClick={() => handleWithdrawBonus(item)} className={item.earned <= 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned <= 0}>
-                                                                        Withdraw Bonus {item.sponsorToken}
+                                                                        Withdraw Bonus {item.sponsorToken} and {item.boostToken}
                                                                     </Button>
                                                                     <Steps item={item} steps={steps} handleClose={handleClose} />
                                                                 </Grid>
@@ -413,7 +421,7 @@ const Dashboard = () => {
                                                                 </Grid>
                                                                 <Grid item xs={12}>
                                                                     <Typography className={classes.myPotsUpgradeText} align={'left'}>
-                                                                        <Trans i18nKey="upgradeNextSteps" values={{token: item.token}}/>
+                                                                        <Trans i18nKey="upgradeNextSteps" values={{token: item.token, amount: "50,000", boostToken: "BNB"}}/>
                                                                     </Typography>
                                                                 </Grid>
                                                                 <Grid item xs={12}>

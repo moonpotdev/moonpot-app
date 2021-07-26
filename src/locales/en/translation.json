@@ -56,8 +56,10 @@
   "myDetails": "My Details",
   "myDeposit": "My Deposit",
   "myEarnings": "My Earnings",
+  "bonusEarnings": "Bonus Earnings",
   "bonusTokenEarnings": "Bonus {{sponsorToken}} Earnings",
   "myBonusEarnings": "My Bonus Earnings",
+  "myBoostEarnings": "My Super Boost Earnings",
   "bonusExtraInfo": "You will continue to earn bonus {{sponsorToken}} and {{boostToken}} until the end of the draw. You can claim it as many times as you like.",
   "myToken": "My {{token}}",
   "mySponsorToken": "My {{sponsorToken}}",
@@ -73,7 +75,7 @@
   "footerPoweredBy": "Powered by",
   "earningsBreakdown": "Earnings Breakdown",
   "upgradeWhy": "We upgraded the {{token}} Moonpot in order to be able to add different Bonus rewards to all future Moonpots.",
-  "upgradeNextSteps": "Because of the upgrade, you need to move your {{token}} to the new {{token}} Moonpot.  We have airdropped you some BNB to help with the transaction fees to move your {{token}}.",
+  "upgradeNextSteps": "Because of the upgrade, you need to move your {{token}} to the new {{token}} Moonpot.  We have added a ${{amount}} {{boostToken}} Super Boost to the new {{token}} Moonpot to help make it worthwhile for you.",
   "learnMore": "Learn more",
   "eolWithdrawWarning": "Withdrawing your {{token}}, instead of moving it to the new Moonpot, means you will miss out on future bonus earnings and your chance to win the next {{token}} Prize."
 
