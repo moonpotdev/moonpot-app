@@ -123,6 +123,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
         let amount = 0;
         let approved = 0;
         let earnedBonus = 0;
+        let earnedBoosted = 0;
         if(wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
             amount = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance), item.tokenDecimals).toFixed(8);
             approved = balance.tokens[item.rewardToken].allowance[item.contractAddress];
@@ -130,8 +131,10 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
         if(wallet.address && !isEmpty(earned.earned[item.id])) {
             const earnedAmount = earned.earned[item.id][item.sponsorToken] ?? 0
             earnedBonus = byDecimals(new BigNumber(earnedAmount), item.sponsorTokenDecimals).toFixed(8);
+            const boostAmount = earned.earned[item.id][item.boostToken] ?? 0
+            earnedBoosted = byDecimals(new BigNumber(boostAmount), item.boostTokenDecimals).toFixed(8);
         }
-        setState({balance: amount, allowance: approved, earned: earnedBonus});
+        setState({balance: amount, allowance: approved, earned: earnedBonus, boosted: earnedBoosted});
     }, [wallet.address, item, balance]);
 
     React.useEffect(() => {
@@ -218,7 +221,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                     </Grid>
                     <Grid item xs={7} align={"right"}>
                         {/* BNB boost value needs populating state.boosted */}
-                        <Typography className={classes.withdrawItemValue}>0 {item.boostToken}</Typography>
+                        <Typography className={classes.withdrawItemValue}>{state.boosted} {item.boostToken}</Typography>
                     </Grid>
                     <Grid item xs={4} align={"left"}>
                         <Typography className={classes.withdrawItemText}>
