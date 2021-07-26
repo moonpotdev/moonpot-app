@@ -39,7 +39,7 @@ const Steps = ({item, steps, handleClose}) => {
                             {steps.items[steps.currentStep].step === 'deposit' ? (
                                 <React.Fragment>
                                     <Typography className={classes.stepsTitleText}>Deposit Successful!</Typography>
-                                    <Typography className={classes.successfulDepositAmountText}>You have successfully deposited {byDecimals(new BigNumber(wallet.action.data.amount), item.tokenDecimals).toFixed(8)} {item.token}</Typography>
+                                    <Typography className={classes.successfulDepositAmountText}>You have successfully deposited {byDecimals(new BigNumber(wallet.action.data.amount), item.tokenDecimals).toFixed(8)} {item.token} into the new {item.token} Moonpot.</Typography>
                                 </React.Fragment>
                             ) : (
                                 <React.Fragment>
