@@ -182,7 +182,9 @@ const Dashboard = () => {
                 }
                 if(wallet.address && !isEmpty(earned.earned[item.id])) {
                     const amount = earned.earned[item.id][item.sponsorToken] ?? 0
+                    const boostAmount = earned.earned[item.id][item.boostToken] ?? 0
                     item.earned = byDecimals(new BigNumber(amount), item.sponsorTokenDecimals).toFixed(8);
+                    item.boosted = byDecimals(new BigNumber(boostAmount), item.boostTokenDecimals).toFixed(8);
                 }
                 data.push(item);
             }
@@ -359,7 +361,7 @@ const Dashboard = () => {
                                                                     </Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsValue} align={'right'}>0 {item.boostToken} (${new BigNumber(item.boosted).multipliedBy(prices.prices[item.boostToken]).toFixed(2)})</Typography>
+                                                                    <Typography className={classes.myDetailsValue} align={'right'}>{item.boosted} {item.boostToken} (${new BigNumber(item.boosted).multipliedBy(prices.prices[item.boostToken]).toFixed(2)})</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={12}>
                                                                     <Typography className={classes.myPotsInfoText} align={'left'}>

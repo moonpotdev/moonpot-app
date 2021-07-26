@@ -19,7 +19,11 @@ export const pools = [
         sponsorToken: 'DODO',
         sponsorAddress: '0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2',
         sponsorTokenDecimals: 18,
-        boostToken: 'BNB',
+        sponsorRewardId: 0,
+        boostToken: 'WBNB',
+        boostAddress: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+        boostRewardId: 1,
+        boostTokenDecimals: 18,
     },
     {
         id: 'cake-bifi',

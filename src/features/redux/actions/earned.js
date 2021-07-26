@@ -8,14 +8,23 @@ const getEarnedSingle = async (item, state, dispatch) => {
     console.log('redux getEarnedSingle() processing...');
     const address = state.walletReducer.address;
     const web3 = state.walletReducer.rpc;
-
     const gateContract = new web3[item.network].eth.Contract(gateManagerAbi, item.contractAddress);
-    const earnedAmount = await gateContract.methods.earned(address).call();
 
     const earned = state.earnedReducer.earned;
-    earned[item.id] = {
-        [item.sponsorToken]: earnedAmount,
-    };
+
+    if (item.boostToken && item.boostRewardId) {
+        const earnedAmount = await gateContract.methods.earned(address, item.sponsorRewardId).call();
+        const boostEarnedAmount = await gateContract.methods.earned(address, item.boostRewardId).call();
+        earned[item.id] = {
+            [item.sponsorToken]: earnedAmount,
+            [item.boostToken]: boostEarnedAmount,
+        };
+    } else {
+        const earnedAmount = await gateContract.methods.earned(address).call();
+        earned[item.id] = {
+            [item.sponsorToken]: earnedAmount,
+        };
+    }
 
     dispatch({
         type: EARNED_FETCH_EARNED_DONE,
@@ -44,12 +53,32 @@ const getEarnedAll = async (state, dispatch) => {
 
     for (let key in pools) {
         const gateContract = new web3[pools[key].network].eth.Contract(gateManagerAbi, pools[key].contractAddress);
+        const pool = pools[key]
 
-        calls[pools[key].network].push({
-            amount: gateContract.methods.earned(address),
-            token: pools[key].sponsorToken,
-            address: pools[key].rewardAddress,
-        });
+        if (pool.sponsorRewardId) {
+            calls[pool.network].push({
+                amount: gateContract.methods.earned(address, pool.sponsorRewardId),
+                token: pool.sponsorToken,
+                address: pool.rewardAddress,
+                poolId: pool.id
+            });
+        } else {
+            calls[pool.network].push({
+                amount: gateContract.methods.earned(address),
+                token: pool.sponsorToken,
+                address: pool.rewardAddress,
+                poolId: pool.id
+            });
+        }
+
+        if (pool.boostToken && pool.boostRewardId) {
+            calls[pool.network].push({
+                amount: gateContract.methods.earned(address, pool.boostRewardId),
+                token: pool.boostToken,
+                address: pool.rewardAddress,
+                poolId: pool.id
+            });
+        }
     }
 
     let response = [];
@@ -60,11 +89,11 @@ const getEarnedAll = async (state, dispatch) => {
     }
 
     const earned = state.earnedReducer.earned;
-    const ids = Object.keys(pools);
     for (let index in response) {
-        const pool = pools[ids[index]];
-        earned[pool.id] = {
-            [pool.sponsorToken]: response[index].amount,
+        const r = response[index];
+        earned[r.poolId] = {
+            ...earned[r.poolId],
+            [r.token]: r.amount,
         };
     }
 
