@@ -27,7 +27,7 @@ export const pools = [
         token: 'CAKE',
         tokenAddress: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
         tokenDecimals: 18,
-        rewardToken: 'potCAKE',
+        rewardToken: 'potCAKEv2',
         rewardAddress: '0x81b554A2C3aD52630Cf1Ca56cad562EC4A551873',
         contractAddress: '0xd582755Bf7dD8427bE31621e4af144F1B8fa7Adf',
         prizePoolAddress: '0x08FC93C37a2608c613A4f32490e29db6886F059E',
