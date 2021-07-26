@@ -87,8 +87,8 @@ const Dashboard = () => {
                 message: "Approval transaction happens once per pot.",
                 action: () => dispatch(reduxActions.wallet.approval(
                     item.network,
-                    'new cake address',
-                    'new cake contract address'
+                    item.migrationRewardAddress,
+                    item.migrationContractAddress,
                 )),
                 pending: false,
             });
@@ -98,9 +98,9 @@ const Dashboard = () => {
                 message: "Confirm deposit transaction on wallet to complete.",
                 action: () => dispatch(reduxActions.wallet.deposit(
                     item.network,
-                    'new cake contract address',
+                    item.migrationContractAddress,
                     balance.tokens[item.rewardToken].balance,
-                    true
+                    false
                 )),
                 pending: false,
             });

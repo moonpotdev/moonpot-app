@@ -41,6 +41,8 @@ export const pools = [
         sponsorToken: 'BIFI',
         sponsorAddress: '0xCa3F508B8e4Dd382eE878A314789373D80A5190A',
         sponsorTokenDecimals: 18,
+        migrationContractAddress: '0x30d55CE74E2dcd1B0Ff37214a6978FCFc06aA499',
+        migrationRewardAddress: '0x9273be9c180B0271cc2c90E5BF99477B573Fe904'
     },
 
 ];
