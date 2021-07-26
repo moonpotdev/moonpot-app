@@ -186,7 +186,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                         </Box>
                     </Grid>
                     <Grid item xs={11}>
-                        <Button onClick={console.log("Placeholder for Withdraw CAKE and BIFI")} className={classes.eolWithdrawBtn}>
+                        <Button onClick={handleWithdraw} className={classes.eolWithdrawBtn}>
                             Withdraw {item.token} and {item.sponsorToken}
                         </Button>
                         <Steps item={item} steps={steps} handleClose={handleClose} />
