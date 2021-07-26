@@ -1,4 +1,4 @@
-import {Grid, Button, InputBase, makeStyles, Paper, Typography} from "@material-ui/core";
+import {Grid, Box, Button, InputBase, makeStyles, Paper, Typography} from "@material-ui/core";
 import {Trans, useTranslation} from "react-i18next";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,7 +12,7 @@ import PrizePoolAbi from "../../../../config/abi/prizepool.json";
 
 const useStyles = makeStyles(styles);
 
-const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemData, resetFormData}) => {
+const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemData, resetFormData, retiredFlag = false}) => {
     const { t } = useTranslation();
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -123,6 +123,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
         let amount = 0;
         let approved = 0;
         let earnedBonus = 0;
+        let earnedBoosted = 0;
         if(wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
             amount = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance), item.tokenDecimals).toFixed(8);
             approved = balance.tokens[item.rewardToken].allowance[item.contractAddress];
@@ -130,8 +131,10 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
         if(wallet.address && !isEmpty(earned.earned[item.id])) {
             const earnedAmount = earned.earned[item.id][item.sponsorToken] ?? 0
             earnedBonus = byDecimals(new BigNumber(earnedAmount), item.sponsorTokenDecimals).toFixed(8);
+            const boostAmount = earned.earned[item.id][item.boostToken] ?? 0
+            earnedBoosted = byDecimals(new BigNumber(boostAmount), item.boostTokenDecimals).toFixed(8);
         }
-        setState({balance: amount, allowance: approved, earned: earnedBonus});
+        setState({balance: amount, allowance: approved, earned: earnedBonus, boosted: earnedBoosted});
     }, [wallet.address, item, balance]);
 
     React.useEffect(() => {
@@ -158,71 +161,119 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
     return (
         <React.Fragment>
             <Grid container spacing={2}>
-                <Grid item xs={4} align={"left"}>
-                    <Typography className={classes.withdrawItemText}>
-                        <Trans i18nKey="myToken" values={{token: item.token}}/>
-                    </Typography>
-                </Grid>
-                <Grid item xs={7} align={"right"}>
-                    <Typography className={classes.withdrawItemValue}>{state.balance} {item.token}</Typography>
-                </Grid>
-                <Grid item xs={4} align={"left"}>
-                    <Typography className={classes.withdrawItemText}>
-                        <Trans i18nKey="mySponsorToken" values={{sponsorToken: item.sponsorToken}}/>
-                    </Typography>
-                </Grid>
-                <Grid item xs={7} align={"right"}>
-                    <Typography className={classes.withdrawItemValue}>{state.earned} {item.sponsorToken}</Typography>
-                </Grid>
-                <Grid item xs={4} align={"left"}>
-                    <Typography className={classes.withdrawItemText}>
-                        <Trans i18nKey="myFairplayTimelock"/>
-                    </Typography>
-                </Grid>
-                <Grid item xs={7} align={"right"}>
-                    <Typography className={classes.withdrawItemValue}>{formatTimelock(fairplayTimelock)}</Typography>
-                </Grid>
-                <Grid item xs={4} align={"left"}>
-                    <Typography className={classes.withdrawItemText}>
-                        <Trans i18nKey="myCurrentFairnessFee"/>
-                    </Typography>
-                </Grid>
-                <Grid item xs={7} align={"right"}>
-                    <Typography className={classes.withdrawItemValue}>{fairnessFee} {item.token}</Typography>
-                </Grid>
-                <Grid item xs={11}>
-                    <Paper component="form" className={classes.input}>
-                        <Grid container spacing={1}>
-                            <Grid item xs={2} alignItems={"center"} justifyContent={"center"}>
-                                <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default} />
+                {
+                retiredFlag ?
+                <React.Fragment>
+                    <Grid item xs={11}>
+                        <Box className={classes.eolWithdrawWarningBox}>
+                            <Grid container>
+                            <Grid item xs={1}>
+                                <Box className={classes.warningIcon}>
+                                    <img 
+                                    alt={`Warning`}
+                                    srcSet={`
+                                    images/state/warning@4x.png 4x,
+                                    images/state/warning@3x.png 3x,
+                                    images/state/warning@2x.png 2x,
+                                    images/state/warning@1x.png 1x
+                                    `}
+                                    />
+                                </Box>
                             </Grid>
-                            <Grid item xs={6}>
-                                <InputBase disabled="disabled" placeholder={state.balance} value={state.balance} onChange={(e) => handleInput(e.target.value)} />
+                            <Grid item xs={10}>
+                                <Trans className={classes.eolWithdrawWarning} i18nKey="eolWithdrawWarning" values={{token: item.token}}/>
+                               
                             </Grid>
-                            <Grid item xs={4} align={"right"}>
+                            
+                            </Grid>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={11}>
+                        <Button onClick={handleWithdraw} className={classes.eolWithdrawBtn}>
+                            Withdraw {item.token} and {item.sponsorToken}
+                        </Button>
+                        <Steps item={item} steps={steps} handleClose={handleClose} />
+                    </Grid>
+                </React.Fragment>
+                :
 
-                            </Grid>
-                        </Grid> 
-                    </Paper>
-                </Grid>
-                <Grid item xs={11}>
-                    {wallet.address ? (
-                            <Button onClick={handleWithdraw} className={formData.withdraw.amount < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={state.balance <= 0}>Withdraw {
-                                state.balance > 0 ? ('All') :
-                                    ( formData.withdraw.amount > 0 ) ? formData.withdraw.amount + " " + item.token : ''
-                                }</Button>
-                    ) : (
-                        <Button onClick={handleWalletConnect} className={classes.connectWalletBtn} variant={'contained'}>{t('buttons.connectWallet')}</Button>
-                    )}
-                    <Steps item={item} steps={steps} handleClose={handleClose} />
-                </Grid>
-                <Grid item xs={11}>
-                    <a href="https://docs.moonpot.com/faq/moonpot-rules#can-i-withdraw-my-funds-at-any-time" target="_blank" rel="noopener noreferrer" className={classes.docsLink}>
-                        <Typography className={classes.withdrawPenaltyWarning}>
-                            <Trans i18nKey="vaultWithdrawPenaltyWarning" values={{token: item.token}} />
+                <React.Fragment>
+                    <Grid item xs={4} align={"left"}>
+                        <Typography className={classes.withdrawItemText}>
+                            <Trans i18nKey="myToken" values={{token: item.token}}/>
                         </Typography>
-                    </a>
-                </Grid>
+                    </Grid>
+                    <Grid item xs={7} align={"right"}>
+                        <Typography className={classes.withdrawItemValue}>{state.balance} {item.token}</Typography>
+                    </Grid>
+                    <Grid item xs={4} align={"left"}>
+                        <Typography className={classes.withdrawItemText}>
+                            <Trans i18nKey="mySponsorToken" values={{sponsorToken: item.sponsorToken}}/>
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={7} align={"right"}>
+                        <Typography className={classes.withdrawItemValue}>{state.earned} {item.sponsorToken}</Typography>
+                    </Grid>
+                    <Grid item xs={4} align={"left"}>
+                        <Typography className={classes.withdrawItemText}>
+                            <Trans i18nKey="myBoostToken" values={{boostToken: item.boostToken}}/>
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={7} align={"right"}>
+                        {/* BNB boost value needs populating state.boosted */}
+                        <Typography className={classes.withdrawItemValue}>{state.boosted} {item.boostToken}</Typography>
+                    </Grid>
+                    <Grid item xs={4} align={"left"}>
+                        <Typography className={classes.withdrawItemText}>
+                            <Trans i18nKey="myFairplayTimelock"/>
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={7} align={"right"}>
+                        <Typography className={classes.withdrawItemValue}>{formatTimelock(fairplayTimelock)}</Typography>
+                    </Grid>
+                    <Grid item xs={4} align={"left"}>
+                        <Typography className={classes.withdrawItemText}>
+                            <Trans i18nKey="myCurrentFairnessFee"/>
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={7} align={"right"}>
+                        <Typography className={classes.withdrawItemValue}>{fairnessFee} {item.token}</Typography>
+                    </Grid>
+                    <Grid item xs={11}>
+                        <Paper component="form" className={classes.input}>
+                            <Grid container spacing={1}>
+                                <Grid item xs={2} alignItems={"center"} justifyContent={"center"}>
+                                    <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default} />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <InputBase disabled="disabled" placeholder={state.balance} value={state.balance} onChange={(e) => handleInput(e.target.value)} />
+                                </Grid>
+                                <Grid item xs={4} align={"right"}>
+
+                                </Grid>
+                            </Grid> 
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={11}>
+                        {wallet.address ? (
+                                <Button onClick={handleWithdraw} className={formData.withdraw.amount < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={state.balance <= 0}>Withdraw {
+                                    state.balance > 0 ? ('All') :
+                                        ( formData.withdraw.amount > 0 ) ? formData.withdraw.amount + " " + item.token : ''
+                                    }</Button>
+                        ) : (
+                            <Button onClick={handleWalletConnect} className={classes.connectWalletBtn} variant={'contained'}>{t('buttons.connectWallet')}</Button>
+                        )}
+                        <Steps item={item} steps={steps} handleClose={handleClose} />
+                    </Grid>
+                    <Grid item xs={11}>
+                        <a href="https://docs.moonpot.com/faq/moonpot-rules#can-i-withdraw-my-funds-at-any-time" target="_blank" rel="noopener noreferrer" className={classes.docsLink}>
+                            <Typography className={classes.withdrawPenaltyWarning}>
+                                <Trans i18nKey="vaultWithdrawPenaltyWarning" values={{token: item.token}} />
+                            </Typography>
+                        </a>
+                    </Grid>
+                </React.Fragment>
+                }
             </Grid>
         </React.Fragment>
     );

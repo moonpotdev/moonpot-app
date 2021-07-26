@@ -201,6 +201,36 @@ const styles = (theme) => ({
         }
 
     },
+    eolWithdrawWarningBox: {
+        backgroundColor: '#FAF9FB',
+        padding: '12px 0px',
+        border: '2px solid #E4E0EB',
+        boxSizing: 'border-box',
+        borderRadius: '4px',
+
+    },
+    eolWithdrawWarning: {
+        color: '#333333',
+        fontSize: '12px',
+        lineHeight: '20px',
+
+    },
+    eolWithdrawBtn: {
+        backgroundColor: '#42385B',
+        border: '2px solid #FFFFFF',
+        borderRadius: '8px',
+        boxSizing: 'border-box',
+        height: '48px',
+        width: '100%',
+        fontWeight: 700,
+        fontStyle: 'Bold',
+        fontSize: '15px',
+        lineHeight: '160%',
+        letterSpacing: '0.2px',
+        color: '#FFFFFF',
+        margin: '16px 0 8px 0',
+
+    },
     connectWalletBtn: {
         backgroundColor: '#FFFFFF',
         borderRadius: '8px',

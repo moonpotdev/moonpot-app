@@ -108,17 +108,17 @@ const Vault = () => {
                     <Box className={classes.vaultPotItem}>
                         <Grid container spacing={2}>
                             <Grid item xs={4} align={"left"}>
-                                <Box className={classes.potImage}>
-                                    <img 
-                                    alt="Moonpot"
-                                    srcSet="
-                                        images/pots/sponsored/cake@4x.png 4x,
-                                        images/pots/sponsored/cake@3x.png 3x,
-                                        images/pots/sponsored/cake@2x.png 2x,
-                                        images/pots/sponsored/cake@1x.png 1x
-                                    "
-                                    />
-                                </Box>
+                            <Box className={classes.potImage}>
+                                <img 
+                                alt={`Moonpot ${item.sponsorToken}`}
+                                srcSet={`
+                                    images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@4x.png 4x,
+                                    images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@3x.png 3x,
+                                    images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@2x.png 2x,
+                                    images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@1x.png 1x
+                                `}
+                                />
+                            </Box>
                             </Grid>
                             <Grid item xs={7}>
                                 <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
