@@ -195,6 +195,17 @@ const styles = (theme) => ({
             opacity: 0.6,
         }
     },
+    potsPrizeWinners: {
+        color: '#FFFFFF',
+        fontWeight: 500,
+        fontSize: '12px',
+        lineHeight: '20px',
+        letterSpacing: '0.2px',
+        margin: '12px 12px',
+        '& span': {
+            fontWeight: 700,
+        }
+    },
     myPotsInfoText: {
         color: '#EBF3F9',
         fontWeight: 400,
