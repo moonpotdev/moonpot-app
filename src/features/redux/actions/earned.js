@@ -12,7 +12,7 @@ const getEarnedSingle = async (item, state, dispatch) => {
 
     const earned = state.earnedReducer.earned;
 
-    if (item.boostToken && item.boostRewardId) {
+    if (item.boostToken && item.boostRewardId !== undefined) {
         const earnedAmount = await gateContract.methods.earned(address, item.sponsorRewardId).call();
         const boostEarnedAmount = await gateContract.methods.earned(address, item.boostRewardId).call();
         earned[item.id] = {
@@ -71,7 +71,7 @@ const getEarnedAll = async (state, dispatch) => {
             });
         }
 
-        if (pool.boostToken && pool.boostRewardId) {
+        if (pool.boostToken && pool.boostRewardId !== undefined) {
             calls[pool.network].push({
                 amount: gateContract.methods.earned(address, pool.boostRewardId),
                 token: pool.boostToken,
