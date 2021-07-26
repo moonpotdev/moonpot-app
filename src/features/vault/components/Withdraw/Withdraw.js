@@ -213,6 +213,15 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                     </Grid>
                     <Grid item xs={4} align={"left"}>
                         <Typography className={classes.withdrawItemText}>
+                            <Trans i18nKey="myBoostToken" values={{boostToken: item.boostToken}}/>
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={7} align={"right"}>
+                        {/* BNB boost value needs populating state.boosted */}
+                        <Typography className={classes.withdrawItemValue}>0 {item.boostToken}</Typography>
+                    </Grid>
+                    <Grid item xs={4} align={"left"}>
+                        <Typography className={classes.withdrawItemText}>
                             <Trans i18nKey="myFairplayTimelock"/>
                         </Typography>
                     </Grid>
