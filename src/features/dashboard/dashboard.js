@@ -87,7 +87,7 @@ const Dashboard = () => {
                 message: "Approval transaction happens once per pot.",
                 action: () => dispatch(reduxActions.wallet.approval(
                     item.network,
-                    item.migrationRewardAddress,
+                    item.tokenAddress,
                     item.migrationContractAddress,
                 )),
                 pending: false,
