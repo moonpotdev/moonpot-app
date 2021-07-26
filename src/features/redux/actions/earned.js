@@ -55,7 +55,7 @@ const getEarnedAll = async (state, dispatch) => {
         const gateContract = new web3[pools[key].network].eth.Contract(gateManagerAbi, pools[key].contractAddress);
         const pool = pools[key]
 
-        if (pool.sponsorRewardId) {
+        if (pool.sponsorRewardId !== undefined) {
             calls[pool.network].push({
                 amount: gateContract.methods.earned(address, pool.sponsorRewardId),
                 token: pool.sponsorToken,
