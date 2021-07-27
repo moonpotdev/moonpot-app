@@ -135,7 +135,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
             earnedBoosted = byDecimals(new BigNumber(boostAmount), item.boostTokenDecimals).toFixed(8);
         }
         setState({balance: amount, allowance: approved, earned: earnedBonus, boosted: earnedBoosted});
-    }, [wallet.address, item, balance]);
+    }, [wallet.address, item, balance, earned]);
 
     React.useEffect(() => {
         const index = steps.currentStep;

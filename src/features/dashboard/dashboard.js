@@ -55,8 +55,8 @@ const Dashboard = () => {
     const handleMigrator = (item) => {
         if(wallet.address) {
             const steps = [];
-            const approved = balance.tokens[item.rewardToken].allowance[item.contractAddress];
-            if(!approved) {
+            const rewardApproved = balance.tokens[item.rewardToken].allowance[item.contractAddress];
+            if(!rewardApproved) {
                 steps.push({
                     step: "approve",
                     message: "Approval transaction happens once per pot.",
@@ -68,7 +68,6 @@ const Dashboard = () => {
                     pending: false,
                 });
             }
-
 
             steps.push({
                 step: "withdraw",
@@ -82,16 +81,19 @@ const Dashboard = () => {
                 pending: false,
             });
 
-            steps.push({
-                step: "approve",
-                message: "Approval transaction happens once per pot.",
-                action: () => dispatch(reduxActions.wallet.approval(
-                    item.network,
-                    item.tokenAddress,
-                    item.migrationContractAddress,
-                )),
-                pending: false,
-            });
+            const tokenApproved = balance.tokens[item.tokenAddress].allowance[item.migrationContractAddress];
+            if(!tokenApproved) {
+                steps.push({
+                    step: "approve",
+                    message: "Approval transaction happens once per pot.",
+                    action: () => dispatch(reduxActions.wallet.approval(
+                        item.network,
+                        item.tokenAddress,
+                        item.migrationContractAddress,
+                    )),
+                    pending: false,
+                });
+            }
 
             steps.push({
                 step: "deposit",
@@ -275,7 +277,7 @@ const Dashboard = () => {
                                         <Grid container spacing={2}>
                                             <Grid item xs={4} align={"left"}>
                                                 <Box className={classes.potImage}>
-                                                    <img 
+                                                    <img
                                                     alt={`Moonpot ${item.sponsorToken}`}
                                                     srcSet={`
                                                         images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@4x.png 4x,
@@ -287,8 +289,8 @@ const Dashboard = () => {
                                                 </Box>
                                             </Grid>
 
-                                            { 
-                                                (item.status == "active") ? 
+                                            {
+                                                (item.status == "active") ?
                                                 // =================
                                                 // Active Layout
                                                 // =================
@@ -374,7 +376,7 @@ const Dashboard = () => {
                                                                     </Button>
                                                                     <Steps item={item} steps={steps} handleClose={handleClose} />
                                                                 </Grid>
-                                    
+
 
                                                             </Grid>
                                                         </AnimateHeight>
@@ -429,9 +431,9 @@ const Dashboard = () => {
                                                                     resetFormData={resetFormData}
                                                                 />
                                                         </AnimateHeight>
-                                                    </Grid> 
+                                                    </Grid>
                                                 </React.Fragment>
-                                                : 
+                                                :
                                                 // =================
                                                 // EOL Layout
                                                 // =================
@@ -472,7 +474,7 @@ const Dashboard = () => {
                                                     </Grid>
                                                     <Grid item xs={12}>
                                                             <Grid container>
-                                                                
+
                                                                 <Grid item xs={12}>
                                                                     <Typography className={classes.myPotsUpgradeText} align={'left'}>
                                                                         <Trans i18nKey="upgradeWhy" values={{token: item.token}}/>
@@ -510,14 +512,14 @@ const Dashboard = () => {
                                                                 <Grid item xs={6} align={"right"}>
                                                                     <Typography className={classes.potsItemValue}>0 {item.token}</Typography>
                                                                 </Grid>
-                                    
+
 
                                                             </Grid>
                                                     </Grid>
                                                     <Grid item xs={11}>
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
-                                                    
+
                                                     <Grid item xs={9} align={"left"} style={{paddingLeft: 0}}>
                                                         <Typography className={classes.dividerText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>
                                                             <Trans i18nKey="withdrawTokenAndSponsorToken" values={{token: item.token, sponsorToken: item.sponsorToken}}/>
@@ -538,7 +540,7 @@ const Dashboard = () => {
                                                                     retiredFlag={true}
                                                                 />
                                                         </AnimateHeight>
-                                                    </Grid> 
+                                                    </Grid>
                                                     <Grid item xs={11}>
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
@@ -562,13 +564,13 @@ const Dashboard = () => {
                                                                             <Trans i18nKey="winningTransactions"/>
                                                                         </Link>
                                                                     </Typography>
-                                                                </Grid>   
-                                                                
+                                                                </Grid>
+
                                                             </Grid>
                                                         </AnimateHeight>
-                                                    </Grid> 
+                                                    </Grid>
                                                 </React.Fragment>
-                                            
+
                                             }
 
                                         </Grid>

@@ -4,44 +4,10 @@ import {config} from '../../../config/config';
 
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 
-const getEarnedSingle = async (item, state, dispatch) => {
-    console.log('redux getEarnedSingle() processing...');
-    const address = state.walletReducer.address;
-    const web3 = state.walletReducer.rpc;
-    const gateContract = new web3[item.network].eth.Contract(gateManagerAbi, item.contractAddress);
-
-    const earned = state.earnedReducer.earned;
-
-    if (item.boostToken && item.boostRewardId !== undefined) {
-        const earnedAmount = await gateContract.methods.earned(address, item.sponsorRewardId).call();
-        const boostEarnedAmount = await gateContract.methods.earned(address, item.boostRewardId).call();
-        earned[item.id] = {
-            [item.sponsorToken]: earnedAmount,
-            [item.boostToken]: boostEarnedAmount,
-        };
-    } else {
-        const earnedAmount = await gateContract.methods.earned(address).call();
-        earned[item.id] = {
-            [item.sponsorToken]: earnedAmount,
-        };
-    }
-
-    dispatch({
-        type: EARNED_FETCH_EARNED_DONE,
-        payload: {
-            earned: earned,
-            lastUpdated: new Date().getTime()
-        }
-    });
-
-    return true;
-}
-
-const getEarnedAll = async (state, dispatch) => {
+const getEarned = async (pools, state, dispatch) => {
     console.log('redux getEarnedAll() processing...');
     const address = state.walletReducer.address;
     const web3 = state.walletReducer.rpc;
-    const pools = state.vaultReducer.pools;
 
     const multicall = [];
     const calls = [];
@@ -106,6 +72,17 @@ const getEarnedAll = async (state, dispatch) => {
     });
 
     return true;
+}
+
+const getEarnedSingle = async (item, state, dispatch) => {
+    console.log('redux getEarnedSingle() processing...');
+    return await getEarned([item], state, dispatch)
+}
+
+const getEarnedAll = async (state, dispatch) => {
+    console.log('redux getEarnedAll() processing...');
+    const pools = state.vaultReducer.pools;
+    return getEarned(pools, state, dispatch);
 }
 
 const fetchEarned = (item = false) => {
