@@ -81,7 +81,7 @@ const Dashboard = () => {
                 pending: false,
             });
 
-            const tokenApproved = balance.tokens[item.tokenAddress].allowance[item.migrationContractAddress];
+            const tokenApproved = balance.tokens[item.token].allowance[item.migrationContractAddress];
             if(!tokenApproved) {
                 steps.push({
                     step: "approve",

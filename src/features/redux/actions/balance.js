@@ -61,11 +61,15 @@ const getBalances = async (pools, state, dispatch) => {
         const r = response[index]
         if (r.amount !== undefined) {
             tokens[r.token] = {
+                ...tokens[r.token],
                 balance: r.amount,
                 address: r.address,
             };
         } else if (r.allowance !== undefined) {
-            tokens[r.token].allowance = {[r.spender]: parseInt(r.allowance)}
+            tokens[r.token].allowance = {
+                ...tokens[r.token].allowance,
+                [r.spender]: parseInt(r.allowance)
+            }
         }
     }
 
