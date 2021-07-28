@@ -11,12 +11,21 @@ import alertIcon from '../../../../images/icons/alert.svg';
 
 const useStyles = makeStyles(styles);
 
+function ButtonLinkComponent({navigate, children, ...rest}) {
+	// Don't pass the navigation function down to the <a>
+	return <Button {...rest}>{children}</Button>;
+}
+
+function ButtonLink({children, ...rest}) {
+	return <Link {...rest} component={ButtonLinkComponent}>{children}</Link>
+}
+
 function MigrationNotice({pot}) {
 	const classes = useStyles();
 	const {t} = useTranslation();
 	const balanceString = useSelector(state => state.balanceReducer.tokens[pot.rewardToken]?.balance || '0');
 	const balanceTokenDecimals = pot.tokenDecimals;
-	const balanceBigNumber = useMemo(() => byDecimals(new BigNumber(balanceString), balanceTokenDecimals), [balanceString]);
+	const balanceBigNumber = useMemo(() => byDecimals(new BigNumber(balanceString), balanceTokenDecimals), [balanceString, balanceTokenDecimals]);
 	const hasBalance = !balanceBigNumber.isZero();
 
 	if (hasBalance) {
@@ -25,12 +34,11 @@ function MigrationNotice({pot}) {
 				<img className={classes.alertIcon} src={alertIcon} width="20" height="20" alt="" aria-hidden={true}
 					 role="presentation"/>
 				<p>{t('migrationNoticeTitle', {asset: pot.token, pot: pot.name})}
-					{pot.migrationLearnMoreUrl ? (<>{' '}<a href={pot.migrationLearnMoreUrl}
-															target="_blank">{t('migrationNoticeLearnMore')}</a></>) : null}</p>
+					{pot.migrationLearnMoreUrl ? (<>{' '}<a href={pot.migrationLearnMoreUrl} className={classes.link}
+															target="_blank" rel="noreferrer">{t('migrationNoticeLearnMore')}</a></>) : null}</p>
 				{pot.migrationExplainer ? pot.migrationExplainer.map((text, index) => <p key={index}>{text}</p>) : null}
 			</div>
-			<Link to="/my-moonpots/eol" component={Button}
-				  className={classes.button}>{t('migrationNoticeMove', {asset: pot.token})}</Link>
+			<ButtonLink to="/my-moonpots/eol" className={classes.button}>{t('migrationNoticeMove', {asset: pot.token})}</ButtonLink>
 		</Box>);
 	}
 
