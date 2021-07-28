@@ -1,21 +1,20 @@
-import * as React from "react";
-import { useHistory } from 'react-router-dom';
-import {useLocation} from "react-router";
-import {useDispatch, useSelector} from "react-redux";
+import * as React from 'react';
+import {useHistory, useParams} from 'react-router-dom';
+import {useLocation} from 'react-router';
+import {useDispatch, useSelector} from 'react-redux';
 import AnimateHeight from 'react-animate-height';
-import {Button, Link, Container, Grid, Box, makeStyles, Typography, Divider} from "@material-ui/core"
-import {ExpandMore, ExpandLess} from '@material-ui/icons';
-import styles from "./styles"
-import {Trans, useTranslation} from "react-i18next";
-import reduxActions from "../redux/actions";
-import Deposit from "../vault/components/Deposit";
-import Withdraw from "../vault/components/Withdraw";
-import BigNumber from "bignumber.js";
-import { investmentOdds } from "../../helpers/utils";
-import {byDecimals, calculateTotalPrize} from "../../helpers/format";
-import {isEmpty} from "../../helpers/utils";
-import Countdown from "../../components/Countdown";
-import Steps from "../vault/components/Steps";
+import {Box, Button, Container, Divider, Grid, Link, makeStyles, Typography} from '@material-ui/core';
+import {ExpandLess, ExpandMore} from '@material-ui/icons';
+import styles from './styles';
+import {Trans, useTranslation} from 'react-i18next';
+import reduxActions from '../redux/actions';
+import Deposit from '../vault/components/Deposit';
+import Withdraw from '../vault/components/Withdraw';
+import BigNumber from 'bignumber.js';
+import {investmentOdds, isEmpty} from '../../helpers/utils';
+import {byDecimals, calculateTotalPrize} from '../../helpers/format';
+import Countdown from '../../components/Countdown';
+import Steps from '../vault/components/Steps';
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -33,7 +32,7 @@ const Dashboard = () => {
         prices: state.pricesReducer,
         earned: state.earnedReducer,
     }));
-
+    const params = useParams();
     const dispatch = useDispatch();
     const classes = useStyles();
     const [detailsOpen, setDetailsOpen] = React.useState(location.detailsOpen);
@@ -41,7 +40,7 @@ const Dashboard = () => {
     const [depositOpen, setDepositOpen] = React.useState(location.depositOpen);
     const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
     const [prizeSplitOpen, setPrizeSplitOpen] = React.useState(location.prizeSplitOpen);
-    const [sortConfig, setSortConfig] = React.useState(defaultFilter);
+    const [sortConfig, setSortConfig] = React.useState('status' in params ? {...defaultFilter, status: params.status} : defaultFilter);
     const [filtered, setFiltered] = React.useState([]);
     const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
     const [steps, setSteps] = React.useState({modal: false, currentStep: -1, items: [], finished: false});

@@ -1,18 +1,18 @@
-import React, { useState, useContext } from "react";
-import { HashRouter, Route, Switch, useHistory } from "react-router-dom";
-import appTheme from "./appTheme.js";
-import Header from "./components/header";
-import Footer from "./components/footer";
-import { ThemeProvider, CssBaseline, Grid, Box, Link, makeStyles } from "@material-ui/core";
+import React, {useContext, useState} from 'react';
+import {HashRouter, Route, Switch, useHistory} from 'react-router-dom';
+import appTheme from './appTheme.js';
+import Header from './components/header';
+import Footer from './components/footer';
+import {Box, CssBaseline, Grid, Link, makeStyles, ThemeProvider} from '@material-ui/core';
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
-import {useDispatch, useSelector} from "react-redux";
-import reduxActions from "./features/redux/actions";
-import {slide as Menu} from "react-burger-menu";
-import {useTranslation} from "react-i18next";
-import WalletContainer from "./components/header/components/WalletContainer";
-import { createHashHistory } from "history";
-import Media from "react-media";
-import {styles, burgerMenuStyles} from "./styles.js";
+import {useDispatch, useSelector} from 'react-redux';
+import reduxActions from './features/redux/actions';
+import {slide as Menu} from 'react-burger-menu';
+import {useTranslation} from 'react-i18next';
+import WalletContainer from './components/header/components/WalletContainer';
+import {createHashHistory} from 'history';
+import Media from 'react-media';
+import {burgerMenuStyles, styles} from './styles.js';
 
 const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
@@ -157,7 +157,7 @@ export default function App() {
                             <Route strict sensitive exact path="/pot/:id">
                                 <Vault />
                             </Route>
-                            <Route strict sensitive exact path="/my-moonpots">
+                            <Route strict sensitive exact path="/my-moonpots/:status?">
                                 <Dashboard />
                             </Route>
                             <Route>
