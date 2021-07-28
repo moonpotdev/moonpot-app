@@ -1,19 +1,20 @@
-import * as React from "react";
-import { useLocation } from "react-router";
-import { useHistory } from 'react-router-dom';
-import {useDispatch, useSelector} from "react-redux";
+import * as React from 'react';
+import {useLocation} from 'react-router';
+import {useHistory} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 import AnimateHeight from 'react-animate-height';
-import {Button, Box, Link, Container, Grid, makeStyles, Typography, Divider} from "@material-ui/core"
-import styles from "./styles"
-import Filter from "./components/Filter";
-import {Trans, useTranslation} from "react-i18next";
-import {ExpandMore, ExpandLess} from '@material-ui/icons';
-import { investmentOdds } from "../../helpers/utils";
-import reduxActions from "../redux/actions";
-import {byDecimals, calculateTotalPrize} from "../../helpers/format";
-import BigNumber from "bignumber.js";
+import {Box, Button, Container, Divider, Grid, Link, makeStyles, Typography} from '@material-ui/core';
+import styles from './styles';
+import Filter from './components/Filter';
+import {Trans, useTranslation} from 'react-i18next';
+import {ExpandLess, ExpandMore} from '@material-ui/icons';
+import {investmentOdds} from '../../helpers/utils';
+import reduxActions from '../redux/actions';
+import {calculateTotalPrize} from '../../helpers/format';
+import BigNumber from 'bignumber.js';
+import {MigrationNotices} from './components/MigrationNotices/MigrationNotices';
 
-import Countdown from "../../components/Countdown";
+import Countdown from '../../components/Countdown';
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -105,6 +106,7 @@ const Home = () => {
                 </Typography>
                 <Box>
                     <Filter sortConfig={sortConfig} setSortConfig={setSortConfig} defaultFilter={defaultFilter} />
+                    <MigrationNotices sortConfig={sortConfig} />
                     <Grid container>
                         {filtered.length === 0 ? '' : (
                             filtered.map(item => (
