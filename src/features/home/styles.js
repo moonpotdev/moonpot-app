@@ -4,7 +4,7 @@ const styles = (theme) => ({
         lineHeight: '34px',
         fontWeight: 500,
         color: '#ffffff',
-        padding: '30px 0',
+        padding: '0 0 56px 0',
         textAlign: 'center',
         '& span': {
             color: '#F3BA2E'
@@ -14,7 +14,7 @@ const styles = (theme) => ({
         backgroundColor: '#437098',
         height: 'auto',
         width: 'min(100%, 500px)',
-        margin: '80px auto 0px auto',
+        margin: '48px auto 0px auto',
         borderRadius: '10px',
         padding: '10px',
         [theme.breakpoints.up('sm')]: {
