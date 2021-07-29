@@ -1,4 +1,4 @@
-export const cakeV1Users = [
+export const whitelistFirstPot = [
     "0x0003718e112ba252e5685fc985561d0b774190fa",
     "0x000a29049158cc3784c03a3a1e519f4c4e896d30",
     "0x000a7f9b917fe3893ee4788465ab412d4f78cceb",

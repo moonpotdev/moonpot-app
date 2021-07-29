@@ -38,8 +38,12 @@ const Provider = (props) => {
                 let nextLogoState = ( newState.isOpen ) ? "none" : "";
                 let stateTimeout = ( newState.isOpen ) ? 0 : 250;
                 
-                setTimeout(function(){
-                    document.getElementById("logo").style.display = nextLogoState;
+                setTimeout(function() {
+                    // element does not exist on resize render
+                    const logo = document.getElementById("logo");
+                    if (logo) {
+                        logo.style.display = nextLogoState;
+                    }
 
                 }, stateTimeout);
             }
