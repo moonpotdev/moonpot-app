@@ -17,6 +17,7 @@ import {burgerMenuStyles, styles} from './styles.js';
 const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
 const Dashboard = React.lazy(() => import(`./features/dashboard`));
+const Dao = React.lazy(() => import(`./features/dao`));
 
 const PageNotFound = () => {
     return <div>Page not found.</div>;
@@ -159,6 +160,9 @@ export default function App() {
                             </Route>
                             <Route strict sensitive exact path="/my-moonpots/:status?">
                                 <Dashboard />
+                            </Route>
+                            <Route strict sensitive exact path="/dao">
+                                <Dao />
                             </Route>
                             <Route>
                                 <PageNotFound />
