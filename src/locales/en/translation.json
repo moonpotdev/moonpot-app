@@ -88,5 +88,11 @@
   "winner4": "Winner 4",
   "winner5": "Winner 5",
   "winners": "Winners",
-  "winningTransactions": "View Transactions"
+  "winningTransactions": "View Transactions",
+  "telegramSocialBlockBody": "Learn about Moonpot and get direct support from the community",
+  "discordSocialBlockBody": "Join the conversation with our active community of developers",
+  "twitterSocialBlockBody": "Get the latest updates and take part in social media giveaways",
+  "telegramSocialBlockButton": "Join our Telegram",
+  "discordSocialBlockButton": "Join our Discord",
+  "twitterSocialBlockButton": "Follow our Twitter"
 }

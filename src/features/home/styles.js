@@ -204,6 +204,9 @@ const styles = (theme) => ({
         marginTop: '-55px',
         marginBottom: '25px',
     },
+    socialMediaSection: {
+        marginTop: '40px',
+    },
 });
 
 export default styles;

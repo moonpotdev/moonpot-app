@@ -15,6 +15,7 @@ import BigNumber from 'bignumber.js';
 import {MigrationNotices} from './components/MigrationNotices/MigrationNotices';
 
 import Countdown from '../../components/Countdown';
+import SocialMediaBlock from './components/SocialMediaBlock/SocialMediaBlock';
 
 const useStyles = makeStyles(styles);
 const defaultFilter = {
@@ -208,6 +209,17 @@ const Home = () => {
                                         <Typography className={classes.communityDescription}>
                                             <Trans i18nKey="homeJoinCommunityBody" />
                                         </Typography>
+                                    </Grid>
+                                </Grid>
+                                <Grid container spacing={3} className={classes.socialMediaSection}>
+                                    <Grid item xs={12} md={3}>
+                                        <SocialMediaBlock type="telegram"/>
+                                    </Grid>
+                                    <Grid item xs={12} md={3}>
+                                        <SocialMediaBlock type="discord"/>
+                                    </Grid>
+                                    <Grid item xs={12} md={3}>
+                                        <SocialMediaBlock type="twitter"/>
                                     </Grid>
                                 </Grid>
                             </Box>
