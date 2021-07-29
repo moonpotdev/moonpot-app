@@ -159,11 +159,14 @@ const MobileHeader = () => {
                     </Button>
                 </Grid>
                 <Grid item xs={10} align={"left"}>
-
                     <Button className={classes.mobileNav} onClick={() => {history.push('/my-moonpots')}}>
                         {t('buttons.myPots')}
                     </Button>
-                        
+                </Grid>
+                <Grid item xs={10} align={"left"}>
+                    <Button className={classes.mobileNav} onClick={() => {history.push('/dao')}}>
+                        {t('buttons.dao')}
+                    </Button>
                 </Grid>
                 <Grid item xs={10} align={"left"}>
                     <Button className={classes.mobileNav} href={"https://docs.moonpot.com"}>

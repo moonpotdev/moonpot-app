@@ -95,14 +95,20 @@ const Navigation = () => {
                         </Link>
                     </Grid>
                     <Grid item xs={10} align={"left"}>
-
                         <Link className={classes.mobileNavItem} onClick={() => {
                             history.push('/my-moonpots');
                             ctx.toggleMenu();
                         }}>
                             {t('buttons.myPots')}
                         </Link>
-                            
+                    </Grid>
+                    <Grid item xs={10} align={"left"}>
+                        <Link className={classes.mobileNavItem} onClick={() => {
+                            history.push('/dao');
+                            ctx.toggleMenu();
+                        }}>
+                            {t('buttons.dao')}
+                        </Link>
                     </Grid>
                     <Grid item xs={10} align={"left"}>
                         <Link className={classes.mobileNavItem} href={"https://docs.moonpot.com"} onClick={() => {
