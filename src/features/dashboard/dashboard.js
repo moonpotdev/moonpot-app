@@ -17,9 +17,18 @@ import Countdown from '../../components/Countdown';
 import Steps from '../vault/components/Steps';
 
 const useStyles = makeStyles(styles);
+
+const VALID_STATUSES = ['active', 'eol'];
 const defaultFilter = {
     status: 'active',
 }
+const getDefaultFilter = (params = {}) => {
+    if ('status' in params && VALID_STATUSES.includes(params.status)) {
+        return {...defaultFilter, status: params.status};
+    }
+
+    return defaultFilter;
+};
 
 const Dashboard = () => {
     const { t } = useTranslation();
@@ -40,7 +49,7 @@ const Dashboard = () => {
     const [depositOpen, setDepositOpen] = React.useState(location.depositOpen);
     const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
     const [prizeSplitOpen, setPrizeSplitOpen] = React.useState(location.prizeSplitOpen);
-    const [sortConfig, setSortConfig] = React.useState('status' in params ? {...defaultFilter, status: params.status} : defaultFilter);
+    const [sortConfig, setSortConfig] = React.useState(getDefaultFilter(params));
     const [filtered, setFiltered] = React.useState([]);
     const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
     const [steps, setSteps] = React.useState({modal: false, currentStep: -1, items: [], finished: false});
