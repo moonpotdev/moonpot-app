@@ -24,6 +24,7 @@ export const pools = [
 		boostAddress: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
 		boostRewardId: 1,
 		boostTokenDecimals: 18,
+		strategyAddress: '0x97e5d50Fe0632A95b9cf1853E744E02f7D816677'
 	},
 	{
 		id: 'cake-bifi',
