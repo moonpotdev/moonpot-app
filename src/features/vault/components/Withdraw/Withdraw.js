@@ -164,7 +164,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                 {
                 retiredFlag ?
                 <React.Fragment>
-                    <Grid item xs={11}>
+                    <Grid item xs={12}>
                         <Box className={classes.eolWithdrawWarningBox}>
                             <Grid container>
                             <Grid item xs={1}>
@@ -188,7 +188,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                             </Grid>
                         </Box>
                     </Grid>
-                    <Grid item xs={11}>
+                    <Grid item xs={12}>
                         <Button onClick={handleWithdraw} className={classes.eolWithdrawBtn}>
                             Withdraw {item.token} and {item.sponsorToken}
                         </Button>
@@ -203,7 +203,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                             <Trans i18nKey="myToken" values={{token: item.token}}/>
                         </Typography>
                     </Grid>
-                    <Grid item xs={7} align={"right"}>
+                    <Grid item xs={8} align={"right"}>
                         <Typography className={classes.withdrawItemValue}>{state.balance} {item.token}</Typography>
                     </Grid>
                     <Grid item xs={4} align={"left"}>
@@ -211,7 +211,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                             <Trans i18nKey="mySponsorToken" values={{sponsorToken: item.sponsorToken}}/>
                         </Typography>
                     </Grid>
-                    <Grid item xs={7} align={"right"}>
+                    <Grid item xs={8} align={"right"}>
                         <Typography className={classes.withdrawItemValue}>{state.earned} {item.sponsorToken}</Typography>
                     </Grid>
                     <Grid item xs={4} align={"left"}>
@@ -219,7 +219,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                             <Trans i18nKey="myBoostToken" values={{boostToken: item.boostToken}}/>
                         </Typography>
                     </Grid>
-                    <Grid item xs={7} align={"right"}>
+                    <Grid item xs={8} align={"right"}>
                         {/* BNB boost value needs populating state.boosted */}
                         <Typography className={classes.withdrawItemValue}>{state.boosted} {item.boostToken}</Typography>
                     </Grid>
@@ -228,7 +228,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                             <Trans i18nKey="myFairplayTimelock"/>
                         </Typography>
                     </Grid>
-                    <Grid item xs={7} align={"right"}>
+                    <Grid item xs={8} align={"right"}>
                         <Typography className={classes.withdrawItemValue}>{formatTimelock(fairplayTimelock)}</Typography>
                     </Grid>
                     <Grid item xs={4} align={"left"}>
@@ -236,10 +236,10 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                             <Trans i18nKey="myCurrentFairnessFee"/>
                         </Typography>
                     </Grid>
-                    <Grid item xs={7} align={"right"}>
+                    <Grid item xs={8} align={"right"}>
                         <Typography className={classes.withdrawItemValue}>{fairnessFee} {item.token}</Typography>
                     </Grid>
-                    <Grid item xs={11}>
+                    <Grid item xs={12}>
                         <Paper component="form" className={classes.input}>
                             <Grid container spacing={1}>
                                 <Grid item xs={2} alignItems={"center"} justifyContent={"center"}>
@@ -254,7 +254,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                             </Grid> 
                         </Paper>
                     </Grid>
-                    <Grid item xs={11}>
+                    <Grid item xs={12}>
                         {wallet.address ? (
                                 <Button onClick={handleWithdraw} className={formData.withdraw.amount < 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={state.balance <= 0}>Withdraw {
                                     state.balance > 0 ? ('All') :
@@ -265,7 +265,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                         )}
                         <Steps item={item} steps={steps} handleClose={handleClose} />
                     </Grid>
-                    <Grid item xs={11}>
+                    <Grid item xs={12}>
                         <a href="https://docs.moonpot.com/faq/moonpot-rules#can-i-withdraw-my-funds-at-any-time" target="_blank" rel="noopener noreferrer" className={classes.docsLink}>
                             <Typography className={classes.withdrawPenaltyWarning}>
                                 <Trans i18nKey="vaultWithdrawPenaltyWarning" values={{token: item.token}} />

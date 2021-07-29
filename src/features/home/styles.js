@@ -16,17 +16,18 @@ const styles = (theme) => ({
         width: 'min(100%, 500px)',
         margin: '48px auto 0px auto',
         borderRadius: '10px',
-        padding: '10px',
+        padding: '24px',
         [theme.breakpoints.up('sm')]: {
             marginLeft: '20px',
             marginRight: '20px',
         },
         boxShadow: '0px 12px 24px rgba(0, 0, 0, 0.4)',
     },
+    potGrid: {
+        flexGrow: '1',
+    },
     potImage: {
         width: '100%',
-        marginTop: '10px',
-        marginLeft: '10px',
     },
     countdown: {
         fontWeight: 700,
@@ -156,7 +157,6 @@ const styles = (theme) => ({
         color: '#DFDDE7',
         left: 'calc(50% - 188px/2)',
         top: 'calc(50% - 20px/2 + 124px)',
-        paddingBottom: '24px',
     },
     communityItem: {
         margin: '105px auto 0px auto',

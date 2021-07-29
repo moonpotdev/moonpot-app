@@ -21,9 +21,10 @@ const styles = (theme) => ({
         borderRadius: '16px',
         boxSizing: 'border-box',
         marginTop: '48px',
+        padding: '24px',
     },
     noActivePotsImage: {
-        marginTop: '24px',
+
     },
     noActivePotsTitle: {
         color: '#585464',
@@ -31,6 +32,7 @@ const styles = (theme) => ({
         fontSize: '24px',
         lineHeight: '36px',
         marginBottom: '12px',
+        marginTop: '24px',
     },
     noActivePotsText: {
         color: '#585464',
@@ -48,8 +50,7 @@ const styles = (theme) => ({
         fontSize: '15px',
         lineHeight: '17.24px',
         color: '#6753DB',
-        marginTop: '24px',
-        marginBottom: '24px',
+        marginTop: '32px',
     },
     activeMyPot: {
         backgroundColor: '#70609A',
@@ -58,7 +59,7 @@ const styles = (theme) => ({
         margin: '80px auto 0px auto',
         marginTop: '56px',
         borderRadius: '16px',
-        padding: '10px',
+        padding: '24px',
         [theme.breakpoints.up('sm')]: {
             marginLeft: '20px',
             marginRight: '20px',
@@ -90,8 +91,6 @@ const styles = (theme) => ({
             background: '#B6ADCC',
             color: 'rgba(255, 255, 255, 0.95)',
         },
-        
-
     },
     eolMyPot: {
         backgroundColor: '#594C7B',
@@ -117,8 +116,6 @@ const styles = (theme) => ({
     },
     potImage: {
         width: '100%',
-        marginTop: '10px',
-        marginLeft: '10px',
     },
     potUsdTop: {
         fontWeight: 700,
@@ -181,7 +178,7 @@ const styles = (theme) => ({
         lineHeight: '20px',
         letterSpacing: '0.2px',
         textTransform: 'capitalize',
-        margin: '12px 12px',
+        margin: '12px 0',
     },
     potsItemValue: {
         color: '#FFFFFF',
@@ -189,7 +186,7 @@ const styles = (theme) => ({
         fontSize: '12px',
         lineHeight: '20px',
         letterSpacing: '0.2px',
-        margin: '12px 12px',
+        margin: '12px 0',
         '& span': {
             textDecoration: 'line-through',
             opacity: 0.6,
@@ -219,7 +216,6 @@ const styles = (theme) => ({
         fontSize: '12px',
         lineHeight: '20px',
         letterSpacing: '0.2px',
-        padding: '0 12px',
     },
     myPotsUpgradeText: {
         color: '#EBF3F9',
@@ -227,7 +223,7 @@ const styles = (theme) => ({
         fontSize: '12px',
         lineHeight: '20px',
         letterSpacing: '0.2px',
-        padding: '16px 12px',
+        paddingBottom: '16px',
     },
     learnMoreText: {
         color: '#F3BA2E',
@@ -235,7 +231,7 @@ const styles = (theme) => ({
         fontSize: '12px',
         lineHeight: '20px',
         letterSpacing: '0.2px',
-        padding: '16px 12px',
+        paddingBottom: '16px',
     },
     enabledActionBtn: {
         backgroundColor: '#FFFFFF',
