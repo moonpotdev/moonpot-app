@@ -97,7 +97,7 @@ function WhitelistMaxi({balance}) {
 			{balanceFulfilled ? null : <p><Link to="/pot/cake-dodo">Deposit now <ArrowRightAlt fontSize="inherit"/></Link></p>}
 		</Requirement>
 		<WhitelistTakePart/>
-		<WhiteListEligbilityText fufilled={balanceFulfilled}/>
+		<WhiteListEligbilityText fulfilled={balanceFulfilled}/>
 	</>;
 }
 
@@ -114,7 +114,7 @@ function WhitelistContest({balance, whitelisted}) {
 			{balanceFulfilled ? null : <p><Link to="/pot/cake-dodo">Deposit now <ArrowRightAlt fontSize="inherit"/></Link></p>}
 		</Requirement>
 		<WhitelistTakePart/>
-		<WhiteListEligbilityText fufilled={whitelisted && balanceFulfilled}/>
+		<WhiteListEligbilityText fulfilled={whitelisted && balanceFulfilled}/>
 	</>;
 }
 
