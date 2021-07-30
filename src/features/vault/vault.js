@@ -125,11 +125,11 @@ const Vault = () => {
                                 <Typography className={classes.potUsd} align={"right"}> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
                                 <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={6} style={{paddingRight: '8px'}}>
                                 <Typography className={classes.subTitle} align={"left"}>{t('nextWeeklyDraw')}</Typography>
                                 <Typography className={classes.countdown} align={"left"}><Countdown expiresAt={item.expiresAt*1000} /> </Typography>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={6} style={{paddingLeft: '8px'}}>
                                 <Typography className={classes.subTitle} align={'right'}>{t('interest')}</Typography>
                                 <Typography className={classes.apy}><span>{item.apy}%</span> {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
                             </Grid>
