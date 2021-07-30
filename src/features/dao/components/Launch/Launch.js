@@ -6,6 +6,7 @@ import {whitelistSafepal} from '../../../../config/dao/whitelist/safepal';
 import {whitelistFirstPot} from '../../../../config/dao/whitelist/firstpot';
 import {whitelistBifiMaxi} from '../../../../config/dao/whitelist/bifimaxi';
 import {whitelistCommunity} from '../../../../config/dao/whitelist/community';
+import {whitelistSecondPot} from "../../../../config/dao/whitelist/secondpot";
 import {byDecimals} from '../../../../helpers/format';
 import BigNumber from 'bignumber.js';
 import {makeStyles, Typography} from '@material-ui/core';
@@ -141,6 +142,8 @@ function Whitelist({currentAddress}) {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const balance = useSelector(state => byDecimals(new BigNumber(state.balanceReducer.tokens['potCAKEv2']?.balance || '0'), 18));
+	// balance will switch to static snapshot
+	// const balance = whitelistSecondPot[currentAddress] || 0
 
 	const inWhitelistFirstPot = useMemo(() => {
 		return currentAddress && whitelistFirstPot.includes(currentAddress);
