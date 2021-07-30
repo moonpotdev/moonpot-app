@@ -5,7 +5,6 @@ const styles = (theme) => ({
     },
     logo: {
         cursor: 'pointer',
-        paddingLeft: '7.5%',
     },
     navHeader: {
         width: '100%',
@@ -17,7 +16,7 @@ const styles = (theme) => ({
         position: 'static',
         marginLeft: '0px',
         '& .MuiToolbar-root': {
-            padding: 0,
+            padding: '0 48px',
         },
         '& .MuiButton-outlined': {
             borderColor: '#9F8FFF',
@@ -58,6 +57,7 @@ const styles = (theme) => ({
     walletContainerContainer: {
         display: 'flex',
         alignItems: 'center',
+        paddingRight: 24,
     },
 })
 

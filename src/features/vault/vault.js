@@ -226,13 +226,13 @@ const Vault = () => {
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
                                         <Typography className={classes.infoMessage} align={"left"}>
-                                            <Trans i18nKey="moonpotStrategyMessage" values={{token: item.token, sponsor: item.sponsorProjectName}}/>
+                                            <Trans i18nKey="moonpotStrategyMessage" values={{token: item.token}}/>
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
-                                        <a href="https://bscscan.com/address/0x97e5d50Fe0632A95b9cf1853E744E02f7D816677">
+                                        <a href={`https://bscscan.com/address/${item.strategyAddress}`}>
                                             <Typography className={classes.infoMessage} align={"left"}>
-                                                    {item.sponsorProjectName} Vault Address <OpenInNew fontSize="small"/>
+                                                    Beefy Vault Address <OpenInNew fontSize="small"/>
                                             </Typography>
                                         </a>
                                     </Grid>

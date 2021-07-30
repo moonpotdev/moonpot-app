@@ -3,22 +3,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import reduxActions from '../../../redux/actions';
 import {byDecimals} from '../../../../helpers/format';
 import BigNumber from 'bignumber.js';
-import {Box, Button, makeStyles} from '@material-ui/core';
+import {Box, makeStyles} from '@material-ui/core';
 import styles from './styles';
 import {useTranslation} from 'react-i18next';
-import {Link} from 'react-router-dom';
 import alertIcon from '../../../../images/icons/alert.svg';
+import {ButtonLink} from '../../../../components/ButtonLink/ButtonLink';
 
 const useStyles = makeStyles(styles);
-
-function ButtonLinkComponent({navigate, children, ...rest}) {
-	// Don't pass the navigation function down to the <a>
-	return <Button {...rest}>{children}</Button>;
-}
-
-function ButtonLink({children, ...rest}) {
-	return <Link {...rest} component={ButtonLinkComponent}>{children}</Link>
-}
 
 function MigrationNotice({pot}) {
 	const classes = useStyles();
