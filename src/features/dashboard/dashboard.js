@@ -257,17 +257,17 @@ const Dashboard = () => {
                             {filtered.length === 0 ?
 
                                 <Box className={classes.noActivePots}>
-                                    <Grid container spacing={2}>
+                                    <Grid container>
                                         <Grid item xs={5}>
                                             <img className={classes.noActivePotsImage} alt="No Active Moonpots" src={require('../../images/ziggy/noActivePots.svg').default} />
                                         </Grid>
                                         <Grid item xs={8}>
                                             <Typography className={classes.noActivePotsTitle}>{t('playWithMoonpot')}</Typography>
                                         </Grid>
-                                        <Grid item xs={10}>
+                                        <Grid item xs={12}>
                                             <Typography className={classes.noActivePotsText}>{t('youHaventEnteredMoonpots')}</Typography>
                                         </Grid>
-                                        <Grid item xs={10}>
+                                        <Grid item xs={12}>
                                             <Button
                                             className={classes.noActivePotsPlayButton}
                                             onClick={() => {history.push('/')}}
@@ -303,21 +303,21 @@ const Dashboard = () => {
                                                 // Active Layout
                                                 // =================
                                                 <React.Fragment>
-                                                    <Grid item xs={7}>
+                                                    <Grid item xs={8}>
                                                         <Typography className={classes.potUsdTop} align={"right"}>${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()} <span>{t('in')}</span> {item.token}</Typography>
                                                         <Typography className={classes.potUsd} align={"right"}>& {item.sponsorToken} PRIZES</Typography>
                                                         <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown expiresAt={item.expiresAt*1000} /> </span></Typography>
                                                     </Grid>
-                                                    <Grid item xs={11}>
+                                                    <Grid item xs={12}>
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
                                                     <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
                                                         <Typography className={classes.dividerText} onClick={() => {setDetailsOpen(!detailsOpen)}}>{t('myDetails')} </Typography>
                                                     </Grid>
-                                                    <Grid item xs={2} align={"right"} style={{paddingBottom: 0}}>
+                                                    <Grid item xs={3} align={"right"} style={{paddingBottom: 0}}>
                                                         <Link onClick={() => {setDetailsOpen(!detailsOpen)}} className={classes.expandToggle}>{detailsOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
-                                                    <Grid item xs={11} style={{padding: 0}}>
+                                                    <Grid item xs={12} style={{padding: '0 8px'}}>
                                                         <AnimateHeight duration={ 500 } height={ detailsOpen ? 'auto' : 0 }>
                                                             <Grid container>
                                                                 <Grid item xs={6}>
@@ -343,7 +343,7 @@ const Dashboard = () => {
                                                             </Grid>
                                                         </AnimateHeight>
                                                     </Grid>
-                                                    <Grid item xs={11}>
+                                                    <Grid item xs={12}>
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
                                                     <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
@@ -351,10 +351,10 @@ const Dashboard = () => {
                                                             <Trans i18nKey="bonusEarnings"/>
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={2} align={"right"} style={{paddingBottom: 0}}>
+                                                    <Grid item xs={3} align={"right"} style={{paddingBottom: 0}}>
                                                         <Link onClick={() => {setBonusOpen(!bonusOpen)}} className={classes.expandToggle}>{bonusOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
-                                                    <Grid item xs={11} style={{padding: 0}}>
+                                                    <Grid item xs={12} style={{padding: '0 8px'}}>
                                                         <AnimateHeight duration={ 500 } height={ bonusOpen ? 'auto' : 0 }>
                                                             <Grid container>
                                                                 <Grid item xs={6}>
@@ -378,7 +378,7 @@ const Dashboard = () => {
                                                                         <Trans i18nKey="bonusExtraInfo" values={{sponsorToken: item.sponsorToken, boostToken: item.boostToken}}/>
                                                                     </Typography>
                                                                 </Grid>
-                                                                <Grid item xs={12} style={{padding: '0 12px'}}>
+                                                                <Grid item xs={12} >
                                                                     <Button onClick={() => handleWithdrawBonus(item)} className={item.earned <= 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned <= 0}>
                                                                         Withdraw Bonus {item.sponsorToken} and {item.boostToken}
                                                                     </Button>
@@ -389,18 +389,18 @@ const Dashboard = () => {
                                                             </Grid>
                                                         </AnimateHeight>
                                                     </Grid>
-                                                    <Grid item xs={11}>
+                                                    <Grid item xs={12}>
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
                                                     <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
                                                         <Typography className={classes.dividerText} onClick={() => {setDepositOpen(!depositOpen)}}>{t('depositMore')} </Typography>
                                                     </Grid>
-                                                    <Grid item xs={2} align={"right"} style={{paddingBottom: 0}}>
+                                                    <Grid item xs={3} align={"right"} style={{paddingBottom: 0}}>
                                                         <Link onClick={() => {setDepositOpen(!depositOpen)}} className={classes.expandToggle}>{depositOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
-                                                    <Grid item xs={11} style={{padding: 0}}>
+                                                    <Grid item xs={12} style={{padding: '0 8px'}}>
                                                         <AnimateHeight duration={ 500 } height={ depositOpen ? 'auto' : 0 }>
-                                                            <Box style={{padding: '12px'}}>
+                                                            <Box style={{padding: '12px 0'}}>
                                                                 <Deposit
                                                                     item={item}
                                                                     handleWalletConnect={handleWalletConnect}
@@ -410,7 +410,7 @@ const Dashboard = () => {
                                                                     resetFormData={resetFormData}
                                                                     depositMore={true}
                                                                 />
-                                                                <Grid item xs={11}>
+                                                                <Grid item xs={12}>
                                                                     <Typography className={classes.depositMoreExtraInfo}>
                                                                         {t('depositMoreExtraInfo')}
                                                                     </Typography>
@@ -419,16 +419,16 @@ const Dashboard = () => {
 
                                                         </AnimateHeight>
                                                     </Grid>
-                                                    <Grid item xs={11}>
+                                                    <Grid item xs={12}>
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
-                                                    <Grid item xs={9} align={"left"}>
+                                                    <Grid item xs={9} align={"left"} style={{paddingBottom: '0'}}>
                                                         <Typography className={classes.dividerText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{t('withdraw')} </Typography>
                                                     </Grid>
-                                                    <Grid item xs={2} align={"right"}>
+                                                    <Grid item xs={3} align={"right"} style={{paddingBottom: '0'}}>
                                                         <Link onClick={() => {setWithdrawOpen(!withdrawOpen)}} className={classes.expandToggle}>{withdrawOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
-                                                    <Grid item xs={12}>
+                                                    <Grid item xs={12} style={{padding: '0 8px'}}>
                                                         <AnimateHeight duration={ 500 } height={ withdrawOpen ? 'auto' : 0 }>
                                                                 <Withdraw
                                                                     item={item}
@@ -446,15 +446,15 @@ const Dashboard = () => {
                                                 // EOL Layout
                                                 // =================
                                                 <React.Fragment>
-                                                    <Grid item xs={7}>
+                                                    <Grid item xs={8}>
                                                         <Typography className={classes.potUsdTop} align={"right"}>Retired {item.token}</Typography>
                                                         <Typography className={classes.potUsd} align={"right"}>Moonpot</Typography>
                                                         <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span>Closed</span></Typography>
                                                     </Grid>
-                                                    <Grid item xs={11} align={"left"} style={{padding: '16px 0px'}}>
+                                                    <Grid item xs={12} align={"left"} >
                                                         <Typography className={classes.dividerText}>{t('myDetails')} </Typography>
                                                     </Grid>
-                                                    <Grid item xs={11} style={{padding: 0}}>
+                                                    <Grid item xs={12} >
                                                         <Grid container>
                                                             <Grid item xs={6}>
                                                                 <Typography className={classes.myDetailsText} align={'left'}>
@@ -498,7 +498,7 @@ const Dashboard = () => {
                                                                         <Trans i18nKey="learnMore"/>
                                                                     </Typography>
                                                                 </Grid>
-                                                                <Grid item xs={12} style={{padding: '0 12px'}}>
+                                                                <Grid item xs={12}>
                                                                     <Button onClick={() => handleMigrator(item)} className={item.userBalance <= 0 ? classes.disabledActionBtn : classes.eolMoveBtn} variant={'contained'} disabled={item.userBalance <= 0}>
                                                                         Move {item.token} and Withdraw {item.sponsorToken}
                                                                     </Button>
@@ -524,19 +524,19 @@ const Dashboard = () => {
 
                                                             </Grid>
                                                     </Grid>
-                                                    <Grid item xs={11}>
+                                                    <Grid item xs={12}>
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
 
-                                                    <Grid item xs={9} align={"left"} style={{paddingLeft: 0}}>
+                                                    <Grid item xs={9} align={"left"} >
                                                         <Typography className={classes.dividerText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>
                                                             <Trans i18nKey="withdrawTokenAndSponsorToken" values={{token: item.token, sponsorToken: item.sponsorToken}}/>
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={2} align={"right"} style={{paddingRight: 0}}>
+                                                    <Grid item xs={3} align={"right"} style={{paddingRight: 0}}>
                                                         <Link onClick={() => {setWithdrawOpen(!withdrawOpen)}} className={classes.expandToggle}>{withdrawOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
-                                                    <Grid item xs={12} style={{padding: 0}}>
+                                                    <Grid item xs={12} >
                                                         <AnimateHeight duration={ 500 } height={ withdrawOpen ? 'auto' : 0 }>
                                                                 <Withdraw
                                                                     item={item}
@@ -549,16 +549,16 @@ const Dashboard = () => {
                                                                 />
                                                         </AnimateHeight>
                                                     </Grid>
-                                                    <Grid item xs={11}>
+                                                    <Grid item xs={12}>
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
-                                                    <Grid item xs={9} align={"left"} style={{paddingLeft: 0}}>
+                                                    <Grid item xs={9} align={"left"}>
                                                         <Typography className={classes.dividerText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeWinners')} </Typography>
                                                     </Grid>
-                                                    <Grid item xs={2} align={"right"} style={{paddingRight: 0}}>
+                                                    <Grid item xs={3} align={"right"}>
                                                         <Link onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}} className={classes.expandToggle}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
-                                                    <Grid item xs={12}>
+                                                    <Grid item xs={12} style={{padding: '0 8px'}}>
                                                         <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                                             <Grid container>
                                                                 <Grid item xs={6} align={"left"}>

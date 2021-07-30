@@ -17,7 +17,7 @@ const styles = (theme) => ({
         margin: '80px auto 0px auto',
         marginTop: '56px',
         borderRadius: '16px',
-        padding: '10px',
+        padding: '24px',
         marginBottom: '4px',
         [theme.breakpoints.up('sm')]: {
             marginLeft: '20px',
@@ -28,8 +28,6 @@ const styles = (theme) => ({
     },
     potImage: {
         width: '100%',
-        marginTop: '10px',
-        marginLeft: '10px',
     },
     countdown: {
         fontWeight: 700,
@@ -326,7 +324,6 @@ const styles = (theme) => ({
         lineHeight: '145%',
         color: '#EBF3F9',
         letterSpacing: '0.2px',
-        marginBottom: '20px',
         textAlign: 'center',
         '& span': {
             textDecoration: "underline",
@@ -356,11 +353,11 @@ const styles = (theme) => ({
         boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2), 0px 12px 24px -10px rgba(0, 0, 0, 0.4)',
         borderRadius: '16px',
         margin: '24px 0px',
-        padding: '12px 0px',
+        padding: '24px',
         width: 'min(100%, 452px)',
     },
     ziggyTimelock: {
-        padding: '24px',
+        paddingBottom: '24px',
     },
     infoTitle: {
         color: '#FAFAFC',
@@ -368,7 +365,6 @@ const styles = (theme) => ({
         fontSize: '16px',
         lineHeight: '20px',
         letterSpacing: '0.6px',
-        padding: '16px 24px',
     },
     infoSubHeader: {
         color: '#EBF3F9',
@@ -378,7 +374,6 @@ const styles = (theme) => ({
         letterSpacing: '1px',
         textTransform: 'uppercase',
         paddingTop: '20px',
-        paddingLeft: '24px',
     },
     infoMessage: {
         color: '#D9D9E8',
@@ -386,7 +381,7 @@ const styles = (theme) => ({
         fontSize: '12px',
         lineHeight: '16px',
         letterSpacing: '0.2px',
-        padding: '12px 24px',
+        padding: '12px 0',
 
     },
     infoDetail: {
@@ -396,7 +391,6 @@ const styles = (theme) => ({
         lineHeight: '24px',
         paddingTop: '5px',
         paddingBottom: '20px',
-        paddingLeft: '24px',
         '& span': {
             textDecoration: 'line-through',
         }
