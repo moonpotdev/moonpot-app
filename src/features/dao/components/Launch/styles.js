@@ -111,6 +111,14 @@ const styles = (theme) => ({
 	},
 	button: {
 		margin: '24px 0',
+	},
+	countdown: {
+		margin: '24px 0',
+		textAlign: 'center',
+		fontWeight: 500,
+		fontSize: '19px',
+		lineHeight: '28px',
+		letterSpacing: '0.6px',
 	}
 });
 

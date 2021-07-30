@@ -15,6 +15,10 @@ export const ButtonWhite = withStyles({
 		textAlign: 'center',
 		'&:hover': {
 			backgroundColor: '#e8e8e8',
+		},
+		'&.Mui-disabled': {
+			color: '#6F609A',
+			backgroundColor: 'rgba(255, 255, 255, 0.6)',
 		}
-	}
+	},
 })(Button);

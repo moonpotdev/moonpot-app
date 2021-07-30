@@ -306,7 +306,7 @@ const Dashboard = () => {
                                                     <Grid item xs={8}>
                                                         <Typography className={classes.potUsdTop} align={"right"}>${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()} <span>{t('in')}</span> {item.token}</Typography>
                                                         <Typography className={classes.potUsd} align={"right"}>& {item.sponsorToken} PRIZES</Typography>
-                                                        <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown expiresAt={item.expiresAt*1000} /> </span></Typography>
+                                                        <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown until={item.expiresAt*1000} /> </span></Typography>
                                                     </Grid>
                                                     <Grid item xs={12}>
                                                         <Divider className={classes.divider}/>
