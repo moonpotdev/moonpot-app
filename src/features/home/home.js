@@ -113,7 +113,7 @@ const Home = () => {
                             filtered.map(item => (
                                 <React.Fragment key={item.id}>
                                     <Box className={classes.potItem}>
-                                        <Grid container spacing={3}>
+                                        <Grid container>
                                             <Grid item xs={4}>
                                                 <Box className={classes.potImage}>
                                                         <img 
@@ -145,7 +145,7 @@ const Home = () => {
                                                 <Typography className={classes.potDataPoint}>{item.tvl}</Typography>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Divider className={classes.divider}/>
+                                                <Divider className={classes.divider} style={{marginBottom:'16px'}}/>
                                             </Grid>
                                             <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
                                                 <Typography className={classes.prizeSplitText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeSplit')} </Typography>
@@ -168,7 +168,7 @@ const Home = () => {
                                                 </AnimateHeight>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Divider className={classes.divider}/>
+                                                <Divider className={classes.divider} style={{marginBottom:'20px'}}/>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.playWith')} {item.token}</Button>

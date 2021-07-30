@@ -28,6 +28,7 @@ const styles = (theme) => ({
     },
     potImage: {
         width: '100%',
+        marginBottom: '20px',
     },
     countdown: {
         fontWeight: 700,
@@ -35,6 +36,7 @@ const styles = (theme) => ({
         lineHeight: '24px',
         letterSpacing: '0.2px',
         color: '#ffffff',
+        marginBottom: '16px',
     },
     subTitle: {
         fontWeight: 700,
@@ -50,6 +52,7 @@ const styles = (theme) => ({
         lineHeight: '24px',
         color: '#ffffff',
         textAlign: 'right',
+        marginBottom: '16px',
         '& span': {
             textDecoration: 'line-through',
             opacity: '0.6',
@@ -100,6 +103,7 @@ const styles = (theme) => ({
         fontSize: '15px',
         lineHeight: '24px',
         color: '#ffffff',
+        marginBottom: '20px',
     },
     prizeSplitText: {
         fontWeight: 700,
@@ -167,7 +171,7 @@ const styles = (theme) => ({
         lineHeight: '139%',
         letterSpacing: '0.2px',
         color: '#3675A2',
-        margin: '16px 0 8px 0',
+        margin: '16px 0 12px 0',
     },
     disabledActionBtn: {
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
@@ -180,7 +184,7 @@ const styles = (theme) => ({
         lineHeight: '139%',
         letterSpacing: '0.2px',
         color: 'rgba(54, 117, 162, 0.4)',
-        margin: '16px 0 8px 0',
+        margin: '16px 0 12px 0',
     },
     actionBtn: {
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
@@ -248,6 +252,7 @@ const styles = (theme) => ({
         lineHeight: '16px',
         fontWeight: 400,
         letterSpacing: '0.2px',
+        marginBottom: '20px',
         '& span': {
             textDecoration: 'underline',
         },
@@ -308,6 +313,7 @@ const styles = (theme) => ({
         fontSize: '12px',
         lineHeight: '145%',
         letterSpacing: '0.2px',
+        marginBottom: '16px',
     },
     withdrawItemValue: {
         color: '#FFFFFF',
@@ -357,7 +363,7 @@ const styles = (theme) => ({
         width: 'min(100%, 452px)',
     },
     ziggyTimelock: {
-        paddingBottom: '24px',
+        paddingBottom: '20px',
     },
     infoTitle: {
         color: '#FAFAFC',
@@ -365,6 +371,7 @@ const styles = (theme) => ({
         fontSize: '16px',
         lineHeight: '20px',
         letterSpacing: '0.6px',
+        marginBottom: '16px',
     },
     infoSubHeader: {
         color: '#EBF3F9',
@@ -373,7 +380,6 @@ const styles = (theme) => ({
         lineHeight: '16px',
         letterSpacing: '1px',
         textTransform: 'uppercase',
-        paddingTop: '20px',
     },
     infoMessage: {
         color: '#D9D9E8',
@@ -381,7 +387,6 @@ const styles = (theme) => ({
         fontSize: '12px',
         lineHeight: '16px',
         letterSpacing: '0.2px',
-        padding: '12px 0',
 
     },
     infoDetail: {
@@ -419,7 +424,7 @@ const styles = (theme) => ({
         backgroundColor: '#fff',
         borderRadius: '16px',
         padding: '20px',
-        marginBottom: '32px',
+        marginBottom: '0px',
         marginLeft: '16px',
         marginRight: '16px',
     },

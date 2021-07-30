@@ -106,7 +106,7 @@ const Vault = () => {
                 
                 <Grid container>
                     <Box className={classes.vaultPotItem}>
-                        <Grid container spacing={2}>
+                        <Grid container>
                             <Grid item xs={4} align={"left"}>
                             <Box className={classes.potImage}>
                                 <img 
@@ -138,7 +138,7 @@ const Vault = () => {
                                 <Typography className={classes.potDataPoint}>{item.tvl}</Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <Divider className={classes.divider}/>
+                                <Divider className={classes.divider} style={{marginBottom: '16px'}} />
                             </Grid>
                             <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
                                 <Typography className={classes.prizeSplitText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeSplit')} </Typography>
@@ -161,7 +161,7 @@ const Vault = () => {
                                 </AnimateHeight>
                             </Grid>
                             <Grid item xs={12}>
-                                <Divider className={classes.divider}></Divider>
+                                <Divider className={classes.divider} style={{marginBottom: '20px', marginTop: '4px'}}></Divider>
                             </Grid>
                             <Grid item xs={12}>
                                 <Deposit
@@ -179,7 +179,7 @@ const Vault = () => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <Divider className={classes.divider}></Divider>
+                                <Divider className={classes.divider} style={{marginBottom: '16px'}}></Divider>
                             </Grid>
                             <Grid item xs={9} align={"left"}>
                                 <Typography className={classes.withdrawText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{t('withdraw')} </Typography>
@@ -225,11 +225,11 @@ const Vault = () => {
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoMessage} align={"left"}>
+                                        <Typography className={classes.infoMessage} align={"left"} style={{marginBottom: '32px'}}>
                                             <Trans i18nKey="moonpotStrategyMessage" values={{token: item.token}}/>
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={12} align={"left"}>
+                                    <Grid item xs={12} align={"left"} style={{marginBottom: '16px'}}>
                                         <a href={`https://bscscan.com/address/${item.strategyAddress}`}>
                                             <Typography className={classes.infoMessage} align={"left"}>
                                                     Beefy Vault Address <OpenInNew fontSize="small"/>
@@ -290,7 +290,7 @@ const Vault = () => {
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoDetail} align={"left"}>
+                                        <Typography className={classes.infoDetail} align={"left"} style={{paddingBottom: 0}}>
                                             5%
                                         </Typography>
                                     </Grid>

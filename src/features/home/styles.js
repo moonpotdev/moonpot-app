@@ -28,6 +28,7 @@ const styles = (theme) => ({
     },
     potImage: {
         width: '100%',
+        marginBottom: '24px',
     },
     countdown: {
         fontWeight: 700,
@@ -35,6 +36,7 @@ const styles = (theme) => ({
         lineHeight: '24px',
         letterSpacing: '0.2px',
         color: '#ffffff',
+        marginBottom: '16px',
     },
     subTitle: {
         fontWeight: 700,
@@ -50,6 +52,7 @@ const styles = (theme) => ({
         lineHeight: '24px',
         color: '#ffffff',
         textAlign: 'right',
+        marginBottom: '16px',
         '& span': {
             color: '#A0BBD5',
             textDecoration: 'line-through',
@@ -89,6 +92,7 @@ const styles = (theme) => ({
         lineHeight: '20px',
         color: '#EBF3F9',
         textAlign: 'right',
+        marginBottom: '24px',
         '& span': {
             color: '#FFFFFF',
         }
@@ -98,6 +102,7 @@ const styles = (theme) => ({
         fontSize: '15px',
         lineHeight: '24px',
         color: '#ffffff',
+        marginBottom: '20px',
     },
     divider: {
         color: '#5989B5',
@@ -118,6 +123,7 @@ const styles = (theme) => ({
         textTransform: 'uppercase',
         color: '#EBF3F9',
         cursor: 'pointer',
+        marginBottom: '16px',
     },
     prizeSplitWinners: {
         fontWeight: 400,
@@ -148,6 +154,7 @@ const styles = (theme) => ({
         fontSize: '15px',
         letterSpacing: '0.2px',
         color: '#3675A2',
+        marginBottom: '8px',
     },
     oddsPerDeposit: {
         fontWeight: 300,
