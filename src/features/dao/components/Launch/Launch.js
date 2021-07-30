@@ -36,7 +36,7 @@ function Intro() {
 
 	return <Card>
 		<img className={classes.rocket} src={ZiggyRocket104} srcSet={`${ZiggyRocket104} 104w, ${ZiggyRocket208} 208w`} width="104" height="104" alt="" aria-hidden={true} />
-		<Typography variant="h2" className={classes.cardTitle}>POTS Launch Agust 2nd, 2021</Typography>
+		<Typography variant="h2" className={classes.cardTitle}>POTS Launch August 2nd, 2021</Typography>
 		<Typography>Moonpot is the win-win savings game where you earn interest, win big crypto prizes - and always keep
 			your deposit</Typography>
 		<Typography>Next week we will launch our POTS token that will let you vote in governance, earn interest via
