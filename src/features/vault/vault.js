@@ -120,12 +120,12 @@ const Vault = () => {
                                 />
                             </Box>
                             </Grid>
-                            <Grid item xs={7}>
+                            <Grid item xs={8}>
                                 <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
                                 <Typography className={classes.potUsd} align={"right"}> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
                                 <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item xs={6}>
                                 <Typography className={classes.subTitle} align={"left"}>{t('nextWeeklyDraw')}</Typography>
                                 <Typography className={classes.countdown} align={"left"}><Countdown expiresAt={item.expiresAt*1000} /> </Typography>
                             </Grid>
@@ -133,20 +133,20 @@ const Vault = () => {
                                 <Typography className={classes.subTitle} align={'right'}>{t('interest')}</Typography>
                                 <Typography className={classes.apy}><span>{item.apy}%</span> {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
                             </Grid>
-                            <Grid item xs={11}>
+                            <Grid item xs={12}>
                                 <Typography className={classes.subTitle}>{t('tvl')}</Typography>
                                 <Typography className={classes.potDataPoint}>{item.tvl}</Typography>
                             </Grid>
-                            <Grid item xs={11}>
+                            <Grid item xs={12}>
                                 <Divider className={classes.divider}/>
                             </Grid>
                             <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
                                 <Typography className={classes.prizeSplitText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeSplit')} </Typography>
                             </Grid>
-                            <Grid item xs={2} align={"right"} style={{paddingBottom: 0}}>
+                            <Grid item xs={3} align={"right"} style={{paddingBottom: 0}}>
                                 <Link className={classes.expandToggle} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                             </Grid>
-                            <Grid item xs={11} style={{padding: 0}}>
+                            <Grid item xs={12} style={{padding: 0}}>
                                 <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                     <Grid container spacing={1}>
                                         <Grid item xs={4} align={"left"}>
@@ -160,10 +160,10 @@ const Vault = () => {
                                     </Grid>
                                 </AnimateHeight>
                             </Grid>
-                            <Grid item xs={11}>
+                            <Grid item xs={12}>
                                 <Divider className={classes.divider}></Divider>
                             </Grid>
-                            <Grid item xs={11}>
+                            <Grid item xs={12}>
                                 <Deposit
                                     item={item}
                                     handleWalletConnect={handleWalletConnect}
@@ -173,18 +173,18 @@ const Vault = () => {
                                     resetFormData={resetFormData}
                                 />
                             </Grid>
-                            <Grid item xs={11}>
+                            <Grid item xs={12}>
                                 <Typography className={classes.fairplayDepositMessage}>
                                     <Trans i18nKey="fairplayDepositMessage"/> <Link onClick={() => window.scrollTo(0, fairPlayRef.current.offsetTop)}>{t('buttons.learnMore')}</Link>
                                 </Typography>
                             </Grid>
-                            <Grid item xs={11}>
+                            <Grid item xs={12}>
                                 <Divider className={classes.divider}></Divider>
                             </Grid>
                             <Grid item xs={9} align={"left"}>
                                 <Typography className={classes.withdrawText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{t('withdraw')} </Typography>
                             </Grid>
-                            <Grid item xs={2} align={"right"}>
+                            <Grid item xs={3} align={"right"}>
                                 <Link className={classes.expandToggle} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{withdrawOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                             </Grid>
                             <Grid item xs={12}>
