@@ -164,7 +164,7 @@ const MobileHeader = () => {
                     </Button>
                 </Grid>
                 <Grid item xs={10} align={"left"}>
-                    <Button className={classes.mobileNav} onClick={() => {history.push('/dao')}}>
+                    <Button className={classes.mobileNav} onClick={() => {history.push('/ido')}}>
                         {t('buttons.ido')}
                     </Button>
                 </Grid>

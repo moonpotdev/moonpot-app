@@ -104,7 +104,7 @@ const Navigation = () => {
                     </Grid>
                     <Grid item xs={10} align={"left"}>
                         <Link className={classes.mobileNavItem} onClick={() => {
-                            history.push('/dao');
+                            history.push('/ido');
                             ctx.toggleMenu();
                         }}>
                             {t('buttons.ido')}
@@ -171,7 +171,7 @@ export default function App() {
                             <Route strict sensitive exact path="/my-moonpots/:status?">
                                 <Dashboard />
                             </Route>
-                            <Route strict sensitive exact path="/dao">
+                            <Route strict sensitive exact path="/ido">
                                 <Dao />
                             </Route>
                             <Route>
