@@ -38,12 +38,15 @@ const Header = () => {
                         </Box>
                     </Grid>
                     
-                    <Grid item className={classes.navContainer} xs={5} align={"center"}>
+                    <Grid item className={classes.navContainer} xs={6} align={"center"}>
                         <Link className={classes.navLink} onClick={() => {history.push('/')}}>
                             {t('buttons.moonpots')}
                         </Link>
                         <Link className={classes.navLink} onClick={() => {history.push('/my-moonpots')}}>
                             {t('buttons.myPots')}
+                        </Link>
+                        <Link className={classes.navLink} onClick={() => {history.push('/dao')}}>
+                            {t('buttons.ido')}
                         </Link>
                         <Link className={classes.navLink} href={"https://docs.moonpot.com"}>
                             {t('buttons.docs')}

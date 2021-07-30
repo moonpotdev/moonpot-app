@@ -17,6 +17,7 @@ import {burgerMenuStyles, styles} from './styles.js';
 const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
 const Dashboard = React.lazy(() => import(`./features/dashboard`));
+const Dao = React.lazy(() => import(`./features/dao`));
 
 const PageNotFound = () => {
     return <div>Page not found.</div>;
@@ -37,8 +38,12 @@ const Provider = (props) => {
                 let nextLogoState = ( newState.isOpen ) ? "none" : "";
                 let stateTimeout = ( newState.isOpen ) ? 0 : 250;
                 
-                setTimeout(function(){
-                    document.getElementById("logo").style.display = nextLogoState;
+                setTimeout(function() {
+                    // element does not exist on resize render
+                    const logo = document.getElementById("logo");
+                    if (logo) {
+                        logo.style.display = nextLogoState;
+                    }
 
                 }, stateTimeout);
             }
@@ -90,14 +95,20 @@ const Navigation = () => {
                         </Link>
                     </Grid>
                     <Grid item xs={10} align={"left"}>
-
                         <Link className={classes.mobileNavItem} onClick={() => {
                             history.push('/my-moonpots');
                             ctx.toggleMenu();
                         }}>
                             {t('buttons.myPots')}
                         </Link>
-                            
+                    </Grid>
+                    <Grid item xs={10} align={"left"}>
+                        <Link className={classes.mobileNavItem} onClick={() => {
+                            history.push('/dao');
+                            ctx.toggleMenu();
+                        }}>
+                            {t('buttons.ido')}
+                        </Link>
                     </Grid>
                     <Grid item xs={10} align={"left"}>
                         <Link className={classes.mobileNavItem} href={"https://docs.moonpot.com"} onClick={() => {
@@ -159,6 +170,9 @@ export default function App() {
                             </Route>
                             <Route strict sensitive exact path="/my-moonpots/:status?">
                                 <Dashboard />
+                            </Route>
+                            <Route strict sensitive exact path="/dao">
+                                <Dao />
                             </Route>
                             <Route>
                                 <PageNotFound />
