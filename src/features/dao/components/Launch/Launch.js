@@ -56,8 +56,8 @@ function AirdropSafepal({amount}) {
 			<div className={classes.airdropAllocation}>Airdrop Allocation</div>
 			<div className={classes.airdropAmount}>{amount} POTS</div>
 		</div>
-		<Typography><strong>Hooray!</strong><br/>You were successful in the SafePal WHO and will receive POTS after the
-			IDO soft cap is reached, starting August 2nd, 2021.</Typography>
+		<Typography><strong>Hooray!</strong><br/>You were successful in the SafePal WHO and will receive POTS after
+			the IDO ends on August 3.</Typography>
 		<Typography><a href={URL_LEARN_MORE_POTS} target="_blank" rel="noreferrer">Learn more about POTS <OpenInNew
 			fontSize="inherit"/></a></Typography>
 	</Card>;
@@ -168,7 +168,7 @@ function Whitelist({currentAddress}) {
 	const showWhitelistContest = !showWhitelistFirstPot && !showWhitelistMaxi;
 
 	return <Card>
-		<Typography variant="h2" className={classes.cardTitle}>My Whitelisting</Typography>
+		<Typography variant="h2" className={classes.cardTitle}>My IDO Whitelisting</Typography>
 		{showWhitelistFirstPot ? <WhitelistFirstPot/> : null}
 		{showWhitelistMaxi ? <WhitelistMaxi balance={balance}/> : null}
 		{showWhitelistContest ? <WhitelistContest balance={balance} whitelisted={inWhitelistCommunity}/> : null}
