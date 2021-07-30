@@ -107,7 +107,7 @@ const Navigation = () => {
                             history.push('/dao');
                             ctx.toggleMenu();
                         }}>
-                            {t('buttons.dao')}
+                            {t('buttons.ido')}
                         </Link>
                     </Grid>
                     <Grid item xs={10} align={"left"}>

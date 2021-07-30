@@ -46,7 +46,7 @@ const Header = () => {
                             {t('buttons.myPots')}
                         </Link>
                         <Link className={classes.navLink} onClick={() => {history.push('/dao')}}>
-                            {t('buttons.dao')}
+                            {t('buttons.ido')}
                         </Link>
                         <Link className={classes.navLink} href={"https://docs.moonpot.com"}>
                             {t('buttons.docs')}

@@ -142,7 +142,7 @@ function Whitelist({currentAddress}) {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const balance = useSelector(state => byDecimals(new BigNumber(state.balanceReducer.tokens['potCAKEv2']?.balance || '0'), 18));
-	// balance will switch to static snapshot
+	// TODO balance will switch to static snapshot
 	// const balance = whitelistSecondPot[currentAddress] || 0
 
 	const inWhitelistFirstPot = useMemo(() => {

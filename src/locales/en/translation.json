@@ -19,7 +19,7 @@
     "playWith": "Play with {{token}}",
     "docs": "Docs",
     "learnMore": "Learn More",
-    "dao": "DAO"
+    "ido": "IDO"
   },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br /> and a chance to win <span>${{amount}}</span>",
   "homeJoinCommunityTitle": "Join the Community",
