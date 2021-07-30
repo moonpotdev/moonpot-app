@@ -28,7 +28,11 @@ const styles = (theme) => ({
         '& img': {
             padding: '0 10px',
         }
-    }
+    },
+    footerImage: {
+        width: '52px',
+        height: '52px',
+    },
 })
 
 export default styles;
