@@ -21,10 +21,10 @@ import ZiggyRocket208 from '../../../../images/ziggy/rocket_208w.png';
 const useStyles = makeStyles(styles);
 
 const URL_TAKE_PART = 'https://app.dodoex.io/cp/join?network=bsc-mainnet'; // TODO (null to hide, string url to show)
-const URL_LEARN_MORE_MOONPOT = 'https://moonpot.com/alpha'; // TODO
-const URL_LEARN_MORE_POTS = 'https://moonpot.com/alpha'; // TODO
-const URL_LEARN_MORE_COMMUNITY_WHITELIST = 'https://moonpot.com/alpha'; // TODO
-const URL_LEARN_MORE_IDO = 'https://moonpot.com/alpha/launch/t-6-dodo-ido-launch/'; // TODO
+const URL_LEARN_MORE_MOONPOT = 'https://moonpot.com/alpha';
+const URL_LEARN_MORE_POTS = 'https://moonpot.com/alpha/launch/the-stars-look-brighter-with-pots/';
+const URL_LEARN_MORE_COMMUNITY_WHITELIST = 'https://moonpot.com/alpha/launch/t-5-bsc-news-community-whitelist/';
+const URL_LEARN_MORE_IDO = 'https://moonpot.com/alpha/launch/t-6-dodo-ido-launch/';
 
 function Card({children, className, ...rest}) {
 	const classes = useStyles();
