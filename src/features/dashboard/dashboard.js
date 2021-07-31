@@ -282,7 +282,7 @@ const Dashboard = () => {
                             : (
                                 filtered.map(item => (
                                     <Box className={(item.status == "active") ? classes.activeMyPot : classes.eolMyPot} key={item.id}>
-                                        <Grid container spacing={2}>
+                                        <Grid container spacing={0}>
                                             <Grid item xs={4} align={"left"}>
                                                 <Box className={classes.potImage}>
                                                     <img
@@ -317,7 +317,7 @@ const Dashboard = () => {
                                                     <Grid item xs={3} align={"right"} style={{paddingBottom: 0}}>
                                                         <Link onClick={() => {setDetailsOpen(!detailsOpen)}} className={classes.expandToggle}>{detailsOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
-                                                    <Grid item xs={12} style={{padding: '0 8px'}}>
+                                                    <Grid item xs={12} >
                                                         <AnimateHeight duration={ 500 } height={ detailsOpen ? 'auto' : 0 }>
                                                             <Grid container>
                                                                 <Grid item xs={6}>
@@ -354,7 +354,7 @@ const Dashboard = () => {
                                                     <Grid item xs={3} align={"right"} style={{paddingBottom: 0}}>
                                                         <Link onClick={() => {setBonusOpen(!bonusOpen)}} className={classes.expandToggle}>{bonusOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
-                                                    <Grid item xs={12} style={{padding: '0 8px'}}>
+                                                    <Grid item xs={12}>
                                                         <AnimateHeight duration={ 500 } height={ bonusOpen ? 'auto' : 0 }>
                                                             <Grid container>
                                                                 <Grid item xs={6}>
@@ -378,7 +378,7 @@ const Dashboard = () => {
                                                                         <Trans i18nKey="bonusExtraInfo" values={{sponsorToken: item.sponsorToken, boostToken: item.boostToken}}/>
                                                                     </Typography>
                                                                 </Grid>
-                                                                <Grid item xs={12} >
+                                                                <Grid item xs={12}>
                                                                     <Button onClick={() => handleWithdrawBonus(item)} className={item.earned <= 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned <= 0}>
                                                                         Withdraw Bonus {item.sponsorToken} and {item.boostToken}
                                                                     </Button>
@@ -398,9 +398,9 @@ const Dashboard = () => {
                                                     <Grid item xs={3} align={"right"} style={{paddingBottom: 0}}>
                                                         <Link onClick={() => {setDepositOpen(!depositOpen)}} className={classes.expandToggle}>{depositOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
-                                                    <Grid item xs={12} style={{padding: '0 8px'}}>
+                                                    <Grid item xs={12}>
                                                         <AnimateHeight duration={ 500 } height={ depositOpen ? 'auto' : 0 }>
-                                                            <Box style={{padding: '12px 0'}}>
+                                                            <Box style={{padding: '4px 0 20px 0'}}>
                                                                 <Deposit
                                                                     item={item}
                                                                     handleWalletConnect={handleWalletConnect}
@@ -423,12 +423,12 @@ const Dashboard = () => {
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
                                                     <Grid item xs={9} align={"left"} style={{paddingBottom: '0'}}>
-                                                        <Typography className={classes.dividerText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{t('withdraw')} </Typography>
+                                                        <Typography className={classes.dividerText} style={{marginBottom: '0'}} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{t('withdraw')} </Typography>
                                                     </Grid>
                                                     <Grid item xs={3} align={"right"} style={{paddingBottom: '0'}}>
-                                                        <Link onClick={() => {setWithdrawOpen(!withdrawOpen)}} className={classes.expandToggle}>{withdrawOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
+                                                        <Link onClick={() => {setWithdrawOpen(!withdrawOpen)}} style={{marginBottom: '0'}} className={classes.expandToggle}>{withdrawOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
-                                                    <Grid item xs={12} style={{padding: '0 8px'}}>
+                                                    <Grid item xs={12}>
                                                         <AnimateHeight duration={ 500 } height={ withdrawOpen ? 'auto' : 0 }>
                                                                 <Withdraw
                                                                     item={item}
@@ -505,7 +505,7 @@ const Dashboard = () => {
                                                                     <Steps item={item} steps={steps} handleClose={handleClose} />
                                                                 </Grid>
                                                                 <Grid item xs={6} align={"left"}>
-                                                                    <Typography className={classes.potsItemText}>
+                                                                    <Typography className={classes.potsItemText} style={{marginTop: '12px'}}>
                                                                         <Trans i18nKey="myFairplayTimelock"/>
                                                                     </Typography>
                                                                 </Grid>
@@ -537,7 +537,7 @@ const Dashboard = () => {
                                                         <Link onClick={() => {setWithdrawOpen(!withdrawOpen)}} className={classes.expandToggle}>{withdrawOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
                                                     <Grid item xs={12} >
-                                                        <AnimateHeight duration={ 500 } height={ withdrawOpen ? 'auto' : 0 }>
+                                                        <AnimateHeight duration={ 500 } height={ withdrawOpen ? 'auto' : 0 } style={{marginBottom: '12px'}}>
                                                                 <Withdraw
                                                                     item={item}
                                                                     handleWalletConnect={handleWalletConnect}

@@ -7,6 +7,6 @@ function ButtonLinkComponent({navigate, children, ...rest}) {
 	return <Button {...rest}>{children}</Button>;
 }
 
-export function ButtonLink({children, ...rest}) {
-	return <Link {...rest} component={ButtonLinkComponent}>{children}</Link>;
+export function ButtonLink({children, component = ButtonLinkComponent, ...rest}) {
+	return <Link {...rest} component={component}>{children}</Link>;
 }
