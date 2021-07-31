@@ -116,6 +116,7 @@ const styles = (theme) => ({
     },
     potImage: {
         width: '100%',
+        marginBottom: '20px',
     },
     potUsdTop: {
         fontWeight: 700,
@@ -146,6 +147,7 @@ const styles = (theme) => ({
         color: '#EBF3F9',
         padding: 0,
         margin: 0,
+        marginBottom: '20px',
         '& span': {
             fontWeight: 700,
         }
@@ -178,7 +180,7 @@ const styles = (theme) => ({
         lineHeight: '20px',
         letterSpacing: '0.2px',
         textTransform: 'capitalize',
-        margin: '12px 0',
+        margin: '8px 0',
     },
     potsItemValue: {
         color: '#FFFFFF',
@@ -231,7 +233,7 @@ const styles = (theme) => ({
         fontSize: '12px',
         lineHeight: '20px',
         letterSpacing: '0.2px',
-        paddingBottom: '16px',
+        paddingBottom: '8px',
     },
     enabledActionBtn: {
         backgroundColor: '#FFFFFF',
@@ -244,7 +246,7 @@ const styles = (theme) => ({
         lineHeight: '139%',
         letterSpacing: '0.2px',
         color: '#3675A2',
-        margin: '16px 0 8px 0',
+        margin: '20px 0 16px 0',
     },
     eolMoveBtn: {
         backgroundColor: '#FFFFFF',
@@ -286,6 +288,10 @@ const styles = (theme) => ({
         lineHeight: '20px',
         letterSpacing: '1px',
         textTransform: 'uppercase',
+        marginBottom: '16px',
+    },
+    divider: {
+        marginBottom: '16px',
     },
     expandToggle: {
         color: '#FFFFFF',

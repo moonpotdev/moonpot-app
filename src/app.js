@@ -13,15 +13,12 @@ import WalletContainer from './components/header/components/WalletContainer';
 import {createHashHistory} from 'history';
 import Media from 'react-media';
 import {burgerMenuStyles, styles} from './styles.js';
+import {PageNotFound} from './PageNotFound';
 
 const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
 const Dashboard = React.lazy(() => import(`./features/dashboard`));
 const Dao = React.lazy(() => import(`./features/dao`));
-
-const PageNotFound = () => {
-    return <div>Page not found.</div>;
-}
 
 const Context = React.createContext();
 

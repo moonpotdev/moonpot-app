@@ -113,7 +113,7 @@ const Home = () => {
                             filtered.map(item => (
                                 <React.Fragment key={item.id}>
                                     <Box className={classes.potItem}>
-                                        <Grid container spacing={3}>
+                                        <Grid container>
                                             <Grid item xs={4}>
                                                 <Box className={classes.potImage}>
                                                         <img 
@@ -132,20 +132,20 @@ const Home = () => {
                                                 <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
                                                 <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                                             </Grid>
-                                            <Grid item xs={6}>
+                                            <Grid item xs={6} style={{paddingRight: '8px'}}>
                                                 <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
                                                 <Typography className={classes.countdown}><Countdown expiresAt={item.expiresAt*1000} /></Typography>
                                             </Grid>
-                                            <Grid item xs={6}>
+                                            <Grid item xs={6} style={{paddingLeft: '8px'}}>
                                                 <Typography className={classes.subTitle} align={'right'}>{t('interest')}</Typography>
                                                 <Typography className={classes.apy} align={'right'}><span>{item.apy}%</span> {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
                                             </Grid>
-                                            <Grid item xs={12}>
+                                            <Grid item xs={12} style={{paddingRight: '8px'}}>
                                                 <Typography className={classes.subTitle}>{t('tvl')}</Typography>
                                                 <Typography className={classes.potDataPoint}>{item.tvl}</Typography>
                                             </Grid>
-                                            <Grid item xs={12}>
-                                                <Divider className={classes.divider}/>
+                                            <Grid item xs={12} style={{paddingLeft: '8px'}}>
+                                                <Divider className={classes.divider} style={{marginBottom:'16px'}}/>
                                             </Grid>
                                             <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
                                                 <Typography className={classes.prizeSplitText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeSplit')} </Typography>
@@ -168,7 +168,7 @@ const Home = () => {
                                                 </AnimateHeight>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Divider className={classes.divider}/>
+                                                <Divider className={classes.divider} style={{marginBottom:'20px'}}/>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.playWith')} {item.token}</Button>
