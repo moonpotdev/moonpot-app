@@ -14,6 +14,7 @@ import {createHashHistory} from 'history';
 import Media from 'react-media';
 import {burgerMenuStyles, styles} from './styles.js';
 import {PageNotFound} from './PageNotFound';
+import {RouteLoading} from './components/RouteLoading/RouteLoading';
 
 const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
@@ -31,10 +32,10 @@ const Provider = (props) => {
             toggleMenu: () => setMenuOpenState(!menuOpenState),
             stateChangeHandler: (newState) => {
                 setMenuOpenState(newState.isOpen);
-                
+
                 let nextLogoState = ( newState.isOpen ) ? "none" : "";
                 let stateTimeout = ( newState.isOpen ) ? 0 : 250;
-                
+
                 setTimeout(function() {
                     // element does not exist on resize render
                     const logo = document.getElementById("logo");
@@ -59,13 +60,13 @@ const Navigation = () => {
 
     const useStyles = makeStyles(styles);
     const classes = useStyles();
-  
+
     return (
         <React.Fragment>
                 <Box id="logo" onClick={() => {history.push('/')}}>
                     <img alt="Moonpot" className={classes.moonpotImage} src={require('./images/moonpot-dot-com.png').default}/>
                 </Box>
-            <Menu 
+            <Menu
                 customBurgerIcon={ <MenuRoundedIcon/> }
                 isOpen={ctx.isMenuOpen}
                 onStateChange={(state) => ctx.stateChangeHandler(state)}
@@ -79,11 +80,11 @@ const Navigation = () => {
                 spacing={3}
                 >
                     <Grid item xs={10} style={{height: '15%'}}>
-                        
+
                     </Grid>
                     <Grid item xs={10} align={"left"}>
                         <Link
-                        className={classes.mobileNavItem} 
+                        className={classes.mobileNavItem}
                         onClick={() => {
                             history.push('/');
                             ctx.toggleMenu();
@@ -122,8 +123,8 @@ const Navigation = () => {
                 </Grid>
             </Menu>
         </React.Fragment>
-                    
-        
+
+
     )
   }
 
@@ -147,17 +148,16 @@ export default function App() {
             <CssBaseline />
             <HashRouter history={createHashHistory()}>
                 <Provider>
-                    <React.Suspense fallback={<div className="loader"/>}>
                     <Media query="(max-width: 1100px)">
                         {matches =>
                             matches ? (
-                                <Navigation /> 
+                                <Navigation />
                             ) : (
                                 <Header />
                             )
                         }
                     </Media>
-                    
+                    <React.Suspense fallback={<RouteLoading/>}>
                         <Switch>
                             <Route exact path="/" key={Date.now()}>
                                 <Home />
