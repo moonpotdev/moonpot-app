@@ -103,7 +103,7 @@ function WhitelistMaxi({balance}) {
 		<Requirement fulfilled={balanceFulfilled}>
 			<p>Deposited at least 10 CAKE in the new CAKE Moonpot</p>
 			{balanceFulfilled || USE_POT_SNAPSHOT ? null :
-				<p><Link to="/pot/cake-dodo">Deposit now <ArrowRightAlt fontSize="inherit"/></Link></p>}
+				<p><Link to="/pot/cake">Deposit now <ArrowRightAlt fontSize="inherit"/></Link></p>}
 		</Requirement>
 		<WhitelistTakePart/>
 		<WhiteListEligbilityText fulfilled={balanceFulfilled}/>
@@ -123,7 +123,7 @@ function WhitelistContest({balance, whitelisted}) {
 		<Requirement fulfilled={balanceFulfilled}>
 			<p>Deposited at least 10 CAKE in the new CAKE Moonpot</p>
 			{balanceFulfilled || USE_POT_SNAPSHOT ? null :
-				<p><Link to="/pot/cake-dodo">Deposit now <ArrowRightAlt fontSize="inherit"/></Link></p>}
+				<p><Link to="/pot/cake">Deposit now <ArrowRightAlt fontSize="inherit"/></Link></p>}
 		</Requirement>
 		<WhitelistTakePart/>
 		<WhiteListEligbilityText fulfilled={whitelisted && balanceFulfilled}/>
