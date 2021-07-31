@@ -160,7 +160,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
 
     return (
         <React.Fragment>
-            <Grid container spacing={2}>
+            <Grid container>
                 {
                 retiredFlag ?
                 <React.Fragment>

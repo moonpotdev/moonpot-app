@@ -14,7 +14,7 @@ import styles from './styles';
 import {ArrowRightAlt, CancelOutlined, CheckCircleOutline, OpenInNew} from '@material-ui/icons';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import {ButtonWhite} from '../../../../components/Buttons/ButtonWhite';
+import {ButtonWhitePurpleLight} from '../../../../components/Buttons/ButtonWhitePurpleLight';
 import ZiggyRocket104 from '../../../../images/ziggy/rocket_104w.png';
 import ZiggyRocket208 from '../../../../images/ziggy/rocket_208w.png';
 import Countdown from '../../../../components/Countdown';
@@ -170,9 +170,9 @@ function WhitelistTakePart() {
 			<a href={URL_LEARN_MORE_IDO} target="_blank" rel="noreferrer">Learn more about the IDO <OpenInNew
 				fontSize="inherit"/></a>
 		</Typography>
-		<ButtonWhite className={classes.button} fullWidth={true} component="a"
+		<ButtonWhitePurpleLight className={classes.button} fullWidth={true} component="a"
 					 href={URL_TAKE_PART ? URL_TAKE_PART : '#'} target="_blank" rel="noopener"
-					 disabled={!URL_TAKE_PART}>Take Part in IDO</ButtonWhite>
+					 disabled={!URL_TAKE_PART}>Take Part in IDO</ButtonWhitePurpleLight>
 	</>;
 }
 
