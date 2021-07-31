@@ -242,11 +242,11 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                     <Grid item xs={12}>
                         <Paper component="form" className={classes.input}>
                             <Grid container spacing={1}>
-                                <Grid item xs={2} alignItems={"center"} justifyContent={"center"}>
+                                <Grid item xs={2}>
                                     <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default} />
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <InputBase disabled="disabled" placeholder={state.balance} value={state.balance} onChange={(e) => handleInput(e.target.value)} />
+                                    <InputBase disabled={true} placeholder={state.balance.toString()} value={state.balance} onChange={(e) => handleInput(e.target.value)} />
                                 </Grid>
                                 <Grid item xs={4} align={"right"}>
 
