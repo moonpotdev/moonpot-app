@@ -1,6 +1,6 @@
 export const pools = [
 	{
-		id: 'cake-dodo',
+		id: 'cake',
 		name: 'Cake',
 		token: 'CAKE',
 		tokenAddress: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
