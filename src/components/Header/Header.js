@@ -4,10 +4,13 @@ import {useTranslation} from 'react-i18next';
 import {useHistory, useRouteMatch} from 'react-router';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import {Drawer, IconButton, makeStyles, useMediaQuery} from '@material-ui/core';
+import {Box, Drawer, IconButton, makeStyles, useMediaQuery} from '@material-ui/core';
 import WalletConnector from './components/WalletConnector';
 import MoonpotDotCom from '../../images/moonpot-white-single-line.svg';
 import classNames from 'classnames';
+import CustomDropdown from "../customDropdown";
+import {useDispatch, useSelector} from "react-redux";
+import reduxActions from "../../features/redux/actions";
 
 const useStyles = makeStyles(styles);
 
@@ -63,6 +66,20 @@ function MenuLink({external, href, label, match, onClick, ...rest}) {
 	return <a {...rest} {...props} onClick={handleClick} data-active={active}>{t(label)}</a>;
 }
 
+function LanguageSelector() {
+	const walletReducer = useSelector(state => state.walletReducer);
+	const { i18n } = useTranslation();
+	const dispatch = useDispatch();
+
+	const handleLanguageSwitch = (value) => {
+		i18n.changeLanguage(value).then(() => dispatch(reduxActions.wallet.setLanguage(value)));
+	}
+
+	return (
+		<CustomDropdown list={{'en': 'EN', 'zh': 'ZH'}} selected={walletReducer.language} handler={(e) => {handleLanguageSwitch(e.target.value)}} css={{marginLeft: 20}} />
+	)
+}
+
 function Sidebar() {
 	const classes = useStyles();
 	const [isOpen, setOpen] = useState(false);
@@ -81,8 +98,8 @@ function Sidebar() {
 				</IconButton>
 			</div>
 			<nav className={classes.sidebarNav}>
-				{links.map(link => <MenuLink key={link.href} {...link} onClick={handleClose}
-											 className={classes.sidebarItem}/>)}
+				{links.map(link => <MenuLink key={link.href} {...link} onClick={handleClose} className={classes.sidebarItem}/>)}
+				<LanguageSelector />
 			</nav>
 			<div className={classes.sidebarBottom}>
 				<WalletConnector onConnect={handleClose} fullWidth={true}/>
@@ -96,6 +113,7 @@ function Nav() {
 
 	return <nav className={classes.nav}>
 		{links.map(link => <MenuLink key={link.href} {...link} className={classes.navItem}/>)}
+		<LanguageSelector />
 	</nav>;
 }
 

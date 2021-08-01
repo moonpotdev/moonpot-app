@@ -3,7 +3,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
 import translationEN from './locales/en/translation.json';
-import translationFR from './locales/fr/translation.json';
+import translationZH from './locales/zh/translation.json';
 
 i18n
   // load translation using http -> see /public/locales
@@ -18,7 +18,7 @@ i18n
       fallbackLng: 'en',
       resources: {
           en: { translation: translationEN },
-          fr: { translation: translationFR },
+          zh: { translation: translationZH },
       },
       interpolation: {
           escapeValue: false, // not needed for react as it escapes by default
