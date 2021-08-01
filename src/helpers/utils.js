@@ -1,5 +1,5 @@
-import { config } from "../config/config";
-import BigNumber from "bignumber.js";
+import { config } from '../config/config';
+import BigNumber from 'bignumber.js';
 
 let trimReg = /(^\s*)|(\s*$)/g;
 
@@ -24,11 +24,11 @@ export function isEmpty(key) {
 
 export const getStablesForNetwork = () => {
   return config.stableCoins;
-}
+};
 
 export const investmentOdds = (currentTvl, investment, winners) => {
-    const oddsOfWinningOnce = investment.dividedBy(currentTvl.plus(investment));
-    const oddsOfLosingOnce = BigNumber(1).minus(oddsOfWinningOnce);
-    const oddsOfWinningAtLeastOnce = BigNumber(1).minus(oddsOfLosingOnce.exponentiatedBy(winners));
-    return Math.ceil(1/Number(oddsOfWinningAtLeastOnce));
-}
+  const oddsOfWinningOnce = investment.dividedBy(currentTvl.plus(investment));
+  const oddsOfLosingOnce = BigNumber(1).minus(oddsOfWinningOnce);
+  const oddsOfWinningAtLeastOnce = BigNumber(1).minus(oddsOfLosingOnce.exponentiatedBy(winners));
+  return Math.ceil(1 / Number(oddsOfWinningAtLeastOnce));
+};

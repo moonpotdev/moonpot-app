@@ -1,4 +1,4 @@
-import {BigNumber} from 'bignumber.js';
+import { BigNumber } from 'bignumber.js';
 
 export const formatApy = (apy, placeholder = '???') => {
   if (!apy) return placeholder;
@@ -66,11 +66,14 @@ const formatTimeLeftDefaultOptions = {
   resolution: 'minutes',
   dropZero: false,
   fixedWidth: true,
-  labels: {days: 'd', hours: 'h', minutes: 'm', seconds: 's'}
+  labels: { days: 'd', hours: 'h', minutes: 'm', seconds: 's' },
 };
 
 export const formatTimeLeft = (milliseconds, options) => {
-  const {resolution, dropZero, fixedWidth, labels} = {...formatTimeLeftDefaultOptions, ...options};
+  const { resolution, dropZero, fixedWidth, labels } = {
+    ...formatTimeLeftDefaultOptions,
+    ...options,
+  };
   const order = ['days', 'hours', 'minutes', 'seconds'];
   const wanted = order.slice(0, order.lastIndexOf(resolution) + 1);
 
@@ -83,7 +86,7 @@ export const formatTimeLeft = (milliseconds, options) => {
 
   const output = [];
 
-  for(const key of wanted) {
+  for (const key of wanted) {
     const number = numbers[key];
 
     if (number || dropZero === false || output.length > 0) {
@@ -103,14 +106,16 @@ export const formatTimeLeft = (milliseconds, options) => {
 };
 
 export const stripExtraDecimals = (f, decimals = 8) => {
-  return (f.indexOf(".") >= 0) ? (f.substr(0, f.indexOf(".")) + f.substr(f.indexOf("."), decimals + 1)) : f;
-}
+  return f.indexOf('.') >= 0
+    ? f.substr(0, f.indexOf('.')) + f.substr(f.indexOf('.'), decimals + 1)
+    : f;
+};
 
 export function convertAmountToRawNumber(value, decimals = 18) {
   return new BigNumber(value)
-      .times(new BigNumber('10').pow(decimals))
-      .decimalPlaces(0, BigNumber.ROUND_DOWN)
-      .toString(10);
+    .times(new BigNumber('10').pow(decimals))
+    .decimalPlaces(0, BigNumber.ROUND_DOWN)
+    .toString(10);
 }
 
 export function calculateTotalPrize(item) {
@@ -122,5 +127,5 @@ export function calculateTotalPrize(item) {
     total = BigNumber(0);
   }
 
-  return "$" + total.toFixed(total > 1 ? 0 : 4);
+  return '$' + total.toFixed(total > 1 ? 0 : 4);
 }
