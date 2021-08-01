@@ -32,7 +32,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -59,9 +60,16 @@
     "bignumber.js": "^9.0.1",
     "canvas": "^2.7.0",
     "eth-multicall": "^1.3.13",
+    "husky": "^7.0.1",
     "i18next": "^20.3.1",
     "i18next-browser-languagedetector": "^6.1.1",
+    "lint-staged": "^11.1.1",
+    "prettier": "^2.3.2",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0"
+  },
+  "lint-staged": {
+    "*.js": "prettier --write",
+    "*.json": "prettier --write"
   }
 }
