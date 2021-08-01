@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
 const Filter = ({ sortConfig, setSortConfig, defaultFilter }) => {
