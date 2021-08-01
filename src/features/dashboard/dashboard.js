@@ -245,14 +245,14 @@ const Dashboard = () => {
     return (
         <React.Fragment>
                 <Container maxWidth="lg">
-                        <Box display="flex" flexWrap="wrap" justifyContent="center">
-                            <Box p={1}>
+                        <Grid container display="flex" flexWrap="wrap" justifyContent="center" spacing={2}>
+                            <Grid item>
                                 <Button variant={"outlined"} color={sortConfig.status === 'active' ? 'primary' : 'default'} onClick={() => setSortConfig({ ...sortConfig, status: 'active' })}>{t('buttons.myActivePots')}</Button>
-                            </Box>
-                            <Box p={1}>
+                            </Grid>
+                            <Grid item>
                                 <Button variant={"outlined"} color={sortConfig.status !== 'active' ? 'primary' : 'default'} onClick={() => setSortConfig({ ...sortConfig, status: 'eol' })}>{t('buttons.myPastPots')}</Button>
-                            </Box>
-                        </Box>
+                            </Grid>
+                        </Grid>
                         <Grid container>
                             {filtered.length === 0 ?
 

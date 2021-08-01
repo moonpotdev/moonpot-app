@@ -40,7 +40,7 @@ const appTheme = () => {
             },
             MuiButton: {
                 root: {
-                    width: '169px',
+                    width: '163px',
                     height: '34px',
                     borderRadius: 20,
                     borderWidth: '2px',
@@ -56,7 +56,7 @@ const appTheme = () => {
                     color: '#7F7FB3',
                     fontWeight: 500,
                     fontSize: '15px',
-                    lineHeight: '17.24px',
+                    lineHeight: '17px',
                 },
                 outlinedPrimary: {
                     border: '2px solid #F3BA2E',
@@ -65,7 +65,7 @@ const appTheme = () => {
                     color: '#F3BA2E',
                     fontWeight: 500,
                     fontSize: '15px',
-                    lineHeight: '17.24px',
+                    lineHeight: '17px',
                     '&:hover': {
                         borderWidth: '2px',
                     }
