@@ -53,10 +53,8 @@ export default function App() {
 			<CssBaseline/>
 			<HashRouter>
 				<Header/>
-				<div id="site-inner">
-					<Pages/>
-					<Footer/>
-				</div>
+				<Pages/>
+				<Footer/>
 			</HashRouter>
 		</ThemeProvider>
 	);

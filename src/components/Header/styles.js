@@ -1,10 +1,16 @@
+export const HEADER_DESKTOP_WIDTH = 780;
+
 export const styles = () => ({
 	bar: {
 		padding: '24px 16px',
 		color: '#ffffff',
 		width: `${1110 + (16 * 2)}px`,
 		maxWidth: '100%',
-		margin: '0 auto 16px auto',
+		margin: '0 auto 24px auto',
+		[`@media (min-width: ${HEADER_DESKTOP_WIDTH}px)`]: {
+			paddingTop: '32px',
+			paddingBottom: '32px',
+		}
 	},
 	barInner: {
 		display: 'flex',

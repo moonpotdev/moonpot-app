@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {styles} from './styles';
+import {HEADER_DESKTOP_WIDTH, styles} from './styles';
 import {useTranslation} from 'react-i18next';
 import {useHistory, useRouteMatch} from 'react-router';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -102,7 +102,7 @@ function Nav() {
 export function Header() {
 	const classes = useStyles();
 	const history = useHistory();
-	const showSidebar = useMediaQuery('(max-width:779.99px)');
+	const showSidebar = !useMediaQuery(`(min-width:${HEADER_DESKTOP_WIDTH}px)`);
 
 	const handleHome = useCallback((e) => {
 		e.preventDefault();
