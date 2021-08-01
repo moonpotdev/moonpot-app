@@ -12,7 +12,7 @@ import Deposit from '../vault/components/Deposit';
 import Withdraw from '../vault/components/Withdraw';
 import BigNumber from 'bignumber.js';
 import {investmentOdds, isEmpty} from '../../helpers/utils';
-import {byDecimals, calculateTotalPrize} from '../../helpers/format';
+import {byDecimals, calculateTotalPrize, formatDecimals} from '../../helpers/format';
 import Countdown from '../../components/Countdown';
 import Steps from '../vault/components/Steps';
 
@@ -188,13 +188,13 @@ const Dashboard = () => {
                 let amount = 0;
 
                 if(wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
-                    item.userBalance = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance), item.tokenDecimals).toFixed(8);
+                    item.userBalance = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance), item.tokenDecimals);
                 }
                 if(wallet.address && !isEmpty(earned.earned[item.id])) {
                     const amount = earned.earned[item.id][item.sponsorToken] ?? 0
                     const boostAmount = earned.earned[item.id][item.boostToken] ?? 0
-                    item.earned = byDecimals(new BigNumber(amount), item.sponsorTokenDecimals).toFixed(8);
-                    item.boosted = byDecimals(new BigNumber(boostAmount), item.boostTokenDecimals).toFixed(8);
+                    item.earned = byDecimals(new BigNumber(amount), item.sponsorTokenDecimals);
+                    item.boosted = byDecimals(new BigNumber(boostAmount), item.boostTokenDecimals);
                 }
                 data.push(item);
             }
@@ -326,7 +326,7 @@ const Dashboard = () => {
                                                                     </Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsValue} align={'right'}>{item.userBalance} {item.token} (${new BigNumber(item.userBalance).multipliedBy(prices.prices[item.oracleId]).toFixed(2)})</Typography>
+                                                                    <Typography className={classes.myDetailsValue} align={'right'}>{formatDecimals(item.userBalance)} {item.token} (${formatDecimals(item.userBalance.multipliedBy(prices.prices[item.oracleId]), 2)})</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
                                                                     <Typography className={classes.myDetailsText} align={'left'}>{t('myInterestRate')}</Typography>
@@ -338,7 +338,7 @@ const Dashboard = () => {
                                                                     <Typography className={classes.myDetailsText} align={'left'}>{t('myOdds')}</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsValue} align={"right"}>{t('odds', {odds: investmentOdds(item.totalStakedUsd, BigNumber(item.userBalance).times(prices.prices[item.oracleId]), 5)})}</Typography>
+                                                                    <Typography className={classes.myDetailsValue} align={"right"}>{t('odds', {odds: investmentOdds(item.totalStakedUsd, item.userBalance.times(prices.prices[item.oracleId]), 5)})}</Typography>
                                                                 </Grid>
                                                             </Grid>
                                                         </AnimateHeight>
@@ -363,7 +363,7 @@ const Dashboard = () => {
                                                                     </Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsValue} align={'right'}>{item.earned} {item.sponsorToken} (${new BigNumber(item.earned).multipliedBy(prices.prices[item.sponsorToken]).toFixed(2)})</Typography>
+                                                                    <Typography className={classes.myDetailsValue} align={'right'}>{formatDecimals(item.earned)} {item.sponsorToken} (${formatDecimals(item.earned.multipliedBy(prices.prices[item.sponsorToken]),2)})</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
                                                                     <Typography className={classes.myDetailsText} align={'left'}>
@@ -371,15 +371,15 @@ const Dashboard = () => {
                                                                     </Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsValue} align={'right'}>{item.boosted} {item.boostToken} (${new BigNumber(item.boosted).multipliedBy(prices.prices[item.boostToken]).toFixed(2)})</Typography>
+                                                                    <Typography className={classes.myDetailsValue} align={'right'}>{formatDecimals(item.boosted)} {item.boostToken} (${formatDecimals(item.boosted.multipliedBy(prices.prices[item.boostToken]), 2)})</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={12}>
                                                                     <Typography className={classes.myPotsInfoText} align={'left'}>
                                                                         <Trans i18nKey="bonusExtraInfo" values={{sponsorToken: item.sponsorToken, boostToken: item.boostToken}}/>
                                                                     </Typography>
                                                                 </Grid>
-                                                                <Grid item xs={12}>
-                                                                    <Button onClick={() => handleWithdrawBonus(item)} className={item.earned <= 0 ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned <= 0}>
+                                                                <Grid item xs={12} >
+                                                                    <Button onClick={() => handleWithdrawBonus(item)} className={item.earned.lte(0) ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned.lte(0)}>
                                                                         Withdraw Bonus {item.sponsorToken} and {item.boostToken}
                                                                     </Button>
                                                                     <Steps item={item} steps={steps} handleClose={handleClose} />
@@ -462,7 +462,7 @@ const Dashboard = () => {
                                                                 </Typography>
                                                             </Grid>
                                                             <Grid item xs={6}>
-                                                                <Typography className={classes.myDetailsValue} align={'right'}>{item.userBalance} {item.token} (${new BigNumber(item.userBalance).multipliedBy(prices.prices[item.oracleId]).toFixed(2)})</Typography>
+                                                                <Typography className={classes.myDetailsValue} align={'right'}>{formatDecimals(item.userBalance)} {item.token} (${formatDecimals(item.userBalance.multipliedBy(prices.prices[item.oracleId]),2)})</Typography>
                                                             </Grid>
                                                             <Grid item xs={6}>
                                                                 <Typography className={classes.myDetailsText} align={'left'}>{t('myInterestRate')}</Typography>
@@ -476,7 +476,7 @@ const Dashboard = () => {
                                                                 </Typography>
                                                             </Grid>
                                                             <Grid item xs={6}>
-                                                                <Typography className={classes.myDetailsValue} align={'right'}>{item.earned} {item.sponsorToken} (${new BigNumber(item.earned).multipliedBy(prices.prices[item.sponsorToken]).toFixed(2)})</Typography>
+                                                                <Typography className={classes.myDetailsValue} align={'right'}>{formatDecimals(item.earned)} {item.sponsorToken} (${formatDecimals(item.earned.multipliedBy(prices.prices[item.sponsorToken]),2)})</Typography>
                                                             </Grid>
                                                         </Grid>
                                                     </Grid>
@@ -499,7 +499,7 @@ const Dashboard = () => {
                                                                     </Typography>
                                                                 </Grid>
                                                                 <Grid item xs={12}>
-                                                                    <Button onClick={() => handleMigrator(item)} className={item.userBalance <= 0 ? classes.disabledActionBtn : classes.eolMoveBtn} variant={'contained'} disabled={item.userBalance <= 0}>
+                                                                    <Button onClick={() => handleMigrator(item)} className={item.userBalance.lte(0) ? classes.disabledActionBtn : classes.eolMoveBtn} variant={'contained'} disabled={item.userBalance.lte(0)}>
                                                                         Move {item.token} and Withdraw {item.sponsorToken}
                                                                     </Button>
                                                                     <Steps item={item} steps={steps} handleClose={handleClose} />
