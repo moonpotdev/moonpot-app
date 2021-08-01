@@ -245,7 +245,7 @@ const Dashboard = () => {
     return (
         <React.Fragment>
                 <Container maxWidth="lg">
-                        <Grid container display="flex" flexWrap="wrap" justifyContent="center" spacing={2}>
+                        <Grid container spacing={2}>
                             <Grid item>
                                 <Button variant={"outlined"} color={sortConfig.status === 'active' ? 'primary' : 'default'} onClick={() => setSortConfig({ ...sortConfig, status: 'active' })}>{t('buttons.myActivePots')}</Button>
                             </Grid>

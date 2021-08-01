@@ -2,7 +2,7 @@ Contributing to the Moonpot App
 =======
 
 <div style="text-align: center; padding: 24px 0px;">
-    <img src="public/images/ziggy/maintenance@3x.png" />
+    <img src="public/images/ziggy/maintenance.svg" width="300" />
 </div>
 
 Hey! Thanks so much for taking the time out to contribute with Moonpot. We really appreciate and value your contribution. Please take 5 minutes to review the items listed below. This will help us merge your contribution as soon as possible.
