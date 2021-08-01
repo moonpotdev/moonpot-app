@@ -134,7 +134,7 @@ const Home = () => {
                                             </Grid>
                                             <Grid item xs={6} style={{paddingRight: '8px'}}>
                                                 <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
-                                                <Typography className={classes.countdown}><Countdown expiresAt={item.expiresAt*1000} /></Typography>
+                                                <Typography className={classes.countdown}><Countdown until={item.expiresAt*1000} /></Typography>
                                             </Grid>
                                             <Grid item xs={6} style={{paddingLeft: '8px'}}>
                                                 <Typography className={classes.subTitle} align={'right'}>{t('interest')}</Typography>
@@ -144,7 +144,7 @@ const Home = () => {
                                                 <Typography className={classes.subTitle}>{t('tvl')}</Typography>
                                                 <Typography className={classes.potDataPoint}>{item.tvl}</Typography>
                                             </Grid>
-                                            <Grid item xs={12} style={{paddingLeft: '8px'}}>
+                                            <Grid item xs={12}>
                                                 <Divider className={classes.divider} style={{marginBottom:'16px'}}/>
                                             </Grid>
                                             <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
@@ -161,7 +161,7 @@ const Home = () => {
                                                         </Grid>
                                                         <Grid item xs={9} align={"right"}>
                                                             <Typography className={classes.prizeSplitValue}>
-                                                                <span>{item.awardBalance.times(0.2).toFixed(3)} {item.token}</span> and <span>{item.sponsorBalance.times(0.2).toFixed(3)} {item.sponsorToken}</span> each
+                                                                <span>{item.awardBalance.times(0.2).toFixed(2)} {item.token}</span> and <span>{item.sponsorBalance.times(0.2).toFixed(2)} {item.sponsorToken}</span> each
                                                             </Typography>
                                                         </Grid>
                                                     </Grid>

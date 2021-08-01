@@ -107,7 +107,7 @@ const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemDa
         <React.Fragment>
             <Paper component="form" className={classes.input}>
                 <Grid container spacing={1}>
-                    <Grid item xs={2} alignItems={"center"} justifyContent={"center"}>
+                    <Grid item xs={2}>
                         <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default} />
                     </Grid>
                     <Grid item xs={6}>
