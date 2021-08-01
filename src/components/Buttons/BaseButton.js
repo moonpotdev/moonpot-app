@@ -2,7 +2,7 @@ import {Button, withStyles} from '@material-ui/core';
 import {useHistory} from 'react-router-dom';
 import {forwardRef, useCallback} from 'react';
 
-const RoutedButton = forwardRef(function ({ref, to, ...rest}) {
+const RoutedButton = forwardRef(function ({to, ...rest}, ref) {
 	const history = useHistory();
 	const handleClick = useCallback(() => {
 		if (to) {

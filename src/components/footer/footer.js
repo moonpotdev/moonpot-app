@@ -11,7 +11,7 @@ const Footer = () => {
 
     return (
         <React.Fragment>
-            <Container maxWidth="xl">
+            <Container maxWidth='xl'>
                 <Grid className={classes.footer} container spacing={2}>
                     <Grid item xs={12}>
                         <Button href={"https://moonpot.com/alpha"} className={classes.footerBtn} variant={'outlined'} size={'small'}>{t('buttons.moonpotAlpha')}</Button>
