@@ -18,6 +18,8 @@ Hey! Thanks so much for taking the time out to contribute with Moonpot. We reall
 
 As a contributor, you are expected to fork this repository, work on your own fork and then submit pull requests. The pull requests will be reviewed and eventually merged into the master repo. See ["Fork-a-Repo"](https://help.github.com/articles/fork-a-repo/) for how this works.
 
+Please run `yarn prepare` in your local repository to install commit hooks (for prettier code formatting).
+
 ### A typical workflow
 
 1. Make sure your fork is up to date with the master repository (on the `dev` branch):
