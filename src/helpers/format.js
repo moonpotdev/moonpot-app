@@ -72,8 +72,6 @@ export const formatTimeLeft = (milliseconds, options) => {
     seconds: Math.floor((milliseconds / 1000) % 60),
   };
 
-  console.log(numbers);
-
   const output = [];
 
   for(const key of wanted) {
