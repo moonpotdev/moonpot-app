@@ -245,7 +245,7 @@ const Dashboard = () => {
     return (
         <React.Fragment>
                 <Container maxWidth="lg">
-                        <Box display="flex" justifyContent="center">
+                        <Box display="flex" flexWrap="wrap" justifyContent="center">
                             <Box p={1}>
                                 <Button variant={"outlined"} color={sortConfig.status === 'active' ? 'primary' : 'default'} onClick={() => setSortConfig({ ...sortConfig, status: 'active' })}>{t('buttons.myActivePots')}</Button>
                             </Box>
