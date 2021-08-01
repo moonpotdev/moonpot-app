@@ -144,7 +144,7 @@ const Home = () => {
                                                 <Typography className={classes.subTitle}>{t('tvl')}</Typography>
                                                 <Typography className={classes.potDataPoint}>{item.tvl}</Typography>
                                             </Grid>
-                                            <Grid item xs={12} style={{paddingLeft: '8px'}}>
+                                            <Grid item xs={12}>
                                                 <Divider className={classes.divider} style={{marginBottom:'16px'}}/>
                                             </Grid>
                                             <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
