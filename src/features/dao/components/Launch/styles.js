@@ -15,6 +15,9 @@ const styles = (theme) => ({
 		},
 		'& p': {
 			color: '#DFDFEC',
+			fontSize: '15px',
+			lineHeight: '24px',
+			letterSpacing: '0.2px',
 			marginBottom: 24,
 			'&:last-child': {
 				marginBottom: 0,
@@ -69,7 +72,7 @@ const styles = (theme) => ({
 		border: '2px solid transparent',
 		boxSizing: 'border-box',
 		borderRadius: 4,
-		padding: 12,
+		padding: 10,
 		marginBottom: 24,
 		display: 'flex',
 		flexDirection: 'row',
@@ -88,6 +91,9 @@ const styles = (theme) => ({
 		fontSize: '15px',
 		lineHeight: '24px',
 		'& p': {
+			fontSize: '15px',
+			lineHeight: '24px',
+			letterSpacing: '0',
 			margin: '0 0 12px 0',
 			color: '#ffffff',
 			'& a': {
@@ -106,11 +112,28 @@ const styles = (theme) => ({
 		borderColor: '#318152',
 	},
 	requirementUnfulfilled: {
-		background: '#A37A3E',
-		borderColor: '#C1A57B',
+		background: '#A3563E',
+		borderColor: '#C1907B',
 	},
 	button: {
 		margin: '24px 0',
+	},
+	countdown: {
+		'p&': {
+			margin: '24px 0',
+			textAlign: 'center',
+			fontWeight: 500,
+			fontSize: '24px',
+			lineHeight: '28px',
+			letterSpacing: '0.6px',
+		}
+	},
+	eligibility: {
+		'& p': {
+			fontSize: '12px',
+			lineHeight: '20px',
+			letterSpacing: '0.2px',
+		}
 	}
 });
 

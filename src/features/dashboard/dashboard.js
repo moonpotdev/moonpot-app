@@ -245,14 +245,14 @@ const Dashboard = () => {
     return (
         <React.Fragment>
                 <Container maxWidth="lg">
-                        <Box display="flex" flexWrap="wrap" justifyContent="center">
-                            <Box p={1}>
+                        <Grid container display="flex" flexWrap="wrap" justifyContent="center" spacing={2}>
+                            <Grid item>
                                 <Button variant={"outlined"} color={sortConfig.status === 'active' ? 'primary' : 'default'} onClick={() => setSortConfig({ ...sortConfig, status: 'active' })}>{t('buttons.myActivePots')}</Button>
-                            </Box>
-                            <Box p={1}>
+                            </Grid>
+                            <Grid item>
                                 <Button variant={"outlined"} color={sortConfig.status !== 'active' ? 'primary' : 'default'} onClick={() => setSortConfig({ ...sortConfig, status: 'eol' })}>{t('buttons.myPastPots')}</Button>
-                            </Box>
-                        </Box>
+                            </Grid>
+                        </Grid>
                         <Grid container>
                             {filtered.length === 0 ?
 
@@ -306,7 +306,7 @@ const Dashboard = () => {
                                                     <Grid item xs={8}>
                                                         <Typography className={classes.potUsdTop} align={"right"}>${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()} <span>{t('in')}</span> {item.token}</Typography>
                                                         <Typography className={classes.potUsd} align={"right"}>& {item.sponsorToken} PRIZES</Typography>
-                                                        <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown expiresAt={item.expiresAt*1000} /> </span></Typography>
+                                                        <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown until={item.expiresAt*1000} /> </span></Typography>
                                                     </Grid>
                                                     <Grid item xs={12}>
                                                         <Divider className={classes.divider}/>

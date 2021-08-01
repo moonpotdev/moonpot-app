@@ -127,7 +127,7 @@ const Vault = () => {
                             </Grid>
                             <Grid item xs={6} style={{paddingRight: '8px'}}>
                                 <Typography className={classes.subTitle} align={"left"}>{t('nextWeeklyDraw')}</Typography>
-                                <Typography className={classes.countdown} align={"left"}><Countdown expiresAt={item.expiresAt*1000} /> </Typography>
+                                <Typography className={classes.countdown} align={"left"}><Countdown until={item.expiresAt*1000} /> </Typography>
                             </Grid>
                             <Grid item xs={6} style={{paddingLeft: '8px'}}>
                                 <Typography className={classes.subTitle} align={'right'}>{t('interest')}</Typography>

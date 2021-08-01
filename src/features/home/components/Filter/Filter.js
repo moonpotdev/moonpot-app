@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, Button} from "@material-ui/core";
+import {Box, Button, Grid} from '@material-ui/core';
 import {useTranslation} from "react-i18next";
 
 const Filter = ({sortConfig, setSortConfig, defaultFilter}) => {
@@ -11,14 +11,14 @@ const Filter = ({sortConfig, setSortConfig, defaultFilter}) => {
 
     return (
         <React.Fragment>
-            <Box display="flex" flexWrap="wrap" justifyContent="center">
-                <Box p={1}>
+            <Grid container display="flex" flexWrap="wrap" justifyContent="center" spacing={2}>
+                <Grid item>
                     <Button variant={"outlined"} color={sortConfig.vault === 'main' ? 'primary' : 'default'} onClick={() => handleChange('vault', 'main')}>{t('buttons.mainPots')}</Button>
-                </Box>
-                <Box p={1}>
+                </Grid>
+                <Grid item>
                     <Button variant={"outlined"} color={sortConfig.vault === 'community' ? 'primary' : 'default'} onClick={() => handleChange('vault', 'community')}>{t('buttons.communityPots')}</Button>
-                </Box>
-            </Box>
+                </Grid>
+            </Grid>
         </React.Fragment>
     )
 }

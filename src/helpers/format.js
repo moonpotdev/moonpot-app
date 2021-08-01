@@ -62,23 +62,44 @@ export function byDecimals(number, tokenDecimals = 18) {
   return new BigNumber(number).dividedBy(decimals);
 }
 
-export const formatCountdown = (currentTime, deadline) => {
-  const time = deadline - currentTime;
+const formatTimeLeftDefaultOptions = {
+  resolution: 'minutes',
+  dropZero: false,
+  fixedWidth: true,
+  labels: {days: 'd', hours: 'h', minutes: 'm', seconds: 's'}
+};
 
-  const day = Math.floor(time / (1000 * 60 * 60 * 24))
-      .toString()
-      .padStart(2, '0');
-  const hours = Math.floor((time / (1000 * 60 * 60)) % 24)
-      .toString()
-      .padStart(2, '0');
-  const minutes = Math.floor((time / (1000 * 60)) % 60)
-      .toString()
-      .padStart(2, '0');
-  /*const seconds = Math.floor((time / 1000) % 60)
-      .toString()
-      .padStart(2, '0');*/
+export const formatTimeLeft = (milliseconds, options) => {
+  const {resolution, dropZero, fixedWidth, labels} = {...formatTimeLeftDefaultOptions, ...options};
+  const order = ['days', 'hours', 'minutes', 'seconds'];
+  const wanted = order.slice(0, order.lastIndexOf(resolution) + 1);
 
-  return `${day}day ${hours}h ${minutes}min`;
+  const numbers = {
+    days: Math.floor(milliseconds / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((milliseconds / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((milliseconds / (1000 * 60)) % 60),
+    seconds: Math.floor((milliseconds / 1000) % 60),
+  };
+
+  const output = [];
+
+  for(const key of wanted) {
+    const number = numbers[key];
+
+    if (number || dropZero === false || output.length > 0) {
+      let value = number.toString();
+      if (fixedWidth) {
+        value = value.padStart(2, '0');
+      }
+      output.push(value + labels[key]);
+    }
+  }
+
+  if (output.length === 0) {
+    return (fixedWidth ? '00' : '0') + labels[resolution];
+  }
+
+  return output.join(' ');
 };
 
 export const stripExtraDecimals = (f, decimals = 8) => {
