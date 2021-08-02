@@ -191,10 +191,12 @@ const Dashboard = () => {
                     item.userBalance = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance), item.tokenDecimals);
                 }
                 if(wallet.address && !isEmpty(earned.earned[item.id])) {
+                    console.log(earned)
                     const amount = earned.earned[item.id][item.sponsorToken] ?? 0
                     const boostAmount = earned.earned[item.id][item.boostToken] ?? 0
                     item.earned = byDecimals(new BigNumber(amount), item.sponsorTokenDecimals);
                     item.boosted = byDecimals(new BigNumber(boostAmount), item.boostTokenDecimals);
+
                 }
                 data.push(item);
             }
