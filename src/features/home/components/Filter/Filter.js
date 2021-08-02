@@ -11,7 +11,7 @@ const Filter = ({sortConfig, setSortConfig, defaultFilter}) => {
 
     return (
         <React.Fragment>
-            <Grid container display="flex" flexWrap="wrap" justifyContent="center" spacing={2}>
+            <Grid container spacing={2}>
                 <Grid item>
                     <Button variant={"outlined"} color={sortConfig.vault === 'main' ? 'primary' : 'default'} onClick={() => handleChange('vault', 'main')}>{t('buttons.mainPots')}</Button>
                 </Grid>

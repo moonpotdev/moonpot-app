@@ -13,7 +13,7 @@ import reduxActions from '../redux/actions';
 import {calculateTotalPrize} from '../../helpers/format';
 import BigNumber from 'bignumber.js';
 import {MigrationNotices} from './components/MigrationNotices/MigrationNotices';
-
+import ZiggyMaintenance from '../../images/ziggy/maintenance.svg';
 import Countdown from '../../components/Countdown';
 import SocialMediaBlock from './components/SocialMediaBlock/SocialMediaBlock';
 
@@ -30,10 +30,11 @@ const Home = () => {
     const { t } = useTranslation();
     const location = useLocation();
     const dispatch = useDispatch();
-    const {vault, prices} = useSelector(state => ({
+    const walletReducer = useSelector(state => state.walletReducer);
+    const {vault, prices, balance} = useSelector(state => ({
         vault: state.vaultReducer,
         prices: state.pricesReducer,
-
+        balance: state.balanceReducer,
     }));
 
     const history = useHistory();
@@ -171,7 +172,7 @@ const Home = () => {
                                                 <Divider className={classes.divider} style={{marginBottom:'20px'}}/>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.playWith')} {item.token}</Button>
+                                                <Button className={classes.play} variant={'contained'} onClick={() => {history.push('/pot/' + (item.id))}}>{t('buttons.playWith')} {balance.tokens[item.rewardToken].balance > 0 && walletReducer.address ? t('buttons.more') : ""} {item.token}</Button>
                                             </Grid>
                                             <Grid item xs={8}>
                                                 <Typography className={classes.oddsPerDeposit}>{t('oddsPerDeposit', {odds: investmentOdds(item.totalStakedUsd, BigNumber(1000), item.numberOfWinners), amount: '$1000'})}</Typography>
@@ -199,7 +200,7 @@ const Home = () => {
                                 <Grid container>
                                     <Grid item xs={12}>
                                         <Box className={classes.ziggyMaintenance}>
-                                            <img alt="Ziggy Maintenance" height="100px" src={require('../../images/ziggy/maintenance.svg').default} />
+                                            <img alt="" width="100" height="100" src={ZiggyMaintenance} aria-hidden={true} />
                                         </Box>
                                     </Grid>
                                     <Grid item xs={12}>
