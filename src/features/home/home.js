@@ -104,7 +104,7 @@ const Home = () => {
         <React.Fragment>
             <Container maxWidth="xl">
                 <Typography className={classes.h1}>
-                    <Trans i18nKey="homeTitle" values={{amount: Number(vault.totalPrizesAvailable.toFixed(0)).toLocaleString()}} />
+                    <Trans i18nKey="homeTitle" values={{amount: new BigNumber(vault.totalPrizesAvailable).plus(new BigNumber(40000)).toFixed(0).toLocaleString()}} />
                 </Typography>
                 <Box>
                     <Filter sortConfig={sortConfig} setSortConfig={setSortConfig} defaultFilter={defaultFilter} />
@@ -139,7 +139,7 @@ const Home = () => {
                                             </Grid>
                                             <Grid item xs={6} style={{paddingLeft: '8px'}}>
                                                 <Typography className={classes.subTitle} align={'right'}>{t('interest')}</Typography>
-                                                <Typography className={classes.apy} align={'right'}><span>{item.apy}%</span> {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
+                                                <Typography className={classes.apy} align={'right'}>{item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
                                             </Grid>
                                             <Grid item xs={12} style={{paddingRight: '8px'}}>
                                                 <Typography className={classes.subTitle}>{t('tvl')}</Typography>
