@@ -43,6 +43,10 @@ const fetchPrices = (reducer) => {
             const prices = await updatePrices(state.pricesReducer);
             const apy = await updateApy(state.pricesReducer);
 
+            if (prices && !('POTS' in prices)) {
+                prices['POTS'] = 1;
+            }
+
             dispatch({
                 type: "FETCH_PRICES",
                 payload: {prices: {...prices, ...state.pricesReducer.prices }, apy: apy, lastUpdated: new Date().getTime()}

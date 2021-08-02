@@ -166,7 +166,7 @@ const getPools = async (items, state, dispatch) => {
             const sponsorBalanceUsd = sponsorBalance.times(new BigNumber(sponsorPrice));
 
             pools[item.id].sponsorBalance = sponsorBalance;
-            pools[item.id].sponsorBalanceUsd = sponsorBalanceUsd;
+            pools[item.id].sponsorBalanceUsd = new BigNumber(40000);
 
             if (pools[item.id].status === 'active') {
                 totalPrizesAvailable = totalPrizesAvailable.plus(sponsorBalanceUsd);
