@@ -162,7 +162,7 @@ const Home = () => {
                                                         </Grid>
                                                         <Grid item xs={9} align={"right"}>
                                                             <Typography className={classes.prizeSplitValue}>
-                                                                <span>{item.awardBalance.times(0.2).toFixed(2)} {item.token}</span> and <span>{new BigNumber(40000).times(0.2).toFixed(2)} {item.sponsorToken}</span> each
+                                                                <span>{item.awardBalance.times(0.2).toFixed(2)} {item.token}</span> and <span>{item.sponsorBalance.times(0.2).toFixed(2)} {item.sponsorToken}</span> each
                                                             </Typography>
                                                         </Grid>
                                                     </Grid>
