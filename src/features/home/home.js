@@ -13,7 +13,7 @@ import reduxActions from '../redux/actions';
 import {calculateTotalPrize} from '../../helpers/format';
 import BigNumber from 'bignumber.js';
 import {MigrationNotices} from './components/MigrationNotices/MigrationNotices';
-
+import ZiggyMaintenance from '../../images/ziggy/maintenance.svg';
 import Countdown from '../../components/Countdown';
 import SocialMediaBlock from './components/SocialMediaBlock/SocialMediaBlock';
 
@@ -199,7 +199,7 @@ const Home = () => {
                                 <Grid container>
                                     <Grid item xs={12}>
                                         <Box className={classes.ziggyMaintenance}>
-                                            <img alt="Ziggy Maintenance" height="100px" src={require('../../images/ziggy/maintenance.svg').default} />
+                                            <img alt="" width="100" height="100" src={ZiggyMaintenance} aria-hidden={true} />
                                         </Box>
                                     </Grid>
                                     <Grid item xs={12}>
