@@ -44,20 +44,20 @@ export function MigrationNotices({sortConfig}) {
 	const allPots = useSelector(state => state.vaultReducer.pools);
 	const dispatch = useDispatch();
 
-	const eolPots = useMemo(() => {
-		return Object.values(allPots).filter(pot => pot.status === 'eol' && pot.vaultType === potType && pot.network === currentNetwork);
+	const potsNeedingMigration = useMemo(() => {
+		return Object.values(allPots).filter(pot => pot.status === 'eol' && pot.vaultType === potType && pot.network === currentNetwork && pot.migrationNeeded);
 	}, [potType, allPots, currentNetwork]);
-	const hasEolPots = eolPots.length > 0;
+	const hasPotsNeedingMigration = potsNeedingMigration.length > 0;
 
 	useEffect(() => {
-		if (currentAddress && hasEolPots) {
+		if (currentAddress && hasPotsNeedingMigration) {
 			dispatch(reduxActions.balance.fetchBalances());
 		}
-	}, [dispatch, currentAddress, hasEolPots]);
+	}, [dispatch, currentAddress, hasPotsNeedingMigration]);
 
-	if (currentAddress && hasEolPots) {
+	if (currentAddress && hasPotsNeedingMigration) {
 		return (
-			<div className={classes.notices}>{eolPots.map(pot => (<MigrationNotice key={pot.id} pot={pot}/>))}</div>);
+			<div className={classes.notices}>{potsNeedingMigration.map(pot => (<MigrationNotice key={pot.id} pot={pot}/>))}</div>);
 	}
 
 	return null;
