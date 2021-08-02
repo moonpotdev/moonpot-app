@@ -111,7 +111,7 @@ const getPools = async (items, state, dispatch) => {
             pools[item.id].awardBalance = awardBalance;
             pools[item.id].awardBalanceUsd = awardBalanceUsd;
             pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toFixed(2)) : 0;
-            
+
             const totalValueLocked = new BigNumber(item.totalValueLocked);
             const totalTokenStaked = byDecimals(totalValueLocked, pools[item.id].tokenDecimals);
             pools[item.id].totalTokenStaked = totalTokenStaked;
@@ -161,12 +161,18 @@ const getPools = async (items, state, dispatch) => {
         }
 
         if (!isEmpty(item.sponsorBalance)) {
+            // TODO remove once POTS prize sent to contract
+            if (item.id === 'cake' && BigNumber(item.sponsorBalance).isZero()) {
+                item.sponsorBalance = BigNumber(40000).multipliedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
+            }
+            // TODO End
+
             const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
             const sponsorBalance = new BigNumber(item.sponsorBalance).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
             const sponsorBalanceUsd = sponsorBalance.times(new BigNumber(sponsorPrice));
 
             pools[item.id].sponsorBalance = sponsorBalance;
-            pools[item.id].sponsorBalanceUsd = new BigNumber(40000);
+            pools[item.id].sponsorBalanceUsd = sponsorBalanceUsd;
 
             if (pools[item.id].status === 'active') {
                 totalPrizesAvailable = totalPrizesAvailable.plus(sponsorBalanceUsd);
