@@ -18,7 +18,8 @@ import Countdown from '../../../../components/Countdown';
 const useStyles = makeStyles(styles);
 
 const URL_TAKE_PART_BUSD = 'https://app.dodoex.io/cp/join/0x6f14608d7d50f697181072a1a2481e0499ac9997?network=bsc';
-const URL_TAKE_PART_BNB = 'https://app.dodoex.io/cp/join/0x2648d14f5d9524e34d68168e2feaf8bde8773af7?network=bsc';
+const URL_TAKE_PART_BNB = null;
+// 'https://app.dodoex.io/cp/join/0x2648d14f5d9524e34d68168e2feaf8bde8773af7?network=bsc';
 const URL_LEARN_MORE_MOONPOT = 'https://moonpot.com/alpha/launch/the-moonpot-mission/';
 const URL_LEARN_MORE_POTS = 'https://moonpot.com/alpha/launch/the-stars-look-brighter-with-pots/';
 const URL_LEARN_MORE_IDO = 'https://moonpot.com/alpha/launch/how-to-enter-the-moonpot-dodo-ido/';
