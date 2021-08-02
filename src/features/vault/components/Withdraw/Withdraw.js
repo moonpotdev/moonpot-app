@@ -214,15 +214,23 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                     <Grid item xs={8} align={"right"}>
                         <Typography className={classes.withdrawItemValue}>{state.earned} {item.sponsorToken}</Typography>
                     </Grid>
-                    <Grid item xs={4} align={"left"}>
-                        <Typography className={classes.withdrawItemText}>
-                            <Trans i18nKey="myBoostToken" values={{boostToken: item.boostToken}}/>
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={8} align={"right"}>
-                        {/* BNB boost value needs populating state.boosted */}
-                        <Typography className={classes.withdrawItemValue}>{state.boosted} {item.boostToken}</Typography>
-                    </Grid>
+                    { item.boostToken ? 
+                    <React.Fragment>
+
+                        <Grid item xs={4} align={"left"}>
+                            <Typography className={classes.withdrawItemText}>
+                                <Trans i18nKey="myBoostToken" values={{boostToken: item.boostToken}}/>
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={8} align={"right"}>
+                            <Typography className={classes.withdrawItemValue}>{state.boosted} {item.boostToken}</Typography>
+                        </Grid>
+                    
+                    </React.Fragment>
+                    : 
+                    ''
+                    }
+                    
                     <Grid item xs={4} align={"left"}>
                         <Typography className={classes.withdrawItemText}>
                             <Trans i18nKey="myFairplayTimelock"/>

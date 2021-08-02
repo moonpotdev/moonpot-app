@@ -41,6 +41,15 @@ const getPools = async (items, state, dispatch) => {
                 sponsorRewardInfo: gateContract.methods.rewardInfo(pool.sponsorRewardId),
                 boostRewardInfo: gateContract.methods.rewardInfo(pool.boostRewardId),
             });
+        } else if (pool.sponsorToken) {
+            calls[pool.network].push({
+                id: pool.id,
+                awardBalance: gateContract.methods.awardBalance(),
+                rewardRate: gateContract.methods.rewardRate(),
+                totalValueLocked: gateContract.methods.TVL(),
+                sponsorRewardInfo: gateContract.methods.rewardInfo(pool.sponsorRewardId),
+                boostRewardInfo: gateContract.methods.rewardInfo(pool.boostRewardId),
+            });
         } else {
             calls[pool.network].push({
                 id: pool.id,
