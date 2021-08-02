@@ -99,7 +99,7 @@ const styles = (theme) => ({
         margin: '80px auto 0px auto',
         marginTop: '56px',
         borderRadius: '16px',
-        padding: '10px',
+        padding: '24px',
         [theme.breakpoints.up('sm')]: {
             marginLeft: '20px',
             marginRight: '20px',
@@ -116,7 +116,7 @@ const styles = (theme) => ({
     },
     potImage: {
         width: '100%',
-        marginBottom: '20px',
+        marginBottom: '24px',
     },
     potUsdTop: {
         fontWeight: 700,

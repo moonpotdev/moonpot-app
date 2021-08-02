@@ -477,7 +477,7 @@ const Dashboard = () => {
                                                                 <Typography className={classes.myDetailsValue} align={"right"}>0% APY</Typography>
                                                             </Grid>
                                                             <Grid item xs={6}>
-                                                                <Typography className={classes.myDetailsText} align={'left'}>
+                                                                <Typography className={classes.myDetailsText} align={'left'} style={{marginBottom: '20px'}}>
                                                                     <Trans i18nKey="myBonusEarnings"/>
                                                                 </Typography>
                                                             </Grid>
@@ -569,7 +569,7 @@ const Dashboard = () => {
                                                             <Divider className={classes.divider}/>
                                                         </Grid>
                                                         <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
-                                                            <Typography className={classes.dividerText} onClick={() => {setBonusOpen(!bonusOpen)}}>
+                                                            <Typography className={classes.dividerText} style={{marginBottom: '16px'}} onClick={() => {setBonusOpen(!bonusOpen)}}>
                                                                 <Trans i18nKey="bonusEarnings"/>
                                                             </Typography>
                                                         </Grid>
@@ -596,7 +596,7 @@ const Dashboard = () => {
                                                                         <Typography className={classes.myDetailsValue} align={'right'}>{formatDecimals(item.boosted)} {item.boostToken} (${formatDecimals(item.boosted.multipliedBy(prices.prices[item.boostToken]), 2)})</Typography>
                                                                     </Grid>
                                                                     <Grid item xs={12} >
-                                                                        <Button onClick={() => handleWithdrawBonus(item)} className={item.earned.lte(0) ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned.lte(0)}>
+                                                                        <Button style={{marginTop: '4px'}} onClick={() => handleWithdrawBonus(item)} className={item.earned.lte(0) ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned.lte(0)}>
                                                                             Withdraw Bonus {item.sponsorToken} { item.boostToken ? 'and ' + item.boostToken : ('')}
                                                                         </Button>
                                                                         <Steps item={item} steps={steps} handleClose={handleClose} />
@@ -613,17 +613,17 @@ const Dashboard = () => {
                                                     <Grid item xs={12}>
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
-                                                    <Grid item xs={9} align={"left"}>
-                                                        <Typography className={classes.dividerText} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeWinners')} </Typography>
+                                                    <Grid item xs={9} align={"left"} style={{height: '20px'}}>
+                                                        <Typography className={classes.dividerText} style={{marginBottom: 0}} onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}}>{t('prizeWinners')} </Typography>
                                                     </Grid>
-                                                    <Grid item xs={3} align={"right"}>
-                                                        <Link onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}} className={classes.expandToggle}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
+                                                    <Grid item xs={3} align={"right"} style={{height: '20px'}}>
+                                                        <Link onClick={() => {setPrizeSplitOpen(!prizeSplitOpen)}} className={classes.expandToggle} style={{marginBottom: '0'}}>{prizeSplitOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
                                                     </Grid>
-                                                    <Grid item xs={12} style={{padding: '0 8px'}}>
+                                                    <Grid item xs={12} style={{padding: 0}}>
                                                         <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                                             <Grid container>
                                                                 <Grid item xs={6} align={"left"}>
-                                                                    <Typography className={classes.potsItemText}>
+                                                                    <Typography className={classes.potsItemText} style={{marginBottom: 0}}>
                                                                         <Trans i18nKey="winners"/>
                                                                     </Typography>
                                                                 </Grid>
