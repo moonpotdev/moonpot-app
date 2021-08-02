@@ -48,7 +48,6 @@ const getPools = async (items, state, dispatch) => {
                 rewardRate: gateContract.methods.rewardRate(),
                 totalValueLocked: gateContract.methods.TVL(),
                 sponsorRewardInfo: gateContract.methods.rewardInfo(pool.sponsorRewardId),
-                boostRewardInfo: gateContract.methods.rewardInfo(pool.boostRewardId),
             });
         } else {
             calls[pool.network].push({
