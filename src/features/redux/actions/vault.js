@@ -118,9 +118,9 @@ const getPools = async (items, state, dispatch) => {
             pools[item.id].totalStakedUsd = totalValueLocked.times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
             pools[item.id].tvl = formatTvl(totalTokenStaked, awardPrice);
 
-            if (item.sponsorRewardInfo) {
+            if ('sponsorRewardInfo' in item) {
                 const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
-                const rewardRate = new BigNumber(item.sponsorRewardInfo['3']);
+                const rewardRate = new BigNumber(item.sponsorRewardInfo ? item.sponsorRewardInfo['3'] : 0);
                 const TotalValueLocked = new BigNumber(item.totalValueLocked);
                 const totalStakedUsd = TotalValueLocked.times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
                 const yearlyRewards = rewardRate.times(3600).times(24).times(365);
