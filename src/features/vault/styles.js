@@ -29,6 +29,9 @@ const styles = (theme) => ({
     potImage: {
         width: '100%',
         marginBottom: '20px',
+        '& img': {
+            maxHeight: '85px',
+        }
     },
     countdown: {
         fontWeight: 700,

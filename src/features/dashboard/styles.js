@@ -117,6 +117,9 @@ const styles = (theme) => ({
     potImage: {
         width: '100%',
         marginBottom: '24px',
+        '& img': {
+            maxHeight: '85px',
+        }
     },
     potUsdTop: {
         fontWeight: 700,
