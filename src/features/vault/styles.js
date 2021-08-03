@@ -293,8 +293,7 @@ const styles = (theme) => ({
     },
     tokenIcon: {
         borderRadius: '25px',
-        margin: '15px',
-        
+        margin: '14px 16px 0 '
     },
     withdrawText: {
         fontWeight: 700,
