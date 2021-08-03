@@ -385,7 +385,7 @@ const Dashboard = () => {
                                                                 }
                                                                 <Grid item xs={12} >
                                                                     <Button onClick={() => handleWithdrawBonus(item)} className={item.earned.lte(0) ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned.lte(0)}>
-                                                                        Withdraw Bonus {item.sponsorToken} { item.boostToken ? 'and ' + item.boostToken : ('')}
+                                                                        Claim Bonus {item.sponsorToken} { item.boostToken ? 'and ' + item.boostToken : ('')}
                                                                     </Button>
                                                                     <Steps item={item} steps={steps} handleClose={handleClose} />
                                                                 </Grid>
@@ -596,7 +596,7 @@ const Dashboard = () => {
                                                                     </Grid>
                                                                     <Grid item xs={12} >
                                                                         <Button style={{marginTop: '4px'}} onClick={() => handleWithdrawBonus(item)} className={item.earned.lte(0) ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned.lte(0)}>
-                                                                            Withdraw Bonus {item.sponsorToken} { item.boostToken ? 'and ' + item.boostToken : ('')}
+                                                                            Claim Bonus {item.sponsorToken} { item.boostToken ? 'and ' + item.boostToken : ('')}
                                                                         </Button>
                                                                         <Steps item={item} steps={steps} handleClose={handleClose} />
                                                                     </Grid>
