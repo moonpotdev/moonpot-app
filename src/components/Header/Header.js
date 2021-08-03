@@ -52,7 +52,7 @@ function MenuLink({external, href, label, match, onClick, ...rest}) {
 	}, [external, href, history, onClick]);
 
 	const props = {
-		href: href,
+		href: href.substr(0, 1) === '/' ? '/#' + href : href,
 	};
 
 	if (external) {
