@@ -77,7 +77,7 @@
   "oddsPerDeposit": "1 in {{odds}} odds per {{amount}} deposit",
   "details": "Details",
   "depositMore": "Deposit More",
-  "depositMoreExtraInfo": "Depositing more CAKE will reset your Fairness Fee to a maximum of 2.5%, for your new deposit. Your Fairplay Timelock countdown will reset to 10 days, but you won't pay any additional Fairness Fees on your older deposits.",
+  "depositMoreExtraInfo": "Depositing more {{token}} will reset your Fairness Fee to a maximum of 2.5%, for your new deposit. Your Fairplay Timelock countdown will reset to 10 days, but you won't pay any additional Fairness Fees on your older deposits.",
   "footerPoweredBy": "Powered by",
   "earningsBreakdown": "Earnings Breakdown",
   "upgradeWhy": "We upgraded the {{token}} Moonpot in order to be able to add different Bonus rewards to all future Moonpots.",

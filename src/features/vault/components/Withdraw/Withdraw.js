@@ -251,7 +251,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                         <Paper component="form" className={classes.input}>
                             <Grid container spacing={1}>
                                 <Grid item xs={2}>
-                                    <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default} />
+                                <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/' + item.token.toLowerCase() + '.svg').default} />
                                 </Grid>
                                 <Grid item xs={6}>
                                     <InputBase disabled={true} placeholder={state.balance.toString()} value={state.balance} onChange={(e) => handleInput(e.target.value)} />
