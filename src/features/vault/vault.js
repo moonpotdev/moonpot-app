@@ -156,7 +156,7 @@ const Vault = () => {
                                 </AnimateHeight>
                             </Grid>
                             <Grid item xs={12}>
-                                <Divider className={classes.divider} style={{marginBottom: '20px', marginTop: '4px'}}></Divider>
+                                <Divider className={classes.divider} style={{marginBottom: '20px', marginTop: '4px'}}/>
                             </Grid>
                             <Grid item xs={12}>
                                 <Deposit
@@ -174,7 +174,7 @@ const Vault = () => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <Divider className={classes.divider} style={{marginBottom: '16px'}}></Divider>
+                                <Divider className={classes.divider} style={{marginBottom: '16px'}}/>
                             </Grid>
                             <Grid item xs={9} align={"left"}>
                                 <Typography className={classes.withdrawText} onClick={() => {setWithdrawOpen(!withdrawOpen)}}>{t('withdraw')} </Typography>
@@ -216,12 +216,13 @@ const Vault = () => {
                                 <Grid container>
                                     <Grid item xs={12} align={"left"}>
                                         <Typography className={classes.infoTitle} align={"left"}>
-                                            {item.token} Moonpot Strategy
+                                            {item.strategyCard.title ? (item.strategyCard.title) : (item.token + ' Moonpot Strategy')}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoMessage} align={"left"} style={{marginBottom: '32px'}}>
-                                            <Trans i18nKey="moonpotStrategyMessage" values={{token: item.token}}/>
+                                        <Typography className={classes.infoMessage} align={"left"} style={{marginBottom: '32px', whiteSpace: 'pre-wrap'}}>
+                                            {item.strategyCard.body ? (item.strategyCard.body) : (<Trans i18nKey="moonpotStrategyMessage" values={{token: item.token}}/>)}
+
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} align={"left"} style={{marginBottom: '16px'}}>
