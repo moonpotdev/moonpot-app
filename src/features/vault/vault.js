@@ -111,12 +111,7 @@ const Vault = () => {
                             <Box className={classes.potImage}>
                                 <img 
                                 alt={`Moonpot ${item.sponsorToken}`}
-                                srcSet={`
-                                    images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@4x.png 4x,
-                                    images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@3x.png 3x,
-                                    images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@2x.png 2x,
-                                    images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@1x.png 1x
-                                `}
+                                src={require('../../images/vault/' + item.token.toLowerCase() + '/sponsored/' + item.sponsorToken.toLowerCase() + '.svg').default}
                                 />
                             </Box>
                             </Grid>
