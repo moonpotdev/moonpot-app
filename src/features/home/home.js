@@ -104,7 +104,7 @@ const Home = () => {
         <React.Fragment>
             <Container maxWidth="xl">
                 <Typography className={classes.h1}>
-                    <Trans i18nKey="homeTitle" values={{amount: new BigNumber(vault.totalPrizesAvailable).plus(new BigNumber(40000)).toFixed(0).toLocaleString()}} />
+                    <Trans i18nKey="homeTitle" values={{amount: Number(vault.totalPrizesAvailable.toFixed(0)).toLocaleString()}} />
                 </Typography>
                 <Box>
                     <Filter sortConfig={sortConfig} setSortConfig={setSortConfig} defaultFilter={defaultFilter} />
