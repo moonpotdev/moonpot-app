@@ -1,5 +1,28 @@
 export const pools = [
 	{
+		id: 'pots',
+		name: 'Pots',
+		token: 'POTS',
+		tokenAddress: '0x1f492289183F784f20C7E8968c7033E76A798432',
+		tokenDecimals: 18,
+		rewardToken: 'potPOTS',
+		rewardAddress: '0xD962cc9e7ddE2465528427cc6a83c1Ddf710d966',
+		contractAddress: '0xdE24522Be2c71DD662307cB23fD47FE255903750',
+		prizePoolAddress: '0x4388dA0b2d475D4164c85A9E45a72191847fb119',
+		prizeStrategyAddress: '0x6c3bF5F01d8d1b4181670cd608f3A67d0dc6eB0E',
+		pricePerShare: 1,
+		oracleId: 'Pots',
+		apyId: 'pots-pots',
+		vaultType: 'main',
+		status: 'active',
+		sponsorProjectName: 'Moonpot',
+		sponsorToken: 'POTS',
+		sponsorAddress: '0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2',
+		sponsorTokenDecimals: 18,
+		sponsorRewardId: 2,
+		strategyAddress: '0x97e5d50Fe0632A95b9cf1853E744E02f7D816677'
+	},
+	{
 		id: 'cake',
 		name: 'Cake',
 		token: 'CAKE',
