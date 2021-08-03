@@ -66,7 +66,7 @@ const Home = () => {
         }
         const check = (item) => {
             if(item.status !== (sortConfig.retired ? 'eol' : 'active')) {
-                return true;
+                return false;
             }
 
             if(sortConfig.deposited && item.deposited === 0) {
