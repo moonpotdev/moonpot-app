@@ -108,7 +108,7 @@ const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemDa
             <Paper component="form" className={classes.input}>
                 <Grid container spacing={1}>
                     <Grid item xs={2}>
-                        <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default} />
+                        <img alt="TokenIcon" className={classes.tokenIcon} src={require('../../../../images/tokens/' + item.token.toLowerCase() + '.svg').default} />
                     </Grid>
                     <Grid item xs={6}>
                         <InputBase placeholder={t('enterCoinAmount', {coin: item.token})} value={formData.deposit.amount} onChange={(e) => handleInput(e.target.value)} />
@@ -123,7 +123,7 @@ const Deposit = ({formData, setFormData, item, handleWalletConnect, updateItemDa
                     <Button onClick={handleDeposit} className={classes.enabledActionBtn} variant={'contained'} disabled={false}>Deposit {
                         formData.deposit.max && formData.deposit.amount > 0 ? ('All') :
                         ( formData.deposit.amount > 0 ) ? formData.deposit.amount + " " + item.token :
-                        depositMore ? 'More' : ''
+                        depositMore ? 'More ' + item.token : ''
                         }</Button>
             ) : (
                 <Button onClick={handleWalletConnect} className={classes.connectWalletBtn} variant={'contained'}>{t('buttons.connectWallet')}</Button>

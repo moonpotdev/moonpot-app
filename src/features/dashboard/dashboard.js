@@ -417,7 +417,7 @@ const Dashboard = () => {
                                                                 />
                                                                 <Grid item xs={12}>
                                                                     <Typography className={classes.depositMoreExtraInfo}>
-                                                                        {t('depositMoreExtraInfo')}
+                                                                        <Trans i18nKey="depositMoreExtraInfo" values={{token: item.token}}/>
                                                                     </Typography>
                                                                 </Grid>
                                                             </Box>
