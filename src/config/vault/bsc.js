@@ -3,7 +3,7 @@ export const pools = [
 		id: 'pots',
 		name: 'Pots',
 		token: 'POTS',
-		tokenAddress: '0x04D2fD1aE46Ff5eEb90EB8C1F5AD5E2187f5e733',
+		tokenAddress: '0x3Fcca8648651E5b974DD6d3e50F61567779772A8',
 		tokenDecimals: 18,
 		rewardToken: 'potPOTS',
 		rewardAddress: '0xa178972A8FfeFd6661179666134A2ba9B3DbE3B1',
