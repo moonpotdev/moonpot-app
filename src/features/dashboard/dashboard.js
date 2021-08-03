@@ -291,12 +291,7 @@ const Dashboard = () => {
                                                 <Box className={classes.potImage}>
                                                     <img
                                                     alt={`Moonpot ${item.sponsorToken}`}
-                                                    srcSet={`
-                                                        images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@4x.png 4x,
-                                                        images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@3x.png 3x,
-                                                        images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@2x.png 2x,
-                                                        images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@1x.png 1x
-                                                    `}
+                                                    src={require('../../images/vault/' + item.token.toLowerCase() + '/sponsored/' + item.sponsorToken.toLowerCase() + '.svg').default}
                                                     />
                                                 </Box>
                                             </Grid>
@@ -362,22 +357,22 @@ const Dashboard = () => {
                                                         <AnimateHeight duration={ 500 } height={ bonusOpen ? 'auto' : 0 }>
                                                             <Grid container>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsText} align={'left'}>
+                                                                    <Typography className={classes.myDetailsText} align={'left'} style={{marginBottom: 0}}>
                                                                         <Trans i18nKey="myBonusEarnings"/>
                                                                     </Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsValue} align={'right'}>{formatDecimals(item.earned)} {item.sponsorToken} (${formatDecimals(item.earned.multipliedBy(prices.prices[item.sponsorToken]),2)})</Typography>
+                                                                    <Typography className={classes.myDetailsValue} align={'right'} style={{marginBottom: 0}}>{formatDecimals(item.earned)} {item.sponsorToken} (${formatDecimals(item.earned.multipliedBy(prices.prices[item.sponsorToken]),2)})</Typography>
                                                                 </Grid>
                                                                 { item.boostToken ? 
                                                                 <React.Fragment>
                                                                     <Grid item xs={6}>
-                                                                        <Typography className={classes.myDetailsText} align={'left'}>
+                                                                        <Typography className={classes.myDetailsText} align={'left'} style={{marginTop: '16px'}}>
                                                                             <Trans i18nKey="myBoostEarnings"/>
                                                                         </Typography>
                                                                     </Grid>
                                                                     <Grid item xs={6}>
-                                                                        <Typography className={classes.myDetailsValue} align={'right'}>{formatDecimals(item.boosted)} {item.boostToken} (${formatDecimals(item.boosted.multipliedBy(prices.prices[item.boostToken]), 2)})</Typography>
+                                                                        <Typography className={classes.myDetailsValue} align={'right'} style={{marginTop: '16px'}}>{formatDecimals(item.boosted)} {item.boostToken} (${formatDecimals(item.boosted.multipliedBy(prices.prices[item.boostToken]), 2)})</Typography>
                                                                     </Grid>
                                                                     <Grid item xs={12}>
                                                                         <Typography className={classes.myPotsInfoText} align={'left'}>

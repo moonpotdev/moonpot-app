@@ -104,7 +104,7 @@ const Home = () => {
         <React.Fragment>
             <Container maxWidth="xl">
                 <Typography className={classes.h1}>
-                    <Trans i18nKey="homeTitle" values={{amount: Number(vault.totalPrizesAvailable.toFixed(0)).toLocaleString()}} />
+                    <Trans i18nKey="homeTitle" values={{amount: new BigNumber(vault.totalPrizesAvailable).toFixed(0).toLocaleString()}} />
                 </Typography>
                 <Box>
                     <Filter sortConfig={sortConfig} setSortConfig={setSortConfig} defaultFilter={defaultFilter} />
@@ -119,12 +119,7 @@ const Home = () => {
                                                 <Box className={classes.potImage}>
                                                         <img 
                                                         alt={`Moonpot ${item.sponsorToken}`}
-                                                        srcSet={`
-                                                            images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@4x.png 4x,
-                                                            images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@3x.png 3x,
-                                                            images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@2x.png 2x,
-                                                            images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@1x.png 1x
-                                                        `}
+                                                        src={require('../../images/vault/' + item.token.toLowerCase() + '/sponsored/' + item.sponsorToken.toLowerCase() + '.svg').default}
                                                         />
                                                 </Box>
                                             </Grid>
@@ -139,7 +134,7 @@ const Home = () => {
                                             </Grid>
                                             <Grid item xs={6} style={{paddingLeft: '8px'}}>
                                                 <Typography className={classes.subTitle} align={'right'}>{t('interest')}</Typography>
-                                                <Typography className={classes.apy} align={'right'}>{item.bonusApy > 0 ? (<span>{item.apy}%</span>) : null} {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
+                                                <Typography className={classes.apy} align={'right'}>{item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
                                             </Grid>
                                             <Grid item xs={12} style={{paddingRight: '8px'}}>
                                                 <Typography className={classes.subTitle}>{t('tvl')}</Typography>

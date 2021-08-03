@@ -117,6 +117,9 @@ const styles = (theme) => ({
     potImage: {
         width: '100%',
         marginBottom: '24px',
+        '& img': {
+            maxHeight: '85px',
+        }
     },
     potUsdTop: {
         fontWeight: 700,
@@ -272,7 +275,7 @@ const styles = (theme) => ({
         lineHeight: '139%',
         letterSpacing: '0.2px',
         color: 'rgba(54, 117, 162, 0.4)',
-        margin: '16px 0 8px 0',
+        margin: '20px 0 16px 0',
     },
     depositMoreExtraInfo: {
         fontWeight: 400,
