@@ -161,11 +161,6 @@ const getPools = async (items, state, dispatch) => {
         }
 
         if (!isEmpty(item.sponsorBalance)) {
-            // TODO remove once POTS prize sent to contract
-            if (item.id === 'cake' && BigNumber(item.sponsorBalance).isZero()) {
-                item.sponsorBalance = BigNumber(40000).multipliedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
-            }
-            // TODO End
 
             const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
             const sponsorBalance = new BigNumber(item.sponsorBalance).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
