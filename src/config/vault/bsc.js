@@ -48,7 +48,8 @@ export const pools = [
 		sponsorTokenDecimals: 18,
 		sponsorRewardId: 2,
 		strategyAddress: '0x97e5d50Fe0632A95b9cf1853E744E02f7D816677',
-		strategyCard: {}
+		strategyCard: {},
+		earningsBreakdown: true,
 	},
 	{
 		id: 'cake-dodo',

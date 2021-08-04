@@ -242,57 +242,64 @@ const Vault = () => {
                                 </Grid>
                             </Box>
                         </Grid>
-                        <Grid item xs={12} align={"center"}>  
-                            <Box className={classes.infoContainer}>
-                                <Grid container>
-                                    <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoTitle} align={"left"}>
-                                            {t('earningsBreakdown')}
-                                        </Typography>
+                        { item.earningsBreakdown ? 
+                        
+                        <React.Fragment>
+                            <Grid item xs={12} align={"center"}>  
+                                <Box className={classes.infoContainer}>
+                                    <Grid container>
+                                        <Grid item xs={12} align={"left"}>
+                                            <Typography className={classes.infoTitle} align={"left"}>
+                                                {t('earningsBreakdown')}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12} align={"left"}>
+                                            <Typography className={classes.infoSubHeader} align={"left"}>
+                                                Your {item.token} Interest
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12} align={"left"}>
+                                            <Typography className={classes.infoDetail} align={"left"}>
+                                                50%
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12} align={"left"}>
+                                            <Typography className={classes.infoSubHeader} align={"left"}>
+                                                {item.token} Moonpot Prize Draw
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12} align={"left"}>
+                                            <Typography className={classes.infoDetail} align={"left"}>
+                                                40%
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12} align={"left"}>
+                                            <Typography className={classes.infoSubHeader} align={"left"}>
+                                                Ziggy's (Governance) Pot Interest
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12} align={"left"}>
+                                            <Typography className={classes.infoDetail} align={"left"}>
+                                                5%
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12} align={"left"}>
+                                            <Typography className={classes.infoSubHeader} align={"left"}>
+                                                Ziggy's (Governance) Prize Draw
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12} align={"left"}>
+                                            <Typography className={classes.infoDetail} align={"left"} style={{paddingBottom: 0}}>
+                                                5%
+                                            </Typography>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoSubHeader} align={"left"}>
-                                            Your {item.token} Interest
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoDetail} align={"left"}>
-                                            50%
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoSubHeader} align={"left"}>
-                                            {item.token} Moonpot Prize Draw
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoDetail} align={"left"}>
-                                            40%
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoSubHeader} align={"left"}>
-                                            Ziggy's (Governance) Pot Interest
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoDetail} align={"left"}>
-                                            5%
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoSubHeader} align={"left"}>
-                                            Ziggy's (Governance) Prize Draw
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} align={"left"}>
-                                        <Typography className={classes.infoDetail} align={"left"} style={{paddingBottom: 0}}>
-                                            5%
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </Box>
-                        </Grid>
+                                </Box>
+                            </Grid>
+                        </React.Fragment>
+                        :
+                        ''
+                        }
                         <Grid item xs={12} align={"center"} ref={fairPlayRef}>
                             <Box className={classes.infoContainer}>
                                 <Grid container>
