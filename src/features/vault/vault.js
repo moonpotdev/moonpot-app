@@ -101,7 +101,11 @@ const Vault = () => {
             ) : (
             <Container maxWidth="lg">
                 <Typography className={classes.title}>
-                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: (item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy), amount: Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}} />
+                    { item.hardcodeWin ?
+                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: (item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy), amount: item.hardcodeWin}} />
+                    :
+                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: (item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy), currency: '$', amount: Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}} />
+                    }
                 </Typography>
                 
                 <Grid container>
@@ -137,7 +141,7 @@ const Vault = () => {
                             </Grid>
                             <Grid item xs={6} style={{paddingLeft: '8px'}}>
                                 <Typography className={classes.subTitle} align={'right'}>{t('interest')}</Typography>
-                                <Typography className={classes.apy}><span>{item.apy}%</span> {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
+                                <Typography className={classes.apy}>{item.apy > 0 ? <span>{item.apy}%</span> : ''} {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
                             </Grid>
                             <Grid item xs={12}>
                                 <Typography className={classes.subTitle}>{t('tvl')}</Typography>
