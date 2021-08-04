@@ -23,21 +23,9 @@ import Withdraw from "./components/Withdraw";
 import {calculateTotalPrize} from "../../helpers/format";
 import BigNumber from "bignumber.js";
 import Countdown from "../../components/Countdown";
+import PrizeSplit from "../../components/PrizeSplit";
 
 const useStyles = makeStyles(styles);
-
-function PrizeSplit({item}) {
-    const classes = useStyles();
-
-    return <Typography className={classes.prizeSplitValue}>
-        <span>{item.awardBalance.div(item.numberOfWinners).toFixed(2)} {item.token}</span>
-        {item.sponsors.map((sponsor, i) => {
-            return <>{i < item.sponsors.length - 1 ? ", " : " and "}
-                <span>{sponsor.sponsorBalance.div(item.numberOfWinners).toFixed(2)} {sponsor.sponsorToken}</span>
-            </>
-        })} each
-    </Typography>
-}
 
 const Vault = () => {
     const { t } = useTranslation();
@@ -143,7 +131,7 @@ const Vault = () => {
                                 :
                             <React.Fragment>
                                 <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
-                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
+                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}<PrizeSplit item={item} withBalances={false}/></Typography>
                                 <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                             </React.Fragment>
                             }
@@ -173,10 +161,13 @@ const Vault = () => {
                                 <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                     <Grid container spacing={1}>
                                         <Grid item xs={4} align={"left"}>
-                                            <Typography className={classes.prizeSplitWinners}>{item.numberOfWinners} winners</Typography>
+                                            <Typography className={classes.prizeSplitWinners}>{item.numberOfWinners.toString()} winners</Typography>
                                         </Grid>
                                         <Grid item xs={8} align={"right"}>
-                                            <PrizeSplit item={item}/>
+                                            <Typography className={classes.prizeSplitValue}>
+                                                <span>{item.awardBalance.div(item.numberOfWinners).toFixed(2)} {item.token}</span>
+                                                <PrizeSplit item={item}/>
+                                            </Typography>
                                         </Grid>
                                     </Grid>
                                 </AnimateHeight>
