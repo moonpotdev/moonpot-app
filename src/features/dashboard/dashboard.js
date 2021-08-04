@@ -284,7 +284,7 @@ const Dashboard = () => {
 
                             : (
                                 filtered.map(item => (
-                                    <Box className={(item.status == "active") ? classes.activeMyPot : classes.eolMyPot} key={item.id}>
+                                    <Box className={(item.status === "active") ? classes.activeMyPot : classes.eolMyPot} key={item.id}>
                                         <Grid container spacing={0}>
                                             <Grid item xs={4} align={"left"}>
                                                 <Box className={classes.potImage}>
@@ -296,7 +296,7 @@ const Dashboard = () => {
                                             </Grid>
 
                                             {
-                                                (item.status == "active") ?
+                                                (item.status === "active") ?
                                                 // =================
                                                 // Active Layout
                                                 // =================
@@ -311,8 +311,8 @@ const Dashboard = () => {
 
                                                     :
                                                     <React.Fragment>
-                                                        <Typography className={classes.potUsdTop} align={"right"}>${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()} <span>{t('in')}</span> {item.token}</Typography>
-                                                        <Typography className={classes.potUsd} align={"right"}><PrizeSplit item={item} withBalances={false} skipFirstComma={true}/> PRIZES</Typography>
+                                                        <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
+                                                        <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}<PrizeSplit item={item} withBalances={false} skipFirstComma={true}/> PRIZES</Typography>
                                                         <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown until={item.expiresAt*1000} /> </span></Typography>
                                                     </React.Fragment>
                                                     }
