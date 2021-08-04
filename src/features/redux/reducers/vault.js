@@ -10,9 +10,9 @@ const initialPools = () => {
 
     for(let net in config) {
         const data = require('../../../config/vault/' + net + '.js');
-        for (const key in data.pools) {
-            const pool = data.pools[key];
+        let defaultOrder = 0;
 
+        for (const pool of data.pools) {
             pool['network'] = net;
             pool['daily'] = 0;
             pool['apy'] = 0;
@@ -22,6 +22,7 @@ const initialPools = () => {
             pool['totalSponsorBalanceUsd'] = new BigNumber(0);
             pool['totalStakedUsd'] = new BigNumber(0);
             pool['numberOfWinners'] = new BigNumber(5);
+            pool['defaultOrder'] = defaultOrder++;
             pool.sponsors.forEach(sponsor => {
                 sponsor.sponsorBalance = new BigNumber(0);
                 sponsor.sponsorBalanceUsd = new BigNumber(0);

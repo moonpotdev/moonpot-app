@@ -36,9 +36,8 @@ function MigrationNotice({pot}) {
 	return null;
 }
 
-export function MigrationNotices({sortConfig}) {
+export function MigrationNotices({potType}) {
 	const classes = useStyles();
-	const potType = sortConfig.vault || 'main';
 	const currentNetwork = useSelector(state => state.walletReducer.network);
 	const currentAddress = useSelector(state => state.walletReducer.address);
 	const allPots = useSelector(state => state.vaultReducer.pools);

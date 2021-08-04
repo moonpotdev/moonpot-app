@@ -299,22 +299,10 @@ const Dashboard = () => {
                                                 // =================
                                                 <React.Fragment>
                                                     <Grid item xs={8}>
-                                                    {
-                                                    item.hardcodeWin ? 
-
-                                                    <React.Fragment>
-                                                        <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> {item.hardcodeWin}</Typography>
-                                                    </React.Fragment>
-
-                                                    :
-                                                    <React.Fragment>
                                                         <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
                                                         <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}<PrizeSplit item={item} withBalances={false} skipFirstComma={true}/> PRIZES</Typography>
                                                         <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown until={item.expiresAt*1000} /> </span></Typography>
-                                                    </React.Fragment>
-                                                    }
-                                                        
-                                                    </Grid>
+                                                               </Grid>
                                                     <Grid item xs={12}>
                                                         <Divider className={classes.divider}/>
                                                     </Grid>
@@ -372,7 +360,7 @@ const Dashboard = () => {
                                                                 <Grid item xs={6}>
                                                                     <Typography className={classes.myDetailsValue} align={'right'} style={{marginBottom: 0}}>{formatDecimals(item.earned)} {item.bonusToken} (${formatDecimals(item.earned.multipliedBy(prices.prices[item.bonusToken]),2)})</Typography>
                                                                 </Grid>
-                                                                { item.boostToken ? 
+                                                                { item.boostToken ?
                                                                 <React.Fragment>
                                                                     <Grid item xs={6}>
                                                                         <Typography className={classes.myDetailsText} align={'left'} style={{marginTop: '16px'}}>
@@ -493,10 +481,10 @@ const Dashboard = () => {
                                                             </Grid>
                                                         </Grid>
                                                     </Grid>
-                                                    { item.migrationContractAddress ? 
+                                                    { item.migrationContractAddress ?
                                                     <React.Fragment>
 
-                                                    
+
                                                         <Grid item xs={12}>
                                                                 <Grid container>
 
@@ -613,7 +601,7 @@ const Dashboard = () => {
                                                                 </Grid>
                                                             </AnimateHeight>
                                                         </Grid>
-                                                        
+
                                                     </React.Fragment>
                                                     }
 

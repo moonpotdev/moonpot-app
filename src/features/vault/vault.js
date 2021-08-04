@@ -102,11 +102,7 @@ const Vault = () => {
             ) : (
             <Container maxWidth="lg">
                 <Typography className={classes.title}>
-                    { item.hardcodeWin ?
-                    <Trans i18nKey="vaultTitle" values={{name: item.token, apy: (item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy), amount: item.hardcodeWin}} />
-                    :
                     <Trans i18nKey="vaultTitle" values={{name: item.token, apy: (item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy), currency: '$', amount: Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}} />
-                    }
                 </Typography>
                 
                 <Grid container>
@@ -121,20 +117,9 @@ const Vault = () => {
                             </Box>
                             </Grid>
                             <Grid item xs={8}>
-                            {
-                                item.hardcodeWin ? 
-
-                                <React.Fragment>
-                                    <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> {item.hardcodeWin}</Typography>
-                                </React.Fragment>
-
-                                :
-                            <React.Fragment>
                                 <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
                                 <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}<PrizeSplit item={item} withBalances={false}/></Typography>
                                 <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
-                            </React.Fragment>
-                            }
                             </Grid>
                             <Grid item xs={6} style={{paddingRight: '8px'}}>
                                 <Typography className={classes.subTitle} align={"left"}>{t('nextDraw')}</Typography>
