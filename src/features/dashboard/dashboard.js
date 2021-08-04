@@ -348,7 +348,7 @@ const Dashboard = () => {
                                                                     <Typography className={classes.myDetailsText} align={'left'}>{t('myOdds')}</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsValue} align={"right"}>{t('odds', {odds: investmentOdds(item.totalStakedUsd, item.userBalance.times(prices.prices[item.oracleId]), 5)})}</Typography>
+                                                                    <Typography className={classes.myDetailsValue} align={"right"}>{t('odds', {odds: investmentOdds(item.totalStakedUsd, item.userBalance.times(prices.prices[item.oracleId]), item.numberOfWinners)})}</Typography>
                                                                 </Grid>
                                                             </Grid>
                                                         </AnimateHeight>
