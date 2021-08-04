@@ -30,7 +30,8 @@ const styles = (theme) => ({
         width: '100%',
         marginBottom: '24px',
         '& img': {
-            maxHeight: '85px',
+            maxHeight: '90px',
+            maxWidth: '90px',
         }
     },
     countdown: {
