@@ -185,9 +185,6 @@ const Dashboard = () => {
 
         for (const [, item] of Object.entries(vault.pools)) {
             if(check(item)) {
-
-                let amount = 0;
-
                 if(wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
                     item.userBalance = byDecimals(new BigNumber(balance.tokens[item.rewardToken].balance), item.tokenDecimals);
                 }
@@ -209,7 +206,7 @@ const Dashboard = () => {
 
         setFiltered(data);
 
-    }, [sortConfig, vault.pools, balance, earned]);
+    }, [sortConfig, vault.pools, balance, earned, wallet.address]);
 
     React.useEffect(() => {
         if(prices.lastUpdated > 0) {

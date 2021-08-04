@@ -16,7 +16,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
     const { t } = useTranslation();
     const classes = useStyles();
     const dispatch = useDispatch();
-    const {wallet, balance, earned, vault} = useSelector(state => ({
+    const {wallet, balance, earned} = useSelector(state => ({
         wallet: state.walletReducer,
         balance: state.balanceReducer,
         earned: state.earnedReducer,
@@ -77,12 +77,10 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
 
     React.useEffect(() => {
         const getData = async () => {
-            if (wallet.address) {
+            if (wallet.address && balance.tokens[item.rewardToken].balance > 0) {
                 const prizePoolContract = new wallet.rpc[item.network].eth.Contract(PrizePoolAbi, item.prizePoolAddress);
-                const userFairPlayLockRemaining = await prizePoolContract.methods.userFairPlayLockRemaining(wallet.address, item.rewardAddress).call();      
-                setFairplayTimelock(Number(userFairPlayLockRemaining) * 1000); 
-            } else {
-                setFairplayTimelock(0); 
+                const userFairPlayLockRemaining = await prizePoolContract.methods.userFairPlayLockRemaining(wallet.address, item.rewardAddress).call();
+                setFairplayTimelock(Number(userFairPlayLockRemaining) * 1000);
             }
         }
 

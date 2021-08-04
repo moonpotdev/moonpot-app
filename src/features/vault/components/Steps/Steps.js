@@ -1,6 +1,5 @@
 import {Backdrop, Grid, Box, Button, Link, Fade, makeStyles, Modal, Typography} from "@material-ui/core";
 import * as React from "react";
-import { useHistory } from 'react-router-dom';
 import {byDecimals} from "../../../../helpers/format";
 import BigNumber from "bignumber.js";
 import {OpenInNew } from "@material-ui/icons";
@@ -15,7 +14,6 @@ const useStyles = makeStyles(styles);
 const Steps = ({item, steps, handleClose}) => {
     const classes = useStyles();
     const wallet = useSelector(state => state.walletReducer);
-    const history = useHistory();
 
     return (
         <Modal

@@ -1,5 +1,3 @@
-import { display } from "@material-ui/system";
-
 const styles = (theme) => ({
 	block: {
 		backgroundColor: '#FFFFFF',

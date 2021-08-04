@@ -211,7 +211,6 @@ const Vault = () => {
                                         />
                                 </AnimateHeight>
                             </Grid>
-
                         </Grid>
                     </Box>
                     <Grid item xs={12}>
