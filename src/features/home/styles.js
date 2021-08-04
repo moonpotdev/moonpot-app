@@ -200,7 +200,7 @@ const styles = (theme) => ({
         letterSpacing: '0.34px',
         textAlign: 'center',
         marginTop: '16px',
-        marginBottom: '100px',
+        marginBottom: '32px',
         '& .MuiLink-root': {
             color: '#ffffff',
             textDecoration: 'underline',
