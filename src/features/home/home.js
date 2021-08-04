@@ -124,9 +124,20 @@ const Home = () => {
                                                 </Box>
                                             </Grid>
                                             <Grid item xs={8}>
-                                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
-                                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
-                                                <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
+                                                {
+                                                    item.hardcodeWin ? 
+
+                                                    <React.Fragment>
+                                                        <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> {item.hardcodeWin}</Typography>
+                                                    </React.Fragment>
+
+                                                    :
+                                                <React.Fragment>
+                                                    <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
+                                                    <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
+                                                    <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
+                                                </React.Fragment>
+                                                }
                                             </Grid>
                                             <Grid item xs={6} style={{paddingRight: '8px'}}>
                                                 <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
@@ -156,9 +167,19 @@ const Home = () => {
                                                             <Typography className={classes.prizeSplitWinners}>5 winners</Typography>
                                                         </Grid>
                                                         <Grid item xs={9} align={"right"}>
+                                                        {
+                                                            item.hardcodeWin ? 
+
+                                                            <Typography className={classes.prizeSplitValue}>
+                                                               {item.hardcodePrizeSplit} each
+                                                            </Typography>
+
+                                                            :
                                                             <Typography className={classes.prizeSplitValue}>
                                                                 <span>{item.awardBalance.times(0.2).toFixed(2)} {item.token}</span> and <span>{item.sponsorBalance.times(0.2).toFixed(2)} {item.sponsorToken}</span> each
                                                             </Typography>
+                                                        }
+                                                            
                                                         </Grid>
                                                     </Grid>
                                                 </AnimateHeight>
