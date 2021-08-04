@@ -15,7 +15,6 @@ export const pools = [
 		apyId: 'pots-pots',
 		vaultType: 'main',
 		status: 'active',
-		winners: 10,
 		sponsorProjectName: 'Moonpot',
 		sponsors: [
             {
@@ -61,7 +60,6 @@ export const pools = [
 		apyId: 'cake-cakev2',
 		vaultType: 'main',
 		status: 'active',
-		winners: 5,
 		sponsorProjectName: 'Moonpot',
         sponsors: [
             {
@@ -95,7 +93,6 @@ export const pools = [
 		apyId: 'cake-cakev2',
 		vaultType: 'main',
 		status: 'eol',
-		winners: 5,
 		sponsorProjectName: 'DODO',
         sponsors: [
             {

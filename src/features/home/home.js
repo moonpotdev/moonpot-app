@@ -26,6 +26,19 @@ const defaultFilter = {
     retired: false,
 }
 
+function PrizeSplit({item}) {
+    const classes = useStyles();
+
+    return <Typography className={classes.prizeSplitValue}>
+        <span>{item.awardBalance.div(item.numberOfWinners).toFixed(2)} {item.token}</span>
+        {item.sponsors.map((sponsor, i) => {
+            return <>{i < item.sponsors.length - 1 ? ", " : " and "}
+                <span>{sponsor.sponsorBalance.div(item.numberOfWinners).toFixed(2)} {sponsor.sponsorToken}</span>
+            </>
+        })} each
+    </Typography>
+}
+
 const Home = () => {
     const { t } = useTranslation();
     const location = useLocation();
@@ -117,7 +130,7 @@ const Home = () => {
                                         <Grid container>
                                             <Grid item xs={4}>
                                                 <Box className={classes.potImage}>
-                                                        <img 
+                                                        <img
                                                         alt={`Moonpot ${item.sponsorToken}`}
                                                         src={require('../../images/vault/' + item.token.toLowerCase() + '/sponsored/' + item.sponsorToken.toLowerCase() + '.svg').default}
                                                         />
@@ -125,7 +138,7 @@ const Home = () => {
                                             </Grid>
                                             <Grid item xs={8}>
                                                 {
-                                                    item.hardcodeWin ? 
+                                                    item.hardcodeWin ?
 
                                                     <React.Fragment>
                                                         <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> {item.hardcodeWin}</Typography>
@@ -164,22 +177,10 @@ const Home = () => {
                                                 <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                                     <Grid container spacing={1}>
                                                         <Grid item xs={3} align={"left"}>
-                                                            <Typography className={classes.prizeSplitWinners}>{item.winners} winners</Typography>
+                                                            <Typography className={classes.prizeSplitWinners}>{item.numberOfWinners} winners</Typography>
                                                         </Grid>
                                                         <Grid item xs={9} align={"right"}>
-                                                        {
-                                                            item.hardcodeWin ? 
-
-                                                            <Typography className={classes.prizeSplitValue}>
-                                                               {item.hardcodePrizeSplit} each
-                                                            </Typography>
-
-                                                            :
-                                                            <Typography className={classes.prizeSplitValue}>
-                                                                <span>{item.awardBalance.div(item.winners).toFixed(2)} {item.token}</span> and <span>{item.sponsorBalance.div(item.winners).toFixed(2)} {item.sponsorToken}</span> each
-                                                            </Typography>
-                                                        }
-                                                            
+                                                            <PrizeSplit item={item}/>
                                                         </Grid>
                                                     </Grid>
                                                 </AnimateHeight>

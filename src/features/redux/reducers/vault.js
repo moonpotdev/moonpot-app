@@ -19,8 +19,13 @@ const initialPools = () => {
             pool['tvl'] = 0;
             pool['awardBalance'] = new BigNumber(0);
             pool['sponsorBalance'] = new BigNumber(0);
+            pool['totalSponsorBalanceUsd'] = new BigNumber(0);
             pool['totalStakedUsd'] = new BigNumber(0);
-            pool['numberOfWinners'] = new BigNumber(0);
+            pool['numberOfWinners'] = new BigNumber(5);
+            pool.sponsors.forEach(sponsor => {
+                sponsor.sponsorBalance = new BigNumber(0);
+                sponsor.sponsorBalanceUsd = new BigNumber(0);
+            })
             pools[pool.id] = pool;
         }
     }

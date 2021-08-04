@@ -26,6 +26,19 @@ import Countdown from "../../components/Countdown";
 
 const useStyles = makeStyles(styles);
 
+function PrizeSplit({item}) {
+    const classes = useStyles();
+
+    return <Typography className={classes.prizeSplitValue}>
+        <span>{item.awardBalance.div(item.numberOfWinners).toFixed(2)} {item.token}</span>
+        {item.sponsors.map((sponsor, i) => {
+            return <>{i < item.sponsors.length - 1 ? ", " : " and "}
+                <span>{sponsor.sponsorBalance.div(item.numberOfWinners).toFixed(2)} {sponsor.sponsorToken}</span>
+            </>
+        })} each
+    </Typography>
+}
+
 const Vault = () => {
     const { t } = useTranslation();
     const location = useLocation();
@@ -160,22 +173,10 @@ const Vault = () => {
                                 <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                     <Grid container spacing={1}>
                                         <Grid item xs={4} align={"left"}>
-                                            <Typography className={classes.prizeSplitWinners}>{item.winners} winners</Typography>
+                                            <Typography className={classes.prizeSplitWinners}>{item.numberOfWinners} winners</Typography>
                                         </Grid>
                                         <Grid item xs={8} align={"right"}>
-                                        {
-                                            item.hardcodeWin ? 
-
-                                            <Typography className={classes.prizeSplitValue}>
-                                                {item.hardcodePrizeSplit} each
-                                            </Typography>
-
-                                            :
-                                            <Typography className={classes.prizeSplitValue}>
-                                                <span>{item.awardBalance.div(item.winners).toFixed(2)} {item.token}</span> and <span>{item.sponsorBalance.div(item.winners).toFixed(2)} {item.sponsorToken}</span> each
-                                            </Typography>
-                                        }
-                                    
+                                            <PrizeSplit item={item}/>
                                         </Grid>
                                     </Grid>
                                 </AnimateHeight>
