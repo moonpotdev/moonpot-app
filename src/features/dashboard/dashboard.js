@@ -15,6 +15,7 @@ import {investmentOdds, isEmpty} from '../../helpers/utils';
 import {byDecimals, calculateTotalPrize, formatDecimals} from '../../helpers/format';
 import Countdown from '../../components/Countdown';
 import Steps from '../vault/components/Steps';
+import PrizeSplit from "../../components/PrizeSplit";
 
 const useStyles = makeStyles(styles);
 
@@ -311,7 +312,7 @@ const Dashboard = () => {
                                                     :
                                                     <React.Fragment>
                                                         <Typography className={classes.potUsdTop} align={"right"}>${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()} <span>{t('in')}</span> {item.token}</Typography>
-                                                        <Typography className={classes.potUsd} align={"right"}>& {item.sponsorToken} PRIZES</Typography>
+                                                        <Typography className={classes.potUsd} align={"right"}><PrizeSplit item={item} withBalances={false} skipFirstComma={true}/> PRIZES</Typography>
                                                         <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown until={item.expiresAt*1000} /> </span></Typography>
                                                     </React.Fragment>
                                                     }
