@@ -197,8 +197,6 @@ const Dashboard = () => {
                     item.earned = byDecimals(new BigNumber(amount), item.sponsorTokenDecimals);
                     item.boosted = byDecimals(new BigNumber(boostAmount), item.boostTokenDecimals);
 
-                    console.log(item)
-
                 }
                 data.push(item);
             }
