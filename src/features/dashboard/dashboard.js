@@ -291,12 +291,7 @@ const Dashboard = () => {
                                                 <Box className={classes.potImage}>
                                                     <img
                                                     alt={`Moonpot ${item.sponsorToken}`}
-                                                    srcSet={`
-                                                        images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@4x.png 4x,
-                                                        images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@3x.png 3x,
-                                                        images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@2x.png 2x,
-                                                        images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@1x.png 1x
-                                                    `}
+                                                    src={require('../../images/vault/' + item.token.toLowerCase() + '/sponsored/' + item.sponsorToken.toLowerCase() + '.svg').default}
                                                     />
                                                 </Box>
                                             </Grid>
@@ -308,9 +303,21 @@ const Dashboard = () => {
                                                 // =================
                                                 <React.Fragment>
                                                     <Grid item xs={8}>
+                                                    {
+                                                    item.hardcodeWin ? 
+
+                                                    <React.Fragment>
+                                                        <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> {item.hardcodeWin}</Typography>
+                                                    </React.Fragment>
+
+                                                    :
+                                                    <React.Fragment>
                                                         <Typography className={classes.potUsdTop} align={"right"}>${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()} <span>{t('in')}</span> {item.token}</Typography>
                                                         <Typography className={classes.potUsd} align={"right"}>& {item.sponsorToken} PRIZES</Typography>
                                                         <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown until={item.expiresAt*1000} /> </span></Typography>
+                                                    </React.Fragment>
+                                                    }
+                                                        
                                                     </Grid>
                                                     <Grid item xs={12}>
                                                         <Divider className={classes.divider}/>
@@ -336,7 +343,7 @@ const Dashboard = () => {
                                                                     <Typography className={classes.myDetailsText} align={'left'}>{t('myInterestRate')}</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsValue} align={"right"}>{item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
+                                                                    <Typography className={classes.myDetailsValue} align={"right"}>{item.apy > 0 ? <span>{item.apy}%</span> : ''} {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
                                                                     <Typography className={classes.myDetailsText} align={'left'}>{t('myOdds')}</Typography>
@@ -362,22 +369,22 @@ const Dashboard = () => {
                                                         <AnimateHeight duration={ 500 } height={ bonusOpen ? 'auto' : 0 }>
                                                             <Grid container>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsText} align={'left'}>
+                                                                    <Typography className={classes.myDetailsText} align={'left'} style={{marginBottom: 0}}>
                                                                         <Trans i18nKey="myBonusEarnings"/>
                                                                     </Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsValue} align={'right'}>{formatDecimals(item.earned)} {item.sponsorToken} (${formatDecimals(item.earned.multipliedBy(prices.prices[item.sponsorToken]),2)})</Typography>
+                                                                    <Typography className={classes.myDetailsValue} align={'right'} style={{marginBottom: 0}}>{formatDecimals(item.earned)} {item.sponsorToken} (${formatDecimals(item.earned.multipliedBy(prices.prices[item.sponsorToken]),2)})</Typography>
                                                                 </Grid>
                                                                 { item.boostToken ? 
                                                                 <React.Fragment>
                                                                     <Grid item xs={6}>
-                                                                        <Typography className={classes.myDetailsText} align={'left'}>
+                                                                        <Typography className={classes.myDetailsText} align={'left'} style={{marginTop: '16px'}}>
                                                                             <Trans i18nKey="myBoostEarnings"/>
                                                                         </Typography>
                                                                     </Grid>
                                                                     <Grid item xs={6}>
-                                                                        <Typography className={classes.myDetailsValue} align={'right'}>{formatDecimals(item.boosted)} {item.boostToken} (${formatDecimals(item.boosted.multipliedBy(prices.prices[item.boostToken]), 2)})</Typography>
+                                                                        <Typography className={classes.myDetailsValue} align={'right'} style={{marginTop: '16px'}}>{formatDecimals(item.boosted)} {item.boostToken} (${formatDecimals(item.boosted.multipliedBy(prices.prices[item.boostToken]), 2)})</Typography>
                                                                     </Grid>
                                                                     <Grid item xs={12}>
                                                                         <Typography className={classes.myPotsInfoText} align={'left'}>
@@ -390,7 +397,7 @@ const Dashboard = () => {
                                                                 }
                                                                 <Grid item xs={12} >
                                                                     <Button onClick={() => handleWithdrawBonus(item)} className={item.earned.lte(0) ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned.lte(0)}>
-                                                                        Withdraw Bonus {item.sponsorToken} { item.boostToken ? 'and ' + item.boostToken : ('')}
+                                                                        Claim Bonus {item.sponsorToken} { item.boostToken ? 'and ' + item.boostToken : ('')}
                                                                     </Button>
                                                                     <Steps item={item} steps={steps} handleClose={handleClose} />
                                                                 </Grid>
@@ -422,7 +429,7 @@ const Dashboard = () => {
                                                                 />
                                                                 <Grid item xs={12}>
                                                                     <Typography className={classes.depositMoreExtraInfo}>
-                                                                        {t('depositMoreExtraInfo')}
+                                                                        <Trans i18nKey="depositMoreExtraInfo" values={{token: item.token}}/>
                                                                     </Typography>
                                                                 </Grid>
                                                             </Box>
@@ -601,7 +608,7 @@ const Dashboard = () => {
                                                                     </Grid>
                                                                     <Grid item xs={12} >
                                                                         <Button style={{marginTop: '4px'}} onClick={() => handleWithdrawBonus(item)} className={item.earned.lte(0) ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned.lte(0)}>
-                                                                            Withdraw Bonus {item.sponsorToken} { item.boostToken ? 'and ' + item.boostToken : ('')}
+                                                                            Claim Bonus {item.sponsorToken} { item.boostToken ? 'and ' + item.boostToken : ('')}
                                                                         </Button>
                                                                         <Steps item={item} steps={steps} handleClose={handleClose} />
                                                                     </Grid>

@@ -29,6 +29,10 @@ const styles = (theme) => ({
     potImage: {
         width: '100%',
         marginBottom: '24px',
+        '& img': {
+            maxHeight: '90px',
+            maxWidth: '90px',
+        }
     },
     countdown: {
         fontWeight: 700,
@@ -197,7 +201,7 @@ const styles = (theme) => ({
         letterSpacing: '0.34px',
         textAlign: 'center',
         marginTop: '16px',
-        marginBottom: '100px',
+        marginBottom: '32px',
         '& .MuiLink-root': {
             color: '#ffffff',
             textDecoration: 'underline',

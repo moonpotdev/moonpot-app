@@ -104,7 +104,7 @@ const Home = () => {
         <React.Fragment>
             <Container maxWidth="xl">
                 <Typography className={classes.h1}>
-                    <Trans i18nKey="homeTitle" values={{amount: new BigNumber(vault.totalPrizesAvailable).plus(new BigNumber(40000)).toFixed(0).toLocaleString()}} />
+                    <Trans i18nKey="homeTitle" values={{amount: new BigNumber(vault.totalPrizesAvailable).toFixed(0).toLocaleString()}} />
                 </Typography>
                 <Box>
                     <Filter sortConfig={sortConfig} setSortConfig={setSortConfig} defaultFilter={defaultFilter} />
@@ -119,27 +119,33 @@ const Home = () => {
                                                 <Box className={classes.potImage}>
                                                         <img 
                                                         alt={`Moonpot ${item.sponsorToken}`}
-                                                        srcSet={`
-                                                            images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@4x.png 4x,
-                                                            images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@3x.png 3x,
-                                                            images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@2x.png 2x,
-                                                            images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@1x.png 1x
-                                                        `}
+                                                        src={require('../../images/vault/' + item.token.toLowerCase() + '/sponsored/' + item.sponsorToken.toLowerCase() + '.svg').default}
                                                         />
                                                 </Box>
                                             </Grid>
                                             <Grid item xs={8}>
-                                                <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
-                                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
-                                                <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
+                                                {
+                                                    item.hardcodeWin ? 
+
+                                                    <React.Fragment>
+                                                        <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> {item.hardcodeWin}</Typography>
+                                                    </React.Fragment>
+
+                                                    :
+                                                <React.Fragment>
+                                                    <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
+                                                    <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token} <span>{t('and')}</span> {item.sponsorToken}</Typography>
+                                                    <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
+                                                </React.Fragment>
+                                                }
                                             </Grid>
                                             <Grid item xs={6} style={{paddingRight: '8px'}}>
-                                                <Typography className={classes.subTitle}>{t('nextWeeklyDraw')}</Typography>
+                                                <Typography className={classes.subTitle}>{t('nextDraw')}</Typography>
                                                 <Typography className={classes.countdown}><Countdown until={item.expiresAt*1000} /></Typography>
                                             </Grid>
                                             <Grid item xs={6} style={{paddingLeft: '8px'}}>
                                                 <Typography className={classes.subTitle} align={'right'}>{t('interest')}</Typography>
-                                                <Typography className={classes.apy} align={'right'}>{item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
+                                                <Typography className={classes.apy} align={'right'}>{item.apy > 0 ? <span>{item.apy}%</span> : ''} {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
                                             </Grid>
                                             <Grid item xs={12} style={{paddingRight: '8px'}}>
                                                 <Typography className={classes.subTitle}>{t('tvl')}</Typography>
@@ -161,9 +167,19 @@ const Home = () => {
                                                             <Typography className={classes.prizeSplitWinners}>5 winners</Typography>
                                                         </Grid>
                                                         <Grid item xs={9} align={"right"}>
+                                                        {
+                                                            item.hardcodeWin ? 
+
+                                                            <Typography className={classes.prizeSplitValue}>
+                                                               {item.hardcodePrizeSplit} each
+                                                            </Typography>
+
+                                                            :
                                                             <Typography className={classes.prizeSplitValue}>
                                                                 <span>{item.awardBalance.times(0.2).toFixed(2)} {item.token}</span> and <span>{item.sponsorBalance.times(0.2).toFixed(2)} {item.sponsorToken}</span> each
                                                             </Typography>
+                                                        }
+                                                            
                                                         </Grid>
                                                     </Grid>
                                                 </AnimateHeight>

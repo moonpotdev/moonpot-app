@@ -118,9 +118,9 @@ const getPools = async (items, state, dispatch) => {
             pools[item.id].totalStakedUsd = totalValueLocked.times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
             pools[item.id].tvl = formatTvl(totalTokenStaked, awardPrice);
 
-            if (item.sponsorRewardInfo) {
+            if ('sponsorRewardInfo' in item) {
                 const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
-                const rewardRate = new BigNumber(item.sponsorRewardInfo['3']);
+                const rewardRate = new BigNumber(item.sponsorRewardInfo ? item.sponsorRewardInfo[item.sponsorRewardId] : 0);
                 const TotalValueLocked = new BigNumber(item.totalValueLocked);
                 const totalStakedUsd = TotalValueLocked.times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
                 const yearlyRewards = rewardRate.times(3600).times(24).times(365);
@@ -132,18 +132,19 @@ const getPools = async (items, state, dispatch) => {
                     const rewardRate = new BigNumber(item.boostRewardInfo['3']);
                     const yearlyRewards = rewardRate.times(3600).times(24).times(365);
                     boostRewardsInUsd = yearlyRewards.times(boostPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].boostTokenDecimals))
+                    pools[item.id].bonusApy = Number(yearlyRewardsInUsd.plus(boostRewardsInUsd).multipliedBy(100).dividedBy(totalStakedUsd));
+                
+                } else if (!isEmpty(pools[item.id].sponsorToken)) {
+
+                    const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
+                    const rewardRate = new BigNumber(item.rewardRate);
+                    const TotalValueLocked = new BigNumber(item.totalValueLocked);
+                    const totalStakedUsd = TotalValueLocked.times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
+                    const yearlyRewards = rewardRate.times(3600).times(24).times(365);
+                    const yearlyRewardsInUsd = yearlyRewards.times(sponsorPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals))
+
+                    pools[item.id].bonusApy = Number(yearlyRewardsInUsd.multipliedBy(100).dividedBy(totalStakedUsd));
                 }
-
-                pools[item.id].bonusApy = Number(yearlyRewardsInUsd.plus(boostRewardsInUsd).multipliedBy(100).dividedBy(totalStakedUsd));
-            } else if (!isEmpty(pools[item.id].sponsorToken)) {
-                const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
-                const rewardRate = new BigNumber(item.rewardRate);
-                const TotalValueLocked = new BigNumber(item.totalValueLocked);
-                const totalStakedUsd = TotalValueLocked.times(awardPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
-                const yearlyRewards = rewardRate.times(3600).times(24).times(365);
-                const yearlyRewardsInUsd = yearlyRewards.times(sponsorPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals))
-
-                pools[item.id].bonusApy = Number(yearlyRewardsInUsd.multipliedBy(100).dividedBy(totalStakedUsd));
             }
 
             if (pools[item.id].status === 'active') {
