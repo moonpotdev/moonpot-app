@@ -71,10 +71,11 @@ const getPools = async (items, state, dispatch) => {
             totalTickets: ticketContract.methods.totalSupply(),
         })
 
-        if (!isEmpty(pool.sponsorAddress)) {
-            const sponsorContract = new web3[pool.network].eth.Contract(ecr20Abi, pool.sponsorAddress);
+        for (const sponsor of pool.sponsors) {
+            const sponsorContract = new web3[pool.network].eth.Contract(ecr20Abi, sponsor.sponsorAddress);
             sponsors[pool.network].push({
                 id: pool.id,
+                sponsorToken: sponsor.sponsorToken,
                 sponsorBalance: sponsorContract.methods.balanceOf(pool.prizePoolAddress),
             });
         }
@@ -133,7 +134,7 @@ const getPools = async (items, state, dispatch) => {
                     const yearlyRewards = rewardRate.times(3600).times(24).times(365);
                     boostRewardsInUsd = yearlyRewards.times(boostPrice).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].boostTokenDecimals))
                     pools[item.id].bonusApy = Number(yearlyRewardsInUsd.plus(boostRewardsInUsd).multipliedBy(100).dividedBy(totalStakedUsd));
-                
+
                 } else if (!isEmpty(pools[item.id].bonusToken)) {
 
                     const bonusPrice = (pools[item.id].bonusToken in prices) ? prices[pools[item.id].bonusToken] : 0;
@@ -163,21 +164,32 @@ const getPools = async (items, state, dispatch) => {
 
         if (!isEmpty(item.sponsorBalance)) {
             // TODO remove once POTS prize sent to contract
-            if (item.id === 'cake' && BigNumber(item.sponsorBalance).isZero()) {
-                item.sponsorBalance = BigNumber(40000).multipliedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
+            if (item.id === 'cake' && new BigNumber(item.sponsorBalance).isZero()) {
+                item.sponsorBalance = new BigNumber(40000).multipliedBy(new BigNumber(10).exponentiatedBy(18));
             }
             // TODO End
 
-            const sponsorPrice = (pools[item.id].sponsorToken in prices) ? prices[pools[item.id].sponsorToken] : 0;
-            const sponsorBalance = new BigNumber(item.sponsorBalance).dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].sponsorTokenDecimals));
+            const sponsorPrice = (item.sponsorToken in prices) ? prices[item.sponsorToken] : 0;
+            const sponsorBalance = new BigNumber(item.sponsorBalance);
             const sponsorBalanceUsd = sponsorBalance.times(new BigNumber(sponsorPrice));
 
-            pools[item.id].sponsorBalance = sponsorBalance;
-            pools[item.id].sponsorBalanceUsd = sponsorBalanceUsd;
-
-            if (pools[item.id].status === 'active') {
-                totalPrizesAvailable = totalPrizesAvailable.plus(sponsorBalanceUsd);
+            const sponsor = pools[item.id].sponsors.find(s => s.sponsorToken === item.sponsorToken)
+            if (sponsor) {
+                const decimals = new BigNumber(10).exponentiatedBy(sponsor.sponsorTokenDecimals)
+                sponsor.sponsorBalance = sponsorBalance.dividedBy(decimals);
+                sponsor.sponsorBalanceUsd = sponsorBalanceUsd.dividedBy(decimals);
             }
+        }
+    }
+
+    for (const key in items) {
+        const pool = items[key];
+        pool.totalSponsorBalanceUsd = new BigNumber(0)
+        pool.sponsors.forEach(sponsor => {
+            pool.totalSponsorBalanceUsd = pool.totalSponsorBalanceUsd.plus(sponsor.sponsorBalanceUsd)
+        })
+        if (pool.status === 'active') {
+            totalPrizesAvailable = totalPrizesAvailable.plus(pool.totalSponsorBalanceUsd);
         }
     }
 

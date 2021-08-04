@@ -17,9 +17,24 @@ export const pools = [
 		status: 'active',
 		winners: 10,
 		sponsorProjectName: 'Moonpot',
+		sponsors: [
+            {
+                sponsorToken: 'CAKE',
+                sponsorAddress: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+                sponsorTokenDecimals: 18,
+            },
+            {
+                sponsorToken: 'DODO',
+                sponsorAddress: "0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2",
+                sponsorTokenDecimals: 18,
+            },
+            {
+                sponsorToken: 'BIFI',
+                sponsorAddress: "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+                sponsorTokenDecimals: 18,
+            }
+		],
 		sponsorToken: 'CAKE',
-		sponsorAddress: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
-		sponsorTokenDecimals: 18,
 		bonusRewardId: 0,
 		bonusToken: 'POTS',
 		bonusAddress: '0x3Fcca8648651E5b974DD6d3e50F61567779772A8',
@@ -48,9 +63,14 @@ export const pools = [
 		status: 'active',
 		winners: 5,
 		sponsorProjectName: 'Moonpot',
+        sponsors: [
+            {
+                sponsorToken: 'POTS',
+                sponsorAddress: '0x3Fcca8648651E5b974DD6d3e50F61567779772A8',
+                sponsorTokenDecimals: 18,
+            }
+        ],
 		sponsorToken: 'POTS',
-		sponsorAddress: '0x3Fcca8648651E5b974DD6d3e50F61567779772A8',
-		sponsorTokenDecimals: 18,
 		bonusRewardId: 2,
         bonusToken: 'POTS',
         bonusAddress: '0x3Fcca8648651E5b974DD6d3e50F61567779772A8',
@@ -77,9 +97,14 @@ export const pools = [
 		status: 'eol',
 		winners: 5,
 		sponsorProjectName: 'DODO',
+        sponsors: [
+            {
+                sponsorToken: 'DODO',
+                sponsorAddress: '0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2',
+                sponsorTokenDecimals: 18,
+            }
+        ],
 		sponsorToken: 'DODO',
-		sponsorAddress: '0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2',
-		sponsorTokenDecimals: 18,
 		bonusRewardId: 0,
 		bonusToken: 'DODO',
 		bonusAddress: '0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2',
@@ -108,9 +133,14 @@ export const pools = [
 		vaultType: 'main',
 		status: 'eol',
 		sponsorProjectName: 'Beefy.Finance',
+        sponsors: [
+            {
+                sponsorToken: 'BIFI',
+                sponsorAddress: '0xCa3F508B8e4Dd382eE878A314789373D80A5190A',
+                sponsorTokenDecimals: 18,
+            }
+        ],
 		sponsorToken: 'BIFI',
-		sponsorAddress: '0xCa3F508B8e4Dd382eE878A314789373D80A5190A',
-		sponsorTokenDecimals: 18,
 		bonusToken: 'BIFI',
 		bonusAddress: '0xCa3F508B8e4Dd382eE878A314789373D80A5190A',
 		bonusTokenDecimals: 18,
