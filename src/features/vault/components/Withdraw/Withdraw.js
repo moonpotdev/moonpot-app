@@ -129,8 +129,8 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
             approved = balance.tokens[item.rewardToken].allowance[item.contractAddress];
         }
         if(wallet.address && !isEmpty(earned.earned[item.id])) {
-            const earnedAmount = earned.earned[item.id][item.sponsorToken] ?? 0
-            earnedBonus = byDecimals(new BigNumber(earnedAmount), item.sponsorTokenDecimals).toFixed(8);
+            const earnedAmount = earned.earned[item.id][item.bonusToken] ?? 0
+            earnedBonus = byDecimals(new BigNumber(earnedAmount), item.bonusTokenDecimals).toFixed(8);
             const boostAmount = earned.earned[item.id][item.boostToken] ?? 0
             earnedBoosted = byDecimals(new BigNumber(boostAmount), item.boostTokenDecimals).toFixed(8);
         }
@@ -190,7 +190,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                     </Grid>
                     <Grid item xs={12}>
                         <Button onClick={handleWithdraw} className={classes.eolWithdrawBtn}>
-                            Withdraw {item.token} and {item.sponsorToken}
+                            Withdraw {item.token} and {item.bonusToken}
                         </Button>
                         <Steps item={item} steps={steps} handleClose={handleClose} />
                     </Grid>
@@ -208,11 +208,11 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                     </Grid>
                     <Grid item xs={4} align={"left"}>
                         <Typography className={classes.withdrawItemText}>
-                            <Trans i18nKey="mySponsorToken" values={{sponsorToken: item.sponsorToken}}/>
+                            <Trans i18nKey="myBonusToken" values={{bonusToken: item.bonusToken}}/>
                         </Typography>
                     </Grid>
                     <Grid item xs={8} align={"right"}>
-                        <Typography className={classes.withdrawItemValue}>{state.earned} {item.sponsorToken}</Typography>
+                        <Typography className={classes.withdrawItemValue}>{state.earned} {item.bonusToken}</Typography>
                     </Grid>
                     { item.boostToken ? 
                     <React.Fragment>
