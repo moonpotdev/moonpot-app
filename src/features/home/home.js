@@ -168,9 +168,9 @@ const Home = () => {
                                                             <Typography className={classes.prizeSplitWinners}>{item.numberOfWinners.toString()} winners</Typography>
                                                         </Grid>
                                                         <Grid item xs={9} align={"right"}>
-                                                            <Typography className={classes.prizeSplitValue} style={{fontWeight: 'bold'}}>
+                                                            <Typography className={classes.prizeSplitValue}>
                                                                 <span>{item.awardBalance.div(item.numberOfWinners).toFixed(2)} {item.token}</span>
-                                                                <PrizeSplit item={item}/>
+                                                                <span><PrizeSplit item={item}/></span> each
                                                             </Typography>
                                                         </Grid>
                                                     </Grid>

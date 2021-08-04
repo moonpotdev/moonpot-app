@@ -166,7 +166,7 @@ const Vault = () => {
                                         <Grid item xs={8} align={"right"}>
                                             <Typography className={classes.prizeSplitValue}>
                                                 <span>{item.awardBalance.div(item.numberOfWinners).toFixed(2)} {item.token}</span>
-                                                <PrizeSplit item={item}/>
+                                                <span><PrizeSplit item={item}/></span> each
                                             </Typography>
                                         </Grid>
                                     </Grid>
