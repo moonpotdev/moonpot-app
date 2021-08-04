@@ -164,7 +164,7 @@ const Home = () => {
                                                 <AnimateHeight duration={ 500 } height={ prizeSplitOpen ? 'auto' : 0 }>
                                                     <Grid container spacing={1}>
                                                         <Grid item xs={3} align={"left"}>
-                                                            <Typography className={classes.prizeSplitWinners}>5 winners</Typography>
+                                                            <Typography className={classes.prizeSplitWinners}>{item.winners} winners</Typography>
                                                         </Grid>
                                                         <Grid item xs={9} align={"right"}>
                                                         {
@@ -176,7 +176,7 @@ const Home = () => {
 
                                                             :
                                                             <Typography className={classes.prizeSplitValue}>
-                                                                <span>{item.awardBalance.times(0.2).toFixed(2)} {item.token}</span> and <span>{item.sponsorBalance.times(0.2).toFixed(2)} {item.sponsorToken}</span> each
+                                                                <span>{item.awardBalance.div(item.winners).toFixed(2)} {item.token}</span> and <span>{item.sponsorBalance.div(item.winners).toFixed(2)} {item.sponsorToken}</span> each
                                                             </Typography>
                                                         }
                                                             
