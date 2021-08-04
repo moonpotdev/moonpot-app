@@ -67,7 +67,7 @@
   "myBoostEarnings": "My Super Boost Earnings",
   "bonusExtraInfo": "You will continue to earn bonus {{sponsorToken}} and {{boostToken}} until the end of the draw. You can claim it as many times as you like.",
   "myToken": "My {{token}}",
-  "mySponsorToken": "My {{sponsorToken}}",
+  "mySponsorToken": "My Earned {{sponsorToken}}",
   "myBoostToken": "My {{boostToken}}",
   "myInterestRate": "My Interest Rate",
   "myOdds": "My Odds",
