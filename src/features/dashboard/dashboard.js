@@ -550,7 +550,7 @@ const Dashboard = () => {
                                                                         </Typography>
                                                                     </Grid>
                                                                     <Grid item xs={12}>
-                                                                        <Button onClick={() => handleMigrator(item)} className={classes.eolMoveBtn} variant={'contained'} disabled={item.userBalance.lte(0)}>
+                                                                        <Button onClick={() => handleMigrator(item)} className={classNames(classes.actionBtn, classes.eolMoveBtn)} variant={'contained'} disabled={item.userBalance.lte(0)}>
                                                                             Move {item.token} and Withdraw {item.bonusToken}
                                                                         </Button>
                                                                         <Steps item={item} steps={steps} handleClose={handleClose} />
