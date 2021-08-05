@@ -290,14 +290,21 @@ const styles = (theme) => ({
     potsMaxButton: {
         backgroundColor: '#6B96BD',
         textTransform: 'uppercase',
-        width: '60px',
+        width: '64px',
+        height: '28px',
         borderRadius: '4px',
         margin: '10px',
+        padding: '4px 12px'
 
     },
     tokenIcon: {
         borderRadius: '25px',
-        margin: '14px 16px 0 '
+        marginLeft: '16px',
+        marginRight: '8px',
+        marginTop: '12px',
+        marginBottom: '12px',
+        width: '24px',
+        height: '24px',
     },
     withdrawText: {
         fontWeight: 700,
