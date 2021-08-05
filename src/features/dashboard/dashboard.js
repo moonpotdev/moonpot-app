@@ -64,7 +64,6 @@ const Dashboard = () => {
     const params = useParams();
     const dispatch = useDispatch();
     const classes = useStyles();
-    const [detailsOpen, setDetailsOpen] = React.useState(location.detailsOpen);
     const [bonusOpen, setBonusOpen] = React.useState(location.bonusOpen);
     const [depositOpen, setDepositOpen] = React.useState(location.depositOpen);
     const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
@@ -73,6 +72,7 @@ const Dashboard = () => {
     const [filtered, setFiltered] = React.useState([]);
     const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
     const [steps, setSteps] = React.useState({modal: false, currentStep: -1, items: [], finished: false});
+    const [stepsItem, setStepsItem] = React.useState(null);
 
     const handleWalletConnect = () => {
         if(!wallet.address) {
@@ -135,6 +135,7 @@ const Dashboard = () => {
                 pending: false,
             });
 
+            setStepsItem(item);
             setSteps({modal: true, currentStep: 0, items: steps, finished: false});
         }
     }
@@ -151,6 +152,8 @@ const Dashboard = () => {
                 )),
                 pending: false,
             });
+
+            setStepsItem(item);
             setSteps({modal: true, currentStep: 0, items: steps, finished: false});
         }
     }
@@ -167,12 +170,16 @@ const Dashboard = () => {
                 )),
                 pending: false,
             });
+
+            setStepsItem(item);
             setSteps({modal: true, currentStep: 0, items: steps, finished: false});
         }
     }
 
     const handleClose = () => {
         updateItemData();
+
+        setStepsItem(null);
         setSteps({modal: false, currentStep: -1, items: [], finished: false});
     }
 
@@ -289,6 +296,7 @@ const Dashboard = () => {
                             </Grid>
                         </Grid>
                         <Grid container>
+                            <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
                             {filtered.length === 0 ?
 
                                 <Box className={classes.noActivePots}>
@@ -431,7 +439,7 @@ const Dashboard = () => {
                                                                     <Button onClick={() => handleWithdrawBonus(item)} className={classes.altActionBtn} fullWidth={true} disabled={item.earned.lte(0)}>
                                                                         {t('buttons.withdrawBonusTokens', {tokens: getItemBonusTokens(item)})}
                                                                     </Button>
-                                                                    <Steps item={item} steps={steps} handleClose={handleClose} />
+
                                                                 </Grid>
                                                             </Grid>
                                                         </AnimateHeight>
@@ -553,7 +561,6 @@ const Dashboard = () => {
                                                                         <Button onClick={() => handleMigrator(item)} className={classNames(classes.actionBtn, classes.eolMoveBtn)} variant={'contained'} disabled={item.userBalance.lte(0)}>
                                                                             Move {item.token} and Withdraw {item.bonusToken}
                                                                         </Button>
-                                                                        <Steps item={item} steps={steps} handleClose={handleClose} />
                                                                     </Grid>
                                                                     <Grid item xs={6} align={"left"}>
                                                                         <Typography className={classes.potsItemText} style={{marginTop: '12px'}}>
@@ -640,7 +647,6 @@ const Dashboard = () => {
                                                                         <Button style={{marginTop: '4px'}} className={classes.actionBtn} onClick={() => handleWithdrawBonus(item)} variant={'contained'} disabled={item.earned.lte(0)}>
                                                                             Claim Bonus {item.bonusToken} { item.boostToken ? 'and ' + item.boostToken : ('')}
                                                                         </Button>
-                                                                        <Steps item={item} steps={steps} handleClose={handleClose} />
                                                                     </Grid>
 
 
