@@ -131,7 +131,7 @@ const Vault = () => {
                                 :
                             <React.Fragment>
                                 <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
-                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}<PrizeSplit item={item} withBalances={false}/></Typography>
+                                <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span><PrizeSplit item={item} withBalances={false}/></Typography>
                                 <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                             </React.Fragment>
                             }
@@ -165,7 +165,6 @@ const Vault = () => {
                                         </Grid>
                                         <Grid item xs={8} align={"right"}>
                                             <Typography className={classes.prizeSplitValue}>
-                                                <span>{item.awardBalance.div(item.numberOfWinners).toFixed(2)} {item.token}</span>
                                                 <span><PrizeSplit item={item}/></span> each
                                             </Typography>
                                         </Grid>

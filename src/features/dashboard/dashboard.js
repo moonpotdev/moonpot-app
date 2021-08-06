@@ -352,7 +352,7 @@ const Dashboard = () => {
                                                     :
                                                     <React.Fragment>
                                                         <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
-                                                        <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}<PrizeSplit item={item} withBalances={false} skipFirstComma={true}/> PRIZES</Typography>
+                                                        <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span><PrizeSplit item={item} withBalances={false}/> PRIZES</Typography>
                                                         <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown until={item.expiresAt*1000} /> </span></Typography>
                                                     </React.Fragment>
                                                     }

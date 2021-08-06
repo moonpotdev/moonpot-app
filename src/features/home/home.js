@@ -43,7 +43,7 @@ const Home = () => {
     const storage = localStorage.getItem('homeSortConfig');
     const [sortConfig, setSortConfig] = React.useState(storage === null ? defaultFilter : JSON.parse(storage));
     const [filtered, setFiltered] = React.useState([]);
-    const [prizeSplitOpen, setPrizeSplitOpen] = React.useState(location.prizeSplitOpen);
+    const [prizeSplitOpen, setPrizeSplitOpen] = React.useState(location.prizeSplitOpen || true);
 
     React.useEffect(() => {
         localStorage.setItem('homeSortConfig', JSON.stringify(sortConfig));
@@ -105,7 +105,7 @@ const Home = () => {
         <React.Fragment>
             <Container maxWidth="xl">
                 <Typography className={classes.h1}>
-                    <Trans i18nKey="homeTitle" values={{amount: new BigNumber(vault.totalPrizesAvailable).toFixed(0).toLocaleString()}} />
+                    <Trans i18nKey="homeTitle" values={{amount: Number(new BigNumber(vault.totalPrizesAvailable).toFixed(0)).toLocaleString()}} />
                 </Typography>
                 <Box>
                     <Filter sortConfig={sortConfig} setSortConfig={setSortConfig} defaultFilter={defaultFilter} />
@@ -135,7 +135,7 @@ const Home = () => {
                                                     :
                                                 <React.Fragment>
                                                     <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
-                                                    <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}<PrizeSplit item={item} withBalances={false}/></Typography>
+                                                    <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span><PrizeSplit item={item} withBalances={false}/></Typography>
                                                     <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                                                 </React.Fragment>
                                                 }
@@ -169,7 +169,6 @@ const Home = () => {
                                                         </Grid>
                                                         <Grid item xs={9} align={"right"}>
                                                             <Typography className={classes.prizeSplitValue}>
-                                                                <span>{item.awardBalance.div(item.numberOfWinners).toFixed(2)} {item.token}</span>
                                                                 <span><PrizeSplit item={item}/></span> each
                                                             </Typography>
                                                         </Grid>
