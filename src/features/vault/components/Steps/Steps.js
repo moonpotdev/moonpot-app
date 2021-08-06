@@ -14,6 +14,7 @@ const useStyles = makeStyles(styles);
 const Steps = ({item, steps, handleClose}) => {
     const classes = useStyles();
     const wallet = useSelector(state => state.walletReducer);
+    const renderContent = steps.modal && item;
 
     return (
         <Modal
@@ -28,7 +29,7 @@ const Steps = ({item, steps, handleClose}) => {
             }}
         >
             <Fade in={steps.modal}>
-                {steps.finished ? (
+                {renderContent ? (steps.finished ? (
                     <Box className={classes.modalForeground}>
                         <Grid container className={classes.modalText}>
                             <Grid item xs={3}>
@@ -58,7 +59,7 @@ const Steps = ({item, steps, handleClose}) => {
                                 </Button>
                             </Box>
                             <Box textAlign={"center"}>
-                                <Link className={classes.blockExplorerLink} variant={"outlined"} href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.receipt.transactionHash} target="_blank">See transaction on Block Explorer <OpenInNew /></Link> 
+                                <Link className={classes.blockExplorerLink} href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.receipt.transactionHash} target="_blank">See transaction on Block Explorer <OpenInNew /></Link>
                             </Box>
                         </Grid>
                     </Box>
@@ -73,7 +74,7 @@ const Steps = ({item, steps, handleClose}) => {
                                     <Typography id="transition-modal-title" className={classes.transactionConfirmations}>{steps.currentStep} / {steps.items.length} Transactions Confirmed</Typography>
                                 </Grid>
                                 <Typography className={classes.confirmTransactionText} id="transition-modal-description">{!isEmpty(steps.items[steps.currentStep]) ? steps.items[steps.currentStep].message : ''}</Typography>
-                                
+
                                 {wallet.action && wallet.action.result === 'error' ? (
                                     <Alert severity={"error"}>
                                         <AlertTitle>Error</AlertTitle>
@@ -86,8 +87,8 @@ const Steps = ({item, steps, handleClose}) => {
                                         <Typography className={classes.pendingText}>Waiting for network to confirm transaction...</Typography>
                                         <Box textAlign={"center"}><Loader /></Box>
                                         <Box textAlign={"center"} mt={2}>
-                                            <Link className={classes.blockExplorerLink} variant={"outlined"} href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.hash} target="_blank">See transaction on Block Explorer <OpenInNew /></Link>
-                                            
+                                            <Link className={classes.blockExplorerLink} href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.hash} target="_blank">See transaction on Block Explorer <OpenInNew /></Link>
+
                                         </Box>
                                     </Alert>
                                 ) : ''}
@@ -95,7 +96,7 @@ const Steps = ({item, steps, handleClose}) => {
                         </Box>
                         <Button variant={"outlined"} onClick={handleClose}>Close</Button>
                     </React.Fragment>
-                )}
+                )) : <Box className={classes.modalForeground}/>}
             </Fade>
         </Modal>
     )
