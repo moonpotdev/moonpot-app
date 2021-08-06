@@ -18,6 +18,11 @@ export const pools = [
 		sponsorProjectName: 'Moonpot',
 		sponsors: [
             {
+                sponsorToken: 'POTS',
+                sponsorAddress: "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+                sponsorTokenDecimals: 18,
+            },
+            {
                 sponsorToken: 'CAKE',
                 sponsorAddress: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
                 sponsorTokenDecimals: 18,
