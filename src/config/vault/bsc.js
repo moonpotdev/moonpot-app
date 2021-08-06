@@ -18,6 +18,11 @@ export const pools = [
 		sponsorProjectName: 'Moonpot',
 		sponsors: [
             {
+                sponsorToken: 'POTS',
+                sponsorAddress: "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+                sponsorTokenDecimals: 18,
+            },
+            {
                 sponsorToken: 'CAKE',
                 sponsorAddress: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
                 sponsorTokenDecimals: 18,
@@ -38,6 +43,7 @@ export const pools = [
 		bonusToken: 'POTS',
 		bonusAddress: '0x3Fcca8648651E5b974DD6d3e50F61567779772A8',
 		bonusTokenDecimals: 18,
+		supportsCompound: true,
 		strategyAddress: '0x97e5d50Fe0632A95b9cf1853E744E02f7D816677',
 		strategyCard: {
 			title: "Ziggy’s Pot Strategy",

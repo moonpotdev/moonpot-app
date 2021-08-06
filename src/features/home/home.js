@@ -36,7 +36,7 @@ const Home = () => {
     const classes = useStyles();
     const [filterConfig, setFilterConfig] = useFilterConfig();
     const filtered = useFilteredPots(vault.pools, filterConfig);
-    const [prizeSplitOpen, setPrizeSplitOpen] = React.useState(location.prizeSplitOpen);
+    const [prizeSplitOpen, setPrizeSplitOpen] = React.useState(location.prizeSplitOpen || true);
 
     React.useEffect(() => {
         if(prices.lastUpdated > 0) {
@@ -48,7 +48,7 @@ const Home = () => {
         <React.Fragment>
             <Container maxWidth="xl">
                 <Typography className={classes.h1}>
-                    <Trans i18nKey="homeTitle" values={{amount: new BigNumber(vault.totalPrizesAvailable).toFixed(0).toLocaleString()}} />
+                    <Trans i18nKey="homeTitle" values={{amount: Number(new BigNumber(vault.totalPrizesAvailable).toFixed(0)).toLocaleString()}} />
                 </Typography>
                 <Box>
                     <Filter config={filterConfig} setConfig={setFilterConfig} />
@@ -69,7 +69,7 @@ const Home = () => {
                                             </Grid>
                                             <Grid item xs={8}>
                                                     <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
-                                                    <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}<PrizeSplit item={item} withBalances={false}/></Typography>
+                                                    <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span><PrizeSplit item={item} withBalances={false}/></Typography>
                                                     <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
                                             </Grid>
                                             <Grid item xs={6} style={{paddingRight: '8px'}}>
@@ -101,7 +101,6 @@ const Home = () => {
                                                         </Grid>
                                                         <Grid item xs={9} align={"right"}>
                                                             <Typography className={classes.prizeSplitValue}>
-                                                                <span>{item.awardBalance.div(item.numberOfWinners).toFixed(2)} {item.token}</span>
                                                                 <span><PrizeSplit item={item}/></span> each
                                                             </Typography>
                                                         </Grid>

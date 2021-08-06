@@ -39,12 +39,19 @@ const Steps = ({item, steps, handleClose}) => {
                                     <Typography className={classes.stepsTitleText}>Deposit Successful!</Typography>
                                     <Typography className={classes.successfulDepositAmountText}>You have successfully deposited {byDecimals(new BigNumber(wallet.action.data.amount), item.tokenDecimals).toFixed(8)} {item.token} into the new {item.token} Moonpot.</Typography>
                                 </React.Fragment>
-                            ) : (
+                            ) : null}
+                            {steps.items[steps.currentStep].step === 'withdraw' || steps.items[steps.currentStep].step === 'reward' ? (
                                 <React.Fragment>
                                     <Typography className={classes.stepsTitleText}>Withdraw Successful!</Typography>
                                     <Typography className={classes.successfulDepositAmountText}>You have successfully withdrawn all of your {steps.items[steps.currentStep].step === 'reward' ? item.bonusToken : item.token}</Typography>
                                 </React.Fragment>
-                            )}
+                            ) : null}
+                          {steps.items[steps.currentStep].step === 'compound' ? (
+                            <React.Fragment>
+                              <Typography className={classes.stepsTitleText}>Compound Successful!</Typography>
+                              <Typography className={classes.successfulDepositAmountText}>You have successfully compounded your bonus {item.token}</Typography>
+                            </React.Fragment>
+                          ) : null}
                             <Box className={classes.viewMyMoonpots} textAlign={"center"}>
                                 <Button href={'/#/my-moonpots'} onClick={handleClose}>
                                         View My Moonpots

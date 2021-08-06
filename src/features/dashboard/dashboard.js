@@ -16,6 +16,7 @@ import {byDecimals, calculateTotalPrize, formatDecimals} from '../../helpers/for
 import Countdown from '../../components/Countdown';
 import Steps from '../vault/components/Steps';
 import PrizeSplit from "../../components/PrizeSplit";
+import classNames from 'classnames';
 
 const useStyles = makeStyles(styles);
 
@@ -29,6 +30,24 @@ const getDefaultFilter = (params = {}) => {
     }
 
     return defaultFilter;
+};
+
+const itemSupportsCompound = (item) => {
+    return item.supportsCompound && 'bonusRewardId' in item && item.bonusRewardId === 0 && item.bonusAddress === item.tokenAddress;
+};
+
+const getItemBonusTokens = (item) => {
+    const tokens = [];
+
+    if (item.bonusToken) {
+        tokens.push(item.bonusToken);
+    }
+
+    if (item.boostToken) {
+        tokens.push(item.boostToken);
+    }
+
+    return tokens.join(' & ');
 };
 
 const Dashboard = () => {
@@ -45,7 +64,6 @@ const Dashboard = () => {
     const params = useParams();
     const dispatch = useDispatch();
     const classes = useStyles();
-    const [detailsOpen, setDetailsOpen] = React.useState(location.detailsOpen);
     const [bonusOpen, setBonusOpen] = React.useState(location.bonusOpen);
     const [depositOpen, setDepositOpen] = React.useState(location.depositOpen);
     const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
@@ -54,6 +72,7 @@ const Dashboard = () => {
     const [filtered, setFiltered] = React.useState([]);
     const [formData, setFormData] = React.useState({deposit: {amount: '', max: false}, withdraw: {amount: '', max: false}});
     const [steps, setSteps] = React.useState({modal: false, currentStep: -1, items: [], finished: false});
+    const [stepsItem, setStepsItem] = React.useState(null);
 
     const handleWalletConnect = () => {
         if(!wallet.address) {
@@ -116,6 +135,7 @@ const Dashboard = () => {
                 pending: false,
             });
 
+            setStepsItem(item);
             setSteps({modal: true, currentStep: 0, items: steps, finished: false});
         }
     }
@@ -132,12 +152,33 @@ const Dashboard = () => {
                 )),
                 pending: false,
             });
+
+            setStepsItem(item);
+            setSteps({modal: true, currentStep: 0, items: steps, finished: false});
+        }
+    }
+
+    const handleCompoundBonus = (item) => {
+        if(wallet.address) {
+            const steps = [];
+            steps.push({
+                step: "compound",
+                message: "Confirm compound transaction on wallet to complete.",
+                action: () => dispatch(reduxActions.wallet.compound(
+                  item.network,
+                  item.contractAddress
+                )),
+                pending: false,
+            });
+
+            setStepsItem(item);
             setSteps({modal: true, currentStep: 0, items: steps, finished: false});
         }
     }
 
     const handleClose = () => {
         updateItemData();
+
         setSteps({modal: false, currentStep: -1, items: [], finished: false});
     }
 
@@ -254,6 +295,7 @@ const Dashboard = () => {
                             </Grid>
                         </Grid>
                         <Grid container>
+                            <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
                             {filtered.length === 0 ?
 
                                 <Box className={classes.noActivePots}>
@@ -299,22 +341,27 @@ const Dashboard = () => {
                                                 // =================
                                                 <React.Fragment>
                                                     <Grid item xs={8}>
+                                                    {
+                                                    item.hardcodeWin ? 
+
+                                                    <React.Fragment>
+                                                        <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> {item.hardcodeWin}</Typography>
+                                                    </React.Fragment>
+
+                                                    :
+                                                    <React.Fragment>
                                                         <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
-                                                        <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span> {item.token}<PrizeSplit item={item} withBalances={false} skipFirstComma={true}/> PRIZES</Typography>
+                                                        <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span><PrizeSplit item={item} withBalances={false}/> PRIZES</Typography>
                                                         <Typography className={classes.myPotsNextWeeklyDrawText} align={"right"}>{t('prize')}: <span><Countdown until={item.expiresAt*1000} /> </span></Typography>
-                                                               </Grid>
-                                                    <Grid item xs={12}>
-                                                        <Divider className={classes.divider}/>
+                                                    </React.Fragment>
+                                                    }
+                                                        
                                                     </Grid>
-                                                    <Grid item xs={9} align={"left"} style={{paddingBottom: 0}}>
-                                                        <Typography className={classes.dividerText} onClick={() => {setDetailsOpen(!detailsOpen)}}>{t('myDetails')} </Typography>
-                                                    </Grid>
-                                                    <Grid item xs={3} align={"right"} style={{paddingBottom: 0}}>
-                                                        <Link onClick={() => {setDetailsOpen(!detailsOpen)}} className={classes.expandToggle}>{detailsOpen ? (<ExpandLess />) : (<ExpandMore />)}</Link>
+                                                    <Grid item xs={12} align={"left"} style={{paddingBottom: 0}}>
+                                                        <Typography className={classes.dividerText}>{t('myDetails')} </Typography>
                                                     </Grid>
                                                     <Grid item xs={12} >
-                                                        <AnimateHeight duration={ 500 } height={ detailsOpen ? 'auto' : 0 }>
-                                                            <Grid container>
+                                                        <Grid container>
                                                                 <Grid item xs={6}>
                                                                     <Typography className={classes.myDetailsText} align={'left'}>
                                                                         <Trans i18nKey="myToken" values={{token: item.token}}/>
@@ -336,7 +383,6 @@ const Dashboard = () => {
                                                                     <Typography className={classes.myDetailsValue} align={"right"}>{t('odds', {odds: investmentOdds(item.totalStakedUsd, item.userBalance.times(prices.prices[item.oracleId]), item.numberOfWinners)})}</Typography>
                                                                 </Grid>
                                                             </Grid>
-                                                        </AnimateHeight>
                                                     </Grid>
                                                     <Grid item xs={12}>
                                                         <Divider className={classes.divider}/>
@@ -351,7 +397,7 @@ const Dashboard = () => {
                                                     </Grid>
                                                     <Grid item xs={12}>
                                                         <AnimateHeight duration={ 500 } height={ bonusOpen ? 'auto' : 0 }>
-                                                            <Grid container>
+                                                            <Grid container className={classes.bonusEarningsInner}>
                                                                 <Grid item xs={6}>
                                                                     <Typography className={classes.myDetailsText} align={'left'} style={{marginBottom: 0}}>
                                                                         <Trans i18nKey="myBonusEarnings"/>
@@ -360,7 +406,7 @@ const Dashboard = () => {
                                                                 <Grid item xs={6}>
                                                                     <Typography className={classes.myDetailsValue} align={'right'} style={{marginBottom: 0}}>{formatDecimals(item.earned)} {item.bonusToken} (${formatDecimals(item.earned.multipliedBy(prices.prices[item.bonusToken]),2)})</Typography>
                                                                 </Grid>
-                                                                { item.boostToken ?
+                                                                { item.boostToken ? 
                                                                 <React.Fragment>
                                                                     <Grid item xs={6}>
                                                                         <Typography className={classes.myDetailsText} align={'left'} style={{marginTop: '16px'}}>
@@ -379,14 +425,21 @@ const Dashboard = () => {
                                                                 :
                                                                 ''
                                                                 }
-                                                                <Grid item xs={12} >
-                                                                    <Button onClick={() => handleWithdrawBonus(item)} className={item.earned.lte(0) ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned.lte(0)}>
-                                                                        Claim Bonus {item.bonusToken} { item.boostToken ? 'and ' + item.boostToken : ('')}
-                                                                    </Button>
-                                                                    <Steps item={item} steps={steps} handleClose={handleClose} />
+                                                                <Grid item xs={12} className={classes.bonusExplainerRow}>
+                                                                    <Typography className={classes.explainerText}>{t('bonusExplainer', {tokens: getItemBonusTokens(item)})}</Typography>
                                                                 </Grid>
+                                                                {itemSupportsCompound(item) ? (<>
+                                                                    <Grid item xs={12} className={classes.bonusCompoundRow}>
+                                                                        <Button onClick={() => handleCompoundBonus(item)} className={classes.actionBtn} variant={'contained'} disabled={item.earned.lte(0)}>{t('buttons.compoundToken', {token: item.token})}</Button>
+                                                                        <Typography className={classes.explainerText}>{t('compoundExplainer', {token: item.token})}</Typography>
+                                                                    </Grid>
+                                                                </>) : null}
+                                                                <Grid item xs={12}>
+                                                                    <Button onClick={() => handleWithdrawBonus(item)} className={classes.altActionBtn} fullWidth={true} disabled={item.earned.lte(0)}>
+                                                                        {t('buttons.withdrawBonusTokens', {tokens: getItemBonusTokens(item)})}
+                                                                    </Button>
 
-
+                                                                </Grid>
                                                             </Grid>
                                                         </AnimateHeight>
                                                     </Grid>
@@ -481,10 +534,10 @@ const Dashboard = () => {
                                                             </Grid>
                                                         </Grid>
                                                     </Grid>
-                                                    { item.migrationContractAddress ?
+                                                    { item.migrationContractAddress ? 
                                                     <React.Fragment>
 
-
+                                                    
                                                         <Grid item xs={12}>
                                                                 <Grid container>
 
@@ -504,10 +557,9 @@ const Dashboard = () => {
                                                                         </Typography>
                                                                     </Grid>
                                                                     <Grid item xs={12}>
-                                                                        <Button onClick={() => handleMigrator(item)} className={item.userBalance.lte(0) ? classes.disabledActionBtn : classes.eolMoveBtn} variant={'contained'} disabled={item.userBalance.lte(0)}>
+                                                                        <Button onClick={() => handleMigrator(item)} className={classNames(classes.actionBtn, classes.eolMoveBtn)} variant={'contained'} disabled={item.userBalance.lte(0)}>
                                                                             Move {item.token} and Withdraw {item.bonusToken}
                                                                         </Button>
-                                                                        <Steps item={item} steps={steps} handleClose={handleClose} />
                                                                     </Grid>
                                                                     <Grid item xs={6} align={"left"}>
                                                                         <Typography className={classes.potsItemText} style={{marginTop: '12px'}}>
@@ -591,17 +643,16 @@ const Dashboard = () => {
                                                                         <Typography className={classes.myDetailsValue} align={'right'}>{formatDecimals(item.boosted)} {item.boostToken} (${formatDecimals(item.boosted.multipliedBy(prices.prices[item.boostToken]), 2)})</Typography>
                                                                     </Grid>
                                                                     <Grid item xs={12} >
-                                                                        <Button style={{marginTop: '4px'}} onClick={() => handleWithdrawBonus(item)} className={item.earned.lte(0) ? classes.disabledActionBtn : classes.enabledActionBtn} variant={'contained'} disabled={item.earned.lte(0)}>
+                                                                        <Button style={{marginTop: '4px'}} className={classes.actionBtn} onClick={() => handleWithdrawBonus(item)} variant={'contained'} disabled={item.earned.lte(0)}>
                                                                             Claim Bonus {item.bonusToken} { item.boostToken ? 'and ' + item.boostToken : ('')}
                                                                         </Button>
-                                                                        <Steps item={item} steps={steps} handleClose={handleClose} />
                                                                     </Grid>
 
 
                                                                 </Grid>
                                                             </AnimateHeight>
                                                         </Grid>
-
+                                                        
                                                     </React.Fragment>
                                                     }
 
