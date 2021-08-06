@@ -179,7 +179,6 @@ const Dashboard = () => {
     const handleClose = () => {
         updateItemData();
 
-        setStepsItem(null);
         setSteps({modal: false, currentStep: -1, items: [], finished: false});
     }
 
