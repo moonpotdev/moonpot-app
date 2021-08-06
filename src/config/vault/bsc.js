@@ -43,6 +43,7 @@ export const pools = [
 		bonusToken: 'POTS',
 		bonusAddress: '0x3Fcca8648651E5b974DD6d3e50F61567779772A8',
 		bonusTokenDecimals: 18,
+		supportsCompound: true,
 		strategyAddress: '0x97e5d50Fe0632A95b9cf1853E744E02f7D816677',
 		strategyCard: {
 			title: "Ziggy’s Pot Strategy",

@@ -20,7 +20,9 @@
     "docs": "Docs",
     "learnMore": "Learn More",
     "ido": "IDO",
-    "more": "More"
+    "more": "More",
+    "compoundToken": "Compound {{token}}",
+    "withdrawBonusTokens": "Withdraw Bonus {{tokens}}"
   },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br /> and a chance to win <span>${{amount}}</span>",
   "homeJoinCommunityTitle": "Join the Community",
@@ -78,6 +80,8 @@
   "details": "Details",
   "depositMore": "Deposit More",
   "depositMoreExtraInfo": "Depositing more {{token}} will reset your Fairness Fee to a maximum of 2.5%, for your new deposit. Your Fairplay Timelock countdown will reset to 10 days, but you won't pay any additional Fairness Fees on your older deposits.",
+  "bonusExplainer": "You will continue to earn bonus {{tokens}} until the end of the draw. You can claim as many times as you like.",
+  "compoundExplainer": "Compounding your Bonus {{token}} will reset your Fairness Fee to a maximum of 2.5%, for your new deposit. Your Fairplay Timelock countdown will reset to 10 days, but you won't pay any additional Fairness Fees on your older deposits.",
   "footerPoweredBy": "Powered by",
   "earningsBreakdown": "Earnings Breakdown",
   "upgradeWhy": "We upgraded the {{token}} Moonpot in order to be able to add different Bonus rewards to all future Moonpots.",
