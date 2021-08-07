@@ -375,7 +375,7 @@ const Dashboard = () => {
                                                                     <Typography className={classes.myDetailsText} align={'left'}>{t('myInterestRate')}</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsValue} align={"right"}>{item.apy > 0 ? <span>{item.apy}%</span> : ''} {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
+                                                                    <Typography className={classes.myDetailsValue} align={"right"}>{item.apy > 0 ? <span>{item.apy.toFixed(2)}%</span> : ''} {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy.toFixed(2)}% APY</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
                                                                     <Typography className={classes.myDetailsText} align={'left'}>{t('myOdds')}</Typography>
