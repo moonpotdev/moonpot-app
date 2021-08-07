@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import {useSelector, useDispatch} from 'react-redux';
-import WrongChainModal from './layouts/worngChainModal';
+import WrongChainModal from './layouts/wrongChainModal';
 
 
 const ModalPopup = () => {
