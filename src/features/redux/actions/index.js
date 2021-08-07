@@ -3,6 +3,7 @@ import vault from './vault'
 import balance from './balance'
 import prices from './prices'
 import earned from './earned'
+import modal from './modal'
 
 const reduxActions = {
     wallet,
@@ -10,6 +11,7 @@ const reduxActions = {
     balance,
     prices,
     earned,
+    modal,
 }
 
 export default reduxActions;
