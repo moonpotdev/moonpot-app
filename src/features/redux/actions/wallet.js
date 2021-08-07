@@ -8,6 +8,7 @@ import {
 } from "../constants";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal, {connectors} from "web3modal";
+import reduxActions from '../actions';
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
@@ -136,7 +137,8 @@ const connect = () => {
                     await provider.request({method: 'wallet_addEthereumChain', params: [config[state.walletReducer.network].walletSettings]});
                     dispatch(connect())
                 } else {
-                    // todo: show error to user for unsupported network
+                    //show error to user for unsupported network
+                    dispatch(reduxActions.modal.showWrongChainModal());
                     //alert('show nice modal: Wallet network not supported: ' + networkId);
                     throw Error('Network not supported, check chainId.');
                 }

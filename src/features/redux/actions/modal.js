@@ -1,11 +1,11 @@
 import {
-    SHOW_MODAL,
+    SHOW_WRONG_CHAIN_MODAL,
     HIDE_MODAL,
 } from "../constants";
 
-const showModal = () => {
+const showWrongChainModal = () => {
     console.log("showModal executed");
-    return {type: SHOW_MODAL};
+    return {type: SHOW_WRONG_CHAIN_MODAL};
 }
 
 const hideModal = () => {
@@ -14,7 +14,7 @@ const hideModal = () => {
 }
 
 const obj = {
-    showModal,
+    showWrongChainModal,
     hideModal
 }
 

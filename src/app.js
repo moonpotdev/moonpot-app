@@ -49,16 +49,9 @@ export default function App() {
 		dispatch(reduxActions.wallet.createWeb3Modal());
 	}, [dispatch]);
 
-	function showModalPopup() {
-		dispatch(reduxActions.modal.showModal());
-	}
-
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline/>
-			<button onClick={showModalPopup} >
-				<h1>TEST</h1>
-			</button>
 			<ModalPopup/>
 			<HashRouter>
 				<Header/>
