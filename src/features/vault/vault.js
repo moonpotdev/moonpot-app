@@ -127,7 +127,7 @@ const Vault = () => {
                             </Grid>
                             <Grid item xs={6} style={{paddingLeft: '8px'}}>
                                 <Typography className={classes.subTitle} align={'right'}>{t('interest')}</Typography>
-                                <Typography className={classes.apy}>{item.apy > 0 ? <span>{item.apy}%</span> : ''} {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
+                                <Typography className={classes.apy}>{item.apy > 0 ? <span>{item.apy.toFixed(2)}%</span> : ''} {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy.toFixed(2)}% APY</Typography>
                             </Grid>
                             <Grid item xs={12}>
                                 <Typography className={classes.subTitle}>{t('tvl')}</Typography>

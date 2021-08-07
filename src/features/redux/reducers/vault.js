@@ -38,7 +38,7 @@ const initialPools = () => {
 const initialState = {
     pools: initialPools(),
     totalTvl: 0,
-    totalPrizesAvailable: 0,
+    totalPrizesAvailable: new BigNumber(0),
     lastUpdated: 0,
     isPoolsLoading: false,
     isFirstTime: true,

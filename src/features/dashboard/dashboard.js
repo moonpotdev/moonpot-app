@@ -16,7 +16,7 @@ import {byDecimals, calculateTotalPrize, formatDecimals} from '../../helpers/for
 import Countdown from '../../components/Countdown';
 import Steps from '../vault/components/Steps';
 import PrizeSplit from "../../components/PrizeSplit";
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
@@ -557,7 +557,7 @@ const Dashboard = () => {
                                                                         </Typography>
                                                                     </Grid>
                                                                     <Grid item xs={12}>
-                                                                        <Button onClick={() => handleMigrator(item)} className={classNames(classes.actionBtn, classes.eolMoveBtn)} variant={'contained'} disabled={item.userBalance.lte(0)}>
+                                                                        <Button onClick={() => handleMigrator(item)} className={clsx(classes.actionBtn, classes.eolMoveBtn)} variant={'contained'} disabled={item.userBalance.lte(0)}>
                                                                             Move {item.token} and Withdraw {item.bonusToken}
                                                                         </Button>
                                                                     </Grid>

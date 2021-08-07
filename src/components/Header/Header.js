@@ -7,7 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import {Drawer, IconButton, makeStyles, useMediaQuery} from '@material-ui/core';
 import WalletConnector from './components/WalletConnector';
 import MoonpotDotCom from '../../images/moonpot-white-single-line.svg';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
@@ -116,8 +116,8 @@ export function Header() {
 					<img src={MoonpotDotCom} alt="Moonpot.com" className={classes.logo} width="157" height="36"/>
 				</a>
 			</div>
-			{showSidebar ? null : <div className={classNames(classes.barItem, classes.pushRight)}><Nav/></div>}
-			<div className={classNames(classes.barItem, {[classes.pushRight]: showSidebar})}>
+			{showSidebar ? null : <div className={clsx(classes.barItem, classes.pushRight)}><Nav/></div>}
+			<div className={clsx(classes.barItem, {[classes.pushRight]: showSidebar})}>
 				{showSidebar ? <Sidebar/> : <WalletConnector variant="small"/>}
 			</div>
 		</div>

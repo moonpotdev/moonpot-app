@@ -24,7 +24,7 @@
     "compoundToken": "Compound {{token}}",
     "withdrawBonusTokens": "Withdraw Bonus {{tokens}}"
   },
-  "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br /> and a chance to win <span>${{amount}}</span>",
+  "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br />and a chance to win <span>${{amount}}</span>",
   "homeJoinCommunityTitle": "Join the Community",
   "homeJoinCommunityBody": "There are no community pots yet. You can suggest a new pot in one of our channels, or join our devs to build one for your favorite project.",
   "migrationNoticeTitle": "Please move your {{asset}} to the new upgraded {{pot}} Moonpot.",
@@ -100,5 +100,28 @@
   "twitterSocialBlockBody": "Get the latest updates and take part in social media giveaways",
   "telegramSocialBlockButton": "Join our Telegram",
   "discordSocialBlockButton": "Join our Discord",
-  "twitterSocialBlockButton": "Follow our Twitter"
+  "twitterSocialBlockButton": "Follow our Twitter",
+  "list": {
+    "one": "<span>{{item}}</span>",
+    "two": "<span>{{first}}</span> and <span>{{last}}</span>",
+    "start": "<span>{{item}}</span>",
+    "join": ", <span>{{item}}</span>",
+    "end": " and <span>{{item}}</span>"
+  },
+  "pot": {
+    "winTotalPrizeAmount": "Win <span>{{prize}}</span> in ",
+    "winTotalNote": "USD value of Prize Draw",
+    "statNextDraw": "Next Draw",
+    "statNextDrawCountdownFinished": "Awaiting draw...",
+    "statInterest": "Interest",
+    "statInterestApy": "{{apy}}% APY",
+    "statInterestApyBonus": "<span>{{old}}%</span> {{new}}% APY",
+    "statTVL": "TVL",
+    "prizeSplit": "Prize Split",
+    "prizeSplitWinner": "{{count}} winner",
+    "prizeSplitWinner_plural": "{{count}} winners",
+    "playWith": "Play with {{token}}",
+    "playWithMore": "Play with more {{token}}",
+    "oddsPerDeposit": "1 in {{odds}} odds per {{deposit}} deposit"
+  }
 }
