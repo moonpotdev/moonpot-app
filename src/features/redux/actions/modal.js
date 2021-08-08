@@ -1,10 +1,10 @@
 import {
-    SHOW_WRONG_CHAIN_MODAL,
+    SHOW_MODAL,
     HIDE_MODAL,
 } from "../constants";
 
-const showWrongChainModal = () => {
-    return {type: SHOW_WRONG_CHAIN_MODAL};
+const showModal = (modalType) => {
+    return {type: SHOW_MODAL, payload: modalType};
 }
 
 const hideModal = () => {
@@ -12,7 +12,7 @@ const hideModal = () => {
 }
 
 const obj = {
-    showWrongChainModal,
+    showModal,
     hideModal
 }
 

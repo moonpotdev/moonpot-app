@@ -15,7 +15,8 @@ const WrongChainModal = () => {
 
     function switchToNetwork(networdIdentifier) {
         networkSetup(networdIdentifier).catch((e) => {
-            console.error(e)
+            console.error(e);
+            dispatch(reduxActions.modal.showUnableToSwitchChainModal());
           }).then(
             dispatch(reduxActions.modal.hideModal())
           );

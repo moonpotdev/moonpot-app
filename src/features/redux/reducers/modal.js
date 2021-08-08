@@ -1,20 +1,20 @@
 import {
-    SHOW_WRONG_CHAIN_MODAL,
+    SHOW_MODAL,
     HIDE_MODAL,
 } from "../constants";
 
 const initialState = {
     isOpen: false,
-    type: null,
+    modalType: null,
 }
 
 const modalReducer = (state = initialState, action) => {
     switch(action.type){
-        case SHOW_WRONG_CHAIN_MODAL:
+        case SHOW_MODAL: 
             return {
                 ...state,
                 isOpen: true,
-                modalType: 'SHOW_WRONG_CHAIN_MODAL',
+                modalType: action.payload,
             }
         case HIDE_MODAL:
             return {

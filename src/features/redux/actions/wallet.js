@@ -138,7 +138,7 @@ const connect = () => {
                     dispatch(connect())
                 } else {
                     //show error to user for unsupported network
-                    dispatch(reduxActions.modal.showWrongChainModal());
+                    dispatch(reduxActions.modal.showModal('WRONG_CHAIN_MODAL'));
                     //alert('show nice modal: Wallet network not supported: ' + networkId);
                     throw Error('Network not supported, check chainId.');
                 }

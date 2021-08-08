@@ -1,8 +1,19 @@
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import WrongChainModal from './layouts/wrongChainModal';
+import UnableToSwitchChainModal from './layouts/unableToSwitchChainModal';
 
+function renderSwitch(type) {
+    switch(type) {
+        case 'WRONG_CHAIN_MODAL':
+            return <WrongChainModal />;
+        case 'UNABLE_TO_SWITCH_CHAIN_MODAL':
+            return <UnableToSwitchChainModal />;
+        default:
+            return "";
+    }
+}
 
 const ModalPopup = () => {
 
@@ -11,7 +22,7 @@ const ModalPopup = () => {
 
     return (
         <Modal open={isOpen}>
-            { modalType == 'SHOW_WRONG_CHAIN_MODAL' ? <WrongChainModal /> : "" }
+            {renderSwitch(modalType)}
         </Modal>
     )
     
