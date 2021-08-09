@@ -11,7 +11,7 @@ const prizeStrategyAbi = require('../../../config/abi/prizestrategy.json');
 
 const getPools = async (items, state, dispatch) => {
     const web3 = state.walletReducer.rpc;
-    const pools = state.vaultReducer.pools;
+    const pools = {...state.vaultReducer.pools}; // need new object ref so filters can re-run when any pool changes
     const prices = state.pricesReducer.prices;
     const apy = state.pricesReducer.apy;
 

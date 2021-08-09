@@ -9,9 +9,6 @@ const styles = (theme) => ({
 		boxSizing: 'border-box',
 		margin: '0 auto',
 		padding: '24px',
-		'& + $notice': {
-			marginTop: 24,
-		}
 	},
     text: {
 		position: 'relative',

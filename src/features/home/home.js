@@ -17,15 +17,9 @@ import ZiggyMaintenance from '../../images/ziggy/maintenance.svg';
 import Countdown from '../../components/Countdown';
 import SocialMediaBlock from './components/SocialMediaBlock/SocialMediaBlock';
 import PrizeSplit from "../../components/PrizeSplit";
+import { useFilterConfig, useFilteredPots } from './hooks/filter';
 
 const useStyles = makeStyles(styles);
-const defaultFilter = {
-    key: 'tvl',
-    direction: 'desc',
-    deposited: false,
-    vault: 'main', // main or community
-    retired: false,
-}
 
 const Home = () => {
     const { t } = useTranslation();
@@ -40,60 +34,9 @@ const Home = () => {
 
     const history = useHistory();
     const classes = useStyles();
-    const storage = localStorage.getItem('homeSortConfig');
-    const [sortConfig, setSortConfig] = React.useState(storage === null ? defaultFilter : JSON.parse(storage));
-    const [filtered, setFiltered] = React.useState([]);
+    const [filterConfig, setFilterConfig] = useFilterConfig();
+    const filtered = useFilteredPots(vault.pools, filterConfig);
     const [prizeSplitOpen, setPrizeSplitOpen] = React.useState(location.prizeSplitOpen || true);
-
-    React.useEffect(() => {
-        localStorage.setItem('homeSortConfig', JSON.stringify(sortConfig));
-
-        let data = [];
-
-        const sorted = (items) => {
-            return items.sort((a, b) => {
-                if(sortConfig.key === 'name') {
-                    if (a[sortConfig.key].toUpperCase() < b[sortConfig.key].toUpperCase()) {
-                        return sortConfig.direction === 'asc' ? -1 : 1;
-                    }
-                    if (a[sortConfig.key].toUpperCase() > b[sortConfig.key].toUpperCase()) {
-                        return sortConfig.direction === 'asc' ? 1 : -1;
-                    }
-                    return 0;
-                } else {
-                    return sortConfig.direction === 'asc' ? (a[sortConfig.key] - b[sortConfig.key]) : (b[sortConfig.key] - a[sortConfig.key]);
-                }
-            });
-        }
-        const check = (item) => {
-            if(item.status !== (sortConfig.retired ? 'eol' : 'active')) {
-                return false;
-            }
-
-            if(sortConfig.deposited && item.deposited === 0) {
-                return false;
-            }
-
-            if(sortConfig.vault !== 'all' && sortConfig.vault !== item.vaultType) {
-                return false;
-            }
-
-            return item;
-        }
-
-        for (const [, item] of Object.entries(vault.pools)) {
-            if(check(item)) {
-                data.push(item);
-            }
-        }
-
-        if (sortConfig !== null) {
-            data = sorted(data);
-        }
-
-        setFiltered(data);
-
-    }, [sortConfig, vault.pools]);
 
     React.useEffect(() => {
         if(prices.lastUpdated > 0) {
@@ -108,8 +51,8 @@ const Home = () => {
                     <Trans i18nKey="homeTitle" values={{amount: Number(new BigNumber(vault.totalPrizesAvailable).toFixed(0)).toLocaleString()}} />
                 </Typography>
                 <Box>
-                    <Filter sortConfig={sortConfig} setSortConfig={setSortConfig} defaultFilter={defaultFilter} />
-                    <MigrationNotices sortConfig={sortConfig} />
+                    <Filter config={filterConfig} setConfig={setFilterConfig} />
+                    <MigrationNotices potType={filterConfig.vault} />
                     <Grid container>
                         {filtered.length === 0 ? '' : (
                             filtered.map(item => (
@@ -125,20 +68,9 @@ const Home = () => {
                                                 </Box>
                                             </Grid>
                                             <Grid item xs={8}>
-                                                {
-                                                    item.hardcodeWin ?
-
-                                                    <React.Fragment>
-                                                        <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> {item.hardcodeWin}</Typography>
-                                                    </React.Fragment>
-
-                                                    :
-                                                <React.Fragment>
                                                     <Typography className={classes.potUsdTop} align={"right"}><span>{t('win')}</span> ${Number((calculateTotalPrize(item, prices)).substring(1)).toLocaleString()}</Typography>
                                                     <Typography className={classes.potUsd} align={"right"}><span>{t('in')}</span><PrizeSplit item={item} withBalances={false}/></Typography>
                                                     <Typography className={classes.potCrypto} align={"right"}>USD {t('value')} {t('prize')}</Typography>
-                                                </React.Fragment>
-                                                }
                                             </Grid>
                                             <Grid item xs={6} style={{paddingRight: '8px'}}>
                                                 <Typography className={classes.subTitle}>{t('nextDraw')}</Typography>
@@ -202,7 +134,7 @@ const Home = () => {
                                 </React.Fragment>
                             ))
                         )}
-                        {sortConfig.vault === 'community' ? (
+                        {filterConfig.vault === 'community' ? (
                             <Box className={classes.communityItem}>
                                 <Grid container>
                                     <Grid item xs={12}>
