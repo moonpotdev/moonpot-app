@@ -3,7 +3,7 @@ import {Trans, useTranslation} from "react-i18next";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import BigNumber from "bignumber.js";
-import {byDecimals, convertAmountToRawNumber, stripExtraDecimals} from "../../../../helpers/format";
+import { byDecimals, convertAmountToRawNumber, formatTimeLeft, stripExtraDecimals } from '../../../../helpers/format';
 import styles from "../../styles";
 import reduxActions from "../../../redux/actions";
 import {isEmpty} from "../../../../helpers/utils";
@@ -86,20 +86,6 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
 
         getData();
     })
-
-    const formatTimelock = (time) => {
-        const day = Math.floor(time / (1000 * 60 * 60 * 24))
-            .toString()
-            .padStart(2, '0');
-        const hours = Math.floor((time / (1000 * 60 * 60)) % 24)
-            .toString()
-            .padStart(2, '0');
-        const minutes = Math.floor((time / (1000 * 60)) % 60)
-            .toString()
-            .padStart(2, '0');
-
-        return(`${day}day ${hours}h ${minutes}min`)
-    }
 
     React.useEffect(() => {
         const max = 3600 * 24 * 10 * 1000;
@@ -235,7 +221,7 @@ const Withdraw = ({item, handleWalletConnect, formData, setFormData, updateItemD
                         </Typography>
                     </Grid>
                     <Grid item xs={8} align={"right"}>
-                        <Typography className={classes.withdrawItemValue}>{formatTimelock(fairplayTimelock)}</Typography>
+                        <Typography className={classes.withdrawItemValue}>{formatTimeLeft(fairplayTimelock)}</Typography>
                     </Grid>
                     <Grid item xs={4} align={"left"}>
                         <Typography className={classes.withdrawItemText}>
