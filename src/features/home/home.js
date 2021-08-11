@@ -43,7 +43,9 @@ const Home = () => {
       <MigrationNotices potType={filterConfig.vault} className={classes.potsMigrationNotice} />
       <div className={classes.potList}>
         <div className={classes.potListInner}>
-          {filtered.map(pot => <Pot key={pot.id} id={pot.id} />)}
+          {filtered.map(pot => (
+            <Pot key={pot.id} id={pot.id} />
+          ))}
         </div>
       </div>
       {filterConfig.vault === 'community' && filtered.length === 0 ? (
@@ -81,11 +83,24 @@ const Home = () => {
           <Trans i18nKey="footerPoweredBy" />
         </div>
         <div className={classes.poweredByItem}>
-          <Link href={'https://www.beefy.finance'} target="_blank" rel="noreferrer"
-                className={classes.beefyLink}>Beefy.Finance</Link>
+          <Link
+            href={'https://www.beefy.finance'}
+            target="_blank"
+            rel="noreferrer"
+            className={classes.beefyLink}
+          >
+            Beefy.Finance
+          </Link>
         </div>
         <div className={classes.poweredByItem}>
-          <img alt="" aria-hidden={true} src={BeefyCow} width={20} height={15.2} className={classes.beefyLogo} />
+          <img
+            alt=""
+            aria-hidden={true}
+            src={BeefyCow}
+            width={20}
+            height={15.2}
+            className={classes.beefyLogo}
+          />
         </div>
       </Box>
     </Container>

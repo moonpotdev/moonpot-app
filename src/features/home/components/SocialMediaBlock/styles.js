@@ -1,4 +1,4 @@
-const styles = (theme) => ({
+const styles = theme => ({
   block: {
     backgroundColor: '#FFFFFF',
     maxWidth: '100%',

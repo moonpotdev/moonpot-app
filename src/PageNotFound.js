@@ -17,15 +17,25 @@ const useStyles = makeStyles(() => ({
 export const PageNotFound = () => {
   const classes = useStyles();
 
-  return <Container maxWidth="xl">
-    <Cards>
-      <Card variant="purpleDark">
-        <img src={ZiggyMaintenance} width={104} height={104} alt="" aria-hidden={true}
-             className={classes.ziggy} />
-        <CardTitle align="center">Page Not Found</CardTitle>
-        <Typography align="center">Looks like you are lost in space</Typography>
-        <PrimaryButton to="/" variant="purple" className={classes.button}>Go back home</PrimaryButton>
-      </Card>
-    </Cards>
-  </Container>;
+  return (
+    <Container maxWidth="xl">
+      <Cards>
+        <Card variant="purpleDark">
+          <img
+            src={ZiggyMaintenance}
+            width={104}
+            height={104}
+            alt=""
+            aria-hidden={true}
+            className={classes.ziggy}
+          />
+          <CardTitle align="center">Page Not Found</CardTitle>
+          <Typography align="center">Looks like you are lost in space</Typography>
+          <PrimaryButton to="/" variant="purple" className={classes.button}>
+            Go back home
+          </PrimaryButton>
+        </Card>
+      </Cards>
+    </Container>
+  );
 };

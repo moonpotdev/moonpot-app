@@ -14,25 +14,54 @@ const useStyles = makeStyles(styles);
 function MigrationNotice({ pot }) {
   const classes = useStyles();
   const { t } = useTranslation();
-  const balanceString = useSelector(state => state.balanceReducer.tokens[pot.rewardToken]?.balance || '0');
+  const balanceString = useSelector(
+    state => state.balanceReducer.tokens[pot.rewardToken]?.balance || '0'
+  );
   const balanceTokenDecimals = pot.tokenDecimals;
-  const balanceBigNumber = useMemo(() => byDecimals(new BigNumber(balanceString), balanceTokenDecimals), [balanceString, balanceTokenDecimals]);
+  const balanceBigNumber = useMemo(
+    () => byDecimals(new BigNumber(balanceString), balanceTokenDecimals),
+    [balanceString, balanceTokenDecimals]
+  );
   const hasBalance = !balanceBigNumber.isZero();
 
   if (hasBalance) {
-    return (<Box className={classes.notice}>
-      <div className={classes.text}>
-        <img className={classes.alertIcon} src={alertIcon} width="20" height="20" alt="" aria-hidden={true}
-             role="presentation" />
-        <p>{t('migrationNoticeTitle', { asset: pot.token, pot: pot.name })}
-          {pot.migrationLearnMoreUrl ? (<>{' '}<a href={pot.migrationLearnMoreUrl} className={classes.link}
-                                                  target="_blank"
-                                                  rel="noreferrer">{t('migrationNoticeLearnMore')}</a></>) : null}</p>
-        {pot.migrationExplainer ? pot.migrationExplainer.map((text, index) => <p key={index}>{text}</p>) : null}
-      </div>
-      <ButtonLink to="/my-moonpots/eol"
-                  className={classes.button}>{t('migrationNoticeMove', { asset: pot.token })}</ButtonLink>
-    </Box>);
+    return (
+      <Box className={classes.notice}>
+        <div className={classes.text}>
+          <img
+            className={classes.alertIcon}
+            src={alertIcon}
+            width="20"
+            height="20"
+            alt=""
+            aria-hidden={true}
+            role="presentation"
+          />
+          <p>
+            {t('migrationNoticeTitle', { asset: pot.token, pot: pot.name })}
+            {pot.migrationLearnMoreUrl ? (
+              <>
+                {' '}
+                <a
+                  href={pot.migrationLearnMoreUrl}
+                  className={classes.link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {t('migrationNoticeLearnMore')}
+                </a>
+              </>
+            ) : null}
+          </p>
+          {pot.migrationExplainer
+            ? pot.migrationExplainer.map((text, index) => <p key={index}>{text}</p>)
+            : null}
+        </div>
+        <ButtonLink to="/my-moonpots/eol" className={classes.button}>
+          {t('migrationNoticeMove', { asset: pot.token })}
+        </ButtonLink>
+      </Box>
+    );
   }
 
   return null;
@@ -46,7 +75,13 @@ export function MigrationNotices({ potType }) {
   const dispatch = useDispatch();
 
   const potsNeedingMigration = useMemo(() => {
-    return Object.values(allPots).filter(pot => pot.status === 'eol' && pot.vaultType === potType && pot.network === currentNetwork && pot.migrationNeeded);
+    return Object.values(allPots).filter(
+      pot =>
+        pot.status === 'eol' &&
+        pot.vaultType === potType &&
+        pot.network === currentNetwork &&
+        pot.migrationNeeded
+    );
   }, [potType, allPots, currentNetwork]);
   const hasPotsNeedingMigration = potsNeedingMigration.length > 0;
 
@@ -59,8 +94,11 @@ export function MigrationNotices({ potType }) {
   if (currentAddress && hasPotsNeedingMigration) {
     return (
       <div className={classes.notices}>
-        {potsNeedingMigration.map(pot => (<MigrationNotice key={pot.id} pot={pot} />))}
-      </div>);
+        {potsNeedingMigration.map(pot => (
+          <MigrationNotice key={pot.id} pot={pot} />
+        ))}
+      </div>
+    );
   }
 
   return null;

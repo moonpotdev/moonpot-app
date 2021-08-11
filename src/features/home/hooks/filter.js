@@ -72,7 +72,7 @@ export function useFilteredPots(pots, config) {
 }
 
 function configNeedsReset(config) {
-  return !config || (!('version' in config) || config.version < FILTER_DEFAULT.version);
+  return !config || !('version' in config) || config.version < FILTER_DEFAULT.version;
 }
 
 export function useFilterConfig() {

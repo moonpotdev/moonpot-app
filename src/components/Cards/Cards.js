@@ -13,28 +13,40 @@ function variantClass(classes, prefix, variant) {
 export function Cards({ className, children, ...rest }) {
   const classes = useStyles();
 
-  return <div className={clsx(classes.cards, className)} {...rest}>{children}</div>;
+  return (
+    <div className={clsx(classes.cards, className)} {...rest}>
+      {children}
+    </div>
+  );
 }
 
 export function Card({ variant = 'tealLight', className, children, ...rest }) {
   const classes = useStyles();
 
-  return <div
-    className={clsx(classes.card, variantClass(classes, 'variant', variant), className)} {...rest}>{children}</div>;
+  return (
+    <div
+      className={clsx(classes.card, variantClass(classes, 'variant', variant), className)}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
 }
 
 export function CardTitle({ className, children, ...rest }) {
   const classes = useStyles();
 
-  return <Typography variant="h2" className={clsx(classes.title, className)} {...rest}>{children}</Typography>;
+  return (
+    <Typography variant="h2" className={clsx(classes.title, className)} {...rest}>
+      {children}
+    </Typography>
+  );
 }
 
 export function CardAccordionGroup({ className, children }) {
   const classes = useStyles();
 
-  return <div className={clsx(classes.accordionGroup, className)}>
-    {children}
-  </div>;
+  return <div className={clsx(classes.accordionGroup, className)}>{children}</div>;
 }
 
 export function CardAccordionItem({ titleKey, children, className, onChange, startOpen = false }) {
@@ -48,14 +60,15 @@ export function CardAccordionItem({ titleKey, children, className, onChange, sta
     }
   }, [setOpen, isOpen, onChange]);
 
-  return <div className={clsx(classes.accordionItem, className)}>
-    <button className={classes.accordionItemToggle} onClick={toggleOpen}>
-      <Trans i18nKey={titleKey} />{isOpen ? (<ExpandLess />) : (<ExpandMore />)}
-    </button>
-    <Collapse in={isOpen}>
-      <div className={classes.accordionItemInner}>
-        {children}
-      </div>
-    </Collapse>
-  </div>;
+  return (
+    <div className={clsx(classes.accordionItem, className)}>
+      <button className={classes.accordionItemToggle} onClick={toggleOpen}>
+        <Trans i18nKey={titleKey} />
+        {isOpen ? <ExpandLess /> : <ExpandMore />}
+      </button>
+      <Collapse in={isOpen}>
+        <div className={classes.accordionItemInner}>{children}</div>
+      </Collapse>
+    </div>
+  );
 }

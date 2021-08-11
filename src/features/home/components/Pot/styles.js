@@ -1,4 +1,4 @@
-const styles = (theme) => ({
+const styles = theme => ({
   rowLogoWinTotal: {
     marginBottom: `${24 - 8}px`,
   },
@@ -57,13 +57,13 @@ const styles = (theme) => ({
       fontWeight: 'normal',
       color: '#A0BBD5',
       textDecoration: 'line-through',
-    }
+    },
   },
   prizeSplitValue: {
     textAlign: 'right',
     '& > span': {
       fontWeight: 'bold',
-    }
+    },
   },
   rowPlay: {
     marginTop: '20px',
@@ -75,7 +75,7 @@ const styles = (theme) => ({
     fontSize: '12px',
     lineHeight: '20px',
     color: '#FFFFFF',
-  }
+  },
 });
 
 export default styles;

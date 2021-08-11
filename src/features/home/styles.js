@@ -1,4 +1,4 @@
-const styles = (theme) => ({
+const styles = theme => ({
   mainTitle: {
     fontWeight: '500',
     fontSize: '24px',
@@ -9,8 +9,8 @@ const styles = (theme) => ({
     '& span': {
       color: '#F3BA2E',
       '&:last-of-type': {
-        color: '#FFFFFF'
-      }
+        color: '#FFFFFF',
+      },
     },
   },
   potsFilter: {
@@ -20,7 +20,7 @@ const styles = (theme) => ({
     marginBottom: '24px',
   },
   potList: {
-    width: `${(500 * 2) + (24 * 2)}px`,
+    width: `${500 * 2 + 24 * 2}px`,
     maxWidth: '100%',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -62,7 +62,7 @@ const styles = (theme) => ({
     letterSpacing: '0.2px',
   },
   socialMediaSection: {
-    marginTop: `${40 - (theme.spacing(3) / 2)}px`,
+    marginTop: `${40 - theme.spacing(3) / 2}px`,
   },
   poweredBy: {
     paddingTop: '12px',

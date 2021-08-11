@@ -9,7 +9,6 @@ import twitterIcon from '../../../../images/icons/twitterPurple.svg';
 const useStyles = makeStyles(styles);
 
 export default function SocialMediaBlock({ type }) {
-
   const classes = useStyles();
 
   const transKeyBody = type + 'SocialBlockBody';
