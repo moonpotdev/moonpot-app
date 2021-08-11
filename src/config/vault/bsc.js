@@ -19,21 +19,25 @@ export const pools = [
     sponsors: [
       {
         sponsorToken: 'POTS',
+        sponsorOracleId: 'POTS',
         sponsorAddress: '0x3fcca8648651e5b974dd6d3e50f61567779772a8',
         sponsorTokenDecimals: 18,
       },
       {
         sponsorToken: 'CAKE',
+        sponsorOracleId: 'Cake',
         sponsorAddress: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
         sponsorTokenDecimals: 18,
       },
       {
         sponsorToken: 'DODO',
+        sponsorOracleId: 'DODO',
         sponsorAddress: '0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2',
         sponsorTokenDecimals: 18,
       },
       {
         sponsorToken: 'BIFI',
+        sponsorOracleId: 'BIFI',
         sponsorAddress: '0xCa3F508B8e4Dd382eE878A314789373D80A5190A',
         sponsorTokenDecimals: 18,
       },
@@ -70,6 +74,7 @@ export const pools = [
     sponsors: [
       {
         sponsorToken: 'POTS',
+        sponsorOracleId: 'POTS',
         sponsorAddress: '0x3Fcca8648651E5b974DD6d3e50F61567779772A8',
         sponsorTokenDecimals: 18,
       },
@@ -103,6 +108,7 @@ export const pools = [
     sponsors: [
       {
         sponsorToken: 'DODO',
+        sponsorOracleId: 'DODO',
         sponsorAddress: '0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2',
         sponsorTokenDecimals: 18,
       },
@@ -139,6 +145,7 @@ export const pools = [
     sponsors: [
       {
         sponsorToken: 'BIFI',
+        sponsorOracleId: 'BIFI',
         sponsorAddress: '0xCa3F508B8e4Dd382eE878A314789373D80A5190A',
         sponsorTokenDecimals: 18,
       },

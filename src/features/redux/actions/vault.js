@@ -2,7 +2,7 @@ import { HOME_FETCH_POOLS_BEGIN, HOME_FETCH_POOLS_DONE } from '../constants';
 import BigNumber from 'bignumber.js';
 import { MultiCall } from 'eth-multicall';
 import { config } from '../../../config/config';
-import {compound, isEmpty} from '../../../helpers/utils';
+import { compound, isEmpty } from '../../../helpers/utils';
 import { byDecimals, formatTvl } from '../../../helpers/format';
 
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
@@ -110,7 +110,7 @@ const getPools = async (items, state, dispatch) => {
     if (!isEmpty(item.awardBalance)) {
       const awardPrice = pools[item.id].oracleId in prices ? prices[pools[item.id].oracleId] : 0;
       const awardBalance = new BigNumber(item.awardBalance)
-        .times(new BigNumber(0.8))
+        .times(new BigNumber(item.id === 'pots' ? 1 : 0.8))
         .dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
       const awardBalanceUsd = awardBalance.times(awardPrice);
 
@@ -169,10 +169,10 @@ const getPools = async (items, state, dispatch) => {
             .times(bonusPrice)
             .dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].bonusTokenDecimals));
 
-          const apr = yearlyRewardsInUsd.dividedBy(totalStakedUsd)
+          const apr = yearlyRewardsInUsd.dividedBy(totalStakedUsd);
           if (pools[item.id].compoundApy) {
             pools[item.id].bonusApr = apr.multipliedBy(100).toNumber();
-            pools[item.id].bonusApy = compound(apr) * 100
+            pools[item.id].bonusApy = compound(apr) * 100;
           } else {
             pools[item.id].bonusApy = apr.multipliedBy(100).toNumber();
           }
@@ -194,12 +194,13 @@ const getPools = async (items, state, dispatch) => {
     }
 
     if (!isEmpty(item.sponsorBalance)) {
-      const sponsorPrice = item.sponsorToken in prices ? prices[item.sponsorToken] : 0;
-      const sponsorBalance = new BigNumber(item.sponsorBalance);
-      const sponsorBalanceUsd = sponsorBalance.times(new BigNumber(sponsorPrice));
-
       const sponsor = pools[item.id].sponsors.find(s => s.sponsorToken === item.sponsorToken);
+
       if (sponsor) {
+        const sponsorPrice =
+          sponsor.sponsorOracleId in prices ? prices[sponsor.sponsorOracleId] : 0;
+        const sponsorBalance = new BigNumber(item.sponsorBalance);
+        const sponsorBalanceUsd = sponsorBalance.times(new BigNumber(sponsorPrice));
         const decimals = new BigNumber(10).exponentiatedBy(sponsor.sponsorTokenDecimals);
         sponsor.sponsorBalance = sponsorBalance.dividedBy(decimals);
         sponsor.sponsorBalanceUsd = sponsorBalanceUsd.dividedBy(decimals);
