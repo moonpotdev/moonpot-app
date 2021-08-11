@@ -1,5 +1,5 @@
 export const HEADER_FULL_LOGO_WIDTH = 472;
-export const HEADER_FULL_NAV_WIDTH = 1080;
+export const HEADER_FULL_NAV_WIDTH = 1024;
 
 export const styles = () => ({
   bar: {
@@ -51,6 +51,9 @@ export const styles = () => ({
       '&:last-child': {
         borderRight: '0',
       },
+      '&$pushRight': {
+        paddingLeft: 0,
+      },
     },
   },
   logoLink: {
@@ -65,7 +68,7 @@ export const styles = () => ({
     justifyContent: 'center',
     alignItems: 'center',
     '& > $navItem + $navItem': {
-      marginLeft: '32px',
+      marginLeft: '24px',
     },
   },
   navItem: {
