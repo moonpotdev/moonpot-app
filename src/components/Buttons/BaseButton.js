@@ -56,7 +56,7 @@ export const BaseButton = withStyles(theme => ({
   },
   label: {
     position: 'relative',
-    zIndex: '10',
+    zIndex: '1',
   },
   disabled: {
     backgroundColor: '#CCCCCC',

@@ -1,27 +1,57 @@
-export const HEADER_DESKTOP_WIDTH = 780;
+export const HEADER_FULL_LOGO_WIDTH = 472;
+export const HEADER_FULL_NAV_WIDTH = 1080;
 
 export const styles = () => ({
   bar: {
-    padding: '24px 16px',
+    padding: '0 16px',
     color: '#ffffff',
-    width: `${1110 + 16 * 2}px`,
+    backgroundColor: '#262640',
     maxWidth: '100%',
-    margin: '0 auto 24px auto',
-    [`@media (min-width: ${HEADER_DESKTOP_WIDTH}px)`]: {
-      paddingTop: '32px',
-      paddingBottom: '32px',
+    margin: '0 auto 32px auto',
+    [`@media (min-width: ${HEADER_FULL_LOGO_WIDTH}px)`]: {
+      paddingLeft: '24px',
+      paddingRight: '24px',
     },
+  },
+  barSizer: {
+    width: '1110px',
+    maxWidth: '100%',
+    margin: '0 auto',
   },
   barInner: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'nowrap',
-    alignItems: 'center',
-    marginLeft: '-16px',
-    marginRight: '-16px',
+    alignItems: 'stretch',
+    marginLeft: '-8px',
+    marginRight: '-8px',
+    [`@media (min-width: ${HEADER_FULL_LOGO_WIDTH}px)`]: {
+      marginLeft: '-12px',
+      marginRight: '-12px',
+    },
+    [`@media (min-width: ${HEADER_FULL_NAV_WIDTH}px)`]: {
+      marginLeft: '-24px',
+      marginRight: '-24px',
+    },
   },
   barItem: {
-    padding: '0 16px',
+    padding: '24px 8px',
+    display: 'flex',
+    [`@media (min-width: ${HEADER_FULL_LOGO_WIDTH}px)`]: {
+      paddingLeft: '12px',
+      paddingRight: '12px',
+    },
+    [`@media (min-width: ${HEADER_FULL_NAV_WIDTH}px)`]: {
+      borderRight: 'solid 1px #303050',
+      paddingLeft: '24px',
+      paddingRight: '24px',
+      '&:first-child': {
+        borderRight: '0',
+      },
+      '&:last-child': {
+        borderRight: '0',
+      },
+    },
   },
   logoLink: {
     display: 'block',
@@ -42,14 +72,39 @@ export const styles = () => ({
     color: '#CDCDE4',
     fontWeight: '500',
     fontSize: '15px',
-    lineHeight: '17px',
+    lineHeight: '24px',
     textDecoration: 'none',
     letterSpacing: '0.6px',
-    textTransform: 'uppercase',
     '&:hover, &:focus, &:active, &[data-active]': {
       color: '#ffffff',
       textDecoration: 'none',
     },
+  },
+  buyButton: {
+    width: 'auto',
+    color: '#6753DB',
+    borderRadius: '70px',
+    whiteSpace: 'nowrap',
+    padding: '0 24px',
+  },
+  navbarPotsPrice: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  navbarPotsLogo: {
+    marginRight: '8px',
+  },
+  navbarPotsValue: {
+    fontWeight: 'bold',
+    fontSize: '15px',
+    lineHeight: '24px',
+    letterSpacing: '0.2px',
+    color: '#ffffff',
+  },
+  navbarBuyButton: {
+    height: '36px',
+    marginLeft: '24px',
   },
   toggleSidebar: {
     padding: '6px',
@@ -70,6 +125,7 @@ export const styles = () => ({
     flexWrap: 'nowrap',
     alignItems: 'center',
     padding: '24px 16px',
+    borderBottom: 'solid 2px #303050',
   },
   sidebarNav: {
     display: 'flex',
@@ -91,9 +147,43 @@ export const styles = () => ({
     },
   },
   sidebarBottom: {
+    borderTop: 'solid 2px #303050',
     marginTop: 'auto',
-    padding: '24px 24px 32px 24px',
+    padding: '24px',
+    display: 'flex',
+    flexDirection: 'row',
   },
+  sidebarPotsPrice: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  sidebarPotsLabel: {
+    fontWeight: 'bold',
+    fontSize: '10px',
+    lineHeight: '18px',
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+    color: '#D6D6EB',
+  },
+  sidebarPotsValue: {
+    fontWeight: 'bold',
+    fontSize: '19px',
+    lineHeight: '24px',
+    letterSpacing: '0.2px',
+    color: '#ffffff',
+  },
+  sidebarPotsText: {
+    marginLeft: '9px',
+  },
+  sidebarBuyButton: {
+    height: '48px',
+    marginLeft: 'auto',
+    flexBasis: '173px',
+    flexGrow: '0',
+    flexShrink: '1',
+  },
+  sidebarPotsLogo: {},
   pushRight: {
     marginLeft: 'auto',
   },
