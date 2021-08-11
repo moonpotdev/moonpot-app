@@ -11,6 +11,7 @@ import Web3Modal, { connectors } from 'web3modal';
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
+const ziggyManagerMultiRewardsAbi = require('../../../config/abi/ziggyManagerMultiRewards.json');
 
 const getClientsForNetwork = async net => {
   return config[net].rpc;
@@ -402,6 +403,44 @@ const getReward = (network, contractAddr) => {
   };
 };
 
+const compound = (network, contractAddr) => {
+  return async (dispatch, getState) => {
+    dispatch({ type: WALLET_ACTION_RESET });
+    const state = getState();
+    const address = state.walletReducer.address;
+    const provider = await state.walletReducer.web3modal.connect();
+
+    if (address && provider) {
+      const web3 = await new Web3(provider);
+      const contract = new web3.eth.Contract(ziggyManagerMultiRewardsAbi, contractAddr);
+      contract.methods
+        .compound()
+        .send({ from: address })
+        .on('transactionHash', function (hash) {
+          dispatch({
+            type: WALLET_ACTION,
+            payload: { result: 'success_pending', data: { spender: contractAddr, hash: hash } },
+          });
+        })
+        .on('receipt', function (receipt) {
+          dispatch({
+            type: WALLET_ACTION,
+            payload: { result: 'success', data: { spender: contractAddr, receipt: receipt } },
+          });
+        })
+        .on('error', function (error) {
+          dispatch({
+            type: WALLET_ACTION,
+            payload: { result: 'error', data: { spender: contractAddr, error: error.message } },
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  };
+};
+
 const createWeb3Modal = () => {
   return async (dispatch, getState) => {
     const state = getState();
@@ -509,6 +548,7 @@ const obj = {
   deposit,
   withdraw,
   getReward,
+  compound,
 };
 
 export default obj;

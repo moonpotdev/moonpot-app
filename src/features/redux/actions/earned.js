@@ -24,17 +24,17 @@ const getEarned = async (pools, state, dispatch) => {
     );
     const pool = pools[key];
 
-    if (pool.sponsorRewardId !== undefined) {
+    if (pool.bonusRewardId !== undefined) {
       calls[pool.network].push({
-        amount: gateContract.methods.earned(address, pool.sponsorRewardId),
-        token: pool.sponsorToken,
+        amount: gateContract.methods.earned(address, pool.bonusRewardId),
+        token: pool.bonusToken,
         address: pool.rewardAddress,
         poolId: pool.id,
       });
     } else {
       calls[pool.network].push({
         amount: gateContract.methods.earned(address),
-        token: pool.sponsorToken,
+        token: pool.bonusToken,
         address: pool.rewardAddress,
         poolId: pool.id,
       });

@@ -7,7 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { Drawer, IconButton, makeStyles, useMediaQuery } from '@material-ui/core';
 import WalletConnector from './components/WalletConnector';
 import MoonpotDotCom from '../../images/moonpot-white-single-line.svg';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
@@ -55,7 +55,7 @@ function MenuLink({ external, href, label, match, onClick, ...rest }) {
   );
 
   const props = {
-    href: href,
+    href: href.substr(0, 1) === '/' ? '/#' + href : href,
   };
 
   if (external) {
@@ -160,11 +160,11 @@ export function Header() {
           </a>
         </div>
         {showSidebar ? null : (
-          <div className={classNames(classes.barItem, classes.pushRight)}>
+          <div className={clsx(classes.barItem, classes.pushRight)}>
             <Nav />
           </div>
         )}
-        <div className={classNames(classes.barItem, { [classes.pushRight]: showSidebar })}>
+        <div className={clsx(classes.barItem, { [classes.pushRight]: showSidebar })}>
           {showSidebar ? <Sidebar /> : <WalletConnector variant="small" />}
         </div>
       </div>

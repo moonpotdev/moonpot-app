@@ -20,7 +20,7 @@
     "docs": "Docs",
     "learnMore": "Learn More"
   },
-  "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br /> and a chance to win ${{amount}}",
+  "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br /> and a chance to win <span>${{amount}}</span>",
   "homeJoinCommunityTitle": "Join the Community",
   "homeJoinCommunityBody": "There are no community pots yet. You can suggest a new pot in one of our channels, or join our devs to build one for your favorite project.",
   "vaultLoadingMessage": "Getting vault data...",

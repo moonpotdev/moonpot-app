@@ -5,7 +5,7 @@ import reduxActions from '../../../../features/redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../../loader';
 import { useTranslation } from 'react-i18next';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
@@ -34,7 +34,7 @@ const WalletConnector = ({ variant, onConnect, onDisconnect, className, ...rest 
     }
   }, [address, onConnect, onDisconnect, dispatch]);
 
-  const buttonClasses = classNames(classes.wallet, className, {
+  const buttonClasses = clsx(classes.wallet, className, {
     [classes.loading]: pending,
     [classes.connected]: !!address,
     [classes.disconnected]: !address,

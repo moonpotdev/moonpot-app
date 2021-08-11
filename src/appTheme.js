@@ -1,7 +1,7 @@
-import { createMuiTheme } from '@material-ui/core';
+import { createTheme } from '@material-ui/core/styles';
 
 const appTheme = () => {
-  return createMuiTheme({
+  return createTheme({
     palette: {
       primary: {
         main: '#F3BA2E',

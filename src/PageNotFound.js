@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Cards, CardTitle } from './components/Cards/Cards';
 import { Container, makeStyles, Typography } from '@material-ui/core';
 import ZiggyMaintenance from './images/ziggy/maintenance.svg';
-import { ButtonWhitePurpleDark } from './components/Buttons/ButtonWhitePurpleDark';
+import { PrimaryButton } from './components/Buttons/PrimaryButton';
 
 const useStyles = makeStyles(() => ({
   ziggy: {
@@ -29,13 +29,11 @@ export const PageNotFound = () => {
             aria-hidden={true}
             className={classes.ziggy}
           />
-          <CardTitle align="center" variant="purpleDark">
-            Page Not Found
-          </CardTitle>
+          <CardTitle align="center">Page Not Found</CardTitle>
           <Typography align="center">Looks like you are lost in space</Typography>
-          <ButtonWhitePurpleDark to="/" className={classes.button}>
+          <PrimaryButton to="/" variant="purple" className={classes.button}>
             Go back home
-          </ButtonWhitePurpleDark>
+          </PrimaryButton>
         </Card>
       </Cards>
     </Container>

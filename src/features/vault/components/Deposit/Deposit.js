@@ -137,19 +137,22 @@ const Deposit = ({
     <React.Fragment>
       <Paper component="form" className={classes.input}>
         <Grid container spacing={1}>
-          <Grid item xs={2}>
-            <img
-              alt="TokenIcon"
-              className={classes.tokenIcon}
-              src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <InputBase
-              placeholder={t('enterCoinAmount', { coin: item.token })}
-              value={formData.deposit.amount}
-              onChange={e => handleInput(e.target.value)}
-            />
+          <Grid item xs={8}>
+            <div style={{ display: 'flex' }}>
+              <img
+                alt="TokenIcon"
+                className={classes.tokenIcon}
+                src={
+                  require('../../../../images/tokens/' + item.token.toLowerCase() + '.svg').default
+                }
+              />
+              <InputBase
+                style={{ margin: '12px 0 0 0 ', height: '24px' }}
+                placeholder={t('enterCoinAmount', { coin: item.token })}
+                value={formData.deposit.amount}
+                onChange={e => handleInput(e.target.value)}
+              />
+            </div>
           </Grid>
           <Grid item xs={4} align={'right'}>
             <Button className={classes.potsMaxButton} onClick={handleMax}>
@@ -171,7 +174,7 @@ const Deposit = ({
             : formData.deposit.amount > 0
             ? formData.deposit.amount + ' ' + item.token
             : depositMore
-            ? 'More'
+            ? 'More ' + item.token
             : ''}
         </Button>
       ) : (

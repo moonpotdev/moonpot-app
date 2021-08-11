@@ -7,7 +7,7 @@ const initialEarned = () => {
     const data = require('../../../config/vault/' + net + '.js');
     for (const key in data.pools) {
       earned[data.pools[key].id] = {
-        [data.pools[key].sponsorToken]: 0,
+        [data.pools[key].bonusToken]: 0,
       };
     }
   }

@@ -24,6 +24,8 @@ import { investmentOdds, isEmpty } from '../../helpers/utils';
 import { byDecimals, calculateTotalPrize, formatDecimals } from '../../helpers/format';
 import Countdown from '../../components/Countdown';
 import Steps from '../vault/components/Steps';
+import PrizeSplit from '../../components/PrizeSplit';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
@@ -37,6 +39,29 @@ const getDefaultFilter = (params = {}) => {
   }
 
   return defaultFilter;
+};
+
+const itemSupportsCompound = item => {
+  return (
+    item.supportsCompound &&
+    'bonusRewardId' in item &&
+    item.bonusRewardId === 0 &&
+    item.bonusAddress === item.tokenAddress
+  );
+};
+
+const getItemBonusTokens = item => {
+  const tokens = [];
+
+  if (item.bonusToken) {
+    tokens.push(item.bonusToken);
+  }
+
+  if (item.boostToken) {
+    tokens.push(item.boostToken);
+  }
+
+  return tokens.join(' & ');
 };
 
 const Dashboard = () => {
@@ -53,7 +78,6 @@ const Dashboard = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [detailsOpen, setDetailsOpen] = React.useState(location.detailsOpen);
   const [bonusOpen, setBonusOpen] = React.useState(location.bonusOpen);
   const [depositOpen, setDepositOpen] = React.useState(location.depositOpen);
   const [withdrawOpen, setWithdrawOpen] = React.useState(location.withdrawOpen);
@@ -70,6 +94,7 @@ const Dashboard = () => {
     items: [],
     finished: false,
   });
+  const [stepsItem, setStepsItem] = React.useState(null);
 
   const handleWalletConnect = () => {
     if (!wallet.address) {
@@ -140,6 +165,7 @@ const Dashboard = () => {
         pending: false,
       });
 
+      setStepsItem(item);
       setSteps({ modal: true, currentStep: 0, items: steps, finished: false });
     }
   };
@@ -153,12 +179,31 @@ const Dashboard = () => {
         action: () => dispatch(reduxActions.wallet.getReward(item.network, item.contractAddress)),
         pending: false,
       });
+
+      setStepsItem(item);
+      setSteps({ modal: true, currentStep: 0, items: steps, finished: false });
+    }
+  };
+
+  const handleCompoundBonus = item => {
+    if (wallet.address) {
+      const steps = [];
+      steps.push({
+        step: 'compound',
+        message: 'Confirm compound transaction on wallet to complete.',
+        action: () => dispatch(reduxActions.wallet.compound(item.network, item.contractAddress)),
+        pending: false,
+      });
+
+      setStepsItem(item);
       setSteps({ modal: true, currentStep: 0, items: steps, finished: false });
     }
   };
 
   const handleClose = () => {
     updateItemData();
+
+    setStepsItem(null);
     setSteps({ modal: false, currentStep: -1, items: [], finished: false });
   };
 
@@ -208,8 +253,6 @@ const Dashboard = () => {
 
     for (const [, item] of Object.entries(vault.pools)) {
       if (check(item)) {
-        let amount = 0;
-
         if (wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
           item.userBalance = byDecimals(
             new BigNumber(balance.tokens[item.rewardToken].balance),
@@ -217,9 +260,9 @@ const Dashboard = () => {
           );
         }
         if (wallet.address && !isEmpty(earned.earned[item.id])) {
-          const amount = earned.earned[item.id][item.sponsorToken] ?? 0;
+          const amount = earned.earned[item.id][item.bonusToken] ?? 0;
           const boostAmount = earned.earned[item.id][item.boostToken] ?? 0;
-          item.earned = byDecimals(new BigNumber(amount), item.sponsorTokenDecimals);
+          item.earned = byDecimals(new BigNumber(amount), item.bonusTokenDecimals);
           item.boosted = byDecimals(new BigNumber(boostAmount), item.boostTokenDecimals);
         }
         data.push(item);
@@ -231,7 +274,7 @@ const Dashboard = () => {
     }
 
     setFiltered(data);
-  }, [sortConfig, vault.pools, balance, earned]);
+  }, [sortConfig, vault.pools, balance, earned, wallet.address]);
 
   React.useEffect(() => {
     if (prices.lastUpdated > 0) {
@@ -270,7 +313,7 @@ const Dashboard = () => {
   return (
     <React.Fragment>
       <Container maxWidth="lg">
-        <Grid container display="flex" flexWrap="wrap" justifyContent="center" spacing={2}>
+        <Grid container spacing={2}>
           <Grid item>
             <Button
               variant={'outlined'}
@@ -291,6 +334,7 @@ const Dashboard = () => {
           </Grid>
         </Grid>
         <Grid container>
+          <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
           {filtered.length === 0 ? (
             <Box className={classes.noActivePots}>
               <Grid container>
@@ -326,7 +370,7 @@ const Dashboard = () => {
           ) : (
             filtered.map(item => (
               <Box
-                className={item.status == 'active' ? classes.activeMyPot : classes.eolMyPot}
+                className={item.status === 'active' ? classes.activeMyPot : classes.eolMyPot}
                 key={item.id}
               >
                 <Grid container spacing={0}>
@@ -334,109 +378,104 @@ const Dashboard = () => {
                     <Box className={classes.potImage}>
                       <img
                         alt={`Moonpot ${item.sponsorToken}`}
-                        srcSet={`
-                                                        images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@4x.png 4x,
-                                                        images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@3x.png 3x,
-                                                        images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@2x.png 2x,
-                                                        images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@1x.png 1x
-                                                    `}
+                        src={
+                          require('../../images/vault/' +
+                            item.token.toLowerCase() +
+                            '/sponsored/' +
+                            item.sponsorToken.toLowerCase() +
+                            '.svg').default
+                        }
                       />
                     </Box>
                   </Grid>
 
-                  {item.status == 'active' ? (
+                  {item.status === 'active' ? (
                     // =================
                     // Active Layout
                     // =================
                     <React.Fragment>
                       <Grid item xs={8}>
-                        <Typography className={classes.potUsdTop} align={'right'}>
-                          ${Number(calculateTotalPrize(item, prices).substring(1)).toLocaleString()}{' '}
-                          <span>{t('in')}</span> {item.token}
-                        </Typography>
-                        <Typography className={classes.potUsd} align={'right'}>
-                          & {item.sponsorToken} PRIZES
-                        </Typography>
-                        <Typography className={classes.myPotsNextWeeklyDrawText} align={'right'}>
-                          {t('prize')}:{' '}
-                          <span>
-                            <Countdown until={item.expiresAt * 1000} />{' '}
-                          </span>
-                        </Typography>
+                        {item.hardcodeWin ? (
+                          <React.Fragment>
+                            <Typography className={classes.potUsdTop} align={'right'}>
+                              <span>{t('win')}</span> {item.hardcodeWin}
+                            </Typography>
+                          </React.Fragment>
+                        ) : (
+                          <React.Fragment>
+                            <Typography className={classes.potUsdTop} align={'right'}>
+                              <span>{t('win')}</span> $
+                              {Number(
+                                calculateTotalPrize(item, prices).substring(1)
+                              ).toLocaleString()}
+                            </Typography>
+                            <Typography className={classes.potUsd} align={'right'}>
+                              <span>{t('in')}</span>
+                              <PrizeSplit item={item} withBalances={false} /> PRIZES
+                            </Typography>
+                            <Typography
+                              className={classes.myPotsNextWeeklyDrawText}
+                              align={'right'}
+                            >
+                              {t('prize')}:{' '}
+                              <span>
+                                <Countdown until={item.expiresAt * 1000} />{' '}
+                              </span>
+                            </Typography>
+                          </React.Fragment>
+                        )}
+                      </Grid>
+                      <Grid item xs={12} align={'left'} style={{ paddingBottom: 0 }}>
+                        <Typography className={classes.dividerText}>{t('myDetails')} </Typography>
                       </Grid>
                       <Grid item xs={12}>
-                        <Divider className={classes.divider} />
-                      </Grid>
-                      <Grid item xs={9} align={'left'} style={{ paddingBottom: 0 }}>
-                        <Typography
-                          className={classes.dividerText}
-                          onClick={() => {
-                            setDetailsOpen(!detailsOpen);
-                          }}
-                        >
-                          {t('myDetails')}{' '}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={3} align={'right'} style={{ paddingBottom: 0 }}>
-                        <Link
-                          onClick={() => {
-                            setDetailsOpen(!detailsOpen);
-                          }}
-                          className={classes.expandToggle}
-                        >
-                          {detailsOpen ? <ExpandLess /> : <ExpandMore />}
-                        </Link>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <AnimateHeight duration={500} height={detailsOpen ? 'auto' : 0}>
-                          <Grid container>
-                            <Grid item xs={6}>
-                              <Typography className={classes.myDetailsText} align={'left'}>
-                                <Trans i18nKey="myToken" values={{ token: item.token }} />
-                              </Typography>
-                            </Grid>
-                            <Grid item xs={6}>
-                              <Typography className={classes.myDetailsValue} align={'right'}>
-                                {formatDecimals(item.userBalance)} {item.token} ($
-                                {formatDecimals(
-                                  item.userBalance.multipliedBy(prices.prices[item.oracleId]),
-                                  2
-                                )}
-                                )
-                              </Typography>
-                            </Grid>
-                            <Grid item xs={6}>
-                              <Typography className={classes.myDetailsText} align={'left'}>
-                                {t('myInterestRate')}
-                              </Typography>
-                            </Grid>
-                            <Grid item xs={6}>
-                              <Typography className={classes.myDetailsValue} align={'right'}>
-                                <span>{item.apy}%</span>{' '}
-                                {item.bonusApy > 0
-                                  ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2)
-                                  : item.apy}
-                                % APY
-                              </Typography>
-                            </Grid>
-                            <Grid item xs={6}>
-                              <Typography className={classes.myDetailsText} align={'left'}>
-                                {t('myOdds')}
-                              </Typography>
-                            </Grid>
-                            <Grid item xs={6}>
-                              <Typography className={classes.myDetailsValue} align={'right'}>
-                                {t('odds', {
-                                  odds: investmentOdds(
-                                    item.totalStakedUsd,
-                                    item.userBalance.times(prices.prices[item.oracleId]),
-                                    5
-                                  ),
-                                })}
-                              </Typography>
-                            </Grid>
+                        <Grid container>
+                          <Grid item xs={6}>
+                            <Typography className={classes.myDetailsText} align={'left'}>
+                              <Trans i18nKey="myToken" values={{ token: item.token }} />
+                            </Typography>
                           </Grid>
-                        </AnimateHeight>
+                          <Grid item xs={6}>
+                            <Typography className={classes.myDetailsValue} align={'right'}>
+                              {formatDecimals(item.userBalance)} {item.token} ($
+                              {formatDecimals(
+                                item.userBalance.multipliedBy(prices.prices[item.oracleId]),
+                                2
+                              )}
+                              )
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Typography className={classes.myDetailsText} align={'left'}>
+                              {t('myInterestRate')}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Typography className={classes.myDetailsValue} align={'right'}>
+                              {item.apy > 0 ? <span>{item.apy.toFixed(2)}%</span> : ''}{' '}
+                              {item.bonusApy > 0
+                                ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2)
+                                : item.apy.toFixed(2)}
+                              % APY
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Typography className={classes.myDetailsText} align={'left'}>
+                              {t('myOdds')}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Typography className={classes.myDetailsValue} align={'right'}>
+                              {t('odds', {
+                                odds: investmentOdds(
+                                  item.totalStakedUsd,
+                                  item.userBalance.times(prices.prices[item.oracleId]),
+                                  item.numberOfWinners
+                                ),
+                              })}
+                            </Typography>
+                          </Grid>
+                        </Grid>
                       </Grid>
                       <Grid item xs={12}>
                         <Divider className={classes.divider} />
@@ -463,62 +502,103 @@ const Dashboard = () => {
                       </Grid>
                       <Grid item xs={12}>
                         <AnimateHeight duration={500} height={bonusOpen ? 'auto' : 0}>
-                          <Grid container>
+                          <Grid container className={classes.bonusEarningsInner}>
                             <Grid item xs={6}>
-                              <Typography className={classes.myDetailsText} align={'left'}>
+                              <Typography
+                                className={classes.myDetailsText}
+                                align={'left'}
+                                style={{ marginBottom: 0 }}
+                              >
                                 <Trans i18nKey="myBonusEarnings" />
                               </Typography>
                             </Grid>
                             <Grid item xs={6}>
-                              <Typography className={classes.myDetailsValue} align={'right'}>
-                                {formatDecimals(item.earned)} {item.sponsorToken} ($
+                              <Typography
+                                className={classes.myDetailsValue}
+                                align={'right'}
+                                style={{ marginBottom: 0 }}
+                              >
+                                {formatDecimals(item.earned)} {item.bonusToken} ($
                                 {formatDecimals(
-                                  item.earned.multipliedBy(prices.prices[item.sponsorToken]),
+                                  item.earned.multipliedBy(prices.prices[item.bonusToken]),
                                   2
                                 )}
                                 )
                               </Typography>
                             </Grid>
-                            <Grid item xs={6}>
-                              <Typography className={classes.myDetailsText} align={'left'}>
-                                <Trans i18nKey="myBoostEarnings" />
+                            {item.boostToken ? (
+                              <React.Fragment>
+                                <Grid item xs={6}>
+                                  <Typography
+                                    className={classes.myDetailsText}
+                                    align={'left'}
+                                    style={{ marginTop: '16px' }}
+                                  >
+                                    <Trans i18nKey="myBoostEarnings" />
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <Typography
+                                    className={classes.myDetailsValue}
+                                    align={'right'}
+                                    style={{ marginTop: '16px' }}
+                                  >
+                                    {formatDecimals(item.boosted)} {item.boostToken} ($
+                                    {formatDecimals(
+                                      item.boosted.multipliedBy(prices.prices[item.boostToken]),
+                                      2
+                                    )}
+                                    )
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <Typography className={classes.myPotsInfoText} align={'left'}>
+                                    <Trans
+                                      i18nKey="bonusExtraInfo"
+                                      values={{
+                                        bonusToken: item.bonusToken,
+                                        boostToken: item.boostToken,
+                                      }}
+                                    />
+                                  </Typography>
+                                </Grid>
+                              </React.Fragment>
+                            ) : (
+                              ''
+                            )}
+                            <Grid item xs={12} className={classes.bonusExplainerRow}>
+                              <Typography className={classes.explainerText}>
+                                {t('bonusExplainer', { tokens: getItemBonusTokens(item) })}
                               </Typography>
                             </Grid>
-                            <Grid item xs={6}>
-                              <Typography className={classes.myDetailsValue} align={'right'}>
-                                {formatDecimals(item.boosted)} {item.boostToken} ($
-                                {formatDecimals(
-                                  item.boosted.multipliedBy(prices.prices[item.boostToken]),
-                                  2
-                                )}
-                                )
-                              </Typography>
-                            </Grid>
-                            <Grid item xs={12}>
-                              <Typography className={classes.myPotsInfoText} align={'left'}>
-                                <Trans
-                                  i18nKey="bonusExtraInfo"
-                                  values={{
-                                    sponsorToken: item.sponsorToken,
-                                    boostToken: item.boostToken,
-                                  }}
-                                />
-                              </Typography>
-                            </Grid>
+                            {itemSupportsCompound(item) ? (
+                              <>
+                                <Grid item xs={12} className={classes.bonusCompoundRow}>
+                                  <Button
+                                    onClick={() => handleCompoundBonus(item)}
+                                    className={classes.actionBtn}
+                                    variant={'contained'}
+                                    disabled={item.earned.lte(0)}
+                                  >
+                                    {t('buttons.compoundToken', { token: item.token })}
+                                  </Button>
+                                  <Typography className={classes.explainerText}>
+                                    {t('compoundExplainer', { token: item.token })}
+                                  </Typography>
+                                </Grid>
+                              </>
+                            ) : null}
                             <Grid item xs={12}>
                               <Button
                                 onClick={() => handleWithdrawBonus(item)}
-                                className={
-                                  item.earned.lte(0)
-                                    ? classes.disabledActionBtn
-                                    : classes.enabledActionBtn
-                                }
-                                variant={'contained'}
+                                className={classes.altActionBtn}
+                                fullWidth={true}
                                 disabled={item.earned.lte(0)}
                               >
-                                Withdraw Bonus {item.sponsorToken} and {item.boostToken}
+                                {t('buttons.withdrawBonusTokens', {
+                                  tokens: getItemBonusTokens(item),
+                                })}
                               </Button>
-                              <Steps item={item} steps={steps} handleClose={handleClose} />
                             </Grid>
                           </Grid>
                         </AnimateHeight>
@@ -560,7 +640,10 @@ const Dashboard = () => {
                             />
                             <Grid item xs={12}>
                               <Typography className={classes.depositMoreExtraInfo}>
-                                {t('depositMoreExtraInfo')}
+                                <Trans
+                                  i18nKey="depositMoreExtraInfo"
+                                  values={{ token: item.token }}
+                                />
                               </Typography>
                             </Grid>
                           </Box>
@@ -651,15 +734,19 @@ const Dashboard = () => {
                             </Typography>
                           </Grid>
                           <Grid item xs={6}>
-                            <Typography className={classes.myDetailsText} align={'left'}>
+                            <Typography
+                              className={classes.myDetailsText}
+                              align={'left'}
+                              style={{ marginBottom: '20px' }}
+                            >
                               <Trans i18nKey="myBonusEarnings" />
                             </Typography>
                           </Grid>
                           <Grid item xs={6}>
                             <Typography className={classes.myDetailsValue} align={'right'}>
-                              {formatDecimals(item.earned)} {item.sponsorToken} ($
+                              {formatDecimals(item.earned)} {item.bonusToken} ($
                               {formatDecimals(
-                                item.earned.multipliedBy(prices.prices[item.sponsorToken]),
+                                item.earned.multipliedBy(prices.prices[item.bonusToken]),
                                 2
                               )}
                               )
@@ -667,114 +754,199 @@ const Dashboard = () => {
                           </Grid>
                         </Grid>
                       </Grid>
-                      <Grid item xs={12}>
-                        <Grid container>
+                      {item.migrationContractAddress ? (
+                        <React.Fragment>
                           <Grid item xs={12}>
-                            <Typography className={classes.myPotsUpgradeText} align={'left'}>
-                              <Trans i18nKey="upgradeWhy" values={{ token: item.token }} />
-                            </Typography>
+                            <Grid container>
+                              <Grid item xs={12}>
+                                <Typography className={classes.myPotsUpgradeText} align={'left'}>
+                                  <Trans i18nKey="upgradeWhy" values={{ token: item.token }} />
+                                </Typography>
+                              </Grid>
+                              <Grid item xs={12}>
+                                <Typography className={classes.myPotsUpgradeText} align={'left'}>
+                                  <Trans
+                                    i18nKey="upgradeNextSteps"
+                                    values={{
+                                      token: item.token,
+                                      amount: '50,000',
+                                      boostToken: 'BNB',
+                                    }}
+                                  />
+                                </Typography>
+                              </Grid>
+                              <Grid item xs={12}>
+                                <Typography className={classes.learnMoreText} align={'left'}>
+                                  <Trans i18nKey="learnMore" />
+                                </Typography>
+                              </Grid>
+                              <Grid item xs={12}>
+                                <Button
+                                  onClick={() => handleMigrator(item)}
+                                  className={clsx(classes.actionBtn, classes.eolMoveBtn)}
+                                  variant={'contained'}
+                                  disabled={item.userBalance.lte(0)}
+                                >
+                                  Move {item.token} and Withdraw {item.bonusToken}
+                                </Button>
+                              </Grid>
+                              <Grid item xs={6} align={'left'}>
+                                <Typography
+                                  className={classes.potsItemText}
+                                  style={{ marginTop: '12px' }}
+                                >
+                                  <Trans i18nKey="myFairplayTimelock" />
+                                </Typography>
+                              </Grid>
+                              <Grid item xs={6} align={'right'}>
+                                <Typography className={classes.potsItemValue}>
+                                  00d 00h 00m
+                                </Typography>
+                              </Grid>
+                              <Grid item xs={6} align={'left'}>
+                                <Typography className={classes.potsItemText}>
+                                  <Trans i18nKey="myCurrentFairnessFee" />
+                                </Typography>
+                              </Grid>
+                              <Grid item xs={6} align={'right'}>
+                                <Typography className={classes.potsItemValue}>
+                                  0 {item.token}
+                                </Typography>
+                              </Grid>
+                            </Grid>
                           </Grid>
                           <Grid item xs={12}>
-                            <Typography className={classes.myPotsUpgradeText} align={'left'}>
+                            <Divider className={classes.divider} />
+                          </Grid>
+
+                          <Grid item xs={9} align={'left'}>
+                            <Typography
+                              className={classes.dividerText}
+                              onClick={() => {
+                                setWithdrawOpen(!withdrawOpen);
+                              }}
+                            >
                               <Trans
-                                i18nKey="upgradeNextSteps"
-                                values={{ token: item.token, amount: '50,000', boostToken: 'BNB' }}
+                                i18nKey="withdrawTokenAndBonusToken"
+                                values={{ token: item.token, bonusToken: item.bonusToken }}
                               />
                             </Typography>
                           </Grid>
-                          <Grid item xs={12}>
-                            <Typography className={classes.learnMoreText} align={'left'}>
-                              <Trans i18nKey="learnMore" />
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Button
-                              onClick={() => handleMigrator(item)}
-                              className={
-                                item.userBalance.lte(0)
-                                  ? classes.disabledActionBtn
-                                  : classes.eolMoveBtn
-                              }
-                              variant={'contained'}
-                              disabled={item.userBalance.lte(0)}
+                          <Grid item xs={3} align={'right'} style={{ paddingRight: 0 }}>
+                            <Link
+                              onClick={() => {
+                                setWithdrawOpen(!withdrawOpen);
+                              }}
+                              className={classes.expandToggle}
                             >
-                              Move {item.token} and Withdraw {item.sponsorToken}
-                            </Button>
-                            <Steps item={item} steps={steps} handleClose={handleClose} />
+                              {withdrawOpen ? <ExpandLess /> : <ExpandMore />}
+                            </Link>
                           </Grid>
-                          <Grid item xs={6} align={'left'}>
+                          <Grid item xs={12}>
+                            <AnimateHeight
+                              duration={500}
+                              height={withdrawOpen ? 'auto' : 0}
+                              style={{ marginBottom: '12px' }}
+                            >
+                              <Withdraw
+                                item={item}
+                                handleWalletConnect={handleWalletConnect}
+                                formData={formData}
+                                setFormData={setFormData}
+                                updateItemData={updateItemData}
+                                resetFormData={resetFormData}
+                                retiredFlag={true}
+                              />
+                            </AnimateHeight>
+                          </Grid>
+                        </React.Fragment>
+                      ) : (
+                        // ----------------
+                        // Standard eol pot
+                        // ----------------
+                        <React.Fragment>
+                          <Grid item xs={12}>
+                            <Divider className={classes.divider} />
+                          </Grid>
+                          <Grid item xs={9} align={'left'} style={{ paddingBottom: 0 }}>
                             <Typography
-                              className={classes.potsItemText}
-                              style={{ marginTop: '12px' }}
+                              className={classes.dividerText}
+                              style={{ marginBottom: '16px' }}
+                              onClick={() => {
+                                setBonusOpen(!bonusOpen);
+                              }}
                             >
-                              <Trans i18nKey="myFairplayTimelock" />
+                              <Trans i18nKey="bonusEarnings" />
                             </Typography>
                           </Grid>
-                          <Grid item xs={6} align={'right'}>
-                            <Typography className={classes.potsItemValue}>00d 00h 00m</Typography>
+                          <Grid item xs={3} align={'right'} style={{ paddingBottom: 0 }}>
+                            <Link
+                              onClick={() => {
+                                setBonusOpen(!bonusOpen);
+                              }}
+                              className={classes.expandToggle}
+                            >
+                              {bonusOpen ? <ExpandLess /> : <ExpandMore />}
+                            </Link>
                           </Grid>
-                          <Grid item xs={6} align={'left'}>
-                            <Typography className={classes.potsItemText}>
-                              <Trans i18nKey="myCurrentFairnessFee" />
-                            </Typography>
+                          <Grid item xs={12}>
+                            <AnimateHeight duration={500} height={bonusOpen ? 'auto' : 0}>
+                              <Grid container>
+                                <Grid item xs={6}>
+                                  <Typography className={classes.myDetailsText} align={'left'}>
+                                    <Trans i18nKey="myBonusEarnings" />
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <Typography className={classes.myDetailsValue} align={'right'}>
+                                    {formatDecimals(item.earned)} {item.bonusToken} ($
+                                    {formatDecimals(
+                                      item.earned.multipliedBy(prices.prices[item.bonusToken]),
+                                      2
+                                    )}
+                                    )
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <Typography className={classes.myDetailsText} align={'left'}>
+                                    <Trans i18nKey="myBoostEarnings" />
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <Typography className={classes.myDetailsValue} align={'right'}>
+                                    {formatDecimals(item.boosted)} {item.boostToken} ($
+                                    {formatDecimals(
+                                      item.boosted.multipliedBy(prices.prices[item.boostToken]),
+                                      2
+                                    )}
+                                    )
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <Button
+                                    style={{ marginTop: '4px' }}
+                                    className={classes.actionBtn}
+                                    onClick={() => handleWithdrawBonus(item)}
+                                    variant={'contained'}
+                                    disabled={item.earned.lte(0)}
+                                  >
+                                    Claim Bonus {item.bonusToken}{' '}
+                                    {item.boostToken ? 'and ' + item.boostToken : ''}
+                                  </Button>
+                                </Grid>
+                              </Grid>
+                            </AnimateHeight>
                           </Grid>
-                          <Grid item xs={6} align={'right'}>
-                            <Typography className={classes.potsItemValue}>
-                              0 {item.token}
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Divider className={classes.divider} />
-                      </Grid>
+                        </React.Fragment>
+                      )}
 
-                      <Grid item xs={9} align={'left'}>
-                        <Typography
-                          className={classes.dividerText}
-                          onClick={() => {
-                            setWithdrawOpen(!withdrawOpen);
-                          }}
-                        >
-                          <Trans
-                            i18nKey="withdrawTokenAndSponsorToken"
-                            values={{ token: item.token, sponsorToken: item.sponsorToken }}
-                          />
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={3} align={'right'} style={{ paddingRight: 0 }}>
-                        <Link
-                          onClick={() => {
-                            setWithdrawOpen(!withdrawOpen);
-                          }}
-                          className={classes.expandToggle}
-                        >
-                          {withdrawOpen ? <ExpandLess /> : <ExpandMore />}
-                        </Link>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <AnimateHeight
-                          duration={500}
-                          height={withdrawOpen ? 'auto' : 0}
-                          style={{ marginBottom: '12px' }}
-                        >
-                          <Withdraw
-                            item={item}
-                            handleWalletConnect={handleWalletConnect}
-                            formData={formData}
-                            setFormData={setFormData}
-                            updateItemData={updateItemData}
-                            resetFormData={resetFormData}
-                            retiredFlag={true}
-                          />
-                        </AnimateHeight>
-                      </Grid>
                       <Grid item xs={12}>
                         <Divider className={classes.divider} />
                       </Grid>
-                      <Grid item xs={9} align={'left'}>
+                      <Grid item xs={9} align={'left'} style={{ height: '20px' }}>
                         <Typography
                           className={classes.dividerText}
+                          style={{ marginBottom: 0 }}
                           onClick={() => {
                             setPrizeSplitOpen(!prizeSplitOpen);
                           }}
@@ -782,27 +954,31 @@ const Dashboard = () => {
                           {t('prizeWinners')}{' '}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3} align={'right'}>
+                      <Grid item xs={3} align={'right'} style={{ height: '20px' }}>
                         <Link
                           onClick={() => {
                             setPrizeSplitOpen(!prizeSplitOpen);
                           }}
                           className={classes.expandToggle}
+                          style={{ marginBottom: '0' }}
                         >
                           {prizeSplitOpen ? <ExpandLess /> : <ExpandMore />}
                         </Link>
                       </Grid>
-                      <Grid item xs={12} style={{ padding: '0 8px' }}>
+                      <Grid item xs={12} style={{ padding: 0 }}>
                         <AnimateHeight duration={500} height={prizeSplitOpen ? 'auto' : 0}>
                           <Grid container>
                             <Grid item xs={6} align={'left'}>
-                              <Typography className={classes.potsItemText}>
+                              <Typography
+                                className={classes.potsItemText}
+                                style={{ marginBottom: 0 }}
+                              >
                                 <Trans i18nKey="winners" />
                               </Typography>
                             </Grid>
                             <Grid item xs={6} align={'right'}>
                               <Typography className={classes.potsPrizeWinnersTransaction}>
-                                <Link href="https://bscscan.com/tx/0x770ddd1d57b19437a0cf563923cb3799d31a5ca3e20a3080e4286d4fede54109">
+                                <Link href={`https://bscscan.com/tx/${item.winnersTransaction}`}>
                                   <Trans i18nKey="winningTransactions" />
                                 </Link>
                               </Typography>

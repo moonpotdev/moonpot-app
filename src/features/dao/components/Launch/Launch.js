@@ -9,15 +9,18 @@ import { whitelistSecondPot } from '../../../../config/dao/whitelist/secondpot';
 import { makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import { CancelOutlined, CheckCircleOutline, OpenInNew } from '@material-ui/icons';
-import classNames from 'classnames';
-import { ButtonWhitePurpleLight } from '../../../../components/Buttons/ButtonWhitePurpleLight';
+import clsx from 'clsx';
 import ZiggyRocket104 from '../../../../images/ziggy/rocket_104w.png';
 import ZiggyRocket208 from '../../../../images/ziggy/rocket_208w.png';
 import Countdown from '../../../../components/Countdown';
+import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
 
 const useStyles = makeStyles(styles);
 
-const URL_TAKE_PART = null; // 'https://app.dodoex.io/cp/join?network=bsc-mainnet'; // TODO set to correct URL
+const URL_TAKE_PART_BUSD =
+  'https://app.dodoex.io/cp/join/0x6f14608d7d50f697181072a1a2481e0499ac9997?network=bsc';
+const URL_TAKE_PART_BNB =
+  'https://app.dodoex.io/cp/join/0x2648d14f5d9524e34d68168e2feaf8bde8773af7?network=bsc';
 const URL_LEARN_MORE_MOONPOT = 'https://moonpot.com/alpha/launch/the-moonpot-mission/';
 const URL_LEARN_MORE_POTS = 'https://moonpot.com/alpha/launch/the-stars-look-brighter-with-pots/';
 const URL_LEARN_MORE_IDO = 'https://moonpot.com/alpha/launch/how-to-enter-the-moonpot-dodo-ido/';
@@ -107,7 +110,7 @@ function Requirement({ fulfilled = false, children }) {
   const Icon = fulfilled ? CheckCircleOutline : CancelOutlined;
 
   return (
-    <div className={classNames(classes.requirement, classes[variantClass])}>
+    <div className={clsx(classes.requirement, classes[variantClass])}>
       <div className={classes.requirementIcon}>
         <Icon fontSize="inherit" />
       </div>
@@ -257,17 +260,30 @@ function WhitelistTakePart() {
           Learn more about the IDO <OpenInNew fontSize="inherit" />
         </a>
       </Typography>
-      <ButtonWhitePurpleLight
+      <PrimaryButton
+        variant="purple"
         className={classes.button}
         fullWidth={true}
         component="a"
-        href={URL_TAKE_PART ? URL_TAKE_PART : '#'}
+        href={URL_TAKE_PART_BUSD ? URL_TAKE_PART_BUSD : '#'}
         target="_blank"
         rel="noopener"
-        disabled={!URL_TAKE_PART}
+        disabled={!URL_TAKE_PART_BUSD}
       >
-        Take Part in IDO
-      </ButtonWhitePurpleLight>
+        Stake Your BUSD to get POTS
+      </PrimaryButton>
+      <PrimaryButton
+        variant="purple"
+        className={classes.button}
+        fullWidth={true}
+        component="a"
+        href={URL_TAKE_PART_BNB ? URL_TAKE_PART_BNB : '#'}
+        target="_blank"
+        rel="noopener"
+        disabled={!URL_TAKE_PART_BNB}
+      >
+        Stake Your BNB to get POTS
+      </PrimaryButton>
     </>
   );
 }

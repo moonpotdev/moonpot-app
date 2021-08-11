@@ -15,6 +15,7 @@ import Withdraw from './components/Withdraw';
 import { calculateTotalPrize } from '../../helpers/format';
 import BigNumber from 'bignumber.js';
 import Countdown from '../../components/Countdown';
+import PrizeSplit from '../../components/PrizeSplit';
 
 const useStyles = makeStyles(styles);
 
@@ -104,6 +105,7 @@ const Vault = () => {
                   item.bonusApy > 0
                     ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2)
                     : item.apy,
+                currency: '$',
                 amount: Number(calculateTotalPrize(item, prices).substring(1)).toLocaleString(),
               }}
             />
@@ -116,12 +118,13 @@ const Vault = () => {
                   <Box className={classes.potImage}>
                     <img
                       alt={`Moonpot ${item.sponsorToken}`}
-                      srcSet={`
-                                    images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@4x.png 4x,
-                                    images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@3x.png 3x,
-                                    images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@2x.png 2x,
-                                    images/pots/${item.token.toLowerCase()}/sponsored/${item.sponsorToken.toLowerCase()}@1x.png 1x
-                                `}
+                      src={
+                        require('../../images/vault/' +
+                          item.token.toLowerCase() +
+                          '/sponsored/' +
+                          item.sponsorToken.toLowerCase() +
+                          '.svg').default
+                      }
                     />
                   </Box>
                 </Grid>
@@ -131,8 +134,8 @@ const Vault = () => {
                     {Number(calculateTotalPrize(item, prices).substring(1)).toLocaleString()}
                   </Typography>
                   <Typography className={classes.potUsd} align={'right'}>
-                    {' '}
-                    {item.token} <span>{t('and')}</span> {item.sponsorToken}
+                    <span>{t('in')}</span>
+                    <PrizeSplit item={item} withBalances={false} />
                   </Typography>
                   <Typography className={classes.potCrypto} align={'right'}>
                     USD {t('value')} {t('prize')}
@@ -140,7 +143,7 @@ const Vault = () => {
                 </Grid>
                 <Grid item xs={6} style={{ paddingRight: '8px' }}>
                   <Typography className={classes.subTitle} align={'left'}>
-                    {t('nextWeeklyDraw')}
+                    {t('nextDraw')}
                   </Typography>
                   <Typography className={classes.countdown} align={'left'}>
                     <Countdown until={item.expiresAt * 1000} />{' '}
@@ -151,10 +154,10 @@ const Vault = () => {
                     {t('interest')}
                   </Typography>
                   <Typography className={classes.apy}>
-                    <span>{item.apy}%</span>{' '}
+                    {item.apy > 0 ? <span>{item.apy.toFixed(2)}%</span> : ''}{' '}
                     {item.bonusApy > 0
                       ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2)
-                      : item.apy}
+                      : item.apy.toFixed(2)}
                     % APY
                   </Typography>
                 </Grid>
@@ -189,16 +192,14 @@ const Vault = () => {
                   <AnimateHeight duration={500} height={prizeSplitOpen ? 'auto' : 0}>
                     <Grid container spacing={1}>
                       <Grid item xs={4} align={'left'}>
-                        <Typography className={classes.prizeSplitWinners}>5 winners</Typography>
+                        <Typography className={classes.prizeSplitWinners}>
+                          {item.numberOfWinners.toString()} winners
+                        </Typography>
                       </Grid>
                       <Grid item xs={8} align={'right'}>
                         <Typography className={classes.prizeSplitValue}>
                           <span>
-                            {item.awardBalance.times(0.2).toFixed(2)} {item.token}
-                          </span>{' '}
-                          and{' '}
-                          <span>
-                            {item.sponsorBalance.times(0.2).toFixed(2)} {item.sponsorToken}
+                            <PrizeSplit item={item} />
                           </span>{' '}
                           each
                         </Typography>
@@ -210,7 +211,7 @@ const Vault = () => {
                   <Divider
                     className={classes.divider}
                     style={{ marginBottom: '20px', marginTop: '4px' }}
-                  ></Divider>
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <Deposit
@@ -231,7 +232,7 @@ const Vault = () => {
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Divider className={classes.divider} style={{ marginBottom: '16px' }}></Divider>
+                  <Divider className={classes.divider} style={{ marginBottom: '16px' }} />
                 </Grid>
                 <Grid item xs={9} align={'left'}>
                   <Typography
@@ -287,16 +288,22 @@ const Vault = () => {
                   <Grid container>
                     <Grid item xs={12} align={'left'}>
                       <Typography className={classes.infoTitle} align={'left'}>
-                        {item.token} Moonpot Strategy
+                        {item.strategyCard.title
+                          ? item.strategyCard.title
+                          : item.token + ' Moonpot Strategy'}
                       </Typography>
                     </Grid>
                     <Grid item xs={12} align={'left'}>
                       <Typography
                         className={classes.infoMessage}
                         align={'left'}
-                        style={{ marginBottom: '32px' }}
+                        style={{ marginBottom: '32px', whiteSpace: 'pre-wrap' }}
                       >
-                        <Trans i18nKey="moonpotStrategyMessage" values={{ token: item.token }} />
+                        {item.strategyCard.body ? (
+                          item.strategyCard.body
+                        ) : (
+                          <Trans i18nKey="moonpotStrategyMessage" values={{ token: item.token }} />
+                        )}
                       </Typography>
                     </Grid>
                     <Grid item xs={12} align={'left'} style={{ marginBottom: '16px' }}>
@@ -316,61 +323,67 @@ const Vault = () => {
                   </Grid>
                 </Box>
               </Grid>
-              <Grid item xs={12} align={'center'}>
-                <Box className={classes.infoContainer}>
-                  <Grid container>
-                    <Grid item xs={12} align={'left'}>
-                      <Typography className={classes.infoTitle} align={'left'}>
-                        {t('earningsBreakdown')}
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} align={'left'}>
-                      <Typography className={classes.infoSubHeader} align={'left'}>
-                        Your {item.token} Interest
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} align={'left'}>
-                      <Typography className={classes.infoDetail} align={'left'}>
-                        50%
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} align={'left'}>
-                      <Typography className={classes.infoSubHeader} align={'left'}>
-                        {item.token} Moonpot Prize Draw
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} align={'left'}>
-                      <Typography className={classes.infoDetail} align={'left'}>
-                        40%
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} align={'left'}>
-                      <Typography className={classes.infoSubHeader} align={'left'}>
-                        Ziggy's (Governance) Pot Interest
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} align={'left'}>
-                      <Typography className={classes.infoDetail} align={'left'}>
-                        5%
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} align={'left'}>
-                      <Typography className={classes.infoSubHeader} align={'left'}>
-                        Ziggy's (Governance) Prize Draw
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} align={'left'}>
-                      <Typography
-                        className={classes.infoDetail}
-                        align={'left'}
-                        style={{ paddingBottom: 0 }}
-                      >
-                        5%
-                      </Typography>
-                    </Grid>
+              {item.earningsBreakdown ? (
+                <React.Fragment>
+                  <Grid item xs={12} align={'center'}>
+                    <Box className={classes.infoContainer}>
+                      <Grid container>
+                        <Grid item xs={12} align={'left'}>
+                          <Typography className={classes.infoTitle} align={'left'}>
+                            {t('earningsBreakdown')}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} align={'left'}>
+                          <Typography className={classes.infoSubHeader} align={'left'}>
+                            Your {item.token} Interest
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} align={'left'}>
+                          <Typography className={classes.infoDetail} align={'left'}>
+                            50%
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} align={'left'}>
+                          <Typography className={classes.infoSubHeader} align={'left'}>
+                            {item.token} Moonpot Prize Draw
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} align={'left'}>
+                          <Typography className={classes.infoDetail} align={'left'}>
+                            40%
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} align={'left'}>
+                          <Typography className={classes.infoSubHeader} align={'left'}>
+                            Ziggy's (Governance) Pot Interest
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} align={'left'}>
+                          <Typography className={classes.infoDetail} align={'left'}>
+                            5%
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} align={'left'}>
+                          <Typography className={classes.infoSubHeader} align={'left'}>
+                            Ziggy's (Governance) Prize Draw
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} align={'left'}>
+                          <Typography
+                            className={classes.infoDetail}
+                            align={'left'}
+                            style={{ paddingBottom: 0 }}
+                          >
+                            5%
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Box>
                   </Grid>
-                </Box>
-              </Grid>
+                </React.Fragment>
+              ) : (
+                ''
+              )}
               <Grid item xs={12} align={'center'} ref={fairPlayRef}>
                 <Box className={classes.infoContainer}>
                   <Grid container>

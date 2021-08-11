@@ -119,8 +119,8 @@ export function convertAmountToRawNumber(value, decimals = 18) {
 }
 
 export function calculateTotalPrize(item) {
-  const a = new BigNumber(item.awardBalanceUsd);
-  const s = new BigNumber(item.sponsorBalanceUsd);
+  const a = new BigNumber(item.awardBalanceUsd) ?? 0;
+  const s = new BigNumber(item.totalSponsorBalanceUsd) ?? 0;
   let total = a.plus(s);
 
   if (isNaN(total.toFixed(0))) {

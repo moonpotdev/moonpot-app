@@ -11,8 +11,11 @@ const Countdown = ({ until, resolution = 'minutes', dropZero = false, children }
     return () => clearInterval(id);
   }, [setTime]);
 
-  const timeLeft = Math.max(0, until - time);
+  if (!until) {
+    return null;
+  }
 
+  const timeLeft = Math.max(0, until - time);
   if (timeLeft > 0 || children === null || React.Children.count(children) === 0) {
     return formatTimeLeft(timeLeft, {
       resolution,

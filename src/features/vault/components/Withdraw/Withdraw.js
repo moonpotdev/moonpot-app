@@ -6,6 +6,7 @@ import BigNumber from 'bignumber.js';
 import {
   byDecimals,
   convertAmountToRawNumber,
+  formatTimeLeft,
   stripExtraDecimals,
 } from '../../../../helpers/format';
 import styles from '../../styles';
@@ -28,7 +29,7 @@ const Withdraw = ({
   const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { wallet, balance, earned, vault } = useSelector(state => ({
+  const { wallet, balance, earned } = useSelector(state => ({
     wallet: state.walletReducer,
     balance: state.balanceReducer,
     earned: state.earnedReducer,
@@ -106,7 +107,7 @@ const Withdraw = ({
 
   React.useEffect(() => {
     const getData = async () => {
-      if (wallet.address) {
+      if (wallet.address && balance.tokens[item.rewardToken].balance > 0) {
         const prizePoolContract = new wallet.rpc[item.network].eth.Contract(
           PrizePoolAbi,
           item.prizePoolAddress
@@ -115,27 +116,11 @@ const Withdraw = ({
           .userFairPlayLockRemaining(wallet.address, item.rewardAddress)
           .call();
         setFairplayTimelock(Number(userFairPlayLockRemaining) * 1000);
-      } else {
-        setFairplayTimelock(0);
       }
     };
 
     getData();
   });
-
-  const formatTimelock = time => {
-    const day = Math.floor(time / (1000 * 60 * 60 * 24))
-      .toString()
-      .padStart(2, '0');
-    const hours = Math.floor((time / (1000 * 60 * 60)) % 24)
-      .toString()
-      .padStart(2, '0');
-    const minutes = Math.floor((time / (1000 * 60)) % 60)
-      .toString()
-      .padStart(2, '0');
-
-    return `${day}day ${hours}h ${minutes}min`;
-  };
 
   React.useEffect(() => {
     const max = 3600 * 24 * 10 * 1000;
@@ -169,8 +154,8 @@ const Withdraw = ({
       approved = balance.tokens[item.rewardToken].allowance[item.contractAddress];
     }
     if (wallet.address && !isEmpty(earned.earned[item.id])) {
-      const earnedAmount = earned.earned[item.id][item.sponsorToken] ?? 0;
-      earnedBonus = byDecimals(new BigNumber(earnedAmount), item.sponsorTokenDecimals).toFixed(8);
+      const earnedAmount = earned.earned[item.id][item.bonusToken] ?? 0;
+      earnedBonus = byDecimals(new BigNumber(earnedAmount), item.bonusTokenDecimals).toFixed(8);
       const boostAmount = earned.earned[item.id][item.boostToken] ?? 0;
       earnedBoosted = byDecimals(new BigNumber(boostAmount), item.boostTokenDecimals).toFixed(8);
     }
@@ -231,7 +216,7 @@ const Withdraw = ({
             </Grid>
             <Grid item xs={12}>
               <Button onClick={handleWithdraw} className={classes.eolWithdrawBtn}>
-                Withdraw {item.token} and {item.sponsorToken}
+                Withdraw {item.token} and {item.bonusToken}
               </Button>
               <Steps item={item} steps={steps} handleClose={handleClose} />
             </Grid>
@@ -250,25 +235,31 @@ const Withdraw = ({
             </Grid>
             <Grid item xs={4} align={'left'}>
               <Typography className={classes.withdrawItemText}>
-                <Trans i18nKey="mySponsorToken" values={{ sponsorToken: item.sponsorToken }} />
+                <Trans i18nKey="myBonusToken" values={{ bonusToken: item.bonusToken }} />
               </Typography>
             </Grid>
             <Grid item xs={8} align={'right'}>
               <Typography className={classes.withdrawItemValue}>
-                {state.earned} {item.sponsorToken}
+                {state.earned} {item.bonusToken}
               </Typography>
             </Grid>
-            <Grid item xs={4} align={'left'}>
-              <Typography className={classes.withdrawItemText}>
-                <Trans i18nKey="myBoostToken" values={{ boostToken: item.boostToken }} />
-              </Typography>
-            </Grid>
-            <Grid item xs={8} align={'right'}>
-              {/* BNB boost value needs populating state.boosted */}
-              <Typography className={classes.withdrawItemValue}>
-                {state.boosted} {item.boostToken}
-              </Typography>
-            </Grid>
+            {item.boostToken ? (
+              <React.Fragment>
+                <Grid item xs={4} align={'left'}>
+                  <Typography className={classes.withdrawItemText}>
+                    <Trans i18nKey="myBoostToken" values={{ boostToken: item.boostToken }} />
+                  </Typography>
+                </Grid>
+                <Grid item xs={8} align={'right'}>
+                  <Typography className={classes.withdrawItemValue}>
+                    {state.boosted} {item.boostToken}
+                  </Typography>
+                </Grid>
+              </React.Fragment>
+            ) : (
+              ''
+            )}
+
             <Grid item xs={4} align={'left'}>
               <Typography className={classes.withdrawItemText}>
                 <Trans i18nKey="myFairplayTimelock" />
@@ -276,7 +267,7 @@ const Withdraw = ({
             </Grid>
             <Grid item xs={8} align={'right'}>
               <Typography className={classes.withdrawItemValue}>
-                {formatTimelock(fairplayTimelock)}
+                {formatTimeLeft(fairplayTimelock)}
               </Typography>
             </Grid>
             <Grid item xs={4} align={'left'}>
@@ -296,7 +287,10 @@ const Withdraw = ({
                     <img
                       alt="TokenIcon"
                       className={classes.tokenIcon}
-                      src={require('../../../../images/tokens/cakeMoonMiniIcon.svg').default}
+                      src={
+                        require('../../../../images/tokens/' + item.token.toLowerCase() + '.svg')
+                          .default
+                      }
                     />
                   </Grid>
                   <Grid item xs={6}>
