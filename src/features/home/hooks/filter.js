@@ -10,7 +10,7 @@ const FILTER_DEFAULT = {
   retired: false,
 };
 
-const FILTER_STORAGE_KEY = 'homeSortConfig';
+const FILTER_STORAGE_KEY = 'moonHomeSortConfig';
 
 const SORT_COMPARE_FUNCTIONS = {
   defaultOrder: compareNumber,

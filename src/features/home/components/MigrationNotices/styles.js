@@ -1,7 +1,6 @@
 const styles = (theme) => ({
 	notices: {
-		marginTop: 24,
-		marginBottom: (32 - 48), // pots have 48px marginTop, negative to get 32px gap
+		maxWidth: '100%',
 	},
 	notice: {
 		backgroundColor: '#FFFFFF',
@@ -11,11 +10,8 @@ const styles = (theme) => ({
 		boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2), 0px 12px 24px -10px rgba(0, 0, 0, 0.4)',
 		borderRadius: '16px',
 		boxSizing: 'border-box',
-		margin: '0 auto',
+		margin: '0 auto 24px auto',
 		padding: '24px',
-		'& + $notice': {
-			marginTop: 24,
-		}
 	},
 	text: {
 		position: 'relative',

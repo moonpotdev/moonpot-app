@@ -16,7 +16,7 @@ import {byDecimals, calculateTotalPrize, formatDecimals} from '../../helpers/for
 import Countdown from '../../components/Countdown';
 import Steps from '../vault/components/Steps';
 import PrizeSplit from "../../components/PrizeSplit";
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
@@ -375,7 +375,7 @@ const Dashboard = () => {
                                                                     <Typography className={classes.myDetailsText} align={'left'}>{t('myInterestRate')}</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
-                                                                    <Typography className={classes.myDetailsValue} align={"right"}>{item.apy > 0 ? <span>{item.apy}%</span> : ''} {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy}% APY</Typography>
+                                                                    <Typography className={classes.myDetailsValue} align={"right"}>{item.apy > 0 ? <span>{item.apy.toFixed(2)}%</span> : ''} {item.bonusApy > 0 ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2) : item.apy.toFixed(2)}% APY</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={6}>
                                                                     <Typography className={classes.myDetailsText} align={'left'}>{t('myOdds')}</Typography>
@@ -558,7 +558,7 @@ const Dashboard = () => {
                                                                         </Typography>
                                                                     </Grid>
                                                                     <Grid item xs={12}>
-                                                                        <Button onClick={() => handleMigrator(item)} className={classNames(classes.actionBtn, classes.eolMoveBtn)} variant={'contained'} disabled={item.userBalance.lte(0)}>
+                                                                        <Button onClick={() => handleMigrator(item)} className={clsx(classes.actionBtn, classes.eolMoveBtn)} variant={'contained'} disabled={item.userBalance.lte(0)}>
                                                                             Move {item.token} and Withdraw {item.bonusToken}
                                                                         </Button>
                                                                     </Grid>

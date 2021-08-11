@@ -111,7 +111,7 @@ const getPools = async (items, state, dispatch) => {
 
             pools[item.id].awardBalance = awardBalance;
             pools[item.id].awardBalanceUsd = awardBalanceUsd;
-            pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toFixed(2)) : 0;
+            pools[item.id].apy = (!isEmpty(apy) && pools[item.id].apyId in apy) ? (new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toNumber()) : 0;
 
             const totalValueLocked = new BigNumber(item.totalValueLocked);
             const totalTokenStaked = byDecimals(totalValueLocked, pools[item.id].tokenDecimals);

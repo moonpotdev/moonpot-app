@@ -9,11 +9,11 @@ import {whitelistSecondPot} from '../../../../config/dao/whitelist/secondpot';
 import {makeStyles, Typography} from '@material-ui/core';
 import styles from './styles';
 import {CancelOutlined, CheckCircleOutline, OpenInNew} from '@material-ui/icons';
-import classNames from 'classnames';
-import {ButtonWhitePurpleLight} from '../../../../components/Buttons/ButtonWhitePurpleLight';
+import clsx from 'clsx';
 import ZiggyRocket104 from '../../../../images/ziggy/rocket_104w.png';
 import ZiggyRocket208 from '../../../../images/ziggy/rocket_208w.png';
 import Countdown from '../../../../components/Countdown';
+import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
 
 const useStyles = makeStyles(styles);
 
@@ -75,7 +75,7 @@ function Requirement({fulfilled = false, children}) {
 	const variantClass = 'requirement' + (fulfilled ? 'Fulfilled' : 'Unfulfilled');
 	const Icon = fulfilled ? CheckCircleOutline : CancelOutlined;
 
-	return <div className={classNames(classes.requirement, classes[variantClass])}>
+	return <div className={clsx(classes.requirement, classes[variantClass])}>
 		<div className={classes.requirementIcon}><Icon fontSize="inherit"/></div>
 		<div className={classes.requirementContent}>{children}</div>
 	</div>;
@@ -186,12 +186,12 @@ function WhitelistTakePart() {
 			<a href={URL_LEARN_MORE_IDO} target="_blank" rel="noreferrer">Learn more about the IDO <OpenInNew
 				fontSize="inherit"/></a>
 		</Typography>
-		<ButtonWhitePurpleLight className={classes.button} fullWidth={true} component="a"
+		<PrimaryButton variant="purple" className={classes.button} fullWidth={true} component="a"
 								href={URL_TAKE_PART_BUSD ? URL_TAKE_PART_BUSD : '#'} target="_blank" rel="noopener"
-								disabled={!URL_TAKE_PART_BUSD}>Stake Your BUSD to get POTS</ButtonWhitePurpleLight>
-		<ButtonWhitePurpleLight className={classes.button} fullWidth={true} component="a"
+								disabled={!URL_TAKE_PART_BUSD}>Stake Your BUSD to get POTS</PrimaryButton>
+		<PrimaryButton variant="purple" className={classes.button} fullWidth={true} component="a"
 								href={URL_TAKE_PART_BNB ? URL_TAKE_PART_BNB : '#'} target="_blank" rel="noopener"
-								disabled={!URL_TAKE_PART_BNB}>Stake Your BNB to get POTS</ButtonWhitePurpleLight>
+								disabled={!URL_TAKE_PART_BNB}>Stake Your BNB to get POTS</PrimaryButton>
 	</>;
 }
 

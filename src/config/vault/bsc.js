@@ -151,8 +151,7 @@ export const pools = [
 		migrationContractAddress: '0x30d55CE74E2dcd1B0Ff37214a6978FCFc06aA499',
 		migrationRewardAddress: '0x9273be9c180B0271cc2c90E5BF99477B573Fe904',
 		migrationLearnMoreUrl: 'https://moonpot.com/alpha/learn/how-to-move-cake-from-the-retired-cake-moonpot/',
-		migrationExplainer: ['After you move your CAKE today, you won’t have to move it again. You will be entered into future Moonpots without having to make transactions each week.',
-			'We are giving away a $50k BNB Super Boost on the new CAKE Moonpot, to make it worthwhile.'],
+		migrationExplainer: ['After you move your CAKE today, you won’t have to move it again. You will be entered into future Moonpots without having to make transactions each week.'],
 		winnersTransaction: '0x770ddd1d57b19437a0cf563923cb3799d31a5ca3e20a3080e4286d4fede54109',
 	},
 
