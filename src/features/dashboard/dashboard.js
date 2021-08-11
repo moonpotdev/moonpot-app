@@ -335,6 +335,7 @@ const Dashboard = () => {
         </Grid>
         <Grid container>
           <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
+          {/*No Active Pots Layout*/}
           {filtered.length === 0 ? (
             <Box className={classes.noActivePots}>
               <Grid container>
@@ -347,12 +348,12 @@ const Dashboard = () => {
                 </Grid>
                 <Grid item xs={8}>
                   <Typography className={classes.noActivePotsTitle}>
-                    {t('playWithMoonpot')}
+                    {wallet.address ? t('playWithMoonpot') : t('connectWallet')}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <Typography className={classes.noActivePotsText}>
-                    {t('youHaventEnteredMoonpots')}
+                    {wallet.address ? t('youHaventEnteredMoonpots') : t('connectToJoin')}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -362,7 +363,7 @@ const Dashboard = () => {
                       history.push('/');
                     }}
                   >
-                    {t('buttons.play')}
+                    {wallet.address ? t('buttons.play') : t('connectWallet')}
                   </Button>
                 </Grid>
               </Grid>
