@@ -5,13 +5,16 @@ const styles = theme => ({
     lineHeight: '40px',
     textAlign: 'center',
     color: '#B4B3CC',
-    marginBottom: '56px',
+    marginBottom: '24px',
     '& span': {
       color: '#F3BA2E',
       '&:last-of-type': {
         color: '#FFFFFF',
       },
     },
+  },
+  totalTVL: {
+    marginBottom: '48px',
   },
   potsFilter: {
     marginBottom: '48px',

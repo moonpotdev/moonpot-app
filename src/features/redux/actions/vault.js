@@ -104,6 +104,7 @@ const getPools = async (items, state, dispatch) => {
   });
 
   let totalPrizesAvailable = new BigNumber(0);
+  let totalTvl = new BigNumber(0);
 
   for (let i = 0; i < response.length; i++) {
     const item = response[i];
@@ -208,14 +209,15 @@ const getPools = async (items, state, dispatch) => {
     }
   }
 
-  for (const key in items) {
-    const pool = items[key];
+  for (const pool of Object.values(items)) {
     pool.totalSponsorBalanceUsd = new BigNumber(0);
     pool.sponsors.forEach(sponsor => {
       pool.totalSponsorBalanceUsd = pool.totalSponsorBalanceUsd.plus(sponsor.sponsorBalanceUsd);
     });
+
     if (pool.status === 'active') {
       totalPrizesAvailable = totalPrizesAvailable.plus(pool.totalSponsorBalanceUsd);
+      totalTvl = totalTvl.plus(pool.totalStakedUsd);
     }
   }
 
@@ -223,7 +225,7 @@ const getPools = async (items, state, dispatch) => {
     type: HOME_FETCH_POOLS_DONE,
     payload: {
       pools: pools,
-      totalTvl: state.vaultReducer.totalTvl,
+      totalTvl: totalTvl.toNumber(),
       totalPrizesAvailable: totalPrizesAvailable,
       isPoolsLoading: false,
       lastUpdated: new Date().getTime(),

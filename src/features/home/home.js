@@ -11,6 +11,7 @@ import SocialMediaBlock from './components/SocialMediaBlock/SocialMediaBlock';
 import { useFilterConfig, useFilteredPots } from './hooks/filter';
 import { Pot } from './components/Pot/Pot';
 import BeefyCow from '../../images/beefy.svg';
+import { TVL } from './components/TVL/TVL';
 
 const useStyles = makeStyles(styles);
 
@@ -39,6 +40,7 @@ const Home = () => {
       <Typography className={classes.mainTitle}>
         <Trans i18nKey="homeTitle" values={{ amount: totalPrizesAvailableFormatted }} />
       </Typography>
+      <TVL className={classes.totalTVL} />
       <Filter config={filterConfig} setConfig={setFilterConfig} className={classes.potsFilter} />
       <MigrationNotices potType={filterConfig.vault} className={classes.potsMigrationNotice} />
       <div className={classes.potList}>
