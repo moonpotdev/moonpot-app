@@ -3,6 +3,7 @@ const styles = theme => ({
     borderColor: '#4C4C80',
     borderRadius: '10px',
     textAlign: 'center',
+    boxShadow: 'none',
   },
   label: {
     fontWeight: 'bold',
