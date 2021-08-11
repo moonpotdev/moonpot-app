@@ -160,6 +160,9 @@ const Vault = () => {
                       : item.apy.toFixed(2)}
                     % APY
                   </Typography>
+                  <Typography className={classes.apy}>
+                    {item.bonusApr > 0 ? `${new BigNumber(item.bonusApr).toFixed(2)}% APR` : ''}
+                  </Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <Typography className={classes.subTitle}>{t('tvl')}</Typography>

@@ -32,3 +32,7 @@ export const investmentOdds = (currentTvl, investment, winners) => {
   const oddsOfWinningAtLeastOnce = BigNumber(1).minus(oddsOfLosingOnce.exponentiatedBy(winners));
   return Math.ceil(1 / Number(oddsOfWinningAtLeastOnce));
 };
+
+export function compound(r, n = 365, t = 1, c = 1) {
+  return (1 + (r * c) / n) ** (n * t) - 1;
+}

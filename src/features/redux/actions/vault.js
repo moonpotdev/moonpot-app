@@ -2,7 +2,7 @@ import { HOME_FETCH_POOLS_BEGIN, HOME_FETCH_POOLS_DONE } from '../constants';
 import BigNumber from 'bignumber.js';
 import { MultiCall } from 'eth-multicall';
 import { config } from '../../../config/config';
-import { isEmpty } from '../../../helpers/utils';
+import {compound, isEmpty} from '../../../helpers/utils';
 import { byDecimals, formatTvl } from '../../../helpers/format';
 
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
@@ -169,9 +169,13 @@ const getPools = async (items, state, dispatch) => {
             .times(bonusPrice)
             .dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].bonusTokenDecimals));
 
-          pools[item.id].bonusApy = Number(
-            yearlyRewardsInUsd.multipliedBy(100).dividedBy(totalStakedUsd)
-          );
+          const apr = yearlyRewardsInUsd.dividedBy(totalStakedUsd)
+          if (pools[item.id].compoundApy) {
+            pools[item.id].bonusApr = apr.multipliedBy(100).toNumber();
+            pools[item.id].bonusApy = compound(apr) * 100
+          } else {
+            pools[item.id].bonusApy = apr.multipliedBy(100).toNumber();
+          }
         }
       }
 
