@@ -54,7 +54,9 @@ export const formatDecimals = (number, maxPlaces = 8) => {
   }
 
   const places = Math.min(maxPlaces, number >= 10 ? 4 : 8);
-  return stripTrailingZeros(number.toFixed(places));
+  return number.toNumber().toLocaleString(undefined, {
+    maximumFractionDigits: places,
+  });
 };
 
 export function byDecimals(number, tokenDecimals = 18) {

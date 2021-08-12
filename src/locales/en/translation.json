@@ -108,21 +108,23 @@
   "twitterSocialBlockButton": "Follow our Twitter",
   "list": {
     "one": "<span>{{item}}</span>",
-    "two": "<span>{{first}}</span> and <span>{{last}}</span>",
+    "two": "<span>{{first}}</span> & <span>{{last}}</span>",
     "start": "<span>{{item}}</span>",
     "join": ", <span>{{item}}</span>",
-    "end": " and <span>{{item}}</span>"
+    "end": " & <span>{{item}}</span>"
   },
   "pot": {
-    "winTotalPrizeAmount": "Win <span>{{prize}}</span> in ",
-    "winTotalNote": "USD value of Prize Draw",
+    "title": "{{name}} Pot",
+    "winTotalPrize": "Win <span>{{prize}}</span>",
+    "winTotalTokensIn": "in ",
     "statNextDraw": "Next Draw",
     "statNextDrawCountdownFinished": "Awaiting draw...",
     "statInterest": "Interest",
     "statInterestApy": "{{apy}}% APY",
-    "statInterestApr": "{{apy}}% APR",
+    "statInterestApr": "{{apr}}% APR",
     "statInterestApyBonus": "<span>{{old}}%</span> {{new}}% APY",
     "statTVL": "TVL",
+    "statDeposit": "Your Deposit",
     "prizeSplit": "Prize Split",
     "prizeSplitWinner": "{{count}} winner",
     "prizeSplitWinner_plural": "{{count}} winners",

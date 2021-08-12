@@ -49,7 +49,14 @@ export function CardAccordionGroup({ className, children }) {
   return <div className={clsx(classes.accordionGroup, className)}>{children}</div>;
 }
 
-export function CardAccordionItem({ titleKey, children, className, onChange, startOpen = false }) {
+export function CardAccordionItem({
+  titleKey,
+  children,
+  className,
+  onChange,
+  collapsable = true,
+  startOpen = false,
+}) {
   const classes = useStyles();
   const [isOpen, setOpen] = useState(startOpen);
   const toggleOpen = useCallback(() => {
@@ -59,14 +66,18 @@ export function CardAccordionItem({ titleKey, children, className, onChange, sta
       onChange(!isOpen);
     }
   }, [setOpen, isOpen, onChange]);
+  const toggleIcon = isOpen ? <ExpandLess /> : <ExpandMore />;
 
   return (
     <div className={clsx(classes.accordionItem, className)}>
-      <button className={classes.accordionItemToggle} onClick={toggleOpen}>
+      <button
+        className={clsx(classes.accordionItemTitle, { [classes.accordionItemToggle]: collapsable })}
+        onClick={collapsable ? toggleOpen : null}
+      >
         <Trans i18nKey={titleKey} />
-        {isOpen ? <ExpandLess /> : <ExpandMore />}
+        {collapsable ? toggleIcon : null}
       </button>
-      <Collapse in={isOpen}>
+      <Collapse in={!collapsable || isOpen}>
         <div className={classes.accordionItemInner}>{children}</div>
       </Collapse>
     </div>

@@ -12,7 +12,10 @@ const Countdown = ({ until, resolution = 'minutes', dropZero = false, children }
   }, [setTime]);
 
   if (!until) {
-    return null;
+    return formatTimeLeft(0, {
+      resolution,
+      dropZero,
+    });
   }
 
   const timeLeft = Math.max(0, until - time);
