@@ -94,15 +94,13 @@ const PotInterest = memo(function ({ baseApy, bonusApy, bonusApr }) {
   return (
     <>
       <div className={classes.interestValueApy}>
-        {hasBaseApy && hasBonusApy ? (
-          <Trans
-            i18nKey="pot.statInterestApyBonus"
-            values={{ old: baseApy.toFixed(2), new: totalApy.toFixed(2) }}
-          />
-        ) : (
-          <Trans i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
-        )}
+        <Trans i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
       </div>
+      {hasBaseApy && hasBonusApy ? (
+        <div className={classes.interestValueBaseApy}>
+          <Trans i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
+        </div>
+      ) : null}
       {hasBonusApr ? (
         <div className={classes.interestValueApr}>
           <Trans i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />

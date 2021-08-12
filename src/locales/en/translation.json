@@ -122,7 +122,6 @@
     "statInterest": "Interest",
     "statInterestApy": "{{apy}}% APY",
     "statInterestApr": "{{apr}}% APR",
-    "statInterestApyBonus": "<span>{{old}}%</span> {{new}}% APY",
     "statTVL": "TVL",
     "statDeposit": "Your Deposit",
     "prizeSplit": "Prize Split",

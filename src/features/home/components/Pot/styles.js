@@ -63,11 +63,11 @@ const styles = theme => ({
   },
   interestValueApy: {
     color: '#F3BA2E',
-    '& > span': {
-      fontWeight: 'normal',
-      color: '#A0BBD5',
-      textDecoration: 'line-through',
-    },
+  },
+  interestValueBaseApy: {
+    fontWeight: 'normal',
+    color: '#A0BBD5',
+    textDecoration: 'line-through',
   },
   interestValueApr: {
     fontWeight: 'normal',
