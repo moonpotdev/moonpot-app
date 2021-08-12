@@ -130,7 +130,7 @@ const PotDeposit = memo(function ({ depositToken, rewardToken, decimals }) {
   const balance256 = useSelector(state => state.balanceReducer.tokens[rewardToken]?.balance);
   const balance = useMemo(() => {
     if (address && balance256) {
-      return formatDecimals(byDecimals(balance256, decimals));
+      return formatDecimals(byDecimals(balance256, decimals), 2);
     }
 
     return 0;
