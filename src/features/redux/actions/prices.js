@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const fetchPrices = reducer => {
   const cache = new Date();
-  cache.setMinutes(0, 0, 0);
+  cache.setSeconds(0, 0);
 
   return async (dispatch, getState) => {
     const updatePrices = async () => {
