@@ -357,14 +357,23 @@ const Dashboard = () => {
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Button
-                    className={classes.noActivePotsPlayButton}
-                    onClick={() => {
-                      history.push('/');
-                    }}
-                  >
-                    {wallet.address ? t('buttons.play') : t('connectWallet')}
-                  </Button>
+                  {wallet.address ? (
+                    <Button
+                      className={classes.noActivePotsPlayButton}
+                      onClick={() => {
+                        history.push('/');
+                      }}
+                    >
+                      {t('buttons.play')}
+                    </Button>
+                  ) : (
+                    <Button
+                      className={classes.noActivePotsPlayButton}
+                      onClick={handleWalletConnect}
+                    >
+                      {t('connectWallet')}
+                    </Button>
+                  )}
                 </Grid>
               </Grid>
             </Box>
