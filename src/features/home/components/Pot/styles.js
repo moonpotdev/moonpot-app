@@ -59,6 +59,19 @@ const styles = theme => ({
       textDecoration: 'line-through',
     },
   },
+  interestValue: {
+    color: '#F3BA2E',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '15px',
+    lineHeight: '24px',
+    letterSpacing: '0.2px',
+    '& > span': {
+      fontWeight: 'normal',
+      color: '#A0BBD5',
+      textDecoration: 'line-through',
+    },
+  },
   prizeSplitValue: {
     textAlign: 'right',
     '& > span': {

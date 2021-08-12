@@ -53,10 +53,10 @@ const styles = theme => ({
     fontWeight: 700,
     fontSize: '15px',
     lineHeight: '24px',
-    color: '#ffffff',
+    color: '#F3BA2E',
     textAlign: 'right',
-    marginBottom: '16px',
     '& span': {
+      color: '#ffffff',
       textDecoration: 'line-through',
       opacity: '0.6',
     },

@@ -119,6 +119,7 @@
     "statNextDrawCountdownFinished": "Awaiting draw...",
     "statInterest": "Interest",
     "statInterestApy": "{{apy}}% APY",
+    "statInterestApr": "{{apy}}% APR",
     "statInterestApyBonus": "<span>{{old}}%</span> {{new}}% APY",
     "statTVL": "TVL",
     "prizeSplit": "Prize Split",

@@ -223,7 +223,16 @@ export function Pot({ id, single = false }) {
         </Grid>
         <Grid item xs={7}>
           <PotDrawStat labelKey="pot.statInterest">
-            <PotInterest apy={pot.apy} bonusApy={pot.bonusApy} />
+            <div className={classes.interestValue}>
+              <PotInterest apy={pot.apy} bonusApy={pot.bonusApy} />
+            </div>
+          </PotDrawStat>
+          <PotDrawStat>
+            {pot.bonusApr > 0 ? (
+              <Trans i18nKey="pot.statInterestApr" values={{ apy: pot.bonusApr.toFixed(2) }} />
+            ) : (
+              ''
+            )}
           </PotDrawStat>
         </Grid>
         <Grid item xs={5}>
