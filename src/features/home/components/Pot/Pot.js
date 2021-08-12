@@ -10,6 +10,7 @@ import Countdown from '../../../../components/Countdown';
 import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../helpers/utils';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
+import { TooltipWithIcon } from '../../../../components/Tooltip/tooltip';
 
 const useStyles = makeStyles(styles);
 
@@ -71,13 +72,26 @@ const PotWinTokens = memo(function ({ depositToken, sponsors }) {
   );
 });
 
-const PotDrawStat = memo(function ({ labelKey, children }) {
+const PotDrawStat = memo(function ({ baseApy, bonusApy, labelKey, children }) {
   const classes = useStyles();
+
+  //Get tooltip label
+  let tooltipi18nkey;
+  if (labelKey == 'pot.statInterest') {
+    const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
+    const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
+    if (hasBaseApy && hasBonusApy) {
+      tooltipi18nkey = 'tooltip.intrestCrossedOut';
+    } else {
+      tooltipi18nkey = 'tooltip.intrest';
+    }
+  }
 
   return (
     <>
       <div className={classes.statLabel}>
         <Trans i18nKey={labelKey} />
+        {labelKey == 'pot.statInterest' ? <TooltipWithIcon i18nkey={tooltipi18nkey} /> : ''}
       </div>
       <div className={classes.statValue}>{children}</div>
     </>
@@ -284,7 +298,7 @@ export function Pot({ id, single = false }) {
           </PotDrawStat>
         </Grid>
         <Grid item xs={7}>
-          <PotDrawStat labelKey="pot.statInterest">
+          <PotDrawStat baseApy={pot.apy} bonusApy={pot.bonusApy} labelKey="pot.statInterest">
             <PotInterest baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
           </PotDrawStat>
         </Grid>
