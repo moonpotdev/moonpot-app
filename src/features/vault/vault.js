@@ -12,12 +12,39 @@ import { isEmpty } from '../../helpers/utils';
 import reduxActions from '../redux/actions';
 import Deposit from './components/Deposit';
 import Withdraw from './components/Withdraw';
-import { calculateTotalPrize } from '../../helpers/format';
+import { calculateTotalPrize, formatDecimals } from '../../helpers/format';
 import BigNumber from 'bignumber.js';
 import Countdown from '../../components/Countdown';
 import PrizeSplit from '../../components/PrizeSplit';
+import { memo } from 'react';
+import { useTotalPrize } from '../../helpers/hooks';
 
 const useStyles = makeStyles(styles);
+
+const VaultTitle = memo(function ({
+  token,
+  baseApy,
+  bonusApy,
+  awardBalanceUsd,
+  totalSponsorBalanceUsd,
+}) {
+  const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
+  const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
+  const totalApy = (hasBaseApy ? baseApy : 0) + (hasBonusApy ? bonusApy : 0);
+  const totalPrize = useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd);
+
+  return (
+    <Trans
+      i18nKey="vaultTitle"
+      values={{
+        token,
+        apy: formatDecimals(totalApy, 2),
+        currency: '$',
+        amount: formatDecimals(totalPrize, 0),
+      }}
+    />
+  );
+});
 
 const Vault = () => {
   const { t } = useTranslation();
@@ -96,18 +123,13 @@ const Vault = () => {
         </Container>
       ) : (
         <Container maxWidth="lg">
-          <Typography className={classes.title}>
-            <Trans
-              i18nKey="vaultTitle"
-              values={{
-                name: item.token,
-                apy:
-                  item.bonusApy > 0
-                    ? new BigNumber(item.apy).plus(item.bonusApy).toFixed(2)
-                    : item.apy,
-                currency: '$',
-                amount: Number(calculateTotalPrize(item, prices).substring(1)).toLocaleString(),
-              }}
+          <Typography className={classes.mainTitle}>
+            <VaultTitle
+              token={item.token}
+              bonusApy={item.bonusApy}
+              baseApy={item.apy}
+              totalSponsorBalanceUsd={item.totalSponsorBalanceUsd}
+              awardBalanceUsd={item.awardBalanceUsd}
             />
           </Typography>
 

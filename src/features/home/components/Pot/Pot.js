@@ -10,22 +10,9 @@ import Countdown from '../../../../components/Countdown';
 import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../helpers/utils';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
+import { useTotalPrize } from '../../../../helpers/hooks';
 
 const useStyles = makeStyles(styles);
-
-function useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd) {
-  return useMemo(() => {
-    const a = new BigNumber(awardBalanceUsd ?? 0);
-    const s = new BigNumber(totalSponsorBalanceUsd ?? 0);
-    const total = a.plus(s);
-    const dp = total.gt(1) ? 0 : 4;
-
-    return total.toNumber().toLocaleString(undefined, {
-      minimumFractionDigits: dp,
-      maximumFractionDigits: dp,
-    });
-  }, [awardBalanceUsd, totalSponsorBalanceUsd]);
-}
 
 const PotLogo = memo(function ({ name, baseToken, sponsorToken }) {
   const src = require('../../../../images/vault/' +

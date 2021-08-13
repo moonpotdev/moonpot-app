@@ -36,7 +36,7 @@
   "migrationNoticeLearnMore": "Learn more.",
   "migrationNoticeMove": "Move my {{asset}}",
   "vaultLoadingMessage": "Getting vault data...",
-  "vaultTitle": "Deposit <span>{{name}}</span>, earn <span>{{apy}}% APY</span><br /> and a chance to win <span>{{currency}}{{amount}}</span>",
+  "vaultTitle": "Deposit <span>{{token}}</span>, earn <span>{{apy}}% APY</span> and a chance to win <span>{{currency}}{{amount}}</span>",
   "vaultWithdrawPenaltyWarning": "Fairplay Timelock rules apply.",
   "DashboardEmpty1": "You don't have any finished Pots yet.",
   "DashboardEmpty2": "Ziggy will let you know as soon as you do.",

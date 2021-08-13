@@ -1,21 +1,27 @@
 const styles = theme => ({
-  title: {
-    fontSize: '22px',
-    lineHeight: '34px',
-    fontWeight: 500,
-    color: '#ffffff',
-    padding: '30px 0',
+  mainTitle: {
+    fontWeight: '500',
+    fontSize: '24px',
+    lineHeight: '40px',
     textAlign: 'center',
+    color: '#B4B3CC',
+    marginBottom: '48px',
+    width: '400px',
+    maxWidth: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     '& span': {
       color: '#F3BA2E',
+      '&:last-of-type': {
+        color: '#FFFFFF',
+      },
     },
   },
   vaultPotItem: {
     backgroundColor: '#345675',
     height: '100%',
     width: 'min(100%, 500px)',
-    margin: '80px auto 0px auto',
-    marginTop: '56px',
+    margin: '0 auto',
     borderRadius: '16px',
     padding: '24px',
     marginBottom: '4px',

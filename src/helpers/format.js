@@ -48,14 +48,17 @@ export const stripTrailingZeros = str => {
   return str.replace(/(\.[0-9]*?)(0+$)/, '$1').replace(/\.$/, '');
 };
 
-export const formatDecimals = (number, maxPlaces = 8) => {
-  if (number.isZero()) {
+export const formatDecimals = (number, maxPlaces = 8, minPlaces = 0) => {
+  number = BigNumber.isBigNumber(number) ? number.toNumber() : number;
+
+  if (number === 0) {
     return '0';
   }
 
   const places = Math.min(maxPlaces, number >= 10 ? 4 : 8);
-  return number.toNumber().toLocaleString(undefined, {
+  return number.toLocaleString(undefined, {
     maximumFractionDigits: places,
+    minimumFractionDigits: minPlaces,
   });
 };
 
