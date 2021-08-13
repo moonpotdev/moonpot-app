@@ -72,26 +72,29 @@ const PotWinTokens = memo(function ({ depositToken, sponsors }) {
   );
 });
 
-const PotDrawStat = memo(function ({ baseApy, bonusApy, labelKey, children }) {
-  const classes = useStyles();
+const PotInterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
+  const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
+  const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
+  const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;
+  let tooltipKey = null;
 
-  //Get tooltip label
-  let tooltipi18nkey;
-  if (labelKey == 'pot.statInterest') {
-    const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
-    const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
-    if (hasBaseApy && hasBonusApy) {
-      tooltipi18nkey = 'tooltip.intrestCrossedOut';
-    } else {
-      tooltipi18nkey = 'tooltip.intrest';
-    }
+  if (hasBaseApy && hasBonusApy) {
+    tooltipKey = 'tooltip.interestBonusApy';
+  } else if (hasBonusApr) {
+    tooltipKey = 'tooltip.interestCompoundApr';
   }
+
+  return tooltipKey ? <TooltipWithIcon i18nKey={tooltipKey} /> : null;
+});
+
+const PotDrawStat = memo(function ({ labelKey, tooltip, children }) {
+  const classes = useStyles();
 
   return (
     <>
       <div className={classes.statLabel}>
         <Trans i18nKey={labelKey} />
-        {labelKey == 'pot.statInterest' ? <TooltipWithIcon i18nkey={tooltipi18nkey} /> : ''}
+        {tooltip ? tooltip : null}
       </div>
       <div className={classes.statValue}>{children}</div>
     </>
@@ -298,7 +301,16 @@ export function Pot({ id, single = false }) {
           </PotDrawStat>
         </Grid>
         <Grid item xs={7}>
-          <PotDrawStat baseApy={pot.apy} bonusApy={pot.bonusApy} labelKey="pot.statInterest">
+          <PotDrawStat
+            labelKey="pot.statInterest"
+            tooltip={
+              <PotInterestTooltip
+                baseApy={pot.apy}
+                bonusApy={pot.bonusApy}
+                bonusApr={pot.bonusApr}
+              />
+            }
+          >
             <PotInterest baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
           </PotDrawStat>
         </Grid>

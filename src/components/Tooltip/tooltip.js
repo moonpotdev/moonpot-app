@@ -1,34 +1,44 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-import { Tooltip } from '@material-ui/core';
+import { Fade, Tooltip } from '@material-ui/core';
+import { HelpOutline } from '@material-ui/icons';
 
 const useStyles = makeStyles(styles);
 
-export function TooltipWithIcon(i18nkey) {
+const StyledTooltip = withStyles(theme => ({
+  tooltip: {
+    backgroundColor: '#373737',
+    color: '#FFFFFF',
+    fontSize: '15px',
+    lineHeight: '24px',
+    fontWeight: 'normal',
+    padding: '16px',
+    borderRadius: '10px',
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+  },
+  arrow: {
+    color: '#373737',
+  },
+}))(Tooltip);
+
+export function TooltipWithIcon({ i18nKey }) {
   const { t } = useTranslation();
   const classes = useStyles();
-  const src = require('../../images/tooltip/tooltipicon.svg').default;
-
-  const LightTooltip = withStyles(theme => ({
-    tooltip: {
-      backgroundColor: '#373737',
-      fontSize: '15px',
-      fontWeight: '300',
-      padding: '16px',
-      borderRadius: '10px',
-    },
-    arrow: {
-      color: '#373737',
-    },
-  }))(Tooltip);
 
   return (
-    <div>
-      <LightTooltip disableFocusListener arrow title={t(i18nkey.i18nkey)} placement="top">
-        <img className={classes.icon} src={src} />
-      </LightTooltip>
-    </div>
+    <>
+      <StyledTooltip
+        arrow
+        TransitionComponent={Fade}
+        title={t(i18nKey)}
+        placement="top"
+        enterTouchDelay={0}
+        leaveTouchDelay={5000}
+      >
+        <HelpOutline fontSize="inherit" className={classes.icon} />
+      </StyledTooltip>
+    </>
   );
 }
