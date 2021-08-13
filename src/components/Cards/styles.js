@@ -32,7 +32,7 @@ const styles = () => ({
     borderBottom: 'solid 2px red',
     paddingBottom: '16px',
   },
-  accordionItemToggle: {
+  accordionItemTitle: {
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '12px',
@@ -49,6 +49,9 @@ const styles = () => ({
     outline: 'none',
     width: '100%',
     padding: '0',
+  },
+  accordionItemToggle: {
+    cursor: 'pointer',
     '& > .MuiSvgIcon-root': {
       fontSize: '20px',
     },
@@ -98,7 +101,7 @@ const styles = () => ({
       '& $accordionItem': {
         borderBottomColor: '#5989B5',
       },
-      '& $accordionItemToggle': {
+      '& $accordionItemTitle': {
         color: '#EBF3F9',
       },
       '& $accordionItemInner': {

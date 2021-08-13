@@ -7,9 +7,10 @@ import { BigNumber } from 'bignumber.js';
 import { Trans } from 'react-i18next';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import Countdown from '../../../../components/Countdown';
-import { formatTvl } from '../../../../helpers/format';
 import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../helpers/utils';
+import { byDecimals, formatDecimals } from '../../../../helpers/format';
+import { TooltipWithIcon } from '../../../../components/Tooltip/tooltip';
 
 const useStyles = makeStyles(styles);
 
@@ -36,102 +37,165 @@ const PotLogo = memo(function ({ name, baseToken, sponsorToken }) {
   return <img src={src} alt={`${name} Pot`} width="90" height="90" />;
 });
 
-const PotWinTotal = memo(function ({
-  baseToken,
-  awardBalanceUsd,
-  totalSponsorBalanceUsd,
-  sponsors,
-}) {
+const PotTitle = memo(function ({ name }) {
   const classes = useStyles();
-  const totalPrize = useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd);
-  const sponsorTokens = sponsors
-    .map(sponsor => sponsor.sponsorToken)
-    .filter(token => token !== baseToken);
-  const allTokens = [baseToken, ...sponsorTokens];
-
   return (
-    <div className={classes.winTotal}>
-      <div className={classes.winTotalPrize}>
-        <span className={classes.winTotalPrizeAmount}>
-          <Trans i18nKey="pot.winTotalPrizeAmount" values={{ prize: `$${totalPrize}` }} />
-        </span>
-        <span className={classes.winTokenPrizeTokens}>
-          {' '}
-          <TransListJoin list={allTokens} />
-        </span>
-      </div>
-      <div className={classes.winTotalNote}>
-        <Trans i18nKey="pot.winTotalNote" />
-      </div>
+    <div className={classes.title}>
+      <Trans i18nKey="pot.title" values={{ name }} />
     </div>
   );
 });
 
-const PotDrawStat = memo(function ({ labelKey, children }) {
+const PotWinTotal = memo(function ({ awardBalanceUsd, totalSponsorBalanceUsd }) {
+  const classes = useStyles();
+  const totalPrize = useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd);
+
+  return (
+    <div className={classes.winTotalPrize}>
+      <Trans i18nKey="pot.winTotalPrize" values={{ prize: `$${totalPrize}` }} />
+    </div>
+  );
+});
+
+const PotWinTokens = memo(function ({ depositToken, sponsors }) {
+  const classes = useStyles();
+  const sponsorTokens = sponsors
+    .map(sponsor => sponsor.sponsorToken)
+    .filter(token => token !== depositToken);
+  const allTokens = [depositToken, ...sponsorTokens];
+
+  return (
+    <div className={classes.winTotalTokens}>
+      <Trans i18nKey="pot.winTotalTokensIn" />
+      <TransListJoin list={allTokens} />
+    </div>
+  );
+});
+
+const PotInterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
+  const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
+  const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
+  const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;
+  let tooltipKey = null;
+
+  if (hasBaseApy && hasBonusApy) {
+    tooltipKey = 'tooltip.interestBonusApy';
+  } else if (hasBonusApr) {
+    tooltipKey = 'tooltip.interestCompoundApr';
+  }
+
+  return tooltipKey ? <TooltipWithIcon i18nKey={tooltipKey} /> : null;
+});
+
+const PotDrawStat = memo(function ({ labelKey, tooltip, children }) {
   const classes = useStyles();
 
   return (
     <>
       <div className={classes.statLabel}>
         <Trans i18nKey={labelKey} />
+        {tooltip ? tooltip : null}
       </div>
       <div className={classes.statValue}>{children}</div>
     </>
   );
 });
 
-const PotInterest = memo(function ({ apy, bonusApy }) {
-  if (typeof apy !== 'undefined' || typeof bonusApy !== 'undefined') {
-    if (apy > 0 && bonusApy > 0) {
-      return (
-        <Trans
-          i18nKey="pot.statInterestApyBonus"
-          values={{ old: apy.toFixed(2), new: (apy + bonusApy).toFixed(2) }}
-        />
-      );
-    }
+const PotInterest = memo(function ({ baseApy, bonusApy, bonusApr }) {
+  const classes = useStyles();
+  const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
+  const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
+  const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;
+  const totalApy = (hasBaseApy ? baseApy : 0) + (hasBonusApy ? bonusApy : 0);
 
-    if (apy > 0 || bonusApy > 0) {
-      const displayApy = Number(apy > 0 ? apy : bonusApy);
-      return <Trans i18nKey="pot.statInterestApy" values={{ apy: displayApy.toFixed(2) }} />;
-    }
-  }
-
-  return null;
+  return (
+    <>
+      <div className={classes.interestValueApy}>
+        <Trans i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
+      </div>
+      {hasBaseApy && hasBonusApy ? (
+        <div className={classes.interestValueBaseApy}>
+          <Trans i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
+        </div>
+      ) : null}
+      {hasBonusApr ? (
+        <div className={classes.interestValueApr}>
+          <Trans i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />
+        </div>
+      ) : null}
+    </>
+  );
 });
 
 const PotTVL = memo(function ({ totalStakedUsd }) {
   if (typeof totalStakedUsd !== 'undefined') {
-    return formatTvl(totalStakedUsd);
+    return (
+      '$' +
+      totalStakedUsd.toNumber().toLocaleString(undefined, {
+        maximumFractionDigits: 0,
+      })
+    );
   }
 
-  return null;
+  return '$0';
 });
 
-const PotPrizeSplit = function ({ baseToken, awardBalance, sponsors, numberOfWinners }) {
-  const allTokens = { [baseToken]: awardBalance };
+const PotDeposit = memo(function ({ depositToken, rewardToken, decimals }) {
+  const address = useSelector(state => state.walletReducer.address);
+  const balance256 = useSelector(state => state.balanceReducer.tokens[rewardToken]?.balance);
+  const balance = useMemo(() => {
+    if (address && balance256) {
+      return formatDecimals(byDecimals(balance256, decimals), 2);
+    }
+
+    return 0;
+  }, [address, balance256, decimals]);
+
+  return `${balance} ${depositToken}`;
+});
+
+const PotPrizeSplit = function ({
+  baseToken,
+  awardBalance,
+  awardBalanceUsd,
+  sponsors,
+  numberOfWinners,
+}) {
+  const allPrizes = {
+    [baseToken]: {
+      tokens: awardBalance || new BigNumber(0),
+      usd: awardBalanceUsd || new BigNumber(0),
+    },
+  };
+
   for (const sponsor of sponsors) {
-    if (sponsor.sponsorToken in allTokens) {
-      allTokens[sponsor.sponsorToken] = allTokens[sponsor.sponsorToken].plus(
-        sponsor.sponsorBalance
+    if (sponsor.sponsorToken in allPrizes) {
+      allPrizes[sponsor.sponsorToken].tokens = allPrizes[sponsor.sponsorToken].tokens.plus(
+        sponsor.sponsorBalance || new BigNumber(0)
+      );
+      allPrizes[sponsor.sponsorToken].usd = allPrizes[sponsor.sponsorToken].usd.plus(
+        sponsor.sponsorBalanceUsd || new BigNumber(0)
       );
     } else {
-      allTokens[sponsor.sponsorToken] = sponsor.sponsorBalance;
+      allPrizes[sponsor.sponsorToken] = {
+        tokens: sponsor.sponsorBalance || new BigNumber(0),
+        usd: sponsor.sponsorBalanceUsd || new BigNumber(0),
+      };
     }
   }
+  return Object.entries(allPrizes).map(([token, total]) => {
+    const tokens = formatDecimals(total.tokens.dividedBy(numberOfWinners), 2);
+    const usd = formatDecimals(total.usd.dividedBy(numberOfWinners), 2);
 
-  const prizeList = Object.entries(allTokens).map(([token, amount]) => {
     return (
-      amount
-        .div(numberOfWinners)
-        .toNumber()
-        .toLocaleString(undefined, { maximumFractionDigits: 2 }) +
-      ' ' +
-      token
+      <div key={token}>
+        <span>
+          {tokens} {token}
+        </span>{' '}
+        (${usd})
+      </div>
     );
   });
-
-  return <TransListJoin list={prizeList} />;
 };
 
 const PotPlay = memo(function ({ id, token, rewardToken }) {
@@ -166,7 +230,7 @@ const PotBottomList = function ({ pot }) {
   return (
     <>
       <CardAccordionGroup>
-        <CardAccordionItem titleKey="pot.prizeSplit" startOpen={true}>
+        <CardAccordionItem titleKey="pot.prizeSplit" collapsable={false}>
           <Grid container>
             <Grid item xs={3}>
               <Trans i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
@@ -175,6 +239,7 @@ const PotBottomList = function ({ pot }) {
               <PotPrizeSplit
                 baseToken={pot.token}
                 awardBalance={pot.awardBalance}
+                awardBalanceUsd={pot.awardBalanceUsd}
                 sponsors={pot.sponsors}
                 numberOfWinners={pot.numberOfWinners}
               />
@@ -205,39 +270,48 @@ export function Pot({ id, single = false }) {
           <PotLogo name={pot.name} baseToken={pot.token} sponsorToken={pot.sponsorToken} />
         </Grid>
         <Grid item xs={8}>
+          <PotTitle name={pot.name} />
           <PotWinTotal
-            baseToken={pot.token}
             awardBalanceUsd={pot.awardBalanceUsd}
             totalSponsorBalanceUsd={pot.totalSponsorBalanceUsd}
-            sponsors={pot.sponsors}
           />
+          <PotWinTokens depositToken={pot.token} sponsors={pot.sponsors} />
         </Grid>
       </Grid>
       <Grid container spacing={2} className={classes.rowDrawStats}>
-        <Grid item xs={5}>
+        <Grid item xs={7}>
           <PotDrawStat labelKey="pot.statNextDraw">
             <Countdown until={pot.expiresAt * 1000}>
               <Trans i18nKey="pot.statNextDrawCountdownFinished" />
             </Countdown>
           </PotDrawStat>
         </Grid>
-        <Grid item xs={7}>
-          <PotDrawStat labelKey="pot.statInterest">
-            <div className={classes.interestValue}>
-              <PotInterest apy={pot.apy} bonusApy={pot.bonusApy} />
-            </div>
-          </PotDrawStat>
-          <PotDrawStat>
-            {pot.bonusApr > 0 ? (
-              <Trans i18nKey="pot.statInterestApr" values={{ apy: pot.bonusApr.toFixed(2) }} />
-            ) : (
-              ''
-            )}
-          </PotDrawStat>
-        </Grid>
         <Grid item xs={5}>
           <PotDrawStat labelKey="pot.statTVL">
             <PotTVL totalStakedUsd={pot.totalStakedUsd} />
+          </PotDrawStat>
+        </Grid>
+        <Grid item xs={5}>
+          <PotDrawStat labelKey="pot.statDeposit">
+            <PotDeposit
+              depositToken={pot.token}
+              rewardToken={pot.rewardToken}
+              decimals={pot.tokenDecimals}
+            />
+          </PotDrawStat>
+        </Grid>
+        <Grid item xs={7}>
+          <PotDrawStat
+            labelKey="pot.statInterest"
+            tooltip={
+              <PotInterestTooltip
+                baseApy={pot.apy}
+                bonusApy={pot.bonusApy}
+                bonusApr={pot.bonusApr}
+              />
+            }
+          >
+            <PotInterest baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
           </PotDrawStat>
         </Grid>
       </Grid>

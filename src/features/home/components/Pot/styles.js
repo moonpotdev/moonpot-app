@@ -2,33 +2,35 @@ const styles = theme => ({
   rowLogoWinTotal: {
     marginBottom: `${24 - 8}px`,
   },
-  winTotal: {
+  title: {
     color: '#EBF3F9',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    textAlign: 'right',
-  },
-  winTotalPrize: {
-    fontSize: '24px',
+    fontSize: '19px',
     lineHeight: '28px',
+    fontWeight: '500',
+    textAlign: 'right',
     letterSpacing: '0.6px',
   },
-  winTotalPrizeAmount: {
+  winTotalPrize: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    textAlign: 'right',
+    fontSize: '24px',
+    lineHeight: '32px',
+    letterSpacing: '0.6px',
     '& > span': {
       color: '#F3BA2E',
-      fontWeight: 'bold',
     },
   },
-  winTokenPrizeTokens: {
-    '& > span': {
-      color: '#FAFAFC',
-      fontWeight: 'bold',
-    },
-  },
-  winTotalNote: {
+  winTotalTokens: {
+    textAlign: 'right',
+    color: '#FAFAFC',
     fontSize: '12px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
+    '& > span': {
+      color: '#FFFFFF',
+      fontWeight: 'bold',
+    },
   },
   rowDrawStats: {
     justifyContent: 'flex-start',
@@ -45,6 +47,8 @@ const styles = theme => ({
     lineHeight: '20px',
     letterSpacing: '1px',
     textTransform: 'uppercase',
+    display: 'inline-flex',
+    alignItems: 'center',
   },
   statValue: {
     color: '#FFFFFF',
@@ -59,23 +63,22 @@ const styles = theme => ({
       textDecoration: 'line-through',
     },
   },
-  interestValue: {
+  interestValueApy: {
     color: '#F3BA2E',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    fontSize: '15px',
-    lineHeight: '24px',
-    letterSpacing: '0.2px',
-    '& > span': {
-      fontWeight: 'normal',
-      color: '#A0BBD5',
-      textDecoration: 'line-through',
-    },
+  },
+  interestValueBaseApy: {
+    fontWeight: 'normal',
+    color: '#A0BBD5',
+    textDecoration: 'line-through',
+  },
+  interestValueApr: {
+    fontWeight: 'normal',
   },
   prizeSplitValue: {
     textAlign: 'right',
-    '& > span': {
+    '& span': {
       fontWeight: 'bold',
+      color: '#ffffff',
     },
   },
   rowPlay: {

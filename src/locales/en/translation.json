@@ -108,26 +108,31 @@
   "twitterSocialBlockButton": "Follow our Twitter",
   "list": {
     "one": "<span>{{item}}</span>",
-    "two": "<span>{{first}}</span> and <span>{{last}}</span>",
+    "two": "<span>{{first}}</span> & <span>{{last}}</span>",
     "start": "<span>{{item}}</span>",
     "join": ", <span>{{item}}</span>",
-    "end": " and <span>{{item}}</span>"
+    "end": " & <span>{{item}}</span>"
   },
   "pot": {
-    "winTotalPrizeAmount": "Win <span>{{prize}}</span> in ",
-    "winTotalNote": "USD value of Prize Draw",
+    "title": "{{name}} Pot",
+    "winTotalPrize": "Win <span>{{prize}}</span>",
+    "winTotalTokensIn": "in ",
     "statNextDraw": "Next Draw",
     "statNextDrawCountdownFinished": "Awaiting draw...",
     "statInterest": "Interest",
     "statInterestApy": "{{apy}}% APY",
-    "statInterestApr": "{{apy}}% APR",
-    "statInterestApyBonus": "<span>{{old}}%</span> {{new}}% APY",
+    "statInterestApr": "{{apr}}% APR",
     "statTVL": "TVL",
+    "statDeposit": "Your Deposit",
     "prizeSplit": "Prize Split",
     "prizeSplitWinner": "{{count}} winner",
     "prizeSplitWinner_plural": "{{count}} winners",
     "playWith": "Play with {{token}}",
     "playWithMore": "Play with more {{token}}",
     "oddsPerDeposit": "1 in {{odds}} odds per {{deposit}} deposit"
+  },
+  "tooltip": {
+    "interestBonusApy": "The crossed-out APY is the interest paid out in the deposited asset and automatically compounded. The gold APY includes additional bonus tokens that are not compounded and can be claimed manually.",
+    "interestCompoundApr": "APR is the annual interest rate received on a deposit. To earn the higher APY, compound your interest daily."
   }
 }

@@ -1,7 +1,7 @@
 export const pools = [
   {
     id: 'pots',
-    name: 'Pots',
+    name: "Ziggy's",
     token: 'POTS',
     tokenAddress: '0x3Fcca8648651E5b974DD6d3e50F61567779772A8',
     tokenDecimals: 18,
@@ -56,7 +56,7 @@ export const pools = [
   },
   {
     id: 'cake',
-    name: 'Cake',
+    name: 'CAKE',
     token: 'CAKE',
     tokenAddress: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
     tokenDecimals: 18,
@@ -90,7 +90,7 @@ export const pools = [
   },
   {
     id: 'cake-dodo',
-    name: 'Cake',
+    name: 'CAKE',
     token: 'CAKE',
     tokenAddress: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
     tokenDecimals: 18,
@@ -127,7 +127,7 @@ export const pools = [
   },
   {
     id: 'cake-bifi',
-    name: 'Cake',
+    name: 'CAKE',
     token: 'CAKE',
     tokenAddress: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
     tokenDecimals: 18,
