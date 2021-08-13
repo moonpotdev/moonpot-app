@@ -47,6 +47,8 @@ const styles = theme => ({
     lineHeight: '20px',
     letterSpacing: '1px',
     textTransform: 'uppercase',
+    display: 'inline-flex',
+    alignItems: 'center',
   },
   statValue: {
     color: '#FFFFFF',

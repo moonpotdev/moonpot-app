@@ -42,7 +42,9 @@
   "DashboardEmpty2": "Ziggy will let you know as soon as you do.",
   "DashboardTitle": "You're in {{count}} <span>Moonpot</span>, with<br /> the chance to win <span>${{amount}}</span>",
   "playWithMoonpot": "Play with Moonpot",
+  "connectWallet": "Connect Wallet",
   "youHaventEnteredMoonpots": "You haven't entered any Moonpots yet.",
+  "connectToJoin": "Connect your wallet to join a Moonpot.",
   "win": "Win",
   "value": "value of",
   "prize": "Prize Draw",
@@ -130,5 +132,9 @@
     "playWith": "Play with {{token}}",
     "playWithMore": "Play with more {{token}}",
     "oddsPerDeposit": "1 in {{odds}} odds per {{deposit}} deposit"
+  },
+  "tooltip": {
+    "interestBonusApy": "The crossed-out APY is the interest paid out in the deposited asset and automatically compounded. The gold APY includes additional bonus tokens that are not compounded and can be claimed manually.",
+    "interestCompoundApr": "APR is the annual interest rate received on a deposit. To earn the higher APY, compound your interest daily."
   }
 }
