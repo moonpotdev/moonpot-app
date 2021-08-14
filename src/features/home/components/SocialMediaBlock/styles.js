@@ -33,7 +33,7 @@ const styles = theme => ({
     width: '100%',
     fontSize: '15px',
     lineHeight: '17px',
-    fontWeight: '600',
+    fontWeight: '500',
     color: '#6753DB',
     marginTop: '24px',
     textTransform: 'none',
