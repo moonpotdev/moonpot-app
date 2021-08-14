@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 import { useStyles } from './styles';
 import clsx from 'clsx';
 import { Collapse, Typography } from '@material-ui/core';
@@ -20,18 +20,22 @@ export function Cards({ className, children, ...rest }) {
   );
 }
 
-export function Card({ variant = 'tealLight', className, children, ...rest }) {
+export const Card = forwardRef(function (
+  { variant = 'tealLight', className, children, ...rest },
+  ref
+) {
   const classes = useStyles();
 
   return (
     <div
       className={clsx(classes.card, variantClass(classes, 'variant', variant), className)}
+      ref={ref}
       {...rest}
     >
       {children}
     </div>
   );
-}
+});
 
 export function CardTitle({ className, children, ...rest }) {
   const classes = useStyles();

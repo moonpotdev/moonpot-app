@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { BigNumber } from 'bignumber.js';
+import BigNumber from 'bignumber.js';
+import { useSelector } from 'react-redux';
+import { byDecimals } from './format';
 
 export function useLocalStorage(key, initialValue) {
   const [storedValue, setStoredValue] = useState(() => {
@@ -35,4 +37,42 @@ export function useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd) {
       maximumFractionDigits: dp,
     });
   }, [awardBalanceUsd, totalSponsorBalanceUsd]);
+}
+
+export function useTokenBalance(token, tokenDecimals) {
+  const balance = useSelector(state => state.balanceReducer.tokens[token]?.balance || 0);
+
+  return useMemo(() => {
+    const bn = new BigNumber(balance);
+
+    return byDecimals(bn, tokenDecimals);
+  }, [balance, tokenDecimals]);
+}
+
+export function useTokenAllowance(address, token, tokenDecimals) {
+  const allowance = useSelector(
+    state => state.balanceReducer.tokens[token]?.allowance[address] || 0
+  );
+
+  return useMemo(() => {
+    const bn = new BigNumber(allowance);
+
+    return byDecimals(bn, tokenDecimals);
+  }, [allowance, tokenDecimals]);
+}
+
+export function useTokenEarned(id, token, tokenDecimals) {
+  const earned = useSelector(state => state.earnedReducer.earned[id]?.[token] || 0);
+
+  return useMemo(() => {
+    const bn = new BigNumber(earned);
+
+    return byDecimals(bn, tokenDecimals);
+  }, [earned, tokenDecimals]);
+}
+
+export function usePot(id) {
+  // TODO: replace state instead of update existing objects so we don't have to do this
+  const pots = useSelector(state => state.vaultReducer.pools);
+  return id in pots ? pots[id] : null;
 }

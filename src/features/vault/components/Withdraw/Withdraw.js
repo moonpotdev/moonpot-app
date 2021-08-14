@@ -1,4 +1,4 @@
-import { Grid, Box, Button, InputBase, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Box, Button, Grid, InputBase, makeStyles, Paper, Typography } from '@material-ui/core';
 import { Trans, useTranslation } from 'react-i18next';
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +17,7 @@ import PrizePoolAbi from '../../../../config/abi/prizepool.json';
 
 const useStyles = makeStyles(styles);
 
+// Only used on "My Pots" currently; see PotWithdraw
 const Withdraw = ({
   item,
   handleWalletConnect,
@@ -107,7 +108,7 @@ const Withdraw = ({
 
   React.useEffect(() => {
     const getData = async () => {
-      if (wallet.address && balance.tokens[item.rewardToken].balance > 0) {
+      if (false && wallet.address && balance.tokens[item.rewardToken].balance > 0) {
         const prizePoolContract = new wallet.rpc[item.network].eth.Contract(
           PrizePoolAbi,
           item.prizePoolAddress
@@ -330,7 +331,7 @@ const Withdraw = ({
                   className={classes.connectWalletBtn}
                   variant={'contained'}
                 >
-                  {t('buttons.connectWallet')}
+                  {t('wallet.connect')}
                 </Button>
               )}
               <Steps item={item} steps={steps} handleClose={handleClose} />

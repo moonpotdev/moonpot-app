@@ -1,7 +1,6 @@
 import { withStyles } from '@material-ui/core';
 import { BaseButton } from './BaseButton';
-
-const styledBy = (property, mapping) => props => mapping[props[property]];
+import { styledBy } from '../../helpers/utils';
 
 export const SecondaryButton = withStyles({
   root: {

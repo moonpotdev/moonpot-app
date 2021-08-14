@@ -1,3 +1,4 @@
+// A lot of styles in here are used by other components; careful what you remove
 const styles = theme => ({
   mainTitle: {
     fontWeight: '500',
@@ -5,8 +6,8 @@ const styles = theme => ({
     lineHeight: '40px',
     textAlign: 'center',
     color: '#B4B3CC',
-    marginBottom: '48px',
-    width: '400px',
+    marginBottom: '12px',
+    width: '372px',
     maxWidth: '100%',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -16,6 +17,12 @@ const styles = theme => ({
         color: '#FFFFFF',
       },
     },
+  },
+  poweredBy: {
+    marginBottom: '32px',
+  },
+  infoCards: {
+    marginTop: '24px',
   },
   vaultPotItem: {
     backgroundColor: '#345675',
@@ -343,24 +350,6 @@ const styles = theme => ({
     textAlign: 'center',
     '& span': {
       textDecoration: 'underline',
-    },
-  },
-  beefy: {
-    fontWeight: 500,
-    fontSize: '12px',
-    lineHeight: '14px',
-    color: '#ffffff',
-    letterSpacing: '0.34px',
-    textAlign: 'center',
-    marginTop: '16px',
-    marginBottom: '56px',
-    '& .MuiLink-root': {
-      color: '#ffffff',
-      textDecoration: 'underline',
-    },
-    '& img': {
-      marginBottom: '-5px',
-      marginLeft: '3px',
     },
   },
   infoContainer: {
