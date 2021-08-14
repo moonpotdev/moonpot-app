@@ -108,7 +108,7 @@ const Withdraw = ({
 
   React.useEffect(() => {
     const getData = async () => {
-      if (false && wallet.address && balance.tokens[item.rewardToken].balance > 0) {
+      if (wallet.address && balance.tokens[item.rewardToken].balance > 0) {
         const prizePoolContract = new wallet.rpc[item.network].eth.Contract(
           PrizePoolAbi,
           item.prizePoolAddress
