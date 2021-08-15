@@ -1,5 +1,3 @@
-import { makeStyles } from '@material-ui/core';
-
 const styles = () => ({
   cards: {
     '& > $card + $card': {
