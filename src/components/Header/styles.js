@@ -1,5 +1,5 @@
 export const HEADER_FULL_LOGO_WIDTH = 472;
-export const HEADER_FULL_NAV_WIDTH = 1024;
+export const HEADER_FULL_NAV_WIDTH = 1030;
 
 export const styles = () => ({
   bar: {

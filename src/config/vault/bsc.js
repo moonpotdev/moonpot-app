@@ -113,7 +113,7 @@ export const pools = [
         sponsorTokenDecimals: 18,
       },
     ],
-    sponsorToken: 'DODO',
+    sponsorToken: 'POTS',
     bonusRewardId: 0,
     bonusToken: 'DODO',
     bonusAddress: '0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2',

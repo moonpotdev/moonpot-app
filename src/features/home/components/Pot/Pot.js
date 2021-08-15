@@ -28,7 +28,7 @@ function useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd) {
   }, [awardBalanceUsd, totalSponsorBalanceUsd]);
 }
 
-const PotLogo = memo(function ({ name, baseToken, sponsorToken }) {
+export const PotLogo = memo(function ({ name, baseToken, sponsorToken }) {
   const src = require('../../../../images/vault/' +
     baseToken.toLowerCase() +
     '/sponsored/' +
@@ -37,7 +37,7 @@ const PotLogo = memo(function ({ name, baseToken, sponsorToken }) {
   return <img src={src} alt={`${name} Pot`} width="90" height="90" />;
 });
 
-const PotTitle = memo(function ({ name }) {
+export const PotTitle = memo(function ({ name }) {
   const classes = useStyles();
   return (
     <div className={classes.title}>

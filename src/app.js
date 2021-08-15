@@ -12,6 +12,7 @@ import Footer from './components/footer';
 const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
 const Dashboard = React.lazy(() => import(`./features/dashboard`));
+const Winners = React.lazy(() => import(`./features/winners`));
 const Dao = React.lazy(() => import(`./features/dao`));
 
 function Pages() {
@@ -26,6 +27,9 @@ function Pages() {
         </Route>
         <Route strict sensitive exact path="/my-moonpots/:status?">
           <Dashboard />
+        </Route>
+        <Route strict sensitive exact path="/winners">
+          <Winners />
         </Route>
         <Route strict sensitive exact path="/ido">
           <Dao />
