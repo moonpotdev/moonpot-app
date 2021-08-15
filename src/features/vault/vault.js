@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router';
+import { Redirect, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
@@ -42,14 +42,13 @@ const VaultTitle = memo(function ({
   );
 });
 
-function is404(pot) {
+function isInvalidPot(pot) {
   return !pot || pot.status !== 'active';
 }
 
 const Vault = () => {
   const { id } = useParams();
   const classes = useStyles();
-  const history = useHistory();
   const dispatch = useDispatch();
   const address = useSelector(state => state.walletReducer.address);
   const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
@@ -61,12 +60,6 @@ const Vault = () => {
       window.scrollTo(0, fairplayRef.current.offsetTop);
     }
   }, [fairplayRef]);
-
-  useEffect(() => {
-    if (is404(pot)) {
-      history.push('/');
-    }
-  }, [history, pot]);
 
   useEffect(() => {
     if (pot && pricesLastUpdated > 0) {
@@ -81,9 +74,8 @@ const Vault = () => {
     }
   }, [dispatch, pot, address]);
 
-  if (is404(pot)) {
-    // Should have redirected above
-    return null;
+  if (isInvalidPot(pot)) {
+    return <Redirect to="/" />;
   }
 
   return (
