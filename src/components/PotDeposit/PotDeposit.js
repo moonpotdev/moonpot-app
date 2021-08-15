@@ -128,8 +128,6 @@ export const PotDeposit = function ({ id, onLearnMore }) {
     setCanDeposit(address && balance.gt(0) && value.gt(0));
   }, [inputValue, address, balance]);
 
-  // TODO: fairplay note
-
   return (
     <>
       <div className={classes.inputHolder}>
