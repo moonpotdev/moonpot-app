@@ -1,40 +1,36 @@
 const styles = theme => ({
-  ziggyTimelock: {
-    paddingBottom: '20px',
+  strategy: {
+    '& p:last-child': {
+      marginBottom: '0',
+    },
   },
-  infoTitle: {
-    color: '#FAFAFC',
-    fontWeight: 500,
-    fontSize: '16px',
-    lineHeight: '20px',
-    letterSpacing: '0.6px',
-    marginBottom: '16px',
+  link: {
+    color: '#F3BA2E',
+    textDecoration: 'none',
+    '& .MuiSvgIcon-root': {
+      verticalAlign: 'middle',
+    },
   },
-  infoSubHeader: {
-    color: '#EBF3F9',
-    fontWeight: 700,
+  earningItem: {
+    '& + $earningItem': {
+      marginTop: '16px',
+    },
+  },
+  earningLabel: {
     fontSize: '10px',
-    lineHeight: '16px',
+    fontWeight: 'bold',
+    lineHeight: '20px',
     letterSpacing: '1px',
     textTransform: 'uppercase',
   },
-  infoMessage: {
-    color: '#D9D9E8',
-    fontWeight: 400,
-    fontSize: '12px',
-    lineHeight: '16px',
-    letterSpacing: '0.2px',
-  },
-  infoDetail: {
-    color: '#FAFAFC',
-    fontWeight: 700,
+  earningValue: {
+    fontWeight: 'bold',
     fontSize: '15px',
     lineHeight: '24px',
-    paddingTop: '5px',
-    paddingBottom: '20px',
-    '& span': {
-      textDecoration: 'line-through',
-    },
+    color: '#FAFAFC',
+  },
+  ziggyTimelock: {
+    marginBottom: '21px',
   },
   ziggyPlay: {
     marginTop: '32px',
