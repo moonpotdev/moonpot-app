@@ -134,4 +134,3 @@ const styles = () => ({
 });
 
 export default styles;
-export const useStyles = makeStyles(styles);

@@ -1,9 +1,11 @@
 import React, { forwardRef, useCallback, useState } from 'react';
-import { useStyles } from './styles';
 import clsx from 'clsx';
-import { Collapse, Typography } from '@material-ui/core';
+import { Collapse, makeStyles, Typography } from '@material-ui/core';
 import { Trans } from 'react-i18next';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import styles from './styles';
+
+const useStyles = makeStyles(styles);
 
 function variantClass(classes, prefix, variant) {
   const key = prefix + variant[0].toUpperCase() + variant.substr(1);
