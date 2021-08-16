@@ -1,0 +1,11 @@
+/node_modules
+/.vscode
+/.husky
+/.idea
+/build
+/dist
+/coverage
+*.log
+*.tgz
+.envrc
+.nyc_output

@@ -1,4 +1,4 @@
-const styles = (theme) => ({
+const styles = theme => ({
   h1: {
     fontSize: '22px',
     lineHeight: '34px',
@@ -104,12 +104,10 @@ const styles = (theme) => ({
     boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2), 0px 12px 24px -10px rgba(0, 0, 0, 0.4)',
     border: '2px solid #70609A',
     '& .MuiDivider-root': {
-
       color: '#70609A',
       backgroundColor: '#70609A',
       height: '2px',
     },
-
   },
   potImage: {
     width: '100%',
@@ -271,8 +269,8 @@ const styles = (theme) => ({
     '&.Mui-disabled': {
       backgroundColor: '#CCCCCC',
       color: '#888888',
-      borderColor: '#CCCCCC'
-    }
+      borderColor: '#CCCCCC',
+    },
   },
   eolMoveBtn: {
     margin: '16px 0 8px 0',
@@ -383,8 +381,8 @@ const styles = (theme) => ({
     '&.Mui-disabled': {
       backgroundColor: '#CCCCCC',
       color: '#888888',
-      borderColor: '#CCCCCC'
-    }
+      borderColor: '#CCCCCC',
+    },
   },
   bonusEarningsInner: {
     paddingBottom: '16px',
@@ -406,8 +404,8 @@ const styles = (theme) => ({
     marginBottom: '16px',
     '& $actionBtn:first-child': {
       marginTop: 0,
-    }
-  }
+    },
+  },
 });
 
 export default styles;

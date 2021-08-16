@@ -1,7 +1,6 @@
 {
   "buttons": {
     "connectWallet": "Connect Wallet",
-    "moonpots": "Moonpots",
     "ziggyMoonpotGuide": "Ziggy's Guide to Moonpot",
     "moonpotAlpha": "Moonpot Alpha Articles",
     "moonpotStats": "Moonpot Stats",
@@ -9,7 +8,6 @@
     "withdraw": "Withdraw",
     "depositMore": "Deposit More",
     "mobilePotsNav": "Pots",
-    "myPots": "My Pots",
     "myActivePots": "My Active Pots",
     "myPastPots": "My Past Pots",
     "playInMorePots": "Play in More Pots",
@@ -17,9 +15,7 @@
     "communityPots": "Community Pots",
     "play": "Play",
     "playWith": "Play with {{token}}",
-    "docs": "Docs",
     "learnMore": "Learn More",
-    "ido": "IDO",
     "more": "More",
     "compoundToken": "Compound {{token}}",
     "withdrawBonusTokens": "Withdraw Bonus {{tokens}}"
@@ -33,7 +29,16 @@
     "manuallySetNetwork": "Please manually set your network to BSC",
     "close": "close"
   },
-  "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br /> and a chance to win <span>${{amount}}</span>",
+  "header": {
+    "moonpots": "Moonpots",
+    "myPots": "My Pots",
+    "docs": "Docs",
+    "vote": "Vote",
+    "potsPrice": "POTS Price",
+    "buyPots": "Buy POTS"
+  },
+  "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br />and a chance to win <span>${{amount}}</span>",
+  "homeTotalDeposits": "Total Deposits (TVL)",
   "homeJoinCommunityTitle": "Join the Community",
   "homeJoinCommunityBody": "There are no community pots yet. You can suggest a new pot in one of our channels, or join our devs to build one for your favorite project.",
   "migrationNoticeTitle": "Please move your {{asset}} to the new upgraded {{pot}} Moonpot.",
@@ -46,7 +51,9 @@
   "DashboardEmpty2": "Ziggy will let you know as soon as you do.",
   "DashboardTitle": "You're in {{count}} <span>Moonpot</span>, with<br /> the chance to win <span>${{amount}}</span>",
   "playWithMoonpot": "Play with Moonpot",
+  "connectWallet": "Connect Wallet",
   "youHaventEnteredMoonpots": "You haven't entered any Moonpots yet.",
+  "connectToJoin": "Connect your wallet to join a Moonpot.",
   "win": "Win",
   "value": "value of",
   "prize": "Prize Draw",
@@ -109,5 +116,34 @@
   "twitterSocialBlockBody": "Get the latest updates and take part in social media giveaways",
   "telegramSocialBlockButton": "Join our Telegram",
   "discordSocialBlockButton": "Join our Discord",
-  "twitterSocialBlockButton": "Follow our Twitter"
+  "twitterSocialBlockButton": "Follow our Twitter",
+  "list": {
+    "one": "<span>{{item}}</span>",
+    "two": "<span>{{first}}</span> & <span>{{last}}</span>",
+    "start": "<span>{{item}}</span>",
+    "join": ", <span>{{item}}</span>",
+    "end": " & <span>{{item}}</span>"
+  },
+  "pot": {
+    "title": "{{name}} Pot",
+    "winTotalPrize": "Win <span>{{prize}}</span>",
+    "winTotalTokensIn": "in ",
+    "statNextDraw": "Next Draw",
+    "statNextDrawCountdownFinished": "Awaiting draw...",
+    "statInterest": "Interest",
+    "statInterestApy": "{{apy}}% APY",
+    "statInterestApr": "{{apr}}% APR",
+    "statTVL": "TVL",
+    "statDeposit": "Your Deposit",
+    "prizeSplit": "Prize Split",
+    "prizeSplitWinner": "{{count}} winner",
+    "prizeSplitWinner_plural": "{{count}} winners",
+    "playWith": "Play with {{token}}",
+    "playWithMore": "Play with more {{token}}",
+    "oddsPerDeposit": "1 in {{odds}} odds per {{deposit}} deposit"
+  },
+  "tooltip": {
+    "interestBonusApy": "The crossed-out APY is the interest paid out in the deposited asset and automatically compounded. The gold APY includes additional bonus tokens that are not compounded and can be claimed manually.",
+    "interestCompoundApr": "APR is the annual interest rate received on a deposit. To earn the higher APY, compound your interest daily."
+  }
 }

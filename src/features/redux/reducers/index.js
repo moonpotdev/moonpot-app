@@ -15,4 +15,4 @@ const rootReducer = combineReducers({
     modalReducer,
 })
 
-export default rootReducer
+export default rootReducer;

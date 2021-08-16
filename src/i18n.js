@@ -15,19 +15,19 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-      fallbackLng: 'en',
-      resources: {
-          en: { translation: translationEN },
-          fr: { translation: translationFR },
-      },
-      interpolation: {
-          escapeValue: false, // not needed for react as it escapes by default
-      },
-      react: {
-          transSupportBasicHtmlNodes: true,
-          transKeepBasicHtmlNodesFor: ['br', 'strong', 'span'],
-          useSuspense: true,
-      },
+    fallbackLng: 'en',
+    resources: {
+      en: { translation: translationEN },
+      fr: { translation: translationFR },
+    },
+    interpolation: {
+      escapeValue: false, // not needed for react as it escapes by default
+    },
+    react: {
+      transSupportBasicHtmlNodes: true,
+      transKeepBasicHtmlNodesFor: ['br', 'strong', 'span'],
+      useSuspense: true,
+    },
   });
 
 export default i18n;
