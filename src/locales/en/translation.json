@@ -24,6 +24,15 @@
     "compoundToken": "Compound {{token}}",
     "withdrawBonusTokens": "Withdraw Bonus {{tokens}}"
   },
+  "modals": {
+    "unsupportedNetworkDetected": "Unsupported Network Detected",
+    "switchToBSCNetwork": "Please switch to BSC network",
+    "switchToBSC": "Switch to BSC",
+    "cancel": "Cancel",
+    "unableToAutoSwitch": "Unable to automatically switch chains",
+    "manuallySetNetwork": "Please manually set your network to BSC",
+    "close": "close"
+  },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><br /> and a chance to win <span>${{amount}}</span>",
   "homeJoinCommunityTitle": "Join the Community",
   "homeJoinCommunityBody": "There are no community pots yet. You can suggest a new pot in one of our channels, or join our devs to build one for your favorite project.",

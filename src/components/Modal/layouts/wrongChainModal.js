@@ -1,13 +1,22 @@
-import {Card, Cards, CardTitle} from '../../Cards/Cards';
-import {ButtonWhitePurpleDark} from '../../Buttons/ButtonWhitePurpleDark';
-import {Typography} from '@material-ui/core';
+import React from 'react';
+import {Card, CardTitle} from '../../Cards/Cards';
+import {ButtonPurpleWhite} from '../../Buttons/ButtonPurpleWhite';
+import { BaseButton } from '../../Buttons/BaseButton';
+import {Typography, makeStyles} from '@material-ui/core';
 import reduxActions from '../../../features/redux/actions';
 import {useDispatch} from 'react-redux';
 import {networkSetup} from '../../../config/config';
+import {useTranslation} from 'react-i18next';
+import styles from "./styles"
+
+
+const useStyles = makeStyles(styles);
 
 const WrongChainModal = () => {
 
     const dispatch = useDispatch();
+    const { t } = useTranslation();
+    const classes = useStyles();
 
     function closeModal() {
         dispatch(reduxActions.modal.hideModal());
@@ -23,14 +32,15 @@ const WrongChainModal = () => {
     }
 
     return (
-        <Cards>
-			<Card variant="purpleDark" style={{marginTop: '100px'}}>
-			    <CardTitle align="center" variant="purpleDark">Unsupported Network Selected</CardTitle>
-			    <Typography align="center">Please set your network to BSC</Typography>
-                <ButtonWhitePurpleDark onClick={ () => switchToNetwork('bsc')} style={{margin: '24px auto 0 auto', width: '90%'}}>Switch to BSC network</ButtonWhitePurpleDark>
-                <ButtonWhitePurpleDark onClick={ () => closeModal()} style={{margin: '24px auto 0 auto', padding: '4px 12px'}}>Dismiss</ButtonWhitePurpleDark>
-			</Card>
-		</Cards>  
+      <React.Fragment>
+        <Card className={classes.card}>
+			    <CardTitle className={classes.title}>{t('modals.unsupportedNetworkDetected')}</CardTitle>
+			    <Typography className={classes.text}>{t('modals.switchToBSCNetwork')}</Typography>
+          <ButtonPurpleWhite onClick={ () => switchToNetwork('bsc')} className={classes.switchButton}>{t('modals.switchToBSC')}</ButtonPurpleWhite>
+			  </Card>
+        <BaseButton onClick={ () => closeModal()} className={classes.dismissButton}>{t('modals.cancel')}</BaseButton>
+      </React.Fragment>
+			  
     )
 }
 
