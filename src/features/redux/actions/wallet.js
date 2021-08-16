@@ -1,13 +1,13 @@
 import { config } from '../../../config/config';
 import {
-    WALLET_ACTION,
-    WALLET_ACTION_RESET,
-    WALLET_CONNECT_BEGIN,
-    WALLET_CONNECT_DONE,
-    WALLET_CREATE_MODAL,
-} from "../constants";
-import WalletConnectProvider from "@walletconnect/web3-provider";
-import Web3Modal, {connectors} from "web3modal";
+  WALLET_ACTION,
+  WALLET_ACTION_RESET,
+  WALLET_CONNECT_BEGIN,
+  WALLET_CONNECT_DONE,
+  WALLET_CREATE_MODAL,
+} from '../constants';
+import WalletConnectProvider from '@walletconnect/web3-provider';
+import Web3Modal, { connectors } from 'web3modal';
 import reduxActions from '../actions';
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
@@ -106,77 +106,51 @@ const connect = () => {
         }
       });
     };
-        
-        const subscribeProvider = (provider, web3) => {
-            if (!provider.on) {
-                return;
-            }
-            provider.on('close', async () => {
-                await close();
-            });
-            provider.on('disconnect', async () => {
-                await close();
-            });
-            provider.on('accountsChanged', async (accounts) => {
-                return accounts[0] !== undefined ?
-                    dispatch({type: WALLET_CONNECT_DONE, payload: {address: accounts[0]}}) : await close();
-            });
-            provider.on('chainChanged', async (chainId) => {
-                console.log('chainChanged');
-                const networkId = web3.utils.isHex(chainId) ? web3.utils.hexToNumber(chainId) : chainId;
-                if(checkNetworkSupport(networkId)) {
-                    const net = getNetworkAbbr(networkId);
-                    dispatch(setNetwork(net));
-                } else {
-                    await close();
-                    console.log('show nice modal: Wallet network not supported: ' + networkId);
-                }
-            });
-        };
+    try {
+      const provider = await state.walletReducer.web3modal.connect();
+      const web3 = await new Web3(provider);
+      web3.eth.extend({
+        methods: [
+          {
+            name: 'chainId',
+            call: 'eth_chainId',
+            outputFormatter: web3.utils.hexToNumber,
+          },
+        ],
+      });
 
-        try {
-            const provider = await state.walletReducer.web3modal.connect();
-            const web3 = await new Web3(provider);
-            web3.eth.extend({
-                methods: [
-                    {
-                        name: 'chainId',
-                        call: 'eth_chainId',
-                        outputFormatter: web3.utils.hexToNumber,
-                    },
-                ],
-            });
+      subscribeProvider(provider, web3);
 
-            subscribeProvider(provider, web3);
+      let networkId = await web3.eth.getChainId();
+      if (networkId === 86) {
+        // Trust provider returns an incorrect chainId for BSC.
+        networkId = 56;
+      }
 
-            let networkId = await web3.eth.getChainId();
-            if (networkId === 86) {
-                // Trust provider returns an incorrect chainId for BSC.
-                networkId = 56;
-            }
-
-            if(networkId === config[state.walletReducer.network].chainId) {
-                const accounts = await web3.eth.getAccounts();
-                //dispatch({type: WALLET_RPC, payload: {rpc: web3}}); => TODO: set same rpc as connected wallet to rpc[network] for consistency
-                dispatch({type: WALLET_CONNECT_DONE, payload: {address: accounts[0]}});
-            } else {
-                await close();
-                if(checkNetworkSupport(networkId) && provider) {
-                    await provider.request({method: 'wallet_addEthereumChain', params: [config[state.walletReducer.network].walletSettings]});
-                    dispatch(connect())
-                } else {
-                    //show error to user for unsupported network
-                    dispatch(reduxActions.modal.showModal('WRONG_CHAIN_MODAL'));
-                    //alert('show nice modal: Wallet network not supported: ' + networkId);
-                    throw Error('Network not supported, check chainId.');
-                }
-            }
-        } catch(err) {
-            console.log('connect error', err);
-            // todo: show modal error to user
-            dispatch({type: WALLET_CONNECT_DONE, payload: {address: null}});
-
+      if (networkId === config[state.walletReducer.network].chainId) {
+        const accounts = await web3.eth.getAccounts();
+        //dispatch({type: WALLET_RPC, payload: {rpc: web3}}); => TODO: set same rpc as connected wallet to rpc[network] for consistency
+        dispatch({ type: WALLET_CONNECT_DONE, payload: { address: accounts[0] } });
+      } else {
+        await close();
+        if (checkNetworkSupport(networkId) && provider) {
+          await provider.request({
+            method: 'wallet_addEthereumChain',
+            params: [config[state.walletReducer.network].walletSettings],
+          });
+          dispatch(connect());
+        } else {
+          //show error to user for unsupported network
+          dispatch(reduxActions.modal.showModal('WRONG_CHAIN_MODAL'));
+          //alert('show nice modal: Wallet network not supported: ' + networkId);
+          throw Error('Network not supported, check chainId.');
         }
+      }
+    } catch (err) {
+      console.log('connect error', err);
+      // todo: show modal error to user
+      dispatch({ type: WALLET_CONNECT_DONE, payload: { address: null } });
+    }
   };
 };
 
