@@ -25,7 +25,7 @@ i18n
     },
     react: {
       transSupportBasicHtmlNodes: true,
-      transKeepBasicHtmlNodesFor: ['br', 'strong', 'span'],
+      transKeepBasicHtmlNodesFor: ['br', 'strong', 'span', 'wbr'],
       useSuspense: true,
     },
   });

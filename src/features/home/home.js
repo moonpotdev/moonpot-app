@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { Box, Container, Grid, Link, makeStyles, Typography } from '@material-ui/core';
+import { Box, Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import Filter from './components/Filter';
 import { Trans } from 'react-i18next';
@@ -10,8 +10,8 @@ import ZiggyMaintenance from '../../images/ziggy/maintenance.svg';
 import SocialMediaBlock from './components/SocialMediaBlock/SocialMediaBlock';
 import { useFilterConfig, useFilteredPots } from './hooks/filter';
 import { Pot } from './components/Pot/Pot';
-import BeefyCow from '../../images/beefy.svg';
 import { TVL } from './components/TVL/TVL';
+import { PoweredByBeefy } from '../../components/PoweredByBeefy';
 
 const useStyles = makeStyles(styles);
 
@@ -80,31 +80,7 @@ const Home = () => {
           </Grid>
         </Grid>
       ) : null}
-      <Box className={classes.poweredBy}>
-        <div className={classes.poweredByItem}>
-          <Trans i18nKey="footerPoweredBy" />
-        </div>
-        <div className={classes.poweredByItem}>
-          <Link
-            href={'https://www.beefy.finance'}
-            target="_blank"
-            rel="noreferrer"
-            className={classes.beefyLink}
-          >
-            Beefy.Finance
-          </Link>
-        </div>
-        <div className={classes.poweredByItem}>
-          <img
-            alt=""
-            aria-hidden={true}
-            src={BeefyCow}
-            width={20}
-            height={15.2}
-            className={classes.beefyLogo}
-          />
-        </div>
-      </Box>
+      <PoweredByBeefy className={classes.poweredBy} />
     </Container>
   );
 };

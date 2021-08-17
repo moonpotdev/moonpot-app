@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(styles);
 
+// Only used on "My Pots" currently; see PotDeposit
 const Deposit = ({
   formData,
   setFormData,
@@ -183,7 +184,7 @@ const Deposit = ({
           className={classes.connectWalletBtn}
           variant={'contained'}
         >
-          {t('buttons.connectWallet')}
+          {t('wallet.connect')}
         </Button>
       )}
       <Steps item={item} steps={steps} handleClose={handleClose} />

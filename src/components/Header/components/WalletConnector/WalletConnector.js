@@ -43,13 +43,7 @@ const WalletConnector = ({ variant, onConnect, onDisconnect, className, ...rest 
 
   return (
     <Button className={buttonClasses} onClick={handleWalletConnect} {...rest}>
-      {pending ? (
-        <Loader line={true} />
-      ) : address ? (
-        formatAddress(address)
-      ) : (
-        t('buttons.connectWallet')
-      )}
+      {pending ? <Loader line={true} /> : address ? formatAddress(address) : t('wallet.connect')}
     </Button>
   );
 };
