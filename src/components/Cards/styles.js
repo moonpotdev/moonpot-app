@@ -1,5 +1,3 @@
-import { makeStyles } from '@material-ui/core';
-
 const styles = () => ({
   cards: {
     '& > $card + $card': {
@@ -25,12 +23,12 @@ const styles = () => ({
     marginBottom: 24,
   },
   accordionGroup: {
-    borderTop: 'solid 2px red',
-    paddingTop: '16px',
-  },
-  accordionItem: {
     borderBottom: 'solid 2px red',
     paddingBottom: '16px',
+  },
+  accordionItem: {
+    borderTop: 'solid 2px red',
+    paddingTop: '16px',
   },
   accordionItemTitle: {
     fontStyle: 'normal',
@@ -52,6 +50,8 @@ const styles = () => ({
   },
   accordionItemToggle: {
     cursor: 'pointer',
+    userSelect: 'none',
+    WebkitTapHighlightColor: 'transparent',
     '& > .MuiSvgIcon-root': {
       fontSize: '20px',
     },
@@ -88,6 +88,18 @@ const styles = () => ({
     '& $title': {
       color: '#EBF3F9',
     },
+    '& $accordionGroup': {
+      borderBottomColor: '#436F97',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#436F97',
+    },
+    '& $accordionItemTitle': {
+      color: '#EBF3F9',
+    },
+    '& $accordionItemInner': {
+      color: '#EBF3F9',
+    },
   },
   variantTealLight: {
     color: '#EBF3F9',
@@ -97,16 +109,16 @@ const styles = () => ({
       color: '#EBF3F9',
     },
     '& $accordionGroup': {
+      borderBottomColor: '#5989B5',
+    },
+    '& $accordionItem': {
       borderTopColor: '#5989B5',
-      '& $accordionItem': {
-        borderBottomColor: '#5989B5',
-      },
-      '& $accordionItemTitle': {
-        color: '#EBF3F9',
-      },
-      '& $accordionItemInner': {
-        color: '#EBF3F9',
-      },
+    },
+    '& $accordionItemTitle': {
+      color: '#EBF3F9',
+    },
+    '& $accordionItemInner': {
+      color: '#EBF3F9',
     },
   },
   variantWhite: {
@@ -120,4 +132,3 @@ const styles = () => ({
 });
 
 export default styles;
-export const useStyles = makeStyles(styles);

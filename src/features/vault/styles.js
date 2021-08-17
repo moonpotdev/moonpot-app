@@ -1,21 +1,34 @@
+// A lot of styles in here are used by other components; careful what you remove
 const styles = theme => ({
-  title: {
-    fontSize: '22px',
-    lineHeight: '34px',
-    fontWeight: 500,
-    color: '#ffffff',
-    padding: '30px 0',
+  mainTitle: {
+    fontWeight: '500',
+    fontSize: '24px',
+    lineHeight: '40px',
     textAlign: 'center',
+    color: '#B4B3CC',
+    marginBottom: '12px',
+    width: '372px',
+    maxWidth: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     '& span': {
       color: '#F3BA2E',
+      '&:last-of-type': {
+        color: '#FFFFFF',
+      },
     },
+  },
+  poweredBy: {
+    marginBottom: '32px',
+  },
+  infoCards: {
+    marginTop: '24px',
   },
   vaultPotItem: {
     backgroundColor: '#345675',
     height: '100%',
     width: 'min(100%, 500px)',
-    margin: '80px auto 0px auto',
-    marginTop: '56px',
+    margin: '0 auto',
     borderRadius: '16px',
     padding: '24px',
     marginBottom: '4px',
@@ -337,24 +350,6 @@ const styles = theme => ({
     textAlign: 'center',
     '& span': {
       textDecoration: 'underline',
-    },
-  },
-  beefy: {
-    fontWeight: 500,
-    fontSize: '12px',
-    lineHeight: '14px',
-    color: '#ffffff',
-    letterSpacing: '0.34px',
-    textAlign: 'center',
-    marginTop: '16px',
-    marginBottom: '56px',
-    '& .MuiLink-root': {
-      color: '#ffffff',
-      textDecoration: 'underline',
-    },
-    '& img': {
-      marginBottom: '-5px',
-      marginLeft: '3px',
     },
   },
   infoContainer: {

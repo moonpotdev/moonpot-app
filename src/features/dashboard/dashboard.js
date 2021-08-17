@@ -348,7 +348,7 @@ const Dashboard = () => {
                 </Grid>
                 <Grid item xs={8}>
                   <Typography className={classes.noActivePotsTitle}>
-                    {wallet.address ? t('playWithMoonpot') : t('connectWallet')}
+                    {wallet.address ? t('playWithMoonpot') : t('wallet.connect')}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -371,7 +371,7 @@ const Dashboard = () => {
                       className={classes.noActivePotsPlayButton}
                       onClick={handleWalletConnect}
                     >
-                      {t('connectWallet')}
+                      {t('wallet.connect')}
                     </Button>
                   )}
                 </Grid>
@@ -670,7 +670,7 @@ const Dashboard = () => {
                             setWithdrawOpen(!withdrawOpen);
                           }}
                         >
-                          {t('withdraw')}{' '}
+                          {t('pot.withdraw')}{' '}
                         </Typography>
                       </Grid>
                       <Grid item xs={3} align={'right'} style={{ paddingBottom: '0' }}>

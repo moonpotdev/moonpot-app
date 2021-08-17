@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { memo, Suspense, useEffect } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import appTheme from './appTheme.js';
@@ -8,6 +8,7 @@ import { RouteLoading } from './components/RouteLoading';
 import { PageNotFound } from './PageNotFound';
 import { Header } from './components/Header';
 import Footer from './components/footer';
+import { useLocation } from 'react-router';
 
 const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
@@ -42,6 +43,16 @@ function Pages() {
   );
 }
 
+const ScrollToTop = memo(function () {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+});
+
 export default function App() {
   const dispatch = useDispatch();
   const theme = appTheme();
@@ -58,6 +69,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <HashRouter>
+        <ScrollToTop />
         <Header />
         <Pages />
         <Footer />

@@ -6,6 +6,10 @@ const styles = theme => ({
     textAlign: 'center',
     color: '#B4B3CC',
     marginBottom: '24px',
+    width: '368px',
+    maxWidth: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     '& span': {
       color: '#F3BA2E',
       '&:last-of-type': {
@@ -69,30 +73,6 @@ const styles = theme => ({
   },
   poweredBy: {
     paddingTop: '12px',
-    fontWeight: 300,
-    fontSize: '12px',
-    lineHeight: '20px',
-    letterSpacing: '0.01em',
-    color: '#ffffff',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-  },
-  poweredByItem: {
-    paddingLeft: '0.12em',
-    paddingRight: '0.12em',
-  },
-  beefyLink: {
-    color: '#FFFFFF',
-    textDecoration: 'underline',
-    '&:hover, &focus': {
-      color: '#FFFFFF',
-    },
-  },
-  beefyLogo: {
-    verticalAlign: 'middle',
   },
 });
 
