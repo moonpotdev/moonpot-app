@@ -36,3 +36,7 @@ export const investmentOdds = (currentTvl, investment, winners) => {
 export function compound(r, n = 365, t = 1, c = 1) {
   return (1 + (r * c) / n) ** (n * t) - 1;
 }
+
+export function indexBy(arr, key) {
+  return Object.fromEntries(arr.map(item => [item[key], item]));
+}

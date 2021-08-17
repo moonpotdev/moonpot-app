@@ -1,5 +1,5 @@
 const styles = theme => ({
-  rowLogoWinTotal: {
+  rowLogoWonTotal: {
     marginBottom: `${24 - 8}px`,
   },
   title: {
@@ -10,7 +10,7 @@ const styles = theme => ({
     textAlign: 'right',
     letterSpacing: '0.6px',
   },
-  winTotalPrize: {
+  valueWon: {
     color: '#FFFFFF',
     fontWeight: 'bold',
     textAlign: 'right',

@@ -1,0 +1,26 @@
+[
+  {
+    "address": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "symbol": "POTS",
+    "oracleId": "POTS",
+    "decimals": 18
+  },
+  {
+    "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+    "symbol": "CAKE",
+    "oracleId": "Cake",
+    "decimals": 18
+  },
+  {
+    "address": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+    "symbol": "BIFI",
+    "oracleId": "BIFI",
+    "decimals": 18
+  },
+  {
+    "address": "0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2",
+    "symbol": "DODO",
+    "oracleId": "DODO",
+    "decimals": 18
+  }
+]

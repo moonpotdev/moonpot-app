@@ -2,13 +2,16 @@ import React from 'react';
 import { Cards } from '../../../../components/Cards/Cards';
 import { Total } from '../Total';
 import { Draw } from '../Draw';
+import { useSelector } from 'react-redux';
 
 export const Winners = function ({ results }) {
+  const sortedIds = useSelector(state => state.prizeDraws.sortedIds);
+
   return (
     <Cards>
-      <Total results={results} />
-      {results.map(result => (
-        <Draw id={result.id} result={result} />
+      <Total />
+      {sortedIds.map(id => (
+        <Draw key={id} id={id} />
       ))}
     </Cards>
   );

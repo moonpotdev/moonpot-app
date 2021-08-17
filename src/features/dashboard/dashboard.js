@@ -983,7 +983,10 @@ const Dashboard = () => {
                                 className={classes.potsItemText}
                                 style={{ marginBottom: 0 }}
                               >
-                                <Trans i18nKey="winners" />
+                                <Trans
+                                  i18nKey="pot.prizeSplitWinner"
+                                  values={{ count: item.numberOfWinners }}
+                                />
                               </Typography>
                             </Grid>
                             <Grid item xs={6} align={'right'}>

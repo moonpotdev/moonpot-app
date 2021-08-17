@@ -37,7 +37,7 @@ export const PotLogo = memo(function ({ name, baseToken, sponsorToken }) {
   return <img src={src} alt={`${name} Pot`} width="90" height="90" />;
 });
 
-export const PotTitle = memo(function ({ name }) {
+const PotTitle = memo(function ({ name }) {
   const classes = useStyles();
   return (
     <div className={classes.title}>
