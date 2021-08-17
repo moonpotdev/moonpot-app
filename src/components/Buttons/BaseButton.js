@@ -53,14 +53,14 @@ export const BaseButton = withStyles(theme => ({
       opacity: 1,
       animation: `$enter 550ms ${theme.transitions.easing.easeInOut}`,
     },
+    '&.Mui-disabled': {
+      backgroundColor: '#CCCCCC',
+      color: '#888888',
+      borderColor: '#CCCCCC',
+    },
   },
   label: {
     position: 'relative',
     zIndex: '1',
-  },
-  disabled: {
-    backgroundColor: '#CCCCCC',
-    color: '#888888',
-    borderColor: '#CCCCCC',
   },
 }))(VariantButton);

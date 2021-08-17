@@ -1,9 +1,11 @@
-import React, { useCallback, useState } from 'react';
-import { useStyles } from './styles';
+import React, { forwardRef, useCallback, useState } from 'react';
 import clsx from 'clsx';
-import { Collapse, Typography } from '@material-ui/core';
+import { Collapse, makeStyles, Typography } from '@material-ui/core';
 import { Trans } from 'react-i18next';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import styles from './styles';
+
+const useStyles = makeStyles(styles);
 
 function variantClass(classes, prefix, variant) {
   const key = prefix + variant[0].toUpperCase() + variant.substr(1);
@@ -20,18 +22,22 @@ export function Cards({ className, children, ...rest }) {
   );
 }
 
-export function Card({ variant = 'tealLight', className, children, ...rest }) {
+export const Card = forwardRef(function (
+  { variant = 'tealLight', className, children, ...rest },
+  ref
+) {
   const classes = useStyles();
 
   return (
     <div
       className={clsx(classes.card, variantClass(classes, 'variant', variant), className)}
+      ref={ref}
       {...rest}
     >
       {children}
     </div>
   );
-}
+});
 
 export function CardTitle({ className, children, ...rest }) {
   const classes = useStyles();

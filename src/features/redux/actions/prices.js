@@ -48,12 +48,6 @@ const fetchPrices = reducer => {
       const prices = await updatePrices(state.pricesReducer);
       const apy = await updateApy(state.pricesReducer);
 
-      // TODO remove once POTS in Beefy Prices API
-      if (prices && !('POTS' in prices)) {
-        prices['POTS'] = 1;
-      }
-      // TODO End
-
       dispatch({
         type: 'FETCH_PRICES',
         payload: {

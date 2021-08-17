@@ -1,4 +1,4 @@
-import { BigNumber } from 'bignumber.js';
+import BigNumber from 'bignumber.js';
 
 export const formatApy = (apy, placeholder = '???') => {
   if (!apy) return placeholder;
@@ -48,14 +48,17 @@ export const stripTrailingZeros = str => {
   return str.replace(/(\.[0-9]*?)(0+$)/, '$1').replace(/\.$/, '');
 };
 
-export const formatDecimals = (number, maxPlaces = 8) => {
-  if (number.isZero()) {
+export const formatDecimals = (number, maxPlaces = null, minPlaces = null) => {
+  number = BigNumber.isBigNumber(number) ? number.toNumber() : number;
+
+  if (number === 0) {
     return '0';
   }
 
-  const places = Math.min(maxPlaces, number >= 10 ? 4 : 8);
-  return number.toNumber().toLocaleString(undefined, {
+  const places = maxPlaces === null ? (number >= 10 ? 4 : 8) : maxPlaces;
+  return number.toLocaleString(undefined, {
     maximumFractionDigits: places,
+    minimumFractionDigits: minPlaces === null ? 0 : minPlaces,
   });
 };
 
@@ -130,4 +133,14 @@ export function calculateTotalPrize(item) {
   }
 
   return '$' + total.toFixed(total > 1 ? 0 : 4);
+}
+
+export function bigNumberTruncate(number, maxDecimals) {
+  const bn = BigNumber.isBigNumber(number) ? number : new BigNumber(number || 0);
+
+  if (bn.isNaN()) {
+    return new BigNumber(0);
+  }
+
+  return bn.decimalPlaces(maxDecimals, BigNumber.ROUND_DOWN);
 }
