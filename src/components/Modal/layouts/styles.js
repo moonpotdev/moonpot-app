@@ -24,6 +24,7 @@ const styles = theme => ({
     boxSizing: 'border-box',
     borderRadius: '60px',
     color: 'rgba(185, 173, 255, 0.7)',
+    background: '#393960',
   },
 });
 
