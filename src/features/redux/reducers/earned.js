@@ -4,10 +4,10 @@ import { config } from '../../../config/config';
 const initialEarned = () => {
   const earned = [];
   for (let net in config) {
-    const data = require('../../../config/vault/' + net + '.js');
-    for (const key in data.pools) {
-      earned[data.pools[key].id] = {
-        [data.pools[key].bonusToken]: 0,
+    const networkPools = require('../../../config/vault/' + net + '.json');
+    for (const key in networkPools) {
+      earned[networkPools[key].id] = {
+        [networkPools[key].bonusToken]: 0,
       };
     }
   }

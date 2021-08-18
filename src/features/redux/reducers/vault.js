@@ -6,10 +6,10 @@ const initialPools = () => {
   const pools = [];
 
   for (let net in config) {
-    const data = require('../../../config/vault/' + net + '.js');
+    const networkPools = require('../../../config/vault/' + net + '.json');
     let defaultOrder = 0;
 
-    for (const pool of data.pools) {
+    for (const pool of networkPools) {
       pool['network'] = net;
       pool['daily'] = 0;
       pool['apy'] = 0;

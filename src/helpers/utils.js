@@ -39,6 +39,14 @@ export function compound(r, n = 365, t = 1, c = 1) {
 
 export const styledBy = (property, mapping) => props => mapping[props[property]];
 
-export function indexBy(arr, key) {
-  return Object.fromEntries(arr.map(item => [item[key], item]));
+export function indexBy(arr, key, keyTransform = k => k) {
+  return Object.fromEntries(arr.map(item => [keyTransform(item[key]), item]));
 }
+
+export function arrUnique(arr) {
+  return arr.filter((value, index) => arr.indexOf(value) === index);
+}
+
+export const formatAddressShort = addr => {
+  return addr.substr(0, 6) + '...' + addr.substr(addr.length - 4, 4);
+};

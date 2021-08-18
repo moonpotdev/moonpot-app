@@ -21,7 +21,7 @@ const styles = theme => ({
       color: '#F3BA2E',
     },
   },
-  winTotalTokens: {
+  wonTotalTokens: {
     textAlign: 'right',
     color: '#FAFAFC',
     fontSize: '12px',
@@ -31,6 +31,41 @@ const styles = theme => ({
       color: '#FFFFFF',
       fontWeight: 'bold',
     },
+  },
+  rowDrawStats: {
+    justifyContent: 'flex-start',
+    marginBottom: `${20 - 8}px`,
+    '& > .MuiGrid-item:nth-child(even)': {
+      textAlign: 'right',
+    },
+  },
+  perWinnerToken: {
+    color: '#F3BA2E',
+  },
+  perWinnerValue: {
+    fontWeight: 'normal',
+  },
+  rowWinners: {
+    justifyContent: 'flex-start',
+    marginBottom: `${16 - 8}px`,
+  },
+  winnerAddress: {
+    fontSize: '10px',
+    fontWeight: 'bold',
+    lineHeight: '20px',
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+  },
+  winnerStaked: {
+    fontSize: '12px',
+    fontWeight: 'bold',
+    lineHeight: '20px',
+    letterSpacing: '0.2px',
+    color: '#FFFFFF',
+  },
+  txLink: {
+    color: '#F3BA2E',
+    textDecoration: 'none',
   },
 });
 

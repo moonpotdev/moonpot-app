@@ -1,14 +1,14 @@
-import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards/Cards';
+import React, { memo, useMemo } from 'react';
+import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
 import { Grid, makeStyles } from '@material-ui/core';
 import { Trans } from 'react-i18next';
-import React, { memo, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../helpers/utils';
 import { BigNumber } from 'bignumber.js';
-import styles from './styles';
 import { Pot as BasePot, PrizeSplit } from '../../../../components/Pot/Pot';
 import { usePot } from '../../../../helpers/hooks';
+import styles from './styles';
 
 const useStyles = makeStyles(styles);
 
