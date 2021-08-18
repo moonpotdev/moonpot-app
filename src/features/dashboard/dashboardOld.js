@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import AnimateHeight from 'react-animate-height';
@@ -17,16 +17,15 @@ import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import styles from './styles';
 import { Trans, useTranslation } from 'react-i18next';
 import reduxActions from '../redux/actions';
-import Deposit from '../vault/components/Deposit';
-import Withdraw from '../vault/components/Withdraw';
+import Deposit from '../vault/components/Deposit/Deposit';
+import Withdraw from '../vault/components/Withdraw/Withdraw';
 import BigNumber from 'bignumber.js';
 import { investmentOdds, isEmpty } from '../../helpers/utils';
 import { byDecimals, calculateTotalPrize, formatDecimals } from '../../helpers/format';
-import Countdown from '../../components/Countdown';
-import Steps from '../vault/components/Steps';
-import PrizeSplit from '../../components/PrizeSplit';
+import Countdown from '../../components/Countdown/Countdown';
+import Steps from '../vault/components/Steps/Steps';
+import PrizeSplit from '../../components/PrizeSplit/PrizeSplit';
 import clsx from 'clsx';
-import NoPotsCard from './components/NoPotsCard/NoPotsCard';
 
 const useStyles = makeStyles(styles);
 
@@ -68,6 +67,7 @@ const getItemBonusTokens = item => {
 const Dashboard = () => {
   const { t } = useTranslation();
   const location = useLocation();
+  const history = useHistory();
   const { vault, wallet, balance, prices, earned } = useSelector(state => ({
     vault: state.vaultReducer,
     wallet: state.walletReducer,
@@ -95,6 +95,12 @@ const Dashboard = () => {
     finished: false,
   });
   const [stepsItem, setStepsItem] = React.useState(null);
+
+  const handleWalletConnect = () => {
+    if (!wallet.address) {
+      dispatch(reduxActions.wallet.connect());
+    }
+  };
 
   const handleMigrator = item => {
     if (wallet.address) {
@@ -345,7 +351,46 @@ const Dashboard = () => {
           <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
           {/*No Active Pots Layout*/}
           {filtered.length === 0 ? (
-            <NoPotsCard />
+            <Box className={classes.noActivePots}>
+              <Grid container>
+                <Grid item xs={5}>
+                  <img
+                    className={classes.noActivePotsImage}
+                    alt="No Active Moonpots"
+                    src={require('../../images/ziggy/noActivePots.svg').default}
+                  />
+                </Grid>
+                <Grid item xs={8}>
+                  <Typography className={classes.noActivePotsTitle}>
+                    {wallet.address ? t('playWithMoonpot') : t('wallet.connect')}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography className={classes.noActivePotsText}>
+                    {wallet.address ? t('youHaventEnteredMoonpots') : t('connectToJoin')}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  {wallet.address ? (
+                    <Button
+                      className={classes.noActivePotsPlayButton}
+                      onClick={() => {
+                        history.push('/');
+                      }}
+                    >
+                      {t('buttons.play')}
+                    </Button>
+                  ) : (
+                    <Button
+                      className={classes.noActivePotsPlayButton}
+                      onClick={handleWalletConnect}
+                    >
+                      {t('wallet.connect')}
+                    </Button>
+                  )}
+                </Grid>
+              </Grid>
+            </Box>
           ) : (
             filtered.map(item => (
               <Box
@@ -610,7 +655,7 @@ const Dashboard = () => {
                           <Box style={{ padding: '4px 0 20px 0' }}>
                             <Deposit
                               item={item}
-                              handleWalletConnect={null}
+                              handleWalletConnect={handleWalletConnect}
                               formData={formData}
                               setFormData={setFormData}
                               updateItemData={updateItemData}
@@ -657,7 +702,7 @@ const Dashboard = () => {
                         <AnimateHeight duration={500} height={withdrawOpen ? 'auto' : 0}>
                           <Withdraw
                             item={item}
-                            handleWalletConnect={null}
+                            handleWalletConnect={handleWalletConnect}
                             formData={formData}
                             setFormData={setFormData}
                             updateItemData={updateItemData}
@@ -829,7 +874,7 @@ const Dashboard = () => {
                             >
                               <Withdraw
                                 item={item}
-                                handleWalletConnect={null}
+                                handleWalletConnect={handleWalletConnect}
                                 formData={formData}
                                 setFormData={setFormData}
                                 updateItemData={updateItemData}
