@@ -8,6 +8,7 @@ import { RouteLoading } from './components/RouteLoading';
 import { PageNotFound } from './PageNotFound';
 import { Header } from './components/Header';
 import Footer from './components/footer';
+import ModalPopup from './components/Modal/modal.js';
 import { useLocation } from 'react-router';
 
 const Home = React.lazy(() => import(`./features/home`));
@@ -61,15 +62,16 @@ export default function App() {
     dispatch(reduxActions.wallet.createWeb3Modal());
   }, [dispatch]);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <HashRouter>
+	return (
+		<ThemeProvider theme={theme}>
+			<CssBaseline/>
+			<ModalPopup/>
+			<HashRouter>
         <ScrollToTop />
-        <Header />
-        <Pages />
-        <Footer />
-      </HashRouter>
-    </ThemeProvider>
-  );
+				<Header/>
+				<Pages/>
+				<Footer/>
+			</HashRouter>
+		</ThemeProvider>
+	);
 }

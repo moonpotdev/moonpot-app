@@ -19,6 +19,15 @@
     "compoundToken": "Compound {{token}}",
     "withdrawBonusTokens": "Withdraw Bonus {{tokens}}"
   },
+  "modals": {
+    "unsupportedNetworkDetected": "Unsupported Network Detected",
+    "switchToBSCNetwork": "Please switch to BSC network",
+    "switchToBSC": "Switch to BSC",
+    "cancel": "Cancel",
+    "unableToAutoSwitch": "Unable to automatically switch chains",
+    "manuallySetNetwork": "Please manually set your network to BSC",
+    "close": "Close"
+  },
   "header": {
     "moonpots": "Moonpots",
     "myPots": "My Pots",
