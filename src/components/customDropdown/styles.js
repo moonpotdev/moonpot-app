@@ -1,9 +1,11 @@
 const styles = theme => ({
   selectWrapper: {
     '& .MuiSelect-root': {
+      color: '#CDCDE4',
       backgroundColor: 'transparent',
       fontWeight: 500,
-      textTransform: 'inherit',
+      fontSize: '21px',
+      lineHeight: '24px',
     },
     '& .MuiSelect-icon': {
       color: '#CDCDE4',

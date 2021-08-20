@@ -11,9 +11,7 @@ import Moonpot from '../../images/moonpot-notext.svg';
 import Pots from '../../images/tokens/pots.svg';
 import clsx from 'clsx';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-import { useDispatch, useSelector } from 'react-redux';
-import reduxActions from '../../features/redux/actions';
-import CustomDropdown from '../customDropdown';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(styles);
 
@@ -78,27 +76,6 @@ function MenuLink({ external, href, label, match, onClick, ...rest }) {
   );
 }
 
-function LanguageSelector({ css }) {
-  const walletReducer = useSelector(state => state.walletReducer);
-  const { i18n } = useTranslation();
-  const dispatch = useDispatch();
-
-  const handleLanguageSwitch = value => {
-    i18n.changeLanguage(value).then(() => dispatch(reduxActions.wallet.setLanguage(value)));
-  };
-
-  return (
-    <CustomDropdown
-      list={{ en: 'English', zh: '中文' }}
-      selected={walletReducer.language}
-      handler={e => {
-        handleLanguageSwitch(e.target.value);
-      }}
-      css={css}
-    />
-  );
-}
-
 function Sidebar() {
   const classes = useStyles();
   const [isOpen, setOpen] = useState(false);
@@ -140,7 +117,6 @@ function Sidebar() {
               className={classes.sidebarItem}
             />
           ))}
-          <LanguageSelector css={{ marginTop: 32 }} />
         </nav>
         <div className={classes.sidebarBottom}>
           <div className={classes.sidebarPotsPrice}>
@@ -195,7 +171,6 @@ function Nav() {
       {links.map(link => (
         <MenuLink key={link.href} {...link} className={classes.navItem} />
       ))}
-      <LanguageSelector css={{ marginLeft: 24 }} />
     </nav>
   );
 }
