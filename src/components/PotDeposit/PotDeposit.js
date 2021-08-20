@@ -64,7 +64,7 @@ const DepositSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
   return <Steps item={pot} steps={steps} handleClose={handleClose} />;
 };
 
-export const PotDeposit = function ({ id, onLearnMore }) {
+export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
@@ -132,7 +132,7 @@ export const PotDeposit = function ({ id, onLearnMore }) {
     <>
       <div className={classes.inputHolder}>
         <TokenInput
-          variant="teal"
+          variant={variant}
           token={pot.token}
           value={inputValue}
           max={balance}

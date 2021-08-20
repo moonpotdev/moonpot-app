@@ -57,13 +57,10 @@ const styles = theme => ({
     margin: '80px auto 0px auto',
     marginTop: '56px',
     borderRadius: '16px',
-    padding: '24px',
     [theme.breakpoints.up('sm')]: {
       marginLeft: '20px',
       marginRight: '20px',
     },
-    boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2), 0px 12px 24px -10px rgba(0, 0, 0, 0.4)',
-    border: '2px solid #8A7EAF',
     '& .MuiDivider-root': {
       color: '#8A7EAF',
       backgroundColor: '#8A7EAF',

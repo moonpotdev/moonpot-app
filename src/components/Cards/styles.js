@@ -72,12 +72,38 @@ const styles = () => ({
     '& $title': {
       color: '#FAFAFC',
     },
+    '& $accordionGroup': {
+      borderBottomColor: '#FAFAFC',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#FAFAFC',
+    },
+    '& $accordionItemTitle': {
+      color: '#FAFAFC',
+    },
+    '& $accordionItemInner': {
+      color: '#FAFAFC',
+    },
   },
   variantPurpleLight: {
     color: '#ECEAFB',
     backgroundColor: '#70609A',
     borderColor: '#8A7EAF',
     '& $title': {
+      color: '#EBF3F9',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#8A7EAF',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#8A7EAF',
+    },
+    '& $accordionItemTitle': {
+      color: '#EBF3F9',
+      paddingBottom: '16px',
+      fontFamily: 'Ubuntu',
+    },
+    '& $accordionItemInner': {
       color: '#EBF3F9',
     },
   },

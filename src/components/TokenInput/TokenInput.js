@@ -90,11 +90,17 @@ export const TokenInput = function ({ variant, token, max, value, setValue, setI
           alt=""
           aria-hidden={true}
           className={classes.token}
+          style={{ borderRadius: '12px' }}
           width={24}
           height={24}
         />
       }
       className={clsx(classes.input, className)}
+      style={
+        variant == 'purple'
+          ? { background: '#8375A9', border: '2px solid #B6ADCC' }
+          : { background: '#3F688D', border: '2px solid #6B96BD' }
+      }
       placeholder={t('tokenInput.placeholder', { token })}
       value={value}
       onChange={handleChange}
