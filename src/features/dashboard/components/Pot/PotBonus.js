@@ -1,22 +1,10 @@
-import React, { useCallback } from 'react';
-import { useLocation } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
-import AnimateHeight from 'react-animate-height';
-import { Box, Button, Divider, Grid, Link, makeStyles, Typography } from '@material-ui/core';
-import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from '../../styles';
 import { Trans, useTranslation } from 'react-i18next';
 import reduxActions from '../../../redux/actions';
-import Deposit from '../../../vault/components/Deposit';
-import Withdraw from '../../../vault/components/Withdraw';
-import BigNumber from 'bignumber.js';
-import { investmentOdds, isEmpty } from '../../../../helpers/utils';
-import { calculateTotalPrize, formatDecimals } from '../../../../helpers/format';
-import Countdown from '../../../../components/Countdown';
-import PrizeSplit from '../../../../components/PrizeSplit';
-import { PotDeposit } from '../../../../components/PotDeposit/PotDeposit';
-import { PotWithdraw } from '../../../../components/PotWithdraw/PotWithdraw';
-import { Card, CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards/Cards';
+import { formatDecimals } from '../../../../helpers/format';
 
 const useStyles = makeStyles(styles);
 

@@ -175,8 +175,14 @@ const Dashboard = () => {
         </Grid>
         <Grid container>
           <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
-          {/*No Active Pots Layout*/}
-          {filtered.length === 0 ? <NoPotsCard /> : filtered.map(item => <Pot item={item} />)}
+          {/*Pots*/}
+          {filtered.length === 0 ? (
+            <NoPotsCard />
+          ) : (
+            filtered.map(item => (
+              <Pot item={item} wallet={wallet} prices={prices} balance={balance} />
+            ))
+          )}
         </Grid>
       </Container>
     </React.Fragment>

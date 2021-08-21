@@ -1,24 +1,11 @@
-import React, { useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core';
-import styles from '../../styles';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
 import { isEmpty } from '../../../../helpers/utils';
 import { PotDeposit } from '../../../../components/PotDeposit/PotDeposit';
 import { PotWithdraw } from '../../../../components/PotWithdraw/PotWithdraw';
 import { CardAccordionItem } from '../../../../components/Cards/Cards';
 import PotBonus from './PotBonus';
 
-const ActiveLayout = function ({ item }) {
-  const { t } = useTranslation();
-  const fairplayRef = React.useRef(null);
-  const { vault, wallet, balance, prices, earned } = useSelector(state => ({
-    vault: state.vaultReducer,
-    wallet: state.walletReducer,
-    balance: state.balanceReducer,
-    prices: state.pricesReducer,
-    earned: state.earnedReducer,
-  }));
+const ActiveLayout = function ({ item, wallet, balance, prices }) {
   const [steps, setSteps] = React.useState({
     modal: false,
     currentStep: -1,
@@ -47,12 +34,6 @@ const ActiveLayout = function ({ item }) {
     }
   }, [steps, wallet.action]);
 
-  const handleFairplayLearnMore = useCallback(() => {
-    if (fairplayRef.current) {
-      window.scrollTo(0, fairplayRef.current.offsetTop);
-    }
-  }, [fairplayRef]);
-
   return (
     <>
       {/*Bonus*/}
@@ -61,11 +42,11 @@ const ActiveLayout = function ({ item }) {
       </CardAccordionItem>
       {/*Deposit*/}
       <CardAccordionItem titleKey="depositMore">
-        <PotDeposit id={item.id} onLearnMore={handleFairplayLearnMore} variant="purple" />
+        <PotDeposit id={item.id} onLearnMore={null} variant="purple" />
       </CardAccordionItem>
       {/*Withdraw*/}
       <CardAccordionItem titleKey="pot.withdraw">
-        <PotWithdraw id={item.id} onLearnMore={handleFairplayLearnMore} />
+        <PotWithdraw id={item.id} onLearnMore={null} />
       </CardAccordionItem>
     </>
   );
