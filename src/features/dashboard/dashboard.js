@@ -188,6 +188,20 @@ const Dashboard = () => {
   const handleCompoundBonus = item => {
     if (wallet.address) {
       const steps = [];
+
+      const tokenApproved = balance.tokens[item.token]?.allowance[item.contractAddress];
+      if (!tokenApproved) {
+        steps.push({
+          step: 'approve',
+          message: 'Approval transaction happens once per pot.',
+          action: () =>
+            dispatch(
+              reduxActions.wallet.approval(item.network, item.tokenAddress, item.contractAddress)
+            ),
+          pending: false,
+        });
+      }
+
       steps.push({
         step: 'compound',
         message: 'Confirm compound transaction on wallet to complete.',

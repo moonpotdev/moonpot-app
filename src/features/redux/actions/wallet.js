@@ -8,6 +8,7 @@ import {
 } from '../constants';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import Web3Modal, { connectors } from 'web3modal';
+import reduxActions from '../actions';
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
@@ -105,7 +106,6 @@ const connect = () => {
         }
       });
     };
-
     try {
       const provider = await state.walletReducer.web3modal.connect();
       const web3 = await new Web3(provider);
@@ -140,7 +140,8 @@ const connect = () => {
           });
           dispatch(connect());
         } else {
-          // todo: show error to user for unsupported network
+          //show error to user for unsupported network
+          dispatch(reduxActions.modal.showModal('WRONG_CHAIN_MODAL'));
           //alert('show nice modal: Wallet network not supported: ' + networkId);
           throw Error('Network not supported, check chainId.');
         }
