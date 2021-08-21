@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TotalStat } from '../../../../components/TotalStat';
 import { Card } from '../../../../components/Cards';
-import { useTotalPrizeValue } from '../../apollo/hooks';
+import { useTotalPrizeValue } from '../../apollo/total';
 import { RouteLoading } from '../../../../components/RouteLoading';
 
 export const Total = memo(function ({ className }) {

@@ -43,7 +43,22 @@ export function indexBy(arr, key, keyTransform = k => k) {
   return Object.fromEntries(arr.map(item => [keyTransform(item[key]), item]));
 }
 
-export function arrUnique(arr) {
+export function groupBy(arr, key, keyTransform = k => k) {
+  const out = {};
+
+  arr.forEach(item => {
+    const groupKey = keyTransform(item[key]);
+    if (groupKey in out) {
+      out[groupKey].push(item);
+    } else {
+      out[groupKey] = [item];
+    }
+  });
+
+  return out;
+}
+
+export function arrayUnique(arr) {
   return arr.filter((value, index) => arr.indexOf(value) === index);
 }
 

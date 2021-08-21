@@ -1,12 +1,13 @@
 import { HOME_FETCH_POOLS_BEGIN, HOME_FETCH_POOLS_DONE } from '../constants';
 import { config } from '../../../config/config';
 import BigNumber from 'bignumber.js';
+import { potsByNetwork } from '../../../config/vault';
 
 const initialPools = () => {
   const pools = [];
 
   for (let net in config) {
-    const networkPools = require('../../../config/vault/' + net + '.json');
+    const networkPools = potsByNetwork[net];
     let defaultOrder = 0;
 
     for (const pool of networkPools) {

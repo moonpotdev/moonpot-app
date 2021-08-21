@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import clsx from 'clsx';
-import { Card } from '../Cards/Cards';
+import { Card } from '../Cards';
 import { makeStyles } from '@material-ui/core';
 import styles from './styles';
 

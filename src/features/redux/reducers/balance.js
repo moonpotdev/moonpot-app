@@ -1,10 +1,11 @@
 import { BALANCE_FETCH_BALANCES_BEGIN, BALANCE_FETCH_BALANCES_DONE } from '../constants';
 import { config } from '../../../config/config';
+import { potsByNetwork } from '../../../config/vault';
 
 const initialTokens = () => {
   const tokens = [];
   for (let net in config) {
-    const networkPools = require('../../../config/vault/' + net + '.json');
+    const networkPools = potsByNetwork[net];
     for (const key in networkPools) {
       tokens[networkPools[key].token] = {
         balance: 0,

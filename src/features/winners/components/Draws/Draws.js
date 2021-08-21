@@ -1,24 +1,26 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import styles from './styles';
-import { useDraws } from '../../apollo/hooks';
 import { Draw } from '../Draw';
+import { Card, Cards } from '../../../../components/Cards';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { RouteLoading } from '../../../../components/RouteLoading';
-import { Card } from '../../../../components/Cards';
-
-const useStyles = makeStyles(styles);
+import { useDraws } from '../../apollo/draws';
 
 export const Draws = function () {
-  const classes = useStyles();
-  const { loading, error, draws } = useDraws();
-
-  if (loading) {
-    return <RouteLoading />;
-  }
+  const { error, draws, fetchMore, hasMore } = useDraws();
 
   if (error) {
     return <Card variant="purpleDark">{JSON.stringify(error)}</Card>;
   }
 
-  return draws.map(draw => <Draw key={draw.id} draw={draw} />);
+  return (
+    <InfiniteScroll
+      dataLength={draws ? draws.length : 0}
+      next={fetchMore}
+      hasMore={hasMore}
+      loader={<RouteLoading />}
+      style={{ overflow: 'visible' }}
+    >
+      <Cards>{draws ? draws.map(draw => <Draw key={draw.id} draw={draw} />) : null}</Cards>
+    </InfiniteScroll>
+  );
 };

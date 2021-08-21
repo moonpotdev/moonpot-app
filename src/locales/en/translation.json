@@ -212,6 +212,7 @@
     "prizePerWinner": "Prize per winner",
     "winners": "Winners",
     "stakedAmountToken": "Staked {{amount}} {{token}}",
-    "viewTransaction": "View Transaction"
+    "viewTransaction": "View Transaction",
+    "userWonPrize": "You won a prize!"
   }
 }

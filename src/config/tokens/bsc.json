@@ -8,7 +8,7 @@
   {
     "address": "0xa178972A8FfeFd6661179666134A2ba9B3DbE3B1",
     "symbol": "moonTicketPOTS",
-    "accountingSymbol": "POTS",
+    "displaySymbol": "POTS",
     "oracleId": "POTS",
     "decimals": 18
   },
@@ -21,14 +21,14 @@
   {
     "address": "0x81b554A2C3aD52630Cf1Ca56cad562EC4A551873",
     "symbol": "moonTicketCake",
-    "accountingSymbol": "CAKE",
+    "displaySymbol": "CAKE",
     "oracleId": "Cake",
     "decimals": 18
   },
   {
     "address": "0x9273be9c180b0271cc2c90e5bf99477b573fe904",
     "symbol": "moonTicketCakeV2",
-    "accountingSymbol": "CAKE",
+    "displaySymbol": "CAKE",
     "oracleId": "Cake",
     "decimals": 18
   },

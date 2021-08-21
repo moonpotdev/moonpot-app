@@ -32,6 +32,26 @@ const styles = theme => ({
       fontWeight: 'bold',
     },
   },
+  userWonPrize: {
+    display: 'flex',
+    flexDirection: 'row',
+    background: '#FAF9FB',
+    border: '2px solid #E3DFEC',
+    borderRadius: '4px',
+    color: '#000000',
+    fontSize: '12px',
+    lineHeight: '20px',
+    padding: '10px',
+    marginBottom: `20px`,
+  },
+  userWonPrizeIcon: {
+    color: '#008F39',
+    fontSize: '20px',
+    flexShrink: '0',
+  },
+  userWonPrizeText: {
+    marginLeft: '10px',
+  },
   rowDrawStats: {
     justifyContent: 'flex-start',
     marginBottom: `${20 - 8}px`,

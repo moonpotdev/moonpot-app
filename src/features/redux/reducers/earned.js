@@ -1,10 +1,11 @@
 import { EARNED_FETCH_EARNED_BEGIN, EARNED_FETCH_EARNED_DONE } from '../constants';
 import { config } from '../../../config/config';
+import { potsByNetwork } from '../../../config/vault';
 
 const initialEarned = () => {
   const earned = [];
   for (let net in config) {
-    const networkPools = require('../../../config/vault/' + net + '.json');
+    const networkPools = potsByNetwork[net];
     for (const key in networkPools) {
       earned[networkPools[key].id] = {
         [networkPools[key].bonusToken]: 0,

@@ -1,7 +1,6 @@
 import React, { memo, useMemo } from 'react';
 import { Card, CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
 import { Grid, Link, makeStyles } from '@material-ui/core';
-import styles from './styles';
 import { Logo } from '../../../../components/Pot';
 import { useSelector } from 'react-redux';
 import { Trans, useTranslation } from 'react-i18next';
@@ -10,21 +9,13 @@ import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
 import { formatAddressShort } from '../../../../helpers/utils';
+import { ErrorOutline } from '@material-ui/icons';
 import BigNumber from 'bignumber.js';
+import clsx from 'clsx';
+import styles from './styles';
 
 const useStyles = makeStyles(styles);
-
-function useTotalTokenAmounts(winners) {
-  return useMemo(() => {
-    const amounts = {};
-    for (const winner of winners) {
-      for (const [symbol, amount] of Object.entries(winner.prizes)) {
-        amounts[symbol] = symbol in amounts ? amounts[symbol] + amount : amount;
-      }
-    }
-    return amounts;
-  }, [winners]);
-}
+const network = 'bsc';
 
 const useTotalPrizeValue = function (winnings, numberOfWinners) {
   return useMemo(() => {
@@ -35,14 +26,30 @@ const useTotalPrizeValue = function (winnings, numberOfWinners) {
     }
 
     return sum;
-  }, [winnings]);
+  }, [winnings, numberOfWinners]);
+};
+
+const useDrawSponsor = function (depositTokenAddress, ticketTokenAddress, awards) {
+  return useMemo(() => {
+    const depositTokenAddressLower = depositTokenAddress.toLowerCase();
+    const ticketTokenAddressLower = ticketTokenAddress.toLowerCase();
+
+    // Return first token which isn't base token
+    for (const { token } of awards) {
+      const tokenAddress = token.toLowerCase();
+      if (tokenAddress !== depositTokenAddressLower && tokenAddress !== ticketTokenAddressLower) {
+        return tokensByNetworkAddress[network]?.[tokenAddress]?.symbol;
+      }
+    }
+
+    return null;
+  }, [depositTokenAddress, ticketTokenAddress, awards]);
 };
 
 const useNormalizedWinnings = function (awards, drawToken) {
   const prices = useSelector(state => state.pricesReducer.prices);
 
   return useMemo(() => {
-    const network = 'bsc';
     const tokens = {
       [drawToken]: {
         symbol: drawToken,
@@ -57,7 +64,7 @@ const useNormalizedWinnings = function (awards, drawToken) {
         const numericAmount = byDecimals(amount, tokenData.decimals);
         const price = new BigNumber(prices[tokenData.oracleId] || 0);
         const totalPrice = numericAmount.multipliedBy(price);
-        const symbol = tokenData.accountingSymbol || tokenData.symbol;
+        const symbol = tokenData.displaySymbol || tokenData.symbol;
 
         if (symbol in tokens) {
           tokens[symbol].amount = tokens[symbol].amount.plus(numericAmount);
@@ -79,7 +86,7 @@ const useNormalizedWinnings = function (awards, drawToken) {
       amount: token.amount.toNumber(),
       value: token.value.toNumber(),
     }));
-  }, [awards, prices]);
+  }, [awards, prices, drawToken]);
 };
 
 const Title = memo(function ({ name, number }) {
@@ -123,7 +130,7 @@ const DrawDate = memo(function ({ timestamp }) {
 });
 
 const Players = memo(function ({ players }) {
-  return players.toLocaleString(undefined, {
+  return Number(players).toLocaleString(undefined, {
     maximumFractionDigits: 0,
   });
 });
@@ -146,25 +153,39 @@ const PrizePerWinner = memo(function ({ winnings }) {
 const Winners = memo(function ({ token, tokenDecimals, winners }) {
   const { t } = useTranslation();
   const classes = useStyles();
-  const network = 'bsc';
   const prices = useSelector(state => state.pricesReducer.prices);
   const tokenData = tokensByNetworkSymbol[network]?.[token];
   const price = prices[tokenData.oracleId] || 0;
 
+  const sortedWinners = useMemo(() => {
+    const entries = winners.map((winner, index) => {
+      const staked = byDecimals(winner.staked, tokenDecimals).multipliedBy(2);
+      const value = staked.multipliedBy(price);
+
+      return {
+        id: winner.address + index,
+        staked: staked.toNumber(),
+        value: value.toNumber(),
+        address: winner.address,
+      };
+    });
+
+    return entries.sort((a, b) => (a.staked > b.staked) - (a.staked < b.staked));
+  }, [winners, price, tokenDecimals]);
+
   return (
     <Grid container spacing={2} className={classes.rowWinners}>
-      {winners.map((winner, index) => {
-        const staked = byDecimals(winner.balance, tokenDecimals).multipliedBy(2);
-        const value = formatDecimals(staked.multipliedBy(price), 2);
-        const stakedFormatted = formatDecimals(staked, 2);
+      {sortedWinners.map(winner => {
+        const valueFormatted = formatDecimals(winner.value, 2);
+        const stakedFormatted = formatDecimals(winner.staked, 2);
 
         return (
-          <Grid item xs={6} key={`${winner.address}${index}`}>
+          <Grid item xs={6} key={winner.id}>
             <div className={classes.winnerAddress}>{formatAddressShort(winner.address)}</div>
             <div className={classes.winnerStaked}>
               {t('winners.stakedAmountToken', { amount: stakedFormatted, token })}
             </div>
-            <div>(${value})</div>
+            <div>(${valueFormatted})</div>
           </Grid>
         );
       })}
@@ -172,10 +193,32 @@ const Winners = memo(function ({ token, tokenDecimals, winners }) {
   );
 });
 
+const UserWonDraw = memo(function ({ winners }) {
+  const classes = useStyles();
+  const address = useSelector(state => state.walletReducer.address)?.toLowerCase();
+
+  if (address && winners.find(winner => winner.address.toLowerCase() === address)) {
+    return (
+      <div className={classes.userWonPrize}>
+        <ErrorOutline
+          className={clsx(classes.userWonPrizeItem, classes.userWonPrizeIcon)}
+          fontSize="inherit"
+        />
+        <div className={clsx(classes.userWonPrizeItem, classes.userWonPrizeText)}>
+          <Trans i18nKey="winners.userWonPrize" />
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+});
+
 export const Draw = function ({ draw }) {
   const classes = useStyles();
   const winnings = useNormalizedWinnings(draw.awards, draw.pot.token);
   const totalPrizeValue = useTotalPrizeValue(winnings, draw.winners.length);
+  const sponsorToken = useDrawSponsor(draw.pot.tokenAddress, draw.pot.rewardAddress, draw.awards);
 
   return (
     <Card variant="purpleMid">
@@ -184,7 +227,7 @@ export const Draw = function ({ draw }) {
           <Logo
             name={draw.pot.name}
             baseToken={draw.pot.token}
-            sponsorToken={draw.pot.sponsorToken}
+            sponsorToken={sponsorToken || draw.pot.sponsorToken}
           />
         </Grid>
         <Grid item xs={8}>
@@ -193,6 +236,7 @@ export const Draw = function ({ draw }) {
           <WonTokens winnings={winnings} />
         </Grid>
       </Grid>
+      <UserWonDraw winners={draw.winners} />
       <Grid container spacing={2} className={classes.rowDrawStats}>
         <Grid item xs={6}>
           <DrawStat i18nKey="winners.drawDate">
@@ -200,9 +244,9 @@ export const Draw = function ({ draw }) {
           </DrawStat>
         </Grid>
         <Grid item xs={6}>
-          {/*<DrawStat i18nKey="winners.players">*/}
-          {/*  <Players players={draw.players || 0} />*/}
-          {/*</DrawStat>*/}
+          <DrawStat i18nKey="winners.players">
+            <Players players={draw.totalPlayers} />
+          </DrawStat>
         </Grid>
         <Grid item xs={12}>
           <DrawStat i18nKey="winners.prizePerWinner">
