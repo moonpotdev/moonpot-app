@@ -116,10 +116,9 @@ const styles = theme => ({
   },
   potUsdTop: {
     fontWeight: 700,
-    fontSize: '18px',
-    lineHeight: '20px',
+    fontSize: '24px',
+    lineHeight: '32px',
     letterSpacing: '0.6px',
-    marginTop: '10px',
     color: '#ffffff',
     '& span': {
       color: '#DFDDE7',
@@ -402,6 +401,35 @@ const styles = theme => ({
     '& $actionBtn:first-child': {
       marginTop: 0,
     },
+  },
+  title: {
+    color: '#EBF3F9',
+    fontSize: '15px',
+    lineHeight: '24px',
+    fontWeight: '500',
+    textAlign: 'right',
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+  },
+  interestValueApy: {
+    color: '#F3BA2E',
+    fontSize: '12px',
+    lineHeight: '20px',
+    fontWeight: '700',
+  },
+  interestValueBaseApy: {
+    fontWeight: 'normal',
+    color: '#A0BBD5',
+    textDecoration: 'line-through',
+    fontSize: '12px',
+    lineHeight: '20px',
+    fontWeight: '700',
+  },
+  interestValueApr: {
+    fontWeight: 'normal',
+    fontSize: '12px',
+    lineHeight: '20px',
+    fontWeight: '700',
   },
 });
 

@@ -57,7 +57,7 @@ const WinTokens = memo(function ({ depositToken, sponsors }) {
   );
 });
 
-const InterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
+export const InterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
   const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;
