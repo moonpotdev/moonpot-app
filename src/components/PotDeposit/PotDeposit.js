@@ -143,7 +143,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
       <div className={classes.buttonHolder}>
         {address ? (
           <PrimaryButton
-            variant="teal"
+            variant={variant}
             onClick={handleDeposit}
             disabled={!canDeposit}
             fullWidth={true}

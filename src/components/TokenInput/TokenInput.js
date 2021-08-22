@@ -19,22 +19,26 @@ const MaxButton = withStyles({
     color: 'rgba(255, 255, 255, 0.95)',
     backgroundColor: styledBy('variant', {
       teal: '#6B96BD',
+      purple: '#B6ADCC',
     }),
     '&:hover': {
       color: 'rgba(255, 255, 255, 0.95)',
       backgroundColor: styledBy('variant', {
         teal: '#628cad',
+        purple: '#B6ADCC',
       }),
     },
     '&:focus': {
       color: 'rgba(255, 255, 255, 0.95)',
       backgroundColor: styledBy('variant', {
         teal: '#628cad',
+        purple: '#B6ADCC',
       }),
     },
     '& .MuiTouchRipple-child': {
       backgroundColor: styledBy('variant', {
         teal: '#50758f',
+        purple: '#B6ADCC',
       }),
     },
   },
