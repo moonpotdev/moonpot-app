@@ -14,8 +14,7 @@ const Pot = function ({ item, wallet, prices, balance }) {
   const { t } = useTranslation();
 
   return (
-    <div className={classes.activeMyPot}>
-      {/*TODO SIMPLIFY CLASS ^^^*/}
+    <div className={classes.potsContainer}>
       <Cards>
         <Card variant={item.status === 'active' ? 'purpleLight' : 'purpleDark'}>
           <Grid container spacing={0}>

@@ -50,8 +50,7 @@ const styles = theme => ({
     color: '#6753DB',
     marginTop: '32px',
   },
-  activeMyPot: {
-    backgroundColor: '#70609A',
+  potsContainer: {
     height: '100%',
     width: 'min(100%, 500px)',
     margin: '80px auto 0px auto',
