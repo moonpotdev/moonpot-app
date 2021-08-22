@@ -7,7 +7,6 @@ import reduxActions from '../redux/actions';
 import BigNumber from 'bignumber.js';
 import { isEmpty } from '../../helpers/utils';
 import { byDecimals } from '../../helpers/format';
-import Steps from '../vault/components/Steps';
 import NoPotsCard from './components/NoPotsCard/NoPotsCard';
 import Pot from './components/Pot/Pot';
 
@@ -36,28 +35,6 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const [sortConfig, setSortConfig] = React.useState(getDefaultFilter(params));
   const [filtered, setFiltered] = React.useState([]);
-  const [steps, setSteps] = React.useState({
-    modal: false,
-    currentStep: -1,
-    items: [],
-    finished: false,
-  });
-  const [stepsItem, setStepsItem] = React.useState(null);
-
-  const handleClose = () => {
-    updateItemData();
-
-    setStepsItem(null);
-    setSteps({ modal: false, currentStep: -1, items: [], finished: false });
-  };
-
-  const updateItemData = () => {
-    if (wallet.address) {
-      dispatch(reduxActions.vault.fetchPools());
-      dispatch(reduxActions.balance.fetchBalances());
-      dispatch(reduxActions.earned.fetchEarned());
-    }
-  };
 
   React.useEffect(() => {
     let data = [];
@@ -129,27 +106,6 @@ const Dashboard = () => {
     }
   }, [dispatch, wallet.address]);
 
-  React.useEffect(() => {
-    const index = steps.currentStep;
-    if (!isEmpty(steps.items[index]) && steps.modal) {
-      const items = steps.items;
-      if (!items[index].pending) {
-        items[index].pending = true;
-        items[index].action();
-        setSteps({ ...steps, items: items });
-      } else {
-        if (wallet.action.result === 'success' && !steps.finished) {
-          const nextStep = index + 1;
-          if (!isEmpty(items[nextStep])) {
-            setSteps({ ...steps, currentStep: nextStep });
-          } else {
-            setSteps({ ...steps, finished: true });
-          }
-        }
-      }
-    }
-  }, [steps, wallet.action]);
-
   return (
     <React.Fragment>
       <Container maxWidth="lg">
@@ -174,7 +130,6 @@ const Dashboard = () => {
           </Grid>
         </Grid>
         <Grid container>
-          <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
           {/*Pots*/}
           {filtered.length === 0 ? (
             <NoPotsCard />

@@ -418,7 +418,6 @@ const styles = theme => ({
     fontWeight: '700',
   },
   interestValueBaseApy: {
-    fontWeight: 'normal',
     color: '#A0BBD5',
     textDecoration: 'line-through',
     fontSize: '12px',
@@ -426,7 +425,6 @@ const styles = theme => ({
     fontWeight: '700',
   },
   interestValueApr: {
-    fontWeight: 'normal',
     fontSize: '12px',
     lineHeight: '20px',
     fontWeight: '700',

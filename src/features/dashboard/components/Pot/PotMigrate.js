@@ -5,6 +5,7 @@ import styles from '../../styles';
 import { Trans } from 'react-i18next';
 import reduxActions from '../../../redux/actions';
 import { isEmpty } from '../../../../helpers/utils';
+import Steps from '../../../vault/components/Steps/Steps';
 import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
@@ -20,26 +21,20 @@ export const PotMigrate = function ({ item, wallet, balance }) {
   });
   const [stepsItem, setStepsItem] = React.useState(null);
 
-  React.useEffect(() => {
-    const index = steps.currentStep;
-    if (!isEmpty(steps.items[index]) && steps.modal) {
-      const items = steps.items;
-      if (!items[index].pending) {
-        items[index].pending = true;
-        items[index].action();
-        setSteps({ ...steps, items: items });
-      } else {
-        if (wallet.action.result === 'success' && !steps.finished) {
-          const nextStep = index + 1;
-          if (!isEmpty(items[nextStep])) {
-            setSteps({ ...steps, currentStep: nextStep });
-          } else {
-            setSteps({ ...steps, finished: true });
-          }
-        }
-      }
+  const handleClose = () => {
+    updateItemData();
+
+    setStepsItem(null);
+    setSteps({ modal: false, currentStep: -1, items: [], finished: false });
+  };
+
+  const updateItemData = () => {
+    if (wallet.address) {
+      dispatch(reduxActions.vault.fetchPools());
+      dispatch(reduxActions.balance.fetchBalances());
+      dispatch(reduxActions.earned.fetchEarned());
     }
-  }, [steps, wallet.action]);
+  };
 
   const handleMigrator = item => {
     if (wallet.address) {
@@ -109,8 +104,30 @@ export const PotMigrate = function ({ item, wallet, balance }) {
     }
   };
 
+  React.useEffect(() => {
+    const index = steps.currentStep;
+    if (!isEmpty(steps.items[index]) && steps.modal) {
+      const items = steps.items;
+      if (!items[index].pending) {
+        items[index].pending = true;
+        items[index].action();
+        setSteps({ ...steps, items: items });
+      } else {
+        if (wallet.action.result === 'success' && !steps.finished) {
+          const nextStep = index + 1;
+          if (!isEmpty(items[nextStep])) {
+            setSteps({ ...steps, currentStep: nextStep });
+          } else {
+            setSteps({ ...steps, finished: true });
+          }
+        }
+      }
+    }
+  }, [steps, wallet.action]);
+
   return (
     <Grid item xs={12}>
+      <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
       <Grid container>
         <Grid item xs={12}>
           <Typography className={classes.myPotsUpgradeText} align={'left'}>

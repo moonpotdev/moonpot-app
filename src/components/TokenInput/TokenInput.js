@@ -97,7 +97,7 @@ export const TokenInput = function ({ variant, token, max, value, setValue, setI
       }
       className={clsx(classes.input, className)}
       style={
-        variant == 'purple'
+        variant === 'purple'
           ? { background: '#8375A9', border: '2px solid #B6ADCC' }
           : { background: '#3F688D', border: '2px solid #6B96BD' }
       }

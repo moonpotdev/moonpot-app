@@ -5,6 +5,8 @@ import styles from '../../styles';
 import { Trans, useTranslation } from 'react-i18next';
 import reduxActions from '../../../redux/actions';
 import { formatDecimals } from '../../../../helpers/format';
+import Steps from '../../../vault/components/Steps/Steps';
+import { isEmpty } from '../../../../helpers/utils';
 
 const useStyles = makeStyles(styles);
 
@@ -42,6 +44,21 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
     finished: false,
   });
   const [stepsItem, setStepsItem] = React.useState(null);
+
+  const handleClose = () => {
+    updateItemData();
+
+    setStepsItem(null);
+    setSteps({ modal: false, currentStep: -1, items: [], finished: false });
+  };
+
+  const updateItemData = () => {
+    if (wallet.address) {
+      dispatch(reduxActions.vault.fetchPools());
+      dispatch(reduxActions.balance.fetchBalances());
+      dispatch(reduxActions.earned.fetchEarned());
+    }
+  };
 
   const handleWithdrawBonus = item => {
     if (wallet.address) {
@@ -87,8 +104,30 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
     }
   };
 
+  React.useEffect(() => {
+    const index = steps.currentStep;
+    if (!isEmpty(steps.items[index]) && steps.modal) {
+      const items = steps.items;
+      if (!items[index].pending) {
+        items[index].pending = true;
+        items[index].action();
+        setSteps({ ...steps, items: items });
+      } else {
+        if (wallet.action.result === 'success' && !steps.finished) {
+          const nextStep = index + 1;
+          if (!isEmpty(items[nextStep])) {
+            setSteps({ ...steps, currentStep: nextStep });
+          } else {
+            setSteps({ ...steps, finished: true });
+          }
+        }
+      }
+    }
+  }, [steps, wallet.action]);
+
   return (
     <Grid container className={classes.bonusEarningsInner}>
+      <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
       <Grid item xs={6}>
         <Typography className={classes.myDetailsText} align={'left'} style={{ marginBottom: 0 }}>
           <Trans i18nKey="myBonusEarnings" />
