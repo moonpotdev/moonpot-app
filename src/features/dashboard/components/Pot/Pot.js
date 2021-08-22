@@ -16,7 +16,7 @@ const Pot = function ({ item, wallet, prices, balance }) {
   return (
     <div className={classes.potsContainer}>
       <Cards>
-        <Card variant={item.status === 'active' ? 'purpleLight' : 'purpleDark'}>
+        <Card variant={item.status === 'active' ? 'purpleLight' : 'purpleDarkAlt'}>
           <Grid container spacing={0}>
             {/*Pot Image*/}
             <PotImage item={item} />

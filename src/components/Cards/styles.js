@@ -67,6 +67,28 @@ const styles = () => ({
   },
   variantPurpleDark: {
     color: '#DFDFEC',
+    backgroundColor: '#393960',
+    borderColor: '#4C4C80',
+    '& $title': {
+      color: '#FAFAFC',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#70609A',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#70609A',
+    },
+    '& $accordionItemTitle': {
+      color: '#EBF3F9',
+      paddingBottom: '16px',
+      fontFamily: 'Ubuntu',
+    },
+    '& $accordionItemInner': {
+      color: '#EBF3F9',
+    },
+  },
+  variantPurpleDarkAlt: {
+    color: '#594C7B',
     backgroundColor: '#594C7B',
     borderColor: '#70609A',
     '& $title': {
