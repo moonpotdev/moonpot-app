@@ -221,7 +221,7 @@ export const Draw = function ({ draw }) {
   const sponsorToken = useDrawSponsor(draw.pot.tokenAddress, draw.pot.rewardAddress, draw.awards);
 
   return (
-    <Card variant="purpleMid">
+    <Card variant="purpleMid" style={{ height: 'fit-content' }}>
       <Grid container spacing={2} className={classes.rowLogoWonTotal}>
         <Grid item xs={4}>
           <Logo
