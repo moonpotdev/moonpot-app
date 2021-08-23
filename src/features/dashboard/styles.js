@@ -379,9 +379,6 @@ const styles = theme => ({
       borderColor: '#CCCCCC',
     },
   },
-  bonusEarningsInner: {
-    paddingBottom: '16px',
-  },
   explainerText: {
     fontFamily: 'Ubuntu',
     fontStyle: 'normal',
@@ -417,7 +414,6 @@ const styles = theme => ({
     fontWeight: '700',
   },
   interestValueBaseApy: {
-    color: '#A0BBD5',
     textDecoration: 'line-through',
     fontSize: '12px',
     lineHeight: '20px',
@@ -427,25 +423,6 @@ const styles = theme => ({
     fontSize: '12px',
     lineHeight: '20px',
     fontWeight: '700',
-  },
-  potList: {
-    width: `${500 * 2 + 24 * 2}px`,
-    maxWidth: '100%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  },
-  potListInner: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginLeft: '-12px',
-    marginRight: '-12px',
-    marginBottom: '-24px',
-    '& > *': {
-      marginBottom: '24px',
-      marginLeft: '12px',
-      marginRight: '12px',
-    },
   },
 });
 

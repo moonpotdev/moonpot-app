@@ -1,7 +1,21 @@
 const styles = () => ({
   cards: {
-    '& > $card + $card': {
-      marginTop: '24px',
+    width: `${500 * 2 + 24 * 2}px`,
+    maxWidth: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  cardsInner: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginLeft: '-12px',
+    marginRight: '-12px',
+    marginBottom: '-24px',
+    '& > *, & > $card': {
+      marginBottom: '24px',
+      marginLeft: '12px',
+      marginRight: '12px',
     },
   },
   card: {
@@ -9,7 +23,8 @@ const styles = () => ({
     maxWidth: '100%',
     borderRadius: '16px',
     boxSizing: 'border-box',
-    margin: '0 auto',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     padding: '24px',
     borderWidth: '2px',
     borderStyle: 'solid',
@@ -29,6 +44,10 @@ const styles = () => ({
   accordionItem: {
     borderTop: 'solid 2px red',
     paddingTop: '16px',
+    paddingBottom: '16px',
+    '&:last-child': {
+      paddingBottom: '0',
+    },
   },
   accordionItemTitle: {
     fontStyle: 'normal',
@@ -58,13 +77,13 @@ const styles = () => ({
     },
   },
   accordionItemInner: {
-    paddingTop: '12px',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '12px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     color: 'red',
+    paddingTop: '16px',
   },
   variantPurpleDark: {
     color: '#DFDFEC',

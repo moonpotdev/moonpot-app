@@ -9,11 +9,7 @@ import { isEmpty } from '../../helpers/utils';
 import { byDecimals } from '../../helpers/format';
 import NoPotsCard from './components/NoPotsCard/NoPotsCard';
 import Pot from './components/Pot/Pot';
-import { Cards } from '../../components/Cards/Cards';
-import styles from './styles';
-import { makeStyles } from '@material-ui/core';
-
-const useStyles = makeStyles(styles);
+import { Cards } from '../../components/Cards';
 
 const VALID_STATUSES = ['active', 'eol'];
 const defaultFilter = {
@@ -29,7 +25,7 @@ const getDefaultFilter = (params = {}) => {
 
 const Dashboard = () => {
   const { t } = useTranslation();
-  const classes = useStyles();
+
   const { vault, wallet, balance, prices, earned } = useSelector(state => ({
     vault: state.vaultReducer,
     wallet: state.walletReducer,
@@ -137,17 +133,15 @@ const Dashboard = () => {
         </Grid>
         <Grid container style={{ marginTop: '56px' }}>
           {/*Pots*/}
-          <div className={classes.potList}>
-            <div className={classes.potListInner}>
-              {filtered.length === 0 ? (
-                <NoPotsCard />
-              ) : (
-                filtered.map(item => (
-                  <Pot item={item} wallet={wallet} prices={prices} balance={balance} />
-                ))
-              )}
-            </div>
-          </div>
+          <Cards>
+            {filtered.length === 0 ? (
+              <NoPotsCard />
+            ) : (
+              filtered.map(item => (
+                <Pot item={item} wallet={wallet} prices={prices} balance={balance} />
+              ))
+            )}
+          </Cards>
         </Grid>
       </Container>
     </React.Fragment>

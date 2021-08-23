@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Grid, makeStyles, Link, Typography } from '@material-ui/core';
+import { Grid, Link, makeStyles, Typography } from '@material-ui/core';
 import styles from '../../styles';
 import { investmentOdds } from '../../../../helpers/utils';
 import { Trans, useTranslation } from 'react-i18next';

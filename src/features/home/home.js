@@ -9,9 +9,10 @@ import { MigrationNotices } from './components/MigrationNotices/MigrationNotices
 import ZiggyMaintenance from '../../images/ziggy/maintenance.svg';
 import SocialMediaBlock from './components/SocialMediaBlock/SocialMediaBlock';
 import { useFilterConfig, useFilteredPots } from './hooks/filter';
-import { Pot } from './components/Pot/Pot';
-import { TVL } from './components/TVL/TVL';
+import { Pot } from './components/Pot';
+import { TVL } from './components/TVL';
 import { PoweredByBeefy } from '../../components/PoweredByBeefy';
+import { Cards } from '../../components/Cards';
 
 const useStyles = makeStyles(styles);
 
@@ -43,13 +44,11 @@ const Home = () => {
       <TVL className={classes.totalTVL} />
       <Filter config={filterConfig} setConfig={setFilterConfig} className={classes.potsFilter} />
       <MigrationNotices potType={filterConfig.vault} className={classes.potsMigrationNotice} />
-      <div className={classes.potList}>
-        <div className={classes.potListInner}>
-          {filtered.map(pot => (
-            <Pot key={pot.id} id={pot.id} />
-          ))}
-        </div>
-      </div>
+      <Cards>
+        {filtered.map(pot => (
+          <Pot key={pot.id} id={pot.id} />
+        ))}
+      </Cards>
       {filterConfig.vault === 'community' && filtered.length === 0 ? (
         <Grid item xs={12}>
           <Grid container className={classes.communityJoin}>
