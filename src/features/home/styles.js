@@ -26,25 +26,6 @@ const styles = theme => ({
   potsMigrationNotice: {
     marginBottom: '24px',
   },
-  potList: {
-    width: `${500 * 2 + 24 * 2}px`,
-    maxWidth: '100%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  },
-  potListInner: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginLeft: '-12px',
-    marginRight: '-12px',
-    marginBottom: '-24px',
-    '& > *': {
-      marginBottom: '24px',
-      marginLeft: '12px',
-      marginRight: '12px',
-    },
-  },
   communityJoin: {
     margin: '0 auto',
     width: '500px',

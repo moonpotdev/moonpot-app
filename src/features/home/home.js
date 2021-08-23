@@ -3,15 +3,17 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Box, Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import Filter from './components/Filter';
-import { Trans } from 'react-i18next';
+
 import reduxActions from '../redux/actions';
 import { MigrationNotices } from './components/MigrationNotices/MigrationNotices';
 import ZiggyMaintenance from '../../images/ziggy/maintenance.svg';
 import SocialMediaBlock from './components/SocialMediaBlock/SocialMediaBlock';
 import { useFilterConfig, useFilteredPots } from './hooks/filter';
-import { Pot } from './components/Pot/Pot';
-import { TVL } from './components/TVL/TVL';
+import { Pot } from './components/Pot';
+import { TVL } from './components/TVL';
 import { PoweredByBeefy } from '../../components/PoweredByBeefy';
+import { Cards } from '../../components/Cards';
+import { Translate } from '../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -38,18 +40,16 @@ const Home = () => {
   return (
     <Container maxWidth="xl">
       <Typography className={classes.mainTitle}>
-        <Trans i18nKey="homeTitle" values={{ amount: totalPrizesAvailableFormatted }} />
+        <Translate i18nKey="homeTitle" values={{ amount: totalPrizesAvailableFormatted }} />
       </Typography>
       <TVL className={classes.totalTVL} />
       <Filter config={filterConfig} setConfig={setFilterConfig} className={classes.potsFilter} />
       <MigrationNotices potType={filterConfig.vault} className={classes.potsMigrationNotice} />
-      <div className={classes.potList}>
-        <div className={classes.potListInner}>
-          {filtered.map(pot => (
-            <Pot key={pot.id} id={pot.id} />
-          ))}
-        </div>
-      </div>
+      <Cards>
+        {filtered.map(pot => (
+          <Pot key={pot.id} id={pot.id} />
+        ))}
+      </Cards>
       {filterConfig.vault === 'community' && filtered.length === 0 ? (
         <Grid item xs={12}>
           <Grid container className={classes.communityJoin}>
@@ -60,10 +60,10 @@ const Home = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography className={classes.communityTitle}>
-                <Trans i18nKey="homeJoinCommunityTitle" />
+                <Translate i18nKey="homeJoinCommunityTitle" />
               </Typography>
               <Typography className={classes.communityDescription}>
-                <Trans i18nKey="homeJoinCommunityBody" />
+                <Translate i18nKey="homeJoinCommunityBody" />
               </Typography>
             </Grid>
           </Grid>

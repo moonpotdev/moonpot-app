@@ -1,43 +1,44 @@
 import React, { memo, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
-import styles from './styles';
-import { Card } from '../Cards/Cards';
+import { Card } from '../Cards';
 import { BigNumber } from 'bignumber.js';
-import { Trans } from 'react-i18next';
 import { TransListJoin } from '../TransListJoin';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
 import { usePot, useTotalPrize } from '../../helpers/hooks';
+import { DrawStat } from '../DrawStat';
+import styles from './styles';
+import { Translate } from '../Translate';
 
 const useStyles = makeStyles(styles);
 
-const Logo = memo(function ({ name, baseToken, sponsorToken }) {
+export const Logo = memo(function ({ name, baseToken, sponsorToken }) {
   const src = require('../../images/vault/' +
     baseToken.toLowerCase() +
     '/sponsored/' +
     sponsorToken.toLowerCase() +
     '.svg').default;
-  return <img src={src} alt={`${name} Pot`} width="90" height="90" />;
+  return <img src={src} alt="" width="90" height="90" aria-hidden={true} />;
 });
 
 const Title = memo(function ({ name }) {
   const classes = useStyles();
   return (
     <div className={classes.title}>
-      <Trans i18nKey="pot.title" values={{ name }} />
+      <Translate i18nKey="pot.title" values={{ name }} />
     </div>
   );
 });
 
-const WinTotal = memo(function ({ awardBalanceUsd, totalSponsorBalanceUsd }) {
+export const WinTotal = memo(function ({ awardBalanceUsd, totalSponsorBalanceUsd }) {
   const classes = useStyles();
   const totalPrize = useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd);
 
   return (
     <div className={classes.winTotalPrize}>
-      <Trans i18nKey="pot.winTotalPrize" values={{ prize: `$${totalPrize}` }} />
+      <Translate i18nKey="pot.winTotalPrize" values={{ prize: `$${totalPrize}` }} />
     </div>
   );
 });
@@ -51,13 +52,13 @@ const WinTokens = memo(function ({ depositToken, sponsors }) {
 
   return (
     <div className={classes.winTotalTokens}>
-      <Trans i18nKey="pot.winTotalTokensIn" />
+      <Translate i18nKey="pot.winTotalTokensIn" />
       <TransListJoin list={allTokens} />
     </div>
   );
 });
 
-const InterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
+export const InterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
   const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;
@@ -72,20 +73,6 @@ const InterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
   return tooltipKey ? <TooltipWithIcon i18nKey={tooltipKey} /> : null;
 });
 
-const DrawStat = memo(function ({ labelKey, tooltip, children }) {
-  const classes = useStyles();
-
-  return (
-    <>
-      <div className={classes.statLabel}>
-        <Trans i18nKey={labelKey} />
-        {tooltip ? tooltip : null}
-      </div>
-      <div className={classes.statValue}>{children}</div>
-    </>
-  );
-});
-
 const Interest = memo(function ({ baseApy, bonusApy, bonusApr }) {
   const classes = useStyles();
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
@@ -96,16 +83,16 @@ const Interest = memo(function ({ baseApy, bonusApy, bonusApr }) {
   return (
     <>
       <div className={classes.interestValueApy}>
-        <Trans i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
+        <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
       </div>
       {hasBaseApy && hasBonusApy ? (
         <div className={classes.interestValueBaseApy}>
-          <Trans i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
+          <Translate i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
         </div>
       ) : null}
       {hasBonusApr ? (
         <div className={classes.interestValueApr}>
-          <Trans i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />
+          <Translate i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />
         </div>
       ) : null}
     </>
@@ -160,19 +147,19 @@ export function Pot({ id, variant, bottom }) {
       </Grid>
       <Grid container spacing={2} className={classes.rowDrawStats}>
         <Grid item xs={7}>
-          <DrawStat labelKey="pot.statNextDraw">
+          <DrawStat i18nKey="pot.statNextDraw">
             <Countdown until={pot.expiresAt * 1000}>
-              <Trans i18nKey="pot.statNextDrawCountdownFinished" />
+              <Translate i18nKey="pot.statNextDrawCountdownFinished" />
             </Countdown>
           </DrawStat>
         </Grid>
         <Grid item xs={5}>
-          <DrawStat labelKey="pot.statTVL">
+          <DrawStat i18nKey="pot.statTVL">
             <TVL totalStakedUsd={pot.totalStakedUsd} />
           </DrawStat>
         </Grid>
         <Grid item xs={5}>
-          <DrawStat labelKey="pot.statDeposit">
+          <DrawStat i18nKey="pot.statDeposit">
             <Deposit
               depositToken={pot.token}
               rewardToken={pot.rewardToken}
@@ -182,7 +169,7 @@ export function Pot({ id, variant, bottom }) {
         </Grid>
         <Grid item xs={7}>
           <DrawStat
-            labelKey="pot.statInterest"
+            i18nKey="pot.statInterest"
             tooltip={
               <InterestTooltip baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
             }

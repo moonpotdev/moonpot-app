@@ -1,5 +1,5 @@
 export const HEADER_FULL_LOGO_WIDTH = 472;
-export const HEADER_FULL_NAV_WIDTH = 1024;
+export const HEADER_FULL_NAV_WIDTH = 1150;
 
 export const styles = () => ({
   bar: {
@@ -70,6 +70,14 @@ export const styles = () => ({
     '& > $navItem + $navItem': {
       marginLeft: '24px',
     },
+    '& .MuiSelect-root': {
+      color: '#CDCDE4',
+      fontSize: '15px',
+      letterSpacing: '0.6px',
+    },
+    '& .MuiSelect-icon': {
+      color: '#CDCDE4',
+    },
   },
   navItem: {
     color: '#CDCDE4',
@@ -136,6 +144,13 @@ export const styles = () => ({
     padding: '24px',
     '& > $sidebarItem + $sidebarItem': {
       marginTop: '32px',
+    },
+    '& .MuiSelect-root': {
+      color: '#fff',
+      fontSize: '21px',
+    },
+    '& .MuiSelect-icon': {
+      color: '#fff',
     },
   },
   sidebarItem: {

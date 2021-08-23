@@ -9,9 +9,10 @@ import Steps from '../../features/vault/components/Steps';
 import { isEmpty } from '../../helpers/utils';
 import { TokenInput } from '../TokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-import { Trans } from 'react-i18next';
+
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
+import { Translate } from '../Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -64,7 +65,7 @@ const DepositSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
   return <Steps item={pot} steps={steps} handleClose={handleClose} />;
 };
 
-export const PotDeposit = function ({ id, onLearnMore }) {
+export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
@@ -132,7 +133,7 @@ export const PotDeposit = function ({ id, onLearnMore }) {
     <>
       <div className={classes.inputHolder}>
         <TokenInput
-          variant="teal"
+          variant={variant}
           token={pot.token}
           value={inputValue}
           max={balance}
@@ -143,12 +144,12 @@ export const PotDeposit = function ({ id, onLearnMore }) {
       <div className={classes.buttonHolder}>
         {address ? (
           <PrimaryButton
-            variant="teal"
+            variant={variant}
             onClick={handleDeposit}
             disabled={!canDeposit}
             fullWidth={true}
           >
-            <Trans
+            <Translate
               i18nKey={
                 isDepositAll
                   ? 'deposit.allToken'
@@ -171,10 +172,10 @@ export const PotDeposit = function ({ id, onLearnMore }) {
         />
       </div>
       <div className={classes.fairplayNotice}>
-        <Trans i18nKey="deposit.fairplayNotice" />{' '}
+        <Translate i18nKey="deposit.fairplayNotice" />{' '}
         {onLearnMore ? (
           <Link onClick={onLearnMore} className={classes.learnMore}>
-            <Trans i18nKey="buttons.learnMore" />
+            <Translate i18nKey="buttons.learnMore" />
           </Link>
         ) : null}
       </div>

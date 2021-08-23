@@ -1,0 +1,47 @@
+[
+  {
+    "address": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "symbol": "POTS",
+    "oracleId": "POTS",
+    "decimals": 18
+  },
+  {
+    "address": "0xa178972A8FfeFd6661179666134A2ba9B3DbE3B1",
+    "symbol": "moonTicketPOTS",
+    "displaySymbol": "POTS",
+    "oracleId": "POTS",
+    "decimals": 18
+  },
+  {
+    "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+    "symbol": "CAKE",
+    "oracleId": "Cake",
+    "decimals": 18
+  },
+  {
+    "address": "0x81b554A2C3aD52630Cf1Ca56cad562EC4A551873",
+    "symbol": "moonTicketCake",
+    "displaySymbol": "CAKE",
+    "oracleId": "Cake",
+    "decimals": 18
+  },
+  {
+    "address": "0x9273be9c180b0271cc2c90e5bf99477b573fe904",
+    "symbol": "moonTicketCakeV2",
+    "displaySymbol": "CAKE",
+    "oracleId": "Cake",
+    "decimals": 18
+  },
+  {
+    "address": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+    "symbol": "BIFI",
+    "oracleId": "BIFI",
+    "decimals": 18
+  },
+  {
+    "address": "0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2",
+    "symbol": "DODO",
+    "oracleId": "DODO",
+    "decimals": 18
+  }
+]

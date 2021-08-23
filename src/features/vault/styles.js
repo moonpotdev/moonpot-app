@@ -81,17 +81,6 @@ const styles = theme => ({
     color: '#DFDDE7',
     letterSpacing: '0.6px',
   },
-  potUsdTop: {
-    fontWeight: 700,
-    fontSize: '18px',
-    lineHeight: '20px',
-    letterSpacing: '0.6px',
-    marginTop: '10px',
-    color: '#ffffff',
-    '& span': {
-      color: '#DFDDE7',
-    },
-  },
   potUsd: {
     fontWeight: 700,
     fontSize: '18px',

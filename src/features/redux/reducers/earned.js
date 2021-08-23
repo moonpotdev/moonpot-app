@@ -1,13 +1,14 @@
 import { EARNED_FETCH_EARNED_BEGIN, EARNED_FETCH_EARNED_DONE } from '../constants';
 import { config } from '../../../config/config';
+import { potsByNetwork } from '../../../config/vault';
 
 const initialEarned = () => {
   const earned = [];
   for (let net in config) {
-    const data = require('../../../config/vault/' + net + '.js');
-    for (const key in data.pools) {
-      earned[data.pools[key].id] = {
-        [data.pools[key].bonusToken]: 0,
+    const networkPools = potsByNetwork[net];
+    for (const key in networkPools) {
+      earned[networkPools[key].id] = {
+        [networkPools[key].bonusToken]: 0,
       };
     }
   }

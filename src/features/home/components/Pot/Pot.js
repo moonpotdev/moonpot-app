@@ -1,14 +1,15 @@
-import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards/Cards';
-import { Grid, makeStyles } from '@material-ui/core';
-import { Trans } from 'react-i18next';
 import React, { memo, useMemo } from 'react';
+import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
+import { Grid, makeStyles } from '@material-ui/core';
+
 import { useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../helpers/utils';
 import { BigNumber } from 'bignumber.js';
-import styles from './styles';
 import { Pot as BasePot, PrizeSplit } from '../../../../components/Pot/Pot';
 import { usePot } from '../../../../helpers/hooks';
+import styles from './styles';
+import { Translate } from '../../../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -19,7 +20,7 @@ const Play = memo(function ({ id, token, rewardToken }) {
 
   return (
     <PrimaryButton to={`/pot/${id}`} variant="teal" fullWidth={true}>
-      <Trans i18nKey={hasStaked ? 'pot.playWithMore' : 'pot.playWith'} values={{ token }} />
+      <Translate i18nKey={hasStaked ? 'pot.playWithMore' : 'pot.playWith'} values={{ token }} />
     </PrimaryButton>
   );
 });
@@ -30,7 +31,7 @@ const Odds = memo(function ({ tvlUsd, depositAmount, winners }) {
   }, [tvlUsd, depositAmount, winners]);
 
   return (
-    <Trans i18nKey="pot.oddsPerDeposit" values={{ odds: odds, deposit: '$' + depositAmount }} />
+    <Translate i18nKey="pot.oddsPerDeposit" values={{ odds: odds, deposit: '$' + depositAmount }} />
   );
 });
 
@@ -44,7 +45,7 @@ const Bottom = function ({ id }) {
         <CardAccordionItem titleKey="pot.prizeSplit" collapsable={false}>
           <Grid container>
             <Grid item xs={3}>
-              <Trans i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
+              <Translate i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
             </Grid>
             <Grid item xs={9} className={classes.prizeSplitValue}>
               <PrizeSplit

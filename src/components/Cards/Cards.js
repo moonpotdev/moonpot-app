@@ -1,9 +1,9 @@
 import React, { forwardRef, useCallback, useState } from 'react';
 import clsx from 'clsx';
 import { Collapse, makeStyles, Typography } from '@material-ui/core';
-import { Trans } from 'react-i18next';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import styles from './styles';
+import { Translate } from '../Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -12,12 +12,12 @@ function variantClass(classes, prefix, variant) {
   return key in classes ? classes[key] : false;
 }
 
-export function Cards({ className, children, ...rest }) {
+export function Cards({ className, children, oneUp = false, ...rest }) {
   const classes = useStyles();
 
   return (
-    <div className={clsx(classes.cards, className)} {...rest}>
-      {children}
+    <div className={clsx(classes.cards, className, { [classes.cardsOne]: oneUp })} {...rest}>
+      <div className={classes.cardsInner}>{children}</div>
     </div>
   );
 }
@@ -80,7 +80,7 @@ export function CardAccordionItem({
         className={clsx(classes.accordionItemTitle, { [classes.accordionItemToggle]: collapsable })}
         onClick={collapsable ? toggleOpen : null}
       >
-        <Trans i18nKey={titleKey} />
+        <Translate i18nKey={titleKey} />
         {collapsable ? toggleIcon : null}
       </button>
       <Collapse in={!collapsable || isOpen}>

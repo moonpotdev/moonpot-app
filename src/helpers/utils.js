@@ -38,3 +38,30 @@ export function compound(r, n = 365, t = 1, c = 1) {
 }
 
 export const styledBy = (property, mapping) => props => mapping[props[property]];
+
+export function indexBy(arr, key, keyTransform = k => k) {
+  return Object.fromEntries(arr.map(item => [keyTransform(item[key]), item]));
+}
+
+export function groupBy(arr, key, keyTransform = k => k) {
+  const out = {};
+
+  arr.forEach(item => {
+    const groupKey = keyTransform(item[key]);
+    if (groupKey in out) {
+      out[groupKey].push(item);
+    } else {
+      out[groupKey] = [item];
+    }
+  });
+
+  return out;
+}
+
+export function arrayUnique(arr) {
+  return arr.filter((value, index) => arr.indexOf(value) === index);
+}
+
+export const formatAddressShort = addr => {
+  return addr.substr(0, 6) + '...' + addr.substr(addr.length - 4, 4);
+};

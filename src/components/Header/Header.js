@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { HEADER_FULL_LOGO_WIDTH, HEADER_FULL_NAV_WIDTH, styles } from './styles';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useRouteMatch } from 'react-router';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
@@ -11,7 +11,11 @@ import Moonpot from '../../images/moonpot-notext.svg';
 import Pots from '../../images/tokens/pots.svg';
 import clsx from 'clsx';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import reduxActions from '../../features/redux/actions';
+import CustomDropdown from '../customDropdown';
+import { supportedLanguages } from '../../i18n';
+import { Translate } from '../Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -24,6 +28,10 @@ const links = [
   {
     label: 'header.myPots',
     href: '/my-moonpots',
+  },
+  {
+    label: 'header.winners',
+    href: '/winners',
   },
   {
     label: 'header.docs',
@@ -76,6 +84,27 @@ function MenuLink({ external, href, label, match, onClick, ...rest }) {
   );
 }
 
+function LanguageSelector({ css }) {
+  const walletReducer = useSelector(state => state.walletReducer);
+  const { i18n } = useTranslation();
+  const dispatch = useDispatch();
+
+  const handleLanguageSwitch = value => {
+    i18n.changeLanguage(value).then(() => dispatch(reduxActions.wallet.setLanguage(value)));
+  };
+
+  return (
+    <CustomDropdown
+      list={supportedLanguages}
+      selected={walletReducer.language}
+      handler={e => {
+        handleLanguageSwitch(e.target.value);
+      }}
+      css={css}
+    />
+  );
+}
+
 function Sidebar() {
   const classes = useStyles();
   const [isOpen, setOpen] = useState(false);
@@ -117,6 +146,7 @@ function Sidebar() {
               className={classes.sidebarItem}
             />
           ))}
+          <LanguageSelector css={{ marginTop: 32 }} />
         </nav>
         <div className={classes.sidebarBottom}>
           <div className={classes.sidebarPotsPrice}>
@@ -130,7 +160,7 @@ function Sidebar() {
             />
             <div className={classes.sidebarPotsText}>
               <div className={classes.sidebarPotsLabel}>
-                <Trans i18nKey="header.potsPrice" />
+                <Translate i18nKey="header.potsPrice" />
               </div>
               <div className={classes.sidebarPotsValue}>
                 <PotsPrice />
@@ -144,7 +174,7 @@ function Sidebar() {
             target="_blank"
             rel="noreferrer"
           >
-            <Trans i18nKey="header.buyPots" />
+            <Translate i18nKey="header.buyPots" />
           </PrimaryButton>
         </div>
       </Drawer>
@@ -171,6 +201,7 @@ function Nav() {
       {links.map(link => (
         <MenuLink key={link.href} {...link} className={classes.navItem} />
       ))}
+      <LanguageSelector css={{ marginLeft: 24 }} />
     </nav>
   );
 }
@@ -198,7 +229,7 @@ function NavbarPotsPrice() {
         target="_blank"
         rel="noreferrer"
       >
-        <Trans i18nKey="header.buyPots" />
+        <Translate i18nKey="header.buyPots" />
       </PrimaryButton>
     </div>
   );

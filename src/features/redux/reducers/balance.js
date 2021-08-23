@@ -1,21 +1,22 @@
 import { BALANCE_FETCH_BALANCES_BEGIN, BALANCE_FETCH_BALANCES_DONE } from '../constants';
 import { config } from '../../../config/config';
+import { potsByNetwork } from '../../../config/vault';
 
 const initialTokens = () => {
   const tokens = [];
   for (let net in config) {
-    const data = require('../../../config/vault/' + net + '.js');
-    for (const key in data.pools) {
-      tokens[data.pools[key].token] = {
+    const networkPools = potsByNetwork[net];
+    for (const key in networkPools) {
+      tokens[networkPools[key].token] = {
         balance: 0,
-        allowance: { [data.pools[key].contractAddress]: 0 },
-        address: data.pools[key].tokenAddress,
+        allowance: { [networkPools[key].contractAddress]: 0 },
+        address: networkPools[key].tokenAddress,
       };
 
-      tokens[data.pools[key].rewardToken] = {
+      tokens[networkPools[key].rewardToken] = {
         balance: 0,
-        allowance: { [data.pools[key].contractAddress]: 0 },
-        address: data.pools[key].rewardAddress,
+        allowance: { [networkPools[key].contractAddress]: 0 },
+        address: networkPools[key].rewardAddress,
       };
     }
   }

@@ -6,12 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../../loader';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
+import { formatAddressShort } from '../../../../helpers/utils';
 
 const useStyles = makeStyles(styles);
-
-const formatAddress = addr => {
-  return addr.substr(0, 6) + '...' + addr.substr(addr.length - 4, 4);
-};
 
 const WalletConnector = ({ variant, onConnect, onDisconnect, className, ...rest }) => {
   const { t } = useTranslation();
@@ -43,7 +40,13 @@ const WalletConnector = ({ variant, onConnect, onDisconnect, className, ...rest 
 
   return (
     <Button className={buttonClasses} onClick={handleWalletConnect} {...rest}>
-      {pending ? <Loader line={true} /> : address ? formatAddress(address) : t('wallet.connect')}
+      {pending ? (
+        <Loader line={true} />
+      ) : address ? (
+        formatAddressShort(address)
+      ) : (
+        t('wallet.connect')
+      )}
     </Button>
   );
 };
