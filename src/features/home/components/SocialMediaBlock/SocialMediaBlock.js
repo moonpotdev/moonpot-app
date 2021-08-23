@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './styles';
 import { Box, Button, makeStyles } from '@material-ui/core';
-import { Trans } from 'react-i18next';
+
 import telegramIcon from '../../../../images/icons/telegramPurple.svg';
 import discordIcon from '../../../../images/icons/discordPurple.svg';
 import twitterIcon from '../../../../images/icons/twitterPurple.svg';
+import { Translate } from '../../../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -32,11 +33,11 @@ export default function SocialMediaBlock({ type }) {
     <Box className={classes.block}>
       <img src={activeIcon} className={classes.image} alt="" />
       <div className={classes.text}>
-        <Trans i18nKey={transKeyBody} />
+        <Translate i18nKey={transKeyBody} />
       </div>
       <a href={activeLink} className={classes.link}>
         <Button className={classes.button}>
-          <Trans i18nKey={transKeyButton} />
+          <Translate i18nKey={transKeyButton} />
         </Button>
       </a>
     </Box>

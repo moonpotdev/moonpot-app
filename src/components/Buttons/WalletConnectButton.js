@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from './PrimaryButton';
-import { Trans } from 'react-i18next';
+import { Translate } from '../Translate';
 import reduxActions from '../../features/redux/actions';
 
 export const WalletConnectButton = function ({
@@ -22,7 +22,7 @@ export const WalletConnectButton = function ({
 
   return (
     <ButtonComponent onClick={handleConnect} disabled={connected} {...rest}>
-      <Trans i18nKey="wallet.connect" />
+      <Translate i18nKey="wallet.connect" />
     </ButtonComponent>
   );
 };

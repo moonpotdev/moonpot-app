@@ -3,7 +3,7 @@ import { Card, CardAccordionGroup, CardAccordionItem } from '../../../../compone
 import { Grid, Link, makeStyles } from '@material-ui/core';
 import { Logo } from '../../../../components/Pot';
 import { useSelector } from 'react-redux';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../../config/tokens';
 import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
@@ -13,6 +13,7 @@ import { ErrorOutline } from '@material-ui/icons';
 import BigNumber from 'bignumber.js';
 import clsx from 'clsx';
 import styles from './styles';
+import { Translate } from '../../../../components/Translate';
 
 const useStyles = makeStyles(styles);
 const network = 'bsc';
@@ -93,7 +94,7 @@ const Title = memo(function ({ name, number }) {
   const classes = useStyles();
   return (
     <div className={classes.title}>
-      <Trans i18nKey="winners.potDrawNumber" values={{ name, number }} />
+      <Translate i18nKey="winners.potDrawNumber" values={{ name, number }} />
     </div>
   );
 });
@@ -106,7 +107,7 @@ const ValueWon = memo(function ({ currency, amount }) {
 
   return (
     <div className={classes.valueWon}>
-      <Trans i18nKey="winners.valueWon" values={{ currency, amount: amountFormatted }} />
+      <Translate i18nKey="winners.valueWon" values={{ currency, amount: amountFormatted }} />
     </div>
   );
 });
@@ -117,7 +118,7 @@ const WonTokens = memo(function ({ winnings }) {
 
   return (
     <div className={classes.wonTotalTokens}>
-      <Trans i18nKey="pot.winTotalTokensIn" />
+      <Translate i18nKey="pot.winTotalTokensIn" />
       <TransListJoin list={[...allTokens]} />
     </div>
   );
@@ -205,7 +206,7 @@ const UserWonDraw = memo(function ({ winners }) {
           fontSize="inherit"
         />
         <div className={clsx(classes.userWonPrizeItem, classes.userWonPrizeText)}>
-          <Trans i18nKey="winners.userWonPrize" />
+          <Translate i18nKey="winners.userWonPrize" />
         </div>
       </div>
     );
@@ -267,7 +268,7 @@ export const Draw = function ({ draw }) {
             rel="noreferrer"
             className={classes.txLink}
           >
-            <Trans i18nKey="winners.viewTransaction" />
+            <Translate i18nKey="winners.viewTransaction" />
           </Link>
         </CardAccordionItem>
       </CardAccordionGroup>

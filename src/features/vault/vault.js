@@ -3,7 +3,7 @@ import { Redirect, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
-import { Trans } from 'react-i18next';
+
 import reduxActions from '../redux/actions';
 import { formatDecimals } from '../../helpers/format';
 import { usePot, useTotalPrize } from '../../helpers/hooks';
@@ -11,6 +11,7 @@ import { Pot } from './components/Pot/Pot';
 import { InfoCards } from './components/InfoCards';
 import { PoweredByBeefy } from '../../components/PoweredByBeefy';
 import clsx from 'clsx';
+import { Translate } from '../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -29,7 +30,7 @@ const VaultTitle = memo(function ({
 
   return (
     <Typography className={clsx(className)}>
-      <Trans
+      <Translate
         i18nKey="vaultTitle"
         values={{
           token,

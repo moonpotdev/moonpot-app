@@ -12,7 +12,7 @@ function renderSwitch(type) {
     case 'UNABLE_TO_SWITCH_CHAIN_MODAL':
       return <UnableToSwitchChainModal />;
     default:
-      return '';
+      return <></>;
   }
 }
 

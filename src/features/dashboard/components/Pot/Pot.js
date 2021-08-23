@@ -15,17 +15,17 @@ const Pot = function ({ item, wallet, prices, balance }) {
   const { t } = useTranslation();
 
   return (
-    <Card variant={item.status === 'active' ? 'purpleLight' : 'purpleDarkAlt'} key={item.id}>
+    <Card variant={item.status === 'active' ? 'purpleLight' : 'purpleDarkAlt'}>
       <Grid container spacing={0}>
         {/*Pot Image*/}
         <Grid item xs={4} align={'left'} style={{ marginBottom: '24px' }}>
           <Logo name={item.name} baseToken={item.token} sponsorToken={item.sponsorToken} />
         </Grid>
         {/*Pot Title*/}
-        <PotTitle item={item} prices={prices} />
+        <PotTitle item={item} />
         {/*Divider Text*/}
         <Grid item xs={12} align={'left'} style={{ paddingBottom: 0 }}>
-          <Typography className={classes.dividerText}>{t('myDetails')} </Typography>
+          <Typography className={classes.dividerText}>{t('pot.myDetails')} </Typography>
         </Grid>
         {/*Info Block*/}
         <PotInfoBlock item={item} prices={prices} />

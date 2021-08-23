@@ -37,6 +37,7 @@ const styles = theme => ({
     width: 'auto',
     height: 'auto',
     minWidth: 'auto',
+    whiteSpace: 'nowrap',
   },
   variantTeal: {
     background: '#3F688D',
