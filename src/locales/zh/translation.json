@@ -1,5 +1,5 @@
 {
-  "buttons": "按钮"
+  "buttons": {
     "connectWallet": "连接钱包",
     "moonpots": "所有宝壶",
     "ziggyMoonpotGuide": "小吉带您玩转Moonpot",
