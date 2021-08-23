@@ -27,6 +27,7 @@
         "sponsorTokenDecimals": 18
       }
     ],
+    "sponsorToken": "POTS",
     "bonusRewardId": 0,
     "bonusToken": "BANANA",
     "bonusAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",

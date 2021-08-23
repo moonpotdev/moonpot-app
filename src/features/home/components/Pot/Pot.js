@@ -16,7 +16,7 @@ const useStyles = makeStyles(styles);
 const Play = memo(function ({ id, token, rewardToken }) {
   const address = useSelector(state => state.walletReducer.address);
   const balance = useSelector(state => state.balanceReducer.tokens[rewardToken]?.balance);
-  const hasStaked = address && balance;
+  const hasStaked = address && balance > 0;
 
   return (
     <PrimaryButton to={`/pot/${id}`} variant="teal" fullWidth={true}>
@@ -69,6 +69,6 @@ const Bottom = function ({ id }) {
   );
 };
 
-export const Pot = function ({ id }) {
-  return <BasePot id={id} variant="tealLight" bottom={<Bottom id={id} />} />;
+export const Pot = function ({ id, variant }) {
+  return <BasePot id={id} variant={variant} bottom={<Bottom id={id} />} />;
 };

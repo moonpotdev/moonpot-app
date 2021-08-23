@@ -47,11 +47,15 @@ const Home = () => {
       <MigrationNotices potType={filterConfig.vault} className={classes.potsMigrationNotice} />
       <Cards>
         {filtered.map(pot => (
-          <Pot key={pot.id} id={pot.id} />
+          <Pot
+            key={pot.id}
+            variant={pot.vaultType === 'main' ? 'tealLight' : 'purpleCommunity'}
+            id={pot.id}
+          />
         ))}
       </Cards>
-      {filterConfig.vault === 'community' && filtered.length === 0 ? (
-        <Grid item xs={12}>
+      {filterConfig.vault === 'community' ? (
+        <Grid item xs={12} style={{ marginTop: '32px' }}>
           <Grid container className={classes.communityJoin}>
             <Grid item xs={12}>
               <Box className={classes.ziggyMaintenance}>
