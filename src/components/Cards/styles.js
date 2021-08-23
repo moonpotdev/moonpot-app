@@ -29,6 +29,7 @@ const styles = () => ({
     borderWidth: '2px',
     borderStyle: 'solid',
     boxShadow: '0px 4px 24px 24px rgba(19, 17, 34, 0.16)',
+    height: 'fit-content',
   },
   title: {
     fontWeight: 500,
