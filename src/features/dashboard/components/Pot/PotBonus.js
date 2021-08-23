@@ -126,7 +126,7 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
   }, [steps, wallet.action]);
 
   return (
-    <Grid container className={classes.bonusEarningsInner}>
+    <Grid container>
       <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
       <Grid item xs={6}>
         <Typography className={classes.myDetailsText} align={'left'} style={{ marginBottom: 0 }}>

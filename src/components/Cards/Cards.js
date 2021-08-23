@@ -17,7 +17,7 @@ export function Cards({ className, children, ...rest }) {
 
   return (
     <div className={clsx(classes.cards, className)} {...rest}>
-      {children}
+      <div className={classes.cardsInner}>{children}</div>
     </div>
   );
 }
