@@ -208,7 +208,7 @@ const MigrationNotice = function ({ token }) {
   );
 };
 
-export const PotWithdraw = function ({ id, onLearnMore }) {
+export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
@@ -257,7 +257,7 @@ export const PotWithdraw = function ({ id, onLearnMore }) {
       <div className={classes.buttonHolder}>
         {address ? (
           <PrimaryButton
-            variant="teal"
+            variant={variant}
             onClick={handleWithdraw}
             disabled={!canWithdraw}
             fullWidth={true}

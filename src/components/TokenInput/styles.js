@@ -1,6 +1,5 @@
 const styles = theme => ({
   input: {
-    border: '2px solid #6B96BD',
     height: `48px`,
     borderRadius: '8px',
     width: '100%',
@@ -38,6 +37,14 @@ const styles = theme => ({
     width: 'auto',
     height: 'auto',
     minWidth: 'auto',
+  },
+  variantTeal: {
+    background: '#3F688D',
+    border: '2px solid #6B96BD',
+  },
+  variantPurple: {
+    background: '#8375A9',
+    border: '2px solid #B6ADCC',
   },
 });
 
