@@ -2,11 +2,12 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from '../../styles';
-import { Trans } from 'react-i18next';
+
 import reduxActions from '../../../redux/actions';
 import { isEmpty } from '../../../../helpers/utils';
 import Steps from '../../../vault/components/Steps/Steps';
 import clsx from 'clsx';
+import { Translate } from '../../../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -131,12 +132,12 @@ export const PotMigrate = function ({ item, wallet, balance }) {
       <Grid container>
         <Grid item xs={12}>
           <Typography className={classes.myPotsUpgradeText} align={'left'}>
-            <Trans i18nKey="upgradeWhy" values={{ token: item.token }} />
+            <Translate i18nKey="upgradeWhy" values={{ token: item.token }} />
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography className={classes.myPotsUpgradeText} align={'left'}>
-            <Trans
+            <Translate
               i18nKey="upgradeNextSteps"
               values={{
                 token: item.token,
@@ -148,7 +149,7 @@ export const PotMigrate = function ({ item, wallet, balance }) {
         </Grid>
         <Grid item xs={12}>
           <Typography className={classes.learnMoreText} align={'left'}>
-            <Trans i18nKey="learnMore" />
+            <Translate i18nKey="learnMore" />
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -163,7 +164,7 @@ export const PotMigrate = function ({ item, wallet, balance }) {
         </Grid>
         <Grid item xs={6} align={'left'}>
           <Typography className={classes.potsItemText} style={{ marginTop: '12px' }}>
-            <Trans i18nKey="myFairplayTimelock" />
+            <Translate i18nKey="pot.myFairplayTimelock" />
           </Typography>
         </Grid>
         <Grid item xs={6} align={'right'}>
@@ -171,7 +172,7 @@ export const PotMigrate = function ({ item, wallet, balance }) {
         </Grid>
         <Grid item xs={6} align={'left'}>
           <Typography className={classes.potsItemText}>
-            <Trans i18nKey="myCurrentFairnessFee" />
+            <Translate i18nKey="pot.myCurrentFairnessFee" />
           </Typography>
         </Grid>
         <Grid item xs={6} align={'right'}>

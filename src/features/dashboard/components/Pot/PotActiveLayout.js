@@ -37,11 +37,11 @@ const ActiveLayout = function ({ item, wallet, balance, prices }) {
   return (
     <>
       {/*Bonus*/}
-      <CardAccordionItem titleKey="bonusEarnings">
+      <CardAccordionItem titleKey="pot.bonusEarnings">
         <PotBonus item={item} prices={prices} wallet={wallet} balance={balance} />
       </CardAccordionItem>
       {/*Deposit*/}
-      <CardAccordionItem titleKey="depositMore">
+      <CardAccordionItem titleKey="pot.depositMore">
         <PotDeposit id={item.id} onLearnMore={null} variant="purple" />
         <div style={{ height: '12px' }} />
       </CardAccordionItem>

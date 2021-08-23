@@ -1,34 +1,35 @@
 import * as React from 'react';
-import { Grid, Link, makeStyles, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from '../../styles';
 import { investmentOdds } from '../../../../helpers/utils';
-import { Trans, useTranslation } from 'react-i18next';
-import { calculateTotalPrize, formatDecimals } from '../../../../helpers/format';
+import { useTranslation } from 'react-i18next';
+import { formatDecimals } from '../../../../helpers/format';
 import Countdown from '../../../../components/Countdown';
-import { InterestTooltip } from '../../../../components/Pot/Pot';
+import { InterestTooltip, WinTotal } from '../../../../components/Pot';
+import { Translate } from '../../../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
-export const PotTitle = function ({ item, prices }) {
+export const PotTitle = function ({ item }) {
   const classes = useStyles();
   const { t } = useTranslation();
-  const name = item.name;
 
   return (
     <Grid item xs={8}>
       {item.status === 'active' ? (
         <React.Fragment>
           <Typography className={classes.title}>
-            <Trans i18nKey="pot.title" values={{ name }} />
+            <Translate i18nKey="pot.title" values={{ name: item.name }} />
           </Typography>
-          <Typography className={classes.potUsdTop} align={'right'}>
-            <span>{t('win')} </span>
-            <span style={{ color: '#F3BA2E' }}>
-              ${Number(calculateTotalPrize(item, prices).substring(1)).toLocaleString()}
-            </span>
-          </Typography>
+          <div className={classes.potUsdTop}>
+            <WinTotal
+              awardBalanceUsd={item.awardBalanceUsd}
+              totalSponsorBalanceUsd={item.totalSponsorBalanceUsd}
+            />
+          </div>
           <Typography className={classes.myPotsNextWeeklyDrawText} align={'right'}>
-            {t('prize')}:{' '}
+            {t('pot.prizeDraw')}
+            {': '}
             <span>
               <Countdown until={item.expiresAt * 1000} />{' '}
             </span>
@@ -37,37 +38,13 @@ export const PotTitle = function ({ item, prices }) {
       ) : (
         <React.Fragment>
           <Typography className={classes.potUsdTop} align={'right'}>
-            Retired {item.token}
-          </Typography>
-          <Typography className={classes.potUsd} align={'right'}>
-            Moonpot
+            <Translate i18nKey="pot.titleRetired" values={{ name: item.name }} />
           </Typography>
           <Typography className={classes.myPotsNextWeeklyDrawText} align={'right'}>
-            {t('prize')}: <span>Closed</span>
+            {t('pot.prizeDraw')}: <span>{t('pot.closed')}</span>
           </Typography>
         </React.Fragment>
       )}
-    </Grid>
-  );
-};
-
-export const PotWinners = function ({ item }) {
-  const classes = useStyles();
-
-  return (
-    <Grid container>
-      <Grid item xs={6} align={'left'}>
-        <Typography className={classes.potsItemText} style={{ marginBottom: 0 }}>
-          <Trans i18nKey="winners" />
-        </Typography>
-      </Grid>
-      <Grid item xs={6} align={'right'}>
-        <Typography className={classes.potsPrizeWinnersTransaction}>
-          <Link href={`https://bscscan.com/tx/${item.winnersTransaction}`}>
-            <Trans i18nKey="winningTransactions" />
-          </Link>
-        </Typography>
-      </Grid>
     </Grid>
   );
 };
@@ -82,16 +59,16 @@ const Interest = function ({ baseApy, bonusApy, bonusApr }) {
   return (
     <div style={{ display: 'block', textAlign: 'right', paddingBottom: '16px' }}>
       <div className={classes.interestValueApy}>
-        <Trans i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
+        <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
       </div>
       {hasBaseApy && hasBonusApy ? (
         <div className={classes.interestValueBaseApy}>
-          <Trans i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
+          <Translate i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
         </div>
       ) : null}
       {hasBonusApr ? (
         <div className={classes.interestValueApr}>
-          <Trans i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />
+          <Translate i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />
         </div>
       ) : null}
     </div>
@@ -108,7 +85,7 @@ export const PotInfoBlock = function ({ item, prices }) {
         {/*Balance*/}
         <Grid item xs={6}>
           <Typography className={classes.myDetailsText} align={'left'}>
-            <Trans i18nKey="myToken" values={{ token: item.token }} />
+            <Translate i18nKey="pot.myToken" values={{ token: item.token }} />
           </Typography>
         </Grid>
         <Grid item xs={6}>
@@ -120,7 +97,7 @@ export const PotInfoBlock = function ({ item, prices }) {
         {/*Interest*/}
         <Grid item xs={6}>
           <Typography className={classes.myDetailsText} align={'left'}>
-            {t('myInterestRate')}
+            {t('pot.myInterestRate')}
             <InterestTooltip baseApy={item.apy} bonusApy={item.bonusApy} bonusApr={item.bonusApr} />
           </Typography>
         </Grid>
@@ -130,12 +107,12 @@ export const PotInfoBlock = function ({ item, prices }) {
         {/*Odds*/}
         <Grid item xs={6}>
           <Typography className={classes.myDetailsText} align={'left'}>
-            {t('myOdds')}
+            {t('pot.myOdds')}
           </Typography>
         </Grid>
         <Grid item xs={6}>
           <Typography className={classes.myDetailsValue} align={'right'}>
-            {t('odds', {
+            {t('pot.odds', {
               odds: investmentOdds(
                 item.totalStakedUsd,
                 item.userBalance.times(prices.prices[item.oracleId]),

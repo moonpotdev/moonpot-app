@@ -120,7 +120,7 @@ const styles = theme => ({
     letterSpacing: '0.6px',
     color: '#ffffff',
     '& span': {
-      color: '#DFDDE7',
+      color: '#F3BA2E',
     },
   },
   potUsd: {

@@ -138,7 +138,7 @@ const Dashboard = () => {
               <NoPotsCard />
             ) : (
               filtered.map(item => (
-                <Pot item={item} wallet={wallet} prices={prices} balance={balance} />
+                <Pot key={item.id} item={item} wallet={wallet} prices={prices} balance={balance} />
               ))
             )}
           </Cards>

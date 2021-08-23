@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Box, Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import Filter from './components/Filter';
-import { Trans } from 'react-i18next';
+
 import reduxActions from '../redux/actions';
 import { MigrationNotices } from './components/MigrationNotices/MigrationNotices';
 import ZiggyMaintenance from '../../images/ziggy/maintenance.svg';
@@ -13,6 +13,7 @@ import { Pot } from './components/Pot';
 import { TVL } from './components/TVL';
 import { PoweredByBeefy } from '../../components/PoweredByBeefy';
 import { Cards } from '../../components/Cards';
+import { Translate } from '../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -39,7 +40,7 @@ const Home = () => {
   return (
     <Container maxWidth="xl">
       <Typography className={classes.mainTitle}>
-        <Trans i18nKey="homeTitle" values={{ amount: totalPrizesAvailableFormatted }} />
+        <Translate i18nKey="homeTitle" values={{ amount: totalPrizesAvailableFormatted }} />
       </Typography>
       <TVL className={classes.totalTVL} />
       <Filter config={filterConfig} setConfig={setFilterConfig} className={classes.potsFilter} />
@@ -59,10 +60,10 @@ const Home = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography className={classes.communityTitle}>
-                <Trans i18nKey="homeJoinCommunityTitle" />
+                <Translate i18nKey="homeJoinCommunityTitle" />
               </Typography>
               <Typography className={classes.communityDescription}>
-                <Trans i18nKey="homeJoinCommunityBody" />
+                <Translate i18nKey="homeJoinCommunityBody" />
               </Typography>
             </Grid>
           </Grid>

@@ -9,9 +9,10 @@ import Steps from '../../features/vault/components/Steps';
 import { isEmpty } from '../../helpers/utils';
 import { TokenInput } from '../TokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-import { Trans } from 'react-i18next';
+
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
+import { Translate } from '../Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -148,7 +149,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
             disabled={!canDeposit}
             fullWidth={true}
           >
-            <Trans
+            <Translate
               i18nKey={
                 isDepositAll
                   ? 'deposit.allToken'
@@ -171,10 +172,10 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
         />
       </div>
       <div className={classes.fairplayNotice}>
-        <Trans i18nKey="deposit.fairplayNotice" />{' '}
+        <Translate i18nKey="deposit.fairplayNotice" />{' '}
         {onLearnMore ? (
           <Link onClick={onLearnMore} className={classes.learnMore}>
-            <Trans i18nKey="buttons.learnMore" />
+            <Translate i18nKey="buttons.learnMore" />
           </Link>
         ) : null}
       </div>

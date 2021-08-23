@@ -23,7 +23,7 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
   const { t } = useTranslation();
 
   return (
-    <Cards className={clsx(className)}>
+    <Cards className={clsx(className)} oneUp={true}>
       {pot.infoCardStrategy ? (
         <Card variant="purpleDark" className={classes.strategy}>
           <CardTitle>{t('pot.infocards.strategy.title', { name: pot.name })}</CardTitle>

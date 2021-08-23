@@ -1,13 +1,14 @@
 import React, { memo } from 'react';
 import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards/Cards';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
-import { Trans } from 'react-i18next';
+
 import { Pot as BasePot, PrizeSplit } from '../../../../components/Pot/Pot';
 import styles from './styles';
 import { PotDeposit } from '../../../../components/PotDeposit';
 import { PotWithdraw } from '../../../../components/PotWithdraw';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { usePot } from '../../../../helpers/hooks';
+import { Translate } from '../../../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -25,7 +26,7 @@ const PrizeSplitAccordion = memo(function ({
       <CardAccordionItem titleKey="pot.prizeSplit">
         <Grid container>
           <Grid item xs={3}>
-            <Trans i18nKey="pot.prizeSplitWinner" values={{ count: count }} />
+            <Translate i18nKey="pot.prizeSplitWinner" values={{ count: count }} />
           </Grid>
           <Grid item xs={9} className={classes.prizeSplitValue}>
             <PrizeSplit
@@ -49,10 +50,10 @@ const EolNotice = function ({ id }) {
   return (
     <Alert severity={'warning'} className={classes.migrationNotice}>
       <AlertTitle>
-        <Trans i18nKey="deposit.eolNotice.title" />
+        <Translate i18nKey="deposit.eolNotice.title" />
       </AlertTitle>
       <Typography>
-        <Trans i18nKey="deposit.eolNotice.message" values={{ token: pot.token }} />
+        <Translate i18nKey="deposit.eolNotice.message" values={{ token: pot.token }} />
       </Typography>
     </Alert>
   );

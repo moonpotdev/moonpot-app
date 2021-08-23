@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { HEADER_FULL_LOGO_WIDTH, HEADER_FULL_NAV_WIDTH, styles } from './styles';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useRouteMatch } from 'react-router';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
@@ -14,6 +14,8 @@ import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { useDispatch, useSelector } from 'react-redux';
 import reduxActions from '../../features/redux/actions';
 import CustomDropdown from '../customDropdown';
+import { supportedLanguages } from '../../i18n';
+import { Translate } from '../Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -93,7 +95,7 @@ function LanguageSelector({ css }) {
 
   return (
     <CustomDropdown
-      list={{ en: 'English', zh: '中文' }}
+      list={supportedLanguages}
       selected={walletReducer.language}
       handler={e => {
         handleLanguageSwitch(e.target.value);
@@ -158,7 +160,7 @@ function Sidebar() {
             />
             <div className={classes.sidebarPotsText}>
               <div className={classes.sidebarPotsLabel}>
-                <Trans i18nKey="header.potsPrice" />
+                <Translate i18nKey="header.potsPrice" />
               </div>
               <div className={classes.sidebarPotsValue}>
                 <PotsPrice />
@@ -172,7 +174,7 @@ function Sidebar() {
             target="_blank"
             rel="noreferrer"
           >
-            <Trans i18nKey="header.buyPots" />
+            <Translate i18nKey="header.buyPots" />
           </PrimaryButton>
         </div>
       </Drawer>
@@ -227,7 +229,7 @@ function NavbarPotsPrice() {
         target="_blank"
         rel="noreferrer"
       >
-        <Trans i18nKey="header.buyPots" />
+        <Translate i18nKey="header.buyPots" />
       </PrimaryButton>
     </div>
   );

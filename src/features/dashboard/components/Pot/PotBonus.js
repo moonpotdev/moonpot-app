@@ -2,11 +2,12 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from '../../styles';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import reduxActions from '../../../redux/actions';
 import { formatDecimals } from '../../../../helpers/format';
 import Steps from '../../../vault/components/Steps/Steps';
 import { isEmpty } from '../../../../helpers/utils';
+import { Translate } from '../../../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -130,7 +131,7 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
       <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
       <Grid item xs={6}>
         <Typography className={classes.myDetailsText} align={'left'} style={{ marginBottom: 0 }}>
-          <Trans i18nKey="myBonusEarnings" />
+          <Translate i18nKey="bonus.myBonusEarnings" />
         </Typography>
       </Grid>
       <Grid item xs={6}>
@@ -147,7 +148,7 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
               align={'left'}
               style={{ marginTop: '16px' }}
             >
-              <Trans i18nKey="myBoostEarnings" />
+              <Translate i18nKey="bonus.myBoostEarnings" />
             </Typography>
           </Grid>
           <Grid item xs={6}>
@@ -162,8 +163,8 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
           </Grid>
           <Grid item xs={12}>
             <Typography className={classes.myPotsInfoText} align={'left'}>
-              <Trans
-                i18nKey="bonusExtraInfo"
+              <Translate
+                i18nKey="bonus.bonusExtraInfo"
                 values={{
                   bonusToken: item.bonusToken,
                   boostToken: item.boostToken,
@@ -177,7 +178,7 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
       )}
       <Grid item xs={12} className={classes.bonusExplainerRow}>
         <Typography className={classes.explainerText}>
-          {t('bonusExplainer', { tokens: getItemBonusTokens(item) })}
+          {t('bonus.bonusExplainer', { tokens: getItemBonusTokens(item) })}
         </Typography>
       </Grid>
       {itemSupportsCompound(item) ? (
@@ -189,10 +190,10 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
               variant={'contained'}
               disabled={item.earned.lte(0)}
             >
-              {t('buttons.compoundToken', { token: item.token })}
+              {t('bonus.compoundToken', { token: item.token })}
             </Button>
             <Typography className={classes.explainerText}>
-              {t('compoundExplainer', { token: item.token })}
+              {t('bonus.compoundExplainer', { token: item.token })}
             </Typography>
           </Grid>
         </>
@@ -204,7 +205,7 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
           fullWidth={true}
           disabled={item.earned.lte(0)}
         >
-          {t('buttons.withdrawBonusTokens', {
+          {t('bonus.withdrawBonusTokens', {
             tokens: getItemBonusTokens(item),
           })}
         </Button>

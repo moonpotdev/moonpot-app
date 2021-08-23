@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { usePot, useTokenAllowance, useTokenBalance, useTokenEarned } from '../../helpers/hooks';
 import { Link, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { formatDecimals, formatTimeLeft } from '../../helpers/format';
 import PrizePoolAbi from '../../config/abi/prizepool.json';
 import reduxActions from '../../features/redux/actions';
@@ -12,6 +12,7 @@ import Steps from '../../features/vault/components/Steps';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { Alert, AlertTitle } from '@material-ui/lab';
+import { Translate } from '../Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -199,10 +200,10 @@ const MigrationNotice = function ({ token }) {
   return (
     <Alert severity={'warning'} className={classes.migrationNotice}>
       <AlertTitle>
-        <Trans i18nKey="withdraw.migrationNotice.title" />
+        <Translate i18nKey="withdraw.migrationNotice.title" />
       </AlertTitle>
       <Typography>
-        <Trans i18nKey="withdraw.migrationNotice.message" values={{ token }} />
+        <Translate i18nKey="withdraw.migrationNotice.message" values={{ token }} />
       </Typography>
     </Alert>
   );
@@ -262,7 +263,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
             disabled={!canWithdraw}
             fullWidth={true}
           >
-            <Trans i18nKey="withdraw.all" />
+            <Translate i18nKey="withdraw.all" />
           </PrimaryButton>
         ) : (
           <WalletConnectButton variant="teal" fullWidth={true} />
@@ -270,10 +271,10 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
         <WithdrawSteps pot={pot} steps={steps} setSteps={setSteps} />
       </div>
       <div className={classes.fairplayNotice}>
-        <Trans i18nKey="withdraw.fairplayNotice" />{' '}
+        <Translate i18nKey="withdraw.fairplayNotice" />{' '}
         {onLearnMore ? (
           <Link onClick={onLearnMore} className={classes.learnMore}>
-            <Trans i18nKey="buttons.learnMore" />
+            <Translate i18nKey="buttons.learnMore" />
           </Link>
         ) : null}
       </div>

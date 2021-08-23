@@ -30,6 +30,9 @@ const styles = () => ({
     borderStyle: 'solid',
     boxShadow: '0px 4px 24px 24px rgba(19, 17, 34, 0.16)',
   },
+  cardsOne: {
+    width: `${500 + 24}px`,
+  },
   title: {
     fontWeight: 500,
     fontSize: '19px',
@@ -100,7 +103,6 @@ const styles = () => ({
     },
     '& $accordionItemTitle': {
       color: '#EBF3F9',
-      paddingBottom: '16px',
     },
     '& $accordionItemInner': {
       color: '#EBF3F9',
@@ -121,7 +123,6 @@ const styles = () => ({
     },
     '& $accordionItemTitle': {
       color: '#EBF3F9',
-      paddingBottom: '16px',
     },
     '& $accordionItemInner': {
       color: '#EBF3F9',
