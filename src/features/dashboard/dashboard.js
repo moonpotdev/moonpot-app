@@ -135,10 +135,10 @@ const Dashboard = () => {
             </Button>
           </Grid>
         </Grid>
-        <Grid container>
+        <Grid container style={{ marginTop: '56px' }}>
           {/*Pots*/}
-          <div className={classes.potsContainer}>
-            <Cards>
+          <div className={classes.potList}>
+            <div className={classes.potListInner}>
               {filtered.length === 0 ? (
                 <NoPotsCard />
               ) : (
@@ -146,7 +146,7 @@ const Dashboard = () => {
                   <Pot item={item} wallet={wallet} prices={prices} balance={balance} />
                 ))
               )}
-            </Cards>
+            </div>
           </div>
         </Grid>
       </Container>
