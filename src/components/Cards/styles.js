@@ -32,7 +32,8 @@ const styles = () => ({
   },
   accordionItemTitle: {
     fontStyle: 'normal',
-    fontWeight: 'bold',
+    fontWeight: '700',
+    fontFamily: 'Ubuntu',
     fontSize: '12px',
     lineHeight: '20px',
     letterSpacing: '1px',
@@ -72,12 +73,59 @@ const styles = () => ({
     '& $title': {
       color: '#FAFAFC',
     },
+    '& $accordionGroup': {
+      borderBottomColor: '#70609A',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#70609A',
+    },
+    '& $accordionItemTitle': {
+      color: '#EBF3F9',
+      paddingBottom: '16px',
+    },
+    '& $accordionItemInner': {
+      color: '#EBF3F9',
+    },
+  },
+  variantPurpleDarkAlt: {
+    color: '#594C7B',
+    backgroundColor: '#594C7B',
+    borderColor: '#70609A',
+    '& $title': {
+      color: '#FAFAFC',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#70609A',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#70609A',
+    },
+    '& $accordionItemTitle': {
+      color: '#EBF3F9',
+      paddingBottom: '16px',
+    },
+    '& $accordionItemInner': {
+      color: '#EBF3F9',
+    },
   },
   variantPurpleLight: {
     color: '#ECEAFB',
     backgroundColor: '#70609A',
     borderColor: '#8A7EAF',
     '& $title': {
+      color: '#EBF3F9',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#8A7EAF',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#8A7EAF',
+    },
+    '& $accordionItemTitle': {
+      color: '#EBF3F9',
+      paddingBottom: '16px',
+    },
+    '& $accordionItemInner': {
       color: '#EBF3F9',
     },
   },

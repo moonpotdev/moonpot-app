@@ -13,7 +13,7 @@ import { usePot, useTotalPrize } from '../../helpers/hooks';
 
 const useStyles = makeStyles(styles);
 
-const Logo = memo(function ({ name, baseToken, sponsorToken }) {
+export const Logo = memo(function ({ name, baseToken, sponsorToken }) {
   const src = require('../../images/vault/' +
     baseToken.toLowerCase() +
     '/sponsored/' +
@@ -57,7 +57,7 @@ const WinTokens = memo(function ({ depositToken, sponsors }) {
   );
 });
 
-const InterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
+export const InterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
   const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;

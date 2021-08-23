@@ -50,20 +50,16 @@ const styles = theme => ({
     color: '#6753DB',
     marginTop: '32px',
   },
-  activeMyPot: {
-    backgroundColor: '#70609A',
+  potsContainer: {
     height: '100%',
     width: 'min(100%, 500px)',
     margin: '80px auto 0px auto',
     marginTop: '56px',
     borderRadius: '16px',
-    padding: '24px',
     [theme.breakpoints.up('sm')]: {
       marginLeft: '20px',
       marginRight: '20px',
     },
-    boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2), 0px 12px 24px -10px rgba(0, 0, 0, 0.4)',
-    border: '2px solid #8A7EAF',
     '& .MuiDivider-root': {
       color: '#8A7EAF',
       backgroundColor: '#8A7EAF',
@@ -119,10 +115,9 @@ const styles = theme => ({
   },
   potUsdTop: {
     fontWeight: 700,
-    fontSize: '18px',
-    lineHeight: '20px',
+    fontSize: '24px',
+    lineHeight: '32px',
     letterSpacing: '0.6px',
-    marginTop: '10px',
     color: '#ffffff',
     '& span': {
       color: '#DFDDE7',
@@ -405,6 +400,33 @@ const styles = theme => ({
     '& $actionBtn:first-child': {
       marginTop: 0,
     },
+  },
+  title: {
+    color: '#EBF3F9',
+    fontSize: '15px',
+    lineHeight: '24px',
+    fontWeight: '500',
+    textAlign: 'right',
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+  },
+  interestValueApy: {
+    color: '#F3BA2E',
+    fontSize: '12px',
+    lineHeight: '20px',
+    fontWeight: '700',
+  },
+  interestValueBaseApy: {
+    color: '#A0BBD5',
+    textDecoration: 'line-through',
+    fontSize: '12px',
+    lineHeight: '20px',
+    fontWeight: '700',
+  },
+  interestValueApr: {
+    fontSize: '12px',
+    lineHeight: '20px',
+    fontWeight: '700',
   },
 });
 
