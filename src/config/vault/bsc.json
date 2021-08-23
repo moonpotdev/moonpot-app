@@ -1,5 +1,38 @@
 [
   {
+    "id": "banana",
+    "name": "Banana",
+    "token": "BANANA",
+    "tokenAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
+    "tokenDecimals": 18,
+    "rewardToken": "potBANANA",
+    "rewardAddress": "0xB0D406BF9e621A4Ecb64ba58456379e619DE7446",
+    "contractAddress": "0xc97761b8BA806093af0d9202952ADd045F544C3e",
+    "prizePoolAddress": "0x42e4F8438f1Bae47659d719EC18B1CF88F214B83",
+    "prizeStrategyAddress": "0x17aB2144F3436c50877033Ff84A859DEf970973b",
+    "pricePerShare": 1,
+    "oracleId": "BANANA",
+    "apyId": "banana-banana",
+    "vaultType": "community",
+    "status": "active",
+    "infoCardStrategy": "PLACEHOLDER",
+    "infoCardBeefyVaultAddress": "0xED4ea41Daf652964789b16e3Ff76eC07d99d2340",
+    "infoCardEarningsBreakdown": true,
+    "sponsorProjectName": "Moonpot",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonusRewardId": 0,
+    "bonusToken": "BANANA",
+    "bonusAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
+    "bonusTokenDecimals": 18
+  },
+  {
     "id": "pots",
     "name": "Ziggy's",
     "token": "POTS",
