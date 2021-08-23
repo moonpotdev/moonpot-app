@@ -9,27 +9,6 @@ import { InterestTooltip } from '../../../../components/Pot/Pot';
 
 const useStyles = makeStyles(styles);
 
-export const PotImage = function ({ item }) {
-  const classes = useStyles();
-
-  return (
-    <Grid item xs={4} align={'left'}>
-      <Box className={classes.potImage}>
-        <img
-          alt={`Moonpot ${item.sponsorToken}`}
-          src={
-            require('../../../../images/vault/' +
-              item.token.toLowerCase() +
-              '/sponsored/' +
-              item.sponsorToken.toLowerCase() +
-              '.svg').default
-          }
-        />
-      </Box>
-    </Grid>
-  );
-};
-
 export const PotTitle = function ({ item, prices }) {
   const classes = useStyles();
   const { t } = useTranslation();
