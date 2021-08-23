@@ -28,6 +28,10 @@ const links = [
     href: '/my-moonpots',
   },
   {
+    label: 'header.winners',
+    href: '/winners',
+  },
+  {
     label: 'header.docs',
     href: 'https://docs.moonpot.com',
     external: true,

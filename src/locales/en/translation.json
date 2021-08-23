@@ -33,6 +33,7 @@
     "myPots": "My Pots",
     "docs": "Docs",
     "vote": "Vote",
+    "winners": "Winners",
     "potsPrice": "POTS Price",
     "buyPots": "Buy POTS"
   },
@@ -106,7 +107,6 @@
   "winner3": "Winner 3",
   "winner4": "Winner 4",
   "winner5": "Winner 5",
-  "winners": "Winners",
   "winningTransactions": "View Transactions",
   "telegramSocialBlockBody": "Learn about Moonpot and get direct support from the community",
   "discordSocialBlockBody": "Join the conversation with our active community of developers",
@@ -210,5 +210,18 @@
   },
   "wallet": {
     "connect": "Connect Wallet"
+  },
+  "winners": {
+    "totalPrizesWon": "Our cadets have won",
+    "potDrawNumber": "{{name}} Pot Draw #{{number}}",
+    "valueWon": "<span>{{currency}}{{amount}}</span> Won",
+    "wonTokensIn": "in ",
+    "drawDate": "Draw date",
+    "players": "Players",
+    "prizePerWinner": "Prize per winner",
+    "winners": "Winners",
+    "stakedAmountToken": "Staked {{amount}} {{token}}",
+    "viewTransaction": "View Transaction",
+    "userWonPrize": "You won a prize!"
   }
 }

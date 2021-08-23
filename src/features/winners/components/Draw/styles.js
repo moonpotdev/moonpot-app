@@ -1,5 +1,5 @@
 const styles = theme => ({
-  rowLogoWinTotal: {
+  rowLogoWonTotal: {
     marginBottom: `${24 - 8}px`,
   },
   title: {
@@ -10,7 +10,7 @@ const styles = theme => ({
     textAlign: 'right',
     letterSpacing: '0.6px',
   },
-  winTotalPrize: {
+  valueWon: {
     color: '#FFFFFF',
     fontWeight: 'bold',
     textAlign: 'right',
@@ -21,7 +21,7 @@ const styles = theme => ({
       color: '#F3BA2E',
     },
   },
-  winTotalTokens: {
+  wonTotalTokens: {
     textAlign: 'right',
     color: '#FAFAFC',
     fontSize: '12px',
@@ -32,6 +32,26 @@ const styles = theme => ({
       fontWeight: 'bold',
     },
   },
+  userWonPrize: {
+    display: 'flex',
+    flexDirection: 'row',
+    background: '#FAF9FB',
+    border: '2px solid #E3DFEC',
+    borderRadius: '4px',
+    color: '#000000',
+    fontSize: '12px',
+    lineHeight: '20px',
+    padding: '10px',
+    marginBottom: `20px`,
+  },
+  userWonPrizeIcon: {
+    color: '#008F39',
+    fontSize: '20px',
+    flexShrink: '0',
+  },
+  userWonPrizeText: {
+    marginLeft: '10px',
+  },
   rowDrawStats: {
     justifyContent: 'flex-start',
     marginBottom: `${20 - 8}px`,
@@ -39,44 +59,33 @@ const styles = theme => ({
       textAlign: 'right',
     },
   },
-  statLabel: {
-    color: '#EBF3F9',
-  },
-  statValue: {
-    '& > span': {
-      fontWeight: 'normal',
-      color: '#A0BBD5',
-      textDecoration: 'line-through',
-    },
-  },
-  interestValueApy: {
+  perWinnerToken: {
     color: '#F3BA2E',
   },
-  interestValueBaseApy: {
-    fontWeight: 'normal',
-    color: '#A0BBD5',
-    textDecoration: 'line-through',
-  },
-  interestValueApr: {
+  perWinnerValue: {
     fontWeight: 'normal',
   },
-  prizeSplitValue: {
-    textAlign: 'right',
-    '& span': {
-      fontWeight: 'bold',
-      color: '#ffffff',
-    },
+  rowWinners: {
+    justifyContent: 'flex-start',
+    marginBottom: `${16 - 8}px`,
   },
-  rowPlay: {
-    marginTop: '20px',
-  },
-  rowOdds: {
-    marginTop: '8px',
-    textAlign: 'center',
-    fontWeight: '300',
-    fontSize: '12px',
+  winnerAddress: {
+    fontSize: '10px',
+    fontWeight: 'bold',
     lineHeight: '20px',
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+  },
+  winnerStaked: {
+    fontSize: '12px',
+    fontWeight: 'bold',
+    lineHeight: '20px',
+    letterSpacing: '0.2px',
     color: '#FFFFFF',
+  },
+  txLink: {
+    color: '#F3BA2E',
+    textDecoration: 'none',
   },
 });
 

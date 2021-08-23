@@ -1,8 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
-import styles from './styles';
-import { Card } from '../Cards/Cards';
+import { Card } from '../Cards';
 import { BigNumber } from 'bignumber.js';
 import { Trans } from 'react-i18next';
 import { TransListJoin } from '../TransListJoin';
@@ -10,6 +9,8 @@ import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
 import { usePot, useTotalPrize } from '../../helpers/hooks';
+import { DrawStat } from '../DrawStat';
+import styles from './styles';
 
 const useStyles = makeStyles(styles);
 
@@ -70,20 +71,6 @@ export const InterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
   }
 
   return tooltipKey ? <TooltipWithIcon i18nKey={tooltipKey} /> : null;
-});
-
-const DrawStat = memo(function ({ labelKey, tooltip, children }) {
-  const classes = useStyles();
-
-  return (
-    <>
-      <div className={classes.statLabel}>
-        <Trans i18nKey={labelKey} />
-        {tooltip ? tooltip : null}
-      </div>
-      <div className={classes.statValue}>{children}</div>
-    </>
-  );
 });
 
 const Interest = memo(function ({ baseApy, bonusApy, bonusApr }) {
@@ -160,19 +147,19 @@ export function Pot({ id, variant, bottom }) {
       </Grid>
       <Grid container spacing={2} className={classes.rowDrawStats}>
         <Grid item xs={7}>
-          <DrawStat labelKey="pot.statNextDraw">
+          <DrawStat i18nKey="pot.statNextDraw">
             <Countdown until={pot.expiresAt * 1000}>
               <Trans i18nKey="pot.statNextDrawCountdownFinished" />
             </Countdown>
           </DrawStat>
         </Grid>
         <Grid item xs={5}>
-          <DrawStat labelKey="pot.statTVL">
+          <DrawStat i18nKey="pot.statTVL">
             <TVL totalStakedUsd={pot.totalStakedUsd} />
           </DrawStat>
         </Grid>
         <Grid item xs={5}>
-          <DrawStat labelKey="pot.statDeposit">
+          <DrawStat i18nKey="pot.statDeposit">
             <Deposit
               depositToken={pot.token}
               rewardToken={pot.rewardToken}
@@ -182,7 +169,7 @@ export function Pot({ id, variant, bottom }) {
         </Grid>
         <Grid item xs={7}>
           <DrawStat
-            labelKey="pot.statInterest"
+            i18nKey="pot.statInterest"
             tooltip={
               <InterestTooltip baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
             }
