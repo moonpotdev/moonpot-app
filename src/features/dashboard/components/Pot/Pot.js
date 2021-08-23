@@ -15,11 +15,7 @@ const Pot = function ({ item, wallet, prices, balance }) {
   const { t } = useTranslation();
 
   return (
-    <Card
-      variant={item.status === 'active' ? 'purpleLight' : 'purpleDarkAlt'}
-      style={{ height: 'fit-content' }}
-      key={item.id}
-    >
+    <Card variant={item.status === 'active' ? 'purpleLight' : 'purpleDarkAlt'} key={item.id}>
       <Grid container spacing={0}>
         {/*Pot Image*/}
         <Grid item xs={4} align={'left'} style={{ marginBottom: '24px' }}>
