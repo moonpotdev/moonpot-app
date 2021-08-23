@@ -32,7 +32,8 @@ const styles = () => ({
   },
   accordionItemTitle: {
     fontStyle: 'normal',
-    fontWeight: 'bold',
+    fontWeight: '700',
+    fontFamily: 'Ubuntu',
     fontSize: '12px',
     lineHeight: '20px',
     letterSpacing: '1px',
@@ -68,7 +69,7 @@ const styles = () => ({
   variantPurpleDark: {
     color: '#DFDFEC',
     backgroundColor: '#393960',
-    borderColor: '#4C4C80',
+    borderColor: '#6753DB',
     '& $title': {
       color: '#FAFAFC',
     },
@@ -81,7 +82,6 @@ const styles = () => ({
     '& $accordionItemTitle': {
       color: '#EBF3F9',
       paddingBottom: '16px',
-      fontFamily: 'Ubuntu',
     },
     '& $accordionItemInner': {
       color: '#EBF3F9',
@@ -103,7 +103,6 @@ const styles = () => ({
     '& $accordionItemTitle': {
       color: '#EBF3F9',
       paddingBottom: '16px',
-      fontFamily: 'Ubuntu',
     },
     '& $accordionItemInner': {
       color: '#EBF3F9',
@@ -125,7 +124,6 @@ const styles = () => ({
     '& $accordionItemTitle': {
       color: '#EBF3F9',
       paddingBottom: '16px',
-      fontFamily: 'Ubuntu',
     },
     '& $accordionItemInner': {
       color: '#EBF3F9',

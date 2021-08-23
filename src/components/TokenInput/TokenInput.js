@@ -44,7 +44,15 @@ const MaxButton = withStyles({
   },
 })(BaseButton);
 
-export const TokenInput = function ({ variant, token, max, value, setValue, setIsMax, className }) {
+export const TokenInput = function ({
+  variant = 'teal',
+  token,
+  max,
+  value,
+  setValue,
+  setIsMax,
+  className,
+}) {
   const { t } = useTranslation();
   const classes = useStyles();
   const tokenIcon = require(`../../images/tokens/${token.toLowerCase()}.svg`).default;
@@ -86,6 +94,11 @@ export const TokenInput = function ({ variant, token, max, value, setValue, setI
     setValue(bn.gt(0) ? bn.toString() : '');
   }, [value, setValue]);
 
+  function variantClass(classes, prefix, variant) {
+    const key = prefix + variant[0].toUpperCase() + variant.substr(1);
+    return key in classes ? classes[key] : false;
+  }
+
   return (
     <InputBase
       startAdornment={
@@ -99,12 +112,7 @@ export const TokenInput = function ({ variant, token, max, value, setValue, setI
           height={24}
         />
       }
-      className={clsx(classes.input, className)}
-      style={
-        variant === 'purple'
-          ? { background: '#8375A9', border: '2px solid #B6ADCC' }
-          : { background: '#3F688D', border: '2px solid #6B96BD' }
-      }
+      className={clsx(classes.input, variantClass(classes, 'variant', variant), className)}
       placeholder={t('tokenInput.placeholder', { token })}
       value={value}
       onChange={handleChange}

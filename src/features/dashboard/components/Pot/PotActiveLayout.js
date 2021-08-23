@@ -43,6 +43,7 @@ const ActiveLayout = function ({ item, wallet, balance, prices }) {
       {/*Deposit*/}
       <CardAccordionItem titleKey="depositMore">
         <PotDeposit id={item.id} onLearnMore={null} variant="purple" />
+        <div style={{ height: '12px' }} />
       </CardAccordionItem>
       {/*Withdraw*/}
       <CardAccordionItem titleKey="pot.withdraw">

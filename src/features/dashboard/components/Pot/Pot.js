@@ -3,9 +3,10 @@ import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from '../../styles';
 import ActiveLayout from './PotActiveLayout';
 import EOLLayout from './PotEOLLayout';
-import { Card, Cards } from '../../../../components/Cards/Cards';
+import { Card } from '../../../../components/Cards/Cards';
 import { useTranslation } from 'react-i18next';
-import { PotImage, PotTitle, PotInfoBlock } from './PotComponents';
+import { PotTitle, PotInfoBlock } from './PotComponents';
+import { Logo } from '../../../../components/Pot/Pot';
 
 const useStyles = makeStyles(styles);
 
@@ -14,30 +15,28 @@ const Pot = function ({ item, wallet, prices, balance }) {
   const { t } = useTranslation();
 
   return (
-    <div className={classes.potsContainer}>
-      <Cards>
-        <Card variant={item.status === 'active' ? 'purpleLight' : 'purpleDarkAlt'}>
-          <Grid container spacing={0}>
-            {/*Pot Image*/}
-            <PotImage item={item} />
-            {/*Pot Title*/}
-            <PotTitle item={item} prices={prices} />
-            {/*Divider Text*/}
-            <Grid item xs={12} align={'left'} style={{ paddingBottom: 0 }}>
-              <Typography className={classes.dividerText}>{t('myDetails')} </Typography>
-            </Grid>
-            {/*Info Block*/}
-            <PotInfoBlock item={item} prices={prices} />
-          </Grid>
-          {/*Bottom*/}
-          {item.status === 'active' ? (
-            <ActiveLayout item={item} wallet={wallet} balance={balance} prices={prices} />
-          ) : (
-            <EOLLayout item={item} wallet={wallet} balance={balance} prices={prices} />
-          )}
-        </Card>
-      </Cards>
-    </div>
+    <Card variant={item.status === 'active' ? 'purpleLight' : 'purpleDarkAlt'} key={item.id}>
+      <Grid container spacing={0}>
+        {/*Pot Image*/}
+        <Grid item xs={4} align={'left'} style={{ marginBottom: '24px' }}>
+          <Logo name={item.name} baseToken={item.token} sponsorToken={item.sponsorToken} />
+        </Grid>
+        {/*Pot Title*/}
+        <PotTitle item={item} prices={prices} />
+        {/*Divider Text*/}
+        <Grid item xs={12} align={'left'} style={{ paddingBottom: 0 }}>
+          <Typography className={classes.dividerText}>{t('myDetails')} </Typography>
+        </Grid>
+        {/*Info Block*/}
+        <PotInfoBlock item={item} prices={prices} />
+      </Grid>
+      {/*Bottom*/}
+      {item.status === 'active' ? (
+        <ActiveLayout item={item} wallet={wallet} balance={balance} prices={prices} />
+      ) : (
+        <EOLLayout item={item} wallet={wallet} balance={balance} prices={prices} />
+      )}
+    </Card>
   );
 };
 

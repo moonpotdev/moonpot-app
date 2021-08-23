@@ -13,7 +13,7 @@ import { usePot, useTotalPrize } from '../../helpers/hooks';
 
 const useStyles = makeStyles(styles);
 
-const Logo = memo(function ({ name, baseToken, sponsorToken }) {
+export const Logo = memo(function ({ name, baseToken, sponsorToken }) {
   const src = require('../../images/vault/' +
     baseToken.toLowerCase() +
     '/sponsored/' +

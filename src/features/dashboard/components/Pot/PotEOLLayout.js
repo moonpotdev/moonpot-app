@@ -23,6 +23,7 @@ const EOLLayout = function ({ item, wallet, balance, prices }) {
           </Grid>
           <CardAccordionItem titleKey="pot.withdraw">
             <PotWithdraw id={item.id} onLearnMore={null} />
+            <div style={{ height: '12px' }} />
           </CardAccordionItem>
         </React.Fragment>
       ) : (
@@ -37,6 +38,7 @@ const EOLLayout = function ({ item, wallet, balance, prices }) {
           {/*Withdraw*/}
           <CardAccordionItem titleKey="pot.withdraw">
             <PotWithdraw id={item.id} onLearnMore={null} />
+            <div style={{ height: '12px' }} />
           </CardAccordionItem>
         </React.Fragment>
       )}
