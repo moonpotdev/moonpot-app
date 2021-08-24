@@ -52,7 +52,8 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
               target="_blank"
               className={classes.link}
             >
-              {t('pot.infocards.strategy.moonpotStrategyAddress')} <OpenInNew fontSize="inherit" />
+              {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
+              <OpenInNew fontSize="inherit" />
             </a>
           </p>
         </Card>

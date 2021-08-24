@@ -107,8 +107,8 @@
             "Ziggy’s Pot also has a monthly Prize Draw where 10 lucky winners will get a share of all the different tokens from that months’s Moonpots. The September 1 Prize includes $POTS, $BIFI, $CAKE and $DODO."
           ]
         },
-        "beefyVaultAddress": "Beefy Vault Address",
-        "moonpotStrategyAddress": "Moonpot Strategy Address"
+        "beefyVaultAddress": "Beefy.Finance Vault Address",
+        "moonpotStrategyAddress": "{{name}} Pot Strategy Address"
       },
       "earnings": {
         "title": "Earnings Breakdown",

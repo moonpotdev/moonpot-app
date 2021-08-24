@@ -1,7 +1,7 @@
 [
   {
     "id": "banana",
-    "name": "Banana",
+    "name": "BANANA",
     "token": "BANANA",
     "tokenAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
     "tokenDecimals": 18,
