@@ -6,10 +6,10 @@
     "tokenAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
     "tokenDecimals": 18,
     "rewardToken": "potBANANA",
-    "rewardAddress": "0x1Aea36A163A1b8682B475B4B8E6DF8083b55Cee1",
-    "contractAddress": "0xd00125264c08f79c6B1229A034EA181eF5c4f0aF",
-    "prizePoolAddress": "0xBF72Efcc038acEb7b758D70616B1D9E78ce1dF74",
-    "prizeStrategyAddress": "0x30Bf34849e2B34FBDfD3Ae8558d2a366d01B840b",
+    "rewardAddress": "0x08B42C61e5e931E9043629dBc8769d59ADB456b4",
+    "contractAddress": "0xe0b8178aBDf315d7C7D46260e59B1A649eFb05B6",
+    "prizePoolAddress": "0xFd541D40C0da3d11F95300fc9756B51D897DC792",
+    "prizeStrategyAddress": "0x6252a5d510f0BDE8d6FDd73696793B572708432e",
     "pricePerShare": 1,
     "oracleId": "BANANA",
     "apyId": "banana-banana",
@@ -31,7 +31,8 @@
     "bonusRewardId": 0,
     "bonusToken": "BANANA",
     "bonusAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
-    "bonusTokenDecimals": 18
+    "bonusTokenDecimals": 18,
+    "supportsCompound": true
   },
   {
     "id": "pots",
