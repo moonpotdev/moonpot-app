@@ -37,7 +37,7 @@ const ActiveLayout = function ({ item, wallet, balance, prices }) {
   return (
     <>
       {/*Bonus*/}
-      <CardAccordionItem titleKey="pot.bonusEarnings">
+      <CardAccordionItem titleKey={item.token === 'POTS' ? 'pot.earnings' : 'pot.bonusEarnings'}>
         <PotBonus item={item} prices={prices} wallet={wallet} balance={balance} />
       </CardAccordionItem>
       {/*Deposit*/}
