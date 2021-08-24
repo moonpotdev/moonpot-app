@@ -79,6 +79,7 @@
     "odds": "1 in {{odds}}",
     "oddsPerDeposit": "1 in {{odds}} odds per {{deposit}} deposit",
     "bonusEarnings": "Bonus Earnings",
+    "earnings": "Earnings",
     "depositMore": "Deposit More",
     "withdraw": "Withdraw",
     "myToken": "My {{token}}",
@@ -156,13 +157,16 @@
   },
   "bonus": {
     "myBonusEarnings": "My Bonus Earnings",
+    "myEarnings": "My Earnings",
     "myBoostEarnings": "My Super Boost Earnings",
     "bonusExtraInfo": "You will continue to earn bonus {{bonusToken}} and {{boostToken}} until the end of the draw. You can claim it as many times as you like.",
     "bonusExplainer": "You will continue to earn bonus {{tokens}} until the end of the draw. You can claim as many times as you like.",
-    "compoundExplainer": "Compounding your Bonus {{token}} will reset your Fairness Fee to a maximum of 2.5%, for your new deposit. Your Fairplay Timelock countdown will reset to 10 days, but you won't pay any additional Fairness Fees on your older deposits.",
+    "potsExplainer": "You will continue to earn {{tokens}} until the end of the draw. You can claim as many times as you like.",
+    "compoundExplainer": "Compounding more {{token}} will increase your Fairness Fee and Fairplay Timelock proportionally to the amount deposited. This fee reduces every second after you deposit. You won't pay any additional Fairness Fees on your older deposits.",
     "compoundToken": "Compound {{token}}",
     "compoundBonusToken": "Compound Bonus {{token}}",
-    "withdrawBonusTokens": "Withdraw Bonus {{tokens}}"
+    "withdrawBonusTokens": "Withdraw Bonus {{tokens}}",
+    "withdrawEarnedTokens": "Withdraw Earned {{tokens}}"
   },
   "wallet": {
     "connect": "Connect Wallet"
