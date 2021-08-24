@@ -12,7 +12,7 @@
     "prizeStrategyAddress": "0x04F3fd08504a7Fc9d4A01985c15EbC3a0F342013",
     "pricePerShare": 1,
     "oracleId": "BANANA",
-    "apyId": "banana-banana",
+    "apyId": "banana-bananav2",
     "vaultType": "community",
     "status": "active",
     "infoCardStrategy": "beefy",
