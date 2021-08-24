@@ -84,7 +84,11 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
         )}
       </div>
       <CardAccordionItem titleKey="pot.withdraw">
-        <PotWithdraw id={id} onLearnMore={onFairplayLearnMore} variant={variant} />
+        <PotWithdraw
+          id={id}
+          onLearnMore={onFairplayLearnMore}
+          variant={pot.vaultType === 'main' ? 'teal' : 'purpleAlt'}
+        />
       </CardAccordionItem>
     </>
   );
