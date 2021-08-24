@@ -131,7 +131,7 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
       <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
       <Grid item xs={6}>
         <Typography className={classes.myDetailsText} align={'left'} style={{ marginBottom: 0 }}>
-          <Translate i18nKey="bonus.myBonusEarnings" />
+          {item.token === 'POTS' ? t('bonus.myEarnings') : t('bonus.myBonusEarnings')}
         </Typography>
       </Grid>
       <Grid item xs={6}>
@@ -178,7 +178,9 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
       )}
       <Grid item xs={12} className={classes.bonusExplainerRow}>
         <Typography className={classes.explainerText}>
-          {t('bonus.bonusExplainer', { tokens: getItemBonusTokens(item) })}
+          {item.token === 'POTS'
+            ? t('bonus.potsExplainer', { tokens: getItemBonusTokens(item) })
+            : t('bonus.bonusExplainer', { tokens: getItemBonusTokens(item) })}
         </Typography>
       </Grid>
       {itemSupportsCompound(item) ? (
@@ -207,9 +209,9 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
           fullWidth={true}
           disabled={item.earned.lte(0)}
         >
-          {t('bonus.withdrawBonusTokens', {
-            tokens: getItemBonusTokens(item),
-          })}
+          {item.compoundIsBonus
+            ? t('bonus.withdrawBonusTokens', { tokens: getItemBonusTokens(item) })
+            : t('bonus.withdrawEarnedTokens', { tokens: getItemBonusTokens(item) })}
         </Button>
       </Grid>
     </Grid>
