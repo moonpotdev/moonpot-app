@@ -58,7 +58,40 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
           </p>
         </Card>
       ) : null}
-      {pot.infoCardEarningsBreakdown ? (
+      {pot.vaultType === 'community' ? (
+        <Card variant="purpleDark">
+          <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
+          <div className={classes.earningItem}>
+            <div className={classes.earningLabel}>
+              {t('pot.infocards.earnings.tokenInterest', { token: pot.token })}
+            </div>
+            <div className={classes.earningValue}>50%</div>
+          </div>
+          <div className={classes.earningItem}>
+            <div className={classes.earningLabel}>
+              {t('pot.infocards.earnings.nameMoonpotPrizeDraw', { name: pot.name })}
+            </div>
+            <div className={classes.earningValue}>40%</div>
+          </div>
+          <div className={classes.earningItem}>
+            <div className={classes.earningLabel}>
+              {t('pot.infocards.earnings.ziggysPotInterest')}
+            </div>
+            <div className={classes.earningValue}>5%</div>
+          </div>
+          <div className={classes.earningItem}>
+            <div className={classes.earningLabel}>
+              {t('pot.infocards.earnings.ziggysPrizeDraw')}
+            </div>
+            <div className={classes.earningValue}>3%</div>
+          </div>
+          <div className={classes.earningItem}>
+            <div className={classes.earningLabel}>{t('pot.infocards.earnings.treasury')}</div>
+            <div className={classes.earningValue}>2%</div>
+          </div>
+        </Card>
+      ) : null}
+      {pot.infoCardEarningsBreakdown && pot.vaultType !== 'community' ? (
         <Card variant="purpleDark">
           <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
           <div className={classes.earningItem}>

@@ -115,7 +115,8 @@
         "tokenInterest": "Your {{token}} Interest",
         "nameMoonpotPrizeDraw": "{{name}} Moonpot Prize Draw",
         "ziggysPotInterest": "Ziggy's (Governance) Pot Interest",
-        "ziggysPrizeDraw": "Ziggy's (Governance) Prize Draw"
+        "ziggysPrizeDraw": "Ziggy's (Governance) Prize Draw",
+        "treasury": "Moonpot Treasury"
       },
       "fairplay": {
         "title": "Fairplay Timelock Rules",
