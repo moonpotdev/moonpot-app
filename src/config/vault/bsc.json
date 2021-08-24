@@ -15,7 +15,7 @@
     "apyId": "banana-banana",
     "vaultType": "community",
     "status": "active",
-    "infoCardStrategy": "PLACEHOLDER",
+    "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xED4ea41Daf652964789b16e3Ff76eC07d99d2340",
     "infoCardEarningsBreakdown": true,
     "sponsorProjectName": "Moonpot",

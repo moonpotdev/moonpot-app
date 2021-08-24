@@ -13,13 +13,13 @@ import { Translate } from '../../../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
-const Play = memo(function ({ id, token, rewardToken }) {
+const Play = memo(function ({ id, token, rewardToken, variant }) {
   const address = useSelector(state => state.walletReducer.address);
   const balance = useSelector(state => state.balanceReducer.tokens[rewardToken]?.balance);
   const hasStaked = address && balance > 0;
 
   return (
-    <PrimaryButton to={`/pot/${id}`} variant="teal" fullWidth={true}>
+    <PrimaryButton to={`/pot/${id}`} variant={variant} fullWidth={true}>
       <Translate i18nKey={hasStaked ? 'pot.playWithMore' : 'pot.playWith'} values={{ token }} />
     </PrimaryButton>
   );
@@ -60,7 +60,12 @@ const Bottom = function ({ id }) {
         </CardAccordionItem>
       </CardAccordionGroup>
       <div className={classes.rowPlay}>
-        <Play id={pot.id} token={pot.token} rewardToken={pot.rewardToken} />
+        <Play
+          id={pot.id}
+          token={pot.token}
+          rewardToken={pot.rewardToken}
+          variant={pot.vaultType === 'main' ? 'teal' : 'purpleCommunity'}
+        />
       </div>
       <div className={classes.rowOdds}>
         <Odds tvlUsd={pot.totalStakedUsd} depositAmount={1000} winners={pot.numberOfWinners} />

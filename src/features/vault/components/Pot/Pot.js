@@ -59,7 +59,7 @@ const EolNotice = function ({ id }) {
   );
 };
 
-const Bottom = function ({ id, onFairplayLearnMore }) {
+const Bottom = function ({ id, onFairplayLearnMore, variant }) {
   const classes = useStyles();
   const pot = usePot(id);
 
@@ -74,24 +74,28 @@ const Bottom = function ({ id, onFairplayLearnMore }) {
       />
       <div className={classes.depositHolder}>
         {pot.status === 'active' ? (
-          <PotDeposit id={id} onLearnMore={onFairplayLearnMore} />
+          <PotDeposit
+            id={id}
+            onLearnMore={onFairplayLearnMore}
+            variant={pot.vaultType === 'main' ? 'teal' : 'purpleAlt'}
+          />
         ) : (
           <EolNotice id={id} />
         )}
       </div>
       <CardAccordionItem titleKey="pot.withdraw">
-        <PotWithdraw id={id} onLearnMore={onFairplayLearnMore} />
+        <PotWithdraw id={id} onLearnMore={onFairplayLearnMore} variant={variant} />
       </CardAccordionItem>
     </>
   );
 };
 
-export const Pot = function ({ id, onFairplayLearnMore }) {
+export const Pot = function ({ id, onFairplayLearnMore, variant }) {
   return (
     <BasePot
       id={id}
-      variant="tealDark"
-      bottom={<Bottom id={id} onFairplayLearnMore={onFairplayLearnMore} />}
+      variant={variant}
+      bottom={<Bottom id={id} onFairplayLearnMore={onFairplayLearnMore} variant={variant} />}
     />
   );
 };

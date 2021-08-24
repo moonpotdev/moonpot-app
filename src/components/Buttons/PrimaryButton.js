@@ -8,6 +8,8 @@ export const PrimaryButton = withStyles({
     color: styledBy('variant', {
       teal: '#3675A2',
       purple: '#70609A',
+      purpleAlt: '#4F5887',
+      purpleCommunity: '#5A6881',
     }),
     '&:hover': {
       backgroundColor: '#E6E6E6',

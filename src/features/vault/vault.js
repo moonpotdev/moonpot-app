@@ -91,7 +91,11 @@ const Vault = () => {
           awardBalanceUsd={pot.awardBalanceUsd}
         />
         <PoweredByBeefy className={classes.poweredBy} />
-        <Pot id={id} onFairplayLearnMore={handleFairplayLearnMore} />
+        <Pot
+          id={id}
+          onFairplayLearnMore={handleFairplayLearnMore}
+          variant={pot.vaultType === 'main' ? 'tealDark' : 'purpleCommunityAlt'}
+        />
         <InfoCards id={id} fairplayRef={fairplayRef} className={classes.infoCards} />
       </Container>
     </div>
