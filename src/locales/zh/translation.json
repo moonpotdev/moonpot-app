@@ -3,10 +3,10 @@
     "ziggyMoonpotGuide": "小吉带您玩转Moonpot",
     "moonpotAlpha": "Alpha 新鲜事",
     "deposit": "存入",
-    "myActivePots": "活跃中的宝壶",
-    "myPastPots": "使用过的宝壶",
-    "mainPots": "核心宝壶",
-    "communityPots": "社群宝壶",
+    "myActivePots": "活跃中的月盒",
+    "myPastPots": "使用过的月盒",
+    "mainPots": "核心月盒",
+    "communityPots": "社群月盒",
     "play": "开始游戏",
     "learnMore": "了解更多"
   },
@@ -21,7 +21,7 @@
   },
   "header": {
     "moonpots": "Moonpots",
-    "myPots": "我的宝壶",
+    "myPots": "我的月盒",
     "docs": "文档",
     "vote": "投票",
     "winners": "全部中奖者",
@@ -31,17 +31,17 @@
   "homeTitle": "存入 <span>加密资产</span>, 赚取<span>利息收入</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
   "homeTotalDeposits": "存款总额 (总锁仓量)",
   "homeJoinCommunityTitle": "加入我们的社群",
-  "homeJoinCommunityBody": "目前社群宝壶暂未上线。您可以通过以下官方社交媒体渠道，告诉我们您对于新增宝壶的建议，或者加入我们的开发团队，为您喜爱的项目创建新的宝壶。",
-  "migrationNoticeTitle": "请将您的 {{asset}} 转移至全新升级的{{pot}}宝壶。",
+  "homeJoinCommunityBody": "目前社群月盒暂未上线。您可以通过以下官方社交媒体渠道，告诉我们您对于新增月盒的建议，或者加入我们的开发团队，为您喜爱的项目创建新的月盒。",
+  "migrationNoticeTitle": "请将您的 {{asset}} 转移至全新升级的{{pot}}月盒。",
   "migrationNoticeLearnMore": "了解更多",
   "migrationNoticeMove": "转移我的{{asset}}",
   "vaultTitle": "存入 <span>{{name}}</span>, 获得 <span>{{apy}}% APY</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
   "playWithMoonpot": "使用Moonpot进行游戏",
-  "youHaventEnteredMoonpots": "您尚未参与任何宝壶.",
-  "connectToJoin": "连接您的钱包以加入宝壶。",
+  "youHaventEnteredMoonpots": "您尚未参与任何月盒.",
+  "connectToJoin": "连接您的钱包以加入月盒。",
   "poweredBy": "技术支持来自",
-  "upgradeWhy": "我们升级了 {{token}}宝壶，以便能够为所有未来的Moonpots玩家添加不同的福利奖励。",
-  "upgradeNextSteps": "由于此次的升级，您需要转移您的{{token}}至新的{{token}} 宝壶。我们已添加了金额为${{amount}} {{boostToken}}的超速增值币到这一新的{{token}}宝壶，以便让您获得更多的收益。",
+  "upgradeWhy": "我们升级了 {{token}}月盒，以便能够为所有未来的Moonpots玩家添加不同的福利奖励。",
+  "upgradeNextSteps": "由于此次的升级，您需要转移您的{{token}}至新的{{token}} 月盒。我们已添加了金额为${{amount}} {{boostToken}}的超速增值币到这一新的{{token}}月盒，以便让您获得更多的收益。",
   "learnMore": "了解更多",
   "telegramSocialBlockBody": "了解更多关于Moonpot的资讯，并获得来自官方社群的帮助",
   "discordSocialBlockBody": "和我们活跃的开发者社群进行直接对话",
@@ -57,7 +57,7 @@
     "end": " & <span>{{item}}</span>"
   },
   "pot": {
-    "title": "{{name}} 宝壶",
+    "title": "{{name}} 月盒",
     "titleRetired": "Retired {{name}} Pot",
     "winTotalPrize": "赢取 <span>{{prize}}</span>",
     "winTotalTokensIn": "的 ",
@@ -94,17 +94,17 @@
     },
     "infocards": {
       "strategy": {
-        "title": "{{name}} 宝壶策略",
+        "title": "{{name}} 月盒策略",
         "body": {
           "beefy": [
             "该策略将您的{{token}} 代币存入 Beefy.Finance {{token}} 机枪池内。Beefy自动复投{{token}}的质押收益。",
-            "所有在Beefy机枪池赚取的 {{token}}收益将被分配给 Moonpot 玩家。一半用于支付利息，另一半则用作抽奖奖金以及未来小吉(治理）宝壶给出的奖励。"
+            "所有在Beefy机枪池赚取的 {{token}}收益将被分配给 Moonpot 玩家。一半用于支付利息，另一半则用作抽奖奖金以及未来小吉(治理）月盒给出的奖励。"
           ],
           "ziggy": [
-            "通过在 Ziggy's Pot 中质押 $POTS，您将获得由所有其他宝壶收入的 5% 所产生的 APY。",
-            "由于目前只有一个宝壶，这意味着您的 APY 只由 CAKE 宝壶生成。 将来会有多个宝壶。 所有的宝壶都将为 Ziggy's Pot 创造收入。",
+            "通过在 Ziggy's Pot 中质押 $POTS，您将获得由所有其他月盒收入的 5% 所产生的 APY。",
+            "由于目前只有一个月盒，这意味着您的 APY 只由 CAKE 月盒生成。 将来会有多个月盒。 所有的月盒都将为 Ziggy's Pot 创造收入。",
             "Ziggy's Pot 使用 Moonpot.com 的收入从市场上购买 $POTS，并将其作为利息提供给 $POTS 质押者。",
-            "Ziggy's Pot 每月还有一次抽奖活动，其中 10 位幸运的获胜者将从当月的宝壶中分享所有不同的代币。 9 月 1 日的奖金包括 $POTS、$BIFI、$CAKE 和 $DODO。"
+            "Ziggy's Pot 每月还有一次抽奖活动，其中 10 位幸运的获胜者将从当月的月盒中分享所有不同的代币。 9 月 1 日的奖金包括 $POTS、$BIFI、$CAKE 和 $DODO。"
           ]
         },
         "beefyVaultAddress": "Beefy 金库地址",
@@ -114,7 +114,7 @@
         "title": "收益明细",
         "tokenInterest": "您的 {{token}} 利息",
         "nameMoonpotPrizeDraw": "{{name}} Moonpot 抽奖活动",
-        "ziggysPotInterest": "Ziggy's (治理) 宝壶利息",
+        "ziggysPotInterest": "Ziggy's (治理) 月盒利息",
         "ziggysPrizeDraw": "Ziggy's (治理) 抽奖活动"
       },
       "fairplay": {
@@ -140,8 +140,8 @@
     "amountToken": "存入 {{amount}} {{token}}",
     "fairplayNotice": "我们设置了10天的公平游戏时间锁定期。如果想要提前提取资产，您必须支付2.5% 或更少的公平费用。公平费在十天内逐秒减少至零。",
     "eolNotice": {
-      "title": "已退役的宝壶",
-      "message": "您不能再向这个宝壶进行存款了."
+      "title": "已退役的月盒",
+      "message": "您不能再向这个月盒进行存款了."
     }
   },
   "withdraw": {
@@ -150,7 +150,7 @@
     "fairplayNotice": "公平游戏锁定期规则适用",
     "migrationNotice": {
       "title": "需要进行迁移",
-      "message": "选择取出您的 {{token}}，而不是转移到新的宝壶，意味着您将错过未来的额外收益，以及赢取下一次{{token}}大奖的机会。"
+      "message": "选择取出您的 {{token}}，而不是转移到新的月盒，意味着您将错过未来的额外收益，以及赢取下一次{{token}}大奖的机会。"
     }
   },
   "bonus": {
@@ -167,7 +167,7 @@
   },
   "winners": {
     "totalPrizesWon": "我们的学员赢得了",
-    "potDrawNumber": "{{name}} 宝壶抽奖活动 #{{number}}",
+    "potDrawNumber": "{{name}} 月盒抽奖活动 #{{number}}",
     "valueWon": "<span>赢取了{{currency}}{{amount}}</span>",
     "wonTokensIn": "的 ",
     "drawDate": "开奖日期",
