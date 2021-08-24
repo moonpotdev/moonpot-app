@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Button, Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 
-const Filter = ({ config, setConfig, className }) => {
+const Filter = ({ config, setConfig, className, selected }) => {
   const { t } = useTranslation();
 
   const handleChange = useCallback(
@@ -12,6 +12,12 @@ const Filter = ({ config, setConfig, className }) => {
     },
     [setConfig, config]
   );
+
+  useEffect(() => {
+    if (selected === 'community') {
+      setConfig({ ...config, vault: 'community' });
+    }
+  }, []);
 
   return (
     <Grid container spacing={2} className={clsx(className)}>

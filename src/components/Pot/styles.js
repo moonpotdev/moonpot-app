@@ -4,11 +4,12 @@ const styles = theme => ({
   },
   title: {
     color: '#EBF3F9',
-    fontSize: '19px',
-    lineHeight: '28px',
+    fontSize: '15px',
+    lineHeight: '24px',
     fontWeight: '500',
     textAlign: 'right',
-    letterSpacing: '0.6px',
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
   },
   winTotalPrize: {
     color: '#FFFFFF',

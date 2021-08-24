@@ -47,6 +47,10 @@ const styles = theme => ({
     background: '#8375A9',
     border: '2px solid #B6ADCC',
   },
+  variantPurpleAlt: {
+    background: '#4F5887',
+    border: '2px solid #586397',
+  },
 });
 
 export default styles;

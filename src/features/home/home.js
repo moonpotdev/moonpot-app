@@ -3,7 +3,6 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Box, Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import Filter from './components/Filter';
-
 import reduxActions from '../redux/actions';
 import { MigrationNotices } from './components/MigrationNotices/MigrationNotices';
 import ZiggyMaintenance from '../../images/ziggy/maintenance.svg';
@@ -17,7 +16,7 @@ import { Translate } from '../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
-const Home = () => {
+const Home = ({ selected }) => {
   const dispatch = useDispatch();
   const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
   const totalPrizesAvailable = useSelector(state => state.vaultReducer.totalPrizesAvailable);
@@ -43,15 +42,24 @@ const Home = () => {
         <Translate i18nKey="homeTitle" values={{ amount: totalPrizesAvailableFormatted }} />
       </Typography>
       <TVL className={classes.totalTVL} />
-      <Filter config={filterConfig} setConfig={setFilterConfig} className={classes.potsFilter} />
+      <Filter
+        config={filterConfig}
+        setConfig={setFilterConfig}
+        className={classes.potsFilter}
+        selected={selected}
+      />
       <MigrationNotices potType={filterConfig.vault} className={classes.potsMigrationNotice} />
       <Cards>
         {filtered.map(pot => (
-          <Pot key={pot.id} id={pot.id} />
+          <Pot
+            key={pot.id}
+            variant={pot.vaultType === 'main' ? 'tealLight' : 'purpleCommunity'}
+            id={pot.id}
+          />
         ))}
       </Cards>
-      {filterConfig.vault === 'community' && filtered.length === 0 ? (
-        <Grid item xs={12}>
+      {filterConfig.vault === 'community' ? (
+        <Grid item xs={12} style={{ marginTop: '32px' }}>
           <Grid container className={classes.communityJoin}>
             <Grid item xs={12}>
               <Box className={classes.ziggyMaintenance}>
