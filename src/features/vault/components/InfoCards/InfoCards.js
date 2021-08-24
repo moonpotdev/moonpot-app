@@ -52,12 +52,48 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
               target="_blank"
               className={classes.link}
             >
-              {t('pot.infocards.strategy.moonpotStrategyAddress')} <OpenInNew fontSize="inherit" />
+              {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
+              <OpenInNew fontSize="inherit" />
             </a>
           </p>
         </Card>
       ) : null}
-      {pot.infoCardEarningsBreakdown ? (
+      {/*Community Pot APR Breakdown */}
+      {pot.vaultType === 'community' ? (
+        <Card variant="purpleDark">
+          <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
+          <div className={classes.earningItem}>
+            <div className={classes.earningLabel}>
+              {t('pot.infocards.earnings.tokenInterest', { token: pot.token })}
+            </div>
+            <div className={classes.earningValue}>50%</div>
+          </div>
+          <div className={classes.earningItem}>
+            <div className={classes.earningLabel}>
+              {t('pot.infocards.earnings.nameMoonpotPrizeDraw', { name: pot.name })}
+            </div>
+            <div className={classes.earningValue}>40%</div>
+          </div>
+          <div className={classes.earningItem}>
+            <div className={classes.earningLabel}>
+              {t('pot.infocards.earnings.ziggysPotInterest')}
+            </div>
+            <div className={classes.earningValue}>5%</div>
+          </div>
+          <div className={classes.earningItem}>
+            <div className={classes.earningLabel}>
+              {t('pot.infocards.earnings.ziggysPrizeDraw')}
+            </div>
+            <div className={classes.earningValue}>3%</div>
+          </div>
+          <div className={classes.earningItem}>
+            <div className={classes.earningLabel}>{t('pot.infocards.earnings.treasury')}</div>
+            <div className={classes.earningValue}>2%</div>
+          </div>
+        </Card>
+      ) : null}
+      {/*Regular Pot APR Breakdown */}
+      {pot.infoCardEarningsBreakdown && pot.vaultType !== 'community' ? (
         <Card variant="purpleDark">
           <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
           <div className={classes.earningItem}>

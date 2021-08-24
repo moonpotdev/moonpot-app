@@ -169,6 +169,46 @@ const styles = () => ({
       color: '#ECEAFB',
     },
   },
+  variantPurpleCommunity: {
+    color: '#EBF3F9',
+    backgroundColor: '#4F5888',
+    borderColor: '#586397',
+    '& $title': {
+      color: '#EBF3F9',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#586397',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#586397',
+    },
+    '& $accordionItemTitle': {
+      color: '#EBF3F9',
+    },
+    '& $accordionItemInner': {
+      color: '#EBF3F9',
+    },
+  },
+  variantPurpleCommunityAlt: {
+    color: '#EBF3F9',
+    backgroundColor: '#464E77',
+    borderColor: '#586397',
+    '& $title': {
+      color: '#EBF3F9',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#586397',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#586397',
+    },
+    '& $accordionItemTitle': {
+      color: '#EBF3F9',
+    },
+    '& $accordionItemInner': {
+      color: '#EBF3F9',
+    },
+  },
   variantTealDark: {
     color: '#EBF3F9',
     backgroundColor: '#345675',

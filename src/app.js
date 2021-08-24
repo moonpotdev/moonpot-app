@@ -24,6 +24,9 @@ function Pages() {
         <Route exact path="/" key={Date.now()}>
           <Home />
         </Route>
+        <Route exact path="/community" key={Date.now()}>
+          <Home selected="community" />
+        </Route>
         <Route strict sensitive exact path="/pot/:id">
           <Vault />
         </Route>
@@ -66,16 +69,16 @@ export default function App() {
     dispatch(reduxActions.wallet.createWeb3Modal());
   }, [dispatch]);
 
-	return (
-		<ThemeProvider theme={theme}>
-			<CssBaseline/>
-			<ModalPopup/>
-			<HashRouter>
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <ModalPopup />
+      <HashRouter>
         <ScrollToTop />
-				<Header/>
-				<Pages/>
-				<Footer/>
-			</HashRouter>
-		</ThemeProvider>
-	);
+        <Header />
+        <Pages />
+        <Footer />
+      </HashRouter>
+    </ThemeProvider>
+  );
 }

@@ -190,7 +190,9 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
               variant={'contained'}
               disabled={item.earned.lte(0)}
             >
-              {t('bonus.compoundToken', { token: item.token })}
+              {item.compoundIsBonus
+                ? t('bonus.compoundBonusToken', { token: item.token })
+                : t('bonus.compoundToken', { token: item.token })}
             </Button>
             <Typography className={classes.explainerText}>
               {t('bonus.compoundExplainer', { token: item.token })}

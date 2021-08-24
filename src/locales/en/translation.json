@@ -31,7 +31,7 @@
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><wbr /> and a chance to win <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposits (TVL)",
   "homeJoinCommunityTitle": "Join the Community",
-  "homeJoinCommunityBody": "There are no community pots yet. You can suggest a new pot in one of our channels, or join our devs to build one for your favorite project.",
+  "homeJoinCommunityBody": "You can suggest a new pot in one of our channels, or join our devs to build one for your favourite project.",
   "migrationNoticeTitle": "Please move your {{asset}} to the new upgraded {{pot}} Moonpot.",
   "migrationNoticeLearnMore": "Learn more.",
   "migrationNoticeMove": "Move my {{asset}}",
@@ -73,7 +73,7 @@
     "closed": "Closed",
     "prizeSplit": "Prize Split",
     "prizeSplitWinner": "{{count}} winner",
-    "prizeSplitWinner_plural": "{{count}} winners",
+    "prizeSplitWinner_plural": "{{count}} winners (each)",
     "playWith": "Play with {{token}}",
     "playWithMore": "Play with more {{token}}",
     "odds": "1 in {{odds}}",
@@ -107,15 +107,16 @@
             "Ziggy’s Pot also has a monthly Prize Draw where 10 lucky winners will get a share of all the different tokens from that months’s Moonpots. The September 1 Prize includes $POTS, $BIFI, $CAKE and $DODO."
           ]
         },
-        "beefyVaultAddress": "Beefy Vault Address",
-        "moonpotStrategyAddress": "Moonpot Strategy Address"
+        "beefyVaultAddress": "Beefy.Finance Vault Address",
+        "moonpotStrategyAddress": "{{name}} Pot Strategy Address"
       },
       "earnings": {
         "title": "Earnings Breakdown",
         "tokenInterest": "Your {{token}} Interest",
         "nameMoonpotPrizeDraw": "{{name}} Moonpot Prize Draw",
         "ziggysPotInterest": "Ziggy's (Governance) Pot Interest",
-        "ziggysPrizeDraw": "Ziggy's (Governance) Prize Draw"
+        "ziggysPrizeDraw": "Ziggy's (Governance) Prize Draw",
+        "treasury": "Moonpot Treasury"
       },
       "fairplay": {
         "title": "Fairplay Timelock Rules",
@@ -160,6 +161,7 @@
     "bonusExplainer": "You will continue to earn bonus {{tokens}} until the end of the draw. You can claim as many times as you like.",
     "compoundExplainer": "Compounding your Bonus {{token}} will reset your Fairness Fee to a maximum of 2.5%, for your new deposit. Your Fairplay Timelock countdown will reset to 10 days, but you won't pay any additional Fairness Fees on your older deposits.",
     "compoundToken": "Compound {{token}}",
+    "compoundBonusToken": "Compound Bonus {{token}}",
     "withdrawBonusTokens": "Withdraw Bonus {{tokens}}"
   },
   "wallet": {
