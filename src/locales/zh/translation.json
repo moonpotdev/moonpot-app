@@ -165,7 +165,7 @@
     "compoundExplainer": "复投额外的 {{token}} 奖励为新存款会将您的公平费重置为最高 2.5%。 您的公平游戏时间锁倒计时将重置为 10 天，但您不需为旧存款支付任何额外的公平费用。",
     "compoundToken": "复投 {{token}}",
     "compoundBonusToken": "复投额外的 {{token}}",
-    "withdrawBonusTokens": "提取 {{tokens}}奖励"，
+    "withdrawBonusTokens": "提取 {{tokens}}奖励",
     "withdrawEarnedTokens": "取出赚取的 {{tokens}}"
   },
   "wallet": {
