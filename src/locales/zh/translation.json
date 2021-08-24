@@ -168,11 +168,11 @@
   "winners": {
     "totalPrizesWon": "我们的学员赢得了",
     "potDrawNumber": "{{name}} 月盒抽奖活动 #{{number}}",
-    "valueWon": "<span>赢取了{{currency}}{{amount}}</span>",
+    "valueWon": "<span>赢走了{{currency}}{{amount}}</span>",
     "wonTokensIn": "的 ",
     "drawDate": "开奖日期",
     "players": "玩家",
-    "prizePerWinner": "每个获奖者的奖金",
+    "prizePerWinner": "每位获奖者的奖金",
     "winners": "赢家们",
     "stakedAmountToken": "质押 {{amount}} {{token}}",
     "viewTransaction": "查看交易",
