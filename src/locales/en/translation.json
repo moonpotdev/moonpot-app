@@ -160,6 +160,7 @@
     "bonusExplainer": "You will continue to earn bonus {{tokens}} until the end of the draw. You can claim as many times as you like.",
     "compoundExplainer": "Compounding your Bonus {{token}} will reset your Fairness Fee to a maximum of 2.5%, for your new deposit. Your Fairplay Timelock countdown will reset to 10 days, but you won't pay any additional Fairness Fees on your older deposits.",
     "compoundToken": "Compound {{token}}",
+    "compoundBonusToken": "Compound Bonus {{token}}",
     "withdrawBonusTokens": "Withdraw Bonus {{tokens}}"
   },
   "wallet": {
