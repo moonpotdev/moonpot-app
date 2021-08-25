@@ -9,6 +9,8 @@ const styles = theme => ({
     fontWeight: '500',
     color: '#696996',
     borderRadius: '0',
+    width: 'auto',
+    whiteSpace: 'nowrap',
   },
   buttonActive: {
     fontSize: '15px',
@@ -17,6 +19,8 @@ const styles = theme => ({
     color: '#FFFFFF',
     borderRadius: '0',
     borderBottom: '2px solid #fff',
+    width: 'auto',
+    whiteSpace: 'nowrap',
   },
 });
 

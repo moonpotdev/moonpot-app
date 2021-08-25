@@ -6,7 +6,7 @@ const FILTER_DEFAULT = {
   sortKey: 'defaultOrder', // Must have matching entry in SORT_COMPARE_FUNCTIONS
   sortDir: 'asc',
   deposited: false,
-  vault: 'main', // main or community
+  vault: 'all', // all/main/community
   retired: false,
 };
 
