@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { useLocalStorage } from '../../../helpers/hooks';
+import { useLocalStorage } from '../../../../helpers/hooks';
 
 const FILTER_DEFAULT = {
   version: 1, // Bump+1 if changes are made to force reset on end user

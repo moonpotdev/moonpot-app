@@ -1,15 +1,15 @@
 import React, { memo, useMemo } from 'react';
-import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
+import { CardAccordionGroup, CardAccordionItem } from '../../../../../components/Cards';
 import { Grid, makeStyles } from '@material-ui/core';
 
 import { useSelector } from 'react-redux';
-import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
-import { investmentOdds } from '../../../../helpers/utils';
+import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
+import { investmentOdds } from '../../../../../helpers/utils';
 import { BigNumber } from 'bignumber.js';
-import { Pot as BasePot, PrizeSplit } from '../../../../components/Pot/Pot';
-import { usePot } from '../../../../helpers/hooks';
+import { Pot as BasePot, PrizeSplit } from '../../../../../components/Pot/Pot';
+import { usePot } from '../../../../../helpers/hooks';
 import styles from './styles';
-import { Translate } from '../../../../components/Translate';
+import { Translate } from '../../../../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
