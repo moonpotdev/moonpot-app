@@ -20,6 +20,11 @@ const styles = theme => ({
   totalTVL: {
     marginBottom: '32px',
   },
+  tvlSpacer: {
+    paddingLeft: '16px',
+    paddingRight: '16px',
+    margin: '0 auto',
+  },
 });
 
 export default styles;

@@ -36,9 +36,9 @@ const styles = theme => ({
     letterSpacing: '0.2px',
   },
   socialMediaSection: {
-    marginTop: `${40 - theme.spacing(3) / 2}px`,
-    width: 'calc(100% + 24px)',
-    margin: '0 auto',
+    //marginTop: `${40 - theme.spacing(3) / 2}px`,
+    width: 'calc(75% + 24px)',
+    margin: '28px auto 0',
   },
   poweredBy: {
     paddingTop: '12px',

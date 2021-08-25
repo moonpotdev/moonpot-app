@@ -113,7 +113,7 @@ const MyPots = () => {
 
   return (
     <React.Fragment>
-      <Container maxWidth="lg">
+      <Container maxWidth="none" style={{ padding: '0' }}>
         <Grid container spacing={2}>
           <Grid item>
             <Button
@@ -132,25 +132,28 @@ const MyPots = () => {
             </Button>
           </Grid>
         </Grid>
+
         <div className={classes.potsContainer}>
-          <Grid container style={{ marginTop: '56px' }}>
-            {/*Pots*/}
-            <Cards>
-              {filtered.length === 0 ? (
-                <NoPotsCard />
-              ) : (
-                filtered.map(item => (
-                  <Pot
-                    key={item.id}
-                    item={item}
-                    wallet={wallet}
-                    prices={prices}
-                    balance={balance}
-                  />
-                ))
-              )}
-            </Cards>
-          </Grid>
+          <div className={classes.spacer}>
+            <Grid container>
+              {/*Pots*/}
+              <Cards>
+                {filtered.length === 0 ? (
+                  <NoPotsCard />
+                ) : (
+                  filtered.map(item => (
+                    <Pot
+                      key={item.id}
+                      item={item}
+                      wallet={wallet}
+                      prices={prices}
+                      balance={balance}
+                    />
+                  ))
+                )}
+              </Cards>
+            </Grid>
+          </div>
         </div>
       </Container>
     </React.Fragment>

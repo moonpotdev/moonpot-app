@@ -25,6 +25,11 @@ const styles = theme => ({
     borderRadius: '0',
     borderBottom: '2px solid #fff',
   },
+  spacer: {
+    paddingLeft: '16px',
+    paddingRight: '16px',
+    margin: '0 auto',
+  },
 });
 
 export default styles;

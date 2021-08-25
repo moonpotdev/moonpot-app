@@ -23,11 +23,13 @@ const Home = ({ selected }) => {
   }, [totalPrizesAvailable]);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="none" style={{ padding: '0' }}>
       <Typography className={classes.mainTitle}>
         <Translate i18nKey="homeTitle" values={{ amount: totalPrizesAvailableFormatted }} />
       </Typography>
-      <TVL className={classes.totalTVL} />
+      <div className={classes.tvlSpacer}>
+        <TVL className={classes.totalTVL} />
+      </div>
       <SectionSelect config={sectionConfig} setConfig={setSectionConfig} />
       {sectionConfig.selected === 'moonpots' ? <Moonpots selected={selected} /> : <MyPots />}
     </Container>
