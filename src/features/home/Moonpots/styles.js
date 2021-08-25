@@ -5,6 +5,13 @@ const styles = theme => ({
   potsMigrationNotice: {
     marginBottom: '24px',
   },
+  potsContainer: {
+    background: '#393960',
+    paddingTop: '32px',
+    paddingBottom: '32px',
+    borderTop: '2px solid #4C4C80',
+    borderBottom: '2px solid #4C4C80',
+  },
   communityJoin: {
     margin: '0 auto',
     width: '500px',
@@ -30,6 +37,8 @@ const styles = theme => ({
   },
   socialMediaSection: {
     marginTop: `${40 - theme.spacing(3) / 2}px`,
+    width: 'calc(100% + 24px)',
+    margin: '0 auto',
   },
   poweredBy: {
     paddingTop: '12px',

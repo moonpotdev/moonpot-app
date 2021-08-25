@@ -18,7 +18,7 @@ const styles = theme => ({
     },
   },
   totalTVL: {
-    marginBottom: '48px',
+    marginBottom: '32px',
   },
 });
 

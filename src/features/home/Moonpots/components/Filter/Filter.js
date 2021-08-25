@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect } from 'react';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import clsx from 'clsx';
+import styles from './styles';
+
+const useStyles = makeStyles(styles);
 
 const Filter = ({ config, setConfig, className, selected }) => {
   const { t } = useTranslation();
+  const classes = useStyles();
 
   const handleChange = useCallback(
     (name, value) => {
@@ -20,20 +23,18 @@ const Filter = ({ config, setConfig, className, selected }) => {
   }, []);
 
   return (
-    <Grid container spacing={2} className={clsx(className)}>
-      <Grid item>
+    <Grid container className={classes.buttonContainer}>
+      <Grid item xs={6}>
         <Button
-          variant={'outlined'}
-          color={config.vault === 'main' ? 'primary' : 'default'}
+          className={config.vault === 'main' ? classes.buttonActive : classes.button}
           onClick={() => handleChange('vault', 'main')}
         >
           {t('buttons.mainPots')}
         </Button>
       </Grid>
-      <Grid item>
+      <Grid item xs={6}>
         <Button
-          variant={'outlined'}
-          color={config.vault === 'community' ? 'primary' : 'default'}
+          className={config.vault === 'community' ? classes.buttonActive : classes.button}
           onClick={() => handleChange('vault', 'community')}
         >
           {t('buttons.communityPots')}

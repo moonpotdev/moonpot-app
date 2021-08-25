@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Container, Grid } from '@material-ui/core';
+import { Button, Container, Grid, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import reduxActions from '../../redux/actions';
 import BigNumber from 'bignumber.js';
@@ -10,6 +10,9 @@ import { byDecimals } from '../../../helpers/format';
 import NoPotsCard from './components/NoPotsCard/NoPotsCard';
 import Pot from './components/Pot/Pot';
 import { Cards } from '../../../components/Cards';
+import styles from './styles';
+
+const useStyles = makeStyles(styles);
 
 const VALID_STATUSES = ['active', 'eol'];
 const defaultFilter = {
@@ -25,7 +28,7 @@ const getDefaultFilter = (params = {}) => {
 
 const MyPots = () => {
   const { t } = useTranslation();
-
+  const classes = useStyles();
   const { vault, wallet, balance, prices, earned } = useSelector(state => ({
     vault: state.vaultReducer,
     wallet: state.walletReducer,
@@ -114,8 +117,7 @@ const MyPots = () => {
         <Grid container spacing={2}>
           <Grid item>
             <Button
-              variant={'outlined'}
-              color={sortConfig.status === 'active' ? 'primary' : 'default'}
+              className={sortConfig.status === 'active' ? classes.buttonActive : classes.button}
               onClick={() => setSortConfig({ ...sortConfig, status: 'active' })}
             >
               {t('buttons.myActivePots')}
@@ -123,26 +125,33 @@ const MyPots = () => {
           </Grid>
           <Grid item>
             <Button
-              variant={'outlined'}
-              color={sortConfig.status !== 'active' ? 'primary' : 'default'}
+              className={sortConfig.status !== 'active' ? classes.buttonActive : classes.button}
               onClick={() => setSortConfig({ ...sortConfig, status: 'eol' })}
             >
               {t('buttons.myPastPots')}
             </Button>
           </Grid>
         </Grid>
-        <Grid container style={{ marginTop: '56px' }}>
-          {/*Pots*/}
-          <Cards>
-            {filtered.length === 0 ? (
-              <NoPotsCard />
-            ) : (
-              filtered.map(item => (
-                <Pot key={item.id} item={item} wallet={wallet} prices={prices} balance={balance} />
-              ))
-            )}
-          </Cards>
-        </Grid>
+        <div className={classes.potsContainer}>
+          <Grid container style={{ marginTop: '56px' }}>
+            {/*Pots*/}
+            <Cards>
+              {filtered.length === 0 ? (
+                <NoPotsCard />
+              ) : (
+                filtered.map(item => (
+                  <Pot
+                    key={item.id}
+                    item={item}
+                    wallet={wallet}
+                    prices={prices}
+                    balance={balance}
+                  />
+                ))
+              )}
+            </Cards>
+          </Grid>
+        </div>
       </Container>
     </React.Fragment>
   );

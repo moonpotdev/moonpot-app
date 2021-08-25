@@ -7,7 +7,7 @@ const styles = theme => ({
     background: '#393960',
     height: '44px',
     width: '344px',
-    marginBottom: '20px',
+    marginBottom: '32px',
   },
   button: {
     borderRadius: '20px',

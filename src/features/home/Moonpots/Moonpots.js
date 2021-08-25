@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { Box, Container, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import Filter from './components/Filter';
 import reduxActions from '../../redux/actions';
@@ -37,47 +37,49 @@ const Moonpots = ({ selected }) => {
         className={classes.potsFilter}
         selected={selected}
       />
-      <MigrationNotices potType={filterConfig.vault} className={classes.potsMigrationNotice} />
-      <Cards>
-        {filtered.map(pot => (
-          <Pot
-            key={pot.id}
-            variant={pot.vaultType === 'main' ? 'tealLight' : 'purpleCommunity'}
-            id={pot.id}
-          />
-        ))}
-      </Cards>
-      {filterConfig.vault === 'community' ? (
-        <Grid item xs={12} style={{ marginTop: '32px' }}>
-          <Grid container className={classes.communityJoin}>
-            <Grid item xs={12}>
-              <Box className={classes.ziggyMaintenance}>
-                <img alt="" width="100" height="100" src={ZiggyMaintenance} aria-hidden={true} />
-              </Box>
+      <div className={classes.potsContainer}>
+        <MigrationNotices potType={filterConfig.vault} className={classes.potsMigrationNotice} />
+        <Cards>
+          {filtered.map(pot => (
+            <Pot
+              key={pot.id}
+              variant={pot.vaultType === 'main' ? 'tealLight' : 'purpleCommunity'}
+              id={pot.id}
+            />
+          ))}
+        </Cards>
+        {filterConfig.vault === 'community' ? (
+          <Grid item xs={12} style={{ marginTop: '32px' }}>
+            <Grid container className={classes.communityJoin}>
+              <Grid item xs={12}>
+                <Box className={classes.ziggyMaintenance}>
+                  <img alt="" width="100" height="100" src={ZiggyMaintenance} aria-hidden={true} />
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography className={classes.communityTitle}>
+                  <Translate i18nKey="homeJoinCommunityTitle" />
+                </Typography>
+                <Typography className={classes.communityDescription}>
+                  <Translate i18nKey="homeJoinCommunityBody" />
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <Typography className={classes.communityTitle}>
-                <Translate i18nKey="homeJoinCommunityTitle" />
-              </Typography>
-              <Typography className={classes.communityDescription}>
-                <Translate i18nKey="homeJoinCommunityBody" />
-              </Typography>
+            <Grid container spacing={3} className={classes.socialMediaSection}>
+              <Grid item xs={12} md={3}>
+                <SocialMediaBlock type="telegram" />
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <SocialMediaBlock type="discord" />
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <SocialMediaBlock type="twitter" />
+              </Grid>
             </Grid>
           </Grid>
-          <Grid container spacing={3} className={classes.socialMediaSection}>
-            <Grid item xs={12} md={3}>
-              <SocialMediaBlock type="telegram" />
-            </Grid>
-            <Grid item xs={12} md={3}>
-              <SocialMediaBlock type="discord" />
-            </Grid>
-            <Grid item xs={12} md={3}>
-              <SocialMediaBlock type="twitter" />
-            </Grid>
-          </Grid>
-        </Grid>
-      ) : null}
-      <PoweredByBeefy className={classes.poweredBy} />
+        ) : null}
+        <PoweredByBeefy className={classes.poweredBy} />
+      </div>
     </React.Fragment>
   );
 };
