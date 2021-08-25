@@ -43,6 +43,11 @@ const styles = theme => ({
   poweredBy: {
     paddingTop: '12px',
   },
+  spacer: {
+    paddingLeft: '16px',
+    paddingRight: '16px',
+    margin: '0 auto',
+  },
 });
 
 export default styles;
