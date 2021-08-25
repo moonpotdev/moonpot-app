@@ -23,7 +23,7 @@ const Home = ({ selected }) => {
   }, [totalPrizesAvailable]);
 
   return (
-    <Container maxWidth="none" style={{ padding: '0' }}>
+    <Container maxWidth="none" style={{ padding: '0', overflow: 'hidden' }}>
       <Typography className={classes.mainTitle}>
         <Translate i18nKey="homeTitle" values={{ amount: totalPrizesAvailableFormatted }} />
       </Typography>
