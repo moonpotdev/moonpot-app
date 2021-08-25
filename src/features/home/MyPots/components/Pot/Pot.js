@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
-import styles from '../../styles';
+import styles from './styles';
 import ActiveLayout from './PotActiveLayout';
 import EOLLayout from './PotEOLLayout';
 import { Card } from '../../../../../components/Cards/Cards';

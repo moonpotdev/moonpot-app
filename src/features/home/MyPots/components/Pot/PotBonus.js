@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
-import styles from '../../styles';
+import styles from './styles';
 import { useTranslation } from 'react-i18next';
 import reduxActions from '../../../../redux/actions';
 import { formatDecimals } from '../../../../../helpers/format';

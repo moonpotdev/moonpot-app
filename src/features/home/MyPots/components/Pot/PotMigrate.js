@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
-import styles from '../../styles';
+import styles from './styles';
 import reduxActions from '../../../../redux/actions';
 import { isEmpty } from '../../../../../helpers/utils';
 import Steps from '../../../../vault/components/Steps/Steps';

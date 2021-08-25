@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
-import styles from '../../styles';
+import styles from './styles';
 import { investmentOdds } from '../../../../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import { formatDecimals } from '../../../../../helpers/format';
