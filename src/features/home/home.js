@@ -7,6 +7,7 @@ import { Translate } from '../../components/Translate';
 import SectionSelect from './components/SectionSelect/SectionSelect';
 import { useSectionConfig } from './hooks/section';
 import Moonpots from './Moonpots/Moonpots';
+import MyPots from './MyPots/MyPots';
 
 const useStyles = makeStyles(styles);
 
@@ -28,7 +29,7 @@ const Home = ({ selected }) => {
       </Typography>
       <TVL className={classes.totalTVL} />
       <SectionSelect config={sectionConfig} setConfig={setSectionConfig} />
-      {sectionConfig.selected === 'moonpots' ? <Moonpots selected={selected} /> : ''}
+      {sectionConfig.selected === 'moonpots' ? <Moonpots selected={selected} /> : <MyPots />}
     </Container>
   );
 };

@@ -1,8 +1,8 @@
 import React from 'react';
-import { isEmpty } from '../../../../helpers/utils';
-import { PotDeposit } from '../../../../components/PotDeposit/PotDeposit';
-import { PotWithdraw } from '../../../../components/PotWithdraw/PotWithdraw';
-import { CardAccordionItem } from '../../../../components/Cards/Cards';
+import { isEmpty } from '../../../../../helpers/utils';
+import { PotDeposit } from '../../../../../components/PotDeposit/PotDeposit';
+import { PotWithdraw } from '../../../../../components/PotWithdraw/PotWithdraw';
+import { CardAccordionItem } from '../../../../../components/Cards/Cards';
 import PotBonus from './PotBonus';
 
 const ActiveLayout = function ({ item, wallet, balance, prices }) {

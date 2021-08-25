@@ -4,7 +4,7 @@ import styles from './styles';
 import { Box, Button, Grid, Typography, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import reduxActions from '../../../redux/actions';
+import reduxActions from '../../../../redux/actions';
 
 const useStyles = makeStyles(styles);
 
@@ -28,7 +28,7 @@ export default function NoPotsCard() {
           <img
             className={classes.noActivePotsImage}
             alt="No Active Moonpots"
-            src={require('../../../../images/ziggy/noActivePots.svg').default}
+            src={require('../../../../../images/ziggy/noActivePots.svg').default}
           />
         </Grid>
         <Grid item xs={8}>

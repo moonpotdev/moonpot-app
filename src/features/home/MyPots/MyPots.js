@@ -3,26 +3,13 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Container, Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import reduxActions from '../redux/actions';
+import reduxActions from '../../redux/actions';
 import BigNumber from 'bignumber.js';
-import { isEmpty } from '../../helpers/utils';
-import { byDecimals } from '../../helpers/format';
+import { isEmpty } from '../../../helpers/utils';
+import { byDecimals } from '../../../helpers/format';
 import NoPotsCard from './components/NoPotsCard/NoPotsCard';
 import Pot from './components/Pot/Pot';
-import { Cards } from '../../components/Cards';
-
-import * as React from 'react';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, Container, Grid } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import reduxActions from '../redux/actions';
-import BigNumber from 'bignumber.js';
-import { isEmpty } from '../../helpers/utils';
-import { byDecimals } from '../../helpers/format';
-import NoPotsCard from './components/NoPotsCard/NoPotsCard';
-import Pot from './components/Pot/Pot';
-import { Cards } from '../../components/Cards';
+import { Cards } from '../../../components/Cards';
 
 const VALID_STATUSES = ['active', 'eol'];
 const defaultFilter = {

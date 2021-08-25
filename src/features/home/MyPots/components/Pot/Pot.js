@@ -3,10 +3,10 @@ import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from '../../styles';
 import ActiveLayout from './PotActiveLayout';
 import EOLLayout from './PotEOLLayout';
-import { Card } from '../../../../components/Cards/Cards';
+import { Card } from '../../../../../components/Cards/Cards';
 import { useTranslation } from 'react-i18next';
 import { PotTitle, PotInfoBlock } from './PotComponents';
-import { Logo } from '../../../../components/Pot/Pot';
+import { Logo } from '../../../../../components/Pot/Pot';
 
 const useStyles = makeStyles(styles);
 

@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from '../../styles';
 import { useTranslation } from 'react-i18next';
-import reduxActions from '../../../redux/actions';
-import { formatDecimals } from '../../../../helpers/format';
-import Steps from '../../../vault/components/Steps/Steps';
-import { isEmpty } from '../../../../helpers/utils';
-import { Translate } from '../../../../components/Translate';
+import reduxActions from '../../../../redux/actions';
+import { formatDecimals } from '../../../../../helpers/format';
+import Steps from '../../../../vault/components/Steps/Steps';
+import { isEmpty } from '../../../../../helpers/utils';
+import { Translate } from '../../../../../components/Translate';
 
 const useStyles = makeStyles(styles);
 

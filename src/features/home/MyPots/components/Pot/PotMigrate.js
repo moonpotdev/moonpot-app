@@ -2,12 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from '../../styles';
-
-import reduxActions from '../../../redux/actions';
-import { isEmpty } from '../../../../helpers/utils';
-import Steps from '../../../vault/components/Steps/Steps';
+import reduxActions from '../../../../redux/actions';
+import { isEmpty } from '../../../../../helpers/utils';
+import Steps from '../../../../vault/components/Steps/Steps';
 import clsx from 'clsx';
-import { Translate } from '../../../../components/Translate';
+import { Translate } from '../../../../../components/Translate/Translate';
 
 const useStyles = makeStyles(styles);
 

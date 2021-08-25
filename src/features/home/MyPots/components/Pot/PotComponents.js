@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from '../../styles';
-import { investmentOdds } from '../../../../helpers/utils';
+import { investmentOdds } from '../../../../../helpers/utils';
 import { useTranslation } from 'react-i18next';
-import { formatDecimals } from '../../../../helpers/format';
-import Countdown from '../../../../components/Countdown';
-import { InterestTooltip, WinTotal } from '../../../../components/Pot';
-import { Translate } from '../../../../components/Translate';
+import { formatDecimals } from '../../../../../helpers/format';
+import Countdown from '../../../../../components/Countdown';
+import { InterestTooltip, WinTotal } from '../../../../../components/Pot';
+import { Translate } from '../../../../../components/Translate';
 
 const useStyles = makeStyles(styles);
 
