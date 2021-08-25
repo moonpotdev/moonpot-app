@@ -31,7 +31,7 @@
   "homeTitle": "存入 <span>加密资产</span>, 赚取<span>利息收入</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
   "homeTotalDeposits": "存款总额 (总锁仓量)",
   "homeJoinCommunityTitle": "加入我们的社群",
-  "homeJoinCommunityBody": "目前社群月盒暂未上线。您可以通过以下官方社交媒体渠道，告诉我们您对于新增月盒的建议，或者加入我们的开发团队，为您喜爱的项目创建新的月盒。",
+  "homeJoinCommunityBody": "您可以通过以下官方社交媒体渠道，告诉我们您对于新增月盒的建议，或者加入我们的开发团队，为您喜爱的项目创建新的月盒。",
   "migrationNoticeTitle": "请将您的 {{asset}} 转移至全新升级的{{pot}}月盒。",
   "migrationNoticeLearnMore": "了解更多",
   "migrationNoticeMove": "转移我的{{asset}}",
@@ -90,7 +90,7 @@
     "myInterestRate": "我的收益率",
     "myOdds": "我的中奖概率",
     "tooltip": {
-      "interestBonusApy": "划掉的 APY 是以存入的资产所支付的利息，并将自动复利。 金色的 APY 包括未复利的额外奖励代币，可以自行手动领取。",
+      "interestBonusApy": "划掉的 APY 是以存入的资产所支付的利息，并将自动复利。 金色的 APY 包括未复利的额外代币奖励，可以自行手动领取。",
       "interestCompoundApr": "APR是指从存款中获得的年利率。为了赚取更高的APY，请每天进行手动复投。"
     },
     "infocards": {
