@@ -5,17 +5,17 @@ import { Grid, makeStyles } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../helpers/utils';
-import { BigNumber } from 'bignumber.js';
 import { Pot as BasePot, PrizeSplit } from '../../../../components/Pot/Pot';
-import { usePot } from '../../../../helpers/hooks';
+import { usePot, useTokenAddressPrice } from '../../../../helpers/hooks';
 import styles from './styles';
 import { Translate } from '../../../../components/Translate';
+import { byDecimals } from '../../../../helpers/format';
 
 const useStyles = makeStyles(styles);
 
-const Play = memo(function ({ id, token, rewardToken, variant }) {
+const Play = memo(function ({ id, token, contractAddress, variant }) {
   const address = useSelector(state => state.walletReducer.address);
-  const balance = useSelector(state => state.balanceReducer.tokens[rewardToken]?.balance);
+  const balance = useSelector(state => state.balanceReducer.tokens[contractAddress]?.balance);
   const hasStaked = address && balance > 0;
 
   return (
@@ -25,13 +25,35 @@ const Play = memo(function ({ id, token, rewardToken, variant }) {
   );
 });
 
-const Odds = memo(function ({ tvlUsd, depositAmount, winners }) {
+const NewDepositOdds = memo(function ({
+  tokenAddress,
+  tokenDecimals,
+  ticketTotalSupply,
+  depositAmountUsd,
+  winners,
+}) {
+  const tokenPrice = useTokenAddressPrice(tokenAddress);
+
   const odds = useMemo(() => {
-    return investmentOdds(tvlUsd, new BigNumber(depositAmount), winners);
-  }, [tvlUsd, depositAmount, winners]);
+    if (tokenPrice) {
+      const depositAmountTickets = depositAmountUsd / tokenPrice / 2;
+
+      return investmentOdds(
+        byDecimals(ticketTotalSupply, tokenDecimals),
+        winners,
+        0,
+        depositAmountTickets
+      );
+    }
+
+    return 0;
+  }, [ticketTotalSupply, depositAmountUsd, tokenPrice, winners, tokenDecimals]);
 
   return (
-    <Translate i18nKey="pot.oddsPerDeposit" values={{ odds: odds, deposit: '$' + depositAmount }} />
+    <Translate
+      i18nKey="pot.oddsPerDeposit"
+      values={{ odds: odds, deposit: '$' + depositAmountUsd }}
+    />
   );
 });
 
@@ -63,12 +85,18 @@ const Bottom = function ({ id }) {
         <Play
           id={pot.id}
           token={pot.token}
-          rewardToken={pot.rewardToken}
+          contractAddress={pot.contractAddress}
           variant={pot.vaultType === 'main' ? 'teal' : 'purpleCommunity'}
         />
       </div>
       <div className={classes.rowOdds}>
-        <Odds tvlUsd={pot.totalStakedUsd} depositAmount={1000} winners={pot.numberOfWinners} />
+        <NewDepositOdds
+          tokenAddress={pot.tokenAddress}
+          tokenDecimals={pot.tokenDecimals}
+          ticketTotalSupply={pot.totalTickets}
+          depositAmountUsd={1000}
+          winners={pot.numberOfWinners}
+        />
       </div>
     </>
   );
