@@ -30,8 +30,8 @@ const getBalances = async (pools, state, dispatch) => {
     const gateContract = new web3[pool.network].eth.Contract(gateManagerAbi, pool.contractAddress);
     calls[pool.network].push({
       amount: gateContract.methods.userTotalBalance(address),
-      token: pool.rewardToken,
-      address: pool.rewardAddress,
+      token: pool.contractAddress,
+      address: pool.contractAddress,
     });
 
     calls[pool.network].push({
@@ -42,6 +42,8 @@ const getBalances = async (pools, state, dispatch) => {
 
     const ticketContract = new web3[pool.network].eth.Contract(erc20Abi, pool.rewardAddress);
     calls[pool.network].push({
+      amount: ticketContract.methods.balanceOf(address),
+      address: pool.rewardAddress,
       allowance: ticketContract.methods.allowance(address, pool.contractAddress),
       token: pool.rewardToken,
       spender: pool.contractAddress,
@@ -65,7 +67,8 @@ const getBalances = async (pools, state, dispatch) => {
         balance: r.amount,
         address: r.address,
       };
-    } else if (r.allowance !== undefined) {
+    }
+    if (r.allowance !== undefined) {
       tokens[r.token].allowance = {
         ...tokens[r.token].allowance,
         [r.spender]: parseInt(r.allowance),
