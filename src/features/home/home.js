@@ -20,6 +20,7 @@ const Home = ({ selected }) => {
   const dispatch = useDispatch();
   const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
   const totalPrizesAvailable = useSelector(state => state.vaultReducer.totalPrizesAvailable);
+  const address = useSelector(state => state.walletReducer.address);
   const pots = useSelector(state => state.vaultReducer.pools, shallowEqual);
   const classes = useStyles();
   const [filterConfig, setFilterConfig] = useFilterConfig();
@@ -35,6 +36,12 @@ const Home = ({ selected }) => {
       dispatch(reduxActions.vault.fetchPools());
     }
   }, [dispatch, pricesLastUpdated]);
+
+  useEffect(() => {
+    if (address) {
+      dispatch(reduxActions.balance.fetchBalances());
+    }
+  }, [dispatch, address]);
 
   return (
     <Container maxWidth="xl">

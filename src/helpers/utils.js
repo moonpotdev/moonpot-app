@@ -26,11 +26,25 @@ export const getStablesForNetwork = () => {
   return config.stableCoins;
 };
 
-export const investmentOdds = (currentTvl, investment, winners) => {
-  const oddsOfWinningOnce = investment.dividedBy(currentTvl.plus(investment));
-  const oddsOfLosingOnce = BigNumber(1).minus(oddsOfWinningOnce);
-  const oddsOfWinningAtLeastOnce = BigNumber(1).minus(oddsOfLosingOnce.exponentiatedBy(winners));
-  return Math.ceil(1 / Number(oddsOfWinningAtLeastOnce));
+export const toBigNumber = maybeBigNumber => {
+  return BigNumber.isBigNumber(maybeBigNumber) ? maybeBigNumber : new BigNumber(maybeBigNumber);
+};
+
+export const investmentOdds = (
+  ticketTotalSupply,
+  numberOfWinners,
+  investedTickets = 0,
+  newInvestmentTickets = 0
+) => {
+  const finalTotalSupply = toBigNumber(ticketTotalSupply).plus(newInvestmentTickets);
+  const finalTicketsInvested = toBigNumber(investedTickets).plus(newInvestmentTickets);
+  const one = toBigNumber(1);
+
+  const oddsOfWinningOnce = finalTicketsInvested.dividedBy(finalTotalSupply);
+  const oddsOfLosingOnce = one.minus(oddsOfWinningOnce);
+  const oddsOfWinningAtLeastOnce = one.minus(oddsOfLosingOnce.exponentiatedBy(numberOfWinners));
+
+  return one.dividedBy(oddsOfWinningAtLeastOnce).integerValue(BigNumber.ROUND_CEIL).toNumber();
 };
 
 export function compound(r, n = 365, t = 1, c = 1) {

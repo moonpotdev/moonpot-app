@@ -1,12 +1,14 @@
 import * as React from 'react';
+import { memo, useMemo } from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from '../../styles';
 import { investmentOdds } from '../../../../helpers/utils';
 import { useTranslation } from 'react-i18next';
-import { formatDecimals } from '../../../../helpers/format';
+import { byDecimals, formatDecimals } from '../../../../helpers/format';
 import Countdown from '../../../../components/Countdown';
 import { InterestTooltip, WinTotal } from '../../../../components/Pot';
 import { Translate } from '../../../../components/Translate';
+import { useTokenBalance } from '../../../../helpers/hooks';
 
 const useStyles = makeStyles(styles);
 
@@ -75,6 +77,16 @@ const Interest = function ({ baseApy, bonusApy, bonusApr }) {
   );
 };
 
+const DepositedOdds = memo(function ({ ticketTotalSupply, winners, ticketToken, tokenDecimals }) {
+  const depositedTickets = useTokenBalance(ticketToken, tokenDecimals);
+
+  const odds = useMemo(() => {
+    return investmentOdds(byDecimals(ticketTotalSupply, tokenDecimals), winners, depositedTickets);
+  }, [ticketTotalSupply, depositedTickets, winners, tokenDecimals]);
+
+  return <Translate i18nKey="pot.odds" values={{ odds }} />;
+});
+
 export const PotInfoBlock = function ({ item, prices }) {
   const classes = useStyles();
   const { t } = useTranslation();
@@ -112,13 +124,12 @@ export const PotInfoBlock = function ({ item, prices }) {
         </Grid>
         <Grid item xs={6}>
           <Typography className={classes.myDetailsValue} align={'right'}>
-            {t('pot.odds', {
-              odds: investmentOdds(
-                item.totalStakedUsd,
-                item.userBalance.times(prices.prices[item.oracleId]),
-                item.numberOfWinners
-              ),
-            })}
+            <DepositedOdds
+              ticketTotalSupply={item.totalTickets}
+              winners={item.numberOfWinners}
+              ticketToken={item.rewardToken}
+              tokenDecimals={item.tokenDecimals}
+            />
           </Typography>
         </Grid>
       </Grid>

@@ -112,9 +112,10 @@ const TVL = memo(function ({ totalStakedUsd }) {
   return '$0';
 });
 
-const Deposit = memo(function ({ depositToken, rewardToken, decimals }) {
+const Deposit = memo(function ({ depositToken, contractAddress, decimals }) {
   const address = useSelector(state => state.walletReducer.address);
-  const balance256 = useSelector(state => state.balanceReducer.tokens[rewardToken]?.balance);
+  const balance256 = useSelector(state => state.balanceReducer.tokens[contractAddress]?.balance);
+
   const balance = useMemo(() => {
     if (address && balance256) {
       return formatDecimals(byDecimals(balance256, decimals), 2);
@@ -162,7 +163,7 @@ export function Pot({ id, variant, bottom }) {
           <DrawStat i18nKey="pot.statDeposit">
             <Deposit
               depositToken={pot.token}
-              rewardToken={pot.rewardToken}
+              contractAddress={pot.contractAddress}
               decimals={pot.tokenDecimals}
             />
           </DrawStat>
