@@ -26,11 +26,7 @@ const fetchPrices = reducer => {
 
     const updateApy = async () => {
       console.log('redux fetchApy called.');
-      const retry = () => {
-        setTimeout(async () => {
-          return await updateApy();
-        }, 1000);
-      };
+      const retry = updateApy;
       try {
         const request = await axios.get(
           'https://api.beefy.finance/apy/breakdown?_=' + cache.getTime(),
