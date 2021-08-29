@@ -18,6 +18,7 @@ const useStyles = makeStyles(styles);
 const Moonpots = ({ selected }) => {
   const dispatch = useDispatch();
   const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
+  const address = useSelector(state => state.walletReducer.address);
   const pots = useSelector(state => state.vaultReducer.pools, shallowEqual);
   const classes = useStyles();
   const [filterConfig, setFilterConfig] = useFilterConfig();
@@ -28,6 +29,12 @@ const Moonpots = ({ selected }) => {
       dispatch(reduxActions.vault.fetchPools());
     }
   }, [dispatch, pricesLastUpdated]);
+
+  useEffect(() => {
+    if (address) {
+      dispatch(reduxActions.balance.fetchBalances());
+    }
+  }, [dispatch, address]);
 
   return (
     <React.Fragment>
