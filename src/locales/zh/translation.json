@@ -31,7 +31,7 @@
   "homeTitle": "存入 <span>加密资产</span>, 赚取<span>利息收入</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
   "homeTotalDeposits": "存款总额 (总锁仓量)",
   "homeJoinCommunityTitle": "加入我们的社群",
-  "homeJoinCommunityBody": "目前社群月盒暂未上线。您可以通过以下官方社交媒体渠道，告诉我们您对于新增月盒的建议，或者加入我们的开发团队，为您喜爱的项目创建新的月盒。",
+  "homeJoinCommunityBody": "您可以通过以下官方社交媒体渠道，告诉我们您对于新增月盒的建议，或者加入我们的开发团队，为您喜爱的项目创建新的月盒。",
   "migrationNoticeTitle": "请将您的 {{asset}} 转移至全新升级的{{pot}}月盒。",
   "migrationNoticeLearnMore": "了解更多",
   "migrationNoticeMove": "转移我的{{asset}}",
@@ -79,6 +79,7 @@
     "odds": "1/{{odds}}",
     "oddsPerDeposit": "每{{deposit}} 的质押中奖概率为1/{{odds}}",
     "bonusEarnings": "额外收益",
+    "earnings": "收益",
     "depositMore": "存入更多",
     "withdraw": "取出",
     "myToken": "我的 {{token}}",
@@ -89,7 +90,7 @@
     "myInterestRate": "我的收益率",
     "myOdds": "我的中奖概率",
     "tooltip": {
-      "interestBonusApy": "划掉的 APY 是以存入的资产所支付的利息，并将自动复利。 金色的 APY 包括未复利的额外奖励代币，可以自行手动领取。",
+      "interestBonusApy": "划掉的 APY 是以存入的资产所支付的利息，并将自动复利。 金色的 APY 包括未复利的额外代币奖励，可以自行手动领取。",
       "interestCompoundApr": "APR是指从存款中获得的年利率。为了赚取更高的APY，请每天进行手动复投。"
     },
     "infocards": {
@@ -98,7 +99,7 @@
         "body": {
           "beefy": [
             "该策略将您的{{token}} 代币存入 Beefy.Finance {{token}} 机枪池内。Beefy自动复投{{token}}的质押收益。",
-            "所有在Beefy机枪池赚取的 {{token}}收益将被分配给 Moonpot 玩家。一半用于支付利息，另一半则用作抽奖奖金以及未来小吉(治理）月盒给出的奖励。"
+            "所有在Beefy机枪池赚取的 {{token}}收益将被分配给 Moonpot 玩家。一半用于支付利息，另一半则用作抽奖奖金以及未来 Ziggy (治理）月盒给出的奖励。"
           ],
           "ziggy": [
             "通过在 Ziggy's Pot 中质押 $POTS，您将获得由所有其他月盒收入的 5% 所产生的 APY。",
@@ -115,7 +116,8 @@
         "tokenInterest": "您的 {{token}} 利息",
         "nameMoonpotPrizeDraw": "{{name}} Moonpot 抽奖活动",
         "ziggysPotInterest": "Ziggy's (治理) 月盒利息",
-        "ziggysPrizeDraw": "Ziggy's (治理) 抽奖活动"
+        "ziggysPrizeDraw": "Ziggy's (治理) 抽奖活动",
+        "treasury": "Moonpot 公帑"
       },
       "fairplay": {
         "title": "公平游戏锁定期规则",
@@ -155,12 +157,16 @@
   },
   "bonus": {
     "myBonusEarnings": "我的额外收益",
+    "myEarnings": "我的收益",
     "myBoostEarnings": "我的超速增值收益",
-    "bonusExtraInfo": "您将持续赚取额外的{{sponsorToken}}和{{boostToken}}直到抽奖结束。您可以根据自己的意愿多次领取。",
+    "bonusExtraInfo": "您将持续赚取额外的{{bonusToken}}和{{boostToken}}直到抽奖结束。您可以根据自己的意愿多次领取。",
     "bonusExplainer": "您将持续赚取额外的 {{tokens}} 直到抽奖结束。您可以根据自己的意愿多次领取。",
+    "potsExplainer": "您将持续赚取 {{tokens}} 直到抽奖结束。您可以根据自己的意愿多次领取。",
     "compoundExplainer": "复投额外的 {{token}} 奖励为新存款会将您的公平费重置为最高 2.5%。 您的公平游戏时间锁倒计时将重置为 10 天，但您不需为旧存款支付任何额外的公平费用。",
     "compoundToken": "复投 {{token}}",
-    "withdrawBonusTokens": "提取 {{tokens}}奖励"
+    "compoundBonusToken": "复投额外的 {{token}}",
+    "withdrawBonusTokens": "提取 {{tokens}}奖励",
+    "withdrawEarnedTokens": "取出赚取的 {{tokens}}"
   },
   "wallet": {
     "connect": "连接钱包"
@@ -174,7 +180,7 @@
     "players": "玩家",
     "prizePerWinner": "每位获奖者的奖金",
     "winners": "赢家们",
-    "stakedAmountToken": "质押 {{amount}} {{token}}",
+    "stakedAmountToken": "质押了 {{amount}} {{token}}",
     "viewTransaction": "查看交易",
     "userWonPrize": "您赢得了一个奖品!"
   }
