@@ -79,3 +79,7 @@ export function arrayUnique(arr) {
 export const formatAddressShort = addr => {
   return addr.substr(0, 6) + '...' + addr.substr(addr.length - 4, 4);
 };
+
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
