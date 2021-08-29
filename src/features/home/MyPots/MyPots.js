@@ -66,7 +66,7 @@ const MyPots = () => {
         return false;
       }
 
-      if (Number(balance.tokens[item.rewardToken].balance) === 0) {
+      if (Number(balance.tokens[item.contractAddress].balance) === 0) {
         return false;
       }
 
@@ -75,9 +75,9 @@ const MyPots = () => {
 
     for (const [, item] of Object.entries(vault.pools)) {
       if (check(item)) {
-        if (wallet.address && !isEmpty(balance.tokens[item.rewardToken])) {
+        if (wallet.address && !isEmpty(balance.tokens[item.contractAddress])) {
           item.userBalance = byDecimals(
-            new BigNumber(balance.tokens[item.rewardToken].balance),
+            new BigNumber(balance.tokens[item.contractAddress].balance),
             item.tokenDecimals
           );
         }

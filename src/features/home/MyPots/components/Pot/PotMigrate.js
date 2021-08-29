@@ -56,14 +56,7 @@ export const PotMigrate = function ({ item, wallet, balance }) {
         step: 'withdraw',
         message: 'Confirm withdraw transaction on wallet to complete.',
         action: () =>
-          dispatch(
-            reduxActions.wallet.withdraw(
-              item.network,
-              item.contractAddress,
-              balance.tokens[item.rewardToken].balance,
-              true
-            )
-          ),
+          dispatch(reduxActions.wallet.withdraw(item.network, item.contractAddress, 0, true)),
         pending: false,
       });
 
@@ -92,7 +85,7 @@ export const PotMigrate = function ({ item, wallet, balance }) {
             reduxActions.wallet.deposit(
               item.network,
               item.migrationContractAddress,
-              balance.tokens[item.rewardToken].balance,
+              balance.tokens[item.contractAddress].balance,
               false
             )
           ),
