@@ -9,6 +9,7 @@ import {
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import Web3Modal, { connectors } from 'web3modal';
 import reduxActions from '../actions';
+
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
@@ -497,13 +498,13 @@ const generateProviderOptions = (wallet, clients) => {
         package: 'safepal',
         connector: connectors.injected,
       },
-      'custom-math': {
+      'custom-coin98': {
         display: {
-          name: 'Math',
-          description: 'Math Wallet',
-          logo: require('../../../images/wallets/math-wallet.svg').default,
+          name: 'Coin98',
+          description: 'Coin98 Wallet',
+          logo: require('../../../images/wallets/coin98-wallet.svg').default,
         },
-        package: 'math',
+        package: 'coin98',
         connector: connectors.injected,
       },
       'custom-binance': {
