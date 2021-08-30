@@ -2,7 +2,7 @@ const styles = theme => ({
   buttonsContainer: {
     margin: '0 auto',
     width: 'fit-content',
-    borderRadius: '20px',
+    borderRadius: '25px',
     border: '2px solid #4C4C80',
     background: '#393960',
     height: '44px',
@@ -10,7 +10,7 @@ const styles = theme => ({
     marginBottom: '32px',
   },
   button: {
-    borderRadius: '20px',
+    borderRadius: '25px',
     padding: '0',
     marginTop: '-2px',
     marginLeft: '-2px',
@@ -21,7 +21,7 @@ const styles = theme => ({
     width: '172px',
   },
   buttonSelected: {
-    borderRadius: '20px',
+    borderRadius: '25px',
     padding: '0',
     marginTop: '-2px',
     marginLeft: '-2px',

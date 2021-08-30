@@ -22,21 +22,27 @@ function Pages() {
       <Switch>
         <Route exact path="/" key={Date.now()}>
           <Home />
+          <Footer variant="light" />
         </Route>
         <Route exact path="/community" key={Date.now()}>
           <Home selected="community" />
+          <Footer variant="light" />
         </Route>
         <Route strict sensitive exact path="/pot/:id">
           <Vault />
+          <Footer variant="dark" />
         </Route>
         <Route strict sensitive exact path="/winners">
           <Winners />
+          <Footer variant="dark" />
         </Route>
         <Route strict sensitive exact path="/ido">
           <Dao />
+          <Footer variant="dark" />
         </Route>
         <Route>
           <PageNotFound />
+          <Footer variant="dark" />
         </Route>
       </Switch>
     </Suspense>
@@ -73,7 +79,6 @@ export default function App() {
         <ScrollToTop />
         <Header />
         <Pages />
-        <Footer />
       </HashRouter>
     </ThemeProvider>
   );

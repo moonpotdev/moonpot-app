@@ -8,9 +8,7 @@ const styles = theme => ({
   potsContainer: {
     background: '#393960',
     paddingTop: '32px',
-    paddingBottom: '32px',
     borderTop: '2px solid #4C4C80',
-    borderBottom: '2px solid #4C4C80',
   },
   communityJoin: {
     margin: '0 auto',

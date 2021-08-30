@@ -92,7 +92,7 @@ const Moonpots = ({ selected }) => {
               </Grid>
             </Grid>
           ) : null}
-          <PoweredByBeefy className={classes.poweredBy} />
+          {/*<PoweredByBeefy className={classes.poweredBy} />*/}
         </div>
       </div>
     </React.Fragment>
