@@ -9,6 +9,7 @@ const styles = theme => ({
     boxSizing: 'border-box',
     margin: '0 auto',
     padding: '24px',
+    maxWidth: '500px',
   },
   text: {
     position: 'relative',
