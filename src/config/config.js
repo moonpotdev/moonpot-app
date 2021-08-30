@@ -16,7 +16,6 @@ export const config = {
       'custom-math',
       'custom-twt',
       'custom-safepal',
-      'custom-coin98',
     ],
     providerName: 'binance',
     walletSettings: {
@@ -34,23 +33,20 @@ export const config = {
   },
 };
 
-export const networkSetup = networdIdentifier => {
-  return new Promise((resolve, reject) => {
-    const provider = window.ethereum;
-    if (provider) {
-      if (config.hasOwnProperty(networdIdentifier)) {
-        provider
-          .request({
-            method: 'wallet_addEthereumChain',
-            params: [config[networdIdentifier].walletSettings],
-          })
-          .then(resolve)
-          .catch(reject);
-      } else {
-        reject(new Error(`No network settings configured for chainId: '${networdIdentifier}'`));
-      }
-    } else {
-      reject(new Error(`window.ethereum is '${typeof provider}'`));
+export const networkSetup = (networdIdentifier) => {
+      return new Promise((resolve, reject) => {
+        const provider = window.ethereum
+        if (provider) {
+          if (config.hasOwnProperty(networdIdentifier)) {
+            provider.request({
+              method: 'wallet_addEthereumChain',
+              params: [config[networdIdentifier].walletSettings]
+            }).then(resolve).catch(reject)
+          } else {
+            reject(new Error(`No network settings configured for chainId: '${networdIdentifier}'`))
+          }
+        } else {
+          reject(new Error(`window.ethereum is '${typeof provider}'`))
+        }
+      })
     }
-  });
-};
