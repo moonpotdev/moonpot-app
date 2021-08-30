@@ -35,7 +35,8 @@ const styles = theme => ({
   },
   socialMediaSection: {
     //marginTop: `${40 - theme.spacing(3) / 2}px`,
-    width: 'calc(75% + 24px)',
+    width: '100%',
+    maxWidth: '2000px',
     margin: '28px auto 0',
   },
   poweredBy: {

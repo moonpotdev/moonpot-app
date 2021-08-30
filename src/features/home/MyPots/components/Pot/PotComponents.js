@@ -59,7 +59,7 @@ const Interest = function ({ baseApy, bonusApy, bonusApr }) {
   const totalApy = (hasBaseApy ? baseApy : 0) + (hasBonusApy ? bonusApy : 0);
 
   return (
-    <div style={{ display: 'block', textAlign: 'right', paddingBottom: '16px' }}>
+    <div className={classes.interestContainer}>
       <div className={classes.interestValueApy}>
         <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
       </div>

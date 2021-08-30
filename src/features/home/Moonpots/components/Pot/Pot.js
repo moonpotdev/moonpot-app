@@ -64,7 +64,7 @@ const Bottom = function ({ id }) {
     <>
       <CardAccordionGroup>
         <CardAccordionItem titleKey="pot.prizeSplit" collapsable={false}>
-          <Grid container>
+          <Grid container style={{ height: '80px' }}>
             <Grid item xs={3}>
               <Translate i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
             </Grid>

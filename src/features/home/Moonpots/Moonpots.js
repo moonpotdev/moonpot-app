@@ -79,11 +79,11 @@ const Moonpots = ({ selected }) => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid container spacing={3} className={classes.socialMediaSection}>
-                <Grid item xs={12} md={3}>
+              <Grid container spacing={0} className={classes.socialMediaSection}>
+                <Grid item xs={12} md={3} style={{ paddingBottom: '24px' }}>
                   <SocialMediaBlock type="telegram" />
                 </Grid>
-                <Grid item xs={12} md={3}>
+                <Grid item xs={12} md={3} style={{ paddingBottom: '24px' }}>
                   <SocialMediaBlock type="discord" />
                 </Grid>
                 <Grid item xs={12} md={3}>
