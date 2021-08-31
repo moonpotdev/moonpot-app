@@ -5,10 +5,13 @@
     "deposit": "存入",
     "myActivePots": "活跃中的月盒",
     "myPastPots": "使用过的月盒",
+    "allPots": "所有月盒",
     "mainPots": "核心月盒",
     "communityPots": "社群月盒",
     "play": "开始游戏",
-    "learnMore": "了解更多"
+    "learnMore": "了解更多",
+    "moonpots": "Moonpots",
+    "myPots": "我的月盒"
   },
   "modals": {
     "unsupportedNetworkDetected": "检测到不支持的网络",
