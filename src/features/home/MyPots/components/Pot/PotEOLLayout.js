@@ -1,9 +1,9 @@
 import React from 'react';
 import { Divider, Grid, makeStyles } from '@material-ui/core';
-import styles from '../../styles';
-import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
+import styles from './styles';
+import { CardAccordionGroup, CardAccordionItem } from '../../../../../components/Cards';
 import PotBonus from './PotBonus';
-import { PotWithdraw } from '../../../../components/PotWithdraw';
+import { PotWithdraw } from '../../../../../components/PotWithdraw';
 import { PotMigrate } from './PotMigrate';
 
 const useStyles = makeStyles(styles);

@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { byDecimals } from '../../../../helpers/format';
+import { byDecimals } from '../../../../../helpers/format';
 import BigNumber from 'bignumber.js';
 import { Box, makeStyles } from '@material-ui/core';
 import styles from './styles';
 import { useTranslation } from 'react-i18next';
-import alertIcon from '../../../../images/icons/alert.svg';
-import { ButtonLink } from '../../../../components/ButtonLink/ButtonLink';
+import alertIcon from '../../../../../images/icons/alert.svg';
+import { ButtonLink } from '../../../../../components/ButtonLink/ButtonLink';
 
 const useStyles = makeStyles(styles);
 

@@ -3,12 +3,15 @@
     "ziggyMoonpotGuide": "Ziggy's Guide to Moonpot",
     "moonpotAlpha": "Moonpot Alpha Articles",
     "deposit": "Deposit",
-    "myActivePots": "My Active Pots",
-    "myPastPots": "My Past Pots",
+    "myActivePots": "Active Pots",
+    "myPastPots": "Past Pots",
+    "allPots": "All Pots",
     "mainPots": "Main Pots",
     "communityPots": "Community Pots",
     "play": "Play",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "moonpots": "Moonpots",
+    "myPots": "My Pots"
   },
   "modals": {
     "unsupportedNetworkDetected": "Unsupported Network Detected",

@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './styles';
 import { Box, Button, makeStyles } from '@material-ui/core';
 
-import telegramIcon from '../../../../images/icons/telegramPurple.svg';
-import discordIcon from '../../../../images/icons/discordPurple.svg';
-import twitterIcon from '../../../../images/icons/twitterPurple.svg';
-import { Translate } from '../../../../components/Translate';
+import telegramIcon from '../../../../../images/icons/telegramPurple.svg';
+import discordIcon from '../../../../../images/icons/discordPurple.svg';
+import twitterIcon from '../../../../../images/icons/twitterPurple.svg';
+import { Translate } from '../../../../../components/Translate';
 
 const useStyles = makeStyles(styles);
 

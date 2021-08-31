@@ -1,6 +1,6 @@
 const styles = () => ({
   cards: {
-    width: `${500 * 2 + 24 * 2}px`,
+    width: `${500 * 3 + 24 * 2}px`,
     maxWidth: '100%',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -28,7 +28,7 @@ const styles = () => ({
     padding: '24px',
     borderWidth: '2px',
     borderStyle: 'solid',
-    boxShadow: '0px 4px 24px 24px rgba(19, 17, 34, 0.16)',
+    //boxShadow: '0px 4px 24px 24px rgba(19, 17, 34, 0.16)',
     height: 'fit-content',
   },
   cardsOne: {

@@ -26,10 +26,6 @@ const links = [
     match: { exact: true },
   },
   {
-    label: 'header.myPots',
-    href: '/my-moonpots',
-  },
-  {
     label: 'header.winners',
     href: '/winners',
   },

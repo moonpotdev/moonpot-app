@@ -1,15 +1,18 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Container, Grid } from '@material-ui/core';
+import { Button, Container, Grid, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import reduxActions from '../redux/actions';
+import reduxActions from '../../redux/actions';
 import BigNumber from 'bignumber.js';
-import { isEmpty } from '../../helpers/utils';
-import { byDecimals } from '../../helpers/format';
+import { isEmpty } from '../../../helpers/utils';
+import { byDecimals } from '../../../helpers/format';
 import NoPotsCard from './components/NoPotsCard/NoPotsCard';
 import Pot from './components/Pot/Pot';
-import { Cards } from '../../components/Cards';
+import { Cards } from '../../../components/Cards';
+import styles from './styles';
+
+const useStyles = makeStyles(styles);
 
 const VALID_STATUSES = ['active', 'eol'];
 const defaultFilter = {
@@ -23,9 +26,9 @@ const getDefaultFilter = (params = {}) => {
   return defaultFilter;
 };
 
-const Dashboard = () => {
+const MyPots = () => {
   const { t } = useTranslation();
-
+  const classes = useStyles();
   const { vault, wallet, balance, prices, earned } = useSelector(state => ({
     vault: state.vaultReducer,
     wallet: state.walletReducer,
@@ -110,12 +113,11 @@ const Dashboard = () => {
 
   return (
     <React.Fragment>
-      <Container maxWidth="lg">
+      <Container maxWidth="none" style={{ padding: '0' }}>
         <Grid container spacing={2}>
           <Grid item>
             <Button
-              variant={'outlined'}
-              color={sortConfig.status === 'active' ? 'primary' : 'default'}
+              className={sortConfig.status === 'active' ? classes.buttonActive : classes.button}
               onClick={() => setSortConfig({ ...sortConfig, status: 'active' })}
             >
               {t('buttons.myActivePots')}
@@ -123,29 +125,39 @@ const Dashboard = () => {
           </Grid>
           <Grid item>
             <Button
-              variant={'outlined'}
-              color={sortConfig.status !== 'active' ? 'primary' : 'default'}
+              className={sortConfig.status !== 'active' ? classes.buttonActive : classes.button}
               onClick={() => setSortConfig({ ...sortConfig, status: 'eol' })}
             >
               {t('buttons.myPastPots')}
             </Button>
           </Grid>
         </Grid>
-        <Grid container style={{ marginTop: '56px' }}>
-          {/*Pots*/}
-          <Cards>
-            {filtered.length === 0 ? (
-              <NoPotsCard />
-            ) : (
-              filtered.map(item => (
-                <Pot key={item.id} item={item} wallet={wallet} prices={prices} balance={balance} />
-              ))
-            )}
-          </Cards>
-        </Grid>
+
+        <div className={classes.potsContainer}>
+          <div className={classes.spacer}>
+            <Grid container>
+              {/*Pots*/}
+              <Cards>
+                {filtered.length === 0 ? (
+                  <NoPotsCard />
+                ) : (
+                  filtered.map(item => (
+                    <Pot
+                      key={item.id}
+                      item={item}
+                      wallet={wallet}
+                      prices={prices}
+                      balance={balance}
+                    />
+                  ))
+                )}
+              </Cards>
+            </Grid>
+          </div>
+        </div>
       </Container>
     </React.Fragment>
   );
 };
 
-export default Dashboard;
+export default MyPots;

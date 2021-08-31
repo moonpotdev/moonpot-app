@@ -1,15 +1,14 @@
 import React, { memo, useMemo } from 'react';
-import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
+import { CardAccordionGroup, CardAccordionItem } from '../../../../../components/Cards';
 import { Grid, makeStyles } from '@material-ui/core';
-
 import { useSelector } from 'react-redux';
-import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
-import { investmentOdds } from '../../../../helpers/utils';
-import { Pot as BasePot, PrizeSplit } from '../../../../components/Pot/Pot';
-import { usePot, useTokenAddressPrice } from '../../../../helpers/hooks';
+import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
+import { investmentOdds } from '../../../../../helpers/utils';
+import { Pot as BasePot, PrizeSplit } from '../../../../../components/Pot/Pot';
+import { usePot, useTokenAddressPrice } from '../../../../../helpers/hooks';
 import styles from './styles';
-import { Translate } from '../../../../components/Translate';
-import { byDecimals } from '../../../../helpers/format';
+import { Translate } from '../../../../../components/Translate';
+import { byDecimals } from '../../../../../helpers/format';
 
 const useStyles = makeStyles(styles);
 
@@ -65,7 +64,7 @@ const Bottom = function ({ id }) {
     <>
       <CardAccordionGroup>
         <CardAccordionItem titleKey="pot.prizeSplit" collapsable={false}>
-          <Grid container>
+          <Grid container style={{ height: '80px' }}>
             <Grid item xs={3}>
               <Translate i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
             </Grid>

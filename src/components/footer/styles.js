@@ -5,8 +5,12 @@ const styles = theme => ({
     textAlign: 'center',
     flex: 1,
     justifyContent: 'flex-end',
-    marginBottom: '32px',
     // backgroundColor: 'red',
+  },
+  light: {
+    backgroundColor: '#393960',
+    maxWidth: 'none',
+    paddingBottom: '32px',
   },
   footerBtn: {
     width: '100%',
@@ -17,9 +21,10 @@ const styles = theme => ({
     color: '#CDCDE4',
     borderColor: '#CDCDE4',
     [theme.breakpoints.up('sm')]: {
-      width: 'auto',
+      width: '500px',
       marginLeft: '10px',
       marginRight: '10px',
+      padding: '0',
     },
   },
   footerIcons: {

@@ -424,6 +424,12 @@ const styles = theme => ({
     lineHeight: '20px',
     fontWeight: '700',
   },
+  interestContainer: {
+    display: 'block',
+    textAlign: 'right',
+    paddingBottom: '16px',
+    height: '56px',
+  },
 });
 
 export default styles;

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { memo, useMemo } from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
-import styles from '../../styles';
-import { investmentOdds } from '../../../../helpers/utils';
+import styles from './styles';
+import { investmentOdds } from '../../../../../helpers/utils';
 import { useTranslation } from 'react-i18next';
-import { byDecimals, formatDecimals } from '../../../../helpers/format';
-import Countdown from '../../../../components/Countdown';
-import { InterestTooltip, WinTotal } from '../../../../components/Pot';
-import { Translate } from '../../../../components/Translate';
-import { useTokenBalance } from '../../../../helpers/hooks';
+import { byDecimals, formatDecimals } from '../../../../../helpers/format';
+import Countdown from '../../../../../components/Countdown';
+import { InterestTooltip, WinTotal } from '../../../../../components/Pot';
+import { Translate } from '../../../../../components/Translate';
+import { useTokenBalance } from '../../../../../helpers/hooks';
 
 const useStyles = makeStyles(styles);
 
@@ -59,7 +59,7 @@ const Interest = function ({ baseApy, bonusApy, bonusApr }) {
   const totalApy = (hasBaseApy ? baseApy : 0) + (hasBonusApy ? bonusApy : 0);
 
   return (
-    <div style={{ display: 'block', textAlign: 'right', paddingBottom: '16px' }}>
+    <div className={classes.interestContainer}>
       <div className={classes.interestValueApy}>
         <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
       </div>

@@ -5,14 +5,14 @@ import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(styles);
 
-const Footer = () => {
+const Footer = ({ variant }) => {
   const { t } = useTranslation();
   const classes = useStyles();
 
   return (
     <React.Fragment>
-      <Container maxWidth="xl">
-        <Grid className={classes.footer} container spacing={2}>
+      <Container maxWidth="xl" className={variant === 'light' ? classes.light : ''}>
+        <Grid container spacing={2} className={classes.footer}>
           <Grid item xs={12}>
             <Button
               href={'https://moonpot.com/alpha'}
