@@ -85,7 +85,7 @@ const Steps = ({ item, steps, handleClose }) => {
                   </React.Fragment>
                 ) : null}
                 <Box className={classes.viewMyMoonpots} textAlign={'center'}>
-                  <Button href={'/#/my-moonpots'} onClick={handleClose}>
+                  <Button href={'/#/'} onClick={handleClose}>
                     View My Moonpots
                   </Button>
                 </Box>
