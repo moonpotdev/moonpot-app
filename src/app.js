@@ -28,6 +28,10 @@ function Pages() {
           <Home selected="community" />
           <Footer variant="light" />
         </Route>
+        <Route exact path="/my-moonpots" key={Date.now()}>
+          <Home selected="myPots" />
+          <Footer variant="light" />
+        </Route>
         <Route strict sensitive exact path="/pot/:id">
           <Vault />
           <Footer variant="dark" />

@@ -22,6 +22,12 @@ const Home = ({ selected }) => {
     });
   }, [totalPrizesAvailable]);
 
+  React.useEffect(() => {
+    if (selected === 'myPots') {
+      setSectionConfig({ ...sectionConfig, selected: 'myPots' });
+    }
+  });
+
   return (
     <Container maxWidth="none" style={{ padding: '0', overflow: 'hidden' }}>
       <Typography className={classes.mainTitle}>
