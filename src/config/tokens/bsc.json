@@ -43,5 +43,18 @@
     "symbol": "DODO",
     "oracleId": "DODO",
     "decimals": 18
+  },
+  {
+    "address": "0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95",
+    "symbol": "BANANA",
+    "oracleId": "BANANA",
+    "decimals": 18
+  },
+  {
+    "address": "0x87f697905732c6FAa5Def3bfE23AaDA5eAC33Ee8",
+    "symbol": "moonTicketBanana",
+    "displaySymbol": "BANANA",
+    "oracleId": "BANANA",
+    "decimals": 18
   }
 ]

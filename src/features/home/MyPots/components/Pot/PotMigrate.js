@@ -1,13 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
-import styles from '../../styles';
-
-import reduxActions from '../../../redux/actions';
-import { isEmpty } from '../../../../helpers/utils';
-import Steps from '../../../vault/components/Steps/Steps';
+import styles from './styles';
+import reduxActions from '../../../../redux/actions';
+import { isEmpty } from '../../../../../helpers/utils';
+import Steps from '../../../../vault/components/Steps/Steps';
 import clsx from 'clsx';
-import { Translate } from '../../../../components/Translate';
+import { Translate } from '../../../../../components/Translate/Translate';
 
 const useStyles = makeStyles(styles);
 
@@ -57,14 +56,7 @@ export const PotMigrate = function ({ item, wallet, balance }) {
         step: 'withdraw',
         message: 'Confirm withdraw transaction on wallet to complete.',
         action: () =>
-          dispatch(
-            reduxActions.wallet.withdraw(
-              item.network,
-              item.contractAddress,
-              balance.tokens[item.rewardToken].balance,
-              true
-            )
-          ),
+          dispatch(reduxActions.wallet.withdraw(item.network, item.contractAddress, 0, true)),
         pending: false,
       });
 
@@ -93,7 +85,7 @@ export const PotMigrate = function ({ item, wallet, balance }) {
             reduxActions.wallet.deposit(
               item.network,
               item.migrationContractAddress,
-              balance.tokens[item.rewardToken].balance,
+              balance.tokens[item.contractAddress].balance,
               false
             )
           ),

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
 import { useSelector } from 'react-redux';
 import { byDecimals } from './format';
+import { tokensByNetworkAddress } from '../config/tokens';
 
 export function usePrevious(value) {
   const ref = useRef();
@@ -79,6 +80,13 @@ export function useTokenEarned(id, token, tokenDecimals) {
 
     return byDecimals(bn, tokenDecimals);
   }, [earned, tokenDecimals]);
+}
+
+export function useTokenAddressPrice(address, network = 'bsc') {
+  const tokenData = tokensByNetworkAddress[network]?.[address.toLowerCase()];
+  return useSelector(state =>
+    tokenData ? state.pricesReducer.prices[tokenData.oracleId] || 0 : 0
+  );
 }
 
 export function usePot(id) {

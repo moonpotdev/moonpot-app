@@ -1,12 +1,12 @@
 import { useEffect, useMemo } from 'react';
-import { useLocalStorage } from '../../../helpers/hooks';
+import { useLocalStorage } from '../../../../helpers/hooks';
 
 const FILTER_DEFAULT = {
   version: 1, // Bump+1 if changes are made to force reset on end user
   sortKey: 'defaultOrder', // Must have matching entry in SORT_COMPARE_FUNCTIONS
   sortDir: 'asc',
   deposited: false,
-  vault: 'main', // main or community
+  vault: 'all', // all/main/community
   retired: false,
 };
 

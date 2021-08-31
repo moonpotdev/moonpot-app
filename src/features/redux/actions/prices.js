@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { sleep } from '../../../helpers/utils';
 
 const fetchPrices = reducer => {
   const cache = new Date();
@@ -7,10 +8,9 @@ const fetchPrices = reducer => {
   return async (dispatch, getState) => {
     const updatePrices = async () => {
       console.log('redux fetchPrices called.');
-      const retry = () => {
-        setTimeout(async () => {
-          return await updatePrices();
-        }, 1000);
+      const retry = async () => {
+        await sleep(1000);
+        return await updatePrices();
       };
 
       try {
@@ -26,10 +26,9 @@ const fetchPrices = reducer => {
 
     const updateApy = async () => {
       console.log('redux fetchApy called.');
-      const retry = () => {
-        setTimeout(async () => {
-          return await updateApy();
-        }, 1000);
+      const retry = async () => {
+        await sleep(1000);
+        return await updateApy();
       };
       try {
         const request = await axios.get(

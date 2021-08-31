@@ -10,6 +10,7 @@ const ecr20Abi = require('../../../config/abi/erc20.json');
 const prizeStrategyAbi = require('../../../config/abi/prizestrategy.json');
 
 const getPools = async (items, state, dispatch) => {
+  console.log('redux getPools processing...');
   const web3 = state.walletReducer.rpc;
   const pools = { ...state.vaultReducer.pools }; // need new object ref so filters can re-run when any pool changes
   const prices = state.pricesReducer.prices;
@@ -235,22 +236,12 @@ const getPools = async (items, state, dispatch) => {
   return true;
 };
 
-const getPoolsSingle = async (item, state, dispatch) => {
-  console.log('redux getPoolsSingle() processing...');
-  return await getPools([item], state, dispatch);
-};
-
-const getPoolsAll = async (state, dispatch) => {
-  console.log('redux getPoolsAll() processing...');
-  const pools = state.vaultReducer.pools;
-  return getPools(pools, state, dispatch);
-};
-
 const fetchPools = (item = false) => {
   return async (dispatch, getState) => {
     const state = getState();
+    const pools = state.vaultReducer.pools;
     dispatch({ type: HOME_FETCH_POOLS_BEGIN });
-    return item ? await getPoolsSingle(item, state, dispatch) : await getPoolsAll(state, dispatch);
+    return await getPools(item ? [item] : pools, state, dispatch);
   };
 };
 

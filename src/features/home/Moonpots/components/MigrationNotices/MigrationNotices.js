@@ -1,13 +1,12 @@
-import React, { useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import reduxActions from '../../../redux/actions';
-import { byDecimals } from '../../../../helpers/format';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { byDecimals } from '../../../../../helpers/format';
 import BigNumber from 'bignumber.js';
 import { Box, makeStyles } from '@material-ui/core';
 import styles from './styles';
 import { useTranslation } from 'react-i18next';
-import alertIcon from '../../../../images/icons/alert.svg';
-import { ButtonLink } from '../../../../components/ButtonLink/ButtonLink';
+import alertIcon from '../../../../../images/icons/alert.svg';
+import { ButtonLink } from '../../../../../components/ButtonLink/ButtonLink';
 
 const useStyles = makeStyles(styles);
 
@@ -15,7 +14,7 @@ function MigrationNotice({ pot }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const balanceString = useSelector(
-    state => state.balanceReducer.tokens[pot.rewardToken]?.balance || '0'
+    state => state.balanceReducer.tokens[pot.contractAddress]?.balance || '0'
   );
   const balanceTokenDecimals = pot.tokenDecimals;
   const balanceBigNumber = useMemo(
@@ -72,7 +71,6 @@ export function MigrationNotices({ potType }) {
   const currentNetwork = useSelector(state => state.walletReducer.network);
   const currentAddress = useSelector(state => state.walletReducer.address);
   const allPots = useSelector(state => state.vaultReducer.pools);
-  const dispatch = useDispatch();
 
   const potsNeedingMigration = useMemo(() => {
     return Object.values(allPots).filter(
@@ -84,12 +82,6 @@ export function MigrationNotices({ potType }) {
     );
   }, [potType, allPots, currentNetwork]);
   const hasPotsNeedingMigration = potsNeedingMigration.length > 0;
-
-  useEffect(() => {
-    if (currentAddress && hasPotsNeedingMigration) {
-      dispatch(reduxActions.balance.fetchBalances());
-    }
-  }, [dispatch, currentAddress, hasPotsNeedingMigration]);
 
   if (currentAddress && hasPotsNeedingMigration) {
     return (
