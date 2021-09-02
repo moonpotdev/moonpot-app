@@ -25,7 +25,6 @@ const Home = ({ selected }) => {
   React.useEffect(() => {
     if (selected === 'myPots') {
       setSectionConfig({ ...sectionConfig, selected: 'myPots' });
-      console.log('Set config');
     }
   }, []);
 
