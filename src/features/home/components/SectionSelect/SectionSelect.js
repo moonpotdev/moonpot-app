@@ -1,44 +1,35 @@
-import React, { useEffect, useCallback } from 'react';
-import { makeStyles } from '@material-ui/core';
-import styles from './styles';
-import { Grid, Button } from '@material-ui/core';
+import React from 'react';
+import { Grid, makeStyles } from '@material-ui/core';
+import { RoutedButton } from '../../../../components/Buttons/BaseButton';
 import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
+import styles from './styles';
 
 const useStyles = makeStyles(styles);
 
-const SectionSelect = ({ config, setConfig }) => {
+const SectionSelect = ({ selected, className }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
-  const handleChange = useCallback(
-    (name, value) => {
-      setConfig({ ...config, [name]: value });
-      console.log('Set config: ' + value);
-    },
-    [setConfig, config]
-  );
-
   return (
-    <React.Fragment>
-      <Grid container className={classes.buttonsContainer}>
-        <Grid item xs={6}>
-          <Button
-            className={config.selected === 'moonpots' ? classes.buttonSelected : classes.button}
-            onClick={() => handleChange('selected', 'moonpots')}
-          >
-            {t('buttons.moonpots')}
-          </Button>
-        </Grid>
-        <Grid item xs={6}>
-          <Button
-            className={config.selected === 'myPots' ? classes.buttonSelected : classes.button}
-            onClick={() => handleChange('selected', 'myPots')}
-          >
-            {t('buttons.myPots')}
-          </Button>
-        </Grid>
+    <Grid container className={clsx(classes.buttonsContainer, className)}>
+      <Grid item xs={6}>
+        <RoutedButton
+          className={clsx(classes.button, { [classes.buttonSelected]: selected === 'moonpots' })}
+          to="/"
+        >
+          {t('buttons.moonpots')}
+        </RoutedButton>
       </Grid>
-    </React.Fragment>
+      <Grid item xs={6}>
+        <RoutedButton
+          className={clsx(classes.button, { [classes.buttonSelected]: selected === 'my-moonpots' })}
+          to="/my-moonpots"
+        >
+          {t('buttons.myPots')}
+        </RoutedButton>
+      </Grid>
+    </Grid>
   );
 };
 
