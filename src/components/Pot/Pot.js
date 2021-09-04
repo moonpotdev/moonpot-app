@@ -14,7 +14,7 @@ import { Translate } from '../Translate';
 
 const useStyles = makeStyles(styles);
 
-export const Logo = memo(function ({ name, baseToken, sponsorToken }) {
+export const Logo = memo(function ({ baseToken, sponsorToken }) {
   const src = require('../../images/vault/' +
     baseToken.toLowerCase() +
     '/sponsored/' +
@@ -43,7 +43,7 @@ export const WinTotal = memo(function ({ awardBalanceUsd, totalSponsorBalanceUsd
   );
 });
 
-const WinTokens = memo(function ({ depositToken, sponsors }) {
+export const WinTokens = memo(function ({ depositToken, sponsors }) {
   const classes = useStyles();
   const sponsorTokens = sponsors
     .map(sponsor => sponsor.sponsorToken)
@@ -135,7 +135,7 @@ export function Pot({ id, variant, bottom }) {
     <Card variant={variant}>
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>
         <Grid item xs={4}>
-          <Logo name={pot.name} baseToken={pot.token} sponsorToken={pot.sponsorToken} />
+          <Logo baseToken={pot.token} sponsorToken={pot.sponsorToken} />
         </Grid>
         <Grid item xs={8}>
           <Title name={pot.name} />
