@@ -159,7 +159,13 @@
     "bonusToken": "POTS",
     "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "bonusTokenDecimals": 18,
-    "compoundIsBonus": true
+    "compoundIsBonus": true,
+    "migrationContractAddress": "0x3789840c8697Aee0d02159003D7501588De3ceD9",
+    "migrationRewardAddress": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
+    "migrationLearnMoreUrl": "https://moonpot.com/alpha/learn/how-to-move-cake-from-the-retired-cake-moonpot/",
+    "migrationExplainer": [
+      "After you move your CAKE today, you won’t have to move it again. You will be entered into future Moonpots without having to make transactions each week."
+    ]
   },
   {
     "id": "banana",
@@ -230,8 +236,8 @@
     "bonusAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
     "bonusTokenDecimals": 18,
     "migrationNeeded": true,
-    "migrationContractAddress": "0x30d55CE74E2dcd1B0Ff37214a6978FCFc06aA499",
-    "migrationRewardAddress": "0x9273be9c180B0271cc2c90E5BF99477B573Fe904",
+    "migrationContractAddress": "0x3789840c8697Aee0d02159003D7501588De3ceD9",
+    "migrationRewardAddress": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
     "migrationLearnMoreUrl": "https://moonpot.com/alpha/learn/how-to-move-cake-from-the-retired-cake-moonpot/",
     "migrationExplainer": [
       "After you move your CAKE today, you won’t have to move it again. You will be entered into future Moonpots without having to make transactions each week."
