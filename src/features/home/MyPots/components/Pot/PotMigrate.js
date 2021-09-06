@@ -164,7 +164,7 @@ export const PotMigrate = function ({ item, wallet, balance }) {
         </Grid>
         <Grid item xs={6} align={'left'}>
           <Typography className={classes.potsItemText}>
-            <Translate i18nKey="pot.myCurrentFairnessFee" />
+            <Translate i18nKey="pot.myFairnessFee" />
           </Typography>
         </Grid>
         <Grid item xs={6} align={'right'}>
