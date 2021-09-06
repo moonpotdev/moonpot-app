@@ -13,6 +13,13 @@
     "decimals": 18
   },
   {
+    "address": "0xeA32bB31A4a5Ab38226c5824FB54D4e271a3253a",
+    "symbol": "moonTicketPotsV2",
+    "displaySymbol": "POTS",
+    "oracleId": "POTS",
+    "decimals": 18
+  },
+  {
     "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
     "symbol": "CAKE",
     "oracleId": "Cake",
@@ -28,6 +35,13 @@
   {
     "address": "0x9273be9c180b0271cc2c90e5bf99477b573fe904",
     "symbol": "moonTicketCakeV2",
+    "displaySymbol": "CAKE",
+    "oracleId": "Cake",
+    "decimals": 18
+  },
+  {
+    "address": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
+    "symbol": "moonTicketCakeV3",
     "displaySymbol": "CAKE",
     "oracleId": "Cake",
     "decimals": 18
