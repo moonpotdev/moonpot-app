@@ -20,7 +20,9 @@ export const Draws = function () {
       loader={<RouteLoading />}
       style={{ overflow: 'visible' }}
     >
-      <Cards>{draws ? draws.map(draw => <Draw key={draw.id} draw={draw} />) : null}</Cards>
+      <Cards sameHeight={false}>
+        {draws ? draws.map(draw => <Draw key={draw.id} draw={draw} />) : null}
+      </Cards>
     </InfiniteScroll>
   );
 };
