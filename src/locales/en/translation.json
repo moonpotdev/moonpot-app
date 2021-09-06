@@ -176,7 +176,7 @@
   },
   "winners": {
     "totalPrizesWon": "Our cadets have won",
-    "potDrawNumber": "{{name}} Pot Draw #{{number}}",
+    "potDraw": "{{name}} Pot Draw",
     "valueWon": "<span>{{currency}}{{amount}}</span> Won",
     "wonTokensIn": "in ",
     "drawDate": "Draw date",
