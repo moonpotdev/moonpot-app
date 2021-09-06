@@ -6,10 +6,10 @@
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
     "rewardToken": "moonTicketPotsV2",
-    "rewardAddress": "0xBC258c4ea30F21F5ab39Ec15391818C6cc4A0D1B",
-    "contractAddress": "0x616BCbAd052FF728B61289035c3c57c9ca23e7D8",
-    "prizePoolAddress": "0xdB8BA7AC77ADbFACf50824085aEeAfCE18D6EB41",
-    "prizeStrategyAddress": "0x10649FFE7b164c020E49A0dde5844f5b5Dd07da3",
+    "rewardAddress": "0xeA32bB31A4a5Ab38226c5824FB54D4e271a3253a",
+    "contractAddress": "0x1f491F500C64118d6435A3387ff4A8a1749a8C28",
+    "prizePoolAddress": "0x24B18744d1B79F21056aF8CB0789c39d28014478",
+    "prizeStrategyAddress": "0xa10519eFE8E4fa5507D47A15Bcbeb7fb30F923B1",
     "pricePerShare": 1,
     "oracleId": "POTS",
     "compoundApy": true,
@@ -124,7 +124,13 @@
     "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "bonusTokenDecimals": 18,
     "supportsCompound": true,
-    "compoundIsBonus": false
+    "compoundIsBonus": false,
+    "migrationContractAddress": "0x1f491F500C64118d6435A3387ff4A8a1749a8C28",
+    "migrationRewardAddress": "0xeA32bB31A4a5Ab38226c5824FB54D4e271a3253a",
+    "migrationLearnMoreUrl": "https://moonpot.com/alpha/learn/how-to-move-cake-from-the-retired-cake-moonpot/",
+    "migrationExplainer": [
+      "After you move your POTS today, you won’t have to move it again. You will be entered into future Moonpots without having to make transactions each week."
+    ]
   },
   {
     "id": "cake-v2",
