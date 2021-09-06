@@ -76,7 +76,7 @@ export function MigrationNotices({ potType }) {
     return Object.values(allPots).filter(
       pot =>
         pot.status === 'eol' &&
-        pot.vaultType === potType &&
+        (potType === 'all' || pot.vaultType === potType) &&
         pot.network === currentNetwork &&
         pot.migrationNeeded
     );
