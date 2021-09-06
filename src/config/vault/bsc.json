@@ -128,7 +128,7 @@
     "migrationNeeded": true,
     "migrationContractAddress": "0x1f491F500C64118d6435A3387ff4A8a1749a8C28",
     "migrationRewardAddress": "0xeA32bB31A4a5Ab38226c5824FB54D4e271a3253a",
-    "migrationLearnMoreUrl": "https://moonpot.com/alpha/learn/how-to-move-cake-from-the-retired-cake-moonpot/",
+    "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/we-ve-been-busy/",
     "migrationExplainer": [
       "After you move your POTS today, you won’t have to move it again. You will be entered into future Moonpots without having to make transactions each week."
     ]
@@ -170,7 +170,7 @@
     "migrationNeeded": true,
     "migrationContractAddress": "0x3789840c8697Aee0d02159003D7501588De3ceD9",
     "migrationRewardAddress": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
-    "migrationLearnMoreUrl": "https://moonpot.com/alpha/learn/how-to-move-cake-from-the-retired-cake-moonpot/",
+    "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/we-ve-been-busy/",
     "migrationExplainer": [
       "After you move your CAKE today, you won’t have to move it again. You will be entered into future Moonpots without having to make transactions each week."
     ]
