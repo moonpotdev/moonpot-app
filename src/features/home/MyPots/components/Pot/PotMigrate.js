@@ -141,7 +141,16 @@ export const PotMigrate = function ({ item, wallet, balance }) {
         </Grid>
         <Grid item xs={12}>
           <Typography className={classes.learnMoreText} align={'left'}>
-            <Translate i18nKey="learnMore" />
+            {item.migrationLearnMoreUrl ? (
+              <a
+                href={item.migrationLearnMoreUrl}
+                className={classes.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Translate i18nKey="migrationNoticeLearnMore" />
+              </a>
+            ) : null}
           </Typography>
         </Grid>
         <Grid item xs={12}>

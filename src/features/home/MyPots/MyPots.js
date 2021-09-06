@@ -102,7 +102,7 @@ const MyPots = ({ selected }) => {
           <div className={classes.spacer}>
             <Grid container>
               {/*Pots*/}
-              <Cards>
+              <Cards sameHeight={false}>
                 {filtered.length === 0 ? (
                   <NoPotsCard />
                 ) : (

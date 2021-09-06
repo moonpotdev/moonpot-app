@@ -12,11 +12,17 @@ function variantClass(classes, prefix, variant) {
   return key in classes ? classes[key] : false;
 }
 
-export function Cards({ className, children, oneUp = false, ...rest }) {
+export function Cards({ className, children, sameHeight = true, oneUp = false, ...rest }) {
   const classes = useStyles();
 
   return (
-    <div className={clsx(classes.cards, className, { [classes.cardsOne]: oneUp })} {...rest}>
+    <div
+      className={clsx(classes.cards, className, {
+        [classes.cardsOne]: oneUp,
+        [classes.cardsNormalHeight]: sameHeight !== true,
+      })}
+      {...rest}
+    >
       <div className={classes.cardsInner}>{children}</div>
     </div>
   );

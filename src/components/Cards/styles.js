@@ -34,6 +34,11 @@ const styles = () => ({
   cardsOne: {
     width: `${500 + 24}px`,
   },
+  cardsNormalHeight: {
+    '& $cardsInner': {
+      alignItems: 'flex-start',
+    },
+  },
   title: {
     fontWeight: 500,
     fontSize: '19px',
