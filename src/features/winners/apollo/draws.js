@@ -86,7 +86,12 @@ function decorateDraw(draw, network) {
   const pots = potsByNetworkPrizePoolAddress[network][draw.prizePool.address.toLowerCase()];
 
   // add static pot info
-  obj.pot = pots ? pots[0] : null;
+  if (pots && pots.length) {
+    const pot = pots[0];
+    if (pot.status !== 'eol' || draw.drawNumber <= pot.eolDrawNumber) {
+      obj.pot = pot;
+    }
+  }
 
   return obj;
 }

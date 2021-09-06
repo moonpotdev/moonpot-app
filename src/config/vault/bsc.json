@@ -96,6 +96,7 @@
     "compoundApy": true,
     "vaultType": "main",
     "status": "eol",
+    "eolDrawNumber": 1,
     "infoCardStrategy": "ziggy",
     "sponsorProjectName": "Moonpot",
     "sponsors": [
@@ -149,6 +150,7 @@
     "apyId": "cake-cakev2",
     "vaultType": "main",
     "status": "eol",
+    "eolDrawNumber": 6,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
     "infoCardEarningsBreakdown": true,
@@ -227,6 +229,7 @@
     "apyId": "cake-cakev2",
     "vaultType": "main",
     "status": "eol",
+    "eolDrawNumber": 1,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
     "infoCardEarningsBreakdown": true,
