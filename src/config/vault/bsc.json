@@ -42,7 +42,8 @@
     "bonusToken": "POTS",
     "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "bonusTokenDecimals": 18,
-    "supportsCompound": true
+    "supportsCompound": true,
+    "compoundIsBonus": false
   },
   {
     "id": "cake",
@@ -76,7 +77,8 @@
     "bonusRewardId": 2,
     "bonusToken": "POTS",
     "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-    "bonusTokenDecimals": 18
+    "bonusTokenDecimals": 18,
+    "compoundIsBonus": true
   },
   {
     "id": "banana",
