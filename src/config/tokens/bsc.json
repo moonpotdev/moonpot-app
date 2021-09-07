@@ -59,6 +59,12 @@
     "decimals": 18
   },
   {
+    "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "symbol": "WBNB",
+    "oracleId": "WBNB",
+    "decimals": 18
+  },
+  {
     "address": "0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95",
     "symbol": "BANANA",
     "oracleId": "BANANA",
