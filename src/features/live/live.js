@@ -224,7 +224,7 @@ const LiveDraw = memo(function LiveDraw({ id }) {
   const pot = usePot(id);
   const classes = useStyles();
   const drawTime = pot.expiresAt;
-  const [checkForResults, setCheckForResults] = useState(() => Date.now() / 1000 > drawTime);
+  const [checkForResults, setCheckForResults] = useState(() => Date.now() / 1000 >= drawTime);
   const step = useSelector(state => state.live[id].step);
   const winners = useWinners(id, pot.token, pot.network);
 
@@ -233,9 +233,11 @@ const LiveDraw = memo(function LiveDraw({ id }) {
     if (initial < drawTime) {
       const id = setInterval(() => {
         const now = Date.now() / 1000;
-        if (now > drawTime) {
+        if (now >= drawTime) {
           clearInterval(id);
           setCheckForResults(true);
+        } else {
+          setCheckForResults(false);
         }
       }, 1000);
 
@@ -287,8 +289,16 @@ const NextLiveDraw = memo(function NextLiveDraw() {
     return null;
   }, [pots]);
 
-  if (next) {
-    return <LiveDraw id={next} />;
+  const [show, setShow] = useState(null);
+
+  useEffect(() => {
+    if (show === null && next !== null) {
+      setShow(next);
+    }
+  }, [next, show, setShow]);
+
+  if (show) {
+    return <LiveDraw id={show} />;
   }
 
   return <RouteLoading />;
