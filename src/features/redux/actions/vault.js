@@ -134,9 +134,7 @@ const getPools = async (items, state, dispatch) => {
       if ('bonusRewardInfo' in item) {
         const bonusPrice =
           pools[item.id].bonusToken in prices ? prices[pools[item.id].bonusToken] : 0;
-        const rewardRate = new BigNumber(
-          item.bonusRewardInfo ? item.bonusRewardInfo[item.bonusRewardInfo] : 0
-        );
+        const rewardRate = new BigNumber(item.bonusRewardInfo ? item.bonusRewardInfo['3'] : 0);
         const totalValueLocked = new BigNumber(item.totalValueLocked);
         const totalStakedUsd = totalValueLocked
           .times(awardPrice)
@@ -155,9 +153,14 @@ const getPools = async (items, state, dispatch) => {
           boostRewardsInUsd = yearlyRewards
             .times(boostPrice)
             .dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].boostTokenDecimals));
-          pools[item.id].bonusApy = Number(
-            yearlyRewardsInUsd.plus(boostRewardsInUsd).multipliedBy(100).dividedBy(totalStakedUsd)
-          );
+
+          const apr = yearlyRewardsInUsd.plus(boostRewardsInUsd).dividedBy(totalStakedUsd);
+          if (pools[item.id].compoundApy) {
+            pools[item.id].bonusApr = apr.multipliedBy(100).toNumber();
+            pools[item.id].bonusApy = compound(apr) * 100;
+          } else {
+            pools[item.id].bonusApy = apr.multipliedBy(100).toNumber();
+          }
         } else if (!isEmpty(pools[item.id].bonusToken)) {
           const bonusPrice =
             pools[item.id].bonusToken in prices ? prices[pools[item.id].bonusToken] : 0;

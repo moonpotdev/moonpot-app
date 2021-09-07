@@ -42,6 +42,10 @@
     "bonusToken": "POTS",
     "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "bonusTokenDecimals": 18,
+    "boostRewardId": 1,
+    "boostToken": "WBNB",
+    "boostAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "boostTokenDecimals": 18,
     "supportsCompound": true,
     "compoundIsBonus": false
   },
@@ -74,10 +78,14 @@
       }
     ],
     "sponsorToken": "POTS",
-    "bonusRewardId": 2,
+    "bonusRewardId": 1,
     "bonusToken": "POTS",
     "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "bonusTokenDecimals": 18,
+    "boostRewardId": 2,
+    "boostToken": "WBNB",
+    "boostAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "boostTokenDecimals": 18,
     "compoundIsBonus": true
   },
   {
