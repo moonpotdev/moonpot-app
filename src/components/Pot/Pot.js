@@ -73,30 +73,38 @@ export const InterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
   return tooltipKey ? <TooltipWithIcon i18nKey={tooltipKey} /> : null;
 });
 
-const Interest = memo(function ({ baseApy, bonusApy, bonusApr }) {
+const Interest = memo(function ({ id, baseApy, bonusApy, bonusApr }) {
   const classes = useStyles();
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
   const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;
   const totalApy = (hasBaseApy ? baseApy : 0) + (hasBonusApy ? bonusApy : 0);
 
-  return (
-    <>
-      <div className={classes.interestValueApy}>
-        <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
+  if (id === 'banana') {
+    return (
+      <div className={classes.interestContainer}>
+        <div className={classes.interestValueApy}>
+          <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
+        </div>
+        {hasBaseApy && hasBonusApy ? (
+          <div className={classes.interestValueBaseApy}>
+            <Translate i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
+          </div>
+        ) : null}
+        {hasBonusApr ? (
+          <div className={classes.interestValueApr}>
+            <Translate i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />
+          </div>
+        ) : null}
       </div>
-      {hasBaseApy && hasBonusApy ? (
-        <div className={classes.interestValueBaseApy}>
-          <Translate i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
-        </div>
-      ) : null}
-      {hasBonusApr ? (
-        <div className={classes.interestValueApr}>
-          <Translate i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />
-        </div>
-      ) : null}
-    </>
-  );
+    );
+  } else {
+    return (
+      <div className={classes.interestContainer}>
+        <div className={classes.interestValueApy}>???</div>
+      </div>
+    );
+  }
 });
 
 const TVL = memo(function ({ totalStakedUsd }) {
@@ -175,7 +183,7 @@ export function Pot({ id, variant, bottom }) {
               <InterestTooltip baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
             }
           >
-            <Interest baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
+            <Interest id={id} baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
           </DrawStat>
         </Grid>
       </Grid>
