@@ -176,7 +176,7 @@
   },
   "winners": {
     "totalPrizesWon": "我们的学员赢得了",
-    "potDrawNumber": "{{name}} 月盒抽奖活动 #{{number}}",
+    "potDraw": "{{name}} 月盒抽奖活动",
     "valueWon": "<span>赢走了{{currency}}{{amount}}</span>",
     "wonTokensIn": "的 ",
     "drawDate": "开奖日期",

@@ -13,14 +13,8 @@ const styles = theme => ({
     whiteSpace: 'nowrap',
   },
   buttonActive: {
-    fontSize: '15px',
-    lineHeight: '24px',
-    fontWeight: '500',
     color: '#FFFFFF',
-    borderRadius: '0',
     borderBottom: '2px solid #fff',
-    width: 'auto',
-    whiteSpace: 'nowrap',
   },
 });
 

@@ -20,16 +20,8 @@ function Pages() {
   return (
     <Suspense fallback={<RouteLoading />}>
       <Switch>
-        <Route exact path="/" key={Date.now()}>
+        <Route exact path={['/:bottom(all|main|community)?', '/:top(my-moonpots)/:bottom(eol)?']}>
           <Home />
-          <Footer variant="light" />
-        </Route>
-        <Route exact path="/community" key={Date.now()}>
-          <Home selected="community" />
-          <Footer variant="light" />
-        </Route>
-        <Route exact path="/my-moonpots" key={Date.now()}>
-          <Home selected="myPots" />
           <Footer variant="light" />
         </Route>
         <Route strict sensitive exact path="/pot/:id">

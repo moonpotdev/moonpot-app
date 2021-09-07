@@ -90,11 +90,11 @@ const useNormalizedWinnings = function (awards, drawToken) {
   }, [awards, prices, drawToken]);
 };
 
-const Title = memo(function ({ name, number }) {
+const Title = memo(function ({ name }) {
   const classes = useStyles();
   return (
     <div className={classes.title}>
-      <Translate i18nKey="winners.potDrawNumber" values={{ name, number }} />
+      <Translate i18nKey="winners.potDraw" values={{ name }} />
     </div>
   );
 });
@@ -232,7 +232,7 @@ export const Draw = function ({ draw }) {
           />
         </Grid>
         <Grid item xs={8}>
-          <Title name={draw.pot.name} number={draw.drawNumber} />
+          <Title name={draw.pot.name} />
           <ValueWon currency="$" amount={totalPrizeValue} />
           <WonTokens winnings={winnings} />
         </Grid>

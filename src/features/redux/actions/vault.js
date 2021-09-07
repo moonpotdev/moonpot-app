@@ -216,9 +216,9 @@ const getPools = async (items, state, dispatch) => {
       pool.totalSponsorBalanceUsd = pool.totalSponsorBalanceUsd.plus(sponsor.sponsorBalanceUsd);
     });
 
+    totalTvl = totalTvl.plus(pool.totalStakedUsd);
     if (pool.status === 'active') {
       totalPrizesAvailable = totalPrizesAvailable.plus(pool.totalSponsorBalanceUsd);
-      totalTvl = totalTvl.plus(pool.totalStakedUsd);
     }
   }
 

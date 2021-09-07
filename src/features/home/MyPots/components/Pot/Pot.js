@@ -28,7 +28,7 @@ const Pot = function ({ item, wallet, prices, balance }) {
           <Typography className={classes.dividerText}>{t('pot.myDetails')} </Typography>
         </Grid>
         {/*Info Block*/}
-        <PotInfoBlock item={item} prices={prices} />
+        <PotInfoBlock item={item} prices={prices} active={item.status !== 'eol'} />
       </Grid>
       {/*Bottom*/}
       {item.status === 'active' ? (

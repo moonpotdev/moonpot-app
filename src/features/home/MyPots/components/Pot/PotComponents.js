@@ -51,30 +51,38 @@ export const PotTitle = function ({ item }) {
   );
 };
 
-const Interest = function ({ baseApy, bonusApy, bonusApr }) {
+const Interest = function ({ id, baseApy, bonusApy, bonusApr }) {
   const classes = useStyles();
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
   const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;
   const totalApy = (hasBaseApy ? baseApy : 0) + (hasBonusApy ? bonusApy : 0);
 
-  return (
-    <div className={classes.interestContainer}>
-      <div className={classes.interestValueApy}>
-        <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
+  if (id === 'banana') {
+    return (
+      <div className={classes.interestContainer}>
+        <div className={classes.interestValueApy}>
+          <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
+        </div>
+        {hasBaseApy && hasBonusApy ? (
+          <div className={classes.interestValueBaseApy}>
+            <Translate i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
+          </div>
+        ) : null}
+        {hasBonusApr ? (
+          <div className={classes.interestValueApr}>
+            <Translate i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />
+          </div>
+        ) : null}
       </div>
-      {hasBaseApy && hasBonusApy ? (
-        <div className={classes.interestValueBaseApy}>
-          <Translate i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
-        </div>
-      ) : null}
-      {hasBonusApr ? (
-        <div className={classes.interestValueApr}>
-          <Translate i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />
-        </div>
-      ) : null}
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className={classes.interestContainer}>
+        <div className={classes.interestValueApy}>???</div>
+      </div>
+    );
+  }
 };
 
 const DepositedOdds = memo(function ({ ticketTotalSupply, winners, ticketToken, tokenDecimals }) {
@@ -87,7 +95,7 @@ const DepositedOdds = memo(function ({ ticketTotalSupply, winners, ticketToken, 
   return <Translate i18nKey="pot.odds" values={{ odds }} />;
 });
 
-export const PotInfoBlock = function ({ item, prices }) {
+export const PotInfoBlock = function ({ item, prices, active = true }) {
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -107,31 +115,48 @@ export const PotInfoBlock = function ({ item, prices }) {
           </Typography>
         </Grid>
         {/*Interest*/}
-        <Grid item xs={6}>
-          <Typography className={classes.myDetailsText} align={'left'}>
-            {t('pot.myInterestRate')}
-            <InterestTooltip baseApy={item.apy} bonusApy={item.bonusApy} bonusApr={item.bonusApr} />
-          </Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Interest baseApy={item.apy} bonusApy={item.bonusApy} bonusApr={item.bonusApr} />
-        </Grid>
+        {active ? (
+          <>
+            <Grid item xs={6}>
+              <Typography className={classes.myDetailsText} align={'left'}>
+                {t('pot.myInterestRate')}
+                <InterestTooltip
+                  baseApy={item.apy}
+                  bonusApy={item.bonusApy}
+                  bonusApr={item.bonusApr}
+                />
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Interest
+                id={item.id}
+                baseApy={item.apy}
+                bonusApy={item.bonusApy}
+                bonusApr={item.bonusApr}
+              />
+            </Grid>
+          </>
+        ) : null}
         {/*Odds*/}
-        <Grid item xs={6}>
-          <Typography className={classes.myDetailsText} align={'left'}>
-            {t('pot.myOdds')}
-          </Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography className={classes.myDetailsValue} align={'right'}>
-            <DepositedOdds
-              ticketTotalSupply={item.totalTickets}
-              winners={item.numberOfWinners}
-              ticketToken={item.rewardToken}
-              tokenDecimals={item.tokenDecimals}
-            />
-          </Typography>
-        </Grid>
+        {active ? (
+          <>
+            <Grid item xs={6}>
+              <Typography className={classes.myDetailsText} align={'left'}>
+                {t('pot.myOdds')}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography className={classes.myDetailsValue} align={'right'}>
+                <DepositedOdds
+                  ticketTotalSupply={item.totalTickets}
+                  winners={item.numberOfWinners}
+                  ticketToken={item.rewardToken}
+                  tokenDecimals={item.tokenDecimals}
+                />
+              </Typography>
+            </Grid>
+          </>
+        ) : null}
       </Grid>
     </Grid>
   );
