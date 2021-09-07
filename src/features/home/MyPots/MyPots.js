@@ -78,7 +78,7 @@ const MyPots = ({ selected }) => {
 
   return (
     <React.Fragment>
-      <Container maxWidth="none" style={{ padding: '0' }}>
+      <Container maxWidth={false} style={{ padding: '0' }}>
         <Grid container spacing={2}>
           <Grid item>
             <RoutedButton
