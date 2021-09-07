@@ -162,7 +162,6 @@
     "myBonusEarnings": "My Bonus Earnings",
     "myEarnings": "My Earnings",
     "myBoostEarnings": "My Super Boost Earnings",
-    "bonusExtraInfo": "You will continue to earn bonus {{bonusToken}} and {{boostToken}} until the end of the draw. You can claim it as many times as you like.",
     "bonusExplainer": "You will continue to earn bonus {{tokens}} until the end of the draw. You can claim as many times as you like.",
     "potsExplainer": "You will continue to earn {{tokens}} until the end of the draw. You can claim as many times as you like.",
     "compoundExplainer": "Compounding more {{token}} will increase your Fairness Fee and Fairplay Timelock proportionally to the amount deposited. This fee reduces every second after you deposit. You won't pay any additional Fairness Fees on your older deposits.",

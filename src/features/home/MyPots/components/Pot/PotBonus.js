@@ -45,6 +45,8 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
     finished: false,
   });
   const [stepsItem, setStepsItem] = React.useState(null);
+  const hasBonus = 'bonusRewardId' in item;
+  const hasBoost = 'boostRewardId' in item;
 
   const handleClose = () => {
     updateItemData();
@@ -129,56 +131,39 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
   return (
     <Grid container>
       <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
-      <Grid item xs={6}>
-        <Typography className={classes.myDetailsText} align={'left'} style={{ marginBottom: 0 }}>
-          {item.token === 'POTS' ? t('bonus.myEarnings') : t('bonus.myBonusEarnings')}
-        </Typography>
-      </Grid>
-      <Grid item xs={6}>
-        <Typography className={classes.myDetailsValue} align={'right'} style={{ marginBottom: 0 }}>
-          {formatDecimals(item.earned)} {item.bonusToken} ($
-          {formatDecimals(item.earned.multipliedBy(prices.prices[item.bonusToken]), 2)})
-        </Typography>
-      </Grid>
-      {item.boostToken ? (
-        <React.Fragment>
+      {hasBonus ? (
+        <>
           <Grid item xs={6}>
-            <Typography
-              className={classes.myDetailsText}
-              align={'left'}
-              style={{ marginTop: '16px' }}
-            >
+            <Typography className={classes.myDetailsText} align={'left'}>
+              {t(item.id === 'pots' ? 'bonus.myEarnings' : 'bonus.myBonusEarnings')}
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography className={classes.myDetailsValue} align={'right'}>
+              {formatDecimals(item.earned)} {item.bonusToken} ($
+              {formatDecimals(item.earned.multipliedBy(prices.prices[item.bonusToken]), 2)})
+            </Typography>
+          </Grid>
+        </>
+      ) : null}
+      {hasBoost ? (
+        <>
+          <Grid item xs={6}>
+            <Typography className={classes.myDetailsText} align={'left'}>
               <Translate i18nKey="bonus.myBoostEarnings" />
             </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography
-              className={classes.myDetailsValue}
-              align={'right'}
-              style={{ marginTop: '16px' }}
-            >
+            <Typography className={classes.myDetailsValue} align={'right'}>
               {formatDecimals(item.boosted)} {item.boostToken} ($
               {formatDecimals(item.boosted.multipliedBy(prices.prices[item.boostToken]), 2)})
             </Typography>
           </Grid>
-          <Grid item xs={12}>
-            <Typography className={classes.myPotsInfoText} align={'left'}>
-              <Translate
-                i18nKey="bonus.bonusExtraInfo"
-                values={{
-                  bonusToken: item.bonusToken,
-                  boostToken: item.boostToken,
-                }}
-              />
-            </Typography>
-          </Grid>
-        </React.Fragment>
-      ) : (
-        ''
-      )}
+        </>
+      ) : null}
       <Grid item xs={12} className={classes.bonusExplainerRow}>
         <Typography className={classes.explainerText}>
-          {item.token === 'POTS'
+          {item.id === 'pots'
             ? t('bonus.potsExplainer', { tokens: getItemBonusTokens(item) })
             : t('bonus.bonusExplainer', { tokens: getItemBonusTokens(item) })}
         </Typography>

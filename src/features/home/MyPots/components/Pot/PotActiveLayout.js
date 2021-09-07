@@ -37,9 +37,11 @@ const ActiveLayout = function ({ item, wallet, balance, prices }) {
   return (
     <>
       {/*Bonus*/}
-      <CardAccordionItem titleKey={item.token === 'POTS' ? 'pot.earnings' : 'pot.bonusEarnings'}>
-        <PotBonus item={item} prices={prices} wallet={wallet} balance={balance} />
-      </CardAccordionItem>
+      {'bonusRewardId' in item || 'boostRewardId' in item ? (
+        <CardAccordionItem titleKey={item.id === 'pots' ? 'pot.earnings' : 'pot.bonusEarnings'}>
+          <PotBonus item={item} prices={prices} wallet={wallet} balance={balance} />
+        </CardAccordionItem>
+      ) : null}
       {/*Deposit*/}
       <CardAccordionItem titleKey="pot.depositMore">
         <PotDeposit id={item.id} onLearnMore={null} variant="purple" />
