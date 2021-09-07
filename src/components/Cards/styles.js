@@ -1,6 +1,6 @@
 const styles = () => ({
   cards: {
-    width: `${500 * 3 + 24 * 2}px`,
+    width: `${500 * 3 + 24 * 3}px`,
     maxWidth: '100%',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -28,11 +28,16 @@ const styles = () => ({
     padding: '24px',
     borderWidth: '2px',
     borderStyle: 'solid',
-    //boxShadow: '0px 4px 24px 24px rgba(19, 17, 34, 0.16)',
-    height: 'fit-content',
+    display: 'flex',
+    flexDirection: 'column',
   },
   cardsOne: {
     width: `${500 + 24}px`,
+  },
+  cardsNormalHeight: {
+    '& $cardsInner': {
+      alignItems: 'flex-start',
+    },
   },
   title: {
     fontWeight: 500,

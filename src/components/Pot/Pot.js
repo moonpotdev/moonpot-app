@@ -213,7 +213,10 @@ export const PrizeSplit = function ({
       };
     }
   }
-  return Object.entries(allPrizes).map(([token, total]) => {
+
+  const prizesOverZero = Object.entries(allPrizes).filter(([, total]) => total.usd.gte(0.01));
+
+  return prizesOverZero.map(([token, total]) => {
     const tokens = formatDecimals(total.tokens.dividedBy(numberOfWinners), 2);
     const usd = formatDecimals(total.usd.dividedBy(numberOfWinners), 2);
 

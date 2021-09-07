@@ -2,11 +2,10 @@ import { useEffect, useMemo } from 'react';
 import { useLocalStorage } from '../../../../helpers/hooks';
 
 const FILTER_DEFAULT = {
-  version: 1, // Bump+1 if changes are made to force reset on end user
+  version: 2, // Bump+1 if changes are made to force reset on end user
   sortKey: 'defaultOrder', // Must have matching entry in SORT_COMPARE_FUNCTIONS
   sortDir: 'asc',
   deposited: false,
-  vault: 'all', // all/main/community
   retired: false,
 };
 
@@ -18,7 +17,7 @@ const SORT_COMPARE_FUNCTIONS = {
   name: compareStringCaseInsensitive,
 };
 
-function filterIncludePot(pot, config) {
+function filterIncludePot(pot, vaultType, config) {
   if (pot.status !== (config.retired ? 'eol' : 'active')) {
     return false;
   }
@@ -27,7 +26,7 @@ function filterIncludePot(pot, config) {
     return false;
   }
 
-  if (config.vault !== 'all' && config.vault !== pot.vaultType) {
+  if (vaultType !== 'all' && vaultType !== pot.vaultType) {
     return false;
   }
 
@@ -63,12 +62,12 @@ function sortPots(pots, key, dir) {
   return pots;
 }
 
-export function useFilteredPots(pots, config) {
+export function useFilteredPots(pots, vaultType, config) {
   return useMemo(() => {
-    const filtered = Object.values(pots).filter(pot => filterIncludePot(pot, config));
+    const filtered = Object.values(pots).filter(pot => filterIncludePot(pot, vaultType, config));
 
     return sortPots(filtered, config.sortKey, config.sortDir);
-  }, [pots, config]);
+  }, [pots, vaultType, config]);
 }
 
 function configNeedsReset(config) {

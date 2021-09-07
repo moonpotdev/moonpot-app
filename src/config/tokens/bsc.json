@@ -13,6 +13,13 @@
     "decimals": 18
   },
   {
+    "address": "0xeA32bB31A4a5Ab38226c5824FB54D4e271a3253a",
+    "symbol": "moonTicketPotsV2",
+    "displaySymbol": "POTS",
+    "oracleId": "POTS",
+    "decimals": 18
+  },
+  {
     "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
     "symbol": "CAKE",
     "oracleId": "Cake",
@@ -33,6 +40,13 @@
     "decimals": 18
   },
   {
+    "address": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
+    "symbol": "moonTicketCakeV3",
+    "displaySymbol": "CAKE",
+    "oracleId": "Cake",
+    "decimals": 18
+  },
+  {
     "address": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
     "symbol": "BIFI",
     "oracleId": "BIFI",
@@ -42,6 +56,12 @@
     "address": "0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2",
     "symbol": "DODO",
     "oracleId": "DODO",
+    "decimals": 18
+  },
+  {
+    "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "symbol": "WBNB",
+    "oracleId": "WBNB",
     "decimals": 18
   },
   {

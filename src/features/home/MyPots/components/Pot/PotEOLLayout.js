@@ -1,26 +1,15 @@
 import React from 'react';
-import { Divider, Grid, makeStyles } from '@material-ui/core';
-import styles from './styles';
 import { CardAccordionGroup, CardAccordionItem } from '../../../../../components/Cards';
 import PotBonus from './PotBonus';
 import { PotWithdraw } from '../../../../../components/PotWithdraw';
 import { PotMigrate } from './PotMigrate';
 
-const useStyles = makeStyles(styles);
-
 const EOLLayout = function ({ item, wallet, balance, prices }) {
-  const classes = useStyles();
-
   return (
     <React.Fragment>
       {/*Pot with migration */}
       {item.migrationContractAddress ? (
-        <>
-          <PotMigrate item={item} wallet={wallet} balance={balance} />
-          <Grid item xs={12}>
-            <Divider className={classes.divider} />
-          </Grid>
-        </>
+        <PotMigrate item={item} wallet={wallet} balance={balance} />
       ) : null}
       <CardAccordionGroup>
         {/*Bonus*/}

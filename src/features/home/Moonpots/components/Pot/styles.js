@@ -6,6 +6,9 @@ const styles = theme => ({
       color: '#ffffff',
     },
   },
+  rowPrizeSplit: {
+    flexGrow: '1',
+  },
   rowPlay: {
     marginTop: '20px',
   },

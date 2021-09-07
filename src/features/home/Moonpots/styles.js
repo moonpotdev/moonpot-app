@@ -1,7 +1,4 @@
 const styles = theme => ({
-  potsFilter: {
-    marginBottom: '48px',
-  },
   potsMigrationNotice: {
     marginBottom: '24px',
   },

@@ -44,7 +44,6 @@ const balanceReducer = (state = initialState, action) => {
         isBalancesLoading: state.isBalancesFirstTime,
       };
     case BALANCE_FETCH_BALANCES_DONE:
-      console.log(action.payload.tokens);
       return {
         ...state,
         tokens: action.payload.tokens,

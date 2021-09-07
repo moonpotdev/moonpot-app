@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Container, Grid, makeStyles } from '@material-ui/core';
+import { Container, Grid, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import reduxActions from '../../redux/actions';
 import BigNumber from 'bignumber.js';
@@ -11,22 +10,12 @@ import NoPotsCard from './components/NoPotsCard/NoPotsCard';
 import Pot from './components/Pot/Pot';
 import { Cards } from '../../../components/Cards';
 import styles from './styles';
+import { RoutedButton } from '../../../components/Buttons/BaseButton';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
-const VALID_STATUSES = ['active', 'eol'];
-const defaultFilter = {
-  status: 'active',
-};
-const getDefaultFilter = (params = {}) => {
-  if ('status' in params && VALID_STATUSES.includes(params.status)) {
-    return { ...defaultFilter, status: params.status };
-  }
-
-  return defaultFilter;
-};
-
-const MyPots = () => {
+const MyPots = ({ selected }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const { vault, wallet, balance, prices, earned } = useSelector(state => ({
@@ -36,33 +25,13 @@ const MyPots = () => {
     prices: state.pricesReducer,
     earned: state.earnedReducer,
   }));
-  const params = useParams();
   const dispatch = useDispatch();
-  const [sortConfig, setSortConfig] = React.useState(getDefaultFilter(params));
-  const [filtered, setFiltered] = React.useState([]);
 
-  React.useEffect(() => {
+  const filtered = useMemo(() => {
     let data = [];
 
-    const sorted = items => {
-      return items.sort((a, b) => {
-        if (sortConfig.key === 'name') {
-          if (a[sortConfig.key].toUpperCase() < b[sortConfig.key].toUpperCase()) {
-            return sortConfig.direction === 'asc' ? -1 : 1;
-          }
-          if (a[sortConfig.key].toUpperCase() > b[sortConfig.key].toUpperCase()) {
-            return sortConfig.direction === 'asc' ? 1 : -1;
-          }
-          return 0;
-        } else {
-          return sortConfig.direction === 'asc'
-            ? a[sortConfig.key] - b[sortConfig.key]
-            : b[sortConfig.key] - a[sortConfig.key];
-        }
-      });
-    };
     const check = item => {
-      if (item.status !== sortConfig.status) {
+      if (item.status !== selected) {
         return false;
       }
 
@@ -91,20 +60,16 @@ const MyPots = () => {
       }
     }
 
-    if (sortConfig !== null) {
-      data = sorted(data);
-    }
+    return data;
+  }, [selected, vault.pools, balance, earned, wallet.address]);
 
-    setFiltered(data);
-  }, [sortConfig, vault.pools, balance, earned, wallet.address]);
-
-  React.useEffect(() => {
+  useEffect(() => {
     if (prices.lastUpdated > 0) {
       dispatch(reduxActions.vault.fetchPools());
     }
   }, [dispatch, prices.lastUpdated]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (wallet.address) {
       dispatch(reduxActions.balance.fetchBalances());
       dispatch(reduxActions.earned.fetchEarned());
@@ -116,20 +81,20 @@ const MyPots = () => {
       <Container maxWidth="none" style={{ padding: '0' }}>
         <Grid container spacing={2}>
           <Grid item>
-            <Button
-              className={sortConfig.status === 'active' ? classes.buttonActive : classes.button}
-              onClick={() => setSortConfig({ ...sortConfig, status: 'active' })}
+            <RoutedButton
+              className={clsx(classes.button, { [classes.buttonActive]: selected === 'active' })}
+              to="/my-moonpots"
             >
               {t('buttons.myActivePots')}
-            </Button>
+            </RoutedButton>
           </Grid>
           <Grid item>
-            <Button
-              className={sortConfig.status !== 'active' ? classes.buttonActive : classes.button}
-              onClick={() => setSortConfig({ ...sortConfig, status: 'eol' })}
+            <RoutedButton
+              className={clsx(classes.button, { [classes.buttonActive]: selected === 'eol' })}
+              to="/my-moonpots/eol"
             >
               {t('buttons.myPastPots')}
-            </Button>
+            </RoutedButton>
           </Grid>
         </Grid>
 
@@ -137,7 +102,7 @@ const MyPots = () => {
           <div className={classes.spacer}>
             <Grid container>
               {/*Pots*/}
-              <Cards>
+              <Cards sameHeight={false}>
                 {filtered.length === 0 ? (
                   <NoPotsCard />
                 ) : (

@@ -229,6 +229,12 @@ const styles = theme => ({
     letterSpacing: '0.2px',
     paddingBottom: '8px',
   },
+  link: {
+    color: '#F3BA2E',
+    '&:hover, &:active, &:focus': {
+      color: '#F3BA2E',
+    },
+  },
   actionBtn: {
     width: '100%',
     height: '48px',

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
@@ -9,7 +9,6 @@ import ZiggyMaintenance from '../../../images/ziggy/maintenance.svg';
 import SocialMediaBlock from './components/SocialMediaBlock/SocialMediaBlock';
 import { useFilterConfig, useFilteredPots } from './hooks/filter';
 import { Pot } from './components/Pot';
-import { PoweredByBeefy } from '../../../components/PoweredByBeefy';
 import { Cards } from '../../../components/Cards';
 import { Translate } from '../../../components/Translate';
 
@@ -21,8 +20,8 @@ const Moonpots = ({ selected }) => {
   const address = useSelector(state => state.walletReducer.address);
   const pots = useSelector(state => state.vaultReducer.pools, shallowEqual);
   const classes = useStyles();
-  const [filterConfig, setFilterConfig] = useFilterConfig();
-  const filtered = useFilteredPots(pots, filterConfig);
+  const [filterConfig] = useFilterConfig();
+  const filtered = useFilteredPots(pots, selected, filterConfig);
 
   useEffect(() => {
     if (pricesLastUpdated > 0) {
@@ -38,15 +37,10 @@ const Moonpots = ({ selected }) => {
 
   return (
     <React.Fragment>
-      <Filter
-        config={filterConfig}
-        setConfig={setFilterConfig}
-        className={classes.potsFilter}
-        selected={selected}
-      />
+      <Filter selected={selected} />
       <div className={classes.potsContainer}>
         <div className={classes.spacer}>
-          <MigrationNotices potType={filterConfig.vault} className={classes.potsMigrationNotice} />
+          <MigrationNotices potType={selected} className={classes.potsMigrationNotice} />
           <Cards>
             {filtered.map(pot => (
               <Pot
@@ -56,7 +50,7 @@ const Moonpots = ({ selected }) => {
               />
             ))}
           </Cards>
-          {filterConfig.vault === 'community' ? (
+          {selected === 'community' ? (
             <Grid item xs={12} style={{ marginTop: '32px' }}>
               <Grid container className={classes.communityJoin}>
                 <Grid item xs={12}>
