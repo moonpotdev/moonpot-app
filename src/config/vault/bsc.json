@@ -28,7 +28,7 @@
       }
     ],
     "sponsorToken": "POTS",
-    "bonusRewardId": 0,
+    "bonusRewardId": 1,
     "bonusToken": "POTS",
     "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "bonusTokenDecimals": 18,
