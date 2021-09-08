@@ -12,6 +12,7 @@
     "prizeStrategyAddress": "0xa7aa57f301b8C65c455326fAD0eACB2Fe5791b57",
     "pricePerShare": 1,
     "oracleId": "BIFI",
+    "apyId": "bifi-maxi-v2",
     "vaultType": "main",
     "status": "active",
     "infoCardStrategy": "beefy",
