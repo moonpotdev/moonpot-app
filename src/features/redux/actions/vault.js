@@ -213,7 +213,11 @@ function calculateBoost(rewardInfo, pool, prices) {
   const boostYearly = boostRate.times(3600).times(24).times(365);
   const boostYearlyUsd = boostYearly.times(boostPrice).dividedBy(boostDecimals);
   const totalStakedUsd = pool.totalStakedUsd;
-  const apr = boostYearlyUsd.dividedBy(totalStakedUsd).toNumber();
+  let apr = boostYearlyUsd.dividedBy(totalStakedUsd).toNumber();
+  const periodFinish = new BigNumber(rewardInfo[2]);
+  if (periodFinish.toNumber() < Date.now() / 1000) {
+    apr = 0;
+  }
 
   return {
     apr: apr * 100,

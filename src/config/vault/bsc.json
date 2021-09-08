@@ -218,6 +218,10 @@
     "bonusToken": "BANANA",
     "bonusAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
     "bonusTokenDecimals": 18,
+    "boostRewardId": 1,
+    "boostToken": "POTS",
+    "boostAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+    "boostTokenDecimals": 18,
     "supportsCompound": true,
     "compoundIsBonus": true
   },
