@@ -47,6 +47,8 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
   const [stepsItem, setStepsItem] = React.useState(null);
   const hasBonus = 'bonusRewardId' in item;
   const hasBoost = 'boostRewardId' in item;
+  const hasEarned =
+    ('earned' in item && item.earned.gt(0)) || ('boosted' in item && item.boosted.gt(0));
 
   const handleClose = () => {
     updateItemData();
@@ -140,8 +142,14 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
           </Grid>
           <Grid item xs={6}>
             <Typography className={classes.myDetailsValue} align={'right'}>
-              {formatDecimals(item.earned)} {item.bonusToken} ($
-              {formatDecimals(item.earned.multipliedBy(prices.prices[item.bonusToken]), 2)})
+              {item.earned ? (
+                <>
+                  {formatDecimals(item.earned)} {item.bonusToken} ($
+                  {formatDecimals(item.earned.multipliedBy(prices.prices[item.bonusToken]), 2)})
+                </>
+              ) : (
+                <>0 {item.bonusToken} ($0.00)</>
+              )}
             </Typography>
           </Grid>
         </>
@@ -155,8 +163,14 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
           </Grid>
           <Grid item xs={6}>
             <Typography className={classes.myDetailsValue} align={'right'}>
-              {formatDecimals(item.boosted)} {item.boostToken} ($
-              {formatDecimals(item.boosted.multipliedBy(prices.prices[item.boostToken]), 2)})
+              {item.boosted ? (
+                <>
+                  {formatDecimals(item.boosted)} {item.boostToken} ($
+                  {formatDecimals(item.boosted.multipliedBy(prices.prices[item.boostToken]), 2)})
+                </>
+              ) : (
+                <>0 {item.boostToken} ($0.00)</>
+              )}
             </Typography>
           </Grid>
         </>
@@ -175,7 +189,7 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
               onClick={() => handleCompoundBonus(item)}
               className={classes.actionBtn}
               variant={'contained'}
-              disabled={item.earned.lte(0)}
+              disabled={!item.earned || item.earned.lte(0)}
             >
               {item.compoundIsBonus
                 ? t('bonus.compoundBonusToken', { token: item.token })
@@ -192,7 +206,7 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
           onClick={() => handleWithdrawBonus(item)}
           className={classes.altActionBtn}
           fullWidth={true}
-          disabled={item.earned.lte(0)}
+          disabled={!hasEarned}
         >
           {item.compoundIsBonus
             ? t('bonus.withdrawBonusTokens', { tokens: getItemBonusTokens(item) })
