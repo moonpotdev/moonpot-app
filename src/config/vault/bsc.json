@@ -1,5 +1,39 @@
 [
   {
+    "id": "bifi",
+    "name": "BIFI",
+    "token": "BIFI",
+    "tokenAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBIFI",
+    "rewardAddress": "0xD763A0377bb40F7b79839ea50aAC75fF67CB9eae",
+    "contractAddress": "0xb4651e8A3E70d0BE1B1D1241C3679F1572c23e48",
+    "prizePoolAddress": "0x9B2f5221EA000fD1A46f347f27Eb10Ca6e79D3a8",
+    "prizeStrategyAddress": "0xa7aa57f301b8C65c455326fAD0eACB2Fe5791b57",
+    "pricePerShare": 1,
+    "oracleId": "BIFI",
+    "vaultType": "main",
+    "status": "active",
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xeffFD962696ac768c3C9C84e2D4CC1bC9C54983d",
+    "infoCardEarningsBreakdown": true,
+    "sponsorProjectName": "Moonpot",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "sponsorToken": "POTS",
+    "bonusRewardId": 0,
+    "bonusToken": "POTS",
+    "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "bonusTokenDecimals": 18,
+    "compoundIsBonus": true
+  },
+  {
     "id": "pots",
     "name": "Ziggy's",
     "token": "POTS",
