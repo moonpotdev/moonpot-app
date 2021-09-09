@@ -4,6 +4,7 @@ import { MultiCall } from 'eth-multicall';
 import { config } from '../../../config/config';
 import { compound, isEmpty } from '../../../helpers/utils';
 import { byDecimals, formatTvl } from '../../../helpers/format';
+import { tokensByNetworkAddress } from '../../../config/tokens';
 
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 const ecr20Abi = require('../../../config/abi/erc20.json');
@@ -131,53 +132,18 @@ const getPools = async (items, state, dispatch) => {
         .dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
       pools[item.id].tvl = formatTvl(totalTokenStaked, awardPrice);
 
-      if ('bonusRewardInfo' in item) {
-        const bonusPrice =
-          pools[item.id].bonusToken in prices ? prices[pools[item.id].bonusToken] : 0;
-        const rewardRate = new BigNumber(
-          item.bonusRewardInfo ? item.bonusRewardInfo[item.bonusRewardInfo] : 0
-        );
-        const totalValueLocked = new BigNumber(item.totalValueLocked);
-        const totalStakedUsd = totalValueLocked
-          .times(awardPrice)
-          .dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].bonusTokenDecimals));
-        const yearlyRewards = rewardRate.times(3600).times(24).times(365);
-        const yearlyRewardsInUsd = yearlyRewards
-          .times(bonusPrice)
-          .dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].bonusTokenDecimals));
+      if ('bonusRewardInfo' in item || 'boostRewardInfo' in item) {
+        const boost = item.boostRewardInfo
+          ? calculateBoost(item.boostRewardInfo, pools[item.id], prices)
+          : { apr: 0, apy: 0, compoundable: false };
+        const bonus = item.bonusRewardInfo
+          ? calculateBoost(item.bonusRewardInfo, pools[item.id], prices)
+          : { apr: 0, apy: 0, compoundable: false };
 
-        let boostRewardsInUsd = new BigNumber(0);
-        if (item.boostRewardInfo) {
-          const boostPrice =
-            pools[item.id].boostToken in prices ? prices[pools[item.id].boostToken] : 0;
-          const rewardRate = new BigNumber(item.boostRewardInfo['3']);
-          const yearlyRewards = rewardRate.times(3600).times(24).times(365);
-          boostRewardsInUsd = yearlyRewards
-            .times(boostPrice)
-            .dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].boostTokenDecimals));
-          pools[item.id].bonusApy = Number(
-            yearlyRewardsInUsd.plus(boostRewardsInUsd).multipliedBy(100).dividedBy(totalStakedUsd)
-          );
-        } else if (!isEmpty(pools[item.id].bonusToken)) {
-          const bonusPrice =
-            pools[item.id].bonusToken in prices ? prices[pools[item.id].bonusToken] : 0;
-          const rewardRate = new BigNumber(item.rewardRate);
-          const totalValueLocked = new BigNumber(item.totalValueLocked);
-          const totalStakedUsd = totalValueLocked
-            .times(awardPrice)
-            .dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].bonusTokenDecimals));
-          const yearlyRewards = rewardRate.times(3600).times(24).times(365);
-          const yearlyRewardsInUsd = yearlyRewards
-            .times(bonusPrice)
-            .dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].bonusTokenDecimals));
+        pools[item.id].bonusApy = boost.apy + bonus.apy;
 
-          const apr = yearlyRewardsInUsd.dividedBy(totalStakedUsd);
-          if (pools[item.id].compoundApy) {
-            pools[item.id].bonusApr = apr.multipliedBy(100).toNumber();
-            pools[item.id].bonusApy = compound(apr) * 100;
-          } else {
-            pools[item.id].bonusApy = apr.multipliedBy(100).toNumber();
-          }
+        if (boost.compoundable || bonus.compoundable) {
+          pools[item.id].bonusApr = boost.apr + bonus.apr;
         }
       }
 
@@ -235,6 +201,30 @@ const getPools = async (items, state, dispatch) => {
 
   return true;
 };
+
+function calculateBoost(rewardInfo, pool, prices) {
+  const boostAddress = rewardInfo[0].toLowerCase();
+  const compoundable =
+    pool.compoundApy === true && boostAddress === pool.tokenAddress.toLowerCase();
+  const boostData = tokensByNetworkAddress[pool.network][boostAddress];
+  const boostDecimals = new BigNumber(10).exponentiatedBy(boostData.decimals);
+  const boostPrice = boostData.symbol in prices ? prices[boostData.symbol] : 0;
+  const boostRate = new BigNumber(rewardInfo[3]);
+  const boostYearly = boostRate.times(3600).times(24).times(365);
+  const boostYearlyUsd = boostYearly.times(boostPrice).dividedBy(boostDecimals);
+  const totalStakedUsd = pool.totalStakedUsd;
+  let apr = boostYearlyUsd.dividedBy(totalStakedUsd).toNumber();
+  const periodFinish = new BigNumber(rewardInfo[2]);
+  if (periodFinish.toNumber() < Date.now() / 1000) {
+    apr = 0;
+  }
+
+  return {
+    apr: apr * 100,
+    apy: (compoundable ? compound(apr) : apr) * 100,
+    compoundable,
+  };
+}
 
 const fetchPools = (item = false) => {
   return async (dispatch, getState) => {

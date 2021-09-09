@@ -395,7 +395,6 @@ const styles = theme => ({
     color: '#ECEAFB',
   },
   bonusExplainerRow: {
-    marginTop: '16px',
     marginBottom: '16px',
   },
   bonusCompoundRow: {

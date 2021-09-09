@@ -162,7 +162,6 @@
     "myBonusEarnings": "我的额外收益",
     "myEarnings": "我的收益",
     "myBoostEarnings": "我的超速增值收益",
-    "bonusExtraInfo": "您将持续赚取额外的{{bonusToken}}和{{boostToken}}直到抽奖结束。您可以根据自己的意愿多次领取。",
     "bonusExplainer": "您将持续赚取额外的 {{tokens}} 直到抽奖结束。您可以根据自己的意愿多次领取。",
     "potsExplainer": "您将持续赚取 {{tokens}} 直到抽奖结束。您可以根据自己的意愿多次领取。",
     "compoundExplainer": "复投额外的 {{token}} 奖励为新存款会将您的公平费重置为最高 2.5%。 您的公平游戏时间锁倒计时将重置为 10 天，但您不需为旧存款支付任何额外的公平费用。",
