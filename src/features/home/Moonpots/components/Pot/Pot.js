@@ -96,6 +96,8 @@ const Bottom = function ({ id }) {
           depositAmountUsd={1000}
           winners={pot.numberOfWinners}
         />
+        <br />
+        <Translate i18nKey="pot.noMinimumDeposit" />
       </div>
     </>
   );
