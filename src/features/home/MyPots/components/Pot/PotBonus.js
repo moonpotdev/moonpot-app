@@ -14,11 +14,11 @@ const useStyles = makeStyles(styles);
 const getItemBonusTokens = item => {
   const tokens = [];
 
-  if (item.bonusToken) {
+  if (item.bonusToken && item.earned > 0) {
     tokens.push(item.bonusToken);
   }
 
-  if (item.boostToken) {
+  if (item.boostToken && item.boosted > 0) {
     tokens.push(item.boostToken);
   }
 
