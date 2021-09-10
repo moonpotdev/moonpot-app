@@ -163,7 +163,10 @@ export const PotMigrate = function ({ item }) {
             fullWidth={true}
             disabled={item.userBalance.lte(0)}
           >
-            Move {item.token} and Withdraw {item.bonusToken}
+            <Translate
+              i18nKey="upgradeMoveWithdraw"
+              values={{ base: item.token, bonus: item.bonusToken }}
+            />
           </PrimaryButton>
         </Grid>
         <Grid item xs={6} align={'left'}>
