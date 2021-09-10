@@ -91,6 +91,7 @@
     "withdraw": "Withdraw",
     "myToken": "My {{token}}",
     "myEarnedToken": "My Earned {{token}}",
+    "myBonusToken": "My Bonus {{token}}",
     "myFairplayTimelock": "My Fairplay Timelock",
     "myFairnessFee": "My Current Fairness Fee",
     "myDetails": "My Details",

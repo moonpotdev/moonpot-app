@@ -76,10 +76,15 @@ const StatDeposited = memo(function ({ token, contractAddress, tokenDecimals }) 
   return <Stat label={t('pot.myToken', { token })}>{formatDecimals(ticketBalance, 8)}</Stat>;
 });
 
-const StatEarned = memo(function ({ id, token, tokenDecimals }) {
+const StatEarned = memo(function ({ id, token, tokenDecimals, labelKey = 'pot.myEarnedToken' }) {
   const { t } = useTranslation();
   const earned = useTokenEarned(id, token, tokenDecimals);
-  return <Stat label={t('pot.myEarnedToken', { token })}>{formatDecimals(earned, 8)}</Stat>;
+
+  if (earned.isZero()) {
+    return null;
+  }
+
+  return <Stat label={t(labelKey, { token })}>{formatDecimals(earned, 8)}</Stat>;
 });
 
 const StatTimelock = memo(function ({ endsAt }) {
@@ -130,10 +135,24 @@ const Stats = function ({ id }) {
         tokenDecimals={pot.tokenDecimals}
       />
       {pot.bonusToken ? (
-        <StatEarned id={id} token={pot.bonusToken} tokenDecimals={pot.bonusTokenDecimals} />
+        <StatEarned
+          id={id}
+          token={pot.bonusToken}
+          tokenDecimals={pot.bonusTokenDecimals}
+          labelKey={
+            id === 'pots' && pot.bonusToken === 'POTS' ? 'pot.myEarnedToken' : 'pot.myBonusToken'
+          }
+        />
       ) : null}
       {pot.boostToken ? (
-        <StatEarned id={id} token={pot.boostToken} tokenDecimals={pot.boostTokenDecimals} />
+        <StatEarned
+          id={id}
+          token={pot.boostToken}
+          tokenDecimals={pot.boostTokenDecimals}
+          labelKey={
+            id === 'pots' && pot.boostToken === 'POTS' ? 'pot.myEarnedToken' : 'pot.myBonusToken'
+          }
+        />
       ) : null}
       <StatTimelock endsAt={timelockEndsAt} />
       <StatFee
