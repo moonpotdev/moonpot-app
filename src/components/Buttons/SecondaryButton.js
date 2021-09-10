@@ -9,12 +9,14 @@ export const SecondaryButton = withStyles({
     backgroundColor: styledBy('variant', {
       teal: '#14222E',
       purple: '#42385B',
+      blueCommunity: '#2a2e47',
     }),
     '&:hover': {
       color: '#FFFFFF',
       backgroundColor: styledBy('variant', {
         teal: '#0C151C',
         purple: '#2B253C',
+        blueCommunity: '#262940',
       }),
     },
     '&:focus': {
@@ -22,12 +24,14 @@ export const SecondaryButton = withStyles({
       backgroundColor: styledBy('variant', {
         teal: '#0C151C',
         purple: '#2B253C',
+        blueCommunity: '#262940',
       }),
     },
     '& .MuiTouchRipple-child': {
       backgroundColor: styledBy('variant', {
         teal: '#05080B',
         purple: '#201B2C',
+        blueCommunity: '#222539',
       }),
     },
   },

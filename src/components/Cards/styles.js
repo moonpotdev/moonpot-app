@@ -174,7 +174,7 @@ const styles = () => ({
       color: '#ECEAFB',
     },
   },
-  variantPurpleCommunity: {
+  variantBlueCommunity: {
     color: '#EBF3F9',
     backgroundColor: '#4F5888',
     borderColor: '#586397',
@@ -194,7 +194,7 @@ const styles = () => ({
       color: '#EBF3F9',
     },
   },
-  variantPurpleCommunityAlt: {
+  variantBlueCommunityAlt: {
     color: '#EBF3F9',
     backgroundColor: '#464E77',
     borderColor: '#586397',

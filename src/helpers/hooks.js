@@ -94,3 +94,24 @@ export function usePot(id) {
   const pots = useSelector(state => state.vaultReducer.pools);
   return id in pots ? pots[id] : null;
 }
+
+export function useRewardEarned(potId, rewardToken, rewardTokenDecimals) {
+  const address = useSelector(state => state.walletReducer.address);
+  const earned = useSelector(state => state.earnedReducer.earned[potId]?.[rewardToken] ?? 0);
+
+  return useMemo(() => {
+    if (address && earned && rewardToken && rewardTokenDecimals) {
+      return byDecimals(new BigNumber(earned), rewardTokenDecimals);
+    }
+
+    return new BigNumber(0);
+  }, [earned, rewardToken, rewardTokenDecimals, address]);
+}
+
+export function useBonusEarned(pot) {
+  return useRewardEarned(pot.id, pot.bonusToken, pot.bonusTokenDecimals);
+}
+
+export function useBoostEarned(pot) {
+  return useRewardEarned(pot.id, pot.boostToken, pot.boostTokenDecimals);
+}

@@ -4,8 +4,10 @@ import { PotDeposit } from '../../../../../components/PotDeposit/PotDeposit';
 import { PotWithdraw } from '../../../../../components/PotWithdraw/PotWithdraw';
 import { CardAccordionItem } from '../../../../../components/Cards/Cards';
 import PotBonus from './PotBonus';
+import { useSelector } from 'react-redux';
 
-const ActiveLayout = function ({ item, wallet, balance, prices }) {
+const ActiveLayout = function ({ item }) {
+  const wallet = useSelector(state => state.walletReducer);
   const [steps, setSteps] = React.useState({
     modal: false,
     currentStep: -1,
@@ -39,7 +41,7 @@ const ActiveLayout = function ({ item, wallet, balance, prices }) {
       {/*Bonus*/}
       {'bonusRewardId' in item || 'boostRewardId' in item ? (
         <CardAccordionItem titleKey={item.id === 'pots' ? 'pot.earnings' : 'pot.bonusEarnings'}>
-          <PotBonus item={item} prices={prices} wallet={wallet} balance={balance} />
+          <PotBonus item={item} />
         </CardAccordionItem>
       ) : null}
       {/*Deposit*/}

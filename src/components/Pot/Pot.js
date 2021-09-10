@@ -7,10 +7,11 @@ import { TransListJoin } from '../TransListJoin';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
-import { usePot, useTotalPrize } from '../../helpers/hooks';
+import { usePot, useTokenBalance, useTotalPrize } from '../../helpers/hooks';
 import { DrawStat } from '../DrawStat';
-import styles from './styles';
 import { Translate } from '../Translate';
+import { investmentOdds } from '../../helpers/utils';
+import styles from './styles';
 
 const useStyles = makeStyles(styles);
 
@@ -112,19 +113,58 @@ const TVL = memo(function ({ totalStakedUsd }) {
   return '$0';
 });
 
-const Deposit = memo(function ({ depositToken, contractAddress, decimals }) {
+function useDeposit(contractAddress, decimals) {
   const address = useSelector(state => state.walletReducer.address);
   const balance256 = useSelector(state => state.balanceReducer.tokens[contractAddress]?.balance);
 
-  const balance = useMemo(() => {
+  return useMemo(() => {
     if (address && balance256) {
       return formatDecimals(byDecimals(balance256, decimals), 2);
     }
 
     return 0;
   }, [address, balance256, decimals]);
+}
 
-  return `${balance} ${depositToken}`;
+function useDepositOdds(ticketTotalSupply, winners, ticketToken, tokenDecimals) {
+  const address = useSelector(state => state.walletReducer.address);
+  const depositedTickets = useTokenBalance(ticketToken, tokenDecimals);
+
+  return useMemo(() => {
+    const totalTickets = byDecimals(ticketTotalSupply, tokenDecimals);
+
+    if (depositedTickets.isZero() || totalTickets.isZero() || !address) {
+      return null;
+    }
+
+    return investmentOdds(totalTickets, winners, depositedTickets);
+  }, [ticketTotalSupply, depositedTickets, winners, tokenDecimals, address]);
+}
+
+const DepositWithOdds = memo(function ({
+  depositToken,
+  contractAddress,
+  ticketTotalSupply,
+  winners,
+  ticketToken,
+  tokenDecimals,
+}) {
+  const classes = useStyles();
+  const deposit = useDeposit(contractAddress, tokenDecimals);
+  const odds = useDepositOdds(ticketTotalSupply, winners, ticketToken, tokenDecimals);
+
+  return (
+    <div>
+      <div>
+        {deposit} {depositToken}
+      </div>
+      {odds ? (
+        <div className={classes.depositOdds}>
+          <Translate i18nKey="pot.oddsOdds" values={{ odds }} />
+        </div>
+      ) : null}
+    </div>
+  );
 });
 
 export function Pot({ id, variant, bottom }) {
@@ -161,10 +201,13 @@ export function Pot({ id, variant, bottom }) {
         </Grid>
         <Grid item xs={5}>
           <DrawStat i18nKey="pot.statDeposit">
-            <Deposit
-              depositToken={pot.token}
+            <DepositWithOdds
               contractAddress={pot.contractAddress}
-              decimals={pot.tokenDecimals}
+              depositToken={pot.token}
+              tokenDecimals={pot.tokenDecimals}
+              ticketToken={pot.rewardToken}
+              ticketTotalSupply={pot.totalTickets}
+              winners={pot.numberOfWinners}
             />
           </DrawStat>
         </Grid>

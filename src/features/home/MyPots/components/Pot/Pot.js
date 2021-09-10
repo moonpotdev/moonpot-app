@@ -1,16 +1,16 @@
-import * as React from 'react';
+import React from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import ActiveLayout from './PotActiveLayout';
 import EOLLayout from './PotEOLLayout';
-import { Card } from '../../../../../components/Cards/Cards';
+import { Card } from '../../../../../components/Cards';
 import { useTranslation } from 'react-i18next';
-import { PotTitle, PotInfoBlock } from './PotComponents';
-import { Logo } from '../../../../../components/Pot/Pot';
+import { PotInfoBlock, PotTitle } from './PotComponents';
+import { Logo } from '../../../../../components/Pot';
 
 const useStyles = makeStyles(styles);
 
-const Pot = function ({ item, wallet, prices, balance }) {
+const Pot = function ({ item }) {
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -28,14 +28,10 @@ const Pot = function ({ item, wallet, prices, balance }) {
           <Typography className={classes.dividerText}>{t('pot.myDetails')} </Typography>
         </Grid>
         {/*Info Block*/}
-        <PotInfoBlock item={item} prices={prices} active={item.status !== 'eol'} />
+        <PotInfoBlock item={item} active={item.status !== 'eol'} />
       </Grid>
       {/*Bottom*/}
-      {item.status === 'active' ? (
-        <ActiveLayout item={item} wallet={wallet} balance={balance} prices={prices} />
-      ) : (
-        <EOLLayout item={item} wallet={wallet} balance={balance} prices={prices} />
-      )}
+      {item.status === 'active' ? <ActiveLayout item={item} /> : <EOLLayout item={item} />}
     </Card>
   );
 };
