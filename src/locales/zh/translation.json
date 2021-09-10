@@ -91,6 +91,7 @@
     "withdraw": "取出",
     "myToken": "我的 {{token}}",
     "myEarnedToken": "我赚取的 {{token}}",
+    "myBonusToken": "我的额外 {{token}}",
     "myFairplayTimelock": "我的公平游戏锁定期",
     "myFairnessFee": "我目前的公平费",
     "myDetails": "我的详细信息",
