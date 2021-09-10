@@ -124,41 +124,6 @@
     "compoundIsBonus": true
   },
   {
-    "id": "banana",
-    "name": "BANANA",
-    "token": "BANANA",
-    "tokenAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketBanana",
-    "rewardAddress": "0x87f697905732c6FAa5Def3bfE23AaDA5eAC33Ee8",
-    "contractAddress": "0x2c85A6aA1974230d3e91bA32956271E5A11b0392",
-    "prizePoolAddress": "0xB721fCd19489141d58ccF5A8Bb9FD3d1E030A02b",
-    "prizeStrategyAddress": "0x04F3fd08504a7Fc9d4A01985c15EbC3a0F342013",
-    "pricePerShare": 1,
-    "oracleId": "BANANA",
-    "apyId": "banana-bananav2",
-    "vaultType": "community",
-    "status": "active",
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0xED4ea41Daf652964789b16e3Ff76eC07d99d2340",
-    "infoCardEarningsBreakdown": true,
-    "sponsorProjectName": "Moonpot",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "sponsorToken": "POTS",
-    "bonusRewardId": 1,
-    "bonusToken": "POTS",
-    "bonusAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
-    "bonusTokenDecimals": 18,
-    "compoundIsBonus": true
-  },
-  {
     "id": "pots-v1",
     "name": "Ziggy's",
     "token": "POTS",
@@ -254,6 +219,46 @@
     "migrationExplainer": [
       "After you move your CAKE today, you won’t have to move it again. You will be entered into future Moonpots without having to make transactions each week."
     ]
+  },
+  {
+    "id": "banana",
+    "name": "BANANA",
+    "token": "BANANA",
+    "tokenAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBanana",
+    "rewardAddress": "0x87f697905732c6FAa5Def3bfE23AaDA5eAC33Ee8",
+    "contractAddress": "0x2c85A6aA1974230d3e91bA32956271E5A11b0392",
+    "prizePoolAddress": "0xB721fCd19489141d58ccF5A8Bb9FD3d1E030A02b",
+    "prizeStrategyAddress": "0x04F3fd08504a7Fc9d4A01985c15EbC3a0F342013",
+    "pricePerShare": 1,
+    "oracleId": "BANANA",
+    "apyId": "banana-bananav2",
+    "vaultType": "community",
+    "status": "active",
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xED4ea41Daf652964789b16e3Ff76eC07d99d2340",
+    "infoCardEarningsBreakdown": true,
+    "sponsorProjectName": "Moonpot",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "sponsorToken": "POTS",
+    "bonusRewardId": 0,
+    "bonusToken": "BANANA",
+    "bonusAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
+    "bonusTokenDecimals": 18,
+    "boostRewardId": 1,
+    "boostToken": "POTS",
+    "boostAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+    "boostTokenDecimals": 18,
+    "supportsCompound": true,
+    "compoundIsBonus": true
   },
   {
     "id": "cake-bifi",
