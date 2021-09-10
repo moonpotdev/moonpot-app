@@ -84,6 +84,7 @@
     "noMinimumDeposit": "无最低存款额度",
     "bonusEarnings": "额外收益",
     "earnings": "收益",
+    "deposit": "存入",
     "depositMore": "存入更多",
     "withdraw": "取出",
     "myToken": "我的 {{token}}",

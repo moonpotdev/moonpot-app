@@ -1,25 +1,27 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import reduxActions from '../../../../redux/actions';
 import { isEmpty } from '../../../../../helpers/utils';
 import Steps from '../../../../vault/components/Steps/Steps';
-import clsx from 'clsx';
-import { Translate } from '../../../../../components/Translate/Translate';
+import { Translate } from '../../../../../components/Translate';
+import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 
 const useStyles = makeStyles(styles);
 
-export const PotMigrate = function ({ item, wallet, balance }) {
+export const PotMigrate = function ({ item }) {
+  const wallet = useSelector(state => state.walletReducer);
+  const balance = useSelector(state => state.balanceReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [steps, setSteps] = React.useState({
+  const [steps, setSteps] = useState({
     modal: false,
     currentStep: -1,
     items: [],
     finished: false,
   });
-  const [stepsItem, setStepsItem] = React.useState(null);
+  const [stepsItem, setStepsItem] = useState(null);
 
   const handleClose = () => {
     updateItemData();
@@ -154,14 +156,15 @@ export const PotMigrate = function ({ item, wallet, balance }) {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Button
+          <PrimaryButton
             onClick={() => handleMigrator(item)}
-            className={clsx(classes.actionBtn, classes.eolMoveBtn)}
-            variant={'contained'}
+            className={classes.eolMoveBtn}
+            variant="purple"
+            fullWidth={true}
             disabled={item.userBalance.lte(0)}
           >
             Move {item.token} and Withdraw {item.bonusToken}
-          </Button>
+          </PrimaryButton>
         </Grid>
         <Grid item xs={6} align={'left'}>
           <Typography className={classes.potsItemText} style={{ marginTop: '12px' }}>

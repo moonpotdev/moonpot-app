@@ -7,12 +7,14 @@ import styles from './styles';
 import { PotDeposit } from '../../../../components/PotDeposit';
 import { PotWithdraw } from '../../../../components/PotWithdraw';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import { usePot } from '../../../../helpers/hooks';
+import { useBonusEarned, useBoostEarned, usePot, useTokenBalance } from '../../../../helpers/hooks';
 import { Translate } from '../../../../components/Translate';
+import PotBonus from '../../../home/MyPots/components/Pot/PotBonus';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(styles);
 
-const PrizeSplitAccordion = memo(function ({
+const PrizeSplitInner = memo(function ({
   awardBalance,
   awardBalanceUsd,
   baseToken,
@@ -22,24 +24,20 @@ const PrizeSplitAccordion = memo(function ({
   const classes = useStyles();
 
   return (
-    <CardAccordionGroup>
-      <CardAccordionItem titleKey="pot.prizeSplit">
-        <Grid container>
-          <Grid item xs={3}>
-            <Translate i18nKey="pot.prizeSplitWinner" values={{ count: count }} />
-          </Grid>
-          <Grid item xs={9} className={classes.prizeSplitValue}>
-            <PrizeSplit
-              baseToken={baseToken}
-              awardBalance={awardBalance}
-              awardBalanceUsd={awardBalanceUsd}
-              sponsors={sponsors}
-              numberOfWinners={count}
-            />
-          </Grid>
-        </Grid>
-      </CardAccordionItem>
-    </CardAccordionGroup>
+    <Grid container>
+      <Grid item xs={3}>
+        <Translate i18nKey="pot.prizeSplitWinner" values={{ count: count }} />
+      </Grid>
+      <Grid item xs={9} className={classes.prizeSplitValue}>
+        <PrizeSplit
+          baseToken={baseToken}
+          awardBalance={awardBalance}
+          awardBalanceUsd={awardBalanceUsd}
+          sponsors={sponsors}
+          numberOfWinners={count}
+        />
+      </Grid>
+    </Grid>
   );
 });
 
@@ -59,20 +57,55 @@ const EolNotice = function ({ id }) {
   );
 };
 
+const BonusAccordionItem = memo(function ({ pot }) {
+  const bonus = useBonusEarned(pot);
+  const boost = useBoostEarned(pot);
+  const hasEarned = bonus.gt(0) || boost.gt(0);
+
+  return hasEarned ? (
+    <CardAccordionItem
+      titleKey={pot.id === 'pots' ? 'pot.earnings' : 'pot.bonusEarnings'}
+      startOpen={true}
+    >
+      <PotBonus
+        item={pot}
+        buttonVariant={pot.vaultType === 'community' ? 'blueCommunity' : 'teal'}
+      />
+    </CardAccordionItem>
+  ) : null;
+});
+
+const WithdrawAccordionItem = memo(function ({ pot, onFairplayLearnMore }) {
+  const address = useSelector(state => state.walletReducer.address);
+  const depositBalance = useTokenBalance(pot.contractAddress, 18);
+  const hasDeposit = address && depositBalance.gt(0);
+
+  return hasDeposit ? (
+    <CardAccordionItem titleKey="pot.withdraw">
+      <PotWithdraw
+        id={pot.id}
+        onLearnMore={onFairplayLearnMore}
+        variant={pot.vaultType === 'main' ? 'teal' : 'purpleAlt'}
+      />
+    </CardAccordionItem>
+  ) : null;
+});
+
 const Bottom = function ({ id, onFairplayLearnMore, variant }) {
-  const classes = useStyles();
   const pot = usePot(id);
 
   return (
-    <>
-      <PrizeSplitAccordion
-        count={pot.numberOfWinners}
-        baseToken={pot.token}
-        awardBalance={pot.awardBalance}
-        awardBalanceUsd={pot.awardBalanceUsd}
-        sponsors={pot.sponsors}
-      />
-      <div className={classes.depositHolder}>
+    <CardAccordionGroup>
+      <CardAccordionItem titleKey="pot.prizeSplit">
+        <PrizeSplitInner
+          count={pot.numberOfWinners}
+          baseToken={pot.token}
+          awardBalance={pot.awardBalance}
+          awardBalanceUsd={pot.awardBalanceUsd}
+          sponsors={pot.sponsors}
+        />
+      </CardAccordionItem>
+      <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
         {pot.status === 'active' ? (
           <PotDeposit
             id={id}
@@ -82,15 +115,10 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
         ) : (
           <EolNotice id={id} />
         )}
-      </div>
-      <CardAccordionItem titleKey="pot.withdraw">
-        <PotWithdraw
-          id={id}
-          onLearnMore={onFairplayLearnMore}
-          variant={pot.vaultType === 'main' ? 'teal' : 'purpleAlt'}
-        />
       </CardAccordionItem>
-    </>
+      <BonusAccordionItem pot={pot} />
+      <WithdrawAccordionItem pot={pot} onFairplayLearnMore={onFairplayLearnMore} />
+    </CardAccordionGroup>
   );
 };
 
