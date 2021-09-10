@@ -45,6 +45,7 @@
   "poweredBy": "技术支持来自",
   "upgradeWhy": "我们升级了 {{token}}月盒，以便能够为所有未来的Moonpots玩家添加不同的福利奖励。",
   "upgradeNextSteps": "由于此次的升级，您需要转移您的{{token}}至新的{{token}} 月盒。我们已添加了金额为${{amount}} {{boostToken}}的超速增值币到这一新的{{token}}月盒，以便让您获得更多的收益。",
+  "upgradeMoveWithdraw": "转移 {{base}} 和取出 {{bonus}}",
   "learnMore": "了解更多",
   "telegramSocialBlockBody": "了解更多关于Moonpot的资讯，并获得来自官方社群的帮助",
   "discordSocialBlockBody": "和我们活跃的开发者社群进行直接对话",
