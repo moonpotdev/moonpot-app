@@ -45,6 +45,7 @@
   "poweredBy": "Powered by",
   "upgradeWhy": "We upgraded the {{token}} Pot in order to make it safer and fairer, as well as to allow us to automate more of our processes.",
   "upgradeNextSteps": "Because of the upgrade, you need to move your {{token}} to the new {{token}} Pot.  We have added a {{boostToken}} Super Boost to the new {{token}} Pot to help make it worthwhile for you.",
+  "upgradeMoveWithdraw": "Move {{base}} and Withdraw {{bonus}}",
   "learnMore": "Learn more",
   "telegramSocialBlockBody": "Learn about Moonpot and get direct support from the community",
   "discordSocialBlockBody": "Join the conversation with our active community of developers",
