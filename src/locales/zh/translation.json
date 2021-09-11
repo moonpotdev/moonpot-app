@@ -45,6 +45,7 @@
   "poweredBy": "技术支持来自",
   "upgradeWhy": "我们升级了 {{token}}月盒，以便能够为所有未来的Moonpots玩家添加不同的福利奖励。",
   "upgradeNextSteps": "由于此次的升级，您需要转移您的{{token}}至新的{{token}} 月盒。我们已添加了金额为${{amount}} {{boostToken}}的超速增值币到这一新的{{token}}月盒，以便让您获得更多的收益。",
+  "upgradeMove": "转移 {{base}}",
   "upgradeMoveWithdraw": "转移 {{base}} 和取出 {{bonus}}",
   "learnMore": "了解更多",
   "telegramSocialBlockBody": "了解更多关于Moonpot的资讯，并获得来自官方社群的帮助",
@@ -90,8 +91,6 @@
     "depositMore": "存入更多",
     "withdraw": "取出",
     "myToken": "我的 {{token}}",
-    "myEarnedToken": "我赚取的 {{token}}",
-    "myBonusToken": "我的额外 {{token}}",
     "myFairplayTimelock": "我的公平游戏锁定期",
     "myFairnessFee": "我目前的公平费",
     "myDetails": "我的详细信息",
@@ -157,6 +156,9 @@
   "withdraw": {
     "all": "取出所有",
     "allToken": "取出所有 {{token}}",
+    "myEarnedToken": "我赚取的 {{token}}",
+    "myBonusToken": "我的额外 {{token}}",
+    "mySuperBoostToken": "My Super Boost {{token}}",
     "fairplayNotice": "公平游戏锁定期规则适用",
     "migrationNotice": {
       "title": "需要进行迁移",

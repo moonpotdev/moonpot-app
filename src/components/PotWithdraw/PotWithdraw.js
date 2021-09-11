@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { usePot, useTokenAllowance, useTokenBalance, useTokenEarned } from '../../helpers/hooks';
+import { useBonusesEarned, usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
 import { Link, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +15,12 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import { Translate } from '../Translate';
 
 const useStyles = makeStyles(styles);
+
+const bonusStatLabels = {
+  bonus: 'withdraw.myBonusToken',
+  superBoost: 'withdraw.mySuperBoostToken',
+  earned: 'withdraw.myEarnedToken',
+};
 
 // TODO move fairness fee to state/redux
 function useTimelockEndsAt(
@@ -76,15 +82,14 @@ const StatDeposited = memo(function ({ token, contractAddress, tokenDecimals }) 
   return <Stat label={t('pot.myToken', { token })}>{formatDecimals(ticketBalance, 8)}</Stat>;
 });
 
-const StatEarned = memo(function ({ id, token, tokenDecimals, labelKey = 'pot.myEarnedToken' }) {
+const StatEarned = memo(function ({ bonus }) {
   const { t } = useTranslation();
-  const earned = useTokenEarned(id, token, tokenDecimals);
 
-  if (earned.isZero()) {
-    return null;
-  }
-
-  return <Stat label={t(labelKey, { token })}>{formatDecimals(earned, 8)}</Stat>;
+  return (
+    <Stat label={t(bonusStatLabels[bonus.type], { token: bonus.symbol })}>
+      {formatDecimals(bonus.earned, 8)}
+    </Stat>
+  );
 });
 
 const StatTimelock = memo(function ({ endsAt }) {
@@ -116,6 +121,16 @@ const StatFee = memo(function ({ endsAt, token, contractAddress, tokenDecimals }
   );
 });
 
+const BonusStats = memo(function BonusStats({ id }) {
+  const bonuses = useBonusesEarned(id).filter(bonus => bonus.earned > 0);
+
+  if (bonuses.length) {
+    return bonuses.map(bonus => <StatEarned key={`${id}-${bonus.id}`} id={id} bonus={bonus} />);
+  }
+
+  return null;
+});
+
 const Stats = function ({ id }) {
   const classes = useStyles();
   const pot = usePot(id);
@@ -134,26 +149,7 @@ const Stats = function ({ id }) {
         contractAddress={pot.contractAddress}
         tokenDecimals={pot.tokenDecimals}
       />
-      {pot.bonusToken ? (
-        <StatEarned
-          id={id}
-          token={pot.bonusToken}
-          tokenDecimals={pot.bonusTokenDecimals}
-          labelKey={
-            id === 'pots' && pot.bonusToken === 'POTS' ? 'pot.myEarnedToken' : 'pot.myBonusToken'
-          }
-        />
-      ) : null}
-      {pot.boostToken ? (
-        <StatEarned
-          id={id}
-          token={pot.boostToken}
-          tokenDecimals={pot.boostTokenDecimals}
-          labelKey={
-            id === 'pots' && pot.boostToken === 'POTS' ? 'pot.myEarnedToken' : 'pot.myBonusToken'
-          }
-        />
-      ) : null}
+      <BonusStats id={id} />
       <StatTimelock endsAt={timelockEndsAt} />
       <StatFee
         endsAt={timelockEndsAt}

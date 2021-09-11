@@ -45,6 +45,7 @@
   "poweredBy": "Powered by",
   "upgradeWhy": "We upgraded the {{token}} Pot in order to make it safer and fairer, as well as to allow us to automate more of our processes.",
   "upgradeNextSteps": "Because of the upgrade, you need to move your {{token}} to the new {{token}} Pot.  We have added a {{boostToken}} Super Boost to the new {{token}} Pot to help make it worthwhile for you.",
+  "upgradeMove": "Move {{base}}",
   "upgradeMoveWithdraw": "Move {{base}} and Withdraw {{bonus}}",
   "learnMore": "Learn more",
   "telegramSocialBlockBody": "Learn about Moonpot and get direct support from the community",
@@ -90,8 +91,6 @@
     "depositMore": "Deposit More",
     "withdraw": "Withdraw",
     "myToken": "My {{token}}",
-    "myEarnedToken": "My Earned {{token}}",
-    "myBonusToken": "My Bonus {{token}}",
     "myFairplayTimelock": "My Fairplay Timelock",
     "myFairnessFee": "My Current Fairness Fee",
     "myDetails": "My Details",
@@ -157,6 +156,9 @@
   "withdraw": {
     "all": "Withdraw All",
     "allToken": "Withdraw All {{token}}",
+    "myEarnedToken": "My Earned {{token}}",
+    "myBonusToken": "My Bonus {{token}}",
+    "mySuperBoostToken": "My Super Boost {{token}}",
     "fairplayNotice": "Fairplay Timelock rules apply.",
     "migrationNotice": {
       "title": "Migration Needed",

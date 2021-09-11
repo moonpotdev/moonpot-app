@@ -1,8 +1,8 @@
 import React from 'react';
 import { isEmpty } from '../../../../../helpers/utils';
-import { PotDeposit } from '../../../../../components/PotDeposit/PotDeposit';
-import { PotWithdraw } from '../../../../../components/PotWithdraw/PotWithdraw';
-import { CardAccordionItem } from '../../../../../components/Cards/Cards';
+import { PotDeposit } from '../../../../../components/PotDeposit';
+import { PotWithdraw } from '../../../../../components/PotWithdraw';
+import { CardAccordionItem } from '../../../../../components/Cards';
 import PotBonus from './PotBonus';
 import { useSelector } from 'react-redux';
 
@@ -39,7 +39,7 @@ const ActiveLayout = function ({ item }) {
   return (
     <>
       {/*Bonus*/}
-      {'bonusRewardId' in item || 'boostRewardId' in item ? (
+      {'bonuses' in item && item.bonuses.length ? (
         <CardAccordionItem titleKey={item.id === 'pots' ? 'pot.earnings' : 'pot.bonusEarnings'}>
           <PotBonus item={item} />
         </CardAccordionItem>

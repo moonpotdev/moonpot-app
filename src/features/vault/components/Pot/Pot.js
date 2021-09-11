@@ -1,13 +1,12 @@
-import React, { memo } from 'react';
-import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards/Cards';
+import React, { memo, useMemo } from 'react';
+import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
-
 import { Pot as BasePot, PrizeSplit } from '../../../../components/Pot/Pot';
 import styles from './styles';
 import { PotDeposit } from '../../../../components/PotDeposit';
 import { PotWithdraw } from '../../../../components/PotWithdraw';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import { useBonusEarned, useBoostEarned, usePot, useTokenBalance } from '../../../../helpers/hooks';
+import { useBonusesEarned, usePot, useTokenBalance } from '../../../../helpers/hooks';
 import { Translate } from '../../../../components/Translate';
 import PotBonus from '../../../home/MyPots/components/Pot/PotBonus';
 import { useSelector } from 'react-redux';
@@ -58,9 +57,8 @@ const EolNotice = function ({ id }) {
 };
 
 const BonusAccordionItem = memo(function ({ pot }) {
-  const bonus = useBonusEarned(pot);
-  const boost = useBoostEarned(pot);
-  const hasEarned = bonus.gt(0) || boost.gt(0);
+  const bonuses = useBonusesEarned(pot.id);
+  const hasEarned = useMemo(() => bonuses.find(bonus => bonus.earned > 0) !== undefined, [bonuses]);
 
   return hasEarned ? (
     <CardAccordionItem

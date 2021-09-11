@@ -4,66 +4,51 @@ import { config } from '../../../config/config';
 
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 
-const getEarned = async (pools, state, dispatch) => {
+const getEarned = async (pots, state, dispatch) => {
   console.log('redux getEarnedAll() processing...');
   const address = state.walletReducer.address;
   const web3 = state.walletReducer.rpc;
+  const earned = { ...state.earnedReducer.earned };
 
   const multicall = [];
   const calls = [];
 
-  for (let key in web3) {
-    multicall[key] = new MultiCall(web3[key], config[key].multicallAddress);
-    calls[key] = [];
+  for (const network in web3) {
+    multicall[network] = new MultiCall(web3[network], config[network].multicallAddress);
+    calls[network] = [];
   }
 
-  for (let key in pools) {
-    const gateContract = new web3[pools[key].network].eth.Contract(
-      gateManagerAbi,
-      pools[key].contractAddress
-    );
-    const pool = pools[key];
+  for (const pot of Object.values(pots)) {
+    if ('bonuses' in pot && pot.bonuses.length) {
+      const gateContract = new web3[pot.network].eth.Contract(gateManagerAbi, pot.contractAddress);
 
-    if (pool.bonusRewardId !== undefined) {
-      calls[pool.network].push({
-        amount: gateContract.methods.earned(address, pool.bonusRewardId),
-        token: pool.bonusToken,
-        address: pool.rewardAddress,
-        poolId: pool.id,
-      });
-    } else {
-      calls[pool.network].push({
-        amount: gateContract.methods.earned(address),
-        token: pool.bonusToken,
-        address: pool.rewardAddress,
-        poolId: pool.id,
-      });
-    }
+      const gateCall = {
+        id: pot.id,
+      };
 
-    if (pool.boostToken && pool.boostRewardId !== undefined) {
-      calls[pool.network].push({
-        amount: gateContract.methods.earned(address, pool.boostRewardId),
-        token: pool.boostToken,
-        address: pool.rewardAddress,
-        poolId: pool.id,
-      });
+      for (const bonus of pot.bonuses) {
+        gateCall['earned_' + bonus.id] = gateContract.methods.earned(address, bonus.id);
+      }
+
+      calls[pot.network].push(gateCall);
     }
   }
 
-  let response = [];
-
-  for (let key in multicall) {
-    const resp = await multicall[key].all([calls[key]]);
-    response = [...response, ...resp[0]];
+  const results = [];
+  for (const network in multicall) {
+    const [networkResults] = await multicall[network].all([calls[network]]);
+    results.push(...networkResults);
   }
 
-  const earned = state.earnedReducer.earned;
-  for (let index in response) {
-    const r = response[index];
-    earned[r.poolId] = {
-      ...earned[r.poolId],
-      [r.token]: r.amount,
-    };
+  for (const result of results) {
+    const pot = pots[result.id];
+
+    for (const bonus of pot.bonuses) {
+      earned[pot.id] = {
+        ...earned[pot.id],
+        [bonus.id]: result['earned_' + bonus.id],
+      };
+    }
   }
 
   dispatch({
@@ -79,7 +64,7 @@ const getEarned = async (pools, state, dispatch) => {
 
 const getEarnedSingle = async (item, state, dispatch) => {
   console.log('redux getEarnedSingle() processing...');
-  return await getEarned([item], state, dispatch);
+  return await getEarned({ [item.id]: item }, state, dispatch);
 };
 
 const getEarnedAll = async (state, dispatch) => {

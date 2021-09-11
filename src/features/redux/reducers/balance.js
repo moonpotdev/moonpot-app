@@ -1,8 +1,12 @@
-import { BALANCE_FETCH_BALANCES_BEGIN, BALANCE_FETCH_BALANCES_DONE } from '../constants';
+import {
+  BALANCE_FETCH_BALANCES_BEGIN,
+  BALANCE_FETCH_BALANCES_DONE,
+  BALANCE_RESET,
+} from '../constants';
 import { config } from '../../../config/config';
 import { potsByNetwork } from '../../../config/vault';
 
-const initialTokens = () => {
+const initialTokens = (() => {
   const tokens = [];
   for (let net in config) {
     const networkPools = potsByNetwork[net];
@@ -27,10 +31,10 @@ const initialTokens = () => {
   }
 
   return tokens;
-};
+})();
 
 const initialState = {
-  tokens: initialTokens(),
+  tokens: initialTokens,
   lastUpdated: 0,
   isBalancesLoading: false,
   isBalancesFirstTime: true,
@@ -51,6 +55,8 @@ const balanceReducer = (state = initialState, action) => {
         isBalancesLoading: false,
         isBalancesFirstTime: false,
       };
+    case BALANCE_RESET:
+      return { ...initialState };
     default:
       return state;
   }

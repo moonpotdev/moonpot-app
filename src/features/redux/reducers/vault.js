@@ -2,6 +2,7 @@ import { HOME_FETCH_POOLS_BEGIN, HOME_FETCH_POOLS_DONE } from '../constants';
 import { config } from '../../../config/config';
 import BigNumber from 'bignumber.js';
 import { potsByNetwork } from '../../../config/vault';
+import { tokensByNetworkSymbol } from '../../../config/tokens';
 
 const initialPools = () => {
   const pools = [];
@@ -26,6 +27,16 @@ const initialPools = () => {
         sponsor.sponsorBalance = new BigNumber(0);
         sponsor.sponsorBalanceUsd = new BigNumber(0);
       });
+
+      pool.bonuses = (pool.bonuses || []).map(bonus => ({
+        ...bonus,
+        ...tokensByNetworkSymbol[pool.network][bonus.symbol],
+        apr: 0,
+        apy: 0,
+        compoundable: false,
+        active: false,
+      }));
+
       pools[pool.id] = pool;
     }
   }
