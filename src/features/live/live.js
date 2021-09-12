@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { Container, Grid, Link, makeStyles } from '@material-ui/core';
 import reduxActions from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -288,17 +288,20 @@ const NextLiveDraw = memo(function NextLiveDraw() {
 
     return null;
   }, [pots]);
-
-  const [show, setShow] = useState(null);
+  const [haveShow, setHaveShow] = useState(false);
+  const show = useRef(null);
 
   useEffect(() => {
-    if (show === null && next !== null) {
-      setShow(next);
+    if (show.current === null && next !== null) {
+      show.current = next;
     }
-  }, [next, show, setShow]);
+    if (show.current !== null && haveShow === false) {
+      setHaveShow(true);
+    }
+  }, [next, show, haveShow, setHaveShow]);
 
-  if (show) {
-    return <LiveDraw id={show} />;
+  if (haveShow && show.current) {
+    return <LiveDraw id={show.current} />;
   }
 
   return <RouteLoading />;
