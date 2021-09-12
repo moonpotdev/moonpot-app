@@ -77,9 +77,6 @@ const styles = theme => ({
       lineHeight: '24px',
       letterSpacing: '0.2px',
     },
-    '& $actionBtn': {
-      color: '#6F609A',
-    },
     '& .MuiPaper-root .MuiButtonBase-root': {
       background: '#B6ADCC',
       color: 'rgba(255, 255, 255, 0.95)',
@@ -235,44 +232,6 @@ const styles = theme => ({
       color: '#F3BA2E',
     },
   },
-  actionBtn: {
-    width: '100%',
-    height: '48px',
-    backgroundColor: '#FFFFFF',
-    borderRadius: '8px',
-    fontStyle: 'normal',
-    fontWeight: 700,
-    fontSize: '15px',
-    lineHeight: '24px',
-    letterSpacing: '0.2px',
-    display: 'flex',
-    alignItems: 'center',
-    textAlign: 'center',
-    color: '#70609A',
-    boxShadow: 'none',
-    margin: '20px 0 16px 0',
-    '& .MuiButton-label': {
-      position: 'relative',
-      zIndex: '10',
-    },
-    '&:hover, &:focus': {
-      boxShadow: 'none',
-      color: '#70609A',
-      backgroundColor: '#E6E6E6',
-    },
-    '& .MuiTouchRipple-rippleVisible': {
-      opacity: 1,
-      animation: `$enter 550ms ${theme.transitions.easing.easeInOut}`,
-    },
-    '& .MuiTouchRipple-child': {
-      backgroundColor: '#C7C0D8',
-    },
-    '&.Mui-disabled': {
-      backgroundColor: '#CCCCCC',
-      color: '#888888',
-      borderColor: '#CCCCCC',
-    },
-  },
   eolMoveBtn: {
     margin: '16px 0 8px 0',
   },
@@ -336,55 +295,6 @@ const styles = theme => ({
       letterSpacing: '0.46px',
     },
   },
-  '@keyframes enter': {
-    '0%': {
-      transform: 'scale(0)',
-      opacity: 0,
-    },
-    '100%': {
-      transform: 'scale(1)',
-      opacity: 1,
-    },
-  },
-  altActionBtn: {
-    width: '100%',
-    height: '48px',
-    backgroundColor: '#42385B',
-    border: '2px solid #FFFFFF',
-    borderRadius: '8px',
-    boxSizing: 'border-box',
-    fontStyle: 'normal',
-    fontWeight: 700,
-    fontSize: '15px',
-    lineHeight: '24px',
-    letterSpacing: '0.2px',
-    display: 'flex',
-    alignItems: 'center',
-    textAlign: 'center',
-    color: '#ffffff',
-    boxShadow: 'none',
-    '& .MuiButton-label': {
-      position: 'relative',
-      zIndex: '10',
-    },
-    '&:hover, &:focus': {
-      boxShadow: 'none',
-      color: '#ffffff',
-      backgroundColor: '#2B253C',
-    },
-    '& .MuiTouchRipple-rippleVisible': {
-      opacity: 1,
-      animation: `$enter 550ms ${theme.transitions.easing.easeInOut}`,
-    },
-    '& .MuiTouchRipple-child': {
-      backgroundColor: '#201B2C',
-    },
-    '&.Mui-disabled': {
-      backgroundColor: '#CCCCCC',
-      color: '#888888',
-      borderColor: '#CCCCCC',
-    },
-  },
   explainerText: {
     fontFamily: 'Ubuntu',
     fontStyle: 'normal',
@@ -394,15 +304,14 @@ const styles = theme => ({
     letterSpacing: '0.2px',
     color: '#ECEAFB',
   },
-  bonusExplainerRow: {
+  compoundExplainerText: {
     marginTop: '16px',
+  },
+  bonusExplainerRow: {
     marginBottom: '16px',
   },
   bonusCompoundRow: {
     marginBottom: '16px',
-    '& $actionBtn:first-child': {
-      marginTop: 0,
-    },
   },
   title: {
     color: '#EBF3F9',

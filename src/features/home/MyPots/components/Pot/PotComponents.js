@@ -9,6 +9,7 @@ import Countdown from '../../../../../components/Countdown';
 import { InterestTooltip, WinTotal } from '../../../../../components/Pot';
 import { Translate } from '../../../../../components/Translate';
 import { useTokenBalance } from '../../../../../helpers/hooks';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(styles);
 
@@ -87,8 +88,9 @@ const DepositedOdds = memo(function ({ ticketTotalSupply, winners, ticketToken, 
   return <Translate i18nKey="pot.odds" values={{ odds }} />;
 });
 
-export const PotInfoBlock = function ({ item, prices, active = true }) {
+export const PotInfoBlock = function ({ item, active = true }) {
   const classes = useStyles();
+  const prices = useSelector(state => state.pricesReducer);
   const { t } = useTranslation();
 
   return (

@@ -1,6 +1,6 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import { useTranslation } from 'react-i18next';
 import reduxActions from '../../../../redux/actions';
@@ -8,43 +8,59 @@ import { formatDecimals } from '../../../../../helpers/format';
 import Steps from '../../../../vault/components/Steps/Steps';
 import { isEmpty } from '../../../../../helpers/utils';
 import { Translate } from '../../../../../components/Translate';
+import { useBonusEarned, useBoostEarned } from '../../../../../helpers/hooks';
+import { SecondaryButton } from '../../../../../components/Buttons/SecondaryButton';
+import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
-const getItemBonusTokens = item => {
-  const tokens = [];
+function useBonusTokens(bonusToken, bonusEarned, boostToken, boostEarned) {
+  return useMemo(() => {
+    const tokens = [];
 
-  if (item.bonusToken) {
-    tokens.push(item.bonusToken);
-  }
+    if (bonusToken && bonusEarned.gt(0)) {
+      tokens.push(bonusToken);
+    }
 
-  if (item.boostToken) {
-    tokens.push(item.boostToken);
-  }
+    if (boostToken && boostEarned.gt(0)) {
+      tokens.push(boostToken);
+    }
 
-  return tokens.join(' & ');
-};
+    return tokens.join(' & ');
+  }, [bonusToken, bonusEarned, boostToken, boostEarned]);
+}
 
-const itemSupportsCompound = item => {
+function itemSupportsCompound(item) {
   return (
     item.supportsCompound &&
     'bonusRewardId' in item &&
     item.bonusRewardId === 0 &&
     item.bonusAddress === item.tokenAddress
   );
-};
+}
 
-const PotBonus = function ({ item, prices, wallet, balance }) {
+const PotBonus = function ({ item, buttonVariant = 'purple' }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [steps, setSteps] = React.useState({
+  const wallet = useSelector(state => state.walletReducer);
+  const balance = useSelector(state => state.balanceReducer);
+  const prices = useSelector(state => state.pricesReducer);
+  const [steps, setSteps] = useState({
     modal: false,
     currentStep: -1,
     items: [],
     finished: false,
   });
-  const [stepsItem, setStepsItem] = React.useState(null);
+  const [stepsItem, setStepsItem] = useState(null);
+  const bonusEarned = useBonusEarned(item);
+  const boostEarned = useBoostEarned(item);
+  const hasBonus = 'bonusRewardId' in item;
+  const hasBoost = 'boostRewardId' in item;
+  const hasEarned = bonusEarned.gt(0) || boostEarned.gt(0);
+  const bonusTokens = useBonusTokens(item.bonusToken, bonusEarned, item.boostToken, boostEarned);
+  const canCompound = bonusEarned.gt(0);
 
   const handleClose = () => {
     updateItemData();
@@ -105,7 +121,7 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const index = steps.currentStep;
     if (!isEmpty(steps.items[index]) && steps.modal) {
       const items = steps.items;
@@ -129,90 +145,101 @@ const PotBonus = function ({ item, prices, wallet, balance }) {
   return (
     <Grid container>
       <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
-      <Grid item xs={6}>
-        <Typography className={classes.myDetailsText} align={'left'} style={{ marginBottom: 0 }}>
-          {item.token === 'POTS' ? t('bonus.myEarnings') : t('bonus.myBonusEarnings')}
-        </Typography>
-      </Grid>
-      <Grid item xs={6}>
-        <Typography className={classes.myDetailsValue} align={'right'} style={{ marginBottom: 0 }}>
-          {formatDecimals(item.earned)} {item.bonusToken} ($
-          {formatDecimals(item.earned.multipliedBy(prices.prices[item.bonusToken]), 2)})
-        </Typography>
-      </Grid>
-      {item.boostToken ? (
-        <React.Fragment>
-          <Grid item xs={6}>
-            <Typography
-              className={classes.myDetailsText}
-              align={'left'}
-              style={{ marginTop: '16px' }}
-            >
-              <Translate i18nKey="bonus.myBoostEarnings" />
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography
-              className={classes.myDetailsValue}
-              align={'right'}
-              style={{ marginTop: '16px' }}
-            >
-              {formatDecimals(item.boosted)} {item.boostToken} ($
-              {formatDecimals(item.boosted.multipliedBy(prices.prices[item.boostToken]), 2)})
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography className={classes.myPotsInfoText} align={'left'}>
-              <Translate
-                i18nKey="bonus.bonusExtraInfo"
-                values={{
-                  bonusToken: item.bonusToken,
-                  boostToken: item.boostToken,
-                }}
-              />
-            </Typography>
-          </Grid>
-        </React.Fragment>
-      ) : (
-        ''
-      )}
+      {hasBonus ? (
+        <>
+          {bonusEarned > 0 ? (
+            <>
+              <Grid item xs={6}>
+                <Typography className={classes.myDetailsText} align={'left'}>
+                  {t(item.id === 'pots' ? 'bonus.myEarnings' : 'bonus.myBonusEarnings')}
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography className={classes.myDetailsValue} align={'right'}>
+                  {bonusEarned ? (
+                    <>
+                      {formatDecimals(bonusEarned)} {item.bonusToken} ($
+                      {formatDecimals(bonusEarned.multipliedBy(prices.prices[item.bonusToken]), 2)})
+                    </>
+                  ) : (
+                    <>0 {item.bonusToken} ($0.00)</>
+                  )}
+                </Typography>
+              </Grid>
+            </>
+          ) : (
+            ''
+          )}
+        </>
+      ) : null}
+      {hasBoost ? (
+        <>
+          {boostEarned > 0 ? (
+            <>
+              <Grid item xs={6}>
+                <Typography className={classes.myDetailsText} align={'left'}>
+                  <Translate i18nKey="bonus.myBoostEarnings" />
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography className={classes.myDetailsValue} align={'right'}>
+                  {boostEarned ? (
+                    <>
+                      {formatDecimals(boostEarned)} {item.boostToken} ($
+                      {formatDecimals(boostEarned.multipliedBy(prices.prices[item.boostToken]), 2)})
+                    </>
+                  ) : (
+                    <>0 {item.boostToken} ($0.00)</>
+                  )}
+                </Typography>
+              </Grid>
+            </>
+          ) : (
+            ''
+          )}
+        </>
+      ) : null}
       <Grid item xs={12} className={classes.bonusExplainerRow}>
         <Typography className={classes.explainerText}>
-          {item.token === 'POTS'
-            ? t('bonus.potsExplainer', { tokens: getItemBonusTokens(item) })
-            : t('bonus.bonusExplainer', { tokens: getItemBonusTokens(item) })}
+          {item.id === 'pots'
+            ? t('bonus.potsExplainer', { tokens: bonusTokens })
+            : t('bonus.bonusExplainer', { tokens: bonusTokens })}
         </Typography>
       </Grid>
       {itemSupportsCompound(item) ? (
         <>
-          <Grid item xs={12} className={classes.bonusCompoundRow}>
-            <Button
-              onClick={() => handleCompoundBonus(item)}
-              className={classes.actionBtn}
-              variant={'contained'}
-              disabled={item.earned.lte(0)}
-            >
-              {item.compoundIsBonus
-                ? t('bonus.compoundBonusToken', { token: item.token })
-                : t('bonus.compoundToken', { token: item.token })}
-            </Button>
-            <Typography className={classes.explainerText}>
-              {t('bonus.compoundExplainer', { token: item.token })}
-            </Typography>
-          </Grid>
+          {bonusEarned > 0 ? (
+            <Grid item xs={12} className={classes.bonusCompoundRow}>
+              <PrimaryButton
+                onClick={() => handleCompoundBonus(item)}
+                variant={buttonVariant}
+                fullWidth={true}
+                disabled={!canCompound}
+              >
+                {item.compoundIsBonus
+                  ? t('bonus.compoundBonusToken', { token: item.token })
+                  : t('bonus.compoundToken', { token: item.token })}
+              </PrimaryButton>
+              <Typography className={clsx(classes.explainerText, classes.compoundExplainerText)}>
+                {t('bonus.compoundExplainer', { token: item.token })}
+              </Typography>
+            </Grid>
+          ) : (
+            ''
+          )}
         </>
       ) : null}
       <Grid item xs={12}>
-        <Button
+        <SecondaryButton
           onClick={() => handleWithdrawBonus(item)}
-          className={classes.altActionBtn}
+          variant={buttonVariant}
           fullWidth={true}
-          disabled={item.earned.lte(0)}
+          disabled={!hasEarned}
         >
           {item.compoundIsBonus
-            ? t('bonus.withdrawBonusTokens', { tokens: getItemBonusTokens(item) })
-            : t('bonus.withdrawEarnedTokens', { tokens: getItemBonusTokens(item) })}
-        </Button>
+            ? t('bonus.withdrawBonusTokens', { tokens: bonusTokens })
+            : t('bonus.withdrawEarnedTokens', { tokens: bonusTokens })}
+        </SecondaryButton>
       </Grid>
     </Grid>
   );

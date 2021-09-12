@@ -20,7 +20,7 @@ const initialPools = () => {
       pool['totalSponsorBalanceUsd'] = new BigNumber(0);
       pool['totalStakedUsd'] = new BigNumber(0);
       pool['numberOfWinners'] = new BigNumber(5);
-      pool['totalTickets'] = new BigNumber(0);
+      pool['totalTickets'] = '0';
       pool['defaultOrder'] = defaultOrder++;
       pool.sponsors.forEach(sponsor => {
         sponsor.sponsorBalance = new BigNumber(0);

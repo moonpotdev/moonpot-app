@@ -13,10 +13,10 @@ export default function NoPotsCard() {
   const { t } = useTranslation();
   const history = useHistory();
   const dispatch = useDispatch();
-  const wallet = useSelector(state => state.walletReducer);
+  const address = useSelector(state => state.walletReducer.address);
 
   const handleWalletConnect = () => {
-    if (!wallet.address) {
+    if (!address) {
       dispatch(reduxActions.wallet.connect());
     }
   };
@@ -33,16 +33,16 @@ export default function NoPotsCard() {
         </Grid>
         <Grid item xs={8}>
           <Typography className={classes.noActivePotsTitle}>
-            {wallet.address ? t('playWithMoonpot') : t('wallet.connect')}
+            {address ? t('playWithMoonpot') : t('wallet.connect')}
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography className={classes.noActivePotsText}>
-            {wallet.address ? t('youHaventEnteredMoonpots') : t('connectToJoin')}
+            {address ? t('youHaventEnteredMoonpots') : t('connectToJoin')}
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          {wallet.address ? (
+          {address ? (
             <Button
               className={classes.noActivePotsPlayButton}
               onClick={() => {

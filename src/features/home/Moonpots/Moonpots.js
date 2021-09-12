@@ -45,7 +45,7 @@ const Moonpots = ({ selected }) => {
             {filtered.map(pot => (
               <Pot
                 key={pot.id}
-                variant={pot.vaultType === 'main' ? 'tealLight' : 'purpleCommunity'}
+                variant={pot.vaultType === 'main' ? 'tealLight' : 'blueCommunity'}
                 id={pot.id}
               />
             ))}
