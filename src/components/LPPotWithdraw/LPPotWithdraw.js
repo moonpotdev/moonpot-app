@@ -17,6 +17,7 @@ import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { Translate } from '../Translate';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
@@ -258,6 +259,11 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
     setSelectedWithdrawToken(event.target.value);
   };
 
+  function variantClass(classes, prefix, variant) {
+    const key = prefix + variant[0].toUpperCase() + variant.substr(1);
+    return key in classes ? classes[key] : false;
+  }
+
   const handleWithdraw = () => {
     const steps = [];
     if (address && ticketBalance.gt(0)) {
@@ -298,14 +304,14 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
           <Grid item xs={2}>
             <FormControl className={classes.selectContainer}>
               <Select
-                className={classes.select}
+                className={clsx(classes.select, variantClass(classes, 'variant', variant))}
                 labelId="demo-customized-select-label"
                 id="demo-customized-select"
                 value={selectedWithdrawToken}
                 onChange={handleSelect}
                 MenuProps={{
                   classes: {
-                    paper: classes.menuStyle,
+                    paper: clsx(classes.menuStyle, variantClass(classes, 'variant', variant)),
                   },
                   anchorOrigin: {
                     vertical: 'bottom',

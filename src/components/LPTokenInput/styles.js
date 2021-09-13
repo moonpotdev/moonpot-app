@@ -44,8 +44,6 @@ const styles = theme => ({
   },
   select: {
     borderRadius: '8px',
-    background: '#275668',
-    border: '2px solid #2E657A',
     height: '100%',
     paddingTop: '4px',
     '&:before': {
@@ -56,24 +54,20 @@ const styles = theme => ({
     },
   },
   menuStyle: {
-    background: '#275668',
-    border: '2px solid #2E657A',
     color: '#FFFFFF',
     borderRadius: '8px',
     marginTop: '4px',
     marginLeft: '-2px',
     '& ul': {
       padding: '0',
-      background: '#275668',
     },
     '& li': {
-      background: '#275668',
       paddingLeft: '0',
     },
   },
   selectContainer: {
     width: '100%',
-    height: '100%',
+    height: '48px',
   },
   variantTeal: {
     background: '#3F688D',
@@ -82,6 +76,12 @@ const styles = theme => ({
   variantPurple: {
     background: '#8375A9',
     border: '2px solid #B6ADCC',
+    '& ul': {
+      background: '#8375A9',
+    },
+    '& li': {
+      background: '#8375A9',
+    },
   },
   variantPurpleAlt: {
     background: '#4F5887',
@@ -90,6 +90,12 @@ const styles = theme => ({
   variantGreen: {
     background: '#275668',
     border: '2px solid #2E657A',
+    '& ul': {
+      background: '#275668',
+    },
+    '& li': {
+      background: '#275668',
+    },
   },
 });
 

@@ -106,6 +106,11 @@ export const LPTokenInput = function ({
     setValue(bn.gt(0) ? bn.toString() : '');
   }, [value, setValue]);
 
+  function variantClass(classes, prefix, variant) {
+    const key = prefix + variant[0].toUpperCase() + variant.substr(1);
+    return key in classes ? classes[key] : false;
+  }
+
   //Handle dropdown token selection
   const [selectedDepositToken, setSelectedDepositToken] = React.useState('pots-bnb');
   const handleSelect = event => {
@@ -117,14 +122,14 @@ export const LPTokenInput = function ({
       <Grid item xs={2}>
         <FormControl className={classes.selectContainer}>
           <Select
-            className={classes.select}
+            className={clsx(classes.select, variantClass(classes, 'variant', variant))}
             labelId="demo-customized-select-label"
             id="demo-customized-select"
             value={selectedDepositToken}
             onChange={handleSelect}
             MenuProps={{
               classes: {
-                paper: classes.menuStyle,
+                paper: clsx(classes.menuStyle, variantClass(classes, 'variant', variant)),
               },
               anchorOrigin: {
                 vertical: 'bottom',
@@ -172,7 +177,7 @@ export const LPTokenInput = function ({
       </Grid>
       <Grid item xs={10}>
         <InputBase
-          className={clsx(classes.input, classes.variantGreen)}
+          className={clsx(classes.input, variantClass(classes, 'variant', variant))}
           placeholder={t('tokenInput.placeholder', { token })}
           value={value}
           onChange={handleChange}
