@@ -35,6 +35,17 @@ const Moonpots = ({ selected }) => {
     }
   }, [dispatch, address]);
 
+  function handleVariant(vaultType) {
+    console.log(vaultType);
+    if (vaultType === 'main') {
+      return 'tealLight';
+    } else if (vaultType === 'community') {
+      return 'blueCommunity';
+    } else if (vaultType === 'lp') {
+      return 'green';
+    }
+  }
+
   return (
     <React.Fragment>
       <Filter selected={selected} />
@@ -43,11 +54,7 @@ const Moonpots = ({ selected }) => {
           <MigrationNotices potType={selected} className={classes.potsMigrationNotice} />
           <Cards>
             {filtered.map(pot => (
-              <Pot
-                key={pot.id}
-                variant={pot.vaultType === 'main' ? 'tealLight' : 'blueCommunity'}
-                id={pot.id}
-              />
+              <Pot key={pot.id} variant={handleVariant(pot.vaultType)} id={pot.id} />
             ))}
           </Cards>
           {selected === 'community' ? (

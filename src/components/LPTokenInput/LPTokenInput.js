@@ -1,0 +1,195 @@
+import React, { useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Grid, InputBase, makeStyles, withStyles } from '@material-ui/core';
+import { bigNumberTruncate } from '../../helpers/format';
+import styles from './styles';
+import { BaseButton } from '../Buttons/BaseButton';
+import { styledBy } from '../../helpers/utils';
+import clsx from 'clsx';
+import BigNumber from 'bignumber.js';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+
+const MAX_DECIMALS = 8;
+const useStyles = makeStyles(styles);
+
+// For toString
+BigNumber.config({ EXPONENTIAL_AT: 21 });
+
+const MaxButton = withStyles({
+  root: {
+    color: 'rgba(255, 255, 255, 0.95)',
+    backgroundColor: styledBy('variant', {
+      teal: '#6B96BD',
+      purple: '#B6ADCC',
+      purpleAlt: '#656FA5',
+    }),
+    '&:hover': {
+      color: 'rgba(255, 255, 255, 0.95)',
+      backgroundColor: styledBy('variant', {
+        teal: '#628cad',
+        purple: '#B6ADCC',
+        purpleAlt: '#656FA5',
+      }),
+    },
+    '&:focus': {
+      color: 'rgba(255, 255, 255, 0.95)',
+      backgroundColor: styledBy('variant', {
+        teal: '#628cad',
+        purple: '#B6ADCC',
+        purpleAlt: '#656FA5',
+      }),
+    },
+    '& .MuiTouchRipple-child': {
+      backgroundColor: styledBy('variant', {
+        teal: '#50758f',
+        purple: '#B6ADCC',
+        purpleAlt: '#656FA5',
+      }),
+    },
+  },
+})(BaseButton);
+
+export const LPTokenInput = function ({
+  variant = 'green',
+  token,
+  max,
+  value,
+  setValue,
+  setIsMax,
+}) {
+  const { t } = useTranslation();
+  const classes = useStyles();
+
+  //Static loaded token icons for testing
+  const LPTokenIcon = require(`../../images/tokens/${token.toLowerCase()}.svg`).default;
+  const TokenAIcon = require(`../../images/tokens/pots.svg`).default;
+  const TokenBIcon = require(`../../images/tokens/bnb.svg`).default;
+
+  const maxTruncated = useMemo(() => {
+    return bigNumberTruncate(max, MAX_DECIMALS);
+  }, [max]);
+
+  const handleMax = useCallback(() => {
+    if (maxTruncated.gt(0)) {
+      setValue(maxTruncated.toString());
+      setIsMax(true);
+    } else {
+      setValue('');
+      setIsMax(false);
+    }
+  }, [setValue, setIsMax, maxTruncated]);
+
+  const handleChange = useCallback(
+    e => {
+      const inputValue = e.target.value;
+      const bn = bigNumberTruncate(inputValue, MAX_DECIMALS);
+
+      if (bn.lt(0)) {
+        setValue('');
+        setIsMax(false);
+      } else if (bn.gte(maxTruncated)) {
+        setValue(maxTruncated.toString());
+        setIsMax(true);
+      } else {
+        setValue(inputValue);
+        setIsMax(false);
+      }
+    },
+    [setValue, setIsMax, maxTruncated]
+  );
+
+  const handleBlur = useCallback(() => {
+    const bn = bigNumberTruncate(value, MAX_DECIMALS);
+    setValue(bn.gt(0) ? bn.toString() : '');
+  }, [value, setValue]);
+
+  //Handle dropdown token selection
+  const [selectedDepositToken, setSelectedDepositToken] = React.useState('pots-bnb');
+  const handleSelect = event => {
+    setSelectedDepositToken(event.target.value);
+  };
+
+  return (
+    <Grid container spacing={1}>
+      <Grid item xs={2}>
+        <FormControl className={classes.selectContainer}>
+          <Select
+            className={classes.select}
+            labelId="demo-customized-select-label"
+            id="demo-customized-select"
+            value={selectedDepositToken}
+            onChange={handleSelect}
+            MenuProps={{
+              classes: {
+                paper: classes.menuStyle,
+              },
+              anchorOrigin: {
+                vertical: 'bottom',
+                horizontal: 'left',
+              },
+              getContentAnchorEl: null,
+            }}
+          >
+            {/*This section needs to be dynamically generated*/}
+            <MenuItem value={'pots-bnb'}>
+              <img
+                src={LPTokenIcon}
+                alt=""
+                aria-hidden={true}
+                className={classes.token}
+                width={24}
+                height={24}
+              />
+              POTS-BNB LP
+            </MenuItem>
+            <MenuItem value={'pots'}>
+              <img
+                src={TokenAIcon}
+                alt=""
+                aria-hidden={true}
+                className={classes.token}
+                width={24}
+                height={24}
+              />
+              POTS
+            </MenuItem>
+            <MenuItem value={'bnb'}>
+              <img
+                src={TokenBIcon}
+                alt=""
+                aria-hidden={true}
+                className={classes.token}
+                width={24}
+                height={24}
+              />
+              BNB
+            </MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={10}>
+        <InputBase
+          className={clsx(classes.input, classes.variantGreen)}
+          placeholder={t('tokenInput.placeholder', { token })}
+          value={value}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          disabled={max.lte(0)}
+          endAdornment={
+            <MaxButton
+              variant={variant}
+              onClick={handleMax}
+              className={classes.max}
+              disabled={max.lte(0)}
+            >
+              {t('tokenInput.max')}
+            </MaxButton>
+          }
+        />
+      </Grid>
+    </Grid>
+  );
+};

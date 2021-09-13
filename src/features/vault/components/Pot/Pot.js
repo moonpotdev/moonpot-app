@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards/Cards';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
-
+import { LPPotDeposit } from '../../../../components/LPPotDeposit/LPPotDeposit';
 import { Pot as BasePot, PrizeSplit } from '../../../../components/Pot/Pot';
 import styles from './styles';
 import { PotDeposit } from '../../../../components/PotDeposit';
@@ -11,6 +11,7 @@ import { useBonusEarned, useBoostEarned, usePot, useTokenBalance } from '../../.
 import { Translate } from '../../../../components/Translate';
 import PotBonus from '../../../home/MyPots/components/Pot/PotBonus';
 import { useSelector } from 'react-redux';
+import { LPPotWithdraw } from '../../../../components/LPPotWithdraw/LPPotWithdraw';
 
 const useStyles = makeStyles(styles);
 
@@ -82,14 +83,32 @@ const WithdrawAccordionItem = memo(function ({ pot, onFairplayLearnMore }) {
 
   return hasDeposit ? (
     <CardAccordionItem titleKey="pot.withdraw">
-      <PotWithdraw
-        id={pot.id}
-        onLearnMore={onFairplayLearnMore}
-        variant={pot.vaultType === 'main' ? 'teal' : 'purpleAlt'}
-      />
+      {pot.vaultType === 'lp' ? (
+        <LPPotWithdraw
+          id={pot.id}
+          onLearnMore={onFairplayLearnMore}
+          variant={handleVariant(pot.vaultType)}
+        />
+      ) : (
+        <PotWithdraw
+          id={pot.id}
+          onLearnMore={onFairplayLearnMore}
+          variant={handleVariant(pot.vaultType)}
+        />
+      )}
     </CardAccordionItem>
   ) : null;
 });
+
+function handleVariant(vaultType) {
+  if (vaultType === 'main') {
+    return 'teal';
+  } else if (vaultType === 'community') {
+    return 'purpleAlt';
+  } else if (vaultType === 'lp') {
+    return 'green';
+  }
+}
 
 const Bottom = function ({ id, onFairplayLearnMore, variant }) {
   const pot = usePot(id);
@@ -107,11 +126,21 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
       </CardAccordionItem>
       <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
         {pot.status === 'active' ? (
-          <PotDeposit
-            id={id}
-            onLearnMore={onFairplayLearnMore}
-            variant={pot.vaultType === 'main' ? 'teal' : 'purpleAlt'}
-          />
+          <>
+            {pot.vaultType === 'lp' ? (
+              <LPPotDeposit
+                id={id}
+                onLearnMore={onFairplayLearnMore}
+                variant={handleVariant(pot.vaultType)}
+              />
+            ) : (
+              <PotDeposit
+                id={id}
+                onLearnMore={onFairplayLearnMore}
+                variant={handleVariant(pot.vaultType)}
+              />
+            )}
+          </>
         ) : (
           <EolNotice id={id} />
         )}

@@ -20,7 +20,10 @@ function Pages() {
   return (
     <Suspense fallback={<RouteLoading />}>
       <Switch>
-        <Route exact path={['/:bottom(all|main|community)?', '/:top(my-moonpots)/:bottom(eol)?']}>
+        <Route
+          exact
+          path={['/:bottom(all|main|lp|community)?', '/:top(my-moonpots)/:bottom(eol)?']}
+        >
           <Home />
           <Footer variant="light" />
         </Route>
