@@ -85,7 +85,7 @@ const Bottom = function ({ id }) {
           id={pot.id}
           token={pot.token}
           contractAddress={pot.contractAddress}
-          variant={pot.vaultType === 'main' ? 'teal' : 'purpleCommunity'}
+          variant={pot.vaultType === 'main' ? 'teal' : 'blueCommunity'}
         />
       </div>
       <div className={classes.rowOdds}>

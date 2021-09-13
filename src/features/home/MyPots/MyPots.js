@@ -18,12 +18,11 @@ const useStyles = makeStyles(styles);
 const MyPots = ({ selected }) => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { vault, wallet, balance, prices, earned } = useSelector(state => ({
+  const { vault, wallet, balance, prices } = useSelector(state => ({
     vault: state.vaultReducer,
     wallet: state.walletReducer,
     balance: state.balanceReducer,
     prices: state.pricesReducer,
-    earned: state.earnedReducer,
   }));
   const dispatch = useDispatch();
 
@@ -50,18 +49,12 @@ const MyPots = ({ selected }) => {
             item.tokenDecimals
           );
         }
-        if (wallet.address && !isEmpty(earned.earned[item.id])) {
-          const amount = earned.earned[item.id][item.bonusToken] ?? 0;
-          const boostAmount = earned.earned[item.id][item.boostToken] ?? 0;
-          item.earned = byDecimals(new BigNumber(amount), item.bonusTokenDecimals);
-          item.boosted = byDecimals(new BigNumber(boostAmount), item.boostTokenDecimals);
-        }
         data.push(item);
       }
     }
 
     return data;
-  }, [selected, vault.pools, balance, earned, wallet.address]);
+  }, [selected, vault.pools, balance, wallet.address]);
 
   useEffect(() => {
     if (prices.lastUpdated > 0) {

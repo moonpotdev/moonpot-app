@@ -4,18 +4,16 @@ import PotBonus from './PotBonus';
 import { PotWithdraw } from '../../../../../components/PotWithdraw';
 import { PotMigrate } from './PotMigrate';
 
-const EOLLayout = function ({ item, wallet, balance, prices }) {
+const EOLLayout = function ({ item }) {
   return (
     <React.Fragment>
       {/*Pot with migration */}
-      {item.migrationContractAddress ? (
-        <PotMigrate item={item} wallet={wallet} balance={balance} />
-      ) : null}
+      {item.migrationContractAddress ? <PotMigrate item={item} /> : null}
       <CardAccordionGroup>
         {/*Bonus*/}
         {item.migrationContractAddress ? null : (
           <CardAccordionItem titleKey="pot.bonusEarnings">
-            <PotBonus item={item} prices={prices} wallet={wallet} balance={balance} />
+            <PotBonus item={item} />
           </CardAccordionItem>
         )}
         {/*Withdraw*/}

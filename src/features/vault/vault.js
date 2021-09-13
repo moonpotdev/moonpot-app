@@ -94,7 +94,7 @@ const Vault = () => {
         <Pot
           id={id}
           onFairplayLearnMore={handleFairplayLearnMore}
-          variant={pot.vaultType === 'main' ? 'tealDark' : 'purpleCommunityAlt'}
+          variant={pot.vaultType === 'main' ? 'tealDark' : 'blueCommunityAlt'}
         />
         <InfoCards id={id} fairplayRef={fairplayRef} className={classes.infoCards} />
       </Container>

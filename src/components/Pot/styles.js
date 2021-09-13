@@ -50,6 +50,13 @@ const styles = theme => ({
       textDecoration: 'line-through',
     },
   },
+  depositOdds: {
+    fontSize: '12px',
+    fontWeight: '400',
+    '& span': {
+      fontWeight: '700',
+    },
+  },
   interestValueApy: {
     color: '#F3BA2E',
   },
