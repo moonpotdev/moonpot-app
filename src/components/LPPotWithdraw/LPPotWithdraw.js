@@ -250,11 +250,9 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
 
   //Static loaded token icons for testing
   const LPTokenIcon = require(`../../images/tokens/${pot.token.toLowerCase()}.svg`).default;
-  const TokenAIcon = require(`../../images/tokens/pots.svg`).default;
-  const TokenBIcon = require(`../../images/tokens/bnb.svg`).default;
 
   //Handle dropdown token selection
-  const [selectedWithdrawToken, setSelectedWithdrawToken] = React.useState('pots-bnb');
+  const [selectedWithdrawToken, setSelectedWithdrawToken] = React.useState(pot.token);
   const handleSelect = event => {
     setSelectedWithdrawToken(event.target.value);
   };
@@ -320,8 +318,8 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
                   getContentAnchorEl: null,
                 }}
               >
-                {/*This section needs to be dynamically generated*/}
-                <MenuItem value={'pots-bnb'}>
+                {/*Handle Base LP*/}
+                <MenuItem value={pot.token}>
                   <img
                     src={LPTokenIcon}
                     alt=""
@@ -332,28 +330,20 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
                   />
                   POTS-BNB LP
                 </MenuItem>
-                <MenuItem value={'pots'}>
-                  <img
-                    src={TokenAIcon}
-                    alt=""
-                    aria-hidden={true}
-                    className={classes.token}
-                    width={24}
-                    height={24}
-                  />
-                  POTS
-                </MenuItem>
-                <MenuItem value={'bnb'}>
-                  <img
-                    src={TokenBIcon}
-                    alt=""
-                    aria-hidden={true}
-                    className={classes.token}
-                    width={24}
-                    height={24}
-                  />
-                  BNB
-                </MenuItem>
+                {/*Handle LP Components*/}
+                {pot.LPcomponents.map(item => (
+                  <MenuItem value={item.token} key={item.token}>
+                    <img
+                      src={require(`../../images/tokens/${item.token.toLowerCase()}.svg`).default}
+                      alt=""
+                      aria-hidden={true}
+                      className={classes.token}
+                      width={24}
+                      height={24}
+                    />
+                    {item.token}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Grid>

@@ -54,6 +54,7 @@ const MaxButton = withStyles({
 
 export const LPTokenInput = function ({
   variant = 'green',
+  pot,
   token,
   max,
   value,
@@ -62,11 +63,6 @@ export const LPTokenInput = function ({
 }) {
   const { t } = useTranslation();
   const classes = useStyles();
-
-  //Static loaded token icons for testing
-  const LPTokenIcon = require(`../../images/tokens/${token.toLowerCase()}.svg`).default;
-  const TokenAIcon = require(`../../images/tokens/pots.svg`).default;
-  const TokenBIcon = require(`../../images/tokens/bnb.svg`).default;
 
   const maxTruncated = useMemo(() => {
     return bigNumberTruncate(max, MAX_DECIMALS);
@@ -112,10 +108,13 @@ export const LPTokenInput = function ({
   }
 
   //Handle dropdown token selection
-  const [selectedDepositToken, setSelectedDepositToken] = React.useState('pots-bnb');
+  const [selectedDepositToken, setSelectedDepositToken] = React.useState(pot.token);
   const handleSelect = event => {
     setSelectedDepositToken(event.target.value);
   };
+
+  //Load LP Icon
+  const LPTokenIcon = require(`../../images/tokens/${token.toLowerCase()}.svg`).default;
 
   return (
     <Grid container spacing={1}>
@@ -138,8 +137,8 @@ export const LPTokenInput = function ({
               getContentAnchorEl: null,
             }}
           >
-            {/*This section needs to be dynamically generated*/}
-            <MenuItem value={'pots-bnb'}>
+            {/*Handle Base LP*/}
+            <MenuItem value={'POTS-BNB'}>
               <img
                 src={LPTokenIcon}
                 alt=""
@@ -150,35 +149,29 @@ export const LPTokenInput = function ({
               />
               POTS-BNB LP
             </MenuItem>
-            <MenuItem value={'pots'}>
-              <img
-                src={TokenAIcon}
-                alt=""
-                aria-hidden={true}
-                className={classes.token}
-                width={24}
-                height={24}
-              />
-              POTS
-            </MenuItem>
-            <MenuItem value={'bnb'}>
-              <img
-                src={TokenBIcon}
-                alt=""
-                aria-hidden={true}
-                className={classes.token}
-                width={24}
-                height={24}
-              />
-              BNB
-            </MenuItem>
+            {/*Handle LP Components*/}
+            {pot.LPcomponents.map(item => (
+              <MenuItem value={item.token} key={item.token}>
+                <img
+                  src={require(`../../images/tokens/${item.token.toLowerCase()}.svg`).default}
+                  alt=""
+                  aria-hidden={true}
+                  className={classes.token}
+                  width={24}
+                  height={24}
+                />
+                {item.token}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Grid>
       <Grid item xs={10}>
         <InputBase
           className={clsx(classes.input, variantClass(classes, 'variant', variant))}
-          placeholder={t('tokenInput.placeholder', { token })}
+          placeholder={
+            t('tokenInput.enter') + ' ' + selectedDepositToken + ' ' + t('tokenInput.amount')
+          }
           value={value}
           onChange={handleChange}
           onBlur={handleBlur}

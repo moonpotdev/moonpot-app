@@ -143,7 +143,9 @@
   },
   "tokenInput": {
     "max": "Max",
-    "placeholder": "Enter {{token}} amount"
+    "placeholder": "Enter {{token}} amount",
+    "enter": "Enter",
+    "amount": "amount"
   },
   "deposit": {
     "token": "Deposit {{token}}",

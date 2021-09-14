@@ -157,6 +157,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
       </Grid>
       <div className={classes.inputHolder}>
         <LPTokenInput
+          pot={pot}
           token={pot.token}
           value={inputValue}
           max={balance}
