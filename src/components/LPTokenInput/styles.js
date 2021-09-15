@@ -23,6 +23,9 @@ const styles = theme => ({
     marginRight: '14px',
     width: '24px',
     height: '24px',
+    [`@media (max-width: 400px)`]: {
+      marginLeft: '5px',
+    },
   },
   max: {
     marginRight: '8px',
@@ -95,6 +98,16 @@ const styles = theme => ({
     },
     '& li': {
       background: '#275668',
+    },
+  },
+  inputField: {
+    [`@media (max-width: 400px)`]: {
+      maxWidth: '78%',
+    },
+  },
+  selectField: {
+    [`@media (max-width: 400px)`]: {
+      minWidth: '22%',
     },
   },
 });

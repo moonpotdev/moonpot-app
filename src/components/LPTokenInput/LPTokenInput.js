@@ -127,13 +127,11 @@ export const LPTokenInput = function ({
 
   return (
     <Grid container spacing={1}>
-      <Grid item xs={3} sm={2}>
+      <Grid item xs={2} className={classes.selectField}>
         <FormControl className={classes.selectContainer}>
           <Select
             className={clsx(classes.select, variantClass(classes, 'variant', variant))}
             IconComponent={KeyboardArrowDownIcon}
-            labelId="demo-customized-select-label"
-            id="demo-customized-select"
             value={selectedDepositToken}
             onChange={handleSelect}
             MenuProps={{
@@ -176,7 +174,7 @@ export const LPTokenInput = function ({
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={9} sm={10}>
+      <Grid item xs={10} className={classes.inputField}>
         <InputBase
           className={clsx(classes.input, variantClass(classes, 'variant', variant))}
           placeholder={'0.0'}
