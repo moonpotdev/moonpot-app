@@ -93,10 +93,10 @@ const styles = theme => ({
     },
   },
   inputField: {
-    width: `calc(100% - 74px)`,
+    width: `calc(100% - 75px)`,
   },
   selectField: {
-    width: '74px',
+    width: '73px',
     paddingRight: '8px',
   },
 });
