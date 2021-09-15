@@ -67,13 +67,10 @@ const styles = theme => ({
     },
   },
   token: {
-    marginLeft: '14px',
-    marginRight: '14px',
+    marginLeft: '12px',
+    marginRight: '12px',
     width: '24px',
     height: '24px',
-    [`@media (max-width: 400px)`]: {
-      marginLeft: '5px',
-    },
   },
   variantPurple: {
     background: '#8375A9',
@@ -96,14 +93,11 @@ const styles = theme => ({
     },
   },
   inputField: {
-    [`@media (max-width: 400px)`]: {
-      maxWidth: '78%',
-    },
+    width: `calc(100% - 74px)`,
   },
   selectField: {
-    [`@media (max-width: 400px)`]: {
-      minWidth: '22%',
-    },
+    width: '74px',
+    paddingRight: '8px',
   },
 });
 

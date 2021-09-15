@@ -299,8 +299,8 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
           <Translate i18nKey="deposit.zap" />
           <TooltipWithIcon i18nKey="deposit.zapTooltip" />
         </div>
-        <Grid container spacing={1}>
-          <Grid item xs={2} className={classes.selectField}>
+        <Grid container>
+          <Grid item className={classes.selectField}>
             <FormControl className={classes.selectContainer}>
               <Select
                 className={clsx(classes.select, variantClass(classes, 'variant', variant))}
@@ -347,7 +347,7 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={10} className={classes.inputField}>
+          <Grid item className={classes.inputField}>
             {address ? (
               <PrimaryButton
                 variant={variant}

@@ -126,8 +126,8 @@ export const LPTokenInput = function ({
   });
 
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={2} className={classes.selectField}>
+    <Grid container>
+      <Grid item className={classes.selectField}>
         <FormControl className={classes.selectContainer}>
           <Select
             className={clsx(classes.select, variantClass(classes, 'variant', variant))}
@@ -174,7 +174,7 @@ export const LPTokenInput = function ({
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={10} className={classes.inputField}>
+      <Grid className={classes.inputField}>
         <InputBase
           className={clsx(classes.input, variantClass(classes, 'variant', variant))}
           placeholder={'0.0'}
