@@ -179,9 +179,7 @@ export const LPTokenInput = function ({
       <Grid item xs={9} sm={10}>
         <InputBase
           className={clsx(classes.input, variantClass(classes, 'variant', variant))}
-          placeholder={
-            t('tokenInput.enter') + ' ' + selectedDepositToken + ' ' + t('tokenInput.amount')
-          }
+          placeholder={'0.0'}
           value={value}
           onChange={handleChange}
           onBlur={handleBlur}
