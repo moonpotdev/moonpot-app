@@ -121,7 +121,7 @@
         "moonpotStrategyAddress": "{{name}} Pot Strategy Address"
       },
       "earnings": {
-        "title": "Earnings Breakdown",
+        "title": "Strategy Breakdown",
         "tokenInterest": "Your {{token}} Interest",
         "nameMoonpotPrizeDraw": "{{name}} Moonpot Prize Draw",
         "ziggysPotInterest": "Ziggy's (Governance) Pot Interest",

@@ -18,6 +18,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import { Translate } from '../Translate';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
 import clsx from 'clsx';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
 const useStyles = makeStyles(styles);
 
@@ -299,12 +300,11 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
           <TooltipWithIcon i18nKey="deposit.zapTooltip" />
         </div>
         <Grid container spacing={1}>
-          <Grid item xs={2}>
+          <Grid item xs={3} sm={2}>
             <FormControl className={classes.selectContainer}>
               <Select
                 className={clsx(classes.select, variantClass(classes, 'variant', variant))}
-                labelId="demo-customized-select-label"
-                id="demo-customized-select"
+                IconComponent={KeyboardArrowDownIcon}
                 value={selectedWithdrawToken}
                 onChange={handleSelect}
                 MenuProps={{
@@ -347,7 +347,7 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={9} sm={10}>
             {address ? (
               <PrimaryButton
                 variant={variant}

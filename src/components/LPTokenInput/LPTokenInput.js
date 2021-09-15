@@ -11,6 +11,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import { useTokenBalance } from '../../helpers/hooks';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
 const MAX_DECIMALS = 8;
 const useStyles = makeStyles(styles);
@@ -113,15 +115,23 @@ export const LPTokenInput = function ({
     setSelectedDepositToken(event.target.value);
   };
 
+  const selectedTokenBalance = useTokenBalance('WBNB', 18);
+
   //Load LP Icon
   const LPTokenIcon = require(`../../images/tokens/${token.toLowerCase()}.svg`).default;
 
+  React.useEffect(() => {
+    console.log(selectedTokenBalance.toFixed(2));
+    //console.log(max);
+  });
+
   return (
     <Grid container spacing={1}>
-      <Grid item xs={2}>
+      <Grid item xs={3} sm={2}>
         <FormControl className={classes.selectContainer}>
           <Select
             className={clsx(classes.select, variantClass(classes, 'variant', variant))}
+            IconComponent={KeyboardArrowDownIcon}
             labelId="demo-customized-select-label"
             id="demo-customized-select"
             value={selectedDepositToken}
@@ -138,7 +148,7 @@ export const LPTokenInput = function ({
             }}
           >
             {/*Handle Base LP*/}
-            <MenuItem value={'POTS-BNB'}>
+            <MenuItem value={pot.token}>
               <img
                 src={LPTokenIcon}
                 alt=""
@@ -166,7 +176,7 @@ export const LPTokenInput = function ({
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={9} sm={10}>
         <InputBase
           className={clsx(classes.input, variantClass(classes, 'variant', variant))}
           placeholder={
