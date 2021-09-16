@@ -1,24 +1,26 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePot, useTokenAllowance, useTokenBalance, useTokenEarned } from '../../helpers/hooks';
-import { Link, makeStyles, Typography, Grid } from '@material-ui/core';
+import { Link, makeStyles, Typography } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import styles from './styles';
 import { useTranslation } from 'react-i18next';
 import { formatDecimals, formatTimeLeft } from '../../helpers/format';
 import PrizePoolAbi from '../../config/abi/prizepool.json';
 import reduxActions from '../../features/redux/actions';
-import { isEmpty, variantClass } from '../../helpers/utils';
+import { indexBy, isEmpty, variantClass } from '../../helpers/utils';
 import Steps from '../../features/vault/components/Steps';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { Translate } from '../Translate';
-import { TooltipWithIcon } from '../Tooltip/tooltip';
 import clsx from 'clsx';
+import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
+import { config } from '../../config/config';
+import { TokenIcon } from '../TokenIcon';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import { createZapOutEstimate } from '../../features/redux/actions/zap';
 
 const useStyles = makeStyles(styles);
 
@@ -78,8 +80,8 @@ const Stat = function ({ label, children }) {
 
 const StatDeposited = memo(function ({ token, contractAddress, tokenDecimals }) {
   const { t } = useTranslation();
-  const ticketBalance = useTokenBalance(contractAddress, tokenDecimals);
-  return <Stat label={t('pot.myToken', { token })}>{formatDecimals(ticketBalance, 8)}</Stat>;
+  const userTotalBalance = useTokenBalance(contractAddress, tokenDecimals);
+  return <Stat label={t('pot.myToken', { token })}>{formatDecimals(userTotalBalance, 8)}</Stat>;
 });
 
 const StatEarned = memo(function ({ id, token, tokenDecimals, labelKey = 'pot.myEarnedToken' }) {
@@ -234,52 +236,169 @@ const MigrationNotice = function ({ token }) {
   );
 };
 
+function useWithdrawTokens(network, lpAddress) {
+  return useMemo(() => {
+    const lpToken = tokensByNetworkAddress[network][lpAddress.toLowerCase()];
+    const supportsZap = 'zap' in lpToken;
+    const tokens = [{ ...lpToken, isNative: false, isRemove: false }];
+
+    if (supportsZap) {
+      const nativeCurrency = config[network].nativeCurrency;
+      const nativeSymbol = nativeCurrency.symbol;
+      const nativeWrappedToken =
+        tokensByNetworkAddress[network][nativeCurrency.wrappedAddress.toLowerCase()];
+      const token0Symbol = lpToken.lp[0];
+      const token1Symbol = lpToken.lp[1];
+      const token0IsNative = token0Symbol === nativeWrappedToken.symbol;
+      const token1IsNative = token1Symbol === nativeWrappedToken.symbol;
+      const token0 = tokensByNetworkSymbol[network][token0Symbol];
+      const token1 = tokensByNetworkSymbol[network][token1Symbol];
+
+      if (token0IsNative) {
+        // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
+        tokens.push({
+          ...token0,
+          symbol: nativeSymbol,
+          isNative: false,
+          isRemove: false,
+        });
+      } else {
+        tokens.push({ ...token0, isNative: false, isRemove: false });
+      }
+
+      if (token1IsNative) {
+        // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
+        tokens.push({
+          ...token1,
+          symbol: nativeSymbol,
+          isNative: false,
+          isRemove: false,
+        });
+      } else {
+        tokens.push({ ...token1, isNative: false, isRemove: false });
+      }
+
+      // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
+      tokens.push({
+        ...lpToken,
+        address: '',
+        symbol: `${token0IsNative ? nativeSymbol : token0.symbol} + ${
+          token1IsNative ? nativeSymbol : token1.symbol
+        }`,
+        isNative: false,
+        isRemove: true,
+      });
+    }
+
+    return tokens;
+  }, [lpAddress, network]);
+}
+
+function DropdownIcon(props) {
+  return <KeyboardArrowDownIcon {...props} viewBox="6 8.59000015258789 12 7.409999847412109" />;
+}
+
 export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
   const address = useSelector(state => state.walletReducer.address);
-  const ticketBalance = useTokenBalance(pot.rewardToken, 18);
-  const ticketAllowance = useTokenAllowance(pot.contractAddress, pot.rewardToken, 18);
+  const network = pot.network;
+  const lpAddress = pot.tokenAddress;
+  const potAddress = pot.contractAddress;
+  const potId = pot.id;
+  const pairToken = tokensByNetworkAddress[pot.network][lpAddress.toLowerCase()];
+  const withdrawTokens = useWithdrawTokens(network, lpAddress);
+  const withdrawTokensBySymbol = useMemo(() => indexBy(withdrawTokens, 'symbol'), [withdrawTokens]);
+  const [selectedTokenSymbol, setSelectedTokenSymbol] = useState(withdrawTokens[0].symbol);
+  const selectedToken = useMemo(
+    () => withdrawTokensBySymbol[selectedTokenSymbol],
+    [withdrawTokensBySymbol, selectedTokenSymbol]
+  );
+  const ticketBalance = useTokenBalance(pot.rewardToken, pot.tokenDecimals);
+  const userTotalBalance = useTokenBalance(pot.contractAddress, pot.tokenDecimals);
+  const selectedNeedsZap = selectedToken.address.toLowerCase() !== pot.tokenAddress.toLowerCase();
+  const [zapRequestId, setZapRequestId] = useState(null);
+  const zapEstimate = useSelector(state =>
+    zapRequestId ? state.zapReducer[zapRequestId] ?? null : null
+  );
+  const canWithdraw = useMemo(() => {
+    if (!address || !userTotalBalance.gt(0)) {
+      return false;
+    }
+
+    if (selectedNeedsZap) {
+      if (!zapEstimate || zapEstimate.pending !== false) {
+        return false;
+      }
+
+      if (!zapEstimate.balance0.gt(0) || !zapEstimate.balance1.gt(0)) {
+        return false;
+      }
+
+      if (!zapEstimate.isRemoveOnly) {
+        return zapEstimate.swapOutAmount.gt(0);
+      }
+    }
+
+    return true;
+  }, [address, userTotalBalance, selectedNeedsZap, zapEstimate]);
+
+  const ticketAllowance = useTokenAllowance(potAddress, pot.rewardToken, pot.tokenDecimals);
   const [steps, setSteps] = React.useState(() => ({
     modal: false,
     currentStep: -1,
     items: [],
     finished: false,
   }));
-  const canWithdraw = address && ticketBalance.gt(0);
 
-  //Static loaded token icons for testing
-  const LPTokenIcon = null; //require(`../../images/tokens/${pot.token.toLowerCase()}.svg`).default;
+  useEffect(() => {
+    if (selectedNeedsZap) {
+      // dispatch zap estimate
+      const [requestId, action] = createZapOutEstimate(
+        potId,
+        selectedToken.address,
+        userTotalBalance
+      );
+      dispatch(action);
+      setZapRequestId(requestId);
+    } else {
+      // clear zap estimate
+      setZapRequestId(null);
+    }
+  }, [dispatch, selectedToken, userTotalBalance, selectedNeedsZap, potId, setZapRequestId]);
 
-  //Handle dropdown token selection
-  const [selectedWithdrawToken, setSelectedWithdrawToken] = React.useState(pot.token);
-  const handleSelect = event => {
-    setSelectedWithdrawToken(event.target.value);
-  };
+  const handleSelect = useCallback(
+    event => {
+      setSelectedTokenSymbol(event.target.value);
+    },
+    [setSelectedTokenSymbol]
+  );
 
   const handleWithdraw = () => {
     const steps = [];
-    if (address && ticketBalance.gt(0)) {
-      if (ticketAllowance.lt(ticketBalance)) {
+    if (address && canWithdraw) {
+      if (selectedNeedsZap) {
+        // TODO approve LP and Ticket to the Zap Contract.
+        // TODO zap
+      } else {
+        if (ticketAllowance.lt(ticketBalance)) {
+          steps.push({
+            step: 'approve',
+            message: 'Approval transaction happens once per pot.',
+            action: () =>
+              dispatch(reduxActions.wallet.approval(pot.network, pot.rewardAddress, potAddress)),
+            pending: false,
+          });
+        }
+
         steps.push({
-          step: 'approve',
-          message: 'Approval transaction happens once per pot.',
-          action: () =>
-            dispatch(
-              reduxActions.wallet.approval(pot.network, pot.rewardAddress, pot.contractAddress)
-            ),
+          step: 'withdraw',
+          message: 'Confirm withdraw transaction on wallet to complete.',
+          action: () => dispatch(reduxActions.wallet.withdraw(pot.network, potAddress, 0, true)),
           pending: false,
         });
       }
-
-      steps.push({
-        step: 'withdraw',
-        message: 'Confirm withdraw transaction on wallet to complete.',
-        action: () =>
-          dispatch(reduxActions.wallet.withdraw(pot.network, pot.contractAddress, 0, true)),
-        pending: false,
-      });
 
       setSteps({ modal: true, currentStep: 0, items: steps, finished: false });
     }
@@ -291,58 +410,46 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
       {canWithdraw && pot.migrationNeeded ? <MigrationNotice token={pot.token} /> : null}
       <div className={classes.buttonHolder}>
         <div className={classes.zapInfoHolder}>
-          <Translate i18nKey="deposit.zap" />
-          <TooltipWithIcon i18nKey="deposit.zapTooltip" />
+          <Translate
+            i18nKey="withdraw.zapExplainer"
+            values={{ token0: pairToken.lp[0], token1: pairToken.lp[1] }}
+          />
+          {/*<TooltipWithIcon i18nKey="withdraw.zapTooltip" />*/}
         </div>
-        <Grid container>
-          <Grid item className={classes.selectField}>
-            <FormControl className={classes.selectContainer}>
+        <div className={classes.fieldsHolder}>
+          {address ? (
+            <div className={classes.selectField}>
               <Select
-                className={clsx(classes.select, variantClass(classes, 'variant', variant))}
-                IconComponent={KeyboardArrowDownIcon}
-                value={selectedWithdrawToken}
+                className={clsx(
+                  classes.tokenSelect,
+                  variantClass(classes, 'inputVariant', variant)
+                )}
+                disableUnderline
+                IconComponent={DropdownIcon}
+                value={selectedTokenSymbol}
                 onChange={handleSelect}
                 MenuProps={{
                   classes: {
-                    paper: clsx(classes.menuStyle, variantClass(classes, 'variant', variant)),
+                    paper: clsx(
+                      classes.tokenDropdown,
+                      variantClass(classes, 'tokenDropdownVariant', variant)
+                    ),
                   },
-                  anchorOrigin: {
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  },
+                  anchorOrigin: { horizontal: 'left', vertical: 'bottom' },
+                  transformOrigin: { horizontal: 'left', vertical: 'top' },
                   getContentAnchorEl: null,
                 }}
               >
-                {/*Handle Base LP*/}
-                <MenuItem value={pot.token}>
-                  <img
-                    src={LPTokenIcon}
-                    alt=""
-                    aria-hidden={true}
-                    className={classes.token}
-                    width={24}
-                    height={24}
-                  />
-                  POTS-BNB LP
-                </MenuItem>
-                {/*Handle LP Components*/}
-                {pot.LPcomponents.map(item => (
-                  <MenuItem value={item.token} key={item.token}>
-                    <img
-                      src={require(`../../images/tokens/${item.token.toLowerCase()}.svg`).default}
-                      alt=""
-                      aria-hidden={true}
-                      className={classes.token}
-                      width={24}
-                      height={24}
-                    />
-                    {item.token}
+                {withdrawTokens.map(token => (
+                  <MenuItem key={token.symbol} value={token.symbol} className={classes.tokenItem}>
+                    <TokenIcon token={token} />
+                    <span className={classes.tokenItemSymbol}>{token.symbol}</span>
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
-          </Grid>
-          <Grid item className={classes.inputField}>
+            </div>
+          ) : null}
+          <div className={classes.inputField}>
             {address ? (
               <PrimaryButton
                 variant={variant}
@@ -350,13 +457,16 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
                 disabled={!canWithdraw}
                 fullWidth={true}
               >
-                <Translate i18nKey="withdraw.all" />
+                <Translate
+                  i18nKey={selectedNeedsZap ? 'withdraw.allTokenAs' : 'withdraw.all'}
+                  values={{ token: selectedTokenSymbol }}
+                />
               </PrimaryButton>
             ) : (
               <WalletConnectButton variant={variant} fullWidth={true} />
             )}
-          </Grid>
-        </Grid>
+          </div>
+        </div>
         <WithdrawSteps pot={pot} steps={steps} setSteps={setSteps} />
       </div>
       <div className={classes.fairplayNotice}>

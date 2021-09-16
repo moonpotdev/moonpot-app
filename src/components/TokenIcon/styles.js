@@ -2,8 +2,12 @@ const styles = () => ({
   icon: {
     width: '24px',
     height: '24px',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    alignItems: 'center',
   },
-  lp: {
+  lpWithdraw: {
     position: 'relative',
     '& img': {
       position: 'absolute',
@@ -19,6 +23,12 @@ const styles = () => ({
         right: 0,
         bottom: 0,
       },
+    },
+  },
+  lpRemove: {
+    '& img': {
+      width: '12px',
+      height: '12px',
     },
   },
 });

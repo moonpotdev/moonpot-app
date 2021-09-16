@@ -80,7 +80,6 @@ const Vault = () => {
   }
 
   function handleVariant(vaultType) {
-    console.log(vaultType);
     if (vaultType === 'main') {
       return 'tealDark';
     } else if (vaultType === 'community') {

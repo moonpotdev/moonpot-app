@@ -10,7 +10,8 @@ export const TokenIcon = memo(function TokenImage({ token, className }) {
   const classNames = clsx(
     {
       [classes.icon]: true,
-      [classes.lp]: token.type === 'lp',
+      [classes.lpWithdraw]: token.type === 'lp' && !token.isRemove,
+      [classes.lpRemove]: token.type === 'lp' && token.isRemove === true,
     },
     className
   );

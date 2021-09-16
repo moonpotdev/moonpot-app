@@ -32,17 +32,13 @@ const getBalances = async (pools, state, dispatch) => {
 
     // lp
     if (pool.vaultType === 'lp') {
-      const nativeTokenSymbol = config[pool.network].nativeCurrency.symbol;
+      const nativeWrappedTokenSymbol = config[pool.network].nativeCurrency.wrappedSymbol;
       const pairToken = tokensByNetworkAddress[pool.network][pool.tokenAddress.toLowerCase()];
 
       if (pairToken.zap) {
         for (const symbol of pairToken.lp) {
-          console.log('XXX', symbol, nativeTokenSymbol, pool.network);
-          const isNative = symbol === nativeTokenSymbol;
-          const wrappedSymbol = isNative
-            ? config[pool.network].nativeCurrency.wrappedSymbol
-            : symbol;
-          const token = tokensByNetworkSymbol[pool.network][wrappedSymbol];
+          const isNative = symbol === nativeWrappedTokenSymbol;
+          const token = tokensByNetworkSymbol[pool.network][symbol];
           const tokenContract = new web3[pool.network].eth.Contract(erc20Abi, token.address);
 
           calls[pool.network].push({
@@ -121,8 +117,6 @@ const getBalances = async (pools, state, dispatch) => {
         ...tokens[r.token].allowance,
         [r.spender]: r.allowance,
       };
-
-      console.log(tokens[r.token]);
     }
   }
 

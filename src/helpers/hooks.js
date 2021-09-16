@@ -50,8 +50,8 @@ export function useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd) {
   }, [awardBalanceUsd, totalSponsorBalanceUsd]);
 }
 
-export function useTokenBalance(token, tokenDecimals) {
-  const balance = useSelector(state => state.balanceReducer.tokens[token]?.balance || 0);
+export function useTokenBalance(tokenSymbol, tokenDecimals) {
+  const balance = useSelector(state => state.balanceReducer.tokens[tokenSymbol]?.balance || 0);
 
   return useMemo(() => {
     const bn = new BigNumber(balance);

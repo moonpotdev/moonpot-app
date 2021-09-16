@@ -569,8 +569,8 @@ const zapIn = (
 
       if (isNative) {
         contract.methods
-          .beamInETH(depositAmountRaw, potAddress, tokenAmountOutMinRaw)
-          .send({ from: address })
+          .beamInETH(potAddress, tokenAmountOutMinRaw)
+          .send({ from: address, value: depositAmountRaw })
           .on('transactionHash', function (hash) {
             dispatch({
               type: WALLET_ACTION,
@@ -634,6 +634,11 @@ const zapIn = (
   };
 };
 
+const zapOut = (potAddress, zapEstimate) => {
+  console.error('TODO: zapOut');
+  return async (dispatch, getState) => {};
+};
+
 const obj = {
   setNetwork,
   createWeb3Modal,
@@ -647,6 +652,7 @@ const obj = {
   getReward,
   compound,
   zapIn,
+  zapOut,
 };
 
 export default obj;

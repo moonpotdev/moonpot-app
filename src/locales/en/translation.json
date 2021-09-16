@@ -153,14 +153,18 @@
       "title": "Pot Retired",
       "message": "You can no longer deposit in to this pot."
     },
-    "zap": "Deposit your LP or️ ZAP⚡ in POTS or BNB",
-    "zapTooltip": "ZAP lets you create liquidity pool tokens and make deposits with just one transaction. Half of your tokens will be sold to balance the liquidity pair, after which liquidity will be provided and LP tokens deposited into this Pot.",
+    "zapExplainer": "Deposit LP or ZAP⚡ in {{token0}} or {{token1}}",
+    "zapTooltip": [
+      "ZAP lets you create liquidity pool tokens and make deposits with just one transaction.",
+      "Half of your tokens will be sold to balance the liquidity pair, after which liquidity will be provided and LP tokens deposited into this Pot."
+    ],
     "inYourWallet": "In your wallet",
     "provider": "Liquidity provider"
   },
   "withdraw": {
     "all": "Withdraw All",
     "allToken": "Withdraw All {{token}}",
+    "allTokenAs": "Withdraw All as {{token}}",
     "myEarnedToken": "My Earned {{token}}",
     "myBonusToken": "My Bonus {{token}}",
     "mySuperBoostToken": "My Super Boost {{token}}",
@@ -168,7 +172,8 @@
     "migrationNotice": {
       "title": "Migration Needed",
       "message": "Withdrawing your {{token}}, instead of moving it to the new Moonpot, means you will miss out on future bonus earnings and your chance to win the next {{token}} Prize."
-    }
+    },
+    "zapExplainer": "Withdraw LP or ZAP⚡ out to {{token0}} or {{token1}}"
   },
   "bonus": {
     "myBonusEarnings": "My Bonus Earnings",

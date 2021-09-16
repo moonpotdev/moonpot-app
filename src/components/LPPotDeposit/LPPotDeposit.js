@@ -75,44 +75,42 @@ function useDepositTokens(network, lpAddress) {
     const tokens = [{ ...lpToken, isNative: false }];
 
     if (supportsZap) {
-      const nativeWrappedAddress = config[network].nativeCurrency.wrappedAddress.toLowerCase();
-      const nativeSymbol = config[network].nativeCurrency.symbol;
+      const nativeCurrency = config[network].nativeCurrency;
+      const nativeSymbol = nativeCurrency.symbol;
+      const nativeDecimals = nativeCurrency.decimals;
+      const nativeWrappedToken =
+        tokensByNetworkAddress[network][nativeCurrency.wrappedAddress.toLowerCase()];
       const token0Symbol = lpToken.lp[0];
       const token1Symbol = lpToken.lp[1];
-      const supportsNative = token0Symbol === nativeSymbol || token1Symbol === nativeSymbol;
-      const lpToken0 =
-        token0Symbol === nativeSymbol
-          ? tokensByNetworkAddress[network][nativeWrappedAddress]
-          : tokensByNetworkSymbol[network][token0Symbol];
-      const lpToken1 =
-        token1Symbol === nativeSymbol
-          ? tokensByNetworkAddress[network][nativeWrappedAddress]
-          : tokensByNetworkSymbol[network][token1Symbol];
+      const token0IsNative = token0Symbol === nativeWrappedToken.symbol;
+      const token1IsNative = token1Symbol === nativeWrappedToken.symbol;
+      const token0 = tokensByNetworkSymbol[network][token0Symbol];
+      const token1 = tokensByNetworkSymbol[network][token1Symbol];
 
-      if (supportsNative && token0Symbol === nativeSymbol) {
+      if (token0IsNative) {
         tokens.push({
-          ...lpToken0,
-          address: false,
-          symbol: config[network].nativeCurrency.symbol,
-          decimals: config[network].nativeCurrency.decimals,
+          ...token0,
+          address: '',
+          symbol: nativeSymbol,
+          decimals: nativeDecimals,
           isNative: true,
         });
-        tokens.push({ ...lpToken0, isNative: false });
+        tokens.push({ ...token0, isNative: false });
       } else {
-        tokens.push({ ...lpToken0, isNative: false });
+        tokens.push({ ...token0, isNative: false });
       }
 
-      if (supportsNative && token1Symbol === nativeSymbol) {
+      if (token1IsNative) {
         tokens.push({
-          ...lpToken1,
-          address: false,
-          symbol: config[network].nativeCurrency.symbol,
-          decimals: config[network].nativeCurrency.decimals,
+          ...token1,
+          address: '',
+          symbol: nativeSymbol,
+          decimals: nativeDecimals,
           isNative: true,
         });
-        tokens.push({ ...lpToken1, isNative: false });
+        tokens.push({ ...token1, isNative: false });
       } else {
-        tokens.push({ ...lpToken1, isNative: false });
+        tokens.push({ ...token1, isNative: false });
       }
     }
 
@@ -129,6 +127,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const lpAddress = pot.tokenAddress;
   const potAddress = pot.contractAddress;
   const potId = pot.id;
+  const pairToken = tokensByNetworkAddress[pot.network][lpAddress.toLowerCase()];
   const depositTokens = useDepositTokens(network, lpAddress);
   const depositTokensBySymbol = useMemo(() => indexBy(depositTokens, 'symbol'), [depositTokens]);
   const [selectedTokenSymbol, setSelectedTokenSymbol] = useState(depositTokens[0].symbol);
@@ -266,7 +265,10 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
       <Grid container>
         <Grid item xs={12}>
           <div className={classes.subHeaderHolder}>
-            <Translate i18nKey="deposit.zap" />
+            <Translate
+              i18nKey="deposit.zapExplainer"
+              values={{ token0: pairToken.lp[0], token1: pairToken.lp[1] }}
+            />
             <TooltipWithIcon i18nKey="deposit.zapTooltip" />
           </div>
         </Grid>

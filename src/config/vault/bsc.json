@@ -42,13 +42,13 @@
       {
         "id": 0,
         "symbol": "POTS",
-        "type": "earned",
+        "display": "earned",
         "alwaysActive": true
       },
       {
         "id": 1,
         "symbol": "WBNB",
-        "type": "superBoost"
+        "display": "superBoost"
       }
     ],
     "supportsCompound": true,
@@ -87,12 +87,12 @@
       {
         "id": 0,
         "symbol": "BIFI",
-        "type": "bonus"
+        "display": "bonus"
       },
       {
         "id": 1,
         "symbol": "POTS",
-        "type": "bonus"
+        "display": "bonus"
       }
     ],
     "compoundIsBonus": true
@@ -130,17 +130,17 @@
       {
         "id": 0,
         "symbol": "CAKE",
-        "type": "bonus"
+        "display": "bonus"
       },
       {
         "id": 1,
         "symbol": "POTS",
-        "type": "bonus"
+        "display": "bonus"
       },
       {
         "id": 2,
         "symbol": "WBNB",
-        "type": "superBoost"
+        "display": "superBoost"
       }
     ],
     "compoundIsBonus": true
@@ -179,7 +179,7 @@
       {
         "id": 0,
         "symbol": "POTS-BUSD LP",
-        "type": "bonus"
+        "display": "bonus"
       }
     ],
     "compoundIsBonus": true
@@ -192,10 +192,10 @@
     "tokenAddress": "0xaa3FCBA2cf7c5f8c8f785A7180F5063144fE53c6",
     "tokenDecimals": 18,
     "rewardToken": "moonTicketPOTS-BNB",
-    "rewardAddress": "0xB0177Aa9d7BDcBc4841993C3153c987A74462198",
-    "contractAddress": "0xDEb80263181735c907b6b5e9cA4bAcBB2d34FC07",
-    "prizePoolAddress": "0x5eB0fFc97e728DE8A605a14bb1c497AA4501B439",
-    "prizeStrategyAddress": "0x252eCEe8F7C40f2A3Ee8C1aB3Cc23F7EB136DC41",
+    "rewardAddress": "0x2f4a26A1B540255B5AA2c2e4A2d142ae2765b186",
+    "contractAddress": "0xA9638f46b23FcfEEc9E000344D9b6ea7160b23Eb",
+    "prizePoolAddress": "0x1b0fFBC3EFb9eE673b6748b7FF90261A3cEc188b",
+    "prizeStrategyAddress": "0x00E47dA7bf0d18cdE025037380A5Fd0FC3FA1736",
     "pricePerShare": 1,
     "oracleId": "banana-pots-bnb",
     "apyId": "banana-pots-bnb",
@@ -218,7 +218,7 @@
       {
         "id": 0,
         "symbol": "POTS-BNB LP",
-        "type": "bonus"
+        "display": "bonus"
       }
     ],
     "compoundIsBonus": true
@@ -267,7 +267,7 @@
       {
         "id": 0,
         "symbol": "POTS",
-        "type": "bonus"
+        "display": "bonus"
       }
     ],
     "supportsCompound": true,
@@ -314,17 +314,17 @@
       {
         "id": 0,
         "symbol": "DODO",
-        "type": "bonus"
+        "display": "bonus"
       },
       {
         "id": 1,
         "symbol": "WBNB",
-        "type": "superBoost"
+        "display": "superBoost"
       },
       {
         "id": 2,
         "symbol": "POTS",
-        "type": "bonus"
+        "display": "bonus"
       }
     ],
     "compoundIsBonus": true,
@@ -369,12 +369,12 @@
       {
         "id": 0,
         "symbol": "BANANA",
-        "type": "bonus"
+        "display": "bonus"
       },
       {
         "id": 1,
         "symbol": "POTS",
-        "type": "bonus"
+        "display": "bonus"
       }
     ],
     "supportsCompound": true,

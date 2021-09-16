@@ -86,7 +86,7 @@ const StatEarned = memo(function ({ bonus }) {
   const { t } = useTranslation();
 
   return (
-    <Stat label={t(bonusStatLabels[bonus.type], { token: bonus.symbol })}>
+    <Stat label={t(bonusStatLabels[bonus.display], { token: bonus.symbol })}>
       {formatDecimals(bonus.earned, 8)}
     </Stat>
   );

@@ -156,7 +156,7 @@ const PotBonus = function ({ item, buttonVariant = 'purple' }) {
               >
                 <Grid item xs={6}>
                   <Typography className={classes.myDetailsText} align={'left'}>
-                    {t(bonusStatLabels[bonus.type])}
+                    {t(bonusStatLabels[bonus.display])}
                   </Typography>
                 </Grid>
                 <Grid item xs={6}>

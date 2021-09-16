@@ -102,7 +102,16 @@
     "type": "lp",
     "oracleId": "banana-pots-bnb",
     "decimals": 18,
-    "lp": ["POTS", "BNB"]
+    "zap": "0x8d86b089696893bbc80ba598B54f8874F0dC4310",
+    "lp": ["POTS", "WBNB"]
+  },
+  {
+    "symbol": "moonTicketApePOTS-BNB",
+    "address": "0x87f697905732c6FAa5Def3bfE23AaDA5eAC33Ee8",
+    "type": "ticket",
+    "oracleId": "banana-pots-bnb",
+    "decimals": 18,
+    "ticketFor": "POTS-BNB LP"
   },
   {
     "symbol": "POTS-BUSD LP",
@@ -112,5 +121,13 @@
     "decimals": 18,
     "zap": "0x18eBd035834941342E399c53f82988Fa6EDbeA05",
     "lp": ["POTS", "BUSD"]
+  },
+  {
+    "symbol": "moonTicketCakeV2POTS-BUSD",
+    "address": "0xB0177Aa9d7BDcBc4841993C3153c987A74462198",
+    "type": "ticket",
+    "oracleId": "cakev2-pots-busd",
+    "decimals": 18,
+    "ticketFor": "POTS-BUSD LP"
   }
 ]

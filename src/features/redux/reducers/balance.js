@@ -19,6 +19,7 @@ const initialTokens = (() => {
     const networkPools = potsByNetwork[net];
     const nativeCurrency = config[net].nativeCurrency;
     const nativeTokenSymbol = nativeCurrency.symbol;
+    const nativeWrappedTokenSymbol = nativeCurrency.wrappedSymbol;
     const zapAllowances = Object.fromEntries(
       tokensByNetwork[net]
         .filter(token => token.type === 'lp' && token.zap)
@@ -44,9 +45,8 @@ const initialTokens = (() => {
 
         if (pairToken.zap) {
           for (const symbol of pairToken.lp) {
-            const isNative = symbol === nativeTokenSymbol;
-            const wrappedSymbol = isNative ? nativeCurrency.wrappedSymbol : symbol;
-            const token = tokensByNetworkSymbol[pot.network][wrappedSymbol];
+            const isNative = symbol === nativeWrappedTokenSymbol;
+            const token = tokensByNetworkSymbol[pot.network][symbol];
 
             tokens[token.symbol] = {
               balance: 0,

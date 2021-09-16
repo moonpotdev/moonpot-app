@@ -58,9 +58,8 @@ const ActiveLayout = function ({ item }) {
       {/*Withdraw*/}
       <CardAccordionItem titleKey="pot.withdraw">
         {item.vaultType === 'lp' ? (
-          <div>TODO</div>
+          <LPPotWithdraw id={item.id} onLearnMore={null} variant="purple" />
         ) : (
-          // <LPPotWithdraw id={item.id} onLearnMore={null} variant="purple" />
           <PotWithdraw id={item.id} onLearnMore={null} variant="purple" />
         )}
       </CardAccordionItem>

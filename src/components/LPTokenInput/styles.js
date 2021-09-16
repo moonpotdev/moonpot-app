@@ -54,9 +54,9 @@ const styles = theme => ({
     height: '100%',
     width: '100%',
     display: 'flex',
-    padding: `${12 - 2 * 2}px`,
+    padding: '0',
     '& .MuiSelect-root': {
-      padding: '0',
+      padding: `${12 - 2 * 2}px`,
     },
     '& .MuiSelect-icon': {
       color: '#FFFFFF',

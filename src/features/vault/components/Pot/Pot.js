@@ -83,13 +83,12 @@ const WithdrawAccordionItem = memo(function ({ pot, onFairplayLearnMore }) {
   return hasDeposit ? (
     <CardAccordionItem titleKey="pot.withdraw">
       {pot.vaultType === 'lp' ? (
-        <div>TODO</div>
+        <LPPotWithdraw
+          id={pot.id}
+          onLearnMore={onFairplayLearnMore}
+          variant={handleVariant(pot.vaultType)}
+        />
       ) : (
-        // <LPPotWithdraw
-        //   id={pot.id}
-        //   onLearnMore={onFairplayLearnMore}
-        //   variant={handleVariant(pot.vaultType)}
-        // />
         <PotWithdraw
           id={pot.id}
           onLearnMore={onFairplayLearnMore}
