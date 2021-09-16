@@ -4,6 +4,8 @@ import { PotDeposit } from '../../../../../components/PotDeposit';
 import { PotWithdraw } from '../../../../../components/PotWithdraw';
 import { CardAccordionItem } from '../../../../../components/Cards';
 import PotBonus from './PotBonus';
+import { LPPotWithdraw } from '../../../../../components/LPPotWithdraw/LPPotWithdraw';
+import { LPPotDeposit } from '../../../../../components/LPPotDeposit/LPPotDeposit';
 import { useSelector } from 'react-redux';
 
 const ActiveLayout = function ({ item }) {
@@ -46,12 +48,20 @@ const ActiveLayout = function ({ item }) {
       ) : null}
       {/*Deposit*/}
       <CardAccordionItem titleKey="pot.depositMore">
-        <PotDeposit id={item.id} onLearnMore={null} variant="purple" />
+        {item.vaultType === 'lp' ? (
+          <LPPotDeposit id={item.id} onLearnMore={null} variant="purple" />
+        ) : (
+          <PotDeposit id={item.id} onLearnMore={null} variant="purple" />
+        )}
         <div style={{ height: '12px' }} />
       </CardAccordionItem>
       {/*Withdraw*/}
       <CardAccordionItem titleKey="pot.withdraw">
-        <PotWithdraw id={item.id} onLearnMore={null} variant="purple" />
+        {item.vaultType === 'lp' ? (
+          <LPPotWithdraw id={item.id} onLearnMore={null} variant="purple" />
+        ) : (
+          <PotWithdraw id={item.id} onLearnMore={null} variant="purple" />
+        )}
       </CardAccordionItem>
     </>
   );

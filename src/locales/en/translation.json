@@ -6,8 +6,9 @@
     "myActivePots": "Active Pots",
     "myPastPots": "Retired Pots",
     "allPots": "All Pots",
-    "mainPots": "Main Pots",
-    "communityPots": "Community Pots",
+    "mainPots": "Main",
+    "communityPots": "Community",
+    "lpPots": "LP",
     "play": "Play",
     "learnMore": "Learn More",
     "moonpots": "Moonpots",
@@ -119,7 +120,7 @@
         "moonpotStrategyAddress": "{{name}} Pot Strategy Address"
       },
       "earnings": {
-        "title": "Earnings Breakdown",
+        "title": "Strategy Breakdown",
         "tokenInterest": "Your {{token}} Interest",
         "nameMoonpotPrizeDraw": "{{name}} Moonpot Prize Draw",
         "ziggysPotInterest": "Ziggy's (Governance) Pot Interest",
@@ -151,7 +152,11 @@
     "eolNotice": {
       "title": "Pot Retired",
       "message": "You can no longer deposit in to this pot."
-    }
+    },
+    "zap": "Deposit your LP or️ ZAP⚡ in POTS or BNB",
+    "zapTooltip": "ZAP lets you create liquidity pool tokens and make deposits with just one transaction. Half of your tokens will be sold to balance the liquidity pair, after which liquidity will be provided and LP tokens deposited into this Pot.",
+    "inYourWallet": "In your wallet",
+    "provider": "Liquidity provider"
   },
   "withdraw": {
     "all": "Withdraw All",
