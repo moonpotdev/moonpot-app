@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { byDecimals } from './format';
 import { tokensByNetworkAddress } from '../config/tokens';
 
@@ -108,10 +108,27 @@ export function useRewardEarned(potId, rewardToken, rewardTokenDecimals) {
   }, [earned, rewardToken, rewardTokenDecimals, address]);
 }
 
-export function useBonusEarned(pot) {
-  return useRewardEarned(pot.id, pot.bonusToken, pot.bonusTokenDecimals);
-}
+export function useBonusesEarned(id) {
+  const earned = useSelector(state => state.earnedReducer.earned[id], shallowEqual);
+  const bonuses = useSelector(state => state.vaultReducer.pools[id]?.bonuses, shallowEqual);
+  const prices = useSelector(
+    state =>
+      Object.fromEntries(
+        bonuses.map(bonus => [bonus.id, state.pricesReducer.prices[bonus.oracleId] || 0])
+      ),
+    shallowEqual
+  );
 
-export function useBoostEarned(pot) {
-  return useRewardEarned(pot.id, pot.boostToken, pot.boostTokenDecimals);
+  return useMemo(() => {
+    return bonuses.map(bonus => {
+      const bonusEarned = byDecimals(earned[bonus.id] || 0, bonus.decimals);
+      const price = prices[bonus.id] || 0;
+
+      return {
+        ...bonus,
+        earned: bonusEarned.toNumber(),
+        value: bonusEarned.multipliedBy(price).toNumber(),
+      };
+    });
+  }, [earned, bonuses, prices]);
 }

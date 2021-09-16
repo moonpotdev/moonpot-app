@@ -17,6 +17,7 @@
     "status": "active",
     "infoCardStrategy": "ziggy",
     "sponsorProjectName": "Moonpot",
+    "sponsorToken": "CAKE",
     "sponsors": [
       {
         "sponsorToken": "POTS",
@@ -37,15 +38,19 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "sponsorToken": "CAKE",
-    "bonusRewardId": 0,
-    "bonusToken": "POTS",
-    "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-    "bonusTokenDecimals": 18,
-    "boostRewardId": 1,
-    "boostToken": "WBNB",
-    "boostAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-    "boostTokenDecimals": 18,
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "POTS",
+        "type": "earned",
+        "alwaysActive": true
+      },
+      {
+        "id": 1,
+        "symbol": "WBNB",
+        "type": "superBoost"
+      }
+    ],
     "supportsCompound": true,
     "compoundIsBonus": false
   },
@@ -69,6 +74,7 @@
     "infoCardBeefyVaultAddress": "0xeffFD962696ac768c3C9C84e2D4CC1bC9C54983d",
     "infoCardEarningsBreakdown": true,
     "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
     "sponsors": [
       {
         "sponsorToken": "POTS",
@@ -77,11 +83,18 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "sponsorToken": "POTS",
-    "bonusRewardId": 1,
-    "bonusToken": "POTS",
-    "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-    "bonusTokenDecimals": 18,
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "BIFI",
+        "type": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "type": "bonus"
+      }
+    ],
     "compoundIsBonus": true
   },
   {
@@ -104,6 +117,7 @@
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
     "infoCardEarningsBreakdown": true,
     "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
     "sponsors": [
       {
         "sponsorToken": "POTS",
@@ -112,15 +126,23 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "sponsorToken": "POTS",
-    "bonusRewardId": 1,
-    "bonusToken": "POTS",
-    "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-    "bonusTokenDecimals": 18,
-    "boostRewardId": 2,
-    "boostToken": "WBNB",
-    "boostAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-    "boostTokenDecimals": 18,
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "CAKE",
+        "type": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "type": "bonus"
+      },
+      {
+        "id": 2,
+        "symbol": "WBNB",
+        "type": "superBoost"
+      }
+    ],
     "compoundIsBonus": true
   },
   {
@@ -142,6 +164,7 @@
     "eolDrawNumber": 1,
     "infoCardStrategy": "ziggy",
     "sponsorProjectName": "Moonpot",
+    "sponsorToken": "CAKE",
     "sponsors": [
       {
         "sponsorToken": "POTS",
@@ -162,11 +185,13 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "sponsorToken": "CAKE",
-    "bonusRewardId": 0,
-    "bonusToken": "POTS",
-    "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-    "bonusTokenDecimals": 18,
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "POTS",
+        "type": "bonus"
+      }
+    ],
     "supportsCompound": true,
     "compoundIsBonus": false,
     "migrationNeeded": true,
@@ -198,6 +223,7 @@
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
     "infoCardEarningsBreakdown": true,
     "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
     "sponsors": [
       {
         "sponsorToken": "POTS",
@@ -206,11 +232,23 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "sponsorToken": "POTS",
-    "bonusRewardId": 2,
-    "bonusToken": "POTS",
-    "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-    "bonusTokenDecimals": 18,
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "DODO",
+        "type": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "WBNB",
+        "type": "superBoost"
+      },
+      {
+        "id": 2,
+        "symbol": "POTS",
+        "type": "bonus"
+      }
+    ],
     "compoundIsBonus": true,
     "migrationNeeded": true,
     "migrationContractAddress": "0x3789840c8697Aee0d02159003D7501588De3ceD9",
@@ -240,6 +278,7 @@
     "infoCardBeefyVaultAddress": "0xED4ea41Daf652964789b16e3Ff76eC07d99d2340",
     "infoCardEarningsBreakdown": true,
     "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
     "sponsors": [
       {
         "sponsorToken": "POTS",
@@ -248,15 +287,18 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "sponsorToken": "POTS",
-    "bonusRewardId": 0,
-    "bonusToken": "BANANA",
-    "bonusAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
-    "bonusTokenDecimals": 18,
-    "boostRewardId": 1,
-    "boostToken": "POTS",
-    "boostAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
-    "boostTokenDecimals": 18,
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "BANANA",
+        "type": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "type": "bonus"
+      }
+    ],
     "supportsCompound": true,
     "compoundIsBonus": true
   },
@@ -281,6 +323,7 @@
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
     "infoCardEarningsBreakdown": true,
     "sponsorProjectName": "Beefy.Finance",
+    "sponsorToken": "BIFI",
     "sponsors": [
       {
         "sponsorToken": "BIFI",
@@ -289,7 +332,6 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "sponsorToken": "BIFI",
     "bonusToken": "BIFI",
     "bonusAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
     "bonusTokenDecimals": 18,

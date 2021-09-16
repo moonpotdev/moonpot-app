@@ -57,7 +57,7 @@ const getBalances = async (pools, state, dispatch) => {
     response = [...response, ...resp[0]];
   }
 
-  const tokens = state.balanceReducer.tokens;
+  const tokens = { ...state.balanceReducer.tokens };
 
   for (let index in response) {
     const r = response[index];
