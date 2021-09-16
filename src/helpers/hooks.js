@@ -60,16 +60,20 @@ export function useTokenBalance(token, tokenDecimals) {
   }, [balance, tokenDecimals]);
 }
 
-export function useTokenAllowance(address, token, tokenDecimals) {
+export function useTokenAllowance(spender, tokenSymbol, tokenDecimals) {
   const allowance = useSelector(
-    state => state.balanceReducer.tokens[token]?.allowance[address] || 0
+    state => state.balanceReducer.tokens[tokenSymbol]?.allowance?.[spender] || 0
   );
 
   return useMemo(() => {
-    const bn = new BigNumber(allowance);
+    if (spender && tokenSymbol && tokenDecimals && allowance) {
+      const bn = new BigNumber(allowance);
 
-    return byDecimals(bn, tokenDecimals);
-  }, [allowance, tokenDecimals]);
+      return byDecimals(bn, tokenDecimals);
+    }
+
+    return new BigNumber(0);
+  }, [allowance, spender, tokenSymbol, tokenDecimals]);
 }
 
 export function useTokenEarned(id, token, tokenDecimals) {

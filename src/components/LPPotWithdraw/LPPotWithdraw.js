@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { formatDecimals, formatTimeLeft } from '../../helpers/format';
 import PrizePoolAbi from '../../config/abi/prizepool.json';
 import reduxActions from '../../features/redux/actions';
-import { isEmpty } from '../../helpers/utils';
+import { isEmpty, variantClass } from '../../helpers/utils';
 import Steps from '../../features/vault/components/Steps';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
@@ -250,18 +250,13 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
   const canWithdraw = address && ticketBalance.gt(0);
 
   //Static loaded token icons for testing
-  const LPTokenIcon = require(`../../images/tokens/${pot.token.toLowerCase()}.svg`).default;
+  const LPTokenIcon = null; //require(`../../images/tokens/${pot.token.toLowerCase()}.svg`).default;
 
   //Handle dropdown token selection
   const [selectedWithdrawToken, setSelectedWithdrawToken] = React.useState(pot.token);
   const handleSelect = event => {
     setSelectedWithdrawToken(event.target.value);
   };
-
-  function variantClass(classes, prefix, variant) {
-    const key = prefix + variant[0].toUpperCase() + variant.substr(1);
-    return key in classes ? classes[key] : false;
-  }
 
   const handleWithdraw = () => {
     const steps = [];

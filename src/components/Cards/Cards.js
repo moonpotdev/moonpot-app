@@ -4,13 +4,9 @@ import { Collapse, makeStyles, Typography } from '@material-ui/core';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import styles from './styles';
 import { Translate } from '../Translate';
+import { variantClass } from '../../helpers/utils';
 
 const useStyles = makeStyles(styles);
-
-function variantClass(classes, prefix, variant) {
-  const key = prefix + variant[0].toUpperCase() + variant.substr(1);
-  return key in classes ? classes[key] : false;
-}
 
 export function Cards({ className, children, sameHeight = true, oneUp = false, ...rest }) {
   const classes = useStyles();

@@ -36,14 +36,14 @@ const Moonpots = ({ selected }) => {
   }, [dispatch, address]);
 
   function handleVariant(vaultType) {
-    console.log(vaultType);
-    if (vaultType === 'main') {
-      return 'tealLight';
-    } else if (vaultType === 'community') {
+    if (vaultType === 'community') {
       return 'blueCommunity';
     } else if (vaultType === 'lp') {
       return 'green';
     }
+
+    // default/main
+    return 'tealLight';
   }
 
   return (

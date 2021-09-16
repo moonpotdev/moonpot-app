@@ -1,6 +1,7 @@
 import { MultiCall } from 'eth-multicall';
 import { BALANCE_FETCH_BALANCES_BEGIN, BALANCE_FETCH_BALANCES_DONE } from '../constants';
 import { config } from '../../../config/config';
+import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
 
 const erc20Abi = require('../../../config/abi/erc20.json');
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
@@ -11,13 +12,15 @@ const getBalances = async (pools, state, dispatch) => {
 
   const multicall = [];
   const calls = [];
+  const needsNativeBalance = {};
 
-  for (let key in web3) {
+  for (const key in web3) {
     multicall[key] = new MultiCall(web3[key], config[key].multicallAddress);
     calls[key] = [];
+    needsNativeBalance[key] = false;
   }
 
-  for (let key in pools) {
+  for (const key in pools) {
     const pool = pools[key];
 
     const tokenContract = new web3[pool.network].eth.Contract(erc20Abi, pool.tokenAddress);
@@ -26,6 +29,40 @@ const getBalances = async (pools, state, dispatch) => {
       token: pool.token,
       address: pool.tokenAddress,
     });
+
+    // lp
+    if (pool.vaultType === 'lp') {
+      const nativeTokenSymbol = config[pool.network].nativeCurrency.symbol;
+      const pairToken = tokensByNetworkAddress[pool.network][pool.tokenAddress.toLowerCase()];
+
+      if (pairToken.zap) {
+        for (const symbol of pairToken.lp) {
+          console.log('XXX', symbol, nativeTokenSymbol, pool.network);
+          const isNative = symbol === nativeTokenSymbol;
+          const wrappedSymbol = isNative
+            ? config[pool.network].nativeCurrency.wrappedSymbol
+            : symbol;
+          const token = tokensByNetworkSymbol[pool.network][wrappedSymbol];
+          const tokenContract = new web3[pool.network].eth.Contract(erc20Abi, token.address);
+
+          calls[pool.network].push({
+            amount: tokenContract.methods.balanceOf(address),
+            token: token.symbol,
+            address: token.address,
+          });
+
+          calls[pool.network].push({
+            allowance: tokenContract.methods.allowance(address, pairToken.zap),
+            token: token.symbol,
+            spender: pairToken.zap,
+          });
+
+          if (isNative) {
+            needsNativeBalance[pool.network] = true;
+          }
+        }
+      }
+    }
 
     const gateContract = new web3[pool.network].eth.Contract(gateManagerAbi, pool.contractAddress);
     calls[pool.network].push({
@@ -59,6 +96,17 @@ const getBalances = async (pools, state, dispatch) => {
 
   const tokens = { ...state.balanceReducer.tokens };
 
+  for (const network in needsNativeBalance) {
+    if (needsNativeBalance[network]) {
+      const balance = await web3[network].eth.getBalance(address);
+      const symbol = config[network].nativeCurrency.symbol;
+      tokens[symbol] = {
+        ...tokens[symbol],
+        balance: balance,
+      };
+    }
+  }
+
   for (let index in response) {
     const r = response[index];
     if (r.amount !== undefined) {
@@ -71,8 +119,10 @@ const getBalances = async (pools, state, dispatch) => {
     if (r.allowance !== undefined) {
       tokens[r.token].allowance = {
         ...tokens[r.token].allowance,
-        [r.spender]: parseInt(r.allowance),
+        [r.spender]: r.allowance,
       };
+
+      console.log(tokens[r.token]);
     }
   }
 
@@ -89,7 +139,7 @@ const getBalances = async (pools, state, dispatch) => {
 
 const getBalancesSingle = async (item, state, dispatch) => {
   console.log('redux getBalancesSingle() processing...');
-  return await getBalances([item], state, dispatch);
+  return await getBalances({ [item.id]: item }, state, dispatch);
 };
 
 const getBalancesAll = async (state, dispatch) => {

@@ -83,3 +83,8 @@ export const formatAddressShort = addr => {
 export function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+export function variantClass(classes, prefix, variant, defaultClass = false) {
+  const key = prefix + variant[0].toUpperCase() + variant.substr(1);
+  return key in classes ? classes[key] : defaultClass;
+}

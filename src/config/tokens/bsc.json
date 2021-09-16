@@ -1,80 +1,116 @@
 [
   {
-    "address": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "symbol": "POTS",
+    "address": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "type": "single",
     "oracleId": "POTS",
     "decimals": 18
   },
   {
-    "address": "0xa178972A8FfeFd6661179666134A2ba9B3DbE3B1",
     "symbol": "moonTicketPOTS",
-    "displaySymbol": "POTS",
+    "address": "0xa178972A8FfeFd6661179666134A2ba9B3DbE3B1",
+    "type": "ticket",
     "oracleId": "POTS",
-    "decimals": 18
+    "decimals": 18,
+    "ticketFor": "POTS"
   },
   {
-    "address": "0xeA32bB31A4a5Ab38226c5824FB54D4e271a3253a",
     "symbol": "moonTicketPotsV2",
-    "displaySymbol": "POTS",
+    "address": "0xeA32bB31A4a5Ab38226c5824FB54D4e271a3253a",
+    "type": "ticket",
     "oracleId": "POTS",
-    "decimals": 18
+    "decimals": 18,
+    "ticketFor": "POTS"
   },
   {
-    "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
     "symbol": "CAKE",
+    "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+    "type": "single",
     "oracleId": "Cake",
     "decimals": 18
   },
   {
-    "address": "0x81b554A2C3aD52630Cf1Ca56cad562EC4A551873",
     "symbol": "moonTicketCake",
-    "displaySymbol": "CAKE",
+    "address": "0x81b554A2C3aD52630Cf1Ca56cad562EC4A551873",
+    "type": "ticket",
     "oracleId": "Cake",
-    "decimals": 18
+    "decimals": 18,
+    "ticketFor": "CAKE"
   },
   {
-    "address": "0x9273be9c180b0271cc2c90e5bf99477b573fe904",
     "symbol": "moonTicketCakeV2",
-    "displaySymbol": "CAKE",
+    "address": "0x9273be9c180b0271cc2c90e5bf99477b573fe904",
+    "type": "ticket",
     "oracleId": "Cake",
-    "decimals": 18
+    "decimals": 18,
+    "ticketFor": "CAKE"
   },
   {
-    "address": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
     "symbol": "moonTicketCakeV3",
-    "displaySymbol": "CAKE",
+    "address": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
+    "type": "ticket",
     "oracleId": "Cake",
-    "decimals": 18
+    "decimals": 18,
+    "ticketFor": "CAKE"
   },
   {
-    "address": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
     "symbol": "BIFI",
+    "address": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+    "type": "single",
     "oracleId": "BIFI",
     "decimals": 18
   },
   {
-    "address": "0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2",
     "symbol": "DODO",
+    "address": "0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2",
+    "type": "single",
     "oracleId": "DODO",
     "decimals": 18
   },
   {
-    "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     "symbol": "WBNB",
+    "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "type": "single",
     "oracleId": "WBNB",
     "decimals": 18
   },
   {
-    "address": "0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95",
     "symbol": "BANANA",
+    "address": "0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95",
+    "type": "single",
     "oracleId": "BANANA",
     "decimals": 18
   },
   {
-    "address": "0x87f697905732c6FAa5Def3bfE23AaDA5eAC33Ee8",
     "symbol": "moonTicketBanana",
-    "displaySymbol": "BANANA",
+    "address": "0x87f697905732c6FAa5Def3bfE23AaDA5eAC33Ee8",
+    "type": "ticket",
     "oracleId": "BANANA",
+    "decimals": 18,
+    "ticketFor": "BANANA"
+  },
+  {
+    "symbol": "BUSD",
+    "address": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+    "type": "single",
+    "oracleId": "BUSD",
     "decimals": 18
+  },
+  {
+    "symbol": "POTS-BNB LP",
+    "address": "0xaa3FCBA2cf7c5f8c8f785A7180F5063144fE53c6",
+    "type": "lp",
+    "oracleId": "banana-pots-bnb",
+    "decimals": 18,
+    "lp": ["POTS", "BNB"]
+  },
+  {
+    "symbol": "POTS-BUSD LP",
+    "address": "0xF90BAA331Cfd40F094476E752Bf272892170d399",
+    "type": "lp",
+    "oracleId": "cakev2-pots-busd",
+    "decimals": 18,
+    "zap": "0x18eBd035834941342E399c53f82988Fa6EDbeA05",
+    "lp": ["POTS", "BUSD"]
   }
 ]

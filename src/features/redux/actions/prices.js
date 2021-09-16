@@ -24,6 +24,24 @@ const fetchPrices = reducer => {
       }
     };
 
+    const updateLPPrices = async () => {
+      console.log('redux fetchLPPrices called.');
+      const retry = async () => {
+        await sleep(1000);
+        return await updateLPPrices();
+      };
+
+      try {
+        const request = await axios.get('https://api.beefy.finance/lps?_=' + cache.getTime(), {
+          timeout: 1000,
+        });
+        return request.status === 200 ? request.data : retry();
+      } catch (err) {
+        console.log('error fetchPrices()', err);
+        return retry();
+      }
+    };
+
     const updateApy = async () => {
       console.log('redux fetchApy called.');
       const retry = async () => {
@@ -45,12 +63,13 @@ const fetchPrices = reducer => {
     const fetch = async () => {
       const state = getState();
       const prices = await updatePrices(state.pricesReducer);
+      const lpPrices = await updateLPPrices(state.pricesReducer);
       const apy = await updateApy(state.pricesReducer);
 
       dispatch({
         type: 'FETCH_PRICES',
         payload: {
-          prices: { ...prices, ...state.pricesReducer.prices },
+          prices: { ...state.pricesReducer.prices, ...prices, ...lpPrices },
           apy: apy,
           lastUpdated: new Date().getTime(),
         },

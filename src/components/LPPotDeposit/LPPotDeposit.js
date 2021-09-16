@@ -1,18 +1,21 @@
-import { Link, makeStyles, Grid } from '@material-ui/core';
-import React, { useCallback, useEffect, useState } from 'react';
+import { Grid, Link, makeStyles } from '@material-ui/core';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles';
 import BigNumber from 'bignumber.js';
-import { bigNumberTruncate, convertAmountToRawNumber } from '../../helpers/format';
+import { bigNumberTruncate, convertAmountToRawNumber, formatDecimals } from '../../helpers/format';
 import reduxActions from '../../features/redux/actions';
 import Steps from '../../features/vault/components/Steps';
-import { isEmpty } from '../../helpers/utils';
+import { indexBy, isEmpty } from '../../helpers/utils';
 import { LPTokenInput } from '../LPTokenInput/LPTokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
 import { Translate } from '../Translate';
+import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
+import { config } from '../../config/config';
+import { createZapInEstimate } from '../../features/redux/actions/zap';
 
 const useStyles = makeStyles(styles);
 
@@ -65,53 +68,183 @@ const DepositSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
   return <Steps item={pot} steps={steps} handleClose={handleClose} />;
 };
 
+function useDepositTokens(network, lpAddress) {
+  return useMemo(() => {
+    const lpToken = tokensByNetworkAddress[network][lpAddress.toLowerCase()];
+    const supportsZap = 'zap' in lpToken;
+    const tokens = [{ ...lpToken, isNative: false }];
+
+    if (supportsZap) {
+      const nativeWrappedAddress = config[network].nativeCurrency.wrappedAddress.toLowerCase();
+      const nativeSymbol = config[network].nativeCurrency.symbol;
+      const token0Symbol = lpToken.lp[0];
+      const token1Symbol = lpToken.lp[1];
+      const supportsNative = token0Symbol === nativeSymbol || token1Symbol === nativeSymbol;
+      const lpToken0 =
+        token0Symbol === nativeSymbol
+          ? tokensByNetworkAddress[network][nativeWrappedAddress]
+          : tokensByNetworkSymbol[network][token0Symbol];
+      const lpToken1 =
+        token1Symbol === nativeSymbol
+          ? tokensByNetworkAddress[network][nativeWrappedAddress]
+          : tokensByNetworkSymbol[network][token1Symbol];
+
+      if (supportsNative && token0Symbol === nativeSymbol) {
+        tokens.push({
+          ...lpToken0,
+          address: false,
+          symbol: config[network].nativeCurrency.symbol,
+          decimals: config[network].nativeCurrency.decimals,
+          isNative: true,
+        });
+        tokens.push({ ...lpToken0, isNative: false });
+      } else {
+        tokens.push({ ...lpToken0, isNative: false });
+      }
+
+      if (supportsNative && token1Symbol === nativeSymbol) {
+        tokens.push({
+          ...lpToken1,
+          address: false,
+          symbol: config[network].nativeCurrency.symbol,
+          decimals: config[network].nativeCurrency.decimals,
+          isNative: true,
+        });
+        tokens.push({ ...lpToken1, isNative: false });
+      } else {
+        tokens.push({ ...lpToken1, isNative: false });
+      }
+    }
+
+    return tokens;
+  }, [lpAddress, network]);
+}
+
 export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
   const address = useSelector(state => state.walletReducer.address);
-  const balance = useTokenBalance(pot.token, pot.tokenDecimals);
-  const allowance = useTokenAllowance(pot.contractAddress, pot.token, pot.tokenDecimals);
+  const network = pot.network;
+  const lpAddress = pot.tokenAddress;
+  const potAddress = pot.contractAddress;
+  const potId = pot.id;
+  const depositTokens = useDepositTokens(network, lpAddress);
+  const depositTokensBySymbol = useMemo(() => indexBy(depositTokens, 'symbol'), [depositTokens]);
+  const [selectedTokenSymbol, setSelectedTokenSymbol] = useState(depositTokens[0].symbol);
+  const selectedToken = useMemo(
+    () => depositTokensBySymbol[selectedTokenSymbol],
+    [depositTokensBySymbol, selectedTokenSymbol]
+  );
+  const balance = useTokenBalance(
+    selectedTokenSymbol,
+    depositTokensBySymbol[selectedTokenSymbol].decimals
+  );
+  const potAllowance = useTokenAllowance(
+    potAddress,
+    selectedTokenSymbol,
+    depositTokensBySymbol[selectedTokenSymbol].decimals
+  );
   const [inputValue, setInputValue] = useState('');
   const [depositAmount, setDepositAmount] = useState(() => new BigNumber(0));
   const [isDepositAll, setIsDepositAll] = useState(false);
-  const [canDeposit, setCanDeposit] = useState(false);
-  const [steps, setSteps] = React.useState(() => ({
+  const [steps, setSteps] = useState(() => ({
     modal: false,
     currentStep: -1,
     items: [],
     finished: false,
   }));
+  const selectedNeedsZap = selectedToken.address.toLowerCase() !== pot.tokenAddress.toLowerCase();
+  const [zapRequestId, setZapRequestId] = useState(null);
+  const zapEstimate = useSelector(state =>
+    zapRequestId ? state.zapReducer[zapRequestId] ?? null : null
+  );
+  const canDeposit = useMemo(() => {
+    const hasBalance = address && balance.gt(0) && depositAmount.gt(0);
+
+    if (hasBalance && selectedNeedsZap) {
+      return (
+        zapEstimate &&
+        zapEstimate.pending === false &&
+        zapEstimate.swapInAmount.gt(0) &&
+        zapEstimate.swapOutAmount.gt(0)
+      );
+    }
+
+    return hasBalance;
+  }, [address, balance, depositAmount, selectedNeedsZap, zapEstimate]);
+  const zapAllowance = useTokenAllowance(
+    canDeposit ? zapEstimate.zapAddress : null,
+    canDeposit ? zapEstimate.swapInToken.symbol : null,
+    canDeposit ? zapEstimate.swapInToken.decimals : null
+  );
+
+  useEffect(() => {
+    if (selectedNeedsZap && depositAmount.gt(0)) {
+      // dispatch zap estimate
+      const [requestId, action] = createZapInEstimate(potId, selectedToken.address, depositAmount);
+      dispatch(action);
+      setZapRequestId(requestId);
+    } else {
+      // clear zap estimate
+      setZapRequestId(null);
+    }
+  }, [dispatch, selectedToken, selectedNeedsZap, depositAmount, potId, setZapRequestId]);
 
   const handleDeposit = () => {
     const steps = [];
-    if (address && depositAmount.gt(0)) {
-      if (allowance.lt(depositAmount)) {
+    if (canDeposit) {
+      if (selectedNeedsZap) {
+        // approve selectedToken on zap contract
+        // call beamIn or beamInETH (native)
+
+        const { zapAddress, isNative, swapInToken } = zapEstimate;
+
+        if (!isNative && zapAllowance.lt(depositAmount)) {
+          steps.push({
+            step: 'approve',
+            message: 'Approval transaction happens once per pot.',
+            action: () =>
+              dispatch(reduxActions.wallet.approval(pot.network, swapInToken.address, zapAddress)),
+            pending: false,
+          });
+        }
+
         steps.push({
-          step: 'approve',
-          message: 'Approval transaction happens once per pot.',
+          step: 'deposit',
+          message: 'Confirm deposit transaction on wallet to complete.',
+          action: () =>
+            dispatch(reduxActions.wallet.zapIn(pot.contractAddress, zapEstimate, isDepositAll)),
+          pending: false,
+        });
+      } else {
+        if (potAllowance.lt(depositAmount)) {
+          steps.push({
+            step: 'approve',
+            message: 'Approval transaction happens once per pot.',
+            action: () =>
+              dispatch(
+                reduxActions.wallet.approval(pot.network, pot.tokenAddress, pot.contractAddress)
+              ),
+            pending: false,
+          });
+        }
+
+        steps.push({
+          step: 'deposit',
+          message: 'Confirm deposit transaction on wallet to complete.',
           action: () =>
             dispatch(
-              reduxActions.wallet.approval(pot.network, pot.tokenAddress, pot.contractAddress)
+              reduxActions.wallet.deposit(
+                pot.network,
+                pot.contractAddress,
+                convertAmountToRawNumber(depositAmount, pot.tokenDecimals),
+                isDepositAll
+              )
             ),
           pending: false,
         });
       }
-
-      steps.push({
-        step: 'deposit',
-        message: 'Confirm deposit transaction on wallet to complete.',
-        action: () =>
-          dispatch(
-            reduxActions.wallet.deposit(
-              pot.network,
-              pot.contractAddress,
-              convertAmountToRawNumber(depositAmount, pot.tokenDecimals),
-              isDepositAll
-            )
-          ),
-        pending: false,
-      });
 
       setSteps({ modal: true, currentStep: 0, items: steps, finished: false });
     }
@@ -126,8 +259,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   useEffect(() => {
     const value = bigNumberTruncate(inputValue, 8);
     setDepositAmount(value);
-    setCanDeposit(address && balance.gt(0) && value.gt(0));
-  }, [inputValue, address, balance]);
+  }, [inputValue]);
 
   return (
     <>
@@ -149,20 +281,46 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
           </div>
         </Grid>
         <Grid item xs={6}>
-          <div className={classes.value}>{balance.toFixed(2)}</div>
+          <div className={classes.value}>
+            {formatDecimals(balance)} {selectedTokenSymbol}
+          </div>
         </Grid>
         <Grid item xs={6} style={{ textAlign: 'right' }}>
           <div className={classes.value}>{pot.provider}</div>
         </Grid>
       </Grid>
       <div className={classes.inputHolder}>
+        {selectedNeedsZap ? 'needs zap' : 'not zap'}
+        {selectedNeedsZap && zapEstimate && zapEstimate.pending === false ? (
+          <>
+            <div>
+              deposit:
+              <div>
+                {zapEstimate.depositAmount.toString()} {zapEstimate.swapInToken.symbol}
+              </div>
+            </div>
+            <div>
+              swap in:
+              <div>
+                {zapEstimate.swapInAmount.toString()} {zapEstimate.swapInToken.symbol}
+              </div>
+            </div>
+            <div>
+              swap out:
+              <div>
+                {zapEstimate.swapOutAmount.toString()} {zapEstimate.swapOutToken.symbol}
+              </div>
+            </div>
+          </>
+        ) : null}
         <LPTokenInput
-          pot={pot}
-          token={pot.token}
+          tokens={depositTokens}
+          selected={selectedTokenSymbol}
           value={inputValue}
           max={balance}
           setValue={setInputValue}
           setIsMax={setIsDepositAll}
+          setSelected={setSelectedTokenSymbol}
           variant={variant}
         />
       </div>
@@ -182,7 +340,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
                   ? 'deposit.amountToken'
                   : 'deposit.token'
               }
-              values={{ token: pot.token, amount: depositAmount.toString() }}
+              values={{ token: selectedTokenSymbol, amount: depositAmount.toString() }}
             />
           </PrimaryButton>
         ) : (

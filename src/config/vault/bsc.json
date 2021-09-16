@@ -146,27 +146,27 @@
     "compoundIsBonus": true
   },
   {
-    "id": "pots-bnb",
-    "name": "POTS-BNB LP",
-    "token": "POTS-BNB",
-    "provider": "ApeSwap",
-    "tokenAddress": "0xaa3fcba2cf7c5f8c8f785a7180f5063144fe53c6",
+    "id": "pots-busd",
+    "name": "POTS-BUSD LP",
+    "token": "POTS-BUSD LP",
+    "provider": "PancakeSwap",
+    "tokenAddress": "0xF90BAA331Cfd40F094476E752Bf272892170d399",
     "tokenDecimals": 18,
-    "LPcomponents": [{ "token": "POTS" }, { "token": "BNB" }, { "token": "WBNB" }],
-    "rewardToken": "moonTicketPOTS-BNB",
-    "rewardAddress": "0xD763A0377bb40F7b79839ea50aAC75fF67CB9eae",
-    "contractAddress": "0xb4651e8A3E70d0BE1B1D1241C3679F1572c23e48",
-    "prizePoolAddress": "0x9B2f5221EA000fD1A46f347f27Eb10Ca6e79D3a8",
-    "prizeStrategyAddress": "0xa7aa57f301b8C65c455326fAD0eACB2Fe5791b57",
+    "rewardToken": "moonTicketCakeV2POTS-BUSD",
+    "rewardAddress": "0xB0177Aa9d7BDcBc4841993C3153c987A74462198",
+    "contractAddress": "0xDEb80263181735c907b6b5e9cA4bAcBB2d34FC07",
+    "prizePoolAddress": "0x5eB0fFc97e728DE8A605a14bb1c497AA4501B439",
+    "prizeStrategyAddress": "0x252eCEe8F7C40f2A3Ee8C1aB3Cc23F7EB136DC41",
     "pricePerShare": 1,
-    "oracleId": "BIFI",
-    "apyId": "bifi-maxi-v2",
+    "oracleId": "cakev2-pots-busd",
+    "apyId": "cakev2-pots-busd",
     "vaultType": "lp",
     "status": "active",
     "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0xeffFD962696ac768c3C9C84e2D4CC1bC9C54983d",
+    "infoCardBeefyVaultAddress": "0x3106d9B3d5e04ff5D575212140FAb1Cf17C8933F",
     "infoCardEarningsBreakdown": true,
     "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
     "sponsors": [
       {
         "sponsorToken": "POTS",
@@ -175,11 +175,52 @@
         "sponsorTokenDecimals": 18
       }
     ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "POTS-BUSD LP",
+        "type": "bonus"
+      }
+    ],
+    "compoundIsBonus": true
+  },
+  {
+    "id": "pots-bnb",
+    "name": "POTS-BNB LP",
+    "token": "POTS-BNB LP",
+    "provider": "ApeSwap",
+    "tokenAddress": "0xaa3FCBA2cf7c5f8c8f785A7180F5063144fE53c6",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketPOTS-BNB",
+    "rewardAddress": "0xB0177Aa9d7BDcBc4841993C3153c987A74462198",
+    "contractAddress": "0xDEb80263181735c907b6b5e9cA4bAcBB2d34FC07",
+    "prizePoolAddress": "0x5eB0fFc97e728DE8A605a14bb1c497AA4501B439",
+    "prizeStrategyAddress": "0x252eCEe8F7C40f2A3Ee8C1aB3Cc23F7EB136DC41",
+    "pricePerShare": 1,
+    "oracleId": "banana-pots-bnb",
+    "apyId": "banana-pots-bnb",
+    "vaultType": "lp",
+    "status": "active",
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xbFa24f7C2376c28407504Fb8512797dD8D316aBf",
+    "infoCardEarningsBreakdown": true,
+    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
-    "bonusRewardId": 1,
-    "bonusToken": "POTS",
-    "bonusAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-    "bonusTokenDecimals": 18,
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "POTS-BNB LP",
+        "type": "bonus"
+      }
+    ],
     "compoundIsBonus": true
   },
   {

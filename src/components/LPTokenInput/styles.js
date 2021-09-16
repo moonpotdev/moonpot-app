@@ -1,6 +1,19 @@
-import { height } from '@material-ui/system';
-
 const styles = theme => ({
+  fieldsHolder: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  inputField: {
+    flexShrink: '1',
+    flexGrow: '1',
+  },
+  selectField: {
+    flexShrink: '0',
+    flexGrow: '0',
+    flexBasis: '78px',
+    width: '78px',
+    paddingRight: '8px',
+  },
   input: {
     height: `48px`,
     borderRadius: '8px',
@@ -17,12 +30,6 @@ const styles = theme => ({
       letterSpacing: '0.2px',
       color: '#AAC3D9',
     },
-  },
-  token: {
-    marginLeft: '12px',
-    marginRight: '12px',
-    width: '24px',
-    height: '24px',
   },
   max: {
     marginRight: '8px',
@@ -42,67 +49,82 @@ const styles = theme => ({
     minWidth: 'auto',
     whiteSpace: 'nowrap',
   },
-  select: {
+  tokenSelect: {
     borderRadius: '8px',
     height: '100%',
-    paddingTop: '4px',
-    '&:before': {
-      display: 'none',
-    },
-    '&:after': {
-      display: 'none',
-    },
-  },
-  menuStyle: {
-    color: '#FFFFFF',
-    borderRadius: '8px',
-    marginTop: '4px',
-    marginLeft: '-2px',
-    '& ul': {
+    width: '100%',
+    display: 'flex',
+    padding: `${12 - 2 * 2}px`,
+    '& .MuiSelect-root': {
       padding: '0',
     },
-    '& li': {
-      paddingLeft: '0',
+    '& .MuiSelect-icon': {
+      color: '#FFFFFF',
+      padding: '0',
+      width: '14px',
+      right: `${12 - 2}px`,
+    },
+    '& $tokenItemSymbol': {
+      display: 'none',
     },
   },
-  selectContainer: {
-    width: '100%',
-    height: '48px',
+  tokenItemSymbol: {
+    /* needed for tokenSelect rule to work */
   },
-  variantTeal: {
+  tokenDropdown: {
+    color: '#FFFFFF',
+    borderRadius: '8px',
+    padding: '6px',
+    '& .MuiList-root': {
+      background: 'transparent',
+      padding: '0',
+    },
+    '& .MuiMenuItem-root': {
+      background: 'transparent',
+      padding: '8px',
+      '& $tokenItemSymbol': {
+        marginLeft: '8px',
+      },
+      '&:hover': {
+        backgroundColor: 'rgba(0, 0, 0, 0.04)',
+      },
+    },
+    '& .Mui-selected': {
+      background: 'transparent',
+      opacity: 0.4,
+    },
+  },
+  inputVariantTeal: {
     background: '#3F688D',
     border: '2px solid #6B96BD',
   },
-  variantPurple: {
+  inputVariantPurple: {
     background: '#8375A9',
     border: '2px solid #B6ADCC',
-    '& ul': {
-      background: '#8375A9',
-    },
-    '& li': {
-      background: '#8375A9',
-    },
   },
-  variantPurpleAlt: {
+  inputVariantPurpleAlt: {
     background: '#4F5887',
     border: '2px solid #586397',
   },
-  variantGreen: {
+  inputVariantGreen: {
     background: '#275668',
     border: '2px solid #2E657A',
-    '& ul': {
-      background: '#275668',
-    },
-    '& li': {
-      background: '#275668',
-    },
   },
-  inputField: {
-    width: `calc(100% - 75px)`,
+  tokenDropdownVariantTeal: {
+    background: '#3F688D',
+    border: '2px solid #6B96BD',
   },
-  selectField: {
-    width: '73px',
-    paddingRight: '8px',
+  tokenDropdownVariantPurple: {
+    background: '#8375A9',
+    border: '2px solid #B6ADCC',
+  },
+  tokenDropdownVariantPurpleAlt: {
+    background: '#4F5887',
+    border: '2px solid #586397',
+  },
+  tokenDropdownVariantGreen: {
+    background: '#275668',
+    border: '2px solid #2E657A',
   },
 });
 

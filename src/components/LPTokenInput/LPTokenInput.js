@@ -1,18 +1,16 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Grid, InputBase, makeStyles, withStyles } from '@material-ui/core';
+import { InputBase, makeStyles } from '@material-ui/core';
 import { bigNumberTruncate } from '../../helpers/format';
 import styles from './styles';
-import { BaseButton } from '../Buttons/BaseButton';
-import { styledBy } from '../../helpers/utils';
+import { variantClass } from '../../helpers/utils';
 import clsx from 'clsx';
 import BigNumber from 'bignumber.js';
-import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import { useTokenBalance } from '../../helpers/hooks';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import { MaxButton } from '../TokenInput/MaxButton';
+import { TokenIcon } from '../TokenIcon';
 
 const MAX_DECIMALS = 8;
 const useStyles = makeStyles(styles);
@@ -20,48 +18,19 @@ const useStyles = makeStyles(styles);
 // For toString
 BigNumber.config({ EXPONENTIAL_AT: 21 });
 
-const MaxButton = withStyles({
-  root: {
-    color: 'rgba(255, 255, 255, 0.95)',
-    backgroundColor: styledBy('variant', {
-      teal: '#6B96BD',
-      purple: '#B6ADCC',
-      purpleAlt: '#656FA5',
-    }),
-    '&:hover': {
-      color: 'rgba(255, 255, 255, 0.95)',
-      backgroundColor: styledBy('variant', {
-        teal: '#628cad',
-        purple: '#B6ADCC',
-        purpleAlt: '#656FA5',
-      }),
-    },
-    '&:focus': {
-      color: 'rgba(255, 255, 255, 0.95)',
-      backgroundColor: styledBy('variant', {
-        teal: '#628cad',
-        purple: '#B6ADCC',
-        purpleAlt: '#656FA5',
-      }),
-    },
-    '& .MuiTouchRipple-child': {
-      backgroundColor: styledBy('variant', {
-        teal: '#50758f',
-        purple: '#B6ADCC',
-        purpleAlt: '#656FA5',
-      }),
-    },
-  },
-})(BaseButton);
+function DropdownIcon(props) {
+  return <KeyboardArrowDownIcon {...props} viewBox="6 8.59000015258789 12 7.409999847412109" />;
+}
 
 export const LPTokenInput = function ({
   variant = 'green',
-  pot,
-  token,
+  selected,
+  tokens,
   max,
   value,
   setValue,
   setIsMax,
+  setSelected,
 }) {
   const { t } = useTranslation();
   const classes = useStyles();
@@ -104,79 +73,47 @@ export const LPTokenInput = function ({
     setValue(bn.gt(0) ? bn.toString() : '');
   }, [value, setValue]);
 
-  function variantClass(classes, prefix, variant) {
-    const key = prefix + variant[0].toUpperCase() + variant.substr(1);
-    return key in classes ? classes[key] : false;
-  }
-
-  //Handle dropdown token selection
-  const [selectedDepositToken, setSelectedDepositToken] = React.useState(pot.token);
-  const handleSelect = event => {
-    setSelectedDepositToken(event.target.value);
-  };
-
-  const selectedTokenBalance = useTokenBalance('WBNB', 18);
-
-  //Load LP Icon
-  const LPTokenIcon = require(`../../images/tokens/${token.toLowerCase()}.svg`).default;
-
-  React.useEffect(() => {
-    console.log(selectedTokenBalance.toFixed(2));
-    //console.log(max);
-  });
+  const handleSelect = useCallback(
+    event => {
+      setSelected(event.target.value);
+      setValue('');
+      setIsMax(false);
+    },
+    [setSelected, setValue, setIsMax]
+  );
 
   return (
-    <Grid container>
-      <Grid item className={classes.selectField}>
-        <FormControl className={classes.selectContainer}>
-          <Select
-            className={clsx(classes.select, variantClass(classes, 'variant', variant))}
-            IconComponent={KeyboardArrowDownIcon}
-            value={selectedDepositToken}
-            onChange={handleSelect}
-            MenuProps={{
-              classes: {
-                paper: clsx(classes.menuStyle, variantClass(classes, 'variant', variant)),
-              },
-              anchorOrigin: {
-                vertical: 'bottom',
-                horizontal: 'left',
-              },
-              getContentAnchorEl: null,
-            }}
-          >
-            {/*Handle Base LP*/}
-            <MenuItem value={pot.token}>
-              <img
-                src={LPTokenIcon}
-                alt=""
-                aria-hidden={true}
-                className={classes.token}
-                width={24}
-                height={24}
-              />
-              POTS-BNB LP
+    <div className={classes.fieldsHolder}>
+      <div className={classes.selectField}>
+        <Select
+          className={clsx(classes.tokenSelect, variantClass(classes, 'inputVariant', variant))}
+          disableUnderline
+          IconComponent={DropdownIcon}
+          value={selected}
+          onChange={handleSelect}
+          MenuProps={{
+            classes: {
+              paper: clsx(
+                classes.tokenDropdown,
+                variantClass(classes, 'tokenDropdownVariant', variant)
+              ),
+            },
+            anchorOrigin: { horizontal: 'left', vertical: 'bottom' },
+            transformOrigin: { horizontal: 'left', vertical: 'top' },
+            getContentAnchorEl: null,
+          }}
+        >
+          {tokens.map(token => (
+            <MenuItem key={token.symbol} value={token.symbol} className={classes.tokenItem}>
+              <TokenIcon token={token} />
+              <span className={classes.tokenItemSymbol}>{token.symbol}</span>
             </MenuItem>
-            {/*Handle LP Components*/}
-            {pot.LPcomponents.map(item => (
-              <MenuItem value={item.token} key={item.token}>
-                <img
-                  src={require(`../../images/tokens/${item.token.toLowerCase()}.svg`).default}
-                  alt=""
-                  aria-hidden={true}
-                  className={classes.token}
-                  width={24}
-                  height={24}
-                />
-                {item.token}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid className={classes.inputField}>
+          ))}
+        </Select>
+      </div>
+      <div className={classes.inputField}>
         <InputBase
-          className={clsx(classes.input, variantClass(classes, 'variant', variant))}
+          className={clsx(classes.input, variantClass(classes, 'inputVariant', variant))}
           placeholder={'0.0'}
           value={value}
           onChange={handleChange}
@@ -193,7 +130,7 @@ export const LPTokenInput = function ({
             </MaxButton>
           }
         />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };

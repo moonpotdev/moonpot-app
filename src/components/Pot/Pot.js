@@ -15,11 +15,18 @@ import styles from './styles';
 
 const useStyles = makeStyles(styles);
 
+function slug(str) {
+  return str
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '-')
+    .replace(/-{2,}/g, '-');
+}
+
 export const Logo = memo(function ({ name, baseToken, sponsorToken }) {
   const src = require('../../images/vault/' +
-    baseToken.toLowerCase() +
+    slug(baseToken) +
     '/sponsored/' +
-    sponsorToken.toLowerCase() +
+    slug(sponsorToken) +
     '.svg').default;
   return <img src={src} alt="" width="90" height="90" aria-hidden={true} />;
 });

@@ -107,7 +107,7 @@ const getPools = async (items, state, dispatch) => {
     const pool = pools[item.id];
 
     // === Gate
-    if (!isEmpty(item.awardBalance)) {
+    if ('awardBalance' in item) {
       const awardPrice = pool.oracleId in prices ? prices[pool.oracleId] : 0;
       const awardBalance = new BigNumber(item.awardBalance)
         .times(new BigNumber(item.id === 'pots' ? 1 : 0.8))
@@ -116,6 +116,7 @@ const getPools = async (items, state, dispatch) => {
 
       pool.awardBalance = awardBalance;
       pool.awardBalanceUsd = awardBalanceUsd;
+      console.log(pool.id, item, pool.apyId, apy[pool.apyId]);
       pool.apy =
         !isEmpty(apy) && pool.apyId in apy
           ? new BigNumber(apy[pool.apyId].totalApy).times(100).div(2).toNumber()

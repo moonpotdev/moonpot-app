@@ -5,27 +5,76 @@ import {
 } from '../constants';
 import { config } from '../../../config/config';
 import { potsByNetwork } from '../../../config/vault';
+import {
+  tokensByNetwork,
+  tokensByNetworkAddress,
+  tokensByNetworkSymbol,
+} from '../../../config/tokens';
+
+const MAX_UINT256 = '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
 
 const initialTokens = (() => {
   const tokens = [];
-  for (let net in config) {
+  for (const net in config) {
     const networkPools = potsByNetwork[net];
+    const nativeCurrency = config[net].nativeCurrency;
+    const nativeTokenSymbol = nativeCurrency.symbol;
+    const zapAllowances = Object.fromEntries(
+      tokensByNetwork[net]
+        .filter(token => token.type === 'lp' && token.zap)
+        .map(token => [token.zap, 0])
+    );
+    const zapAllowancesInfinity = Object.fromEntries(
+      tokensByNetwork[net]
+        .filter(token => token.type === 'lp' && token.zap)
+        .map(token => [token.zap, MAX_UINT256])
+    );
+
     for (const key in networkPools) {
-      tokens[networkPools[key].token] = {
+      const pot = networkPools[key];
+
+      tokens[pot.token] = {
         balance: 0,
-        allowance: { [networkPools[key].contractAddress]: 0 },
-        address: networkPools[key].tokenAddress,
+        allowance: { ...zapAllowances, [pot.contractAddress]: 0 },
+        address: pot.tokenAddress,
       };
 
-      tokens[networkPools[key].rewardToken] = {
+      if (pot.vaultType === 'lp') {
+        const pairToken = tokensByNetworkAddress[pot.network][pot.tokenAddress.toLowerCase()];
+
+        if (pairToken.zap) {
+          for (const symbol of pairToken.lp) {
+            const isNative = symbol === nativeTokenSymbol;
+            const wrappedSymbol = isNative ? nativeCurrency.wrappedSymbol : symbol;
+            const token = tokensByNetworkSymbol[pot.network][wrappedSymbol];
+
+            tokens[token.symbol] = {
+              balance: 0,
+              allowance: { ...zapAllowances, [pot.contractAddress]: 0 },
+              address: token.address,
+            };
+
+            if (isNative) {
+              tokens[nativeTokenSymbol] = {
+                balance: 0,
+                allowance: { ...zapAllowancesInfinity, [pot.contractAddress]: Infinity },
+                address: false,
+                isNative: true,
+              };
+            }
+          }
+        }
+      }
+
+      tokens[pot.rewardToken] = {
         balance: 0,
-        allowance: { [networkPools[key].contractAddress]: 0 },
-        address: networkPools[key].rewardAddress,
+        allowance: { ...zapAllowances, [pot.contractAddress]: 0 },
+        address: pot.rewardAddress,
       };
 
-      tokens[networkPools[key].contractAddress] = {
+      tokens[pot.contractAddress] = {
         balance: 0,
-        address: networkPools[key].contractAddress,
+        address: pot.contractAddress,
       };
     }
   }
