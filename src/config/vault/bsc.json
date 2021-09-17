@@ -181,6 +181,11 @@
         "id": 0,
         "symbol": "POTS-BUSD LP",
         "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
       }
     ],
     "compoundIsBonus": true
@@ -220,6 +225,11 @@
       {
         "id": 0,
         "symbol": "POTS-BNB LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
         "display": "bonus"
       }
     ],
