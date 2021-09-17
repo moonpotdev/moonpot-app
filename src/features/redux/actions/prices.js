@@ -14,12 +14,9 @@ const fetchPrices = reducer => {
       };
 
       try {
-        const request = await axios.get(
-          'https://moonpot-beefy-api.herokuapp.com/prices?_=' + cache.getTime(),
-          {
-            timeout: 1000,
-          }
-        );
+        const request = await axios.get('https://api.beefy.finance/prices?_=' + cache.getTime(), {
+          timeout: 1000,
+        });
         return request.status === 200 ? request.data : retry();
       } catch (err) {
         console.log('error fetchPrices()', err);
@@ -35,7 +32,7 @@ const fetchPrices = reducer => {
       };
       try {
         const request = await axios.get(
-          'https://moonpot-beefy-api.herokuapp.com/apy/breakdown?_=' + cache.getTime(),
+          'https://api.beefy.finance/apy/breakdown?_=' + cache.getTime(),
           { timeout: 1000 }
         );
         return request.status === 200 ? request.data : retry();
