@@ -7,7 +7,7 @@ const zapReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case ZAP_SWAP_ESTIMATE_PENDING:
-      console.log(action);
+      // console.log(action);
       return {
         ...state,
         [payload.requestId]: {
@@ -17,7 +17,7 @@ const zapReducer = (state = initialState, action) => {
         },
       };
     case ZAP_SWAP_ESTIMATE_COMPLETE:
-      console.log(action);
+      // console.log(action);
       return {
         ...state,
         [payload.requestId]: {

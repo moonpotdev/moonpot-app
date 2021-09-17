@@ -294,16 +294,16 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
           />
           {/*<TooltipWithIcon i18nKey="withdraw.zapTooltip" />*/}
         </div>
-        <div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>
-          <div>DEBUG</div>
-          <ZapWithdrawEstimateDebugger
-            zapEstimate={zapEstimate}
-            selectedNeedsZap={selectedNeedsZap}
-            selectedToken={selectedToken}
-            userTotalBalance={userTotalBalance}
-            pairToken={pairToken}
-          />
-        </div>
+        {/*<div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>*/}
+        {/*  <div>DEBUG</div>*/}
+        {/*  <ZapWithdrawEstimateDebugger*/}
+        {/*    zapEstimate={zapEstimate}*/}
+        {/*    selectedNeedsZap={selectedNeedsZap}*/}
+        {/*    selectedToken={selectedToken}*/}
+        {/*    userTotalBalance={userTotalBalance}*/}
+        {/*    pairToken={pairToken}*/}
+        {/*  />*/}
+        {/*</div>*/}
         <div className={classes.fieldsHolder}>
           {address ? (
             <div className={classes.selectField}>

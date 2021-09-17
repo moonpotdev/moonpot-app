@@ -1,17 +1,15 @@
 import {
   Backdrop,
-  Grid,
   Box,
   Button,
-  Link,
   Fade,
+  Grid,
+  Link,
   makeStyles,
   Modal,
   Typography,
 } from '@material-ui/core';
-import * as React from 'react';
-import { byDecimals } from '../../../../helpers/format';
-import BigNumber from 'bignumber.js';
+import React from 'react';
 import { OpenInNew } from '@material-ui/icons';
 import { isEmpty } from '../../../../helpers/utils';
 import { Alert, AlertTitle } from '@material-ui/lab';

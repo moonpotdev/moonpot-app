@@ -327,16 +327,16 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
           <div className={classes.value}>{pot.provider}</div>
         </Grid>
       </Grid>
-      <div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>
-        <div>DEBUG</div>
-        <ZapDepositEstimateDebugger
-          zapEstimate={zapEstimate}
-          selectedToken={selectedToken}
-          selectedNeedsZap={selectedNeedsZap}
-          depositAmount={depositAmount}
-          pairToken={pairToken}
-        />
-      </div>
+      {/*<div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>*/}
+      {/*  <div>DEBUG</div>*/}
+      {/*  <ZapDepositEstimateDebugger*/}
+      {/*    zapEstimate={zapEstimate}*/}
+      {/*    selectedToken={selectedToken}*/}
+      {/*    selectedNeedsZap={selectedNeedsZap}*/}
+      {/*    depositAmount={depositAmount}*/}
+      {/*    pairToken={pairToken}*/}
+      {/*  />*/}
+      {/*</div>*/}
       <div className={classes.inputHolder}>
         <LPTokenInput
           tokens={depositTokens}
