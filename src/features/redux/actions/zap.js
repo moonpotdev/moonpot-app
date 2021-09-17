@@ -191,7 +191,7 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
             isRemoveOnly,
             zapAddress: pairToken.zap,
             userTotalBalance: byDecimals(userTotalBalance, pot.tokenDecimals, true),
-            withdrawableBalance: byDecimals(userWithdrawableBalance, pot.tokenDecimals, true),
+            userWithdrawableBalance: byDecimals(userWithdrawableBalance, pot.tokenDecimals, true),
             token0,
             token1,
             balance0: byDecimals(balance0, token0.decimals, true),

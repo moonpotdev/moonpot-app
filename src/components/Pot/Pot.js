@@ -122,7 +122,9 @@ const TVL = memo(function ({ totalStakedUsd }) {
 
 function useDeposit(contractAddress, decimals) {
   const address = useSelector(state => state.walletReducer.address);
-  const balance256 = useSelector(state => state.balanceReducer.tokens[contractAddress]?.balance);
+  const balance256 = useSelector(
+    state => state.balanceReducer.tokens[contractAddress + ':total']?.balance
+  );
 
   return useMemo(() => {
     if (address && balance256) {
