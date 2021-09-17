@@ -135,6 +135,22 @@ function ZapWithdrawEstimateDebugger({
   );
 }
 
+function useUnwrappedTokensSymbols(network, tokens) {
+  return useMemo(() => {
+    const nativeCurrency = config[network].nativeCurrency;
+    const nativeSymbol = nativeCurrency.symbol;
+    const nativeWrappedSymbol = nativeCurrency.wrappedSymbol;
+
+    return tokens.map(symbol => {
+      if (symbol === nativeWrappedSymbol) {
+        return nativeSymbol;
+      }
+
+      return symbol;
+    });
+  }, [network, tokens]);
+}
+
 export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -145,6 +161,7 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
   const potAddress = pot.contractAddress;
   const potId = pot.id;
   const pairToken = tokensByNetworkAddress[pot.network][lpAddress.toLowerCase()];
+  const unwrappedTokenSymbols = useUnwrappedTokensSymbols(pot.network, pairToken.lp);
   const withdrawTokens = useWithdrawTokens(network, lpAddress);
   const withdrawTokensBySymbol = useMemo(() => indexBy(withdrawTokens, 'symbol'), [withdrawTokens]);
   const [selectedTokenSymbol, setSelectedTokenSymbol] = useState(withdrawTokens[0].symbol);
@@ -273,7 +290,7 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
         <div className={classes.zapInfoHolder}>
           <Translate
             i18nKey="withdraw.zapExplainer"
-            values={{ token0: pairToken.lp[0], token1: pairToken.lp[1] }}
+            values={{ token0: unwrappedTokenSymbols[0], token1: unwrappedTokenSymbols[1] }}
           />
           {/*<TooltipWithIcon i18nKey="withdraw.zapTooltip" />*/}
         </div>
