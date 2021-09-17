@@ -143,6 +143,10 @@ const styles = theme => ({
       fontWeight: 700,
     },
   },
+  bonusRow: {},
+  bonusRowInactive: {
+    opacity: 0.6,
+  },
   myDetailsText: {
     color: '#EBF3F9',
     fontWeight: 400,

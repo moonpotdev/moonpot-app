@@ -33,33 +33,25 @@ const getPools = async (items, state, dispatch) => {
 
   for (let key in items) {
     const pool = items[key];
+
+    // === Gate
     const gateContract = new web3[pool.network].eth.Contract(gateManagerAbi, pool.contractAddress);
-    if (pool.boostRewardId !== undefined) {
-      calls[pool.network].push({
-        id: pool.id,
-        awardBalance: gateContract.methods.awardBalance(),
-        rewardRate: gateContract.methods.rewardRate(),
-        totalValueLocked: gateContract.methods.TVL(),
-        bonusRewardInfo: gateContract.methods.rewardInfo(pool.bonusRewardId),
-        boostRewardInfo: gateContract.methods.rewardInfo(pool.boostRewardId),
-      });
-    } else if (pool.bonusRewardId !== undefined) {
-      calls[pool.network].push({
-        id: pool.id,
-        awardBalance: gateContract.methods.awardBalance(),
-        rewardRate: gateContract.methods.rewardRate(),
-        totalValueLocked: gateContract.methods.TVL(),
-        bonusRewardInfo: gateContract.methods.rewardInfo(pool.bonusRewardId),
-      });
-    } else {
-      calls[pool.network].push({
-        id: pool.id,
-        awardBalance: gateContract.methods.awardBalance(),
-        rewardRate: gateContract.methods.rewardRate(),
-        totalValueLocked: gateContract.methods.TVL(),
-      });
+
+    const gateCall = {
+      id: pool.id,
+      awardBalance: gateContract.methods.awardBalance(),
+      totalValueLocked: gateContract.methods.TVL(),
+    };
+
+    if ('bonuses' in pool) {
+      for (const bonus of pool.bonuses) {
+        gateCall['rewardInfo_' + bonus.id] = gateContract.methods.rewardInfo(bonus.id);
+      }
     }
 
+    calls[pool.network].push(gateCall);
+
+    // === Strategy
     const strategyContract = new web3[pool.network].eth.Contract(
       prizeStrategyAbi,
       pool.prizeStrategyAddress
@@ -70,12 +62,14 @@ const getPools = async (items, state, dispatch) => {
       numberOfWinners: strategyContract.methods.numberOfWinners(),
     });
 
+    // === Ticket
     const ticketContract = new web3[pool.network].eth.Contract(ecr20Abi, pool.rewardAddress);
     ticket[pool.network].push({
       id: pool.id,
       totalTickets: ticketContract.methods.totalSupply(),
     });
 
+    // === Sponsor Tokens
     for (const sponsor of pool.sponsors) {
       const sponsorContract = new web3[pool.network].eth.Contract(ecr20Abi, sponsor.sponsorAddress);
       sponsors[pool.network].push({
@@ -110,59 +104,69 @@ const getPools = async (items, state, dispatch) => {
 
   for (let i = 0; i < response.length; i++) {
     const item = response[i];
-    if (!isEmpty(item.awardBalance)) {
-      const awardPrice = pools[item.id].oracleId in prices ? prices[pools[item.id].oracleId] : 0;
-      const awardBalance = new BigNumber(item.awardBalance)
+    const pool = pools[item.id];
+
+    // === Gate
+    if ('awardBalance' in item) {
+      const awardPrice = pool.oracleId in prices ? prices[pool.oracleId] : 0;
+      const awardBalance = new BigNumber(item.awardBalance || '0')
         .times(new BigNumber(item.id === 'pots' ? 1 : 0.8))
-        .dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
+        .dividedBy(new BigNumber(10).exponentiatedBy(pool.tokenDecimals));
       const awardBalanceUsd = awardBalance.times(awardPrice);
 
-      pools[item.id].awardBalance = awardBalance;
-      pools[item.id].awardBalanceUsd = awardBalanceUsd;
-      pools[item.id].apy =
-        !isEmpty(apy) && pools[item.id].apyId in apy
-          ? new BigNumber(apy[pools[item.id].apyId].totalApy).times(100).div(2).toNumber()
+      pool.awardBalance = awardBalance;
+      pool.awardBalanceUsd = awardBalanceUsd;
+
+      pool.apy =
+        !isEmpty(apy) && pool.apyId in apy
+          ? new BigNumber(apy[pool.apyId].totalApy).times(100).div(2).toNumber()
           : 0;
 
       const totalValueLocked = new BigNumber(item.totalValueLocked);
-      const totalTokenStaked = byDecimals(totalValueLocked, pools[item.id].tokenDecimals);
-      pools[item.id].totalTokenStaked = totalTokenStaked;
-      pools[item.id].totalStakedUsd = totalValueLocked
+      const totalTokenStaked = byDecimals(totalValueLocked, pool.tokenDecimals);
+      pool.totalTokenStaked = totalTokenStaked;
+      pool.totalStakedUsd = totalValueLocked
         .times(awardPrice)
-        .dividedBy(new BigNumber(10).exponentiatedBy(pools[item.id].tokenDecimals));
-      pools[item.id].tvl = formatTvl(totalTokenStaked, awardPrice);
+        .dividedBy(new BigNumber(10).exponentiatedBy(pool.tokenDecimals));
+      pool.tvl = formatTvl(totalTokenStaked, awardPrice);
 
-      if ('bonusRewardInfo' in item || 'boostRewardInfo' in item) {
-        const boost = item.boostRewardInfo
-          ? calculateBoost(item.boostRewardInfo, pools[item.id], prices)
-          : { apr: 0, apy: 0, compoundable: false };
-        const bonus = item.bonusRewardInfo
-          ? calculateBoost(item.bonusRewardInfo, pools[item.id], prices)
-          : { apr: 0, apy: 0, compoundable: false };
+      if ('bonuses' in pool) {
+        const bonuses = pool.bonuses.map(bonusConfig => {
+          const rewardInfo = item['rewardInfo_' + bonusConfig.id];
+          return calculateBoost(rewardInfo, pool, prices, bonusConfig);
+        });
 
-        pools[item.id].bonusApy = boost.apy + bonus.apy;
+        const activeCompoundable =
+          bonuses.find(bonus => bonus.compoundable && bonus.active) !== undefined;
 
-        if (boost.compoundable || bonus.compoundable) {
-          pools[item.id].bonusApr = boost.apr + bonus.apr;
+        pool.bonusApy = bonuses.reduce((total, bonus) => total + bonus.apy, 0);
+
+        if (activeCompoundable) {
+          pool.bonusApr = bonuses.reduce((total, bonus) => total + bonus.apr, 0);
         }
+
+        pool.bonuses = bonuses;
       }
 
-      if (pools[item.id].status === 'active') {
+      if (pool.status === 'active') {
         totalPrizesAvailable = totalPrizesAvailable.plus(awardBalanceUsd);
       }
     }
 
+    // === Strategy
     if (!isEmpty(item.expiresAt)) {
-      pools[item.id].expiresAt = item.expiresAt;
-      pools[item.id].numberOfWinners = Number(item.numberOfWinners);
+      pool.expiresAt = item.expiresAt;
+      pool.numberOfWinners = Number(item.numberOfWinners);
     }
 
+    // === Ticket
     if (!isEmpty(item.totalTickets)) {
-      pools[item.id].totalTickets = item.totalTickets;
+      pool.totalTickets = item.totalTickets;
     }
 
+    // === Sponsor Tokens
     if (!isEmpty(item.sponsorBalance)) {
-      const sponsor = pools[item.id].sponsors.find(s => s.sponsorToken === item.sponsorToken);
+      const sponsor = pool.sponsors.find(s => s.sponsorToken === item.sponsorToken);
 
       if (sponsor) {
         const sponsorPrice =
@@ -202,28 +206,36 @@ const getPools = async (items, state, dispatch) => {
   return true;
 };
 
-function calculateBoost(rewardInfo, pool, prices) {
-  const boostAddress = rewardInfo[0].toLowerCase();
-  const compoundable =
-    pool.compoundApy === true && boostAddress === pool.tokenAddress.toLowerCase();
-  const boostData = tokensByNetworkAddress[pool.network][boostAddress];
-  const boostDecimals = new BigNumber(10).exponentiatedBy(boostData.decimals);
-  const boostPrice = boostData.symbol in prices ? prices[boostData.symbol] : 0;
-  const boostRate = new BigNumber(rewardInfo[3]);
-  const boostYearly = boostRate.times(3600).times(24).times(365);
-  const boostYearlyUsd = boostYearly.times(boostPrice).dividedBy(boostDecimals);
-  const totalStakedUsd = pool.totalStakedUsd;
-  let apr = boostYearlyUsd.dividedBy(totalStakedUsd).toNumber();
+function calculateBoost(rewardInfo, pool, prices, config) {
+  const now = Date.now() / 1000;
   const periodFinish = new BigNumber(rewardInfo[2]);
-  if (periodFinish.toNumber() < Date.now() / 1000) {
-    apr = 0;
+  const alwaysActive = config.alwaysActive === true;
+  const isActive = periodFinish > now || alwaysActive;
+  const boostAddress = rewardInfo[0].toLowerCase();
+  const boostData = tokensByNetworkAddress[pool.network][boostAddress];
+
+  if (isActive) {
+    const compoundable =
+      pool.compoundApy === true && boostAddress === pool.tokenAddress.toLowerCase();
+    const boostDecimals = new BigNumber(10).exponentiatedBy(boostData.decimals);
+    const boostPrice = boostData.symbol in prices ? prices[boostData.symbol] : 0;
+    const boostRate = new BigNumber(rewardInfo[3]);
+    const boostYearly = boostRate.times(3600).times(24).times(365);
+    const boostYearlyUsd = boostYearly.times(boostPrice).dividedBy(boostDecimals);
+    const totalStakedUsd = pool.totalStakedUsd;
+    const apr = boostYearlyUsd.dividedBy(totalStakedUsd).toNumber();
+
+    return {
+      ...config,
+      ...boostData,
+      apr: apr * 100,
+      apy: (compoundable ? compound(apr) : apr) * 100,
+      compoundable,
+      active: isActive,
+    };
   }
 
-  return {
-    apr: apr * 100,
-    apy: (compoundable ? compound(apr) : apr) * 100,
-    compoundable,
-  };
+  return { ...config, ...boostData, apr: 0, apy: 0, compoundable: false, active: false };
 }
 
 const fetchPools = (item = false) => {

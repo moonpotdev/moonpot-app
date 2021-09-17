@@ -89,7 +89,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
       if (allowance.lt(depositAmount)) {
         steps.push({
           step: 'approve',
-          message: 'Approval transaction happens once per pot.',
+          message: 'Approval transactions happen once per pot.',
           action: () =>
             dispatch(
               reduxActions.wallet.approval(pot.network, pot.tokenAddress, pot.contractAddress)
