@@ -1,12 +1,13 @@
-import { ZAP_SWAP_ESTIMATE_COMPLETE, ZAP_SWAP_ESTIMATE_PENDING } from '../constants';
 import uniqid from 'uniqid';
+import BigNumber from 'bignumber.js';
+import { ZAP_SWAP_ESTIMATE_COMPLETE, ZAP_SWAP_ESTIMATE_PENDING } from '../constants';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
 import zapAbi from '../../../config/abi/zap.json';
 import routerAbi from '../../../config/abi/router.json';
 import pairAbi from '../../../config/abi/pair.json';
+import prizePoolAbi from '../../../config/abi/prizepool.json';
 import { byDecimals, convertAmountToRawNumber } from '../../../helpers/format';
 import { config } from '../../../config/config';
-import BigNumber from 'bignumber.js';
 
 export function createZapInEstimate(potId, depositAddress, depositAmount) {
   const requestId = uniqid('in', potId);
@@ -65,6 +66,31 @@ export function createZapInEstimate(potId, depositAddress, depositAmount) {
   ];
 }
 
+async function getFairplayFeePercent(web3, userAddress, prizePoolAddress, ticketAddress) {
+  const max = 3600 * 24 * 10;
+  const secondsRemaining = await getFairplaySecondsRemaining(
+    web3,
+    userAddress,
+    prizePoolAddress,
+    ticketAddress
+  );
+  return (secondsRemaining * 0.025) / max;
+}
+
+async function getFairplaySecondsRemaining(web3, userAddress, prizePoolAddress, ticketAddress) {
+  const prizePoolContract = new web3.eth.Contract(prizePoolAbi, prizePoolAddress);
+
+  try {
+    const remaining = await prizePoolContract.methods
+      .userFairPlayLockRemaining(userAddress, ticketAddress)
+      .call();
+
+    return remaining || 0;
+  } catch {
+    return 0;
+  }
+}
+
 export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) {
   const requestId = uniqid('out', potId);
 
@@ -85,6 +111,7 @@ export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) 
       const pot = state.vaultReducer.pools[potId];
       const network = pot.network;
       const web3 = state.walletReducer.rpc[network];
+      const address = state.walletReducer.address;
       const isRemoveOnly = !wantTokenAddress;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
       const token0Symbol = pairToken.lp[0];
@@ -96,30 +123,26 @@ export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) 
       const routerContract = new web3.eth.Contract(routerAbi, routerAddress);
       const pairContract = new web3.eth.Contract(pairAbi, pairToken.address);
 
-      // TODO get withdraw fee and remove from userTotalBalance
-
-      const userBalanceRaw = new BigNumber(userTotalBalance)
+      const fairplayFee = await getFairplayFeePercent(
+        web3,
+        address,
+        pot.prizePoolAddress,
+        pot.rewardAddress
+      );
+      const userBalanceAfterFee = userTotalBalance.multipliedBy(1 - fairplayFee);
+      const userBalanceAfterFeeRaw = userBalanceAfterFee
         .times(new BigNumber('10').pow(pot.tokenDecimals))
         .decimalPlaces(0, BigNumber.ROUND_DOWN);
       const totalSupplyRaw = new BigNumber(await pairContract.methods.totalSupply().call());
       const reservesRaw = await pairContract.methods.getReserves().call();
-      const balance0raw = userBalanceRaw
+      const balance0raw = userBalanceAfterFeeRaw
         .dividedBy(totalSupplyRaw)
         .multipliedBy(reservesRaw[0])
         .decimalPlaces(0, BigNumber.ROUND_DOWN);
-      const balance1raw = userBalanceRaw
+      const balance1raw = userBalanceAfterFeeRaw
         .dividedBy(totalSupplyRaw)
         .multipliedBy(reservesRaw[1])
         .decimalPlaces(0, BigNumber.ROUND_DOWN);
-
-      console.log(
-        byDecimals(userBalanceRaw, pot.decimals).toString(),
-        'lp',
-        byDecimals(balance0raw, token0.decimals).toString(),
-        token0.symbol,
-        byDecimals(balance1raw, token1.decimals).toString(),
-        token1.symbol
-      );
 
       if (isRemoveOnly) {
         // withdraw lp from pot and withdraw tokens from lp as-is
@@ -130,7 +153,9 @@ export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) 
             potId,
             isRemoveOnly,
             zapAddress: pairToken.zap,
-            userBalanceRaw,
+            userBalance: userTotalBalance,
+            userBalanceAfterFee,
+            userBalanceAfterFeeRaw,
             token0,
             token1,
             balance0: byDecimals(balance0raw, token0.decimals),
@@ -157,7 +182,9 @@ export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) 
             potId,
             isRemoveOnly,
             zapAddress: pairToken.zap,
-            userBalanceRaw,
+            userBalance: userTotalBalance,
+            userBalanceAfterFee,
+            userBalanceAfterFeeRaw,
             token0,
             token1,
             swapInToken,

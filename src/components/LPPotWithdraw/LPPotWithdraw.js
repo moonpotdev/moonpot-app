@@ -321,7 +321,8 @@ function ZapWithdrawEstimateDebugger({
     return (
       <div>
         <div>
-          Withdraw {userTotalBalance.toString()} {pairToken.symbol}
+          Withdraw {userTotalBalance.toString()} {pairToken.symbol} (
+          {zapEstimate.userBalanceAfterFee.toString()} {pairToken.symbol} after fairplay fee)
         </div>
         <div>
           Remove liquidity for {zapEstimate.balance0.toString()} {zapEstimate.token0.symbol} and{' '}
@@ -334,7 +335,8 @@ function ZapWithdrawEstimateDebugger({
   return (
     <div>
       <div>
-        Withdraw {userTotalBalance.toString()} {pairToken.symbol}
+        Withdraw {userTotalBalance.toString()} {pairToken.symbol} (
+        {zapEstimate.userBalanceAfterFee.toString()} {pairToken.symbol} after fairplay fee)
       </div>
       <div>
         Remove liquidity for {zapEstimate.balance0.toString()} {zapEstimate.token0.symbol} and{' '}

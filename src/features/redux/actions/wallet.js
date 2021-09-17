@@ -639,7 +639,7 @@ const zapIn = (
 
 const zapOut = (
   potAddress,
-  { zapAddress, isRemoveOnly, userBalanceRaw, swapOutToken, swapOutAmount }
+  { zapAddress, isRemoveOnly, userBalanceAfterFeeRaw, swapOutToken, swapOutAmount }
 ) => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
@@ -660,7 +660,7 @@ const zapOut = (
               type: WALLET_ACTION,
               payload: {
                 result: 'success_pending',
-                data: { spender: zapAddress, amount: userBalanceRaw, hash: hash },
+                data: { spender: zapAddress, amount: userBalanceAfterFeeRaw, hash: hash },
               },
             });
           })
@@ -669,7 +669,7 @@ const zapOut = (
               type: WALLET_ACTION,
               payload: {
                 result: 'success',
-                data: { spender: zapAddress, amount: userBalanceRaw, receipt: receipt },
+                data: { spender: zapAddress, amount: userBalanceAfterFeeRaw, receipt: receipt },
               },
             });
           })
@@ -707,7 +707,7 @@ const zapOut = (
               type: WALLET_ACTION,
               payload: {
                 result: 'success_pending',
-                data: { spender: zapAddress, amount: userBalanceRaw, hash: hash },
+                data: { spender: zapAddress, amount: userBalanceAfterFeeRaw, hash: hash },
               },
             });
           })
@@ -716,7 +716,7 @@ const zapOut = (
               type: WALLET_ACTION,
               payload: {
                 result: 'success',
-                data: { spender: zapAddress, amount: userBalanceRaw, receipt: receipt },
+                data: { spender: zapAddress, amount: userBalanceAfterFeeRaw, receipt: receipt },
               },
             });
           })
