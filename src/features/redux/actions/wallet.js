@@ -688,16 +688,16 @@ const zapOut = (
           swapOutToken.decimals
         );
 
-        console.log(
-          'beamOutAndSwap(',
-          potAddress,
-          swapOutToken.address,
-          swapOutAmountMinRaw,
-          true,
-          ')',
-          swapOutAmount.toString(),
-          byDecimals(swapOutAmountMinRaw, swapOutToken.decimals).toString()
-        );
+        // console.log(
+        //   'beamOutAndSwap(',
+        //   potAddress,
+        //   swapOutToken.address,
+        //   swapOutAmountMinRaw,
+        //   true,
+        //   ')',
+        //   swapOutAmount.toString(),
+        //   byDecimals(swapOutAmountMinRaw, swapOutToken.decimals).toString()
+        // );
 
         contract.methods
           .beamOutAndSwap(potAddress, swapOutToken.address, swapOutAmountMinRaw, true)
