@@ -151,7 +151,7 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
         .decimalPlaces(0, BigNumber.ROUND_DOWN);
 
       // TODO remove
-      console.log({
+      console.log('pablo1', {
         userTotalBalance: byDecimals(userTotalBalance, 18).toString(),
         ticketBalance: byDecimals(ticketBalance, 18).toString(),
         depositBalance: byDecimals(depositBalance, 18).toString(),
@@ -169,6 +169,16 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
           new BigNumber(ticketBalance).multipliedBy(fairplayFee),
           18
         ).toString(),
+
+        rawUserTotalBalance: userTotalBalance.toString(),
+        rawTicketBalance: ticketBalance.toString(),
+        rawDepositBalance: depositBalance.toString(),
+        rawTicketBalanceAfterWithdrawFee: ticketBalanceAfterWithdrawFee.toString(),
+        rawDepositBalanceAfterWithdrawFee: depositBalanceAfterWithdrawFee.toString(),
+        rawTicketBalanceAfterFairplayFee: ticketBalanceAfterFairplayFee.toString(),
+        rawUserWithdrawableBalance: userWithdrawableBalance.toString(),
+        rawWithdrawFeeTokens: new BigNumber(userTotalBalance).multipliedBy(withdrawFee).toString(),
+        rawFairplayFeeTokens: new BigNumber(ticketBalance).multipliedBy(fairplayFee).toString(),
       });
 
       const balance0 = userWithdrawableBalance
@@ -182,7 +192,7 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
         .decimalPlaces(0, BigNumber.ROUND_DOWN);
 
       if (isRemoveOnly) {
-        console.log('is remove only');
+        console.log('pablo2', 'is remove only');
         // withdraw lp from pot and withdraw tokens from lp as-is
         dispatch({
           type: ZAP_SWAP_ESTIMATE_COMPLETE,
@@ -200,7 +210,7 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
           },
         });
       } else {
-        console.log('remove and swap');
+        console.log('pablo2', 'remove and swap');
         // withdraw lp and swap one half
         const routerContract = new web3.eth.Contract(routerAbi, routerAddress);
         const wantIsToken0 = wantTokenAddress.toLowerCase() === token0.address.toLowerCase();
@@ -210,7 +220,7 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
         const swapOutToken = wantIsToken0 ? token0 : token1;
         const swapOutReservesRaw = wantIsToken0 ? reserves[0] : reserves[1];
 
-        console.log('pablo', {
+        console.log('pablo3', {
           swapInAmountRaw,
           swapInAmountRawString: swapInAmountRaw.toString(10),
           swapInReservesRaw,
