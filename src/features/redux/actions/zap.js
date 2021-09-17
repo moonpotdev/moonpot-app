@@ -182,6 +182,7 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
         .decimalPlaces(0, BigNumber.ROUND_DOWN);
 
       if (isRemoveOnly) {
+        console.log('is remove only');
         // withdraw lp from pot and withdraw tokens from lp as-is
         dispatch({
           type: ZAP_SWAP_ESTIMATE_COMPLETE,
@@ -199,6 +200,7 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
           },
         });
       } else {
+        console.log('remove and swap');
         // withdraw lp and swap one half
         const routerContract = new web3.eth.Contract(routerAbi, routerAddress);
         const wantIsToken0 = wantTokenAddress.toLowerCase() === token0.address.toLowerCase();
@@ -207,6 +209,15 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
         const swapInAmountRaw = wantIsToken0 ? balance1 : balance0;
         const swapOutToken = wantIsToken0 ? token0 : token1;
         const swapOutReservesRaw = wantIsToken0 ? reserves[0] : reserves[1];
+
+        console.log('pablo', {
+          swapInAmountRaw,
+          swapInAmountRawString: swapInAmountRaw.toString(10),
+          swapInReservesRaw,
+          swapInReservesRawString: swapInReservesRaw.toString(10),
+          swapOutReservesRaw,
+          swapOutReservesRawString: swapOutReservesRaw.toString(10),
+        });
 
         const swapOutAmountRaw = await routerContract.methods
           .getAmountOut(swapInAmountRaw, swapInReservesRaw, swapOutReservesRaw)
