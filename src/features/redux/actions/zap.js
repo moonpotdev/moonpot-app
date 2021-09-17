@@ -184,12 +184,14 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
       const balance0 = userWithdrawableBalance
         .dividedBy(totalSupply)
         .multipliedBy(reserves[0])
-        .decimalPlaces(0, BigNumber.ROUND_DOWN);
+        .decimalPlaces(0, BigNumber.ROUND_DOWN)
+        .toString();
 
       const balance1 = userWithdrawableBalance
         .dividedBy(totalSupply)
         .multipliedBy(reserves[1])
-        .decimalPlaces(0, BigNumber.ROUND_DOWN);
+        .decimalPlaces(0, BigNumber.ROUND_DOWN)
+        .toString();
 
       if (isRemoveOnly) {
         console.log('pablo2', 'is remove only');
@@ -222,11 +224,8 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
 
         console.log('pablo3', {
           swapInAmountRaw,
-          swapInAmountRawString: swapInAmountRaw.toString(10),
           swapInReservesRaw,
-          swapInReservesRawString: swapInReservesRaw.toString(10),
           swapOutReservesRaw,
-          swapOutReservesRawString: swapOutReservesRaw.toString(10),
         });
 
         const swapOutAmountRaw = await routerContract.methods
