@@ -118,6 +118,43 @@ function useDepositTokens(network, lpAddress) {
   }, [lpAddress, network]);
 }
 
+function ZapDepositEstimateDebugger({
+  selectedNeedsZap,
+  zapEstimate,
+  selectedToken,
+  depositAmount,
+  pairToken,
+}) {
+  if (!selectedNeedsZap) {
+    return <div>Zap not needed for {selectedToken.symbol}</div>;
+  }
+
+  if (!depositAmount.gt(0)) {
+    return <div>zero deposit amount</div>;
+  }
+
+  if (!zapEstimate) {
+    return <div>No estimate yet</div>;
+  }
+
+  if (zapEstimate.pending) {
+    return <div>Estimate pending</div>;
+  }
+
+  return (
+    <>
+      <div>
+        Deposit {depositAmount.toString()} {selectedToken.symbol}
+      </div>
+      <div>
+        Swap {zapEstimate.swapInAmount.toString()} {zapEstimate.swapInToken.symbol} for{' '}
+        {zapEstimate.swapOutAmount.toString()} {zapEstimate.swapOutToken.symbol}
+      </div>
+      <div>Add {pairToken.symbol} liquidity</div>
+    </>
+  );
+}
+
 export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -173,9 +210,9 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
     return hasBalance;
   }, [address, balance, depositAmount, selectedNeedsZap, zapEstimate]);
   const zapAllowance = useTokenAllowance(
-    canDeposit ? zapEstimate.zapAddress : null,
-    canDeposit ? zapEstimate.swapInToken.symbol : null,
-    canDeposit ? zapEstimate.swapInToken.decimals : null
+    canDeposit && selectedNeedsZap ? zapEstimate.zapAddress : null,
+    canDeposit && selectedNeedsZap ? zapEstimate.swapInToken.symbol : null,
+    canDeposit && selectedNeedsZap ? zapEstimate.swapInToken.decimals : null
   );
 
   useEffect(() => {
@@ -194,11 +231,9 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
     const steps = [];
     if (canDeposit) {
       if (selectedNeedsZap) {
-        // approve selectedToken on zap contract
-        // call beamIn or beamInETH (native)
-
         const { zapAddress, isNative, swapInToken } = zapEstimate;
 
+        // Approve Zap to spend token user is depositing
         if (!isNative && zapAllowance.lt(depositAmount)) {
           steps.push({
             step: 'approve',
@@ -209,6 +244,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
           });
         }
 
+        // Zap in
         steps.push({
           step: 'deposit',
           message: 'Confirm deposit transaction on wallet to complete.',
@@ -291,30 +327,17 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
           <div className={classes.value}>{pot.provider}</div>
         </Grid>
       </Grid>
+      <div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>
+        <div>DEBUG</div>
+        <ZapDepositEstimateDebugger
+          zapEstimate={zapEstimate}
+          selectedToken={selectedToken}
+          selectedNeedsZap={selectedNeedsZap}
+          depositAmount={depositAmount}
+          pairToken={pairToken}
+        />
+      </div>
       <div className={classes.inputHolder}>
-        {selectedNeedsZap ? 'needs zap' : 'not zap'}
-        {selectedNeedsZap && zapEstimate && zapEstimate.pending === false ? (
-          <>
-            <div>
-              deposit:
-              <div>
-                {zapEstimate.depositAmount.toString()} {zapEstimate.swapInToken.symbol}
-              </div>
-            </div>
-            <div>
-              swap in:
-              <div>
-                {zapEstimate.swapInAmount.toString()} {zapEstimate.swapInToken.symbol}
-              </div>
-            </div>
-            <div>
-              swap out:
-              <div>
-                {zapEstimate.swapOutAmount.toString()} {zapEstimate.swapOutToken.symbol}
-              </div>
-            </div>
-          </>
-        ) : null}
         <LPTokenInput
           tokens={depositTokens}
           selected={selectedTokenSymbol}

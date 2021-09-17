@@ -15,7 +15,7 @@ const fetchPrices = reducer => {
 
       try {
         const request = await axios.get('https://api.beefy.finance/prices?_=' + cache.getTime(), {
-          timeout: 1000,
+          timeout: 2000,
         });
         return request.status === 200 ? request.data : retry();
       } catch (err) {
@@ -33,7 +33,7 @@ const fetchPrices = reducer => {
 
       try {
         const request = await axios.get('https://api.beefy.finance/lps?_=' + cache.getTime(), {
-          timeout: 1000,
+          timeout: 2000,
         });
         return request.status === 200 ? request.data : retry();
       } catch (err) {
@@ -51,7 +51,7 @@ const fetchPrices = reducer => {
       try {
         const request = await axios.get(
           'https://api.beefy.finance/apy/breakdown?_=' + cache.getTime(),
-          { timeout: 1000 }
+          { timeout: 2000 }
         );
         return request.status === 200 ? request.data : retry();
       } catch (err) {

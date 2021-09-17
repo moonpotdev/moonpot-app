@@ -21,65 +21,85 @@ const getBalances = async (pools, state, dispatch) => {
   }
 
   for (const key in pools) {
-    const pool = pools[key];
+    const pot = pools[key];
 
-    const tokenContract = new web3[pool.network].eth.Contract(erc20Abi, pool.tokenAddress);
-    calls[pool.network].push({
+    const tokenContract = new web3[pot.network].eth.Contract(erc20Abi, pot.tokenAddress);
+    calls[pot.network].push({
       amount: tokenContract.methods.balanceOf(address),
-      token: pool.token,
-      address: pool.tokenAddress,
+      token: pot.token,
+      address: pot.tokenAddress,
     });
 
     // lp
-    if (pool.vaultType === 'lp') {
-      const nativeWrappedTokenSymbol = config[pool.network].nativeCurrency.wrappedSymbol;
-      const pairToken = tokensByNetworkAddress[pool.network][pool.tokenAddress.toLowerCase()];
+    if (pot.vaultType === 'lp') {
+      const nativeWrappedTokenSymbol = config[pot.network].nativeCurrency.wrappedSymbol;
+      const pairToken = tokensByNetworkAddress[pot.network][pot.tokenAddress.toLowerCase()];
 
       if (pairToken.zap) {
+        // Allowance of zap to spend tickets
+        const ticketContract = new web3[pot.network].eth.Contract(erc20Abi, pot.rewardAddress);
+        calls[pot.network].push({
+          allowance: ticketContract.methods.allowance(address, pairToken.zap),
+          token: pot.rewardToken,
+          spender: pairToken.zap,
+        });
+
+        // Allowance of zap to spend lp
+        const lpContract = new web3[pot.network].eth.Contract(erc20Abi, pot.tokenAddress);
+        calls[pot.network].push({
+          allowance: lpContract.methods.allowance(address, pairToken.zap),
+          token: pot.token,
+          spender: pairToken.zap,
+        });
+
+        // token0/token1
         for (const symbol of pairToken.lp) {
           const isNative = symbol === nativeWrappedTokenSymbol;
-          const token = tokensByNetworkSymbol[pool.network][symbol];
-          const tokenContract = new web3[pool.network].eth.Contract(erc20Abi, token.address);
+          const token = tokensByNetworkSymbol[pot.network][symbol];
+          const tokenContract = new web3[pot.network].eth.Contract(erc20Abi, token.address);
 
-          calls[pool.network].push({
+          // Balance of token0/token1
+          calls[pot.network].push({
             amount: tokenContract.methods.balanceOf(address),
             token: token.symbol,
             address: token.address,
           });
 
-          calls[pool.network].push({
+          // Allowance of zap to spend token0/token1
+          calls[pot.network].push({
             allowance: tokenContract.methods.allowance(address, pairToken.zap),
             token: token.symbol,
             spender: pairToken.zap,
           });
 
+          // Do we need native balance
           if (isNative) {
-            needsNativeBalance[pool.network] = true;
+            needsNativeBalance[pot.network] = true;
           }
         }
       }
     }
 
-    const gateContract = new web3[pool.network].eth.Contract(gateManagerAbi, pool.contractAddress);
-    calls[pool.network].push({
+    const gateContract = new web3[pot.network].eth.Contract(gateManagerAbi, pot.contractAddress);
+    calls[pot.network].push({
       amount: gateContract.methods.userTotalBalance(address),
-      token: pool.contractAddress,
-      address: pool.contractAddress,
+      token: pot.contractAddress,
+      address: pot.contractAddress,
     });
 
-    calls[pool.network].push({
-      allowance: tokenContract.methods.allowance(address, pool.contractAddress),
-      token: pool.token,
-      spender: pool.contractAddress,
+    calls[pot.network].push({
+      allowance: tokenContract.methods.allowance(address, pot.contractAddress),
+      token: pot.token,
+      spender: pot.contractAddress,
     });
 
-    const ticketContract = new web3[pool.network].eth.Contract(erc20Abi, pool.rewardAddress);
-    calls[pool.network].push({
+    const ticketContract = new web3[pot.network].eth.Contract(erc20Abi, pot.rewardAddress);
+    calls[pot.network].push({
       amount: ticketContract.methods.balanceOf(address),
-      address: pool.rewardAddress,
-      allowance: ticketContract.methods.allowance(address, pool.contractAddress),
-      token: pool.rewardToken,
-      spender: pool.contractAddress,
+      address: pot.rewardAddress,
+      allowance: ticketContract.methods.allowance(address, pot.contractAddress),
+      token: pot.rewardToken,
+      spender: pot.contractAddress,
     });
   }
 

@@ -96,26 +96,33 @@ export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) 
       const routerContract = new web3.eth.Contract(routerAbi, routerAddress);
       const pairContract = new web3.eth.Contract(pairAbi, pairToken.address);
 
+      // TODO get withdraw fee and remove from userTotalBalance
+
       const userBalanceRaw = new BigNumber(userTotalBalance)
         .times(new BigNumber('10').pow(pot.tokenDecimals))
         .decimalPlaces(0, BigNumber.ROUND_DOWN);
-      const totalSupply = new BigNumber(await pairContract.methods.totalSupply().call());
-      const reserves = await pairContract.methods.getReserves().call();
-      const balance0 = userBalanceRaw.dividedBy(totalSupply).multipliedBy(reserves[0]);
-      const balance1 = userBalanceRaw.dividedBy(totalSupply).multipliedBy(reserves[1]);
+      const totalSupplyRaw = new BigNumber(await pairContract.methods.totalSupply().call());
+      const reservesRaw = await pairContract.methods.getReserves().call();
+      const balance0raw = userBalanceRaw
+        .dividedBy(totalSupplyRaw)
+        .multipliedBy(reservesRaw[0])
+        .decimalPlaces(0, BigNumber.ROUND_DOWN);
+      const balance1raw = userBalanceRaw
+        .dividedBy(totalSupplyRaw)
+        .multipliedBy(reservesRaw[1])
+        .decimalPlaces(0, BigNumber.ROUND_DOWN);
 
       console.log(
         byDecimals(userBalanceRaw, pot.decimals).toString(),
         'lp',
-        byDecimals(balance0, token0.decimals).toString(),
+        byDecimals(balance0raw, token0.decimals).toString(),
         token0.symbol,
-        byDecimals(balance1, token1.decimals).toString(),
+        byDecimals(balance1raw, token1.decimals).toString(),
         token1.symbol
       );
 
       if (isRemoveOnly) {
         // withdraw lp from pot and withdraw tokens from lp as-is
-        console.log('remove liq only');
         dispatch({
           type: ZAP_SWAP_ESTIMATE_COMPLETE,
           payload: {
@@ -123,39 +130,25 @@ export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) 
             potId,
             isRemoveOnly,
             zapAddress: pairToken.zap,
+            userBalanceRaw,
             token0,
             token1,
-            balance0: byDecimals(balance0, token0.decimals),
-            balance1: byDecimals(balance0, token0.decimals),
+            balance0: byDecimals(balance0raw, token0.decimals),
+            balance1: byDecimals(balance1raw, token1.decimals),
           },
         });
       } else {
-        const swapInToken =
-          wantTokenAddress.toLowerCase() === token0.address.toLowerCase() ? token0 : token1;
-        const swapOutToken =
-          wantTokenAddress.toLowerCase() === token0.address.toLowerCase() ? token1 : token0;
+        // withdraw lp and swap one half
+        const wantIsToken0 = wantTokenAddress.toLowerCase() === token0.address.toLowerCase();
+        const swapInToken = wantIsToken0 ? token1 : token0;
+        const swapInReservesRaw = wantIsToken0 ? reservesRaw[1] : reservesRaw[0];
+        const swapInAmountRaw = wantIsToken0 ? balance1raw : balance0raw;
+        const swapOutToken = wantIsToken0 ? token0 : token1;
+        const swapOutReservesRaw = wantIsToken0 ? reservesRaw[0] : reservesRaw[1];
 
-        const inputAmountRaw = (
-          wantTokenAddress.toLowerCase() === token0.address.toLowerCase() ? balance0 : balance1
-        )
-          .decimalPlaces(0, BigNumber.ROUND_DOWN)
-          .toString(10);
-        // const pairContract = new web3.eth.Contract(pairAbi, pairToken.address);
-
-        // out[0] === input amount, out[1] === output amount
-        const out = await routerContract.methods
-          .getAmountsOut(inputAmountRaw, [swapInToken.address, swapOutToken.address])
+        const swapOutAmountRaw = await routerContract.methods
+          .getAmountOut(swapInAmountRaw, swapInReservesRaw, swapOutReservesRaw)
           .call();
-
-        const outputAmountRaw = out[1];
-
-        console.log(
-          'swap',
-          byDecimals(inputAmountRaw, swapInToken.decimals).toNumber(),
-          swapInToken.symbol,
-          byDecimals(outputAmountRaw, swapOutToken.decimals).toNumber(),
-          swapOutToken.symbol
-        );
 
         dispatch({
           type: ZAP_SWAP_ESTIMATE_COMPLETE,
@@ -164,12 +157,15 @@ export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) 
             potId,
             isRemoveOnly,
             zapAddress: pairToken.zap,
+            userBalanceRaw,
             token0,
             token1,
+            swapInToken,
             swapOutToken,
-            balance0: byDecimals(balance0, token0.decimals),
-            balance1: byDecimals(balance0, token0.decimals),
-            swapOutAmount: byDecimals(outputAmountRaw, swapOutToken.decimals),
+            balance0: byDecimals(balance0raw, token0.decimals),
+            balance1: byDecimals(balance1raw, token1.decimals),
+            swapInAmount: byDecimals(swapInAmountRaw, swapInToken.decimals),
+            swapOutAmount: byDecimals(swapOutAmountRaw, swapOutToken.decimals),
           },
         });
       }

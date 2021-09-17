@@ -298,6 +298,56 @@ function DropdownIcon(props) {
   return <KeyboardArrowDownIcon {...props} viewBox="6 8.59000015258789 12 7.409999847412109" />;
 }
 
+function ZapWithdrawEstimateDebugger({
+  zapEstimate,
+  userTotalBalance,
+  selectedNeedsZap,
+  selectedToken,
+  pairToken,
+}) {
+  if (!selectedNeedsZap) {
+    return <div>Zap not needed for {selectedToken.symbol}</div>;
+  }
+
+  if (!zapEstimate) {
+    return <div>No estimate yet</div>;
+  }
+
+  if (zapEstimate.pending) {
+    return <div>Estimate pending</div>;
+  }
+
+  if (zapEstimate.isRemoveOnly) {
+    return (
+      <div>
+        <div>
+          Withdraw {userTotalBalance.toString()} {pairToken.symbol}
+        </div>
+        <div>
+          Remove liquidity for {zapEstimate.balance0.toString()} {zapEstimate.token0.symbol} and{' '}
+          {zapEstimate.balance1.toString()} {zapEstimate.token1.symbol}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div>
+        Withdraw {userTotalBalance.toString()} {pairToken.symbol}
+      </div>
+      <div>
+        Remove liquidity for {zapEstimate.balance0.toString()} {zapEstimate.token0.symbol} and{' '}
+        {zapEstimate.balance1.toString()} {zapEstimate.token1.symbol}
+      </div>
+      <div>
+        Swap {zapEstimate.swapInAmount.toString()} {zapEstimate.swapInToken.symbol} for{' '}
+        {zapEstimate.swapOutAmount.toString()} {zapEstimate.swapOutToken.symbol}
+      </div>
+    </div>
+  );
+}
+
 export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -343,8 +393,9 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
 
     return true;
   }, [address, userTotalBalance, selectedNeedsZap, zapEstimate]);
-
-  const ticketAllowance = useTokenAllowance(potAddress, pot.rewardToken, pot.tokenDecimals);
+  const potTicketAllowance = useTokenAllowance(potAddress, pot.rewardToken, pot.tokenDecimals);
+  const zapTicketAllowance = useTokenAllowance(pairToken.zap, pot.rewardToken, pot.tokenDecimals);
+  const zapLPAllowance = useTokenAllowance(pairToken.zap, pot.token, pot.tokenDecimals);
   const [steps, setSteps] = React.useState(() => ({
     modal: false,
     currentStep: -1,
@@ -379,10 +430,37 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
     const steps = [];
     if (address && canWithdraw) {
       if (selectedNeedsZap) {
-        // TODO approve LP and Ticket to the Zap Contract.
-        // TODO zap
+        // Approve Zap to spend Tickets
+        if (zapTicketAllowance.lt(ticketBalance)) {
+          steps.push({
+            step: 'approve',
+            message: 'Approval transaction happens once per pot.',
+            action: () =>
+              dispatch(reduxActions.wallet.approval(pot.network, pot.rewardAddress, pairToken.zap)),
+            pending: false,
+          });
+        }
+
+        // Approve Zap to spend LP
+        if (zapLPAllowance.lt(userTotalBalance)) {
+          steps.push({
+            step: 'approve',
+            message: 'Approval transaction happens once per pot.',
+            action: () =>
+              dispatch(reduxActions.wallet.approval(pot.network, pot.tokenAddress, pairToken.zap)),
+            pending: false,
+          });
+        }
+
+        // Zap
+        steps.push({
+          step: 'withdraw',
+          message: 'Confirm withdraw transaction on wallet to complete.',
+          action: () => dispatch(reduxActions.wallet.zapOut(pot.contractAddress, zapEstimate)),
+          pending: false,
+        });
       } else {
-        if (ticketAllowance.lt(ticketBalance)) {
+        if (potTicketAllowance.lt(ticketBalance)) {
           steps.push({
             step: 'approve',
             message: 'Approval transaction happens once per pot.',
@@ -415,6 +493,16 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
             values={{ token0: pairToken.lp[0], token1: pairToken.lp[1] }}
           />
           {/*<TooltipWithIcon i18nKey="withdraw.zapTooltip" />*/}
+        </div>
+        <div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>
+          <div>DEBUG</div>
+          <ZapWithdrawEstimateDebugger
+            zapEstimate={zapEstimate}
+            selectedNeedsZap={selectedNeedsZap}
+            selectedToken={selectedToken}
+            userTotalBalance={userTotalBalance}
+            pairToken={pairToken}
+          />
         </div>
         <div className={classes.fieldsHolder}>
           {address ? (

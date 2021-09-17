@@ -12,7 +12,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider';
 import Web3Modal, { connectors } from 'web3modal';
 import reduxActions from '../actions';
 import zapAbi from '../../../config/abi/zap.json';
-import { convertAmountToRawNumber } from '../../../helpers/format';
+import { byDecimals, convertAmountToRawNumber } from '../../../helpers/format';
 
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
@@ -173,7 +173,7 @@ const disconnect = () => {
   };
 };
 
-const approval = (network, tokenAddr, contractAddr) => {
+const approval = (network, tokenAddr, spendingContractAddress) => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
@@ -186,14 +186,14 @@ const approval = (network, tokenAddr, contractAddr) => {
       const maxAmount = Web3.utils.toWei('8000000000', 'ether');
 
       contract.methods
-        .approve(contractAddr, maxAmount)
+        .approve(spendingContractAddress, maxAmount)
         .send({ from: address })
         .on('transactionHash', function (hash) {
           dispatch({
             type: WALLET_ACTION,
             payload: {
               result: 'success_pending',
-              data: { spender: contractAddr, maxAmount: maxAmount, hash: hash },
+              data: { spender: spendingContractAddress, maxAmount: maxAmount, hash: hash },
             },
           });
         })
@@ -202,14 +202,17 @@ const approval = (network, tokenAddr, contractAddr) => {
             type: WALLET_ACTION,
             payload: {
               result: 'success',
-              data: { spender: contractAddr, maxAmount: maxAmount, receipt: receipt },
+              data: { spender: spendingContractAddress, maxAmount: maxAmount, receipt: receipt },
             },
           });
         })
         .on('error', function (error) {
           dispatch({
             type: WALLET_ACTION,
-            payload: { result: 'error', data: { spender: contractAddr, error: error.message } },
+            payload: {
+              result: 'error',
+              data: { spender: spendingContractAddress, error: error.message },
+            },
           });
         })
         .catch(error => {
@@ -634,9 +637,101 @@ const zapIn = (
   };
 };
 
-const zapOut = (potAddress, zapEstimate) => {
-  console.error('TODO: zapOut');
-  return async (dispatch, getState) => {};
+const zapOut = (
+  potAddress,
+  { zapAddress, isRemoveOnly, userBalanceRaw, swapOutToken, swapOutAmount }
+) => {
+  return async (dispatch, getState) => {
+    dispatch({ type: WALLET_ACTION_RESET });
+    const state = getState();
+    const address = state.walletReducer.address;
+    const provider = await state.walletReducer.web3modal.connect();
+
+    if (address && provider) {
+      const web3 = await new Web3(provider);
+      const contract = new web3.eth.Contract(zapAbi, zapAddress);
+
+      if (isRemoveOnly) {
+        contract.methods
+          .beamOut(potAddress, true)
+          .send({ from: address })
+          .on('transactionHash', function (hash) {
+            dispatch({
+              type: WALLET_ACTION,
+              payload: {
+                result: 'success_pending',
+                data: { spender: zapAddress, amount: userBalanceRaw, hash: hash },
+              },
+            });
+          })
+          .on('receipt', function (receipt) {
+            dispatch({
+              type: WALLET_ACTION,
+              payload: {
+                result: 'success',
+                data: { spender: zapAddress, amount: userBalanceRaw, receipt: receipt },
+              },
+            });
+          })
+          .on('error', function (error) {
+            dispatch({
+              type: WALLET_ACTION,
+              payload: { result: 'error', data: { spender: zapAddress, error: error.message } },
+            });
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      } else {
+        const swapOutAmountMinRaw = convertAmountToRawNumber(
+          swapOutAmount.multipliedBy(0.99),
+          swapOutToken.decimals
+        );
+
+        console.log(
+          'beamOutAndSwap(',
+          potAddress,
+          swapOutToken.address,
+          swapOutAmountMinRaw,
+          true,
+          ')',
+          swapOutAmount.toString(),
+          byDecimals(swapOutAmountMinRaw, swapOutToken.decimals).toString()
+        );
+
+        contract.methods
+          .beamOutAndSwap(potAddress, swapOutToken.address, swapOutAmountMinRaw, true)
+          .send({ from: address })
+          .on('transactionHash', function (hash) {
+            dispatch({
+              type: WALLET_ACTION,
+              payload: {
+                result: 'success_pending',
+                data: { spender: zapAddress, amount: userBalanceRaw, hash: hash },
+              },
+            });
+          })
+          .on('receipt', function (receipt) {
+            dispatch({
+              type: WALLET_ACTION,
+              payload: {
+                result: 'success',
+                data: { spender: zapAddress, amount: userBalanceRaw, receipt: receipt },
+              },
+            });
+          })
+          .on('error', function (error) {
+            dispatch({
+              type: WALLET_ACTION,
+              payload: { result: 'error', data: { spender: zapAddress, error: error.message } },
+            });
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    }
+  };
 };
 
 const obj = {
