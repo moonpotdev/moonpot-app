@@ -131,10 +131,16 @@ const getPools = async (items, state, dispatch) => {
       pool.tvl = formatTvl(totalTokenStaked, awardPrice);
 
       if ('bonuses' in pool) {
-        const bonuses = pool.bonuses.map(bonusConfig => {
-          const rewardInfo = item['rewardInfo_' + bonusConfig.id];
-          return calculateBoost(rewardInfo, pool, prices, bonusConfig);
-        });
+        const bonuses = pool.bonuses
+          .map(bonusConfig => {
+            const rewardInfo = item['rewardInfo_' + bonusConfig.id];
+            if (rewardInfo) {
+              return calculateBoost(rewardInfo, pool, prices, bonusConfig);
+            }
+
+            return null;
+          })
+          .filter(bonus => !!bonus);
 
         const activeCompoundable =
           bonuses.find(bonus => bonus.compoundable && bonus.active) !== undefined;
