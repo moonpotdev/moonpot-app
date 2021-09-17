@@ -169,6 +169,7 @@
     "myBonusToken": "My Bonus {{token}}",
     "mySuperBoostToken": "My Super Boost {{token}}",
     "fairplayNotice": "Fairplay Timelock rules apply.",
+    "withdrawFeeNotice": "Withdraw fee of {{percent}}% applies.",
     "migrationNotice": {
       "title": "Migration Needed",
       "message": "Withdrawing your {{token}}, instead of moving it to the new Moonpot, means you will miss out on future bonus earnings and your chance to win the next {{token}} Prize."

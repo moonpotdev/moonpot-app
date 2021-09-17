@@ -76,6 +76,10 @@ export function arrayUnique(arr) {
   return arr.filter((value, index) => arr.indexOf(value) === index);
 }
 
+export function objectArrayFlatten(arr) {
+  return arr.reduce((out, next) => ({ ...out, ...next }), {});
+}
+
 export const formatAddressShort = addr => {
   return addr.substr(0, 6) + '...' + addr.substr(addr.length - 4, 4);
 };

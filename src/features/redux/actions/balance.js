@@ -2,9 +2,9 @@ import { MultiCall } from 'eth-multicall';
 import { BALANCE_FETCH_BALANCES_BEGIN, BALANCE_FETCH_BALANCES_DONE } from '../constants';
 import { config } from '../../../config/config';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
-
-const erc20Abi = require('../../../config/abi/erc20.json');
-const gateManagerAbi = require('../../../config/abi/gatemanager.json');
+import prizePoolAbi from '../../../config/abi/prizepool.json';
+import erc20Abi from '../../../config/abi/erc20.json';
+import gateManagerAbi from '../../../config/abi/gatemanager.json';
 
 const getBalances = async (pools, state, dispatch) => {
   const address = state.walletReducer.address;
@@ -14,59 +14,101 @@ const getBalances = async (pools, state, dispatch) => {
   const calls = [];
   const needsNativeBalance = {};
 
-  for (const key in web3) {
-    multicall[key] = new MultiCall(web3[key], config[key].multicallAddress);
-    calls[key] = [];
-    needsNativeBalance[key] = false;
+  for (const network in web3) {
+    multicall[network] = new MultiCall(web3[network], config[network].multicallAddress);
+    calls[network] = [];
+    needsNativeBalance[network] = false;
   }
 
-  for (const key in pools) {
-    const pot = pools[key];
+  for (const id in pools) {
+    const pot = pools[id];
+    const network = pot.network;
+    const ticketContract = new web3[network].eth.Contract(erc20Abi, pot.rewardAddress);
+    const tokenContract = new web3[network].eth.Contract(erc20Abi, pot.tokenAddress);
+    const gateContract = new web3[network].eth.Contract(gateManagerAbi, pot.contractAddress);
+    const prizePoolContract = new web3[network].eth.Contract(prizePoolAbi, pot.prizePoolAddress);
 
-    const tokenContract = new web3[pot.network].eth.Contract(erc20Abi, pot.tokenAddress);
-    calls[pot.network].push({
+    // wallet balance of pot deposit token
+    calls[network].push({
       amount: tokenContract.methods.balanceOf(address),
       token: pot.token,
       address: pot.tokenAddress,
     });
 
+    // allowance of pot to spend deposit token
+    calls[network].push({
+      allowance: tokenContract.methods.allowance(address, pot.contractAddress),
+      token: pot.token,
+      spender: pot.contractAddress,
+    });
+
+    // deposited total balance (tickets + balance)
+    calls[network].push({
+      amount: gateContract.methods.userTotalBalance(address),
+      token: pot.contractAddress + ':total',
+      address: pot.contractAddress,
+    });
+
+    // deposited balance (interest earning)
+    calls[network].push({
+      amount: gateContract.methods.balances(address),
+      token: pot.contractAddress + ':balance',
+      address: pot.contractAddress,
+    });
+
+    // user balance of tickets + allowance of pot to spend tickets
+    calls[network].push({
+      amount: ticketContract.methods.balanceOf(address),
+      address: pot.rewardAddress,
+      allowance: ticketContract.methods.allowance(address, pot.contractAddress),
+      token: pot.rewardToken,
+      spender: pot.contractAddress,
+    });
+
+    // fairplay time left
+    calls[network].push({
+      timeleft: prizePoolContract.methods.userFairPlayLockRemaining(address, pot.rewardAddress),
+      token: pot.contractAddress + ':fee',
+      address: pot.contractAddress,
+    });
+
     // lp
     if (pot.vaultType === 'lp') {
-      const nativeWrappedTokenSymbol = config[pot.network].nativeCurrency.wrappedSymbol;
-      const pairToken = tokensByNetworkAddress[pot.network][pot.tokenAddress.toLowerCase()];
+      const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
 
       if (pairToken.zap) {
+        const nativeWrappedTokenSymbol = config[network].nativeCurrency.wrappedSymbol;
+
         // Allowance of zap to spend tickets
-        const ticketContract = new web3[pot.network].eth.Contract(erc20Abi, pot.rewardAddress);
-        calls[pot.network].push({
+        calls[network].push({
           allowance: ticketContract.methods.allowance(address, pairToken.zap),
           token: pot.rewardToken,
           spender: pairToken.zap,
         });
 
         // Allowance of zap to spend lp
-        const lpContract = new web3[pot.network].eth.Contract(erc20Abi, pot.tokenAddress);
-        calls[pot.network].push({
+        const lpContract = new web3[network].eth.Contract(erc20Abi, pot.tokenAddress);
+        calls[network].push({
           allowance: lpContract.methods.allowance(address, pairToken.zap),
           token: pot.token,
           spender: pairToken.zap,
         });
 
-        // token0/token1
+        // token0/token1 of lp
         for (const symbol of pairToken.lp) {
           const isNative = symbol === nativeWrappedTokenSymbol;
-          const token = tokensByNetworkSymbol[pot.network][symbol];
-          const tokenContract = new web3[pot.network].eth.Contract(erc20Abi, token.address);
+          const token = tokensByNetworkSymbol[network][symbol];
+          const tokenContract = new web3[network].eth.Contract(erc20Abi, token.address);
 
           // Balance of token0/token1
-          calls[pot.network].push({
+          calls[network].push({
             amount: tokenContract.methods.balanceOf(address),
             token: token.symbol,
             address: token.address,
           });
 
           // Allowance of zap to spend token0/token1
-          calls[pot.network].push({
+          calls[network].push({
             allowance: tokenContract.methods.allowance(address, pairToken.zap),
             token: token.symbol,
             spender: pairToken.zap,
@@ -74,44 +116,24 @@ const getBalances = async (pools, state, dispatch) => {
 
           // Do we need native balance
           if (isNative) {
-            needsNativeBalance[pot.network] = true;
+            needsNativeBalance[network] = true;
           }
         }
       }
     }
-
-    const gateContract = new web3[pot.network].eth.Contract(gateManagerAbi, pot.contractAddress);
-    calls[pot.network].push({
-      amount: gateContract.methods.userTotalBalance(address),
-      token: pot.contractAddress,
-      address: pot.contractAddress,
-    });
-
-    calls[pot.network].push({
-      allowance: tokenContract.methods.allowance(address, pot.contractAddress),
-      token: pot.token,
-      spender: pot.contractAddress,
-    });
-
-    const ticketContract = new web3[pot.network].eth.Contract(erc20Abi, pot.rewardAddress);
-    calls[pot.network].push({
-      amount: ticketContract.methods.balanceOf(address),
-      address: pot.rewardAddress,
-      allowance: ticketContract.methods.allowance(address, pot.contractAddress),
-      token: pot.rewardToken,
-      spender: pot.contractAddress,
-    });
   }
 
-  let response = [];
-
-  for (let key in multicall) {
-    const resp = await multicall[key].all([calls[key]]);
-    response = [...response, ...resp[0]];
+  // Merge responses per network
+  let responses = [];
+  for (const network in multicall) {
+    const [response] = await multicall[network].all([calls[network]]);
+    responses = [...responses, ...response];
   }
 
+  // New array for new state
   const tokens = { ...state.balanceReducer.tokens };
 
+  // Native balances
   for (const network in needsNativeBalance) {
     if (needsNativeBalance[network]) {
       const balance = await web3[network].eth.getBalance(address);
@@ -123,19 +145,28 @@ const getBalances = async (pools, state, dispatch) => {
     }
   }
 
-  for (let index in response) {
-    const r = response[index];
-    if (r.amount !== undefined) {
-      tokens[r.token] = {
-        ...tokens[r.token],
-        balance: r.amount,
-        address: r.address,
+  // Build new state
+  for (const response of responses) {
+    if (response.amount !== undefined) {
+      tokens[response.token] = {
+        ...tokens[response.token],
+        balance: response.amount,
+        address: response.address,
       };
     }
-    if (r.allowance !== undefined) {
-      tokens[r.token].allowance = {
-        ...tokens[r.token].allowance,
-        [r.spender]: r.allowance,
+
+    if (response.allowance !== undefined) {
+      tokens[response.token].allowance = {
+        ...tokens[response.token].allowance,
+        [response.spender]: response.allowance,
+      };
+    }
+
+    if (response.timeleft !== undefined) {
+      tokens[response.token] = {
+        ...tokens[response.token],
+        timeleft: parseInt(response.timeleft || 0),
+        timeleftUpdated: Date.now() / 1000,
       };
     }
   }

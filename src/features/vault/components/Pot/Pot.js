@@ -11,7 +11,7 @@ import { useBonusesEarned, usePot, useTokenBalance } from '../../../../helpers/h
 import { Translate } from '../../../../components/Translate';
 import PotBonus from '../../../home/MyPots/components/Pot/PotBonus';
 import { useSelector } from 'react-redux';
-import { LPPotWithdraw } from '../../../../components/LPPotWithdraw/LPPotWithdraw';
+import { LPPotWithdraw } from '../../../../components/PotWithdraw/LPPotWithdraw';
 
 const useStyles = makeStyles(styles);
 
@@ -77,7 +77,7 @@ const BonusAccordionItem = memo(function ({ pot }) {
 
 const WithdrawAccordionItem = memo(function ({ pot, onFairplayLearnMore }) {
   const address = useSelector(state => state.walletReducer.address);
-  const depositBalance = useTokenBalance(pot.contractAddress, 18);
+  const depositBalance = useTokenBalance(pot.contractAddress + ':total', 18);
   const hasDeposit = address && depositBalance.gt(0);
 
   return hasDeposit ? (

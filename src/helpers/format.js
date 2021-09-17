@@ -62,9 +62,15 @@ export const formatDecimals = (number, maxPlaces = null, minPlaces = null) => {
   });
 };
 
-export function byDecimals(number, tokenDecimals = 18) {
+export function byDecimals(number, tokenDecimals = 18, truncate = false) {
   const decimals = new BigNumber(10).exponentiatedBy(tokenDecimals);
-  return new BigNumber(number).dividedBy(decimals);
+  const value = new BigNumber(number).dividedBy(decimals);
+
+  if (truncate) {
+    return value.decimalPlaces(tokenDecimals, BigNumber.ROUND_DOWN);
+  }
+
+  return value;
 }
 
 const formatTimeLeftDefaultOptions = {

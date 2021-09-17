@@ -6,8 +6,12 @@ import zapAbi from '../../../config/abi/zap.json';
 import routerAbi from '../../../config/abi/router.json';
 import pairAbi from '../../../config/abi/pair.json';
 import prizePoolAbi from '../../../config/abi/prizepool.json';
+import erc20Abi from '../../../config/abi/erc20.json';
 import { byDecimals, convertAmountToRawNumber } from '../../../helpers/format';
 import { config } from '../../../config/config';
+import gateManagerAbi from '../../../config/abi/gatemanager.json';
+import { MultiCall } from 'eth-multicall';
+import { objectArrayFlatten } from '../../../helpers/utils';
 
 export function createZapInEstimate(potId, depositAddress, depositAmount) {
   const requestId = uniqid('in', potId);
@@ -66,32 +70,16 @@ export function createZapInEstimate(potId, depositAddress, depositAmount) {
   ];
 }
 
-async function getFairplayFeePercent(web3, userAddress, prizePoolAddress, ticketAddress) {
-  const max = 3600 * 24 * 10;
-  const secondsRemaining = await getFairplaySecondsRemaining(
-    web3,
-    userAddress,
-    prizePoolAddress,
-    ticketAddress
-  );
-  return (secondsRemaining * 0.025) / max;
-}
-
-async function getFairplaySecondsRemaining(web3, userAddress, prizePoolAddress, ticketAddress) {
-  const prizePoolContract = new web3.eth.Contract(prizePoolAbi, prizePoolAddress);
-
-  try {
-    const remaining = await prizePoolContract.methods
-      .userFairPlayLockRemaining(userAddress, ticketAddress)
-      .call();
-
-    return remaining || 0;
-  } catch {
-    return 0;
+function getFairplayFeePercent(secondsRemaining, days = 10) {
+  if (secondsRemaining) {
+    const max = 3600 * 24 * days;
+    return (secondsRemaining * 0.05) / max;
   }
+
+  return 0;
 }
 
-export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) {
+export function createZapOutEstimate(potId, wantTokenAddress) {
   const requestId = uniqid('out', potId);
 
   return [
@@ -103,14 +91,15 @@ export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) 
           requestId,
           potId,
           wantTokenAddress,
-          userTotalBalance,
         },
       });
 
       const state = getState();
       const pot = state.vaultReducer.pools[potId];
+      const withdrawFee = 'withdrawFee' in pot ? pot.withdrawFee : 0;
       const network = pot.network;
       const web3 = state.walletReducer.rpc[network];
+      const multicall = new MultiCall(web3, config[network].multicallAddress);
       const address = state.walletReducer.address;
       const isRemoveOnly = !wantTokenAddress;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
@@ -119,29 +108,77 @@ export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) 
       const token0 = tokensByNetworkSymbol[network][token0Symbol];
       const token1 = tokensByNetworkSymbol[network][token1Symbol];
       const zapContract = new web3.eth.Contract(zapAbi, pairToken.zap);
-      const routerAddress = await zapContract.methods.router().call();
-      const routerContract = new web3.eth.Contract(routerAbi, routerAddress);
       const pairContract = new web3.eth.Contract(pairAbi, pairToken.address);
+      const ticketContract = new web3.eth.Contract(erc20Abi, pot.rewardAddress);
+      const gateContract = new web3.eth.Contract(gateManagerAbi, pot.contractAddress);
+      const prizePoolContract = new web3.eth.Contract(prizePoolAbi, pot.prizePoolAddress);
 
-      const fairplayFee = await getFairplayFeePercent(
-        web3,
-        address,
-        pot.prizePoolAddress,
-        pot.rewardAddress
+      const calls = [
+        {
+          ticketBalance: ticketContract.methods.balanceOf(address),
+        },
+        {
+          totalSupply: pairContract.methods.totalSupply(),
+          reserves: pairContract.methods.getReserves(),
+        },
+        {
+          timeleft: prizePoolContract.methods.userFairPlayLockRemaining(address, pot.rewardAddress),
+        },
+        {
+          userTotalBalance: gateContract.methods.userTotalBalance(address),
+        },
+        {
+          routerAddress: zapContract.methods.router(),
+        },
+      ];
+
+      const [results] = await multicall.all([calls]);
+      const { ticketBalance, totalSupply, reserves, timeleft, userTotalBalance, routerAddress } =
+        objectArrayFlatten(results);
+
+      const fairplayFee = getFairplayFeePercent(timeleft);
+
+      const depositBalance = new BigNumber(userTotalBalance).minus(ticketBalance);
+      const ticketBalanceAfterWithdrawFee = new BigNumber(ticketBalance).multipliedBy(
+        1 - withdrawFee
       );
-      const userBalanceAfterFee = userTotalBalance.multipliedBy(1 - fairplayFee);
-      const userBalanceAfterFeeRaw = userBalanceAfterFee
-        .times(new BigNumber('10').pow(pot.tokenDecimals))
+      const depositBalanceAfterWithdrawFee = depositBalance.multipliedBy(1 - withdrawFee);
+      const ticketBalanceAfterFairplayFee = ticketBalanceAfterWithdrawFee.multipliedBy(
+        1 - fairplayFee
+      );
+      const userWithdrawableBalance = depositBalanceAfterWithdrawFee
+        .plus(ticketBalanceAfterFairplayFee)
         .decimalPlaces(0, BigNumber.ROUND_DOWN);
-      const totalSupplyRaw = new BigNumber(await pairContract.methods.totalSupply().call());
-      const reservesRaw = await pairContract.methods.getReserves().call();
-      const balance0raw = userBalanceAfterFeeRaw
-        .dividedBy(totalSupplyRaw)
-        .multipliedBy(reservesRaw[0])
+
+      // TODO remove
+      console.log({
+        userTotalBalance: byDecimals(userTotalBalance, 18).toString(),
+        ticketBalance: byDecimals(ticketBalance, 18).toString(),
+        depositBalance: byDecimals(depositBalance, 18).toString(),
+        ticketBalanceAfterWithdrawFee: byDecimals(ticketBalanceAfterWithdrawFee, 18).toString(),
+        depositBalanceAfterWithdrawFee: byDecimals(depositBalanceAfterWithdrawFee, 18).toString(),
+        ticketBalanceAfterFairplayFee: byDecimals(ticketBalanceAfterFairplayFee, 18).toString(),
+        userWithdrawableBalance: byDecimals(userWithdrawableBalance, 18).toString(),
+        withdrawFee: withdrawFee * 100 + '%',
+        withdrawFeeTokens: byDecimals(
+          new BigNumber(userTotalBalance).multipliedBy(withdrawFee),
+          18
+        ).toString(),
+        fairplayFee: fairplayFee * 100 + '%',
+        fairplayFeeTokens: byDecimals(
+          new BigNumber(ticketBalance).multipliedBy(fairplayFee),
+          18
+        ).toString(),
+      });
+
+      const balance0 = userWithdrawableBalance
+        .dividedBy(totalSupply)
+        .multipliedBy(reserves[0])
         .decimalPlaces(0, BigNumber.ROUND_DOWN);
-      const balance1raw = userBalanceAfterFeeRaw
-        .dividedBy(totalSupplyRaw)
-        .multipliedBy(reservesRaw[1])
+
+      const balance1 = userWithdrawableBalance
+        .dividedBy(totalSupply)
+        .multipliedBy(reserves[1])
         .decimalPlaces(0, BigNumber.ROUND_DOWN);
 
       if (isRemoveOnly) {
@@ -153,23 +190,23 @@ export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) 
             potId,
             isRemoveOnly,
             zapAddress: pairToken.zap,
-            userBalance: userTotalBalance,
-            userBalanceAfterFee,
-            userBalanceAfterFeeRaw,
+            userTotalBalance: byDecimals(userTotalBalance, pot.tokenDecimals, true),
+            withdrawableBalance: byDecimals(userWithdrawableBalance, pot.tokenDecimals, true),
             token0,
             token1,
-            balance0: byDecimals(balance0raw, token0.decimals),
-            balance1: byDecimals(balance1raw, token1.decimals),
+            balance0: byDecimals(balance0, token0.decimals, true),
+            balance1: byDecimals(balance1, token1.decimals, true),
           },
         });
       } else {
         // withdraw lp and swap one half
+        const routerContract = new web3.eth.Contract(routerAbi, routerAddress);
         const wantIsToken0 = wantTokenAddress.toLowerCase() === token0.address.toLowerCase();
         const swapInToken = wantIsToken0 ? token1 : token0;
-        const swapInReservesRaw = wantIsToken0 ? reservesRaw[1] : reservesRaw[0];
-        const swapInAmountRaw = wantIsToken0 ? balance1raw : balance0raw;
+        const swapInReservesRaw = wantIsToken0 ? reserves[1] : reserves[0];
+        const swapInAmountRaw = wantIsToken0 ? balance1 : balance0;
         const swapOutToken = wantIsToken0 ? token0 : token1;
-        const swapOutReservesRaw = wantIsToken0 ? reservesRaw[0] : reservesRaw[1];
+        const swapOutReservesRaw = wantIsToken0 ? reserves[0] : reserves[1];
 
         const swapOutAmountRaw = await routerContract.methods
           .getAmountOut(swapInAmountRaw, swapInReservesRaw, swapOutReservesRaw)
@@ -182,17 +219,16 @@ export function createZapOutEstimate(potId, wantTokenAddress, userTotalBalance) 
             potId,
             isRemoveOnly,
             zapAddress: pairToken.zap,
-            userBalance: userTotalBalance,
-            userBalanceAfterFee,
-            userBalanceAfterFeeRaw,
+            userTotalBalance: byDecimals(userTotalBalance, pot.tokenDecimals, true),
+            userWithdrawableBalance: byDecimals(userWithdrawableBalance, pot.tokenDecimals, true),
             token0,
             token1,
+            balance0: byDecimals(balance0, token0.decimals, true),
+            balance1: byDecimals(balance1, token1.decimals, true),
             swapInToken,
             swapOutToken,
-            balance0: byDecimals(balance0raw, token0.decimals),
-            balance1: byDecimals(balance1raw, token1.decimals),
-            swapInAmount: byDecimals(swapInAmountRaw, swapInToken.decimals),
-            swapOutAmount: byDecimals(swapOutAmountRaw, swapOutToken.decimals),
+            swapInAmount: byDecimals(swapInAmountRaw, swapInToken.decimals, true),
+            swapOutAmount: byDecimals(swapOutAmountRaw, swapOutToken.decimals, true),
           },
         });
       }

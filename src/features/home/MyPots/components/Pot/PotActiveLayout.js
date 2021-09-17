@@ -4,7 +4,7 @@ import { PotDeposit } from '../../../../../components/PotDeposit';
 import { PotWithdraw } from '../../../../../components/PotWithdraw';
 import { CardAccordionItem } from '../../../../../components/Cards';
 import PotBonus from './PotBonus';
-import { LPPotWithdraw } from '../../../../../components/LPPotWithdraw/LPPotWithdraw';
+import { LPPotWithdraw } from '../../../../../components/PotWithdraw/LPPotWithdraw';
 import { LPPotDeposit } from '../../../../../components/LPPotDeposit/LPPotDeposit';
 import { useSelector } from 'react-redux';
 
