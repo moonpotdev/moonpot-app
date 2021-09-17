@@ -55,24 +55,24 @@ const Steps = ({ item, steps, handleClose }) => {
                   <React.Fragment>
                     <Typography className={classes.stepsTitleText}>Deposit Successful!</Typography>
                     <Typography className={classes.successfulDepositAmountText}>
-                      You have successfully deposited{' '}
-                      {byDecimals(
-                        new BigNumber(wallet.action.data.amount),
-                        item.tokenDecimals
-                      ).toFixed(8)}{' '}
-                      {item.token} into the new {item.token} Moonpot.
+                      You have successfully deposited into {item.name} Pot.
                     </Typography>
                   </React.Fragment>
                 ) : null}
-                {steps.items[steps.currentStep].step === 'withdraw' ||
-                steps.items[steps.currentStep].step === 'reward' ? (
+                {steps.items[steps.currentStep].step === 'withdraw' ? (
                   <React.Fragment>
                     <Typography className={classes.stepsTitleText}>Withdraw Successful!</Typography>
                     <Typography className={classes.successfulDepositAmountText}>
-                      You have successfully withdrawn all of your{' '}
-                      {steps.items[steps.currentStep].step === 'reward'
-                        ? item.bonusToken
-                        : item.token}
+                      You have successfully withdrawn from {item.name} Pot.
+                    </Typography>
+                  </React.Fragment>
+                ) : null}
+                {steps.items[steps.currentStep].step === 'reward' ? (
+                  <React.Fragment>
+                    <Typography className={classes.stepsTitleText}>Withdraw Successful!</Typography>
+                    <Typography className={classes.successfulDepositAmountText}>
+                      You have successfully withdrawn all of your bonus earnings from {item.name}{' '}
+                      Pot.
                     </Typography>
                   </React.Fragment>
                 ) : null}

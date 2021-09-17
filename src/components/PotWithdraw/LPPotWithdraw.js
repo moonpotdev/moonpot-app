@@ -234,7 +234,7 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
         if (zapTicketAllowance.lt(ticketBalance)) {
           steps.push({
             step: 'approve',
-            message: 'Approval transaction happens once per pot.',
+            message: 'Approval transactions happen once per pot.',
             action: () =>
               dispatch(reduxActions.wallet.approval(pot.network, pot.rewardAddress, pairToken.zap)),
             pending: false,
@@ -245,7 +245,7 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
         if (zapLPAllowance.lt(userTotalBalance)) {
           steps.push({
             step: 'approve',
-            message: 'Approval transaction happens once per pot.',
+            message: 'Approval transactions happen once per pot.',
             action: () =>
               dispatch(reduxActions.wallet.approval(pot.network, pot.tokenAddress, pairToken.zap)),
             pending: false,
@@ -263,7 +263,7 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
         if (potTicketAllowance.lt(ticketBalance)) {
           steps.push({
             step: 'approve',
-            message: 'Approval transaction happens once per pot.',
+            message: 'Approval transactions happen once per pot',
             action: () =>
               dispatch(reduxActions.wallet.approval(pot.network, pot.rewardAddress, potAddress)),
             pending: false,

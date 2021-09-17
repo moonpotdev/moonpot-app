@@ -237,7 +237,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
         if (!isNative && zapAllowance.lt(depositAmount)) {
           steps.push({
             step: 'approve',
-            message: 'Approval transaction happens once per pot.',
+            message: 'Approval transactions happen once per pot.',
             action: () =>
               dispatch(reduxActions.wallet.approval(pot.network, swapInToken.address, zapAddress)),
             pending: false,
@@ -256,7 +256,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
         if (potAllowance.lt(depositAmount)) {
           steps.push({
             step: 'approve',
-            message: 'Approval transaction happens once per pot.',
+            message: 'Approval transactions happen once per pot.',
             action: () =>
               dispatch(
                 reduxActions.wallet.approval(pot.network, pot.tokenAddress, pot.contractAddress)

@@ -209,7 +209,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
       if (ticketAllowance.lt(ticketBalance)) {
         steps.push({
           step: 'approve',
-          message: 'Approval transaction happens once per pot.',
+          message: 'Approval transactions happen once per pot.',
           action: () =>
             dispatch(
               reduxActions.wallet.approval(pot.network, pot.rewardAddress, pot.contractAddress)
