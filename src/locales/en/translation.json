@@ -69,6 +69,8 @@
     "winTotalTokensIn": "in ",
     "statNextDraw": "Next Draw",
     "statNextDrawWeekly": "Next Weekly Draw",
+    "statNextDrawBiWeekly": "Next Bi-Weekly Draw",
+    "statNextDrawMonthly": "Next Monthly Draw",
     "statNextDrawCountdownFinished": "Awaiting draw...",
     "statInterest": "Interest",
     "statInterestApy": "{{apy}}% APY",
