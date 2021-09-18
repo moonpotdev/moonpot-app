@@ -8,7 +8,7 @@ import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
 import { usePot, useTokenBalance, useTotalPrize } from '../../helpers/hooks';
-import { DrawStat } from '../DrawStat';
+import { DrawStat, DrawNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
 import { investmentOdds } from '../../helpers/utils';
 import styles from './styles';
@@ -180,6 +180,8 @@ export function Pot({ id, variant, bottom }) {
   const classes = useStyles();
   const pot = usePot(id);
 
+  console.log(pot);
+
   return (
     <Card variant={variant}>
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>
@@ -197,11 +199,11 @@ export function Pot({ id, variant, bottom }) {
       </Grid>
       <Grid container spacing={2} className={classes.rowDrawStats}>
         <Grid item xs={7}>
-          <DrawStat i18nKey="pot.statNextDraw">
+          <DrawNextDraw frequency={pot.frequency}>
             <Countdown until={pot.expiresAt * 1000}>
               <Translate i18nKey="pot.statNextDrawCountdownFinished" />
             </Countdown>
-          </DrawStat>
+          </DrawNextDraw>
         </Grid>
         <Grid item xs={5}>
           <DrawStat i18nKey="pot.statTVL">

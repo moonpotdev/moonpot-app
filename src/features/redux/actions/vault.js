@@ -60,6 +60,7 @@ const getPools = async (items, state, dispatch) => {
       id: pool.id,
       expiresAt: strategyContract.methods.prizePeriodEndAt(),
       numberOfWinners: strategyContract.methods.numberOfWinners(),
+      frequency: strategyContract.methods.prizePeriodSeconds(),
     });
 
     // === Ticket
@@ -163,6 +164,7 @@ const getPools = async (items, state, dispatch) => {
     if (!isEmpty(item.expiresAt)) {
       pool.expiresAt = item.expiresAt;
       pool.numberOfWinners = Number(item.numberOfWinners);
+      pool.frequency = item.frequency;
     }
 
     // === Ticket
