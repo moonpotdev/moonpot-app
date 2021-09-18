@@ -107,7 +107,7 @@
   },
   {
     "symbol": "moonTicketApePOTS-BNB",
-    "address": "0x87f697905732c6FAa5Def3bfE23AaDA5eAC33Ee8",
+    "address": "0x2f4a26A1B540255B5AA2c2e4A2d142ae2765b186",
     "type": "ticket",
     "oracleId": "banana-pots-bnb",
     "decimals": 18,

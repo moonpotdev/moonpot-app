@@ -12,7 +12,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider';
 import Web3Modal, { connectors } from 'web3modal';
 import reduxActions from '../actions';
 import zapAbi from '../../../config/abi/zap.json';
-import { byDecimals, convertAmountToRawNumber } from '../../../helpers/format';
+import { convertAmountToRawNumber } from '../../../helpers/format';
 
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
