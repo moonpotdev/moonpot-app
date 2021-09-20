@@ -193,8 +193,12 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
   const classes = useStyles();
   const pot = usePot(id);
   const address = useSelector(state => state.walletReducer.address);
-  const ticketBalance = useTokenBalance(pot.rewardToken, 18);
-  const ticketAllowance = useTokenAllowance(pot.contractAddress, pot.rewardToken, 18);
+  const ticketBalance = useTokenBalance(pot.rewardToken, pot.tokenDecimals);
+  const ticketAllowance = useTokenAllowance(
+    pot.contractAddress,
+    pot.rewardToken,
+    pot.tokenDecimals
+  );
   const [steps, setSteps] = React.useState(() => ({
     modal: false,
     currentStep: -1,
