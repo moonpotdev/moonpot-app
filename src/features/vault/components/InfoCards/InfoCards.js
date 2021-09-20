@@ -59,7 +59,7 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
         </Card>
       ) : null}
       {/*Community Pot APR Breakdown */}
-      {pot.vaultType === 'community' ? (
+      {pot.vaultType === 'community' || 'lp' ? (
         <Card variant="purpleDark">
           <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
           <div className={classes.earningItem}>
@@ -93,7 +93,7 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
         </Card>
       ) : null}
       {/*Regular Pot APR Breakdown */}
-      {pot.infoCardEarningsBreakdown && pot.vaultType !== 'community' ? (
+      {pot.infoCardEarningsBreakdown && pot.vaultType === 'main' ? (
         <Card variant="purpleDark">
           <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
           <div className={classes.earningItem}>

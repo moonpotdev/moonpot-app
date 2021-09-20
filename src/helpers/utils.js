@@ -76,10 +76,19 @@ export function arrayUnique(arr) {
   return arr.filter((value, index) => arr.indexOf(value) === index);
 }
 
+export function objectArrayFlatten(arr) {
+  return arr.reduce((out, next) => ({ ...out, ...next }), {});
+}
+
 export const formatAddressShort = addr => {
   return addr.substr(0, 6) + '...' + addr.substr(addr.length - 4, 4);
 };
 
 export function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export function variantClass(classes, prefix, variant, defaultClass = false) {
+  const key = prefix + variant[0].toUpperCase() + variant.substr(1);
+  return key in classes ? classes[key] : defaultClass;
 }

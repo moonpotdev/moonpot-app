@@ -1,16 +1,17 @@
-import React, { memo } from 'react';
-import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards/Cards';
+import React, { memo, useMemo } from 'react';
+import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
-
+import { LPPotDeposit } from '../../../../components/LPPotDeposit/LPPotDeposit';
 import { Pot as BasePot, PrizeSplit } from '../../../../components/Pot/Pot';
 import styles from './styles';
 import { PotDeposit } from '../../../../components/PotDeposit';
 import { PotWithdraw } from '../../../../components/PotWithdraw';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import { useBonusEarned, useBoostEarned, usePot, useTokenBalance } from '../../../../helpers/hooks';
+import { useBonusesEarned, usePot, useTokenBalance } from '../../../../helpers/hooks';
 import { Translate } from '../../../../components/Translate';
 import PotBonus from '../../../home/MyPots/components/Pot/PotBonus';
 import { useSelector } from 'react-redux';
+import { LPPotWithdraw } from '../../../../components/PotWithdraw/LPPotWithdraw';
 
 const useStyles = makeStyles(styles);
 
@@ -58,9 +59,8 @@ const EolNotice = function ({ id }) {
 };
 
 const BonusAccordionItem = memo(function ({ pot }) {
-  const bonus = useBonusEarned(pot);
-  const boost = useBoostEarned(pot);
-  const hasEarned = bonus.gt(0) || boost.gt(0);
+  const bonuses = useBonusesEarned(pot.id);
+  const hasEarned = useMemo(() => bonuses.find(bonus => bonus.earned > 0) !== undefined, [bonuses]);
 
   return hasEarned ? (
     <CardAccordionItem
@@ -77,19 +77,38 @@ const BonusAccordionItem = memo(function ({ pot }) {
 
 const WithdrawAccordionItem = memo(function ({ pot, onFairplayLearnMore }) {
   const address = useSelector(state => state.walletReducer.address);
-  const depositBalance = useTokenBalance(pot.contractAddress, 18);
+  const depositBalance = useTokenBalance(pot.contractAddress + ':total', 18);
   const hasDeposit = address && depositBalance.gt(0);
 
   return hasDeposit ? (
     <CardAccordionItem titleKey="pot.withdraw">
-      <PotWithdraw
-        id={pot.id}
-        onLearnMore={onFairplayLearnMore}
-        variant={pot.vaultType === 'main' ? 'teal' : 'purpleAlt'}
-      />
+      {pot.vaultType === 'lp' ? (
+        <LPPotWithdraw
+          id={pot.id}
+          onLearnMore={onFairplayLearnMore}
+          variant={handleVariant(pot.vaultType)}
+        />
+      ) : (
+        <PotWithdraw
+          id={pot.id}
+          onLearnMore={onFairplayLearnMore}
+          variant={handleVariant(pot.vaultType)}
+        />
+      )}
     </CardAccordionItem>
   ) : null;
 });
+
+function handleVariant(vaultType) {
+  if (vaultType === 'community') {
+    return 'purpleAlt';
+  } else if (vaultType === 'lp') {
+    return 'green';
+  }
+
+  // default/main
+  return 'teal';
+}
 
 const Bottom = function ({ id, onFairplayLearnMore, variant }) {
   const pot = usePot(id);
@@ -107,11 +126,21 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
       </CardAccordionItem>
       <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
         {pot.status === 'active' ? (
-          <PotDeposit
-            id={id}
-            onLearnMore={onFairplayLearnMore}
-            variant={pot.vaultType === 'main' ? 'teal' : 'purpleAlt'}
-          />
+          <>
+            {pot.vaultType === 'lp' ? (
+              <LPPotDeposit
+                id={id}
+                onLearnMore={onFairplayLearnMore}
+                variant={handleVariant(pot.vaultType)}
+              />
+            ) : (
+              <PotDeposit
+                id={id}
+                onLearnMore={onFairplayLearnMore}
+                variant={handleVariant(pot.vaultType)}
+              />
+            )}
+          </>
         ) : (
           <EolNotice id={id} />
         )}

@@ -65,7 +65,7 @@ const useNormalizedWinnings = function (awards, drawToken) {
         const numericAmount = byDecimals(amount, tokenData.decimals);
         const price = new BigNumber(prices[tokenData.oracleId] || 0);
         const totalPrice = numericAmount.multipliedBy(price);
-        const symbol = tokenData.displaySymbol || tokenData.symbol;
+        const symbol = tokenData.ticketFor || tokenData.symbol;
 
         if (symbol in tokens) {
           tokens[symbol].amount = tokens[symbol].amount.plus(numericAmount);

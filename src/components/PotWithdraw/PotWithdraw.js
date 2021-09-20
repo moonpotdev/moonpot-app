@@ -1,11 +1,10 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { usePot, useTokenAllowance, useTokenBalance, useTokenEarned } from '../../helpers/hooks';
+import { useBonusesEarned, usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
 import { Link, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import { useTranslation } from 'react-i18next';
 import { formatDecimals, formatTimeLeft } from '../../helpers/format';
-import PrizePoolAbi from '../../config/abi/prizepool.json';
 import reduxActions from '../../features/redux/actions';
 import { isEmpty } from '../../helpers/utils';
 import Steps from '../../features/vault/components/Steps';
@@ -16,49 +15,11 @@ import { Translate } from '../Translate';
 
 const useStyles = makeStyles(styles);
 
-// TODO move fairness fee to state/redux
-function useTimelockEndsAt(
-  contractAddress,
-  rewardTokenAddress,
-  tokenDecimals,
-  prizePoolAddress,
-  network
-) {
-  const rpc = useSelector(state => state.walletReducer.rpc[network]);
-  const address = useSelector(state => state.walletReducer.address);
-  const depositBalance = useTokenBalance(contractAddress, tokenDecimals);
-  const [endsAt, setEndsAt] = useState(0);
-
-  const prizePoolContract = useMemo(() => {
-    return new rpc.eth.Contract(PrizePoolAbi, prizePoolAddress);
-  }, [prizePoolAddress, rpc]);
-
-  useEffect(() => {
-    if (address && depositBalance.gt(0)) {
-      (async () => {
-        try {
-          const lockRemainingSeconds = await prizePoolContract.methods
-            .userFairPlayLockRemaining(address, rewardTokenAddress)
-            .call();
-          const now = Date.now();
-          const timeLeft = (lockRemainingSeconds || 0) * 1000;
-
-          setEndsAt(now + timeLeft);
-        } catch (e) {
-          if (e.message && e.message.includes('SafeMath: subtraction overflow')) {
-            setEndsAt(0);
-          } else {
-            throw e;
-          }
-        }
-      })();
-    } else {
-      setEndsAt(0);
-    }
-  }, [address, depositBalance, setEndsAt, rewardTokenAddress, prizePoolContract]);
-
-  return endsAt;
-}
+const bonusStatLabels = {
+  bonus: 'withdraw.myBonusToken',
+  superBoost: 'withdraw.mySuperBoostToken',
+  earned: 'withdraw.myEarnedToken',
+};
 
 const Stat = function ({ label, children }) {
   const classes = useStyles();
@@ -72,42 +33,57 @@ const Stat = function ({ label, children }) {
 
 const StatDeposited = memo(function ({ token, contractAddress, tokenDecimals }) {
   const { t } = useTranslation();
-  const ticketBalance = useTokenBalance(contractAddress, tokenDecimals);
-  return <Stat label={t('pot.myToken', { token })}>{formatDecimals(ticketBalance, 8)}</Stat>;
+  const userTotalBalance = useTokenBalance(contractAddress + ':total', tokenDecimals);
+  return <Stat label={t('pot.myToken', { token })}>{formatDecimals(userTotalBalance, 8)}</Stat>;
 });
 
-const StatEarned = memo(function ({ id, token, tokenDecimals, labelKey = 'pot.myEarnedToken' }) {
+const StatEarned = memo(function ({ bonus }) {
   const { t } = useTranslation();
-  const earned = useTokenEarned(id, token, tokenDecimals);
 
-  if (earned.isZero()) {
-    return null;
-  }
-
-  return <Stat label={t(labelKey, { token })}>{formatDecimals(earned, 8)}</Stat>;
+  return (
+    <Stat label={t(bonusStatLabels[bonus.display], { token: bonus.symbol })}>
+      {formatDecimals(bonus.earned, 8)}
+    </Stat>
+  );
 });
 
-const StatTimelock = memo(function ({ endsAt }) {
+const StatTimelock = memo(function ({ contractAddress }) {
   const { t } = useTranslation();
+  const timeleft = useSelector(
+    state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleft
+  );
+  const timeleftUpdatedAt = useSelector(
+    state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleftUpdated
+  );
+  const endsAt = (timeleftUpdatedAt + timeleft) * 1000;
   const timeLeft = Math.max(0, endsAt - Date.now());
   return <Stat label={t('pot.myFairplayTimelock')}>{formatTimeLeft(timeLeft)}</Stat>;
 });
 
-const StatFee = memo(function ({ endsAt, token, contractAddress, tokenDecimals }) {
+const StatFee = memo(function ({ token, contractAddress, ticketSymbol, tokenDecimals }) {
   const { t } = useTranslation();
   const address = useSelector(state => state.walletReducer.address);
-  const depositBalance = useTokenBalance(contractAddress, tokenDecimals);
+  const timeleft = useSelector(
+    state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleft
+  );
+  const timeleftUpdatedAt = useSelector(
+    state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleftUpdated
+  );
+  const endsAt = (timeleftUpdatedAt + timeleft) * 1000;
+  const ticketBalance = useTokenBalance(ticketSymbol, tokenDecimals);
+
   const fairnessFee = useMemo(() => {
     const timeLeft = endsAt - Date.now();
-    if (address && depositBalance.gt(0) && timeLeft > 0) {
+
+    if (address && ticketBalance.gt(0) && timeLeft > 0) {
       const max = 3600 * 24 * 10 * 1000;
-      const relative = (timeLeft * 0.025) / max;
-      const fee = depositBalance.times(relative);
+      const relative = (timeLeft * 0.05) / max;
+      const fee = ticketBalance.times(relative);
       return formatDecimals(fee, 8);
     }
 
     return 0;
-  }, [endsAt, depositBalance, address]);
+  }, [endsAt, ticketBalance, address]);
 
   return (
     <Stat label={t('pot.myFairnessFee')}>
@@ -116,16 +92,19 @@ const StatFee = memo(function ({ endsAt, token, contractAddress, tokenDecimals }
   );
 });
 
-const Stats = function ({ id }) {
+const BonusStats = memo(function BonusStats({ id }) {
+  const bonuses = useBonusesEarned(id).filter(bonus => bonus.earned > 0);
+
+  if (bonuses.length) {
+    return bonuses.map(bonus => <StatEarned key={`${id}-${bonus.id}`} id={id} bonus={bonus} />);
+  }
+
+  return null;
+});
+
+export const Stats = function ({ id }) {
   const classes = useStyles();
   const pot = usePot(id);
-  const timelockEndsAt = useTimelockEndsAt(
-    pot.contractAddress,
-    pot.rewardAddress,
-    pot.tokenDecimals,
-    pot.prizePoolAddress,
-    pot.network
-  );
 
   return (
     <div className={classes.stats}>
@@ -134,39 +113,20 @@ const Stats = function ({ id }) {
         contractAddress={pot.contractAddress}
         tokenDecimals={pot.tokenDecimals}
       />
-      {pot.bonusToken ? (
-        <StatEarned
-          id={id}
-          token={pot.bonusToken}
-          tokenDecimals={pot.bonusTokenDecimals}
-          labelKey={
-            id === 'pots' && pot.bonusToken === 'POTS' ? 'pot.myEarnedToken' : 'pot.myBonusToken'
-          }
-        />
-      ) : null}
-      {pot.boostToken ? (
-        <StatEarned
-          id={id}
-          token={pot.boostToken}
-          tokenDecimals={pot.boostTokenDecimals}
-          labelKey={
-            id === 'pots' && pot.boostToken === 'POTS' ? 'pot.myEarnedToken' : 'pot.myBonusToken'
-          }
-        />
-      ) : null}
-      <StatTimelock endsAt={timelockEndsAt} />
+      <BonusStats id={id} />
+      <StatTimelock contractAddress={pot.contractAddress} />
       <StatFee
-        endsAt={timelockEndsAt}
         token={pot.token}
         contractAddress={pot.contractAddress}
         tokenDecimals={pot.tokenDecimals}
+        ticketSymbol={pot.rewardToken}
       />
     </div>
   );
 };
 
 // TODO DRY, move to one global steps component; use state/actions
-const WithdrawSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
+export const WithdrawSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
   const dispatch = useDispatch();
   const action = useSelector(state => state.walletReducer.action);
 
@@ -214,7 +174,7 @@ const WithdrawSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
   return <Steps item={pot} steps={steps} handleClose={handleClose} />;
 };
 
-const MigrationNotice = function ({ token }) {
+export const MigrationNotice = function ({ token }) {
   const classes = useStyles();
   return (
     <Alert severity={'warning'} className={classes.migrationNotice}>
@@ -249,7 +209,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
       if (ticketAllowance.lt(ticketBalance)) {
         steps.push({
           step: 'approve',
-          message: 'Approval transaction happens once per pot.',
+          message: 'Approval transactions happen once per pot.',
           action: () =>
             dispatch(
               reduxActions.wallet.approval(pot.network, pot.rewardAddress, pot.contractAddress)
@@ -289,6 +249,15 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
         )}
         <WithdrawSteps pot={pot} steps={steps} setSteps={setSteps} />
       </div>
+      {pot.withdrawFee ? (
+        <div className={classes.fairplayNotice}>
+          <Translate
+            i18nKey="withdraw.withdrawFeeNotice"
+            values={{ percent: formatDecimals(pot.withdrawFee * 100, 2) }}
+          />
+          ) : null}
+        </div>
+      ) : null}
       <div className={classes.fairplayNotice}>
         <Translate i18nKey="withdraw.fairplayNotice" />{' '}
         {onLearnMore ? (

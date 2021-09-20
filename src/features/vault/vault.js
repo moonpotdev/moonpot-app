@@ -79,6 +79,16 @@ const Vault = () => {
     return <Redirect to="/" />;
   }
 
+  function handleVariant(vaultType) {
+    if (vaultType === 'main') {
+      return 'tealDark';
+    } else if (vaultType === 'community') {
+      return 'blueCommunity';
+    } else if (vaultType === 'lp') {
+      return 'greenDark';
+    }
+  }
+
   return (
     <div className="App">
       <Container maxWidth="lg">
@@ -94,7 +104,7 @@ const Vault = () => {
         <Pot
           id={id}
           onFairplayLearnMore={handleFairplayLearnMore}
-          variant={pot.vaultType === 'main' ? 'tealDark' : 'blueCommunityAlt'}
+          variant={handleVariant(pot.vaultType)}
         />
         <InfoCards id={id} fairplayRef={fairplayRef} className={classes.infoCards} />
       </Container>

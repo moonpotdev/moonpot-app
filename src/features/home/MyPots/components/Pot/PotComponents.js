@@ -90,7 +90,7 @@ const DepositedOdds = memo(function ({ ticketTotalSupply, winners, ticketToken, 
 
 export const PotInfoBlock = function ({ item, active = true }) {
   const classes = useStyles();
-  const prices = useSelector(state => state.pricesReducer);
+  const depositTokenPrice = useSelector(state => state.pricesReducer.prices[item.oracleId]);
   const { t } = useTranslation();
 
   return (
@@ -105,7 +105,7 @@ export const PotInfoBlock = function ({ item, active = true }) {
         <Grid item xs={6}>
           <Typography className={classes.myDetailsValue} align={'right'}>
             {formatDecimals(item.userBalance)} {item.token} ($
-            {formatDecimals(item.userBalance.multipliedBy(prices.prices[item.oracleId]), 2)})
+            {formatDecimals(item.userBalance.multipliedBy(depositTokenPrice), 2)})
           </Typography>
         </Grid>
         {/*Interest*/}

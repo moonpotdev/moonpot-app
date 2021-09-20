@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
@@ -7,6 +7,7 @@ import { isEmpty } from '../../../../../helpers/utils';
 import Steps from '../../../../vault/components/Steps/Steps';
 import { Translate } from '../../../../../components/Translate';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
+import { useBonusesEarned } from '../../../../../helpers/hooks';
 
 const useStyles = makeStyles(styles);
 
@@ -22,6 +23,15 @@ export const PotMigrate = function ({ item }) {
     finished: false,
   });
   const [stepsItem, setStepsItem] = useState(null);
+  const bonuses = useBonusesEarned(item.id);
+  const bonusTokens = useMemo(
+    () =>
+      bonuses
+        .filter(bonus => bonus.earned > 0)
+        .map(bonus => bonus.symbol)
+        .join(' & '),
+    [bonuses]
+  );
 
   const handleClose = () => {
     updateItemData();
@@ -164,8 +174,8 @@ export const PotMigrate = function ({ item }) {
             disabled={item.userBalance.lte(0)}
           >
             <Translate
-              i18nKey="upgradeMoveWithdraw"
-              values={{ base: item.token, bonus: item.bonusToken }}
+              i18nKey={bonusTokens ? 'upgradeMoveWithdraw' : 'upgradeMove'}
+              values={{ base: item.token, bonus: bonusTokens }}
             />
           </PrimaryButton>
         </Grid>

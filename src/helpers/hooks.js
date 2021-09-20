@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { byDecimals } from './format';
 import { tokensByNetworkAddress } from '../config/tokens';
 
@@ -50,8 +50,8 @@ export function useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd) {
   }, [awardBalanceUsd, totalSponsorBalanceUsd]);
 }
 
-export function useTokenBalance(token, tokenDecimals) {
-  const balance = useSelector(state => state.balanceReducer.tokens[token]?.balance || 0);
+export function useTokenBalance(tokenSymbol, tokenDecimals) {
+  const balance = useSelector(state => state.balanceReducer.tokens[tokenSymbol]?.balance || 0);
 
   return useMemo(() => {
     const bn = new BigNumber(balance);
@@ -60,16 +60,20 @@ export function useTokenBalance(token, tokenDecimals) {
   }, [balance, tokenDecimals]);
 }
 
-export function useTokenAllowance(address, token, tokenDecimals) {
+export function useTokenAllowance(spender, tokenSymbol, tokenDecimals) {
   const allowance = useSelector(
-    state => state.balanceReducer.tokens[token]?.allowance[address] || 0
+    state => state.balanceReducer.tokens[tokenSymbol]?.allowance?.[spender] || 0
   );
 
   return useMemo(() => {
-    const bn = new BigNumber(allowance);
+    if (spender && tokenSymbol && tokenDecimals && allowance) {
+      const bn = new BigNumber(allowance);
 
-    return byDecimals(bn, tokenDecimals);
-  }, [allowance, tokenDecimals]);
+      return byDecimals(bn, tokenDecimals);
+    }
+
+    return new BigNumber(0);
+  }, [allowance, spender, tokenSymbol, tokenDecimals]);
 }
 
 export function useTokenEarned(id, token, tokenDecimals) {
@@ -108,10 +112,27 @@ export function useRewardEarned(potId, rewardToken, rewardTokenDecimals) {
   }, [earned, rewardToken, rewardTokenDecimals, address]);
 }
 
-export function useBonusEarned(pot) {
-  return useRewardEarned(pot.id, pot.bonusToken, pot.bonusTokenDecimals);
-}
+export function useBonusesEarned(id) {
+  const earned = useSelector(state => state.earnedReducer.earned[id], shallowEqual);
+  const bonuses = useSelector(state => state.vaultReducer.pools[id]?.bonuses, shallowEqual);
+  const prices = useSelector(
+    state =>
+      Object.fromEntries(
+        bonuses.map(bonus => [bonus.id, state.pricesReducer.prices[bonus.oracleId] || 0])
+      ),
+    shallowEqual
+  );
 
-export function useBoostEarned(pot) {
-  return useRewardEarned(pot.id, pot.boostToken, pot.boostTokenDecimals);
+  return useMemo(() => {
+    return bonuses.map(bonus => {
+      const bonusEarned = byDecimals(earned[bonus.id] || 0, bonus.decimals);
+      const price = prices[bonus.id] || 0;
+
+      return {
+        ...bonus,
+        earned: bonusEarned.toNumber(),
+        value: bonusEarned.multipliedBy(price).toNumber(),
+      };
+    });
+  }, [earned, bonuses, prices]);
 }

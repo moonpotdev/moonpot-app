@@ -18,12 +18,12 @@ const useStyles = makeStyles(styles);
 const MyPots = ({ selected }) => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { vault, wallet, balance, prices } = useSelector(state => ({
+  const { vault, prices } = useSelector(state => ({
     vault: state.vaultReducer,
-    wallet: state.walletReducer,
-    balance: state.balanceReducer,
     prices: state.pricesReducer,
   }));
+  const walletAddress = useSelector(state => state.walletReducer.address);
+  const tokenBalances = useSelector(state => state.balanceReducer.tokens);
   const dispatch = useDispatch();
 
   const filtered = useMemo(() => {
@@ -34,7 +34,7 @@ const MyPots = ({ selected }) => {
         return false;
       }
 
-      if (Number(balance.tokens[item.contractAddress].balance) === 0) {
+      if (Number(tokenBalances[item.contractAddress + ':total'].balance) === 0) {
         return false;
       }
 
@@ -43,9 +43,9 @@ const MyPots = ({ selected }) => {
 
     for (const [, item] of Object.entries(vault.pools)) {
       if (check(item)) {
-        if (wallet.address && !isEmpty(balance.tokens[item.contractAddress])) {
+        if (walletAddress && !isEmpty(tokenBalances[item.contractAddress + ':total'])) {
           item.userBalance = byDecimals(
-            new BigNumber(balance.tokens[item.contractAddress].balance),
+            new BigNumber(tokenBalances[item.contractAddress + ':total'].balance),
             item.tokenDecimals
           );
         }
@@ -54,7 +54,7 @@ const MyPots = ({ selected }) => {
     }
 
     return data;
-  }, [selected, vault.pools, balance, wallet.address]);
+  }, [selected, vault.pools, tokenBalances, walletAddress]);
 
   useEffect(() => {
     if (prices.lastUpdated > 0) {
@@ -63,11 +63,11 @@ const MyPots = ({ selected }) => {
   }, [dispatch, prices.lastUpdated]);
 
   useEffect(() => {
-    if (wallet.address) {
+    if (walletAddress) {
       dispatch(reduxActions.balance.fetchBalances());
       dispatch(reduxActions.earned.fetchEarned());
     }
-  }, [dispatch, wallet.address]);
+  }, [dispatch, walletAddress]);
 
   return (
     <React.Fragment>
@@ -99,15 +99,7 @@ const MyPots = ({ selected }) => {
                 {filtered.length === 0 ? (
                   <NoPotsCard />
                 ) : (
-                  filtered.map(item => (
-                    <Pot
-                      key={item.id}
-                      item={item}
-                      wallet={wallet}
-                      prices={prices}
-                      balance={balance}
-                    />
-                  ))
+                  filtered.map(item => <Pot key={item.id} item={item} />)
                 )}
               </Cards>
             </Grid>

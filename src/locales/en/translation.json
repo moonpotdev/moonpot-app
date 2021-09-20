@@ -6,8 +6,9 @@
     "myActivePots": "Active Pots",
     "myPastPots": "Retired Pots",
     "allPots": "All Pots",
-    "mainPots": "Main Pots",
-    "communityPots": "Community Pots",
+    "mainPots": "Main",
+    "communityPots": "Community",
+    "lpPots": "LP",
     "play": "Play",
     "learnMore": "Learn More",
     "moonpots": "Moonpots",
@@ -45,6 +46,7 @@
   "poweredBy": "Powered by",
   "upgradeWhy": "We upgraded the {{token}} Pot in order to make it safer and fairer, as well as to allow us to automate more of our processes.",
   "upgradeNextSteps": "Because of the upgrade, you need to move your {{token}} to the new {{token}} Pot.  We have added a {{boostToken}} Super Boost to the new {{token}} Pot to help make it worthwhile for you.",
+  "upgradeMove": "Move {{base}}",
   "upgradeMoveWithdraw": "Move {{base}} and Withdraw {{bonus}}",
   "learnMore": "Learn more",
   "telegramSocialBlockBody": "Learn about Moonpot and get direct support from the community",
@@ -67,6 +69,8 @@
     "winTotalTokensIn": "in ",
     "statNextDraw": "Next Draw",
     "statNextDrawWeekly": "Next Weekly Draw",
+    "statNextDrawBiWeekly": "Next Bi-Weekly Draw",
+    "statNextDrawMonthly": "Next Monthly Draw",
     "statNextDrawCountdownFinished": "Awaiting draw...",
     "statInterest": "Interest",
     "statInterestApy": "{{apy}}% APY",
@@ -90,8 +94,6 @@
     "depositMore": "Deposit More",
     "withdraw": "Withdraw",
     "myToken": "My {{token}}",
-    "myEarnedToken": "My Earned {{token}}",
-    "myBonusToken": "My Bonus {{token}}",
     "myFairplayTimelock": "My Fairplay Timelock",
     "myFairnessFee": "My Current Fairness Fee",
     "myDetails": "My Details",
@@ -120,7 +122,7 @@
         "moonpotStrategyAddress": "{{name}} Pot Strategy Address"
       },
       "earnings": {
-        "title": "Earnings Breakdown",
+        "title": "Strategy Breakdown",
         "tokenInterest": "Your {{token}} Interest",
         "nameMoonpotPrizeDraw": "{{name}} Moonpot Prize Draw",
         "ziggysPotInterest": "Ziggy's (Governance) Pot Interest",
@@ -152,16 +154,29 @@
     "eolNotice": {
       "title": "Pot Retired",
       "message": "You can no longer deposit in to this pot."
-    }
+    },
+    "zapExplainer": "Deposit LP or ZAP⚡ in {{token0}} or {{token1}}",
+    "zapTooltip": [
+      "ZAP lets you create liquidity pool tokens and make deposits with just one transaction.",
+      "Half of your tokens will be sold to balance the liquidity pair, after which liquidity will be provided and LP tokens deposited into this Pot."
+    ],
+    "inYourWallet": "In your wallet",
+    "provider": "Liquidity provider"
   },
   "withdraw": {
     "all": "Withdraw All",
     "allToken": "Withdraw All {{token}}",
+    "allTokenAs": "Withdraw All as {{token}}",
+    "myEarnedToken": "My Earned {{token}}",
+    "myBonusToken": "My Bonus {{token}}",
+    "mySuperBoostToken": "My Super Boost {{token}}",
     "fairplayNotice": "Fairplay Timelock rules apply.",
+    "withdrawFeeNotice": "Withdraw fee of {{percent}}% applies.",
     "migrationNotice": {
       "title": "Migration Needed",
       "message": "Withdrawing your {{token}}, instead of moving it to the new Moonpot, means you will miss out on future bonus earnings and your chance to win the next {{token}} Prize."
-    }
+    },
+    "zapExplainer": "Withdraw LP or ZAP⚡ out to {{token0}} or {{token1}}"
   },
   "bonus": {
     "myBonusEarnings": "My Bonus Earnings",
