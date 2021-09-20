@@ -3,7 +3,7 @@ import { formatTimeLeft } from '../../helpers/format';
 
 // until in milliseconds since unix epoch
 // Optionally, pass children to render when countdown reaches zero
-const Countdown = ({ until, resolution = 'minutes', dropZero = false, children }) => {
+const Countdown = ({ until, resolution = 'seconds', dropZero = false, children }) => {
   const [time, setTime] = useState(Date.now());
 
   useEffect(() => {
