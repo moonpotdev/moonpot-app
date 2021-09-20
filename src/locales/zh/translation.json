@@ -8,6 +8,7 @@
     "allPots": "所有月盒",
     "mainPots": "核心月盒",
     "communityPots": "社群月盒",
+    "lpPots": "LP 月盒",
     "play": "开始游戏",
     "learnMore": "了解更多",
     "moonpots": "Moonpots",
@@ -46,7 +47,7 @@
   "upgradeWhy": "我们升级了 {{token}}月盒，以便能够为所有未来的Moonpots玩家添加不同的福利奖励。",
   "upgradeNextSteps": "由于此次的升级，您需要转移您的{{token}}至新的{{token}} 月盒。我们已添加了金额为${{amount}} {{boostToken}}的超速增值币到这一新的{{token}}月盒，以便让您获得更多的收益。",
   "upgradeMove": "转移 {{base}}",
-  "upgradeMoveWithdraw": "转移 {{base}} 和取出 {{bonus}}",
+  "upgradeMoveWithdraw": "转移 {{base}} 和提取 {{bonus}}",
   "learnMore": "了解更多",
   "telegramSocialBlockBody": "了解更多关于Moonpot的资讯，并获得来自官方社群的帮助",
   "discordSocialBlockBody": "和我们活跃的开发者社群进行直接对话",
@@ -68,6 +69,8 @@
     "winTotalTokensIn": "的 ",
     "statNextDraw": "下次抽奖",
     "statNextDrawWeekly": "距下一次每周抽奖",
+    "statNextDrawBiWeekly": "距下一次双周抽奖",
+    "statNextDrawMonthly": "距下一次月度抽奖",
     "statNextDrawCountdownFinished": "等待抽奖...",
     "statInterest": "利息",
     "statInterestApy": "{{apy}}% APY",
@@ -89,7 +92,7 @@
     "earnings": "收益",
     "deposit": "存入",
     "depositMore": "存入更多",
-    "withdraw": "取出",
+    "withdraw": "提取",
     "myToken": "我的 {{token}}",
     "myFairplayTimelock": "我的公平游戏锁定期",
     "myFairnessFee": "我目前的公平费",
@@ -109,10 +112,10 @@
             "所有在Beefy机枪池赚取的 {{token}}收益将被分配给 Moonpot 玩家。一半用于支付利息，另一半则用作抽奖奖金以及未来 Ziggy (治理）月盒给出的奖励。"
           ],
           "ziggy": [
-            "通过在 Ziggy's Pot 中质押 $POTS，您将获得由所有其他月盒收入的 5% 所产生的 APY。",
-            "由于目前只有一个月盒，这意味着您的 APY 只由 CAKE 月盒生成。 将来会有多个月盒。 所有的月盒都将为 Ziggy's Pot 创造收入。",
-            "Ziggy's Pot 使用 Moonpot.com 的收入从市场上购买 $POTS，并将其作为利息提供给 $POTS 质押者。",
-            "Ziggy's Pot 每月还有一次抽奖活动，其中 10 位幸运的获胜者将从当月的月盒中分享所有不同的代币。 9 月 1 日的奖金包括 $POTS、$BIFI、$CAKE 和 $DODO。"
+            "通过在 Ziggy 月盒中质押 $POTS，您将获得由所有其他月盒收入的 5% 所产生的 APY。",
+            "由于目前只有一个月盒，这意味着您的 APY 只由 CAKE 月盒生成。 将来会有多个月盒。 所有的月盒都将为 Ziggy 月盒创造收入。",
+            "Ziggy 月盒使用 Moonpot.com 的收入从市场上购买 $POTS，并将其作为利息提供给 $POTS 质押者。",
+            "Ziggy 月盒每月还有一次抽奖活动，其中 10 位幸运的获胜者将从当月的月盒中分享所有不同的代币。 9 月 1 日的奖金包括 $POTS、$BIFI、$CAKE 和 $DODO。"
           ]
         },
         "beefyVaultAddress": "Beefy 金库地址",
@@ -151,19 +154,29 @@
     "eolNotice": {
       "title": "已退役的月盒",
       "message": "您不能再向这个月盒进行存款了."
-    }
+    },
+    "zapExplainer": "存入 LP 或使用 {{token0}} 或 {{token1}} 执行 ZAP⚡ 功能",
+    "zapTooltip": [
+      "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
+      "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
+    ],
+    "inYourWallet": "您的钱包里有",
+    "provider": "流动性提供者"
   },
   "withdraw": {
-    "all": "取出所有",
-    "allToken": "取出所有 {{token}}",
+    "all": "提取所有",
+    "allToken": "提取所有 {{token}}",
+    "allTokenAs": "提取所有为 {{token}}",
     "myEarnedToken": "我赚取的 {{token}}",
     "myBonusToken": "我的额外 {{token}}",
-    "mySuperBoostToken": "My Super Boost {{token}}",
+    "mySuperBoostToken": "我的超速增值 {{token}}",
     "fairplayNotice": "公平游戏锁定期规则适用",
+    "withdrawFeeNotice": "{{percent}}% 的提款费适用。",
     "migrationNotice": {
       "title": "需要进行迁移",
-      "message": "选择取出您的 {{token}}，而不是转移到新的月盒，意味着您将错过未来的额外收益，以及赢取下一次{{token}}大奖的机会。"
-    }
+      "message": "选择提取您的 {{token}}，而不是转移到新的月盒，意味着您将错过未来的额外收益，以及赢取下一次{{token}}大奖的机会。"
+    },
+    "zapExplainer": "取出 LP 或使用 ZAP⚡ 提取为 {{token0}} 或 {{token1}}"
   },
   "bonus": {
     "myBonusEarnings": "我的额外收益",
@@ -175,7 +188,7 @@
     "compoundToken": "复投 {{token}}",
     "compoundBonusToken": "复投额外的 {{token}}",
     "withdrawBonusTokens": "提取 {{tokens}}奖励",
-    "withdrawEarnedTokens": "取出赚取的 {{tokens}}"
+    "withdrawEarnedTokens": "提取赚取的 {{tokens}}"
   },
   "wallet": {
     "connect": "连接钱包"
