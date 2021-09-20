@@ -176,7 +176,7 @@
       "title": "需要进行迁移",
       "message": "选择提取您的 {{token}}，而不是转移到新的月盒，意味着您将错过未来的额外收益，以及赢取下一次{{token}}大奖的机会。"
     },
-    "zapExplainer": "取出 LP 或使用 ZAP⚡ 提取为 {{token0}} 或 {{token1}}"
+    "zapExplainer": "提取 LP 或使用 ZAP⚡ 提取为 {{token0}} 或 {{token1}}"
   },
   "bonus": {
     "myBonusEarnings": "我的额外收益",
