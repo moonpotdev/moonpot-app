@@ -197,7 +197,7 @@
     "provider": "ApeSwap",
     "tokenAddress": "0xaa3FCBA2cf7c5f8c8f785A7180F5063144fE53c6",
     "tokenDecimals": 18,
-    "rewardToken": "moonTicketPOTS-BNB",
+    "rewardToken": "moonTicketApePOTS-BNB",
     "rewardAddress": "0x2f4a26A1B540255B5AA2c2e4A2d142ae2765b186",
     "contractAddress": "0xA9638f46b23FcfEEc9E000344D9b6ea7160b23Eb",
     "prizePoolAddress": "0x1b0fFBC3EFb9eE673b6748b7FF90261A3cEc188b",
