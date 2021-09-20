@@ -14,7 +14,6 @@ const useStyles = makeStyles(styles);
 
 export const PotMigrate = function ({ item }) {
   const wallet = useSelector(state => state.walletReducer);
-  const balance = useSelector(state => state.balanceReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [steps, setSteps] = useState({
