@@ -23,13 +23,6 @@ const getClientsForNetwork = async net => {
   return config[net].rpc;
 };
 
-const setLanguage = value => {
-  return async dispatch => {
-    localStorage.setItem('moon_site_language', value);
-    dispatch({ type: 'SET_LANGUAGE', payload: { language: value } });
-  };
-};
-
 const setCurrency = value => {
   return async dispatch => {
     localStorage.setItem('moon_site_currency', value);
@@ -739,7 +732,6 @@ const obj = {
   createWeb3Modal,
   connect,
   disconnect,
-  setLanguage,
   setCurrency,
   approval,
   deposit,
