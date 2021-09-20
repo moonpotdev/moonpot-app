@@ -180,8 +180,6 @@ export function Pot({ id, variant, bottom }) {
   const classes = useStyles();
   const pot = usePot(id);
 
-  console.log(pot);
-
   return (
     <Card variant={variant}>
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>

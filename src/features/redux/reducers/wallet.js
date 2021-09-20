@@ -1,11 +1,6 @@
 import { config } from '../../../config/config';
 import Web3 from 'web3';
 
-const initialLanguage = () => {
-  const storage = localStorage.getItem('moon_site_language');
-  return storage === null ? 'en' : storage;
-};
-
 const initialCurrency = () => {
   const storage = localStorage.getItem('moon_site_currency');
   return storage === null ? 'usd' : storage;
@@ -43,7 +38,6 @@ const initialExplorer = () => {
 
 const initialState = {
   network: initialNetwork(),
-  language: initialLanguage(),
   currency: initialCurrency(),
   rpc: initialRpc(),
   web3modal: null,
@@ -82,11 +76,6 @@ const walletReducer = (state = initialState, action) => {
         network: action.payload.network,
         clients: action.payload.clients,
         rpc: false,
-      };
-    case 'SET_LANGUAGE':
-      return {
-        ...state,
-        language: action.payload.language,
       };
     case 'SET_CURRENCY':
       return {
