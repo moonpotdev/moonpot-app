@@ -7,21 +7,15 @@ import styles from './styles';
 import { useTranslation } from 'react-i18next';
 import alertIcon from '../../../../../images/icons/alert.svg';
 import { ButtonLink } from '../../../../../components/ButtonLink/ButtonLink';
+import { useTokenBalance } from '../../../../../helpers/hooks';
 
 const useStyles = makeStyles(styles);
 
 function MigrationNotice({ pot }) {
   const classes = useStyles();
   const { t } = useTranslation();
-  const balanceString = useSelector(
-    state => state.balanceReducer.tokens[pot.contractAddress]?.balance || '0'
-  );
-  const balanceTokenDecimals = pot.tokenDecimals;
-  const balanceBigNumber = useMemo(
-    () => byDecimals(new BigNumber(balanceString), balanceTokenDecimals),
-    [balanceString, balanceTokenDecimals]
-  );
-  const hasBalance = !balanceBigNumber.isZero();
+  const balance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);
+  const hasBalance = balance.gt(0);
 
   if (hasBalance) {
     return (
