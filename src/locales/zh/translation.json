@@ -39,7 +39,7 @@
   "migrationNoticeTitle": "请将您的 {{asset}} 转移至全新升级的{{pot}}月盒。",
   "migrationNoticeLearnMore": "了解更多",
   "migrationNoticeMove": "转移我的{{asset}}",
-  "vaultTitle": "存入 <span>{{name}}</span>, 获得 <span>{{apy}}% APY</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
+  "vaultTitle": "存入 <span>{{token}}</span>, 获得 <span>{{apy}}% APY</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
   "playWithMoonpot": "使用Moonpot进行游戏",
   "youHaventEnteredMoonpots": "您尚未参与任何月盒.",
   "connectToJoin": "连接您的钱包以加入月盒。",
