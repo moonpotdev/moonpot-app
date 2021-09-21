@@ -1,0 +1,209 @@
+{
+  "buttons": {
+    "ziggyMoonpotGuide": "Panduan Ziggy ke Moonpot",
+    "moonpotAlpha": "Artikel Alpha Moonpot",
+    "deposit": "Setoran",
+    "myActivePots": "Pots Aktif",
+    "myPastPots": "Pots Tidak Aktif",
+    "allPots": "Semua Pots",
+    "mainPots": "Utama",
+    "communityPots": "Komunitas",
+    "lpPots": "LP",
+    "play": "Bermain",
+    "learnMore": "Pelajari lebih lanjut",
+    "moonpots": "Moonpots",
+    "myPots": "Pots Saya"
+  },
+  "modals": {
+    "unsupportedNetworkDetected": "Jaringan terdeteksi tidak didukung ",
+    "switchToBSCNetwork": "Silakan beralih ke jaringan BSC",
+    "switchToBSC": "Beralih ke BSC",
+    "cancel": "Batal",
+    "unableToAutoSwitch": "Tidak dapat mengganti rantai secara otomatis",
+    "manuallySetNetwork": "Silakan atur jaringan Anda secara manual ke BSC",
+    "close": "Tutup"
+  },
+  "header": {
+    "moonpots": "Moonpots",
+    "myPots": "Pots Saya",
+    "docs": "Dokumen",
+    "vote": "Pilih",
+    "winners": "Pemenang",
+    "potsPrice": "Harga POTS",
+    "buyPots": "Beli POTS"
+  },
+  "homeTitle": "Setoran <span>crypto</span>, Menghasilkan <span>interest</span><wbr /> dan berkesempatan untuk menang <span>${{amount}}</span>",
+  "homeTotalDeposits": "Total Setoran (TVL)",
+  "homeJoinCommunityTitle": "Bergabung dengan komunitas",
+  "homeJoinCommunityBody": "Anda dapat menyarankan pot baru di salah satu saluran kami, atau bergabung dengan pengembang kami untuk membangun salah satu project favorit anda.",
+  "migrationNoticeTitle": "Memindahkan {{asset}} saya untuk peningkatan Moonpot {{pot}} terbaru.",
+  "migrationNoticeLearnMore": "Pelajari lebih lanjut.",
+  "migrationNoticeMove": "Pindahkan {{asset}} saya",
+  "vaultTitle": "Setoran <span>{{token}}</span>, Menghasilkan <span>{{apy}}% APY</span><wbr /> and berkesempatan untuk menang <span>{{currency}}{{amount}}</span>",
+  "playWithMoonpot": "Bermain dengan Moonpot",
+  "youHaventEnteredMoonpots": "Anda belum memasukkan Moonpots apa pun.",
+  "connectToJoin": "Hubungkan dompet Anda untuk bergabung dengan Moonpot.",
+  "poweredBy": "Didukung oleh",
+  "upgradeWhy": "Kami meningkatkan {{token}} Pot agar lebih aman dan adil, serta memungkinkan kami untuk mengotomatiskan lebih banyak proses kami.",
+  "upgradeNextSteps": "Karena ada peningkatan, Anda perlu memindahkan {{token}} anda ke Pot {{token}} yang baru.  Kami telah menambahkan {{boostToken}} Superboost ke Pot {{token}} baru untuk membantu anda agar lebih bermanfaat.",
+  "upgradeMove": "Pindahkan {{base}}",
+  "upgradeMoveWithdraw": "Pindahkan {{base}} dan Penarikan {{bonus}}",
+  "learnMore": "Pelajari lebih lanjut",
+  "telegramSocialBlockBody": "Pelajari tentang Moonpot dan dapatkan dukungan langsung dari komunitas",
+  "discordSocialBlockBody": "Bergabunglah dengan percakapan komunitas aktif dari pengembang kami",
+  "twitterSocialBlockBody": "Dapatkan update terbaru and bergabunglah dalam undian berhadiah media sosial kami",
+  "telegramSocialBlockButton": "Bergabunglah dengan Telegram kami",
+  "discordSocialBlockButton": "Bergabunglah dengan Discord kami",
+  "twitterSocialBlockButton": "Ikuti twitter kami",
+  "list": {
+    "one": "<span>{{item}}</span>",
+    "two": "<span>{{first}}</span> & <span>{{last}}</span>",
+    "start": "<span>{{item}}</span>",
+    "join": ", <span>{{item}}</span>",
+    "end": " & <span>{{item}}</span>"
+  },
+  "pot": {
+    "title": "{{name}} Pot",
+    "titleRetired": "Pot {{name}} Tidak Aktif",
+    "winTotalPrize": "Menang <span>{{prize}}</span>",
+    "winTotalTokensIn": "Di dalam ",
+    "statNextDraw": "Pengundian Berikutnya",
+    "statNextDrawWeekly": "Pengundian Mingguan Berikutnya",
+    "statNextDrawBiWeekly": "Pengundian Dua-Mingguan Berikutnya",
+    "statNextDrawMonthly": "Pengundian Bulanan Berikutnya",
+    "statNextDrawCountdownFinished": "Menunggu Pengundian...",
+    "statInterest": "Keuntungan",
+    "statInterestApy": "{{apy}}% APY",
+    "statInterestApr": "{{apr}}% APR",
+    "statTVL": "TVL",
+    "statDeposit": "Setoran Anda",
+    "prizeDraw": "Hadiah Undian",
+    "closed": "Tertutup",
+    "prizeSplit": "Pembagian Hadiah",
+    "prizeSplitWinner": "{{count}} Pemenang",
+    "prizeSplitWinner_plural": "{{count}} Para Pemenang (each)",
+    "playWith": "Bermain dengan {{token}}",
+    "playWithMore": "Bermain dengan lebih banyak {{token}}",
+    "odds": "1 dalam {{odds}}",
+    "oddsOdds": "<span>1</span> dalam <span>{{odds}}</span> peluang",
+    "oddsPerDeposit": "1 dalam {{odds}} peluang per {{deposit}} yang dipertaruhkan",
+    "noMinimumDeposit": "Tidak ada minimal setoran",
+    "bonusEarnings": "Bonus yang dihasilkan",
+    "earnings": "Penghasilan",
+    "deposit": "Setoran",
+    "depositMore": "Setoran Lebih Banyak",
+    "withdraw": "Penarikan",
+    "myToken": "Saya {{token}}",
+    "myFairplayTimelock": "Waktu Terkunci Fairplay Saya",
+    "myFairnessFee": "Biaya Fairness Saya Saat Ini",
+    "myDetails": "Detail Saya",
+    "myInterestRate": "Suku Bunga Saya",
+    "myOdds": "Peluang Saya",
+    "tooltip": {
+      "interestBonusApy": "APY yang dicoret adalah bunga yang dibayarkan dalam aset yang disimpan dan digabungkan secara otomatis. APY emas termasuk token bonus tambahan yang tidak digabungkan dan dapat diklaim secara manual.",
+      "interestCompoundApr": "APR adalah tingkat bunga tahunan yang diterima pada tiap setoran. Untuk mendapatkan APY yang lebih tinggi, Gabungkan keuntungan Anda setiap hari."
+    },
+    "infocards": {
+      "strategy": {
+        "title": "{{name}} Strategi Pot",
+        "body": {
+          "beefy": [
+            "Strategi ini menyimpan token {{token}} anda di brankas Beefy.Finance {{token}}. Beefy secara otomatis menggabungkan penghasilan {{token}}.",
+            "Semua {{token}} yang diperoleh di brankas beefy akan diberikan kepada seluruh pemain Moonpot. Setengah akan digunakan untuk diberikan kepada anda sebagai bunga. Dan setengahnya lagi akan digunakan untuk Hadiah Undian dan Hadiah Ziggy Pot (Tata Kelola)."
+          ],
+          "ziggy": [
+            "Dengan mempertaruhkan $POTS di Ziggy's Pot, Anda akan menerima APY yang dihasilkan sebesar 5% dari pendapatan semua Moonpot lainnya.",
+            "Karena saat ini hanya ada satu Moonpot, itu berarti APY Anda akan dihasilkan oleh CAKE Moonpot. Di masa depan akan ada beberapa Moonpot. Semua akan menghasilkan pendapatan untuk Ziggy's Pot.",
+            "Ziggy Pot akan membeli $POTS dari pasar dengan pendapatan Moonpot.com dan memberikannya kepada pemegang $POTS sebagai bunga.",
+            "Ziggy Pot juga memiliki Undian Hadiah bulanan di mana 10 pemenang yang beruntung akan mendapatkan bagian dari semua token yang berbeda dari Moonpot bulan itu. Pada 1 September hadiahnya termasuk $POTS, $BIFI, $CAKE dan $DODO."
+          ]
+        },
+        "beefyVaultAddress": "Alamat Brankas Beefy.Finance",
+        "moonpotStrategyAddress": "{{name}} Alamat Strategi Pot"
+      },
+      "earnings": {
+        "title": "Rincian Strategi",
+        "tokenInterest": "Bunga {{token}} Anda",
+        "nameMoonpotPrizeDraw": "{{name}} Undian Hadiah Moonpot",
+        "ziggysPotInterest": "Bunga Pot Ziggy (Tata kelola)",
+        "ziggysPrizeDraw": "Undian Hadiah Ziggy (Tata Kelola)",
+        "treasury": "Perbendaharaan Moonpot"
+      },
+      "fairplay": {
+        "title": "Aturan Waktu Terkunci Fairplay",
+        "body": [
+          "Hadiah berasal dari bunga yang dihasilkan oleh semua pemain Moonpot, jadi kami membutuhkan sebuah sistem untuk menjaga permainan ini tetap adil.",
+          "Disana ada waktu terkunci Fairplay selama sepuluh hari sebagai dasar untuk mencegah pemain menyetor tepat sebelum pengundian dimulai dan kemudian menariknya dengan cepat setelah undian selesai.",
+          "Jika Anda ingin melakukan penarikan lebih awal, Anda akan membayar Biaya Fairness sebanyak 2,5%, atau kurang. Biaya Fairness akan berkurang setiap detik dan akan menjadi nol selama sepuluh hari.",
+          "Menyetorkan lebih banyak {{token}} akan menyetel ulang biaya Fairness Anda hingga maksimum 2,5%, untuk setoran tambahan Anda.",
+          "Jika Anda memenangkan hadiah, Biaya Fairness Anda akan diatur ulang menjadi 5% dan dikurangi menjadi nol selama sepuluh hari setelah menang.",
+          "Langkah-langkah ini dapat mencegah pelaku jahat memanipulasi pengundian hadiah."
+        ]
+      }
+    }
+  },
+  "tokenInput": {
+    "max": "Maksimal",
+    "placeholder": "Jumlah {{token}} Masuk"
+  },
+  "deposit": {
+    "token": "Setoran {{token}}",
+    "allToken": "Semua Setoran {{token}}",
+    "amountToken": "Setoran {{amount}} {{token}}",
+    "fairplayNotice": "Ada Waktu Terkunci Fairplay selama 10 hari. Jika Anda ingin menarik lebih awal, Anda akan membayar Biaya Fairness 2,5%, atau kurang. Biaya akan berkurang setiap detik.",
+    "eolNotice": {
+      "title": "Pot Tidak Aktif",
+      "message": "Anda tidak dapat lagi menyetor ke pot ini."
+    },
+    "zapExplainer": "Setoran LP atau ZAP⚡ dalam {{token0}} atau {{token1}}",
+    "zapTooltip": [
+      "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan setoran hanya dengan satu transaksi.",
+      "Setengah dari token Anda akan dijual untuk menyeimbangkan pasangan likuiditas, setelah itu likuiditas akan diberikan dan LP token disetorkan ke dalam Pot ini."
+    ],
+    "inYourWallet": "Di dompet Anda",
+    "provider": "Penyedia likuiditas"
+  },
+  "withdraw": {
+    "all": "Penarikan semua",
+    "allToken": "Penarikan semua {{token}}",
+    "allTokenAs": "Penarikan semua sebagai {{token}}",
+    "myEarnedToken": "Penghasilan saya {{token}}",
+    "myBonusToken": "Bonus saya {{token}}",
+    "mySuperBoostToken": "Super Boost saya {{token}}",
+    "fairplayNotice": "Aturan waktu terkunci Fairplay berlaku.",
+    "withdrawFeeNotice": "Biaya penarikan {{percent}}% berlaku.",
+    "migrationNotice": {
+      "title": "Perlu Migrasi",
+      "message": "Penarikan anda {{token}}, sebaliknya jika memindahkannya ke Moonpot yang baru, berarti anda akan kehilangan penghasilan bonus di masa mendatang dan kesempatan anda untuk memenangkan Hadiah {{token}} berikutnya."
+    },
+    "zapExplainer": "Penarikan LP atau ZAP⚡ keluar ke {{token0}} atau {{token1}}"
+  },
+  "bonus": {
+    "myBonusEarnings": "Penghasilan Bonus Saya",
+    "myEarnings": "Penghasilan Saya",
+    "myBoostEarnings": "Penghasilan Super Boost saya",
+    "bonusExplainer": "Anda akan terus mendapatkan bonus {{token}} hingga akhir undian. Anda dapat mengklaim sebanyak yang anda suka.",
+    "potsExplainer": "Anda akan terus mendapatkan {{token}} hingga akhir undian. Anda dapat mengklaim sebanyak yang anda suka.",
+    "compoundExplainer": "Menggabungkan lebih banyak {{token}} akan meningkatkan Biaya Fairness dan Waktu terkunci Fairplay Anda secara proporsional dengan jumlah yang disetorkan. Biaya ini akan berkurang setiap detik setelah Anda menyetor. Anda tidak akan membayar Biaya Fairness tambahan pada setoran lama Anda.",
+    "compoundToken": "Menggabungkan {{token}}",
+    "compoundBonusToken": "Menggabungkan Bonus {{token}}",
+    "withdrawBonusTokens": "Penarikan Bonus {{tokens}}",
+    "withdrawEarnedTokens": "Penarikan yang didapat{{tokens}}"
+  },
+  "wallet": {
+    "connect": "Hubungkan Wallet"
+  },
+  "winners": {
+    "totalPrizesWon": "Cadet kami telah menang",
+    "potDraw": "{{name}} Undian Pot",
+    "valueWon": "<span>{{currency}}{{amount}}</span> Menang",
+    "wonTokensIn": "Dalam ",
+    "drawDate": "Tanggal Undian",
+    "players": "Pemain",
+    "prizePerWinner": "Hadiah per pemenang",
+    "winners": "Pemenang",
+    "stakedAmountToken": "Dipertaruhkan {{amount}} {{token}}",
+    "viewTransaction": "Lihat Transaksi",
+    "userWonPrize": "Anda memenangkan sebuah hadiah!"
+  }
+}
