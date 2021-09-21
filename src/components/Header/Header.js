@@ -11,8 +11,7 @@ import Moonpot from '../../images/moonpot-notext.svg';
 import Pots from '../../images/tokens/pots.svg';
 import clsx from 'clsx';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-import { useDispatch, useSelector } from 'react-redux';
-import reduxActions from '../../features/redux/actions';
+import { useSelector } from 'react-redux';
 import CustomDropdown from '../customDropdown';
 import { supportedLanguages } from '../../i18n';
 import { Translate } from '../Translate';
@@ -80,22 +79,36 @@ function MenuLink({ external, href, label, match, onClick, ...rest }) {
   );
 }
 
-function LanguageSelector({ css }) {
-  const walletReducer = useSelector(state => state.walletReducer);
-  const { i18n } = useTranslation();
-  const dispatch = useDispatch();
+function getSelectedLanguage(i18n) {
+  const detectedLanguage = i18n.language;
 
-  const handleLanguageSwitch = value => {
-    i18n.changeLanguage(value).then(() => dispatch(reduxActions.wallet.setLanguage(value)));
-  };
+  if (!detectedLanguage) {
+    return 'en';
+  }
+
+  if (detectedLanguage in supportedLanguages) {
+    return detectedLanguage;
+  }
+
+  const lngs = i18n.services.languageUtils.toResolveHierarchy(detectedLanguage, 'en');
+  for (const lng of lngs) {
+    if (lng in supportedLanguages) {
+      return lng;
+    }
+  }
+
+  return 'en';
+}
+
+function LanguageSelector({ css }) {
+  const { i18n } = useTranslation();
+  const selected = getSelectedLanguage(i18n);
 
   return (
     <CustomDropdown
       list={supportedLanguages}
-      selected={walletReducer.language}
-      handler={e => {
-        handleLanguageSwitch(e.target.value);
-      }}
+      selected={selected}
+      handler={e => i18n.changeLanguage(e.target.value)}
       css={css}
     />
   );
