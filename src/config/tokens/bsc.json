@@ -61,6 +61,14 @@
     "decimals": 18
   },
   {
+    "symbol": "moonTicketBIFI",
+    "address": "0xD763A0377bb40F7b79839ea50aAC75fF67CB9eae",
+    "type": "ticket",
+    "oracleId": "BIFI",
+    "decimals": 18,
+    "ticketFor": "BIFI"
+  },
+  {
     "symbol": "DODO",
     "address": "0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2",
     "type": "single",
