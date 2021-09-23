@@ -8,7 +8,7 @@ import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
 import { usePot, useTokenBalance, useTotalPrize } from '../../helpers/hooks';
-import { DrawStat, DrawNextDraw } from '../DrawStat';
+import { DrawStat, DrawStatNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
 import { investmentOdds } from '../../helpers/utils';
 import styles from './styles';
@@ -197,11 +197,11 @@ export function Pot({ id, variant, bottom }) {
       </Grid>
       <Grid container spacing={2} className={classes.rowDrawStats}>
         <Grid item xs={7}>
-          <DrawNextDraw frequency={pot.frequency}>
+          <DrawStatNextDraw frequency={pot.frequency}>
             <Countdown until={pot.expiresAt * 1000}>
               <Translate i18nKey="pot.statNextDrawCountdownFinished" />
             </Countdown>
-          </DrawNextDraw>
+          </DrawStatNextDraw>
         </Grid>
         <Grid item xs={5}>
           <DrawStat i18nKey="pot.statTVL">
