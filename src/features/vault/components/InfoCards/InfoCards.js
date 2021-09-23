@@ -22,6 +22,8 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
   const classes = useStyles();
   const { t } = useTranslation();
 
+  console.log(pot);
+
   return (
     <Cards className={clsx(className)} oneUp={true}>
       {pot.infoCardStrategy ? (
@@ -59,7 +61,7 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
         </Card>
       ) : null}
       {/*Community Pot APR Breakdown */}
-      {pot.vaultType === 'community' || 'lp' ? (
+      {pot.vaultType != 'main' ? (
         <Card variant="purpleDark">
           <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
           <div className={classes.earningItem}>
