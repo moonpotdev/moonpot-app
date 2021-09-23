@@ -30,38 +30,33 @@ function useWithdrawTokens(network, lpAddress) {
       const nativeSymbol = nativeCurrency.symbol;
       const nativeWrappedToken =
         tokensByNetworkAddress[network][nativeCurrency.wrappedAddress.toLowerCase()];
-      const token0Symbol = lpToken.lp[0];
-      const token1Symbol = lpToken.lp[1];
-      const token0IsNative = token0Symbol === nativeWrappedToken.symbol;
-      const token1IsNative = token1Symbol === nativeWrappedToken.symbol;
-      const token0 = tokensByNetworkSymbol[network][token0Symbol];
-      const token1 = tokensByNetworkSymbol[network][token1Symbol];
 
-      if (token0IsNative) {
-        // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
-        tokens.push({
-          ...token0,
-          symbol: nativeSymbol,
-          isNative: false,
-          isRemove: false,
-        });
-      } else {
-        tokens.push({ ...token0, isNative: false, isRemove: false });
+      for (const symbol of lpToken.lp) {
+        const tokenIsNative = symbol === nativeWrappedToken.symbol;
+        const token = tokensByNetworkSymbol[network][symbol];
+
+        if (tokenIsNative) {
+          // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
+          tokens.push({
+            ...token,
+            symbol: nativeSymbol,
+            isNative: false,
+            isRemove: false,
+          });
+        } else {
+          tokens.push({ ...token, isNative: false, isRemove: false });
+        }
       }
 
-      if (token1IsNative) {
-        // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
-        tokens.push({
-          ...token1,
-          symbol: nativeSymbol,
-          isNative: false,
-          isRemove: false,
-        });
-      } else {
-        tokens.push({ ...token1, isNative: false, isRemove: false });
-      }
-
+      // Withdraw as token0 + token1
       if (lpToken.lp.length === 2) {
+        const token0Symbol = lpToken.lp[0];
+        const token1Symbol = lpToken.lp[1];
+        const token0IsNative = token0Symbol === nativeWrappedToken.symbol;
+        const token1IsNative = token1Symbol === nativeWrappedToken.symbol;
+        const token0 = tokensByNetworkSymbol[network][token0Symbol];
+        const token1 = tokensByNetworkSymbol[network][token1Symbol];
+
         // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
         tokens.push({
           ...lpToken,
@@ -72,12 +67,6 @@ function useWithdrawTokens(network, lpAddress) {
           isNative: false,
           isRemove: true,
         });
-      } else {
-        for (let i = 2; i < lpToken.lp.length; i++) {
-          const symbol = lpToken.lp[i];
-          const token = tokensByNetworkSymbol[network][symbol];
-          tokens.push({ ...token, isNative: false, isRemove: false });
-        }
       }
     }
 

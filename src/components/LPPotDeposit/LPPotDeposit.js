@@ -80,44 +80,22 @@ function useDepositTokens(network, lpAddress) {
       const nativeDecimals = nativeCurrency.decimals;
       const nativeWrappedToken =
         tokensByNetworkAddress[network][nativeCurrency.wrappedAddress.toLowerCase()];
-      const token0Symbol = lpToken.lp[0];
-      const token1Symbol = lpToken.lp[1];
-      const token0IsNative = token0Symbol === nativeWrappedToken.symbol;
-      const token1IsNative = token1Symbol === nativeWrappedToken.symbol;
-      const token0 = tokensByNetworkSymbol[network][token0Symbol];
-      const token1 = tokensByNetworkSymbol[network][token1Symbol];
 
-      if (token0IsNative) {
-        tokens.push({
-          ...token0,
-          address: '',
-          symbol: nativeSymbol,
-          decimals: nativeDecimals,
-          isNative: true,
-        });
-        tokens.push({ ...token0, isNative: false });
-      } else {
-        tokens.push({ ...token0, isNative: false });
-      }
+      for (const symbol of lpToken.lp) {
+        const tokenIsNative = symbol === nativeWrappedToken.symbol;
+        const token = tokensByNetworkSymbol[network][symbol];
 
-      if (token1IsNative) {
-        tokens.push({
-          ...token1,
-          address: '',
-          symbol: nativeSymbol,
-          decimals: nativeDecimals,
-          isNative: true,
-        });
-        tokens.push({ ...token1, isNative: false });
-      } else {
-        tokens.push({ ...token1, isNative: false });
-      }
-
-      if (lpToken.lp.length > 2) {
-        for (let i = 2; i < lpToken.lp.length; i++) {
-          const symbol = lpToken.lp[i];
-          const token = tokensByNetworkSymbol[network][symbol];
-          tokens.push({ ...token, isNative: false, isRemove: false });
+        if (tokenIsNative) {
+          tokens.push({
+            ...token,
+            address: '',
+            symbol: nativeSymbol,
+            decimals: nativeDecimals,
+            isNative: true,
+          });
+          tokens.push({ ...token, isNative: false });
+        } else {
+          tokens.push({ ...token, isNative: false });
         }
       }
     }
