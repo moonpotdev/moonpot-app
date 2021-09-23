@@ -22,7 +22,7 @@ function Pages() {
       <Switch>
         <Route
           exact
-          path={['/:bottom(all|main|lp|community)?', '/:top(my-moonpots)/:bottom(eol)?']}
+          path={['/:bottom(all|main|lp|stable|community)?', '/:top(my-moonpots)/:bottom(eol)?']}
         >
           <Home />
           <Footer variant="light" />

@@ -82,7 +82,7 @@ const WithdrawAccordionItem = memo(function ({ pot, onFairplayLearnMore }) {
 
   return hasDeposit ? (
     <CardAccordionItem titleKey="pot.withdraw">
-      {pot.vaultType === 'lp' ? (
+      {pot.vaultType === 'lp' || pot.vaultType === 'stable' ? (
         <LPPotWithdraw
           id={pot.id}
           onLearnMore={onFairplayLearnMore}
@@ -104,6 +104,8 @@ function handleVariant(vaultType) {
     return 'purpleAlt';
   } else if (vaultType === 'lp') {
     return 'green';
+  } else if (vaultType === 'stable') {
+    return 'greenStable';
   }
 
   // default/main
@@ -127,7 +129,7 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
       <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
         {pot.status === 'active' ? (
           <>
-            {pot.vaultType === 'lp' ? (
+            {pot.vaultType === 'lp' || pot.vaultType === 'stable' ? (
               <LPPotDeposit
                 id={id}
                 onLearnMore={onFairplayLearnMore}

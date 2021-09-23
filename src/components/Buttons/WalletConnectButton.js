@@ -7,6 +7,7 @@ import reduxActions from '../../features/redux/actions';
 export const WalletConnectButton = function ({
   ButtonComponent = PrimaryButton,
   onClick,
+  variant,
   ...rest
 }) {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export const WalletConnectButton = function ({
   }, [dispatch, onClick]);
 
   return (
-    <ButtonComponent onClick={handleConnect} disabled={connected} {...rest}>
+    <ButtonComponent onClick={handleConnect} variant={variant} disabled={connected} {...rest}>
       <Translate i18nKey="wallet.connect" />
     </ButtonComponent>
   );
