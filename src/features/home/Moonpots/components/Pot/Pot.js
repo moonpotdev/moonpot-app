@@ -6,8 +6,13 @@ import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../../helpers/utils';
 import { Pot as BasePot, PrizeSplit } from '../../../../../components/Pot/Pot';
 import { usePot, useTokenAddressPrice } from '../../../../../helpers/hooks';
+import {
+  calculateTokenProjectedPrize,
+  calculateUSDProjectedPrize,
+} from '../../../../../helpers/utils';
 import { Translate } from '../../../../../components/Translate';
 import { byDecimals } from '../../../../../helpers/format';
+import { TooltipWithIcon } from '../../../../../components/Tooltip/tooltip';
 import styles from './styles';
 
 const useStyles = makeStyles(styles);
@@ -62,10 +67,17 @@ const Bottom = function ({ id }) {
   const classes = useStyles();
   const pot = usePot(id);
 
+  const projectedTokenPrize = calculateTokenProjectedPrize({ pot });
+  const projectedUSDPrize = calculateUSDProjectedPrize({ pot });
+
   return (
     <>
       <CardAccordionGroup className={classes.rowPrizeSplit}>
-        <CardAccordionItem titleKey="pot.prizeSplit" collapsable={false}>
+        <CardAccordionItem
+          titleKey="pot.prizeSplit"
+          collapsable={false}
+          tooltip={<TooltipWithIcon i18nKey={'pot.prizeSplitToolTip'} />}
+        >
           <Grid container>
             <Grid item xs={3}>
               <Translate i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
@@ -73,8 +85,8 @@ const Bottom = function ({ id }) {
             <Grid item xs={9} className={classes.prizeSplitValue}>
               <PrizeSplit
                 baseToken={pot.token}
-                awardBalance={pot.awardBalance}
-                awardBalanceUsd={pot.awardBalanceUsd}
+                awardBalance={projectedTokenPrize}
+                awardBalanceUsd={projectedUSDPrize}
                 sponsors={pot.sponsors}
                 numberOfWinners={pot.numberOfWinners}
               />

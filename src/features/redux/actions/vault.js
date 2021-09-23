@@ -61,6 +61,7 @@ const getPools = async (items, state, dispatch) => {
       expiresAt: strategyContract.methods.prizePeriodEndAt(),
       numberOfWinners: strategyContract.methods.numberOfWinners(),
       frequency: strategyContract.methods.prizePeriodSeconds(),
+      secondsToDraw: strategyContract.methods.prizePeriodRemainingSeconds(),
     });
 
     // === Ticket
@@ -165,6 +166,7 @@ const getPools = async (items, state, dispatch) => {
       pool.expiresAt = item.expiresAt;
       pool.numberOfWinners = Number(item.numberOfWinners);
       pool.frequency = item.frequency;
+      pool.secondsToDraw = item.secondsToDraw;
     }
 
     // === Ticket

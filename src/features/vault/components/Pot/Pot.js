@@ -12,6 +12,11 @@ import { Translate } from '../../../../components/Translate';
 import PotBonus from '../../../home/MyPots/components/Pot/PotBonus';
 import { useSelector } from 'react-redux';
 import { LPPotWithdraw } from '../../../../components/PotWithdraw/LPPotWithdraw';
+import {
+  calculateTokenProjectedPrize,
+  calculateUSDProjectedPrize,
+} from '../../../../helpers/utils';
+import { TooltipWithIcon } from '../../../../components/Tooltip/tooltip';
 
 const useStyles = makeStyles(styles);
 
@@ -113,14 +118,20 @@ function handleVariant(vaultType) {
 const Bottom = function ({ id, onFairplayLearnMore, variant }) {
   const pot = usePot(id);
 
+  const projectedTokenPrize = calculateTokenProjectedPrize({ pot });
+  const projectedUSDPrize = calculateUSDProjectedPrize({ pot });
+
   return (
     <CardAccordionGroup>
-      <CardAccordionItem titleKey="pot.prizeSplit">
+      <CardAccordionItem
+        titleKey="pot.prizeSplit"
+        tooltip={<TooltipWithIcon i18nKey={'pot.prizeSplitToolTip'} />}
+      >
         <PrizeSplitInner
           count={pot.numberOfWinners}
           baseToken={pot.token}
-          awardBalance={pot.awardBalance}
-          awardBalanceUsd={pot.awardBalanceUsd}
+          awardBalance={projectedTokenPrize}
+          awardBalanceUsd={projectedUSDPrize}
           sponsors={pot.sponsors}
         />
       </CardAccordionItem>

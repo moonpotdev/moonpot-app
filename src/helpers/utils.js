@@ -92,3 +92,45 @@ export function variantClass(classes, prefix, variant, defaultClass = false) {
   const key = prefix + variant[0].toUpperCase() + variant.substr(1);
   return key in classes ? classes[key] : defaultClass;
 }
+
+export const calculateTokenProjectedPrize = ({ pot }) => {
+  const APY = BigNumber(pot.apy); //INPUT APY
+  const convertedAPY = BigNumber.sum(APY.multipliedBy(0.01), 1); //Convert APY to decimal and add 1
+  var dailyRate = Math.pow(convertedAPY.toFixed(20), 1 / 365) - 1; //Calculate daily APR
+
+  const secondsToDraw = new BigNumber(pot.secondsToDraw); //INPUT seconds till draw
+  const daysToDraw = secondsToDraw.dividedBy(86400).toFixed(20); //Convert seconds to days till draw
+
+  const TVL = BigNumber(pot.totalTokenStaked); //INPUT current locked value
+  const futureValue = TVL.toFixed(20) * (Math.pow(1 + dailyRate, daysToDraw) - 1) * 0.4; //Calculate value to be added
+
+  const currentAwardBalance = pot.awardBalance; //INPUT current prize balance
+  const projectedPrizeTotal = BigNumber.sum(currentAwardBalance, futureValue);
+
+  //console.log(pot);
+  //console.log(futureValue);
+  //console.log(projectedPrizeTotal.toFixed(2));
+
+  return projectedPrizeTotal;
+};
+
+export const calculateUSDProjectedPrize = ({ pot }) => {
+  const APY = BigNumber(pot.apy); //INPUT APY
+  const convertedAPY = BigNumber.sum(APY.multipliedBy(0.01), 1); //Convert APY to decimal and add 1
+  var dailyRate = Math.pow(convertedAPY.toFixed(20), 1 / 365) - 1; //Calculate daily APR
+
+  const secondsToDraw = new BigNumber(pot.secondsToDraw); //INPUT seconds till draw
+  const daysToDraw = secondsToDraw.dividedBy(86400).toFixed(20); //Convert seconds to days till draw
+
+  const TVL = BigNumber(pot.totalStakedUsd); //INPUT current locked value
+  const futureValue = TVL.toFixed(20) * (Math.pow(1 + dailyRate, daysToDraw) - 1) * 0.4; //Calculate value to be added
+
+  const currentAwardBalance = pot.awardBalanceUsd; //INPUT current prize balance
+  const projectedPrizeTotal = BigNumber.sum(currentAwardBalance, futureValue);
+
+  console.log(pot);
+  console.log(futureValue);
+  console.log(projectedPrizeTotal.toFixed(2));
+
+  return projectedPrizeTotal;
+};
