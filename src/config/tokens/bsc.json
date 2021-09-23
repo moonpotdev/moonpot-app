@@ -168,5 +168,13 @@
     "oracleId": "cakev2-pots-busd",
     "decimals": 18,
     "ticketFor": "POTS-BUSD LP"
+  },
+  {
+    "symbol": "moonTicketBelt4LP",
+    "address": "0x8CCBaddBB224D173e2f45CaC0A4DDdFFabDF71b9",
+    "type": "ticket",
+    "oracleId": "belt-4belt",
+    "decimals": 18,
+    "ticketFor": "Belt LP"
   }
 ]
