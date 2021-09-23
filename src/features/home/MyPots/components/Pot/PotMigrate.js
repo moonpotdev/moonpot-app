@@ -7,13 +7,13 @@ import { isEmpty } from '../../../../../helpers/utils';
 import Steps from '../../../../vault/components/Steps/Steps';
 import { Translate } from '../../../../../components/Translate';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
-import { useBonusesEarned } from '../../../../../helpers/hooks';
+import { useBonusesEarned, useTokenAllowance, useTokenBalance } from '../../../../../helpers/hooks';
+import { convertAmountToRawNumber } from '../../../../../helpers/format';
 
 const useStyles = makeStyles(styles);
 
 export const PotMigrate = function ({ item }) {
   const wallet = useSelector(state => state.walletReducer);
-  const balance = useSelector(state => state.balanceReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [steps, setSteps] = useState({
@@ -22,6 +22,19 @@ export const PotMigrate = function ({ item }) {
     items: [],
     finished: false,
   });
+  const userTotalBalance = useTokenBalance(item.contractAddress + ':total', item.tokenDecimals);
+  const ticketBalance = useTokenBalance(item.rewardToken, item.tokenDecimals);
+  const ticketWithdrawAllowance = useTokenAllowance(
+    item.contractAddress,
+    item.rewardToken,
+    item.tokenDecimals
+  );
+  const tokenDepositAllowance = useTokenAllowance(
+    item.migrationContractAddress,
+    item.token,
+    item.tokenDecimals
+  );
+
   const [stepsItem, setStepsItem] = useState(null);
   const bonuses = useBonusesEarned(item.id);
   const bonusTokens = useMemo(
@@ -51,11 +64,11 @@ export const PotMigrate = function ({ item }) {
   const handleMigrator = item => {
     if (wallet.address) {
       const steps = [];
-      const rewardApproved = balance.tokens[item.rewardToken].allowance[item.contractAddress];
-      if (!rewardApproved) {
+
+      if (ticketWithdrawAllowance.lt(ticketBalance)) {
         steps.push({
           step: 'approve',
-          message: 'Approval transaction happens once per pot.',
+          message: 'Approval transactions happen once per pot.',
           action: () =>
             dispatch(
               reduxActions.wallet.approval(item.network, item.rewardAddress, item.contractAddress)
@@ -72,11 +85,10 @@ export const PotMigrate = function ({ item }) {
         pending: false,
       });
 
-      const tokenApproved = balance.tokens[item.token].allowance[item.migrationContractAddress];
-      if (!tokenApproved) {
+      if (tokenDepositAllowance.lt(userTotalBalance)) {
         steps.push({
           step: 'approve',
-          message: 'Approval transaction happens once per pot.',
+          message: 'Approval transactions happen once per pot.',
           action: () =>
             dispatch(
               reduxActions.wallet.approval(
@@ -97,7 +109,7 @@ export const PotMigrate = function ({ item }) {
             reduxActions.wallet.deposit(
               item.network,
               item.migrationContractAddress,
-              balance.tokens[item.contractAddress].balance,
+              convertAmountToRawNumber(userTotalBalance, item.tokenDecimals),
               false
             )
           ),
