@@ -74,7 +74,13 @@
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x1bBBf8910E5A074c7B62D891Dbab9f4af82C14D4",
-    "infoCardEarningsBreakdown": true,
+    "infoCardEarningsBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
