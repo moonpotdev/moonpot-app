@@ -377,7 +377,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
             />
           </PrimaryButton>
         ) : (
-          <WalletConnectButton variant="teal" fullWidth={true} />
+          <WalletConnectButton variant={variant} fullWidth={true} />
         )}
         <DepositSteps
           pot={pot}
