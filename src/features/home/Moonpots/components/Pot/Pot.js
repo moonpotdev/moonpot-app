@@ -58,6 +58,19 @@ const NewDepositOdds = memo(function ({
   );
 });
 
+function handleVariant(vaultType) {
+  if (vaultType === 'community') {
+    return 'blueCommunity';
+  } else if (vaultType === 'lp') {
+    return 'green';
+  } else if (vaultType === 'stable') {
+    return 'greenStable';
+  }
+
+  // default/main
+  return 'teal';
+}
+
 const Bottom = function ({ id }) {
   const classes = useStyles();
   const pot = usePot(id);
@@ -87,7 +100,7 @@ const Bottom = function ({ id }) {
           id={pot.id}
           token={pot.token}
           contractAddress={pot.contractAddress}
-          variant={pot.vaultType === 'main' ? 'teal' : 'blueCommunity'}
+          variant={handleVariant(pot.vaultType)}
         />
       </div>
       <div className={classes.rowOdds}>
