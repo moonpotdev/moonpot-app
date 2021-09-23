@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { Link, makeStyles, MenuItem, Select } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import { usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
+import { usePot, useSymbolOrList, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
 import reduxActions from '../../features/redux/actions';
 import { indexBy, variantClass } from '../../helpers/utils';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
@@ -159,6 +159,7 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
   const potId = pot.id;
   const pairToken = tokensByNetworkAddress[pot.network][lpAddress.toLowerCase()];
   const unwrappedTokenSymbols = useUnwrappedTokensSymbols(pot.network, pairToken.lp);
+  const withdrawSingleSymbols = useSymbolOrList(unwrappedTokenSymbols);
   const withdrawTokens = useWithdrawTokens(network, lpAddress);
   const withdrawTokensBySymbol = useMemo(() => indexBy(withdrawTokens, 'symbol'), [withdrawTokens]);
   const [selectedTokenSymbol, setSelectedTokenSymbol] = useState(withdrawTokens[0].symbol);
@@ -285,10 +286,7 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
       {canWithdraw && pot.migrationNeeded ? <MigrationNotice token={pot.token} /> : null}
       <div className={classes.buttonHolder}>
         <div className={classes.zapInfoHolder}>
-          <Translate
-            i18nKey="withdraw.zapExplainer"
-            values={{ token0: unwrappedTokenSymbols[0], token1: unwrappedTokenSymbols[1] }}
-          />
+          <Translate i18nKey="withdraw.zapExplainer" values={{ tokens: withdrawSingleSymbols }} />
           {/*<TooltipWithIcon i18nKey="withdraw.zapTooltip" />*/}
         </div>
         {/*<div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>*/}

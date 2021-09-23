@@ -136,3 +136,27 @@ export function useBonusesEarned(id) {
     });
   }, [earned, bonuses, prices]);
 }
+
+export function useSymbolOrList(symbols) {
+  return useMemo(() => {
+    if (symbols && symbols.length) {
+      return symbols.join(' / ');
+    }
+
+    return '';
+  }, [symbols]);
+}
+
+export function useSymbolAndList(symbols) {
+  return useMemo(() => {
+    if (symbols && symbols.length) {
+      if (symbols.length <= 2) {
+        return symbols.join(' & ');
+      }
+
+      return symbols.slice(0, -1).join(', ') + ' & ' + symbols.slice(-1);
+    }
+
+    return '';
+  }, [symbols]);
+}
