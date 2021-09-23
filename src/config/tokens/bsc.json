@@ -105,6 +105,27 @@
     "decimals": 18
   },
   {
+    "symbol": "DAI",
+    "address": "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3",
+    "type": "single",
+    "oracleId": "DAI",
+    "decimals": 18
+  },
+  {
+    "symbol": "USDT",
+    "address": "0x55d398326f99059fF775485246999027B3197955",
+    "type": "single",
+    "oracleId": "USDT",
+    "decimals": 18
+  },
+  {
+    "symbol": "USDC",
+    "address": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
+    "type": "single",
+    "oracleId": "USDC",
+    "decimals": 18
+  },
+  {
     "symbol": "POTS-BNB LP",
     "address": "0xaa3FCBA2cf7c5f8c8f785A7180F5063144fE53c6",
     "type": "lp",
@@ -129,6 +150,16 @@
     "decimals": 18,
     "zap": "0x18eBd035834941342E399c53f82988Fa6EDbeA05",
     "lp": ["POTS", "BUSD"]
+  },
+  {
+    "symbol": "Belt LP",
+    "icon": "belt4",
+    "address": "0x9cb73F20164e399958261c289Eb5F9846f4D1404",
+    "type": "lp",
+    "oracleId": "belt-4belt",
+    "decimals": 18,
+    "zap": "0xBC106076552d0DbA0705C76b0344C533Cb63788C",
+    "lp": ["DAI", "USDT", "USDC", "BUSD"]
   },
   {
     "symbol": "moonTicketCakeV2POTS-BUSD",

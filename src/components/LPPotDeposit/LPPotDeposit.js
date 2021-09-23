@@ -112,6 +112,14 @@ function useDepositTokens(network, lpAddress) {
       } else {
         tokens.push({ ...token1, isNative: false });
       }
+
+      if (lpToken.lp.length > 2) {
+        for (let i = 2; i < lpToken.lp.length; i++) {
+          const symbol = lpToken.lp[i];
+          const token = tokensByNetworkSymbol[network][symbol];
+          tokens.push({ ...token, isNative: false, isRemove: false });
+        }
+      }
     }
 
     return tokens;

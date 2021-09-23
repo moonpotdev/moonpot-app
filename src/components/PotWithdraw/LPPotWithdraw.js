@@ -61,16 +61,24 @@ function useWithdrawTokens(network, lpAddress) {
         tokens.push({ ...token1, isNative: false, isRemove: false });
       }
 
-      // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
-      tokens.push({
-        ...lpToken,
-        address: '',
-        symbol: `${token0IsNative ? nativeSymbol : token0.symbol} + ${
-          token1IsNative ? nativeSymbol : token1.symbol
-        }`,
-        isNative: false,
-        isRemove: true,
-      });
+      if (lpToken.lp.length === 2) {
+        // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
+        tokens.push({
+          ...lpToken,
+          address: '',
+          symbol: `${token0IsNative ? nativeSymbol : token0.symbol} + ${
+            token1IsNative ? nativeSymbol : token1.symbol
+          }`,
+          isNative: false,
+          isRemove: true,
+        });
+      } else {
+        for (let i = 2; i < lpToken.lp.length; i++) {
+          const symbol = lpToken.lp[i];
+          const token = tokensByNetworkSymbol[network][symbol];
+          tokens.push({ ...token, isNative: false, isRemove: false });
+        }
+      }
     }
 
     return tokens;
