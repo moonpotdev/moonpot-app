@@ -181,16 +181,16 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
       });*/
 
       const balance0 = userWithdrawableBalance
-        .dividedBy(totalSupply)
         .multipliedBy(reserves[0])
+        .dividedBy(totalSupply)
         .decimalPlaces(0, BigNumber.ROUND_DOWN)
-        .toString();
+        .toString(10);
 
       const balance1 = userWithdrawableBalance
-        .dividedBy(totalSupply)
         .multipliedBy(reserves[1])
+        .dividedBy(totalSupply)
         .decimalPlaces(0, BigNumber.ROUND_DOWN)
-        .toString();
+        .toString(10);
 
       if (isRemoveOnly) {
         // console.log('zap out', 'is remove only');
