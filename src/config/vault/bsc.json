@@ -36,6 +36,24 @@
         "sponsorOracleId": "BANANA",
         "sponsorAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
         "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BIFI",
+        "sponsorOracleId": "BIFI",
+        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BUSD",
+        "sponsorOracleId": "BUSD",
+        "sponsorAddress": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "WBNB",
+        "sponsorOracleId": "WBNB",
+        "sponsorAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+        "sponsorTokenDecimals": 18
       }
     ],
     "bonuses": [
