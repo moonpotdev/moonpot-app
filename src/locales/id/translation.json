@@ -66,10 +66,10 @@
     "title": "Pot {{name}}",
     "titleRetired": "Pot {{name}} Tidak Aktif",
     "winTotalPrize": "Menangkan <span>{{prize}}</span>",
-    "winTotalTokensIn": "di",
+    "winTotalTokensIn": "di ",
     "statNextDraw": "Pengundian Berikutnya",
     "statNextDrawWeekly": "Pengundian Mingguan Berikutnya",
-    "statNextDrawBiWeekly": "Pengundian Dua-Mingguan Berikutnya",
+    "statNextDrawBiWeekly": "Pengundian Dua-Minggu Berikutnya",
     "statNextDrawMonthly": "Pengundian Bulanan Berikutnya",
     "statNextDrawCountdownFinished": "Menunggu Pengundian...",
     "statInterest": "Keuntungan",
@@ -77,16 +77,16 @@
     "statInterestApr": "{{apr}}% APR",
     "statTVL": "TVL",
     "statDeposit": "Deposit Anda",
-    "prizeDraw": "Hadiah Undian",
+    "prizeDraw": "Undian Hadiah",
     "closed": "Ditutup",
     "prizeSplit": "Pembagian Hadiah",
     "prizeSplitWinner": "{{count}} Pemenang",
     "prizeSplitWinner_plural": "{{count}} Para Pemenang (Masing-masing)",
     "playWith": "Bermain dengan {{token}}",
     "playWithMore": "Bermain dengan lebih banyak {{token}}",
-    "odds": "1 dari {{odds}}",
-    "oddsOdds": "Kesempatan menang <span>1</span> banding <span>{{odds}}</span>",
-    "oddsPerDeposit": "Kesempatan menang 1 banding {{odds}} per {{deposit}} yang di Stake kan",
+    "odds": "1 : {{odds}}",
+    "oddsOdds": "Kesempatan menang <span>1</span> : <span>{{odds}}</span>",
+    "oddsPerDeposit": "Kesempatan menang 1 : {{odds}} per {{deposit}} yang di Stake",
     "noMinimumDeposit": "Tidak ada minimal setoran",
     "bonusEarnings": "Bonus yang dihasilkan",
     "earnings": "Penghasilan",
@@ -105,7 +105,7 @@
     },
     "infocards": {
       "strategy": {
-        "title": "{{name}} Strategi Pot",
+        "title": "Strategi Pot {{name}}",
         "body": {
           "beefy": [
             "Strategi ini menyimpan token {{token}} anda di brankas Beefy.Finance {{token}}. Beefy secara otomatis menggabungkan penghasilan {{token}} Anda.",
@@ -144,7 +144,7 @@
   },
   "tokenInput": {
     "max": "Maksimal",
-    "placeholder": "Jumlah {{token}} Masuk"
+    "placeholder": "Masukkan Jumlah {{token}}"
   },
   "deposit": {
     "token": "Deposit {{token}}",
@@ -183,7 +183,7 @@
     "myEarnings": "Penghasilan Saya",
     "myBoostEarnings": "Penghasilan Super Boost saya",
     "bonusExplainer": "Anda akan terus mendapatkan bonus {{token}} hingga akhir undian. Anda dapat mengklaim sebanyak yang anda suka.",
-    "potsExplainer": "Anda akan terus mendapatkan {{token}} hingga akhir undian. Anda dapat mengklaim sebanyak yang anda suka.",
+    "potsExplainer": "Anda akan terus mendapatkan bonus {{token}} hingga akhir undian. Anda dapat mengklaim sebanyak yang anda suka.",
     "compoundExplainer": "Menggabungkan lebih banyak {{token}} akan meningkatkan Biaya Fairness dan TimeLock Fairplay Anda secara proporsional dengan jumlah yang didepositkan. Biaya ini akan berkurang setiap detik setelah Anda deposit. Anda tidak akan membayar Biaya Fairness tambahan pada deposit lama Anda.",
     "compoundToken": "Gabungkan {{token}}",
     "compoundBonusToken": "Gabungkan Bonus {{token}}",
@@ -197,12 +197,12 @@
     "totalPrizesWon": "Cadet kami telah memenangkan",
     "potDraw": "Undian Pot {{name}}",
     "valueWon": "Menangkan <span>{{currency}}{{amount}}</span>",
-    "wonTokensIn": "di",
+    "wonTokensIn": "di ",
     "drawDate": "Tanggal Undian",
     "players": "Pemain",
     "prizePerWinner": "Hadiah pemenang",
     "winners": "Pemenang",
-    "stakedAmountToken": "Staked {{amount}} {{token}}",
+    "stakedAmountToken": "Stake {{amount}} {{token}}",
     "viewTransaction": "Lihat Transaksi",
     "userWonPrize": "Anda memenangkan sebuah hadiah!"
   }
