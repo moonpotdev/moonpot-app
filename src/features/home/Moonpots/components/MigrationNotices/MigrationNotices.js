@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { byDecimals } from '../../../../../helpers/format';
+import BigNumber from 'bignumber.js';
 import { Box, makeStyles } from '@material-ui/core';
 import styles from './styles';
 import { useTranslation } from 'react-i18next';
