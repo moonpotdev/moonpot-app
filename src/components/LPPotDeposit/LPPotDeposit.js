@@ -249,7 +249,9 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
           step: 'deposit',
           message: 'Confirm deposit transaction on wallet to complete.',
           action: () =>
-            dispatch(reduxActions.wallet.zapIn(pot.contractAddress, zapEstimate, isDepositAll)),
+            dispatch(
+              reduxActions.wallet.zapIn(pot.network, pot.contractAddress, zapEstimate, isDepositAll)
+            ),
           pending: false,
         });
       } else {

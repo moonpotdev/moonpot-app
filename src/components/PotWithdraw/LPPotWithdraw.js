@@ -256,7 +256,8 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
         steps.push({
           step: 'withdraw',
           message: 'Confirm withdraw transaction on wallet to complete.',
-          action: () => dispatch(reduxActions.wallet.zapOut(pot.contractAddress, zapEstimate)),
+          action: () =>
+            dispatch(reduxActions.wallet.zapOut(pot.network, pot.contractAddress, zapEstimate)),
           pending: false,
         });
       } else {
