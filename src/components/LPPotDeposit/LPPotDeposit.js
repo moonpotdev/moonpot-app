@@ -104,7 +104,7 @@ function useDepositTokens(network, lpAddress) {
   }, [lpAddress, network]);
 }
 
-function ZapDepositEstimateDebugger({
+/*function ZapDepositEstimateDebugger({
   selectedNeedsZap,
   zapEstimate,
   selectedToken,
@@ -139,7 +139,7 @@ function ZapDepositEstimateDebugger({
       <div>Add {pairToken.symbol} liquidity</div>
     </>
   );
-}
+}*/
 
 export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();

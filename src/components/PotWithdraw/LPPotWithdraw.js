@@ -78,7 +78,7 @@ function DropdownIcon(props) {
   return <KeyboardArrowDownIcon {...props} viewBox="6 8.59000015258789 12 7.409999847412109" />;
 }
 
-function ZapWithdrawEstimateDebugger({
+/*function ZapWithdrawEstimateDebugger({
   zapEstimate,
   userTotalBalance,
   selectedNeedsZap,
@@ -130,7 +130,7 @@ function ZapWithdrawEstimateDebugger({
       </div>
     </div>
   );
-}
+}*/
 
 function useUnwrappedTokensSymbols(network, tokens) {
   return useMemo(() => {

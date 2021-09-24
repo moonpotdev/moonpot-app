@@ -69,6 +69,7 @@
     "winTotalPrize": "Win <span>{{prize}}</span>",
     "winTotalTokensIn": "in ",
     "statNextDraw": "Next Draw",
+    "statNextDrawDaily": "Next Daily Draw",
     "statNextDrawWeekly": "Next Weekly Draw",
     "statNextDrawBiWeekly": "Next Bi-Weekly Draw",
     "statNextDrawMonthly": "Next Monthly Draw",
