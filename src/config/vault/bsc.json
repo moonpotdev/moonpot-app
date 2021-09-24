@@ -74,8 +74,8 @@
   },
   {
     "id": "4belt",
-    "name": "Belt LP",
-    "token": "Belt-LP",
+    "name": "4Belt USD",
+    "token": "4Belt",
     "provider": "Belt",
     "tokenAddress": "0x9cb73F20164e399958261c289Eb5F9846f4D1404",
     "tokenDecimals": 18,
