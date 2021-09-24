@@ -177,19 +177,10 @@ const approval = (network, tokenAddr, spendingContractAddress) => {
       const web3 = await new Web3(provider);
       const contract = new web3.eth.Contract(erc20Abi, tokenAddr);
       const maxAmount = Web3.utils.toWei('8000000000', 'ether');
-      let estimateGas = config[network].defaultGasLimit;
-
-      try {
-        estimateGas = await contract.methods
-          .approve(spendingContractAddress, maxAmount)
-          .estimateGas({ from: address });
-      } catch (err) {
-        console.log('cannot estimate gas, setting default', estimateGas);
-      }
 
       contract.methods
         .approve(spendingContractAddress, maxAmount)
-        .send({ from: address, gas: estimateGas })
+        .send({ from: address })
         .on('transactionHash', function (hash) {
           dispatch({
             type: WALLET_ACTION,
@@ -234,20 +225,11 @@ const deposit = (network, contractAddr, amount, max) => {
     if (address && provider) {
       const web3 = await new Web3(provider);
       const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);
-      let estimateGas = config[network].defaultGasLimit;
-
-      try {
-        estimateGas = await contract.methods
-          .depositAll('0x0000000000000000000000000000000000000000')
-          .estimateGas({ from: address });
-      } catch (err) {
-        console.log('cannot estimate gas, setting default', estimateGas);
-      }
 
       if (max) {
         contract.methods
           .depositAll('0x0000000000000000000000000000000000000000')
-          .send({ from: address, gas: estimateGas })
+          .send({ from: address })
           .on('transactionHash', function (hash) {
             dispatch({
               type: WALLET_ACTION,
@@ -278,7 +260,7 @@ const deposit = (network, contractAddr, amount, max) => {
       } else {
         contract.methods
           .depositMoonPot(amount, '0x0000000000000000000000000000000000000000')
-          .send({ from: address, gas: estimateGas })
+          .send({ from: address })
           .on('transactionHash', function (hash) {
             dispatch({
               type: WALLET_ACTION,
@@ -321,18 +303,11 @@ const withdraw = (network, contractAddr, amount, max) => {
     if (address && provider) {
       const web3 = await new Web3(provider);
       const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);
-      let estimateGas = config[network].defaultGasLimit;
-
-      try {
-        estimateGas = await contract.methods.exitInstantly().estimateGas({ from: address });
-      } catch (err) {
-        console.log('cannot estimate gas, setting default', estimateGas);
-      }
 
       if (max) {
         contract.methods
           .exitInstantly()
-          .send({ from: address, gas: estimateGas })
+          .send({ from: address })
           .on('transactionHash', function (hash) {
             dispatch({
               type: WALLET_ACTION,
@@ -406,17 +381,9 @@ const getReward = (network, contractAddr) => {
     if (address && provider) {
       const web3 = await new Web3(provider);
       const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);
-      let estimateGas = config[network].defaultGasLimit;
-
-      try {
-        estimateGas = await contract.methods.getReward().estimateGas({ from: address });
-      } catch (err) {
-        console.log('cannot estimate gas, setting default', estimateGas);
-      }
-
       contract.methods
         .getReward()
-        .send({ from: address, gas: estimateGas })
+        .send({ from: address })
         .on('transactionHash', function (hash) {
           dispatch({
             type: WALLET_ACTION,
@@ -452,17 +419,9 @@ const compound = (network, contractAddr) => {
     if (address && provider) {
       const web3 = await new Web3(provider);
       const contract = new web3.eth.Contract(ziggyManagerMultiRewardsAbi, contractAddr);
-      let estimateGas = config[network].defaultGasLimit;
-
-      try {
-        estimateGas = await contract.methods.compound().estimateGas({ from: address });
-      } catch (err) {
-        console.log('cannot estimate gas, setting default', estimateGas);
-      }
-
       contract.methods
         .compound()
-        .send({ from: address, gas: estimateGas })
+        .send({ from: address })
         .on('transactionHash', function (hash) {
           dispatch({
             type: WALLET_ACTION,
