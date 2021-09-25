@@ -11,7 +11,7 @@ import { LPTokenInput } from '../LPTokenInput/LPTokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
-import { usePot, useSymbolOrList, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
+import { usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
 import { Translate } from '../Translate';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
 import { config } from '../../config/config';
@@ -80,28 +80,37 @@ function useDepositTokens(network, lpAddress) {
       const nativeDecimals = nativeCurrency.decimals;
       const nativeWrappedToken =
         tokensByNetworkAddress[network][nativeCurrency.wrappedAddress.toLowerCase()];
+      const token0Symbol = lpToken.lp[0];
+      const token1Symbol = lpToken.lp[1];
+      const token0IsNative = token0Symbol === nativeWrappedToken.symbol;
+      const token1IsNative = token1Symbol === nativeWrappedToken.symbol;
+      const token0 = tokensByNetworkSymbol[network][token0Symbol];
+      const token1 = tokensByNetworkSymbol[network][token1Symbol];
 
-      for (const symbol of lpToken.lpDisplayOrder || lpToken.lp) {
-        const tokenIsNative = symbol === nativeWrappedToken.symbol;
-        const token = tokensByNetworkSymbol[network][symbol];
-
-        if (tokenIsNative) {
-          tokens.push({
-            ...token,
-            address: '',
-            symbol: nativeSymbol,
-            decimals: nativeDecimals,
-            isNative: true,
-          });
-          tokens.push({ ...token, isNative: false });
-        } else {
-          tokens.push({ ...token, isNative: false });
-        }
+      if (token0IsNative) {
+        tokens.push({
+          ...token0,
+          address: '',
+          symbol: nativeSymbol,
+          decimals: nativeDecimals,
+          isNative: true,
+        });
+        tokens.push({ ...token0, isNative: false });
+      } else {
+        tokens.push({ ...token0, isNative: false });
       }
 
-      // Move LP to end of list
-      if (lpToken.lpLast) {
-        tokens.push(tokens.shift());
+      if (token1IsNative) {
+        tokens.push({
+          ...token1,
+          address: '',
+          symbol: nativeSymbol,
+          decimals: nativeDecimals,
+          isNative: true,
+        });
+        tokens.push({ ...token1, isNative: false });
+      } else {
+        tokens.push({ ...token1, isNative: false });
       }
     }
 
@@ -156,7 +165,6 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const potAddress = pot.contractAddress;
   const potId = pot.id;
   const pairToken = tokensByNetworkAddress[pot.network][lpAddress.toLowerCase()];
-  const depositSingleSymbols = useSymbolOrList(pairToken.lpDisplayOrder || pairToken.lp);
   const depositTokens = useDepositTokens(network, lpAddress);
   const depositTokensBySymbol = useMemo(() => indexBy(depositTokens, 'symbol'), [depositTokens]);
   const [selectedTokenSymbol, setSelectedTokenSymbol] = useState(depositTokens[0].symbol);
@@ -293,10 +301,11 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
       <Grid container>
         <Grid item xs={12}>
           <div className={classes.subHeaderHolder}>
-            <Translate i18nKey="deposit.zapExplainer" values={{ tokens: depositSingleSymbols }} />
-            <TooltipWithIcon
-              i18nKey={id === '4belt' ? 'deposit.zapTooltip4Belt' : 'deposit.zapTooltip'}
+            <Translate
+              i18nKey="deposit.zapExplainer"
+              values={{ token0: pairToken.lp[0], token1: pairToken.lp[1] }}
             />
+            <TooltipWithIcon i18nKey="deposit.zapTooltip" />
           </div>
         </Grid>
         <Grid item xs={6}>
@@ -360,7 +369,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
             />
           </PrimaryButton>
         ) : (
-          <WalletConnectButton variant={variant} fullWidth={true} />
+          <WalletConnectButton variant="teal" fullWidth={true} />
         )}
         <DepositSteps
           pot={pot}

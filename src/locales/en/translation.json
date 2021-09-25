@@ -9,7 +9,6 @@
     "mainPots": "Main",
     "communityPots": "Community",
     "lpPots": "LP",
-    "stablePots": "Stable",
     "play": "Play",
     "learnMore": "Learn More",
     "moonpots": "Moonpots",
@@ -158,13 +157,10 @@
       "title": "Pot Retired",
       "message": "You can no longer deposit in to this pot."
     },
-    "zapExplainer": "Deposit LP or ZAP⚡ in {{tokens}}",
+    "zapExplainer": "Deposit LP or ZAP⚡ in {{token0}} or {{token1}}",
     "zapTooltip": [
       "ZAP lets you create liquidity pool tokens and make deposits with just one transaction.",
       "Half of your tokens will be sold to balance the liquidity pair, after which liquidity will be provided and LP tokens deposited into this Pot."
-    ],
-    "zapTooltip4Belt": [
-      "ZAP lets you create liquidity pool tokens and make deposits with just one transaction."
     ],
     "inYourWallet": "In your wallet",
     "provider": "Liquidity provider"
@@ -182,7 +178,7 @@
       "title": "Migration Needed",
       "message": "Withdrawing your {{token}}, instead of moving it to the new Moonpot, means you will miss out on future bonus earnings and your chance to win the next {{token}} Prize."
     },
-    "zapExplainer": "Withdraw LP or ZAP⚡ out to {{tokens}}"
+    "zapExplainer": "Withdraw LP or ZAP⚡ out to {{token0}} or {{token1}}"
   },
   "bonus": {
     "myBonusEarnings": "My Bonus Earnings",
@@ -211,8 +207,5 @@
     "stakedAmountToken": "Staked {{amount}} {{token}}",
     "viewTransaction": "View Transaction",
     "userWonPrize": "You won a prize!"
-  },
-  "tokens": {
-    "4Belt USD LP": "USD Stablecoins"
   }
 }

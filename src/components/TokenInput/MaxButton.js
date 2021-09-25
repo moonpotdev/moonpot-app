@@ -9,8 +9,6 @@ export const MaxButton = withStyles({
       teal: '#6B96BD',
       purple: '#B6ADCC',
       purpleAlt: '#656FA5',
-      green: '#2E657A',
-      greenStable: '#508276',
     }),
     '&:hover': {
       color: 'rgba(255, 255, 255, 0.95)',
@@ -18,8 +16,6 @@ export const MaxButton = withStyles({
         teal: '#628cad',
         purple: '#B6ADCC',
         purpleAlt: '#656FA5',
-        green: '#2E657A',
-        greenStable: '#508276',
       }),
     },
     '&:focus': {
@@ -28,8 +24,6 @@ export const MaxButton = withStyles({
         teal: '#628cad',
         purple: '#B6ADCC',
         purpleAlt: '#656FA5',
-        green: '#2E657A',
-        greenStable: '#508276',
       }),
     },
     '& .MuiTouchRipple-child': {
@@ -37,8 +31,6 @@ export const MaxButton = withStyles({
         teal: '#50758f',
         purple: '#B6ADCC',
         purpleAlt: '#656FA5',
-        green: '#2E657A',
-        greenStable: '#508276',
       }),
     },
   },

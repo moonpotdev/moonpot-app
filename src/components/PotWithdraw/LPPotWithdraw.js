@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { Link, makeStyles, MenuItem, Select } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import { usePot, useSymbolOrList, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
+import { usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
 import reduxActions from '../../features/redux/actions';
 import { indexBy, variantClass } from '../../helpers/utils';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
@@ -30,49 +30,47 @@ function useWithdrawTokens(network, lpAddress) {
       const nativeSymbol = nativeCurrency.symbol;
       const nativeWrappedToken =
         tokensByNetworkAddress[network][nativeCurrency.wrappedAddress.toLowerCase()];
+      const token0Symbol = lpToken.lp[0];
+      const token1Symbol = lpToken.lp[1];
+      const token0IsNative = token0Symbol === nativeWrappedToken.symbol;
+      const token1IsNative = token1Symbol === nativeWrappedToken.symbol;
+      const token0 = tokensByNetworkSymbol[network][token0Symbol];
+      const token1 = tokensByNetworkSymbol[network][token1Symbol];
 
-      for (const symbol of lpToken.lpDisplayOrder || lpToken.lp) {
-        const tokenIsNative = symbol === nativeWrappedToken.symbol;
-        const token = tokensByNetworkSymbol[network][symbol];
-
-        if (tokenIsNative) {
-          // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
-          tokens.push({
-            ...token,
-            symbol: nativeSymbol,
-            isNative: false,
-            isRemove: false,
-          });
-        } else {
-          tokens.push({ ...token, isNative: false, isRemove: false });
-        }
-      }
-
-      // Withdraw as token0 + token1
-      if (lpToken.lp.length === 2) {
-        const token0Symbol = lpToken.lp[0];
-        const token1Symbol = lpToken.lp[1];
-        const token0IsNative = token0Symbol === nativeWrappedToken.symbol;
-        const token1IsNative = token1Symbol === nativeWrappedToken.symbol;
-        const token0 = tokensByNetworkSymbol[network][token0Symbol];
-        const token1 = tokensByNetworkSymbol[network][token1Symbol];
-
+      if (token0IsNative) {
         // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
         tokens.push({
-          ...lpToken,
-          address: '',
-          symbol: `${token0IsNative ? nativeSymbol : token0.symbol} + ${
-            token1IsNative ? nativeSymbol : token1.symbol
-          }`,
+          ...token0,
+          symbol: nativeSymbol,
           isNative: false,
-          isRemove: true,
+          isRemove: false,
         });
+      } else {
+        tokens.push({ ...token0, isNative: false, isRemove: false });
       }
 
-      // Move LP to end of list
-      if (lpToken.lpLast) {
-        tokens.push(tokens.shift());
+      if (token1IsNative) {
+        // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
+        tokens.push({
+          ...token1,
+          symbol: nativeSymbol,
+          isNative: false,
+          isRemove: false,
+        });
+      } else {
+        tokens.push({ ...token1, isNative: false, isRemove: false });
       }
+
+      // NOTE: beamOut automatically unwraps WBNB->BNB so we label WBNB as BNB
+      tokens.push({
+        ...lpToken,
+        address: '',
+        symbol: `${token0IsNative ? nativeSymbol : token0.symbol} + ${
+          token1IsNative ? nativeSymbol : token1.symbol
+        }`,
+        isNative: false,
+        isRemove: true,
+      });
     }
 
     return tokens;
@@ -163,11 +161,7 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
   const potAddress = pot.contractAddress;
   const potId = pot.id;
   const pairToken = tokensByNetworkAddress[pot.network][lpAddress.toLowerCase()];
-  const unwrappedTokenSymbols = useUnwrappedTokensSymbols(
-    pot.network,
-    pairToken.lpDisplayOrder || pairToken.lp
-  );
-  const withdrawSingleSymbols = useSymbolOrList(unwrappedTokenSymbols);
+  const unwrappedTokenSymbols = useUnwrappedTokensSymbols(pot.network, pairToken.lp);
   const withdrawTokens = useWithdrawTokens(network, lpAddress);
   const withdrawTokensBySymbol = useMemo(() => indexBy(withdrawTokens, 'symbol'), [withdrawTokens]);
   const [selectedTokenSymbol, setSelectedTokenSymbol] = useState(withdrawTokens[0].symbol);
@@ -294,7 +288,10 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
       {canWithdraw && pot.migrationNeeded ? <MigrationNotice token={pot.token} /> : null}
       <div className={classes.buttonHolder}>
         <div className={classes.zapInfoHolder}>
-          <Translate i18nKey="withdraw.zapExplainer" values={{ tokens: withdrawSingleSymbols }} />
+          <Translate
+            i18nKey="withdraw.zapExplainer"
+            values={{ token0: unwrappedTokenSymbols[0], token1: unwrappedTokenSymbols[1] }}
+          />
           {/*<TooltipWithIcon i18nKey="withdraw.zapTooltip" />*/}
         </div>
         {/*<div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>*/}

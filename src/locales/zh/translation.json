@@ -155,7 +155,7 @@
       "title": "已退役的月盒",
       "message": "您不能再向这个月盒进行存款了."
     },
-    "zapExplainer": "存入 LP 或使用 {{tokens}} 执行 ZAP⚡ 功能",
+    "zapExplainer": "存入 LP 或使用 {{token0}} 或 {{token1}} 执行 ZAP⚡ 功能",
     "zapTooltip": [
       "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
       "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
@@ -176,7 +176,7 @@
       "title": "需要进行迁移",
       "message": "选择提取您的 {{token}}，而不是转移到新的月盒，意味着您将错过未来的额外收益，以及赢取下一次{{token}}大奖的机会。"
     },
-    "zapExplainer": "提取 LP 或使用 ZAP⚡ 提取为 {{tokens}}"
+    "zapExplainer": "提取 LP 或使用 ZAP⚡ 提取为 {{token0}} 或 {{token1}}"
   },
   "bonus": {
     "myBonusEarnings": "我的额外收益",
@@ -205,8 +205,5 @@
     "stakedAmountToken": "质押了 {{amount}} {{token}}",
     "viewTransaction": "查看交易",
     "userWonPrize": "您赢得了一个奖品!"
-  },
-  "tokens": {
-    "4Belt USD LP": "USD Stablecoins"
   }
 }
