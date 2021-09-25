@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../../helpers/utils';
 import { Pot as BasePot, PrizeSplit } from '../../../../../components/Pot/Pot';
-import { usePot, useTokenAddressPrice } from '../../../../../helpers/hooks';
+import { usePot, useTokenAddressPrice, useTranslatedToken } from '../../../../../helpers/hooks';
 import { Translate } from '../../../../../components/Translate';
 import { byDecimals } from '../../../../../helpers/format';
 import styles from './styles';
@@ -18,10 +18,14 @@ const Play = memo(function ({ id, token, contractAddress, variant }) {
     state => state.balanceReducer.tokens[contractAddress + ':total']?.balance
   );
   const hasStaked = address && balance > 0;
+  const translatedToken = useTranslatedToken(token);
 
   return (
     <PrimaryButton to={`/pot/${id}`} variant={variant} fullWidth={true}>
-      <Translate i18nKey={hasStaked ? 'pot.playWithMore' : 'pot.playWith'} values={{ token }} />
+      <Translate
+        i18nKey={hasStaked ? 'pot.playWithMore' : 'pot.playWith'}
+        values={{ token: translatedToken }}
+      />
     </PrimaryButton>
   );
 });
