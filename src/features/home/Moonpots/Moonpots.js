@@ -40,8 +40,6 @@ const Moonpots = ({ selected }) => {
       return 'blueCommunity';
     } else if (vaultType === 'lp') {
       return 'green';
-    } else if (vaultType === 'stable') {
-      return 'greenStable';
     }
 
     // default/main

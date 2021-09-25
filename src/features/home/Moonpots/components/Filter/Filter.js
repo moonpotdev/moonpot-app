@@ -32,12 +32,6 @@ const Filter = ({ className, selected }) => {
         {t('buttons.lpPots')}
       </RoutedButton>
       <RoutedButton
-        className={clsx(classes.button, { [classes.buttonActive]: selected === 'stable' })}
-        to="/stable"
-      >
-        {t('buttons.stablePots')}
-      </RoutedButton>
-      <RoutedButton
         className={clsx(classes.button, { [classes.buttonActive]: selected === 'community' })}
         to="/community"
       >

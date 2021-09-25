@@ -1,9 +1,5 @@
 const styles = theme => ({
   strategy: {
-    '& p': {
-      marginTop: '0',
-      marginBottom: '1em',
-    },
     '& p:last-child': {
       marginBottom: '0',
     },
@@ -32,15 +28,6 @@ const styles = theme => ({
     fontSize: '15px',
     lineHeight: '24px',
     color: '#FAFAFC',
-  },
-  fairplayRules: {
-    '& p': {
-      marginTop: '0',
-      marginBottom: '1em',
-    },
-    '& p:last-child': {
-      marginBottom: '0',
-    },
   },
   ziggyTimelock: {
     marginBottom: '21px',
