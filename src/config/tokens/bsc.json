@@ -152,6 +152,14 @@
     "lp": ["POTS", "BUSD"]
   },
   {
+    "symbol": "moonTicketCakeV2POTS-BUSD",
+    "address": "0xB0177Aa9d7BDcBc4841993C3153c987A74462198",
+    "type": "ticket",
+    "oracleId": "cakev2-pots-busd",
+    "decimals": 18,
+    "ticketFor": "POTS-BUSD LP"
+  },
+  {
     "symbol": "4Belt USD LP",
     "icon": "belt-lp",
     "address": "0x9cb73F20164e399958261c289Eb5F9846f4D1404",
@@ -164,19 +172,11 @@
     "lpLast": true
   },
   {
-    "symbol": "moonTicketCakeV2POTS-BUSD",
-    "address": "0xB0177Aa9d7BDcBc4841993C3153c987A74462198",
-    "type": "ticket",
-    "oracleId": "cakev2-pots-busd",
-    "decimals": 18,
-    "ticketFor": "POTS-BUSD LP"
-  },
-  {
     "symbol": "moonTicketBelt4LP",
     "address": "0x49d46111DDD93C526486b88E17C4f8b1Ea0F682e",
     "type": "ticket",
     "oracleId": "belt-4belt",
     "decimals": 18,
-    "ticketFor": "Belt LP"
+    "ticketFor": "4Belt USD LP"
   }
 ]
