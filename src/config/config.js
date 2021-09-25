@@ -36,8 +36,6 @@ export const config = {
       wrappedSymbol: 'WBNB',
       wrappedAddress: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
     },
-    defaultGasLimit: 430000,
-    defaultGasWei: 5000000000,
   },
 };
 
