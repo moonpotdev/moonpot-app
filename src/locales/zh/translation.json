@@ -68,6 +68,7 @@
     "winTotalPrize": "赢取 <span>{{prize}}</span>",
     "winTotalTokensIn": "的 ",
     "statNextDraw": "下次抽奖",
+    "statNextDrawDaily": "距下一次每天抽奖",
     "statNextDrawWeekly": "距下一次每周抽奖",
     "statNextDrawBiWeekly": "距下一次双周抽奖",
     "statNextDrawMonthly": "距下一次月度抽奖",
