@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { byDecimals } from './format';
 import { tokensByNetworkAddress } from '../config/tokens';
+import { useTranslation } from 'react-i18next';
+import { WALLET_CONNECT_DONE } from '../features/redux/constants';
 
 export function usePrevious(value) {
   const ref = useRef();
@@ -135,4 +137,56 @@ export function useBonusesEarned(id) {
       };
     });
   }, [earned, bonuses, prices]);
+}
+
+export function useSymbolOrList(symbols) {
+  return useMemo(() => {
+    if (symbols && symbols.length) {
+      return symbols.join(' / ');
+    }
+
+    return '';
+  }, [symbols]);
+}
+
+export function useSymbolAndList(symbols) {
+  return useMemo(() => {
+    if (symbols && symbols.length) {
+      if (symbols.length <= 2) {
+        return symbols.join(' & ');
+      }
+
+      return symbols.slice(0, -1).join(', ') + ' & ' + symbols.slice(-1);
+    }
+
+    return '';
+  }, [symbols]);
+}
+
+export function translateToken(symbol, i18n, t) {
+  const key = 'tokens.' + symbol;
+  if (i18n.exists(key)) {
+    return t(key);
+  }
+
+  return symbol;
+}
+
+export function useTranslatedToken(symbol) {
+  const { i18n, t } = useTranslation();
+
+  return useMemo(() => {
+    return translateToken(symbol, i18n, t);
+  }, [symbol, i18n, t]);
+}
+
+export function useImpersonate() {
+  const dispatch = useDispatch();
+
+  window.impersonate = useCallback(
+    address => {
+      dispatch({ type: WALLET_CONNECT_DONE, payload: { address } });
+    },
+    [dispatch]
+  );
 }

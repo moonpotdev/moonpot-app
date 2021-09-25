@@ -156,7 +156,7 @@
       "title": "Pot Tidak Aktif",
       "message": "Anda tidak dapat lagi Deposit ke pot ini."
     },
-    "zapExplainer": "Deposit LP atau ZAP⚡ Masukkan {{token0}} atau {{token1}}",
+    "zapExplainer": "Deposit LP atau ZAP⚡ Masukkan {{tokens}}",
     "zapTooltip": [
       "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi.",
       "Setengah dari token Anda akan dijual untuk menyeimbangkan pasangan likuiditas, setelah itu likuiditas akan diberikan dan LP token akan didepositkan ke dalam Pot ini."
@@ -177,7 +177,7 @@
       "title": "Perlu Migrasi",
       "message": "Penarikan {{token}} Anda, sebaliknya jika memindahkannya ke Moonpot yang baru, berarti anda akan kehilangan penghasilan bonus di masa mendatang dan kesempatan anda untuk memenangkan Hadiah {{token}} berikutnya."
     },
-    "zapExplainer": "Penarikan LP atau ZAP⚡ Keluarkan {{token0}} atau {{token1}}"
+    "zapExplainer": "Penarikan LP atau ZAP⚡ Keluarkan {{tokens}}"
   },
   "bonus": {
     "myBonusEarnings": "Penghasilan Bonus Saya",
@@ -206,5 +206,8 @@
     "stakedAmountToken": "Stake {{amount}} {{token}}",
     "viewTransaction": "Lihat Transaksi",
     "userWonPrize": "Anda memenangkan sebuah hadiah!"
+  },
+  "tokens": {
+    "4Belt USD LP": "USD Stablecoins"
   }
 }

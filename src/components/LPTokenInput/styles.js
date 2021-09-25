@@ -110,8 +110,12 @@ const styles = theme => ({
     background: '#275668',
     border: '2px solid #2E657A',
   },
+  inputVariantGreenStable: {
+    background: '#467268',
+    border: '2px solid #508276',
+  },
   tokenDropdownVariantTeal: {
-    background: '#3F688D',
+    background: '#3C6259',
     border: '2px solid #6B96BD',
   },
   tokenDropdownVariantPurple: {
@@ -124,7 +128,11 @@ const styles = theme => ({
   },
   tokenDropdownVariantGreen: {
     background: '#275668',
-    border: '2px solid #2E657A',
+    border: '2px solid #508276',
+  },
+  tokenDropdownVariantGreenStable: {
+    background: '#467268',
+    border: '2px solid #508276',
   },
 });
 
