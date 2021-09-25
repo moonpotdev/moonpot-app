@@ -173,7 +173,7 @@
   },
   {
     "symbol": "moonTicketBelt4LP",
-    "address": "0x8CCBaddBB224D173e2f45CaC0A4DDdFFabDF71b9",
+    "address": "0x49d46111DDD93C526486b88E17C4f8b1Ea0F682e",
     "type": "ticket",
     "oracleId": "belt-4belt",
     "decimals": 18,
