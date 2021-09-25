@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../../helpers/utils';
 import { Pot as BasePot, PrizeSplit } from '../../../../../components/Pot/Pot';
-import { usePot, useTokenAddressPrice } from '../../../../../helpers/hooks';
+import { usePot, useTokenAddressPrice, useTranslatedToken } from '../../../../../helpers/hooks';
 import { Translate } from '../../../../../components/Translate';
 import { byDecimals } from '../../../../../helpers/format';
 import styles from './styles';
@@ -18,10 +18,14 @@ const Play = memo(function ({ id, token, contractAddress, variant }) {
     state => state.balanceReducer.tokens[contractAddress + ':total']?.balance
   );
   const hasStaked = address && balance > 0;
+  const translatedToken = useTranslatedToken(token);
 
   return (
     <PrimaryButton to={`/pot/${id}`} variant={variant} fullWidth={true}>
-      <Translate i18nKey={hasStaked ? 'pot.playWithMore' : 'pot.playWith'} values={{ token }} />
+      <Translate
+        i18nKey={hasStaked ? 'pot.playWithMore' : 'pot.playWith'}
+        values={{ token: translatedToken }}
+      />
     </PrimaryButton>
   );
 });
@@ -58,6 +62,19 @@ const NewDepositOdds = memo(function ({
   );
 });
 
+function handleVariant(vaultType) {
+  if (vaultType === 'community') {
+    return 'blueCommunity';
+  } else if (vaultType === 'lp') {
+    return 'green';
+  } else if (vaultType === 'stable') {
+    return 'greenStable';
+  }
+
+  // default/main
+  return 'teal';
+}
+
 const Bottom = function ({ id }) {
   const classes = useStyles();
   const pot = usePot(id);
@@ -87,7 +104,7 @@ const Bottom = function ({ id }) {
           id={pot.id}
           token={pot.token}
           contractAddress={pot.contractAddress}
-          variant={pot.vaultType === 'main' ? 'teal' : 'blueCommunity'}
+          variant={handleVariant(pot.vaultType)}
         />
       </div>
       <div className={classes.rowOdds}>

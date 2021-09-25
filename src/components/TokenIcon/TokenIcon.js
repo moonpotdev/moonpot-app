@@ -10,11 +10,25 @@ export const TokenIcon = memo(function TokenImage({ token, className }) {
   const classNames = clsx(
     {
       [classes.icon]: true,
-      [classes.lpWithdraw]: token.type === 'lp' && !token.isRemove,
-      [classes.lpRemove]: token.type === 'lp' && token.isRemove === true,
+      [classes.lpWithdraw]: !token.icon && token.type === 'lp' && !token.isRemove,
+      [classes.lpRemove]: !token.icon && token.type === 'lp' && token.isRemove === true,
     },
     className
   );
+
+  if (token.icon) {
+    return (
+      <div className={classNames}>
+        <img
+          src={require(`../../images/tokens/${token.icon}.svg`).default}
+          alt=""
+          aria-hidden={true}
+          width={24}
+          height={24}
+        />
+      </div>
+    );
+  }
 
   if (token.type === 'lp') {
     return (
