@@ -10,6 +10,7 @@ import { Header } from './components/Header';
 import Footer from './components/footer';
 import ModalPopup from './components/Modal/modal.js';
 import { useLocation } from 'react-router';
+import { useImpersonate } from './helpers/hooks';
 
 const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
@@ -61,6 +62,7 @@ const ScrollToTop = memo(function () {
 export default function App() {
   const dispatch = useDispatch();
   const theme = appTheme();
+  useImpersonate();
 
   React.useEffect(() => {
     dispatch(reduxActions.prices.fetchPrices());

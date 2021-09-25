@@ -210,5 +210,8 @@
     "stakedAmountToken": "Staked {{amount}} {{token}}",
     "viewTransaction": "View Transaction",
     "userWonPrize": "You won a prize!"
+  },
+  "tokens": {
+    "4Belt USD LP": "USD Stablecoins"
   }
 }

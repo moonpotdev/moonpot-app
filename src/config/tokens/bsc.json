@@ -152,14 +152,16 @@
     "lp": ["POTS", "BUSD"]
   },
   {
-    "symbol": "4Belt",
+    "symbol": "4Belt USD LP",
     "icon": "belt-lp",
     "address": "0x9cb73F20164e399958261c289Eb5F9846f4D1404",
     "type": "lp",
     "oracleId": "belt-4belt",
     "decimals": 18,
     "zap": "0xBC106076552d0DbA0705C76b0344C533Cb63788C",
-    "lp": ["DAI", "USDT", "USDC", "BUSD"]
+    "lp": ["DAI", "USDC", "USDT", "BUSD"],
+    "lpDisplayOrder": ["BUSD", "USDT", "USDC", "DAI"],
+    "lpLast": true
   },
   {
     "symbol": "moonTicketCakeV2POTS-BUSD",

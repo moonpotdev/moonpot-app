@@ -205,5 +205,8 @@
     "stakedAmountToken": "Stake {{amount}} {{token}}",
     "viewTransaction": "Lihat Transaksi",
     "userWonPrize": "Anda memenangkan sebuah hadiah!"
+  },
+  "tokens": {
+    "4Belt USD LP": "USD Stablecoins"
   }
 }

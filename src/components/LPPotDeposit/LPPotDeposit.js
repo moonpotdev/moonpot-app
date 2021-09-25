@@ -81,7 +81,7 @@ function useDepositTokens(network, lpAddress) {
       const nativeWrappedToken =
         tokensByNetworkAddress[network][nativeCurrency.wrappedAddress.toLowerCase()];
 
-      for (const symbol of lpToken.lp) {
+      for (const symbol of lpToken.lpDisplayOrder || lpToken.lp) {
         const tokenIsNative = symbol === nativeWrappedToken.symbol;
         const token = tokensByNetworkSymbol[network][symbol];
 
@@ -97,6 +97,11 @@ function useDepositTokens(network, lpAddress) {
         } else {
           tokens.push({ ...token, isNative: false });
         }
+      }
+
+      // Move LP to end of list
+      if (lpToken.lpLast) {
+        tokens.push(tokens.shift());
       }
     }
 
@@ -151,7 +156,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const potAddress = pot.contractAddress;
   const potId = pot.id;
   const pairToken = tokensByNetworkAddress[pot.network][lpAddress.toLowerCase()];
-  const depositSingleSymbols = useSymbolOrList(pairToken.lp);
+  const depositSingleSymbols = useSymbolOrList(pairToken.lpDisplayOrder || pairToken.lp);
   const depositTokens = useDepositTokens(network, lpAddress);
   const depositTokensBySymbol = useMemo(() => indexBy(depositTokens, 'symbol'), [depositTokens]);
   const [selectedTokenSymbol, setSelectedTokenSymbol] = useState(depositTokens[0].symbol);

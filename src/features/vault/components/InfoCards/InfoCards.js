@@ -3,7 +3,7 @@ import { usePot } from '../../../../helpers/hooks';
 import { Box, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { OpenInNew } from '@material-ui/icons';
-import { Card, Cards, CardTitle } from '../../../../components/Cards/Cards';
+import { Card, Cards, CardTitle } from '../../../../components/Cards';
 import styles from './styles';
 import clsx from 'clsx';
 import ziggyPlay1x from '../../../../images/ziggy/play@1x.png';
@@ -105,7 +105,7 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
           ) : null}
         </Card>
       ) : null}
-      <Card variant="purpleDark" ref={fairplayRef}>
+      <Card variant="purpleDark" ref={fairplayRef} className={classes.fairplayRules}>
         <div className={classes.ziggyTimelock}>
           <img
             alt=""

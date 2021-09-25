@@ -7,10 +7,11 @@ import { TransListJoin } from '../TransListJoin';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
-import { usePot, useTokenBalance, useTotalPrize } from '../../helpers/hooks';
+import { translateToken, usePot, useTokenBalance, useTotalPrize } from '../../helpers/hooks';
 import { DrawStat, DrawStatNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
 import { investmentOdds } from '../../helpers/utils';
+import { useTranslation } from 'react-i18next';
 import styles from './styles';
 
 const useStyles = makeStyles(styles);
@@ -52,11 +53,12 @@ export const WinTotal = memo(function ({ awardBalanceUsd, totalSponsorBalanceUsd
 });
 
 const WinTokens = memo(function ({ depositToken, sponsors }) {
+  const { t, i18n } = useTranslation();
   const classes = useStyles();
   const sponsorTokens = sponsors
     .map(sponsor => sponsor.sponsorToken)
     .filter(token => token !== depositToken);
-  const allTokens = [depositToken, ...sponsorTokens];
+  const allTokens = [depositToken, ...sponsorTokens].map(symbol => translateToken(symbol, i18n, t));
 
   return (
     <div className={classes.winTotalTokens}>

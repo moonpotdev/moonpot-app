@@ -205,5 +205,8 @@
     "stakedAmountToken": "质押了 {{amount}} {{token}}",
     "viewTransaction": "查看交易",
     "userWonPrize": "您赢得了一个奖品!"
+  },
+  "tokens": {
+    "4Belt USD LP": "USD Stablecoins"
   }
 }

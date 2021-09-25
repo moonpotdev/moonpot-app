@@ -31,7 +31,7 @@ function useWithdrawTokens(network, lpAddress) {
       const nativeWrappedToken =
         tokensByNetworkAddress[network][nativeCurrency.wrappedAddress.toLowerCase()];
 
-      for (const symbol of lpToken.lp) {
+      for (const symbol of lpToken.lpDisplayOrder || lpToken.lp) {
         const tokenIsNative = symbol === nativeWrappedToken.symbol;
         const token = tokensByNetworkSymbol[network][symbol];
 
@@ -67,6 +67,11 @@ function useWithdrawTokens(network, lpAddress) {
           isNative: false,
           isRemove: true,
         });
+      }
+
+      // Move LP to end of list
+      if (lpToken.lpLast) {
+        tokens.push(tokens.shift());
       }
     }
 
@@ -158,7 +163,10 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
   const potAddress = pot.contractAddress;
   const potId = pot.id;
   const pairToken = tokensByNetworkAddress[pot.network][lpAddress.toLowerCase()];
-  const unwrappedTokenSymbols = useUnwrappedTokensSymbols(pot.network, pairToken.lp);
+  const unwrappedTokenSymbols = useUnwrappedTokensSymbols(
+    pot.network,
+    pairToken.lpDisplayOrder || pairToken.lp
+  );
   const withdrawSingleSymbols = useSymbolOrList(unwrappedTokenSymbols);
   const withdrawTokens = useWithdrawTokens(network, lpAddress);
   const withdrawTokensBySymbol = useMemo(() => indexBy(withdrawTokens, 'symbol'), [withdrawTokens]);
