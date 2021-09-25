@@ -68,6 +68,7 @@
     "winTotalPrize": "Menangkan <span>{{prize}}</span>",
     "winTotalTokensIn": "di ",
     "statNextDraw": "Pengundian Berikutnya",
+    "statNextDrawDaily": "Pengundian Harian Berikutnya",
     "statNextDrawWeekly": "Pengundian Mingguan Berikutnya",
     "statNextDrawBiWeekly": "Pengundian Dua-Minggu Berikutnya",
     "statNextDrawMonthly": "Pengundian Bulanan Berikutnya",
