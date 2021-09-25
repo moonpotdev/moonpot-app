@@ -86,6 +86,8 @@ const Vault = () => {
       return 'blueCommunity';
     } else if (vaultType === 'lp') {
       return 'greenDark';
+    } else if (vaultType === 'stable') {
+      return 'greenStableAlt';
     }
   }
 
