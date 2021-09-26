@@ -114,9 +114,10 @@
           ],
           "ziggy": [
             "Dengan stake $POTS di Ziggy's Pot, Anda akan menerima APY yang dihasilkan sebesar 5% dari pendapatan semua Moonpot lainnya.",
-            "Karena saat ini hanya ada satu Moonpot, itu berarti APY Anda akan dihasilkan oleh CAKE Moonpot. Di masa yang akan datang akan ada beberapa Moonpot. Semua akan menghasilkan pendapatan untuk Ziggy's Pot.",
-            "Ziggy Pot akan membeli $POTS dari pasar dengan pendapatan Moonpot.com dan memberikannya kepada pemegang $POTS sebagai keuntungannya.",
-            "Ziggy Pot juga memiliki Undian Hadiah bulanan di mana 10 pemenang yang beruntung akan mendapatkan bagian dari semua token yang berbeda dari Moonpot bulan itu. Pada 1 September hadiahnya termasuk $POTS, $BIFI, $CAKE dan $DODO."
+            "Itu berarti APY anda akan dihasilkan oleh pendapatan dari Pot BANANA, BIFI, CAKE, dan LP kami — dan ditambah semua Moonpot lain yang anda lihat pada saat diluncurkan di platform.",
+            "Ziggy akan membeli POTS dari pasar terbuka dengan pendapatan Moonpot.com dan memberikannya kepada pemegang POTS sebagai keuntungan/bunga.",
+            "Ada juga Undian Hadiah bulanan yang ditambahkan ke Pot Ziggy di mana 10 pemenang yang beruntung akan mendapatkan bagian dari hadiah pot sebanyak 5% dari pendapatan semua token di seluruh platform Moonpot.",
+            "Sebagai contoh, Pengundian Hadiah pada 1 September termasuk POTS, BIFI, CAKE dan DODO, dan menghasilkan total $723.760. Pot Ziggy diundi setiap empat minggu sekali (pada hari Rabu). Anda tidak perlu stake ulang."
           ]
         },
         "beefyVaultAddress": "Alamat Brankas Beefy.Finance",
