@@ -2,7 +2,7 @@ import * as React from 'react';
 import { memo, useMemo } from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
-import { investmentOdds } from '../../../../../helpers/utils';
+import { investmentOdds, calculateUSDProjectedPrize } from '../../../../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import { byDecimals, formatDecimals } from '../../../../../helpers/format';
 import Countdown from '../../../../../components/Countdown';
@@ -16,6 +16,7 @@ const useStyles = makeStyles(styles);
 export const PotTitle = function ({ item }) {
   const classes = useStyles();
   const { t } = useTranslation();
+  const pot = item;
 
   return (
     <Grid item xs={8}>
@@ -26,7 +27,7 @@ export const PotTitle = function ({ item }) {
           </Typography>
           <div className={classes.potUsdTop}>
             <WinTotal
-              awardBalanceUsd={item.awardBalanceUsd}
+              awardBalanceUsd={calculateUSDProjectedPrize({ pot })}
               totalSponsorBalanceUsd={item.totalSponsorBalanceUsd}
             />
           </div>

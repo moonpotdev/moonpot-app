@@ -94,43 +94,95 @@ export function variantClass(classes, prefix, variant, defaultClass = false) {
 }
 
 export const calculateTokenProjectedPrize = ({ pot }) => {
-  const APY = BigNumber(pot.apy); //INPUT APY
-  const convertedAPY = BigNumber.sum(APY.multipliedBy(0.01), 1); //Convert APY to decimal and add 1
-  var dailyRate = Math.pow(convertedAPY.toFixed(20), 1 / 365) - 1; //Calculate daily APR
-
-  const secondsToDraw = new BigNumber(pot.secondsToDraw); //INPUT seconds till draw
-  const daysToDraw = secondsToDraw.dividedBy(86400).toFixed(20); //Convert seconds to days till draw
-
-  const TVL = BigNumber(pot.totalTokenStaked); //INPUT current locked value
-  const futureValue = TVL.toFixed(20) * (Math.pow(1 + dailyRate, daysToDraw) - 1) * 0.4; //Calculate value to be added
-
-  const currentAwardBalance = pot.awardBalance; //INPUT current prize balance
-  const projectedPrizeTotal = BigNumber.sum(currentAwardBalance, futureValue);
-
-  //console.log(pot);
-  //console.log(futureValue);
-  //console.log(projectedPrizeTotal.toFixed(2));
-
+  const projectedPrizeTotal = calculateProjectedPrize(
+    pot.apy,
+    pot.secondsToDraw,
+    pot.totalTokenStaked,
+    pot.awardBalance
+  );
   return projectedPrizeTotal;
 };
 
 export const calculateUSDProjectedPrize = ({ pot }) => {
-  const APY = BigNumber(pot.apy); //INPUT APY
+  const projectedPrizeTotal = calculateProjectedPrize(
+    pot.apy,
+    pot.secondsToDraw,
+    pot.totalStakedUsd,
+    pot.awardBalanceUsd
+  );
+  return projectedPrizeTotal;
+};
+
+export const calculateZiggyTokenProjections = ({ pot, pots }) => {
+  var sponsors = pot.sponsors;
+  console.log(pot);
+  // for(var i = 0; i < sponsors.length; i++) {
+  //   console.log(sponsors[i].sponsorBalance.toFixed(20));
+  // }
+  console.log('Starting Calculation');
+  for (var i in pots) {
+    var sponsorIndex = sponsors.findIndex(item => item.sponsorToken === pots[i].token); //Find coresponding sponsor in sponsors array
+    if (sponsorIndex != -1) {
+      if (pots[i].vaultType === 'main') {
+        sponsors[sponsorIndex].sponsorBalance = calculateProjectedPrize(
+          pots[i].apy,
+          pot.secondsToDraw,
+          pots[i].totalTokenStaked,
+          sponsors[sponsorIndex].sponsorBalance,
+          0.05
+        );
+        sponsors[sponsorIndex].sponsorBalanceUsd = calculateProjectedPrize(
+          pots[i].apy,
+          pot.secondsToDraw,
+          pots[i].totalStakedUsd,
+          sponsors[sponsorIndex].sponsorBalanceUsd,
+          0.05
+        );
+      } else if (pots[i].vaultType === 'community') {
+        sponsors[sponsorIndex].sponsorBalance = calculateProjectedPrize(
+          pots[i].apy,
+          pot.secondsToDraw,
+          pots[i].totalTokenStaked,
+          sponsors[sponsorIndex].sponsorBalance,
+          0.03
+        );
+        sponsors[sponsorIndex].sponsorBalanceUsd = calculateProjectedPrize(
+          pots[i].apy,
+          pot.secondsToDraw,
+          pots[i].totalStakedUsd,
+          sponsors[sponsorIndex].sponsorBalanceUsd,
+          0.03
+        );
+      }
+    }
+  }
+  // for(var i = 0; i < sponsors.length; i++) {
+  //   console.log(sponsors[i].sponsorBalance.toFixed(20));
+  // }
+  //console.log(sponsors)
+
+  return sponsors;
+};
+
+const calculateProjectedPrize = (
+  inputAPY,
+  inputSecondsToDraw,
+  inputTotalStaked,
+  inputCurrentBalance,
+  multiplier = 0.4
+) => {
+  const APY = BigNumber(inputAPY); //INPUT APY
   const convertedAPY = BigNumber.sum(APY.multipliedBy(0.01), 1); //Convert APY to decimal and add 1
   var dailyRate = Math.pow(convertedAPY.toFixed(20), 1 / 365) - 1; //Calculate daily APR
 
-  const secondsToDraw = new BigNumber(pot.secondsToDraw); //INPUT seconds till draw
+  const secondsToDraw = new BigNumber(inputSecondsToDraw); //INPUT seconds till draw
   const daysToDraw = secondsToDraw.dividedBy(86400).toFixed(20); //Convert seconds to days till draw
 
-  const TVL = BigNumber(pot.totalStakedUsd); //INPUT current locked value
-  const futureValue = TVL.toFixed(20) * (Math.pow(1 + dailyRate, daysToDraw) - 1) * 0.4; //Calculate value to be added
+  const TVL = BigNumber(inputTotalStaked); //INPUT current locked value
+  const futureValue = TVL.toFixed(20) * (Math.pow(1 + dailyRate, daysToDraw) - 1) * multiplier; //Calculate value to be added
 
-  const currentAwardBalance = pot.awardBalanceUsd; //INPUT current prize balance
+  const currentAwardBalance = inputCurrentBalance; //INPUT current prize balance
   const projectedPrizeTotal = BigNumber.sum(currentAwardBalance, futureValue);
-
-  console.log(pot);
-  console.log(futureValue);
-  console.log(projectedPrizeTotal.toFixed(2));
 
   return projectedPrizeTotal;
 };

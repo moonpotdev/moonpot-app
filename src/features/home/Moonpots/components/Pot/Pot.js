@@ -5,10 +5,11 @@ import { useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../../helpers/utils';
 import { Pot as BasePot, PrizeSplit } from '../../../../../components/Pot/Pot';
-import { usePot, useTokenAddressPrice } from '../../../../../helpers/hooks';
+import { usePot, useTokenAddressPrice, usePots } from '../../../../../helpers/hooks';
 import {
   calculateTokenProjectedPrize,
   calculateUSDProjectedPrize,
+  calculateZiggyTokenProjections,
 } from '../../../../../helpers/utils';
 import { Translate } from '../../../../../components/Translate';
 import { byDecimals } from '../../../../../helpers/format';
@@ -66,6 +67,7 @@ const NewDepositOdds = memo(function ({
 const Bottom = function ({ id }) {
   const classes = useStyles();
   const pot = usePot(id);
+  const pots = usePots();
 
   const projectedTokenPrize = calculateTokenProjectedPrize({ pot });
   const projectedUSDPrize = calculateUSDProjectedPrize({ pot });
@@ -87,7 +89,9 @@ const Bottom = function ({ id }) {
                 baseToken={pot.token}
                 awardBalance={projectedTokenPrize}
                 awardBalanceUsd={projectedUSDPrize}
-                sponsors={pot.sponsors}
+                sponsors={
+                  pot.id === 'pots' ? calculateZiggyTokenProjections({ pot, pots }) : pot.sponsors
+                }
                 numberOfWinners={pot.numberOfWinners}
               />
             </Grid>

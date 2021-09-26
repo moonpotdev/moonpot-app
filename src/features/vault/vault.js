@@ -3,7 +3,7 @@ import { Redirect, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
-
+import { calculateUSDProjectedPrize } from '../../helpers/utils';
 import reduxActions from '../redux/actions';
 import { formatDecimals } from '../../helpers/format';
 import { usePot, useTotalPrize } from '../../helpers/hooks';
@@ -98,7 +98,7 @@ const Vault = () => {
           bonusApy={pot.bonusApy}
           baseApy={pot.apy}
           totalSponsorBalanceUsd={pot.totalSponsorBalanceUsd}
-          awardBalanceUsd={pot.awardBalanceUsd}
+          awardBalanceUsd={calculateUSDProjectedPrize({ pot })}
         />
         <PoweredByBeefy className={classes.poweredBy} />
         <Pot
