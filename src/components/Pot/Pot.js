@@ -7,10 +7,20 @@ import { TransListJoin } from '../TransListJoin';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
-import { translateToken, usePot, useTokenBalance, useTotalPrize } from '../../helpers/hooks';
+import {
+  translateToken,
+  usePot,
+  usePots,
+  useTokenBalance,
+  useTotalPrize,
+} from '../../helpers/hooks';
 import { DrawStat, DrawStatNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
-import { investmentOdds, calculateUSDProjectedPrize } from '../../helpers/utils';
+import {
+  investmentOdds,
+  calculateUSDProjectedPrize,
+  calculateZiggyUsdProjection,
+} from '../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import styles from './styles';
 
@@ -181,6 +191,7 @@ const DepositWithOdds = memo(function ({
 export function Pot({ id, variant, bottom }) {
   const classes = useStyles();
   const pot = usePot(id);
+  const pots = usePots();
 
   return (
     <Card variant={variant}>
@@ -192,7 +203,11 @@ export function Pot({ id, variant, bottom }) {
           <Title name={pot.name} />
           <WinTotal
             awardBalanceUsd={calculateUSDProjectedPrize({ pot })}
-            totalSponsorBalanceUsd={pot.totalSponsorBalanceUsd}
+            totalSponsorBalanceUsd={
+              pot.id === 'pots'
+                ? calculateZiggyUsdProjection({ pot, pots })
+                : pot.totalSponsorBalanceUsd
+            }
           />
           <WinTokens depositToken={pot.token} sponsors={pot.sponsors} />
         </Grid>

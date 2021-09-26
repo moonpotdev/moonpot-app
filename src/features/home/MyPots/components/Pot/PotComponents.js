@@ -2,13 +2,17 @@ import * as React from 'react';
 import { memo, useMemo } from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
-import { investmentOdds, calculateUSDProjectedPrize } from '../../../../../helpers/utils';
+import {
+  investmentOdds,
+  calculateUSDProjectedPrize,
+  calculateZiggyUsdProjection,
+} from '../../../../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import { byDecimals, formatDecimals } from '../../../../../helpers/format';
 import Countdown from '../../../../../components/Countdown';
 import { InterestTooltip, WinTotal } from '../../../../../components/Pot';
 import { Translate } from '../../../../../components/Translate';
-import { useTokenBalance } from '../../../../../helpers/hooks';
+import { usePots, usePot, useTokenBalance } from '../../../../../helpers/hooks';
 import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(styles);
@@ -17,6 +21,7 @@ export const PotTitle = function ({ item }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const pot = item;
+  const pots = usePots();
 
   return (
     <Grid item xs={8}>
@@ -28,7 +33,11 @@ export const PotTitle = function ({ item }) {
           <div className={classes.potUsdTop}>
             <WinTotal
               awardBalanceUsd={calculateUSDProjectedPrize({ pot })}
-              totalSponsorBalanceUsd={item.totalSponsorBalanceUsd}
+              totalSponsorBalanceUsd={
+                item.id === 'pots'
+                  ? calculateZiggyUsdProjection({ pot, pots })
+                  : pot.totalSponsorBalanceUsd
+              }
             />
           </div>
           <Typography className={classes.myPotsNextWeeklyDrawText} align={'right'}>
