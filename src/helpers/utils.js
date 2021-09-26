@@ -115,51 +115,84 @@ export const calculateUSDProjectedPrize = ({ pot }) => {
 
 export const calculateZiggyTokenProjections = ({ pot, pots }) => {
   var sponsors = pot.sponsors;
-  console.log(pot);
-  // for(var i = 0; i < sponsors.length; i++) {
-  //   console.log(sponsors[i].sponsorBalance.toFixed(20));
-  // }
-  console.log('Starting Calculation');
   for (var i in pots) {
-    var sponsorIndex = sponsors.findIndex(item => item.sponsorToken === pots[i].token); //Find coresponding sponsor in sponsors array
-    if (sponsorIndex != -1) {
-      if (pots[i].vaultType === 'main') {
-        sponsors[sponsorIndex].sponsorBalance = calculateProjectedPrize(
-          pots[i].apy,
-          pot.secondsToDraw,
-          pots[i].totalTokenStaked,
-          sponsors[sponsorIndex].sponsorBalance,
-          0.05
-        );
-        sponsors[sponsorIndex].sponsorBalanceUsd = calculateProjectedPrize(
-          pots[i].apy,
-          pot.secondsToDraw,
-          pots[i].totalStakedUsd,
-          sponsors[sponsorIndex].sponsorBalanceUsd,
-          0.05
-        );
-      } else if (pots[i].vaultType === 'community') {
-        sponsors[sponsorIndex].sponsorBalance = calculateProjectedPrize(
-          pots[i].apy,
-          pot.secondsToDraw,
-          pots[i].totalTokenStaked,
-          sponsors[sponsorIndex].sponsorBalance,
-          0.03
-        );
-        sponsors[sponsorIndex].sponsorBalanceUsd = calculateProjectedPrize(
-          pots[i].apy,
-          pot.secondsToDraw,
-          pots[i].totalStakedUsd,
-          sponsors[sponsorIndex].sponsorBalanceUsd,
-          0.03
-        );
+    if (pots[i].status === 'active') {
+      var sponsorIndex = sponsors.findIndex(item => item.sponsorToken === pots[i].token); //Find coresponding sponsor in sponsors array
+      /*For non LP pots*/
+      if (sponsorIndex != -1) {
+        /*Calculate future prize for main pots */
+        if (pots[i].vaultType === 'main') {
+          /*Token*/
+          sponsors[sponsorIndex].sponsorBalance = calculateProjectedPrize(
+            pots[i].apy, //APY of base asset
+            pot.secondsToDraw, //Time till draw of ziggys pot
+            pots[i].totalTokenStaked, //Tokens staked in pot of base asset
+            sponsors[sponsorIndex].sponsorBalance, //Current balance of token reward in ziggys pot
+            0.05 //Share of tokens alloted to ziggy prize
+          );
+          /*USD*/
+          sponsors[sponsorIndex].sponsorBalanceUsd = calculateProjectedPrize(
+            pots[i].apy, //APY of base asset
+            pot.secondsToDraw, //Time till draw of ziggys pot
+            pots[i].totalTokenStaked, //Tokens staked in pot of base asset
+            sponsors[sponsorIndex].sponsorBalance, //Current balance of token reward in ziggys pot
+            0.05 //Share of tokens alloted to ziggy prize
+          );
+        }
+        /*Calculate future prize for community pots */
+        if (pots[i].vaultType === 'community') {
+          /*Token*/
+          sponsors[sponsorIndex].sponsorBalance = calculateProjectedPrize(
+            pots[i].apy, //APY of base asset
+            pot.secondsToDraw, //Time till draw of ziggys pot
+            pots[i].totalTokenStaked, //Tokens staked in pot of base asset
+            sponsors[sponsorIndex].sponsorBalance, //Current balance of token reward in ziggys pot
+            0.03 //Share of tokens alloted to ziggy prize
+          );
+          /*USD*/
+          sponsors[sponsorIndex].sponsorBalanceUsd = calculateProjectedPrize(
+            pots[i].apy, //APY of base asset
+            pot.secondsToDraw, //Time till draw of ziggys pot
+            pots[i].totalTokenStaked, //Tokens staked in pot of base asset
+            sponsors[sponsorIndex].sponsorBalance, //Current balance of token reward in ziggys pot
+            0.03 //Share of tokens alloted to ziggy prize
+          );
+        }
+      } else {
+        for (var j in pots[i].contributingToZiggy) {
+          sponsorIndex = sponsors.findIndex(
+            item => item.sponsorToken === pots[i].contributingToZiggy[j].token
+          ); //Find coresponding sponsor in sponsors array (LPs)
+          /*Check for only tokens in the sponsors array */
+          if (sponsorIndex != -1) {
+            /*Get distribution amount to ziggy prize */
+            var prizePercent;
+            if (pots[i].vaultType === 'lp') {
+              prizePercent = 0.03;
+            } else {
+              prizePercent = 0.05;
+            }
+            /*Token*/
+            sponsors[sponsorIndex].sponsorBalance = calculateProjectedPrize(
+              pots[i].apy, //APY of base asset
+              pot.secondsToDraw, //Time till draw of ziggys pot
+              pots[i].totalTokenStaked, //Tokens staked in pot of base asset
+              sponsors[sponsorIndex].sponsorBalance, //Current balance of token reward in ziggys pot
+              0.03 / pots[i].contributingToZiggy.length //Share of tokens alloted to ziggy prize divide by lp components
+            );
+            /*USD*/
+            sponsors[sponsorIndex].sponsorBalanceUsd = calculateProjectedPrize(
+              pots[i].apy, //APY of base asset
+              pot.secondsToDraw, //Time till draw of ziggys pot
+              pots[i].totalTokenStaked, //Tokens staked in pot of base asset
+              sponsors[sponsorIndex].sponsorBalance, //Current balance of token reward in ziggys pot
+              0.03 / pots[i].contributingToZiggy.length //Share of tokens alloted to ziggy prize divide by lp components
+            );
+          }
+        }
       }
     }
   }
-  // for(var i = 0; i < sponsors.length; i++) {
-  //   console.log(sponsors[i].sponsorBalance.toFixed(20));
-  // }
-  //console.log(sponsors)
 
   return sponsors;
 };
