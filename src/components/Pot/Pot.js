@@ -7,10 +7,11 @@ import { TransListJoin } from '../TransListJoin';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
-import { usePot, useTokenBalance, useTotalPrize } from '../../helpers/hooks';
-import { DrawStat, DrawNextDraw } from '../DrawStat';
+import { translateToken, usePot, useTokenBalance, useTotalPrize } from '../../helpers/hooks';
+import { DrawStat, DrawStatNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
 import { investmentOdds, calculateUSDProjectedPrize } from '../../helpers/utils';
+import { useTranslation } from 'react-i18next';
 import styles from './styles';
 
 const useStyles = makeStyles(styles);
@@ -52,11 +53,12 @@ export const WinTotal = memo(function ({ awardBalanceUsd, totalSponsorBalanceUsd
 });
 
 const WinTokens = memo(function ({ depositToken, sponsors }) {
+  const { t, i18n } = useTranslation();
   const classes = useStyles();
   const sponsorTokens = sponsors
     .map(sponsor => sponsor.sponsorToken)
     .filter(token => token !== depositToken);
-  const allTokens = [depositToken, ...sponsorTokens];
+  const allTokens = [depositToken, ...sponsorTokens].map(symbol => translateToken(symbol, i18n, t));
 
   return (
     <div className={classes.winTotalTokens}>
@@ -197,11 +199,11 @@ export function Pot({ id, variant, bottom }) {
       </Grid>
       <Grid container spacing={2} className={classes.rowDrawStats}>
         <Grid item xs={7}>
-          <DrawNextDraw frequency={pot.frequency}>
+          <DrawStatNextDraw frequency={pot.frequency}>
             <Countdown until={pot.expiresAt * 1000}>
               <Translate i18nKey="pot.statNextDrawCountdownFinished" />
             </Countdown>
-          </DrawNextDraw>
+          </DrawStatNextDraw>
         </Grid>
         <Grid item xs={5}>
           <DrawStat i18nKey="pot.statTVL">

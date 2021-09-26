@@ -36,6 +36,24 @@
         "sponsorOracleId": "BANANA",
         "sponsorAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
         "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BIFI",
+        "sponsorOracleId": "BIFI",
+        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BUSD",
+        "sponsorOracleId": "BUSD",
+        "sponsorAddress": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "WBNB",
+        "sponsorOracleId": "WBNB",
+        "sponsorAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+        "sponsorTokenDecimals": 18
       }
     ],
     "bonuses": [
@@ -55,6 +73,56 @@
     "compoundIsBonus": false
   },
   {
+    "id": "4belt",
+    "name": "4Belt USD",
+    "token": "4Belt USD LP",
+    "provider": "Belt",
+    "tokenAddress": "0x9cb73F20164e399958261c289Eb5F9846f4D1404",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBelt4LP",
+    "rewardAddress": "0x49d46111DDD93C526486b88E17C4f8b1Ea0F682e",
+    "contractAddress": "0xAc02606cAD10FB8FaC90C201Ee9072f4912Aa5c1",
+    "prizePoolAddress": "0x8243B29f44c895f5141FA5DB43Cf15D8f1A9eB21",
+    "prizeStrategyAddress": "0x063221c7743eF6AA49b32Ca249F1AFF2266f0e2A",
+    "pricePerShare": 1,
+    "oracleId": "belt-4belt",
+    "apyId": "beltv2-4belt",
+    "vaultType": "stable",
+    "status": "active",
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x1bBBf8910E5A074c7B62D891Dbab9f4af82C14D4",
+    "infoCardEarningsBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "Belt LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ],
+    "compoundIsBonus": true
+  },
+  {
     "id": "bifi",
     "name": "BIFI",
     "token": "BIFI",
@@ -72,7 +140,12 @@
     "status": "active",
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xeffFD962696ac768c3C9C84e2D4CC1bC9C54983d",
-    "infoCardEarningsBreakdown": true,
+    "infoCardEarningsBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
@@ -115,7 +188,12 @@
     "status": "active",
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
-    "infoCardEarningsBreakdown": true,
+    "infoCardEarningsBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
@@ -165,7 +243,13 @@
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x3106d9B3d5e04ff5D575212140FAb1Cf17C8933F",
-    "infoCardEarningsBreakdown": true,
+    "infoCardEarningsBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
@@ -210,7 +294,13 @@
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xbFa24f7C2376c28407504Fb8512797dD8D316aBf",
-    "infoCardEarningsBreakdown": true,
+    "infoCardEarningsBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
@@ -311,7 +401,12 @@
     "eolDrawNumber": 6,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
-    "infoCardEarningsBreakdown": true,
+    "infoCardEarningsBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
@@ -366,7 +461,13 @@
     "status": "active",
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xED4ea41Daf652964789b16e3Ff76eC07d99d2340",
-    "infoCardEarningsBreakdown": true,
+    "infoCardEarningsBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
@@ -411,7 +512,12 @@
     "eolDrawNumber": 1,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
-    "infoCardEarningsBreakdown": true,
+    "infoCardEarningsBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
     "sponsorProjectName": "Beefy.Finance",
     "sponsorToken": "BIFI",
     "sponsors": [

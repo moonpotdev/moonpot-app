@@ -21,6 +21,8 @@ const styles = theme => ({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    width: 'auto',
+    whiteSpace: 'nowrap',
   },
   loading: {
     paddingTop: '16px',
