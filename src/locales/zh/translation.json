@@ -39,7 +39,7 @@
   "migrationNoticeTitle": "请将您的 {{asset}} 转移至全新升级的{{pot}}月盒。",
   "migrationNoticeLearnMore": "了解更多",
   "migrationNoticeMove": "转移我的{{asset}}",
-  "vaultTitle": "存入 <span>{{name}}</span>, 获得 <span>{{apy}}% APY</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
+  "vaultTitle": "存入 <span>{{token}}</span>, 获得 <span>{{apy}}% APY</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
   "playWithMoonpot": "使用Moonpot进行游戏",
   "youHaventEnteredMoonpots": "您尚未参与任何月盒.",
   "connectToJoin": "连接您的钱包以加入月盒。",
@@ -68,6 +68,7 @@
     "winTotalPrize": "赢取 <span>{{prize}}</span>",
     "winTotalTokensIn": "的 ",
     "statNextDraw": "下次抽奖",
+    "statNextDrawDaily": "距下一次每天抽奖",
     "statNextDrawWeekly": "距下一次每周抽奖",
     "statNextDrawBiWeekly": "距下一次双周抽奖",
     "statNextDrawMonthly": "距下一次月度抽奖",
@@ -113,9 +114,10 @@
           ],
           "ziggy": [
             "通过在 Ziggy 月盒中质押 $POTS，您将获得由所有其他月盒收入的 5% 所产生的 APY。",
-            "由于目前只有一个月盒，这意味着您的 APY 只由 CAKE 月盒生成。 将来会有多个月盒。 所有的月盒都将为 Ziggy 月盒创造收入。",
-            "Ziggy 月盒使用 Moonpot.com 的收入从市场上购买 $POTS，并将其作为利息提供给 $POTS 质押者。",
-            "Ziggy 月盒每月还有一次抽奖活动，其中 10 位幸运的获胜者将从当月的月盒中分享所有不同的代币。 9 月 1 日的奖金包括 $POTS、$BIFI、$CAKE 和 $DODO。"
+            "这意味着您的 APY 是由我们的 BANANA、BIFI、CAKE 和 LP 月盒以及您在平台上看到的所有任何其他月盒的收入所产生的。",
+            "Ziggy 使用 Moonpot.com 的收入从公开市场上购买 POTS，并将其作为利息提供给 POTS 质押者。",
+            "Ziggy's 月盒还设有每月一次的抽奖活动，其中 10 位幸运的获胜者可以分享由整个Moonpot平台所有代币收入的5%组成的奖池。",
+            "例如，9 月 1 日的抽奖活动奖励包括 POTS、BIFI、CAKE 和 DODO 代币，总奖金为 $723,760。 Ziggy's 月盒每四个星期（星期三）抽奖一次。参与抽奖的过程是自动化的，您无需每次手动重新质押进月盒以参与抽奖。"
           ]
         },
         "beefyVaultAddress": "Beefy 金库地址",
