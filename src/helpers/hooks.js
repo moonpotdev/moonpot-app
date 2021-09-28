@@ -101,6 +101,11 @@ export function usePot(id) {
   return id in pots ? pots[id] : null;
 }
 
+export function usePots() {
+  const pots = useSelector(state => state.vaultReducer.pools);
+  return pots;
+}
+
 export function useRewardEarned(potId, rewardToken, rewardTokenDecimals) {
   const address = useSelector(state => state.walletReducer.address);
   const earned = useSelector(state => state.earnedReducer.earned[potId]?.[rewardToken] ?? 0);

@@ -120,6 +120,24 @@
         "display": "bonus"
       }
     ],
+    "contributingToZiggy": [
+      {
+        "id": 0,
+        "token": "BUSD"
+      },
+      {
+        "id": 1,
+        "token": "USDT"
+      },
+      {
+        "id": 2,
+        "token": "USDC"
+      },
+      {
+        "id": 3,
+        "token": "DAI"
+      }
+    ],
     "compoundIsBonus": true
   },
   {
@@ -272,6 +290,16 @@
         "display": "bonus"
       }
     ],
+    "contributingToZiggy": [
+      {
+        "id": 0,
+        "token": "POTS"
+      },
+      {
+        "id": 1,
+        "token": "BUSD"
+      }
+    ],
     "compoundIsBonus": true
   },
   {
@@ -321,6 +349,16 @@
         "id": 1,
         "symbol": "POTS",
         "display": "bonus"
+      }
+    ],
+    "contributingToZiggy": [
+      {
+        "id": 0,
+        "token": "POTS"
+      },
+      {
+        "id": 1,
+        "token": "WBNB"
       }
     ],
     "compoundIsBonus": true
