@@ -113,11 +113,6 @@
         "id": 0,
         "symbol": "PACOCA",
         "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
       }
     ],
     "compoundIsBonus": true
