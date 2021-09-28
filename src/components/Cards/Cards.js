@@ -75,7 +75,11 @@ export function CardAccordionItem({
       onChange(!isOpen);
     }
   }, [setOpen, isOpen, onChange]);
-  const toggleIcon = isOpen ? <ExpandLess /> : <ExpandMore />;
+  const toggleIcon = isOpen ? (
+    <ExpandLess style={{ position: 'absolute', right: '0' }} />
+  ) : (
+    <ExpandMore style={{ position: 'absolute', right: '0' }} />
+  );
 
   return (
     <div className={clsx(classes.accordionItem, className)}>

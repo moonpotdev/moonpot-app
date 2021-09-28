@@ -100,7 +100,12 @@ const Bottom = function ({ id }) {
         <CardAccordionItem
           titleKey="pot.prizeSplit"
           collapsable={false}
-          tooltip={<TooltipWithIcon i18nKey={'pot.prizeSplitToolTip'} />}
+          tooltip={
+            <TooltipWithIcon
+              i18nKey={'pot.prizeSplitToolTip'}
+              style={{ marginLeft: '0', marginRight: 'auto' }}
+            />
+          }
         >
           <Grid container>
             <Grid item xs={3}>
