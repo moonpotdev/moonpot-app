@@ -178,5 +178,20 @@
     "oracleId": "belt-4belt",
     "decimals": 18,
     "ticketFor": "4Belt USD LP"
+  },
+  {
+    "symbol": "PACOCA",
+    "address": "0x55671114d774ee99D653D6C12460c780a67f1D18",
+    "type": "single",
+    "oracleId": "PACOCA",
+    "decimals": 18
+  },
+  {
+    "symbol": "moonTicketPacoca",
+    "address": "0x76b0Fbdf8437126C3aA16995F2d2c2b0DdAbEDD8",
+    "type": "ticket",
+    "oracleId": "PACOCA",
+    "decimals": 18,
+    "ticketFor": "PACOCA"
   }
 ]

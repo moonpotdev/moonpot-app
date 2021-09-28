@@ -73,6 +73,55 @@
     "compoundIsBonus": false
   },
   {
+    "id": "pacoca",
+    "name": "Pacoca",
+    "token": "Pacoca",
+    "tokenAddress": "0x55671114d774ee99D653D6C12460c780a67f1D18",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketPacoca",
+    "rewardAddress": "0x76b0Fbdf8437126C3aA16995F2d2c2b0DdAbEDD8",
+    "contractAddress": "0xB9208616368c362c531aFE3b813a5cef181399b7",
+    "prizePoolAddress": "0xC95382A725df5c037D51330eD14F48035240fD1d",
+    "prizeStrategyAddress": "0x0DbD64Ce578a67b915b7558a928d15A1A580b69e",
+    "pricePerShare": 1,
+    "oracleId": "PACOCA",
+    "apyId": "pacoca-pacoca",
+    "vaultType": "community",
+    "status": "active",
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x21403739A1Dc0e3ceC70CBD5ceaE78fF25F102a4",
+    "infoCardEarningsBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "PACOCA",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ],
+    "compoundIsBonus": true
+  },
+  {
     "id": "4belt",
     "name": "4Belt USD",
     "token": "4Belt USD LP",
