@@ -106,6 +106,7 @@ export const calculateTokenProjectedPrize = ({ pot }) => {
 
 //Return the USD prize total of a single pot
 export const calculateUSDProjectedPrize = ({ pot }) => {
+  console.log(pot);
   const projectedPrizeTotal = calculateProjectedPrize(
     pot.apy,
     pot.secondsToDraw,
@@ -148,9 +149,9 @@ export const calculateZiggyUsdProjection = ({ pot, pots }) => {
       /*Calculate allocated share*/
       var allocatedShare;
       if (pots[i].vaultType === 'main' || pots[i].vaultType === 'stable') {
-        allocatedShare = 0.05;
+        allocatedShare = 0.1;
       } else {
-        allocatedShare = 0.03;
+        allocatedShare = 0.6;
       }
       if (pots[i].status === 'active') {
         usdTotal = calculateProjectedPrize(
@@ -184,7 +185,7 @@ export const calculateZiggyTokenProjections = ({ pot, pots }) => {
               pot.secondsToDraw, //Time till draw of ziggys pot
               pots[i].totalTokenStaked, //Tokens staked in pot of base asset
               sponsors[sponsorIndex].sponsorBalance, //Current balance of token reward in ziggys pot
-              0.05 //Share of tokens alloted to ziggy prize
+              0.1 //Share of tokens alloted to ziggy prize
             );
             /*USD*/
             sponsors[sponsorIndex].sponsorBalanceUsd = calculateProjectedPrize(
@@ -192,7 +193,7 @@ export const calculateZiggyTokenProjections = ({ pot, pots }) => {
               pot.secondsToDraw, //Time till draw of ziggys pot
               pots[i].totalStakedUsd, //Tokens staked in pot of base asset
               sponsors[sponsorIndex].sponsorBalanceUsd, //Current balance of token reward in ziggys pot
-              0.05 //Share of tokens alloted to ziggy prize
+              0.1 //Share of tokens alloted to ziggy prize
             );
           }
           /*Calculate future prize for community pots */
@@ -203,7 +204,7 @@ export const calculateZiggyTokenProjections = ({ pot, pots }) => {
               pot.secondsToDraw, //Time till draw of ziggys pot
               pots[i].totalTokenStaked, //Tokens staked in pot of base asset
               sponsors[sponsorIndex].sponsorBalance, //Current balance of token reward in ziggys pot
-              0.03 //Share of tokens alloted to ziggy prize
+              0.06 //Share of tokens alloted to ziggy prize
             );
             /*USD*/
             sponsors[sponsorIndex].sponsorBalanceUsd = calculateProjectedPrize(
@@ -211,7 +212,7 @@ export const calculateZiggyTokenProjections = ({ pot, pots }) => {
               pot.secondsToDraw, //Time till draw of ziggys pot
               pots[i].totalStakedUsd, //Tokens staked in pot of base asset
               sponsors[sponsorIndex].sponsorBalanceUsd, //Current balance of token reward in ziggys pot
-              0.03 //Share of tokens alloted to ziggy prize
+              0.06 //Share of tokens alloted to ziggy prize
             );
           }
         } else {
@@ -224,9 +225,9 @@ export const calculateZiggyTokenProjections = ({ pot, pots }) => {
               /*Get distribution amount to ziggy prize */
               var prizePercent;
               if (pots[i].vaultType === 'lp') {
-                prizePercent = 0.03;
+                prizePercent = 0.06;
               } else {
-                prizePercent = 0.05;
+                prizePercent = 0.1;
               }
               /*Token*/
               sponsors[sponsorIndex].sponsorBalance = calculateProjectedPrize(
@@ -259,7 +260,7 @@ const calculateProjectedPrize = (
   inputSecondsToDraw,
   inputTotalStaked,
   inputCurrentBalance,
-  multiplier = 0.4
+  multiplier = 0.8
 ) => {
   const APY = BigNumber(inputAPY); //INPUT APY
   const convertedAPY = BigNumber.sum(APY.multipliedBy(0.01), 1); //Convert APY to decimal and add 1

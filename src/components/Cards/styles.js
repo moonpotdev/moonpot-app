@@ -54,6 +54,7 @@ const styles = () => ({
     borderTop: 'solid 2px red',
     paddingTop: '16px',
     paddingBottom: '16px',
+    position: 'relative',
     '&:last-child': {
       paddingBottom: '0',
     },
