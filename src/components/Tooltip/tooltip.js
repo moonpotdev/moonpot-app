@@ -78,12 +78,18 @@ export function InterestTooltip({ pot }) {
   const bonusApy = pot.bonusApy;
   const bonusApr = new BigNumber(pot.bonusApr);
 
+  const bonuses = pot.bonuses;
+  console.log(bonuses);
+  var bonusTokens = '';
+  for (var i in bonuses) {
+    if (bonuses[i].apy > 0) bonusTokens += bonuses[i].symbol;
+    bonusTokens += ' ';
+  }
+
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
   //const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;
   const totalApy = (hasBaseApy ? baseApy : 0) + (hasBonusApy ? bonusApy : 0);
-
-  const totalAPY = console.log(pot);
 
   const content = useMemo(() => {
     const text = (
@@ -107,12 +113,22 @@ export function InterestTooltip({ pot }) {
               </Grid>
               {/*Bonus APR*/}
               {pot.bonuses.map(bonus => (
-                <>
+                <div key={bonus.id}>
                   {bonus.apr != 0 ? (
                     <Grid container style={{ width: '100%' }} key={bonus.id}>
                       <Grid item xs={6}>
                         <Typography align={'left'}>
-                          <Translate i18nKey="pot.bonusTokenAPR" values={{ token: bonus.symbol }} />
+                          {bonus.display === 'bonus' ? (
+                            <Translate
+                              i18nKey="pot.bonusTokenAPR"
+                              values={{ token: bonus.symbol }}
+                            />
+                          ) : (
+                            <Translate
+                              i18nKey="pot.superBoostTokenAPR"
+                              values={{ token: bonus.symbol }}
+                            />
+                          )}
                         </Typography>
                       </Grid>
                       <Grid item xs={6}>
@@ -122,7 +138,7 @@ export function InterestTooltip({ pot }) {
                       </Grid>
                     </Grid>
                   ) : null}
-                </>
+                </div>
               ))}
               {/*Total APY*/}
               <Grid container style={{ width: '100%' }}>
@@ -181,7 +197,10 @@ export function InterestTooltip({ pot }) {
           {/*Description*/}
           {pot.token != 'POTS' ? (
             <Typography style={{ marginRight: '32px', marginTop: '8px' }}>
-              <Translate i18nKey="pot.tooltip.standard" values={{ token: pot.token }} />
+              <Translate
+                i18nKey="pot.tooltip.standard"
+                values={{ token: pot.token, bonus: bonusTokens }}
+              />
             </Typography>
           ) : (
             <Typography style={{ marginRight: '32px', marginTop: '8px' }}>

@@ -167,7 +167,7 @@ export function Pot({ id, variant, bottom }) {
   const classes = useStyles();
   const pot = usePot(id);
   const pots = usePots();
-  console.log(pot);
+  //console.log(pot);
 
   return (
     <Card variant={variant}>
