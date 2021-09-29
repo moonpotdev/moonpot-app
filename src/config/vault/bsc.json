@@ -69,7 +69,6 @@
         "display": "superBoost"
       }
     ],
-    "supportsCompound": true,
     "compoundIsBonus": false
   },
   {
@@ -455,7 +454,6 @@
         "display": "bonus"
       }
     ],
-    "supportsCompound": true,
     "compoundIsBonus": false,
     "migrationNeeded": true,
     "migrationContractAddress": "0x1f491F500C64118d6435A3387ff4A8a1749a8C28",
@@ -573,7 +571,6 @@
         "display": "bonus"
       }
     ],
-    "supportsCompound": true,
     "compoundIsBonus": true
   },
   {
