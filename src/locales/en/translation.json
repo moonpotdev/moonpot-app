@@ -102,7 +102,13 @@
     "myDetails": "My Details",
     "myInterestRate": "My Interest Rate",
     "myOdds": "My Odds",
+    "tokenAPY": "{{token}} APY",
+    "tokenAPR": "{{token}} APR",
+    "totalAPY": "Total APY",
+    "bonusTokenAPR": "Bonus {{token}} APR",
     "tooltip": {
+      "standard": "This pot auto-compounds your {{token}} and rewards bonus tokens to achieve the total APY.",
+      "pots": "APR is the annual interest rate received on a deposit. To earn the higher APY, compound your interest daily.",
       "interestBonusApy": "The crossed-out APY is the interest paid out in the deposited asset and automatically compounded. The gold APY includes additional bonus tokens that are not compounded and can be claimed manually.",
       "interestCompoundApr": "APR is the annual interest rate received on a deposit. To earn the higher APY, compound your interest daily."
     },
