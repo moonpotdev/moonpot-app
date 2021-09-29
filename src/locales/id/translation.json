@@ -9,6 +9,7 @@
     "mainPots": "Utama",
     "communityPots": "Komunitas",
     "lpPots": "LP",
+    "stablePots": "Stable",
     "play": "Bermain",
     "learnMore": "Pelajari lebih lanjut",
     "moonpots": "Moonpots",
@@ -80,9 +81,10 @@
     "statDeposit": "Deposit Anda",
     "prizeDraw": "Undian Hadiah",
     "closed": "Ditutup",
-    "prizeSplit": "Pembagian Hadiah",
+    "prizeSplit": "Proyeksi Pembagian Hadiah",
+    "prizeSplitToolTip": "Proyeksi langsung berdasarkan TVL saat ini dan suku bunga",
     "prizeSplitWinner": "{{count}} Pemenang",
-    "prizeSplitWinner_plural": "{{count}} Para Pemenang (Masing-masing)",
+    "prizeSplitWinner_plural": "{{count}} Tiket Pemenang (Masing-masing)",
     "playWith": "Bermain dengan {{token}}",
     "playWithMore": "Bermain dengan lebih banyak {{token}}",
     "odds": "1 : {{odds}}",
@@ -161,6 +163,9 @@
     "zapTooltip": [
       "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi.",
       "Setengah dari token Anda akan dijual untuk menyeimbangkan pasangan likuiditas, setelah itu likuiditas akan diberikan dan LP token akan didepositkan ke dalam Pot ini."
+    ],
+    "zapTooltip4Belt": [
+      "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi."
     ],
     "inYourWallet": "Di dompet Anda",
     "provider": "Penyedia likuiditas"
