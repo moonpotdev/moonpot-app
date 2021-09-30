@@ -314,14 +314,7 @@
     },
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
+    "sponsors": [],
     "bonuses": [
       {
         "id": 0,
@@ -375,14 +368,7 @@
     },
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
+    "sponsors": [],
     "bonuses": [
       {
         "id": 0,
