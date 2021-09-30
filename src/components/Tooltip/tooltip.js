@@ -80,10 +80,18 @@ export function InterestTooltip({ pot }) {
 
   const bonuses = pot.bonuses;
   console.log(bonuses);
+
+  /*-----Create Bonus Token Text-----*/
+  var bonusCount = 0;
   var bonusTokens = '';
   for (var i in bonuses) {
-    if (bonuses[i].apy > 0) bonusTokens += bonuses[i].symbol;
-    bonusTokens += ' ';
+    if (bonusCount > 0) {
+      bonusTokens += ', ';
+    }
+    if (bonuses[i].apy > 0) {
+      bonusTokens += bonuses[i].symbol;
+      bonusCount++;
+    }
   }
 
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
@@ -197,10 +205,17 @@ export function InterestTooltip({ pot }) {
           {/*Description*/}
           {pot.token != 'POTS' ? (
             <Typography style={{ marginRight: '32px', marginTop: '8px' }}>
-              <Translate
-                i18nKey="pot.tooltip.standard"
-                values={{ token: pot.token, bonus: bonusTokens }}
-              />
+              {bonusTokens == '' ? (
+                <Translate
+                  i18nKey="pot.tooltip.standardNoBoost"
+                  values={{ token: pot.token, bonus: bonusTokens }}
+                />
+              ) : (
+                <Translate
+                  i18nKey="pot.tooltip.standard"
+                  values={{ token: pot.token, bonus: bonusTokens }}
+                />
+              )}
             </Typography>
           ) : (
             <Typography style={{ marginRight: '32px', marginTop: '8px' }}>
