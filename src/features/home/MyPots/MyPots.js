@@ -95,7 +95,9 @@ const MyPots = ({ selected }) => {
         <div className={classes.potsContainer}>
           <div className={classes.spacer}>
             <Grid container>
-              <ClaimableBonusNotification className={classes.claimableBonuses} />
+              {selected === 'active' ? (
+                <ClaimableBonusNotification className={classes.claimableBonuses} />
+              ) : null}
               <Cards sameHeight={false}>
                 {filtered.length === 0 ? (
                   <NoPotsCard />
