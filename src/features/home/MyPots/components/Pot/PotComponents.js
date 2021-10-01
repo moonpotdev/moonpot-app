@@ -10,7 +10,8 @@ import {
 import { useTranslation } from 'react-i18next';
 import { byDecimals, formatDecimals } from '../../../../../helpers/format';
 import Countdown from '../../../../../components/Countdown';
-import { InterestTooltip, WinTotal } from '../../../../../components/Pot';
+import { WinTotal } from '../../../../../components/Pot';
+import { InterestTooltip } from '../../../../../components/Tooltip/tooltip';
 import { Translate } from '../../../../../components/Translate';
 import { usePots, usePot, useTokenBalance } from '../../../../../helpers/hooks';
 import { useSelector } from 'react-redux';
@@ -102,6 +103,7 @@ export const PotInfoBlock = function ({ item, active = true }) {
   const classes = useStyles();
   const depositTokenPrice = useSelector(state => state.pricesReducer.prices[item.oracleId]);
   const { t } = useTranslation();
+  const pot = item;
 
   return (
     <Grid item xs={12}>
@@ -124,11 +126,7 @@ export const PotInfoBlock = function ({ item, active = true }) {
             <Grid item xs={6}>
               <Typography className={classes.myDetailsText} align={'left'}>
                 {t('pot.myInterestRate')}
-                <InterestTooltip
-                  baseApy={item.apy}
-                  bonusApy={item.bonusApy}
-                  bonusApr={item.bonusApr}
-                />
+                <InterestTooltip pot={pot} />
               </Typography>
             </Grid>
             <Grid item xs={6}>

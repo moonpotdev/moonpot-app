@@ -39,8 +39,11 @@ const PotBonus = function ({ item, buttonVariant = 'purple' }) {
     () => bonuses.find(bonus => bonus.earned > 0) !== undefined,
     [bonuses]
   );
-  const compoundableBonus = useMemo(() => bonuses.find(bonus => bonus.compoundable), [bonuses]);
-  const canCompound = compoundableBonus !== undefined && compoundableBonus.earned > 0;
+  const compoundableBonus = useMemo(
+    () => bonuses.find(bonus => bonus.id === 0 && bonus.earned > 0),
+    [bonuses]
+  );
+  const canCompound = compoundableBonus !== undefined;
   const earnedTokens = useMemo(
     () =>
       bonuses
@@ -175,7 +178,7 @@ const PotBonus = function ({ item, buttonVariant = 'purple' }) {
             : t('bonus.bonusExplainer', { tokens: activeTokens })}
         </Typography>
       </Grid>
-      {compoundableBonus ? (
+      {canCompound ? (
         <Grid item xs={12} className={classes.bonusCompoundRow}>
           <PrimaryButton
             onClick={() => handleCompoundBonus(item)}

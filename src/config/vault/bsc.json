@@ -69,7 +69,6 @@
         "display": "superBoost"
       }
     ],
-    "supportsCompound": true,
     "compoundIsBonus": false
   },
   {
@@ -315,14 +314,7 @@
     },
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
+    "sponsors": [],
     "bonuses": [
       {
         "id": 0,
@@ -376,14 +368,7 @@
     },
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
+    "sponsors": [],
     "bonuses": [
       {
         "id": 0,
@@ -455,7 +440,6 @@
         "display": "bonus"
       }
     ],
-    "supportsCompound": true,
     "compoundIsBonus": false,
     "migrationNeeded": true,
     "migrationContractAddress": "0x1f491F500C64118d6435A3387ff4A8a1749a8C28",
@@ -553,14 +537,7 @@
     },
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
+    "sponsors": [],
     "bonuses": [
       {
         "id": 0,
@@ -573,7 +550,6 @@
         "display": "bonus"
       }
     ],
-    "supportsCompound": true,
     "compoundIsBonus": true
   },
   {

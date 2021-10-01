@@ -6,7 +6,7 @@ import { BigNumber } from 'bignumber.js';
 import { TransListJoin } from '../TransListJoin';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
-import { TooltipWithIcon } from '../Tooltip/tooltip';
+import { TooltipWithIcon, InterestTooltip } from '../Tooltip/tooltip';
 import {
   translateToken,
   usePot,
@@ -78,21 +78,6 @@ const WinTokens = memo(function ({ depositToken, sponsors }) {
   );
 });
 
-export const InterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
-  const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
-  const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
-  const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;
-  let tooltipKey = null;
-
-  if (hasBaseApy && hasBonusApy) {
-    tooltipKey = 'pot.tooltip.interestBonusApy';
-  } else if (hasBonusApr) {
-    tooltipKey = 'pot.tooltip.interestCompoundApr';
-  }
-
-  return tooltipKey ? <TooltipWithIcon i18nKey={tooltipKey} /> : null;
-});
-
 const Interest = memo(function ({ baseApy, bonusApy, bonusApr }) {
   const classes = useStyles();
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
@@ -105,16 +90,6 @@ const Interest = memo(function ({ baseApy, bonusApy, bonusApr }) {
       <div className={classes.interestValueApy}>
         <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
       </div>
-      {hasBaseApy && hasBonusApy ? (
-        <div className={classes.interestValueBaseApy}>
-          <Translate i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
-        </div>
-      ) : null}
-      {hasBonusApr ? (
-        <div className={classes.interestValueApr}>
-          <Translate i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />
-        </div>
-      ) : null}
     </>
   );
 });
@@ -192,6 +167,7 @@ export function Pot({ id, variant, bottom }) {
   const classes = useStyles();
   const pot = usePot(id);
   const pots = usePots();
+  //console.log(pot);
 
   return (
     <Card variant={variant}>
@@ -238,12 +214,7 @@ export function Pot({ id, variant, bottom }) {
           </DrawStat>
         </Grid>
         <Grid item xs={7}>
-          <DrawStat
-            i18nKey="pot.statInterest"
-            tooltip={
-              <InterestTooltip baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
-            }
-          >
+          <DrawStat i18nKey="pot.statInterest" tooltip={<InterestTooltip pot={pot} />}>
             <Interest baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
           </DrawStat>
         </Grid>
