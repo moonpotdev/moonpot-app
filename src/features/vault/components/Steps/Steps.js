@@ -9,7 +9,7 @@ import {
   Modal,
   Typography,
 } from '@material-ui/core';
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import { OpenInNew } from '@material-ui/icons';
 import { isEmpty } from '../../../../helpers/utils';
 import { Alert, AlertTitle } from '@material-ui/lab';
@@ -79,6 +79,14 @@ const Steps = ({ item, steps, handleClose }) => {
                     <Typography className={classes.stepsTitleText}>Compound Successful!</Typography>
                     <Typography className={classes.successfulDepositAmountText}>
                       You have successfully compounded your bonus {item.token}
+                    </Typography>
+                  </React.Fragment>
+                ) : null}
+                {steps.items[steps.currentStep].step === 'claimAll' ? (
+                  <React.Fragment>
+                    <Typography className={classes.stepsTitleText}>Claim Successful!</Typography>
+                    <Typography className={classes.successfulDepositAmountText}>
+                      You have successfully claimed your bonus POTS
                     </Typography>
                   </React.Fragment>
                 ) : null}
@@ -175,5 +183,32 @@ const Steps = ({ item, steps, handleClose }) => {
     </Modal>
   );
 };
+
+export const StepsProgress = memo(function StepsProgress({ steps, setSteps }) {
+  const action = useSelector(state => state.walletReducer.action);
+
+  useEffect(() => {
+    const index = steps.currentStep;
+    if (!isEmpty(steps.items[index]) && steps.modal) {
+      const items = steps.items;
+      if (!items[index].pending) {
+        items[index].pending = true;
+        items[index].action();
+        setSteps({ ...steps, items: items });
+      } else {
+        if (action.result === 'success' && !steps.finished) {
+          const nextStep = index + 1;
+          if (!isEmpty(items[nextStep])) {
+            setSteps({ ...steps, currentStep: nextStep });
+          } else {
+            setSteps({ ...steps, finished: true });
+          }
+        }
+      }
+    }
+  }, [steps, setSteps, action]);
+
+  return null;
+});
 
 export default Steps;

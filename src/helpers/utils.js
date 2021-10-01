@@ -93,6 +93,14 @@ export function variantClass(classes, prefix, variant, defaultClass = false) {
   return key in classes ? classes[key] : defaultClass;
 }
 
+export function sortObjectsAsc(objectsArray, key) {
+  return objectsArray.sort((a, b) => (a[key] > b[key]) - (a[key] < b[key]));
+}
+
+export function sortObjectsDesc(objectsArray, key) {
+  return objectsArray.sort((a, b) => (a[key] < b[key]) - (a[key] > b[key]));
+}
+
 //Return the token prize total of a single pot
 export const calculateTokenProjectedPrize = ({ pot }) => {
   const projectedPrizeTotal = calculateProjectedPrize(
@@ -106,7 +114,7 @@ export const calculateTokenProjectedPrize = ({ pot }) => {
 
 //Return the USD prize total of a single pot
 export const calculateUSDProjectedPrize = ({ pot }) => {
-  console.log(pot);
+  // console.log(pot);
   const projectedPrizeTotal = calculateProjectedPrize(
     pot.apy,
     pot.secondsToDraw,
