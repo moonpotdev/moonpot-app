@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -47,7 +47,7 @@ function useClaimableBonuses() {
 
   return useMemo(() => {
     if (unclaimedBonuses) {
-      if ('POTS' in unclaimedBonuses) {
+      if ('POTS' in unclaimedBonuses && unclaimedBonuses.POTS.earned.gte(0.00000001)) {
         const { POTS, ...rest } = unclaimedBonuses;
         const others = sortObjectsDesc(Object.values(rest));
 
@@ -98,12 +98,20 @@ export const ClaimableBonusNotification = memo(function ClaimableBonusNotificati
     dispatch(reduxActions.earned.fetchEarned());
   }, [setSteps]);
 
+  useEffect(() => {
+    const id = setInterval(() => {
+      dispatch(reduxActions.earned.fetchEarned());
+    }, 15000);
+
+    return () => clearInterval(id);
+  }, [dispatch]);
+
   if (pots) {
     return (
       <Card variant="purpleDark" className={clsx(classes.claimable, className)} {...rest}>
         <div className={classes.total}>
           <img src={Pots} width={24} height={24} aria-hidden={true} alt="" />
-          <div className={classes.totalText}>{formatDecimals(pots.earned)} POTS</div>
+          <div className={classes.totalText}>{formatDecimals(pots.earned, 8, 8)} POTS</div>
         </div>
         <div className={classes.description}>
           {t('claimableBonuses.description', {
