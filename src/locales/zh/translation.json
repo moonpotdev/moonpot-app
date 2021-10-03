@@ -106,7 +106,7 @@
     "tokenAPR": "{{token}} APR",
     "totalAPY": "总 APY",
     "bonusTokenAPR": "额外 {{token}} APR",
-    "superBoostTokenAPR": "超速增值 {{token}} APR"
+    "superBoostTokenAPR": "超速增值 {{token}} APR",
     "tooltip": {
       "standard": "此月盒会自动复投您的 {{token}} 并奖励额外的 {{bonus}} 以实现总 APY。",
       "standardNoBoost": "此月盒自动复投您的 {{token}}。",
