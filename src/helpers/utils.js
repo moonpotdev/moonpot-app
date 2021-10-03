@@ -151,7 +151,7 @@ export const calculateZiggyUsdProjection = ({ pot, pots }) => {
       if (pots[i].vaultType === 'main' || pots[i].vaultType === 'stable') {
         allocatedShare = 0.1;
       } else {
-        allocatedShare = 0.6;
+        allocatedShare = 0.06;
       }
       if (pots[i].status === 'active') {
         usdTotal = calculateProjectedPrize(

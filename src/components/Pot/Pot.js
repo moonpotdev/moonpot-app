@@ -231,12 +231,16 @@ export const PrizeSplit = function ({
   sponsors,
   numberOfWinners,
 }) {
+  var totalPrizesUsd = new BigNumber(0);
+
   const allPrizes = {
     [baseToken]: {
       tokens: awardBalance || new BigNumber(0),
       usd: awardBalanceUsd || new BigNumber(0),
     },
   };
+
+  totalPrizesUsd = BigNumber.sum(totalPrizesUsd, awardBalanceUsd);
 
   for (const sponsor of sponsors) {
     if (sponsor.sponsorToken in allPrizes) {
@@ -252,21 +256,33 @@ export const PrizeSplit = function ({
         usd: sponsor.sponsorBalanceUsd || new BigNumber(0),
       };
     }
+    totalPrizesUsd = BigNumber.sum(totalPrizesUsd, sponsor.sponsorBalanceUsd);
   }
 
   const prizesOverZero = Object.entries(allPrizes).filter(([, total]) => total.usd.gte(0.01));
 
-  return prizesOverZero.map(([token, total]) => {
-    const tokens = formatDecimals(total.tokens.dividedBy(numberOfWinners), 2);
-    const usd = formatDecimals(total.usd.dividedBy(numberOfWinners), 2);
+  return (
+    <>
+      <span style={{ color: '#F3BA2E', fontWeight: '700' }}>
+        ${formatDecimals(totalPrizesUsd.dividedBy(numberOfWinners), 2)}
+        &nbsp;
+      </span>
+      <Translate i18nKey="pot.each" />
+      {prizesOverZero.map(([token, total]) => {
+        const tokens = formatDecimals(total.tokens.dividedBy(numberOfWinners), 2);
+        const usd = formatDecimals(total.usd.dividedBy(numberOfWinners), 2);
 
-    return (
-      <div key={token}>
-        <span>
-          {tokens} {token}
-        </span>{' '}
-        (${usd})
-      </div>
-    );
-  });
+        return (
+          <>
+            <div key={token}>
+              <span>
+                {tokens} {token}
+              </span>{' '}
+              (${usd})
+            </div>
+          </>
+        );
+      })}
+    </>
+  );
 };

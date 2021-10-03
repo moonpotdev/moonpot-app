@@ -64,6 +64,7 @@
     "end": " & <span>{{item}}</span>"
   },
   "pot": {
+    "each": "each",
     "title": "{{name}} Pot",
     "titleRetired": "Retired {{name}} Pot",
     "winTotalPrize": "Win <span>{{prize}}</span>",
