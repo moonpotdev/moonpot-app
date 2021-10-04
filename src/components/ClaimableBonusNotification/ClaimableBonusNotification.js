@@ -96,7 +96,7 @@ export const ClaimableBonusNotification = memo(function ClaimableBonusNotificati
   const handleClose = useCallback(() => {
     setSteps({ modal: false, currentStep: -1, items: [], finished: false });
     dispatch(reduxActions.earned.fetchEarned());
-  }, [setSteps]);
+  }, [setSteps, dispatch]);
 
   useEffect(() => {
     const id = setInterval(() => {
