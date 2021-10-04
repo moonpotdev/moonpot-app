@@ -106,7 +106,6 @@ export const calculateTokenProjectedPrize = ({ pot }) => {
 
 //Return the USD prize total of a single pot
 export const calculateUSDProjectedPrize = ({ pot }) => {
-  console.log(pot);
   const projectedPrizeTotal = calculateProjectedPrize(
     pot.apy,
     pot.secondsToDraw,

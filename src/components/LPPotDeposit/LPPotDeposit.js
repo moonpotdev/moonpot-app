@@ -146,7 +146,7 @@ function useDepositTokens(network, lpAddress) {
   );
 }*/
 
-export const LPPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
+export const LPPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
