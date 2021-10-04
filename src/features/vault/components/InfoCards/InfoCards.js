@@ -58,49 +58,45 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
           </p>
         </Card>
       ) : null}
-      {pot.infoCardEarningsBreakdown ? (
+      {pot.interestBreakdown ? (
         <Card variant="purpleDark">
           <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
-          {pot.infoCardEarningsBreakdown.interest ? (
+          {pot.interestBreakdown.interest ? (
             <div className={classes.earningItem}>
               <div className={classes.earningLabel}>
                 {t('pot.infocards.earnings.tokenInterest', { token: pot.token })}
               </div>
-              <div className={classes.earningValue}>{pot.infoCardEarningsBreakdown.interest}%</div>
+              <div className={classes.earningValue}>{pot.interestBreakdown.interest}%</div>
             </div>
           ) : null}
-          {pot.infoCardEarningsBreakdown.prize ? (
+          {pot.interestBreakdown.prize ? (
             <div className={classes.earningItem}>
               <div className={classes.earningLabel}>
                 {t('pot.infocards.earnings.nameMoonpotPrizeDraw', { name: pot.name })}
               </div>
-              <div className={classes.earningValue}>{pot.infoCardEarningsBreakdown.prize}%</div>
+              <div className={classes.earningValue}>{pot.interestBreakdown.prize}%</div>
             </div>
           ) : null}
-          {pot.infoCardEarningsBreakdown.ziggyInterest ? (
+          {pot.interestBreakdown.ziggyInterest ? (
             <div className={classes.earningItem}>
               <div className={classes.earningLabel}>
                 {t('pot.infocards.earnings.ziggysPotInterest')}
               </div>
-              <div className={classes.earningValue}>
-                {pot.infoCardEarningsBreakdown.ziggyInterest}%
-              </div>
+              <div className={classes.earningValue}>{pot.interestBreakdown.ziggyInterest}%</div>
             </div>
           ) : null}
-          {pot.infoCardEarningsBreakdown.ziggyPrize ? (
+          {pot.interestBreakdown.ziggyPrize ? (
             <div className={classes.earningItem}>
               <div className={classes.earningLabel}>
                 {t('pot.infocards.earnings.ziggysPrizeDraw')}
               </div>
-              <div className={classes.earningValue}>
-                {pot.infoCardEarningsBreakdown.ziggyPrize}%
-              </div>
+              <div className={classes.earningValue}>{pot.interestBreakdown.ziggyPrize}%</div>
             </div>
           ) : null}
-          {pot.infoCardEarningsBreakdown.treasury ? (
+          {pot.interestBreakdown.treasury ? (
             <div className={classes.earningItem}>
               <div className={classes.earningLabel}>{t('pot.infocards.earnings.treasury')}</div>
-              <div className={classes.earningValue}>{pot.infoCardEarningsBreakdown.treasury}%</div>
+              <div className={classes.earningValue}>{pot.interestBreakdown.treasury}%</div>
             </div>
           ) : null}
         </Card>

@@ -68,11 +68,16 @@ const styles = theme => ({
   interestValueApr: {
     fontWeight: 'normal',
   },
-  prizeSplitValue: {
-    textAlign: 'right',
+  prizeSplitToken: {
     '& span': {
       fontWeight: 'bold',
       color: '#ffffff',
+    },
+  },
+  prizeSplitTotal: {
+    '& span': {
+      fontWeight: 'bold',
+      color: '#F3BA2E',
     },
   },
   rowPlay: {

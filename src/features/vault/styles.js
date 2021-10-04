@@ -136,9 +136,6 @@ const styles = theme => ({
     letterSpacing: '0.2px',
     color: '#FFF',
     padding: '4px 0 12px 12px',
-    '& span': {
-      fontWeight: 700,
-    },
   },
   input: {
     border: '2px solid #6B96BD',

@@ -20,20 +20,20 @@ export const DrawStat = memo(function ({ i18nKey, tooltip, labelClass, valueClas
   );
 });
 
-export const DrawStatNextDraw = memo(function ({ frequency, ...rest }) {
+export const DrawStatNextDraw = memo(function ({ duration, ...rest }) {
   const i18nKey = useMemo(() => {
-    if (frequency >= 16 * 24 * 60 * 60) {
+    if (duration >= 28) {
       return 'pot.statNextDrawMonthly';
-    } else if (frequency >= 9 * 24 * 60 * 60) {
+    } else if (duration >= 14) {
       return 'pot.statNextDrawBiWeekly';
-    } else if (frequency >= 5 * 24 * 60 * 60) {
+    } else if (duration >= 7) {
       return 'pot.statNextDrawWeekly';
-    } else if (frequency >= 20 * 60 * 60) {
+    } else if (duration >= 1) {
       return 'pot.statNextDrawDaily';
     }
 
     return 'pot.statNextDraw';
-  }, [frequency]);
+  }, [duration]);
 
   return <DrawStat i18nKey={i18nKey} {...rest} />;
 });
