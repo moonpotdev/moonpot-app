@@ -1,0 +1,227 @@
+{
+  "buttons": {
+    "ziggyMoonpotGuide": "Panduan Ziggy ke Moonpot",
+    "moonpotAlpha": "Artikel Alpha Moonpot",
+    "deposit": "deposit",
+    "myActivePots": "Pots Aktif",
+    "myPastPots": "Pots Tidak Aktif",
+    "allPots": "Semua Pots",
+    "mainPots": "Utama",
+    "communityPots": "Komunitas",
+    "lpPots": "LP",
+    "stablePots": "Stable",
+    "play": "Bermain",
+    "learnMore": "Pelajari lebih lanjut",
+    "moonpots": "Moonpots",
+    "myPots": "Pots Saya"
+  },
+  "modals": {
+    "unsupportedNetworkDetected": "Jaringan terdeteksi tidak didukung ",
+    "switchToBSCNetwork": "Silahkan beralih ke jaringan BSC",
+    "switchToBSC": "Beralih ke BSC",
+    "cancel": "Batal",
+    "unableToAutoSwitch": "Tidak dapat mengganti jaringan secara otomatis",
+    "manuallySetNetwork": "Silahkan atur jaringan Anda secara manual ke BSC",
+    "close": "Tutup"
+  },
+  "header": {
+    "moonpots": "Moonpots",
+    "myPots": "Pots Saya",
+    "docs": "Dokumen",
+    "vote": "Pilih",
+    "winners": "Pemenang",
+    "potsPrice": "Harga POTS",
+    "buyPots": "Beli POTS"
+  },
+  "homeTitle": "Depositkan <span>crypto</span>, Hasilkan <span>keuntungan</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>${{amount}}</span>",
+  "homeTotalDeposits": "Total Deposit (TVL)",
+  "homeJoinCommunityTitle": "Bergabung dengan komunitas",
+  "homeJoinCommunityBody": "Anda dapat menyarankan pot baru di salah satu saluran kami, atau bergabung dengan pengembang kami untuk membangun salah satu project favorit anda.",
+  "migrationNoticeTitle": "Pindahkan {{asset}} saya untuk peningkatan Moonpot {{pot}} terbaru.",
+  "migrationNoticeLearnMore": "Pelajari lebih lanjut.",
+  "migrationNoticeMove": "Pindahkan {{asset}} saya",
+  "vaultTitle": "Depositkan <span>{{token}}</span>, Hasilkan <span>{{apy}}% APY</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
+  "playWithMoonpot": "Bermain dengan Moonpot",
+  "youHaventEnteredMoonpots": "Anda belum masuk ke Moonpots manapun.",
+  "connectToJoin": "Hubungkan dompet Anda untuk bergabung dengan Moonpot.",
+  "poweredBy": "Didukung oleh",
+  "upgradeWhy": "Kami meningkatkan Pot {{token}} agar lebih aman dan adil, serta memungkinkan kami untuk mengotomatiskan lebih banyak proses kami.",
+  "upgradeNextSteps": "Karena ada peningkatan, Anda perlu memindahkan {{token}} anda ke Pot {{token}} yang baru.  Kami telah menambahkan {{boostToken}} Superboost ke Pot {{token}} baru untuk membantu anda agar lebih bermanfaat.",
+  "upgradeMove": "Pindahkan {{base}}",
+  "upgradeMoveWithdraw": "Pindahkan {{base}} dan Tarik {{bonus}}",
+  "learnMore": "Pelajari lebih lanjut",
+  "telegramSocialBlockBody": "Pelajari tentang Moonpot dan dapatkan dukungan langsung dari komunitas",
+  "discordSocialBlockBody": "Bergabunglah dengan percakapan komunitas aktif dari pengembang kami",
+  "twitterSocialBlockBody": "Dapatkan update terbaru dan bergabunglah dalam undian berhadiah media sosial kami",
+  "telegramSocialBlockButton": "Bergabunglah dengan Telegram kami",
+  "discordSocialBlockButton": "Bergabunglah dengan Discord kami",
+  "twitterSocialBlockButton": "Ikuti twitter kami",
+  "list": {
+    "one": "<span>{{item}}</span>",
+    "two": "<span>{{first}}</span> & <span>{{last}}</span>",
+    "start": "<span>{{item}}</span>",
+    "join": ", <span>{{item}}</span>",
+    "end": " & <span>{{item}}</span>"
+  },
+  "pot": {
+    "title": "Pot {{name}}",
+    "titleRetired": "Pot {{name}} Tidak Aktif",
+    "winTotalPrize": "Menangkan <span>{{prize}}</span>",
+    "winTotalTokensIn": "di ",
+    "statNextDraw": "Pengundian Berikutnya",
+    "statNextDrawDaily": "Pengundian Harian Berikutnya",
+    "statNextDrawWeekly": "Pengundian Mingguan Berikutnya",
+    "statNextDrawBiWeekly": "Pengundian Dua-Minggu Berikutnya",
+    "statNextDrawMonthly": "Pengundian Bulanan Berikutnya",
+    "statNextDrawCountdownFinished": "Menunggu Pengundian...",
+    "statInterest": "Keuntungan",
+    "statInterestApy": "{{apy}}% APY",
+    "statInterestApr": "{{apr}}% APR",
+    "statTVL": "TVL",
+    "statDeposit": "Deposit Anda",
+    "prizeDraw": "Undian Hadiah",
+    "closed": "Ditutup",
+    "prizeSplit": "Proyeksi Pembagian Hadiah",
+    "prizeSplitToolTip": "Proyeksi langsung berdasarkan TVL saat ini dan suku bunga",
+    "prizeSplitWinner": "{{count}} Pemenang",
+    "prizeSplitWinner_plural": "{{count}} Tiket Pemenang (Masing-masing)",
+    "playWith": "Bermain dengan {{token}}",
+    "playWithMore": "Bermain dengan lebih banyak {{token}}",
+    "odds": "1 : {{odds}}",
+    "oddsOdds": "Kesempatan menang <span>1</span> : <span>{{odds}}</span>",
+    "oddsPerDeposit": "Kesempatan menang 1 : {{odds}} per {{deposit}} yang di Stake",
+    "noMinimumDeposit": "Tidak ada minimal setoran",
+    "bonusEarnings": "Bonus yang dihasilkan",
+    "earnings": "Penghasilan",
+    "deposit": "Deposit",
+    "depositMore": "Deposit Lebih Banyak",
+    "withdraw": "Penarikan",
+    "myToken": "{{token}} Saya",
+    "myFairplayTimelock": "TimeLock Fairplay Saya",
+    "myFairnessFee": "Biaya Fairness Saya Saat Ini",
+    "myDetails": "Detail Saya",
+    "myInterestRate": "Tingkat Keuntungan Saya",
+    "myOdds": "Kesempatan menang Saya",
+    "tokenAPY": "{{token}} APY",
+    "tokenAPR": "{{token}} APR",
+    "totalAPY": "Jumlah APY",
+    "bonusTokenAPR": "Bonus {{token}} APR",
+    "superBoostTokenAPR": "Super Boost {{token}} APR",
+    "tooltip": {
+      "standard": "Pot ini menggabungkan {{token}} anda secara otomatis dan memberikan token {{bonus}} untuk mencapai total APY.",
+      "standardNoBoost": "Pot ini menggabungkan {{token}} anda secara otomatis.",
+      "pots": "Pot ini mengharuskan anda untuk menggabungkan penghasilan POTS anda secara manual sekali sehari  untuk mencapai APY yang ditampilkan.",
+      "interestBonusApy": "APY yang dicoret adalah keuntungan yang dibayarkan dalam aset yang disimpan dan digabungkan secara otomatis. APY emas termasuk token bonus tambahan yang tidak digabungkan dan dapat diklaim secara manual.",
+      "interestCompoundApr": "APR adalah tingkat keuntungan tahunan yang diterima pada tiap deposit. Untuk mendapatkan APY yang lebih tinggi, Gabungkan keuntungan Anda setiap hari."
+    },
+    "infocards": {
+      "strategy": {
+        "title": "Strategi Pot {{name}}",
+        "body": {
+          "beefy": [
+            "Strategi ini menyimpan token {{token}} anda di brankas Beefy.Finance {{token}}. Beefy secara otomatis menggabungkan penghasilan {{token}} Anda.",
+            "Semua {{token}} yang diperoleh di brankas beefy akan diberikan kepada seluruh pemain Moonpot. Setengah akan digunakan untuk diberikan kepada anda sebagai keuntungan. Dan setengahnya lagi akan digunakan untuk Hadiah Undian dan Hadiah Ziggy Pot (Tata Kelola)."
+          ],
+          "ziggy": [
+            "Dengan stake $POTS di Ziggy's Pot, Anda akan menerima APY yang dihasilkan sebesar 5% dari pendapatan semua Moonpot lainnya.",
+            "Itu berarti APY anda akan dihasilkan oleh pendapatan dari Pot BANANA, BIFI, CAKE, dan LP kami — dan ditambah semua Moonpot lain yang anda lihat pada saat diluncurkan di platform.",
+            "Ziggy akan membeli POTS dari pasar terbuka dengan pendapatan Moonpot.com dan memberikannya kepada pemegang POTS sebagai keuntungan/bunga.",
+            "Ada juga Undian Hadiah bulanan yang ditambahkan ke Pot Ziggy di mana 10 pemenang yang beruntung akan mendapatkan bagian dari hadiah pot sebanyak 5% dari pendapatan semua token di seluruh platform Moonpot.",
+            "Sebagai contoh, Pengundian Hadiah pada 1 September termasuk POTS, BIFI, CAKE dan DODO, dan menghasilkan total $723.760. Pot Ziggy diundi setiap empat minggu sekali (pada hari Rabu). Anda tidak perlu stake ulang."
+          ]
+        },
+        "beefyVaultAddress": "Alamat Brankas Beefy.Finance",
+        "moonpotStrategyAddress": "Alamat Strategi Pot {{name}}"
+      },
+      "earnings": {
+        "title": "Rincian Strategi",
+        "tokenInterest": "Keuntungan {{token}} Anda",
+        "nameMoonpotPrizeDraw": "Undian Hadiah Moonpot {{name}}",
+        "ziggysPotInterest": "Keuntungan Pot Ziggy (Tata kelola)",
+        "ziggysPrizeDraw": "Undian Hadiah Ziggy (Tata Kelola)",
+        "treasury": "Perbendaharaan Moonpot"
+      },
+      "fairplay": {
+        "title": "Aturan TimeLock Fairplay",
+        "body": [
+          "Hadiah berasal dari keuntungan yang dihasilkan oleh semua pemain Moonpot, jadi kami membutuhkan sebuah sistem untuk menjaga permainan ini tetap adil.",
+          "Ada TimeLock Fairplay selama sepuluh hari sebagai dasar untuk mencegah pemain menyetor tepat sebelum pengundian dimulai dan kemudian menariknya dengan cepat setelah undian selesai.",
+          "Jika Anda ingin melakukan penarikan lebih awal, Anda akan membayar Biaya Fairness sebanyak 2,5%, atau kurang. Biaya Fairness akan berkurang setiap detik dan akan menjadi nol selama sepuluh hari.",
+          "Deposit/menyetorkan lebih banyak {{token}} akan menyetel ulang biaya Fairness Anda hingga maksimum 2,5%, untuk deposit tambahan Anda.",
+          "Jika Anda memenangkan hadiah, Biaya Fairness Anda akan diatur ulang menjadi 5% dan dikurangi menjadi nol selama sepuluh hari setelah Anda memenangkan hadiah.",
+          "Langkah-langkah ini dapat mencegah pelaku jahat memanipulasi pengundian hadiah."
+        ]
+      }
+    }
+  },
+  "tokenInput": {
+    "max": "Maksimal",
+    "placeholder": "Masukkan Jumlah {{token}}"
+  },
+  "deposit": {
+    "token": "Deposit {{token}}",
+    "allToken": "Deposit Semua {{token}}",
+    "amountToken": "Deposit {{amount}} {{token}}",
+    "fairplayNotice": "Ada TimeLock Fairplay selama 10 hari. Jika Anda ingin menarik lebih awal, Anda akan membayar Biaya Fairness 2,5%, atau kurang. Biaya akan berkurang setiap detik.",
+    "eolNotice": {
+      "title": "Pot Tidak Aktif",
+      "message": "Anda tidak dapat lagi Deposit ke pot ini."
+    },
+    "zapExplainer": "Deposit LP atau ZAP⚡ Masukkan {{tokens}}",
+    "zapTooltip": [
+      "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi.",
+      "Setengah dari token Anda akan dijual untuk menyeimbangkan pasangan likuiditas, setelah itu likuiditas akan diberikan dan LP token akan didepositkan ke dalam Pot ini."
+    ],
+    "zapTooltip4Belt": [
+      "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi."
+    ],
+    "inYourWallet": "Di dompet Anda",
+    "provider": "Penyedia likuiditas"
+  },
+  "withdraw": {
+    "all": "Tarik semua",
+    "allToken": "Tarik semua {{token}}",
+    "allTokenAs": "Tarik semua sebagai {{token}}",
+    "myEarnedToken": "Penghasilan {{token}} Saya",
+    "myBonusToken": "Bonus {{token}} Saya",
+    "mySuperBoostToken": "Super Boost {{token}} Saya",
+    "fairplayNotice": "Aturan TimeLock Fairplay berlaku.",
+    "withdrawFeeNotice": "Biaya penarikan {{percent}}% berlaku.",
+    "migrationNotice": {
+      "title": "Perlu Migrasi",
+      "message": "Penarikan {{token}} Anda, sebaliknya jika memindahkannya ke Moonpot yang baru, berarti anda akan kehilangan penghasilan bonus di masa mendatang dan kesempatan anda untuk memenangkan Hadiah {{token}} berikutnya."
+    },
+    "zapExplainer": "Penarikan LP atau ZAP⚡ Keluarkan {{tokens}}"
+  },
+  "bonus": {
+    "myBonusEarnings": "Penghasilan Bonus Saya",
+    "myEarnings": "Penghasilan Saya",
+    "myBoostEarnings": "Penghasilan Super Boost saya",
+    "bonusExplainer": "Anda akan terus mendapatkan bonus {{token}} hingga akhir undian. Anda dapat mengklaim sebanyak yang anda suka.",
+    "potsExplainer": "Anda akan terus mendapatkan bonus {{token}} hingga akhir undian. Anda dapat mengklaim sebanyak yang anda suka.",
+    "compoundExplainer": "Menggabungkan lebih banyak {{token}} akan meningkatkan Biaya Fairness dan TimeLock Fairplay Anda secara proporsional dengan jumlah yang didepositkan. Biaya ini akan berkurang setiap detik setelah Anda deposit. Anda tidak akan membayar Biaya Fairness tambahan pada deposit lama Anda.",
+    "compoundToken": "Gabungkan {{token}}",
+    "compoundBonusToken": "Gabungkan Bonus {{token}}",
+    "withdrawBonusTokens": "Tarik Bonus {{tokens}}",
+    "withdrawEarnedTokens": "Tarik {{tokens}} yang didapat"
+  },
+  "wallet": {
+    "connect": "Hubungkan Wallet"
+  },
+  "winners": {
+    "totalPrizesWon": "Cadet kami telah memenangkan",
+    "potDraw": "Undian Pot {{name}}",
+    "valueWon": "Menangkan <span>{{currency}}{{amount}}</span>",
+    "wonTokensIn": "di ",
+    "drawDate": "Tanggal Undian",
+    "players": "Pemain",
+    "prizePerWinner": "Hadiah pemenang",
+    "winners": "Pemenang",
+    "stakedAmountToken": "Stake {{amount}} {{token}}",
+    "viewTransaction": "Lihat Transaksi",
+    "userWonPrize": "Anda memenangkan sebuah hadiah!"
+  },
+  "tokens": {
+    "4Belt USD LP": "USD Stablecoins"
+  }
+}

@@ -64,6 +64,7 @@ export function CardAccordionItem({
   onChange,
   collapsable = true,
   startOpen = false,
+  tooltip,
 }) {
   const classes = useStyles();
   const [isOpen, setOpen] = useState(startOpen);
@@ -74,15 +75,21 @@ export function CardAccordionItem({
       onChange(!isOpen);
     }
   }, [setOpen, isOpen, onChange]);
-  const toggleIcon = isOpen ? <ExpandLess /> : <ExpandMore />;
+  const toggleIcon = isOpen ? (
+    <ExpandLess style={{ position: 'absolute', right: '0' }} />
+  ) : (
+    <ExpandMore style={{ position: 'absolute', right: '0' }} />
+  );
 
   return (
     <div className={clsx(classes.accordionItem, className)}>
       <button
         className={clsx(classes.accordionItemTitle, { [classes.accordionItemToggle]: collapsable })}
         onClick={collapsable ? toggleOpen : null}
+        style={{ width: 'auto' }}
       >
         <Translate i18nKey={titleKey} />
+        {tooltip}
         {collapsable ? toggleIcon : null}
       </button>
       <Collapse in={!collapsable || isOpen}>

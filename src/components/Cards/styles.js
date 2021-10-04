@@ -54,6 +54,7 @@ const styles = () => ({
     borderTop: 'solid 2px red',
     paddingTop: '16px',
     paddingBottom: '16px',
+    position: 'relative',
     '&:last-child': {
       paddingBottom: '0',
     },
@@ -286,6 +287,46 @@ const styles = () => ({
     },
     '& $accordionItem': {
       borderTopColor: '#275668',
+    },
+    '& $accordionItemTitle': {
+      color: '#FFFFFF',
+    },
+    '& $accordionItemInner': {
+      color: '#FFFFFF',
+    },
+  },
+  variantGreenStable: {
+    color: '#FFFFFF',
+    backgroundColor: '#467268',
+    borderColor: '#508276',
+    '& $title': {
+      color: '#FFFFFF',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#508276',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#508276',
+    },
+    '& $accordionItemTitle': {
+      color: '#FFFFFF',
+    },
+    '& $accordionItemInner': {
+      color: '#FFFFFF',
+    },
+  },
+  variantGreenStableAlt: {
+    color: '#FFFFFF',
+    backgroundColor: '#3C6259',
+    borderColor: '#467268',
+    '& $title': {
+      color: '#FFFFFF',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#467268',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#467268',
     },
     '& $accordionItemTitle': {
       color: '#FFFFFF',

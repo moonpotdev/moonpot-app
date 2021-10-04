@@ -48,7 +48,7 @@ const ActiveLayout = function ({ item }) {
       ) : null}
       {/*Deposit*/}
       <CardAccordionItem titleKey="pot.depositMore">
-        {item.vaultType === 'lp' ? (
+        {item.vaultType === 'lp' || item.vaultType === 'stable' ? (
           <LPPotDeposit id={item.id} onLearnMore={null} variant="purple" />
         ) : (
           <PotDeposit id={item.id} onLearnMore={null} variant="purple" />
@@ -57,7 +57,7 @@ const ActiveLayout = function ({ item }) {
       </CardAccordionItem>
       {/*Withdraw*/}
       <CardAccordionItem titleKey="pot.withdraw">
-        {item.vaultType === 'lp' ? (
+        {item.vaultType === 'lp' || item.vaultType === 'stable' ? (
           <LPPotWithdraw id={item.id} onLearnMore={null} variant="purple" />
         ) : (
           <PotWithdraw id={item.id} onLearnMore={null} variant="purple" />

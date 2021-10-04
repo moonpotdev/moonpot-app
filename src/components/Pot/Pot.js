@@ -6,11 +6,22 @@ import { BigNumber } from 'bignumber.js';
 import { TransListJoin } from '../TransListJoin';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
-import { TooltipWithIcon } from '../Tooltip/tooltip';
-import { usePot, useTokenBalance, useTotalPrize } from '../../helpers/hooks';
-import { DrawStat } from '../DrawStat';
+import { TooltipWithIcon, InterestTooltip } from '../Tooltip/tooltip';
+import {
+  translateToken,
+  usePot,
+  usePots,
+  useTokenBalance,
+  useTotalPrize,
+} from '../../helpers/hooks';
+import { DrawStat, DrawStatNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
-import { investmentOdds } from '../../helpers/utils';
+import {
+  investmentOdds,
+  calculateUSDProjectedPrize,
+  calculateZiggyUsdProjection,
+} from '../../helpers/utils';
+import { useTranslation } from 'react-i18next';
 import styles from './styles';
 
 const useStyles = makeStyles(styles);
@@ -52,11 +63,12 @@ export const WinTotal = memo(function ({ awardBalanceUsd, totalSponsorBalanceUsd
 });
 
 const WinTokens = memo(function ({ depositToken, sponsors }) {
+  const { t, i18n } = useTranslation();
   const classes = useStyles();
   const sponsorTokens = sponsors
     .map(sponsor => sponsor.sponsorToken)
     .filter(token => token !== depositToken);
-  const allTokens = [depositToken, ...sponsorTokens];
+  const allTokens = [depositToken, ...sponsorTokens].map(symbol => translateToken(symbol, i18n, t));
 
   return (
     <div className={classes.winTotalTokens}>
@@ -64,21 +76,6 @@ const WinTokens = memo(function ({ depositToken, sponsors }) {
       <TransListJoin list={allTokens} />
     </div>
   );
-});
-
-export const InterestTooltip = memo(function ({ baseApy, bonusApy, bonusApr }) {
-  const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
-  const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
-  const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;
-  let tooltipKey = null;
-
-  if (hasBaseApy && hasBonusApy) {
-    tooltipKey = 'pot.tooltip.interestBonusApy';
-  } else if (hasBonusApr) {
-    tooltipKey = 'pot.tooltip.interestCompoundApr';
-  }
-
-  return tooltipKey ? <TooltipWithIcon i18nKey={tooltipKey} /> : null;
 });
 
 const Interest = memo(function ({ baseApy, bonusApy, bonusApr }) {
@@ -93,16 +90,6 @@ const Interest = memo(function ({ baseApy, bonusApy, bonusApr }) {
       <div className={classes.interestValueApy}>
         <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
       </div>
-      {hasBaseApy && hasBonusApy ? (
-        <div className={classes.interestValueBaseApy}>
-          <Translate i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
-        </div>
-      ) : null}
-      {hasBonusApr ? (
-        <div className={classes.interestValueApr}>
-          <Translate i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />
-        </div>
-      ) : null}
     </>
   );
 });
@@ -179,6 +166,8 @@ const DepositWithOdds = memo(function ({
 export function Pot({ id, variant, bottom }) {
   const classes = useStyles();
   const pot = usePot(id);
+  const pots = usePots();
+  //console.log(pot);
 
   return (
     <Card variant={variant}>
@@ -189,19 +178,23 @@ export function Pot({ id, variant, bottom }) {
         <Grid item xs={8}>
           <Title name={pot.name} />
           <WinTotal
-            awardBalanceUsd={pot.awardBalanceUsd}
-            totalSponsorBalanceUsd={pot.totalSponsorBalanceUsd}
+            awardBalanceUsd={calculateUSDProjectedPrize({ pot })}
+            totalSponsorBalanceUsd={
+              pot.id === 'pots'
+                ? calculateZiggyUsdProjection({ pot, pots })
+                : pot.totalSponsorBalanceUsd
+            }
           />
           <WinTokens depositToken={pot.token} sponsors={pot.sponsors} />
         </Grid>
       </Grid>
       <Grid container spacing={2} className={classes.rowDrawStats}>
         <Grid item xs={7}>
-          <DrawStat i18nKey="pot.statNextDraw">
+          <DrawStatNextDraw frequency={pot.frequency}>
             <Countdown until={pot.expiresAt * 1000}>
               <Translate i18nKey="pot.statNextDrawCountdownFinished" />
             </Countdown>
-          </DrawStat>
+          </DrawStatNextDraw>
         </Grid>
         <Grid item xs={5}>
           <DrawStat i18nKey="pot.statTVL">
@@ -221,12 +214,7 @@ export function Pot({ id, variant, bottom }) {
           </DrawStat>
         </Grid>
         <Grid item xs={7}>
-          <DrawStat
-            i18nKey="pot.statInterest"
-            tooltip={
-              <InterestTooltip baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
-            }
-          >
+          <DrawStat i18nKey="pot.statInterest" tooltip={<InterestTooltip pot={pot} />}>
             <Interest baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
           </DrawStat>
         </Grid>

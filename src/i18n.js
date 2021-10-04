@@ -4,6 +4,7 @@ import { initReactI18next } from 'react-i18next';
 
 export const supportedLanguages = {
   en: 'English',
+  id: 'Bahasa Indonesia',
   zh: '中文',
 };
 

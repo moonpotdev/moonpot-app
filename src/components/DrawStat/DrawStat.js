@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { makeStyles } from '@material-ui/core';
 import styles from './styles';
 import clsx from 'clsx';
@@ -18,4 +18,22 @@ export const DrawStat = memo(function ({ i18nKey, tooltip, labelClass, valueClas
       <div className={clsx(classes.statValue, valueClass)}>{children}</div>
     </>
   );
+});
+
+export const DrawStatNextDraw = memo(function ({ frequency, ...rest }) {
+  const i18nKey = useMemo(() => {
+    if (frequency >= 16 * 24 * 60 * 60) {
+      return 'pot.statNextDrawMonthly';
+    } else if (frequency >= 9 * 24 * 60 * 60) {
+      return 'pot.statNextDrawBiWeekly';
+    } else if (frequency >= 5 * 24 * 60 * 60) {
+      return 'pot.statNextDrawWeekly';
+    } else if (frequency >= 20 * 60 * 60) {
+      return 'pot.statNextDrawDaily';
+    }
+
+    return 'pot.statNextDraw';
+  }, [frequency]);
+
+  return <DrawStat i18nKey={i18nKey} {...rest} />;
 });

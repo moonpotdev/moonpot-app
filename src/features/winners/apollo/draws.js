@@ -107,7 +107,7 @@ export const useDraws = function () {
     client: client,
     variables: {
       timestamp: Math.floor(Date.now() / 1000),
-      limit: 10 + 1, // fetch 1 more than needed so we can work out if there is another 'page'
+      limit: 20 + 1, // fetch 1 more than needed so we can work out if there is another 'page'
     },
   });
   const prizeDraws = !loading && !error ? data?.prizeDraws : null;

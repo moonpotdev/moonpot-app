@@ -12,7 +12,8 @@ import WalletConnectProvider from '@walletconnect/web3-provider';
 import Web3Modal, { connectors } from 'web3modal';
 import reduxActions from '../actions';
 import zapAbi from '../../../config/abi/zap.json';
-import { byDecimals, convertAmountToRawNumber } from '../../../helpers/format';
+import { convertAmountToRawNumber } from '../../../helpers/format';
+import BigNumber from 'bignumber.js';
 
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
@@ -21,13 +22,6 @@ const ziggyManagerMultiRewardsAbi = require('../../../config/abi/ziggyManagerMul
 
 const getClientsForNetwork = async net => {
   return config[net].rpc;
-};
-
-const setLanguage = value => {
-  return async dispatch => {
-    localStorage.setItem('moon_site_language', value);
-    dispatch({ type: 'SET_LANGUAGE', payload: { language: value } });
-  };
 };
 
 const setCurrency = value => {
@@ -73,6 +67,27 @@ const setNetwork = net => {
     }
   };
 };
+
+async function estimateGas(network, method, options) {
+  let estimatedGasLimit = '0';
+
+  try {
+    estimatedGasLimit = await method.estimateGas(options);
+  } catch (err) {
+    console.error('cannot estimate gas,', err);
+    return [err.reason || err.data?.message || err.message || 'Unknown failure', null];
+  }
+
+  const limit = new BigNumber(estimatedGasLimit || '0');
+  if (limit.isNaN() || limit.lte(0)) {
+    return ['Estimate was zero', null];
+  }
+
+  // Add 50%
+  const limitWithMargin = limit.multipliedBy('15000').dividedToIntegerBy('10000').toNumber();
+
+  return [null, { ...options, gas: limitWithMargin }];
+}
 
 const connect = () => {
   return async (dispatch, getState) => {
@@ -184,10 +199,22 @@ const approval = (network, tokenAddr, spendingContractAddress) => {
       const web3 = await new Web3(provider);
       const contract = new web3.eth.Contract(erc20Abi, tokenAddr);
       const maxAmount = Web3.utils.toWei('8000000000', 'ether');
+      const method = contract.methods.approve(spendingContractAddress, maxAmount);
+      const [estimateError, options] = await estimateGas(network, method, { from: address });
 
-      contract.methods
-        .approve(spendingContractAddress, maxAmount)
-        .send({ from: address })
+      if (estimateError) {
+        dispatch({
+          type: WALLET_ACTION,
+          payload: {
+            result: 'error',
+            data: { spender: spendingContractAddress, error: estimateError },
+          },
+        });
+        return;
+      }
+
+      method
+        .send(options)
         .on('transactionHash', function (hash) {
           dispatch({
             type: WALLET_ACTION,
@@ -234,9 +261,19 @@ const deposit = (network, contractAddr, amount, max) => {
       const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);
 
       if (max) {
-        contract.methods
-          .depositAll('0x0000000000000000000000000000000000000000')
-          .send({ from: address })
+        const method = contract.methods.depositAll('0x0000000000000000000000000000000000000000');
+        const [estimateError, options] = await estimateGas(network, method, { from: address });
+
+        if (estimateError) {
+          dispatch({
+            type: WALLET_ACTION,
+            payload: { result: 'error', data: { spender: contractAddr, error: estimateError } },
+          });
+          return;
+        }
+
+        method
+          .send(options)
           .on('transactionHash', function (hash) {
             dispatch({
               type: WALLET_ACTION,
@@ -265,9 +302,22 @@ const deposit = (network, contractAddr, amount, max) => {
             console.log(error);
           });
       } else {
-        contract.methods
-          .depositMoonPot(amount, '0x0000000000000000000000000000000000000000')
-          .send({ from: address })
+        const method = contract.methods.depositMoonPot(
+          amount,
+          '0x0000000000000000000000000000000000000000'
+        );
+        const [estimateError, options] = await estimateGas(network, method, { from: address });
+
+        if (estimateError) {
+          dispatch({
+            type: WALLET_ACTION,
+            payload: { result: 'error', data: { spender: contractAddr, error: estimateError } },
+          });
+          return;
+        }
+
+        method
+          .send(options)
           .on('transactionHash', function (hash) {
             dispatch({
               type: WALLET_ACTION,
@@ -312,9 +362,19 @@ const withdraw = (network, contractAddr, amount, max) => {
       const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);
 
       if (max) {
-        contract.methods
-          .exitInstantly()
-          .send({ from: address })
+        const method = contract.methods.exitInstantly();
+        const [estimateError, options] = await estimateGas(network, method, { from: address });
+
+        if (estimateError) {
+          dispatch({
+            type: WALLET_ACTION,
+            payload: { result: 'error', data: { spender: contractAddr, error: estimateError } },
+          });
+          return;
+        }
+
+        method
+          .send(options)
           .on('transactionHash', function (hash) {
             dispatch({
               type: WALLET_ACTION,
@@ -343,9 +403,19 @@ const withdraw = (network, contractAddr, amount, max) => {
             console.log(error);
           });
       } else {
-        contract.methods
-          .exitInstantly()
-          .send({ from: address })
+        const method = contract.methods.exitInstantly();
+        const [estimateError, options] = await estimateGas(network, method, { from: address });
+
+        if (estimateError) {
+          dispatch({
+            type: WALLET_ACTION,
+            payload: { result: 'error', data: { spender: contractAddr, error: estimateError } },
+          });
+          return;
+        }
+
+        method
+          .send(options)
           .on('transactionHash', function (hash) {
             dispatch({
               type: WALLET_ACTION,
@@ -388,9 +458,19 @@ const getReward = (network, contractAddr) => {
     if (address && provider) {
       const web3 = await new Web3(provider);
       const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);
-      contract.methods
-        .getReward()
-        .send({ from: address })
+      const method = contract.methods.getReward();
+      const [estimateError, options] = await estimateGas(network, method, { from: address });
+
+      if (estimateError) {
+        dispatch({
+          type: WALLET_ACTION,
+          payload: { result: 'error', data: { spender: contractAddr, error: estimateError } },
+        });
+        return;
+      }
+
+      method
+        .send(options)
         .on('transactionHash', function (hash) {
           dispatch({
             type: WALLET_ACTION,
@@ -426,9 +506,19 @@ const compound = (network, contractAddr) => {
     if (address && provider) {
       const web3 = await new Web3(provider);
       const contract = new web3.eth.Contract(ziggyManagerMultiRewardsAbi, contractAddr);
-      contract.methods
-        .compound()
-        .send({ from: address })
+      const method = contract.methods.compound();
+      const [estimateError, options] = await estimateGas(network, method, { from: address });
+
+      if (estimateError) {
+        dispatch({
+          type: WALLET_ACTION,
+          payload: { result: 'error', data: { spender: contractAddr, error: estimateError } },
+        });
+        return;
+      }
+
+      method
+        .send(options)
         .on('transactionHash', function (hash) {
           dispatch({
             type: WALLET_ACTION,
@@ -551,6 +641,7 @@ const generateProviderOptions = (wallet, clients) => {
 };
 
 const zapIn = (
+  network,
   potAddress,
   { depositAmount, isNative, zapAddress, swapInToken, swapOutToken, swapOutAmount },
   isDepositAll
@@ -571,9 +662,22 @@ const zapIn = (
       );
 
       if (isNative) {
-        contract.methods
-          .beamInETH(potAddress, tokenAmountOutMinRaw)
-          .send({ from: address, value: depositAmountRaw })
+        const method = contract.methods.beamInETH(potAddress, tokenAmountOutMinRaw);
+        const [estimateError, options] = await estimateGas(network, method, {
+          from: address,
+          value: depositAmountRaw,
+        });
+
+        if (estimateError) {
+          dispatch({
+            type: WALLET_ACTION,
+            payload: { result: 'error', data: { spender: zapAddress, error: estimateError } },
+          });
+          return;
+        }
+
+        method
+          .send(options)
           .on('transactionHash', function (hash) {
             dispatch({
               type: WALLET_ACTION,
@@ -602,9 +706,24 @@ const zapIn = (
             console.log(error);
           });
       } else {
-        contract.methods
-          .beamIn(potAddress, tokenAmountOutMinRaw, swapInToken.address, depositAmountRaw)
-          .send({ from: address })
+        const method = contract.methods.beamIn(
+          potAddress,
+          tokenAmountOutMinRaw,
+          swapInToken.address,
+          depositAmountRaw
+        );
+        const [estimateError, options] = await estimateGas(network, method, { from: address });
+
+        if (estimateError) {
+          dispatch({
+            type: WALLET_ACTION,
+            payload: { result: 'error', data: { spender: zapAddress, error: estimateError } },
+          });
+          return;
+        }
+
+        method
+          .send(options)
           .on('transactionHash', function (hash) {
             dispatch({
               type: WALLET_ACTION,
@@ -638,6 +757,7 @@ const zapIn = (
 };
 
 const zapOut = (
+  network,
   potAddress,
   { zapAddress, isRemoveOnly, userBalanceAfterFeeRaw, swapOutToken, swapOutAmount }
 ) => {
@@ -652,9 +772,19 @@ const zapOut = (
       const contract = new web3.eth.Contract(zapAbi, zapAddress);
 
       if (isRemoveOnly) {
-        contract.methods
-          .beamOut(potAddress, true)
-          .send({ from: address })
+        const method = contract.methods.beamOut(potAddress, true);
+        const [estimateError, options] = await estimateGas(network, method, { from: address });
+
+        if (estimateError) {
+          dispatch({
+            type: WALLET_ACTION,
+            payload: { result: 'error', data: { spender: zapAddress, error: estimateError } },
+          });
+          return;
+        }
+
+        method
+          .send(options)
           .on('transactionHash', function (hash) {
             dispatch({
               type: WALLET_ACTION,
@@ -699,9 +829,24 @@ const zapOut = (
         //   byDecimals(swapOutAmountMinRaw, swapOutToken.decimals).toString()
         // );
 
-        contract.methods
-          .beamOutAndSwap(potAddress, swapOutToken.address, swapOutAmountMinRaw, true)
-          .send({ from: address })
+        const method = contract.methods.beamOutAndSwap(
+          potAddress,
+          swapOutToken.address,
+          swapOutAmountMinRaw,
+          true
+        );
+        const [estimateError, options] = await estimateGas(network, method, { from: address });
+
+        if (estimateError) {
+          dispatch({
+            type: WALLET_ACTION,
+            payload: { result: 'error', data: { spender: zapAddress, error: estimateError } },
+          });
+          return;
+        }
+
+        method
+          .send(options)
           .on('transactionHash', function (hash) {
             dispatch({
               type: WALLET_ACTION,
@@ -739,7 +884,6 @@ const obj = {
   createWeb3Modal,
   connect,
   disconnect,
-  setLanguage,
   setCurrency,
   approval,
   deposit,

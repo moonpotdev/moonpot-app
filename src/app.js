@@ -1,4 +1,5 @@
 import React, { memo, Suspense, useEffect } from 'react';
+import { load } from 'fathom-client';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import appTheme from './appTheme.js';
@@ -10,6 +11,9 @@ import { Header } from './components/Header';
 import Footer from './components/footer';
 import ModalPopup from './components/Modal/modal.js';
 import { useLocation } from 'react-router';
+import { useImpersonate } from './helpers/hooks';
+
+require('dotenv').config();
 
 const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
@@ -22,7 +26,7 @@ function Pages() {
       <Switch>
         <Route
           exact
-          path={['/:bottom(all|main|lp|community)?', '/:top(my-moonpots)/:bottom(eol)?']}
+          path={['/:bottom(all|main|lp|stable|community)?', '/:top(my-moonpots)/:bottom(eol)?']}
         >
           <Home />
           <Footer variant="light" />
@@ -61,6 +65,14 @@ const ScrollToTop = memo(function () {
 export default function App() {
   const dispatch = useDispatch();
   const theme = appTheme();
+  useImpersonate();
+
+  React.useEffect(() => {
+    load(process.env.REACT_APP_FATHOM_SITE_ID, {
+      url: process.env.REACT_APP_FATHOM_SITE_URL,
+      spa: 'hash',
+    });
+  });
 
   React.useEffect(() => {
     dispatch(reduxActions.prices.fetchPrices());
