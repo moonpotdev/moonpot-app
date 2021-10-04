@@ -57,6 +57,7 @@
         "sponsorTokenDecimals": 18
       }
     ],
+    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -156,6 +157,7 @@
         "sponsorTokenDecimals": 18
       }
     ],
+    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -223,6 +225,7 @@
         "sponsorTokenDecimals": 18
       }
     ],
+    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -272,6 +275,7 @@
         "sponsorTokenDecimals": 18
       }
     ],
+    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -322,6 +326,7 @@
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [],
+    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -377,6 +382,7 @@
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [],
+    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -549,6 +555,7 @@
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [],
+    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,

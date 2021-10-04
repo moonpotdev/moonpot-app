@@ -92,3 +92,11 @@ export function variantClass(classes, prefix, variant, defaultClass = false) {
   const key = prefix + variant[0].toUpperCase() + variant.substr(1);
   return key in classes ? classes[key] : defaultClass;
 }
+
+export function sortObjectsAsc(objectsArray, key) {
+  return objectsArray.sort((a, b) => (a[key] > b[key]) - (a[key] < b[key]));
+}
+
+export function sortObjectsDesc(objectsArray, key) {
+  return objectsArray.sort((a, b) => (a[key] < b[key]) - (a[key] > b[key]));
+}

@@ -9,6 +9,7 @@ export const config = {
     ],
     explorerUrl: 'https://bscscan.com',
     multicallAddress: '0xB94858b0bB5437498F5453A16039337e5Fdc269C',
+    claimAllBonusesAddress: '0xD6F847959f00818BeB8FeC4F8866A7369695A488',
     supportedWallets: [
       'injected',
       'walletconnect',
