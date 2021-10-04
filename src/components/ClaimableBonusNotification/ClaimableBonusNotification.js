@@ -114,7 +114,7 @@ export const ClaimableBonusNotification = memo(function ClaimableBonusNotificati
           <div className={classes.totalText}>{formatDecimals(pots.earned, 8, 8)} POTS</div>
         </div>
         <div className={classes.description}>
-          {t('claimableBonuses.description', {
+          {t('claimableBonuses.explainer', {
             returnObjects: true,
           }).map((text, i) => (
             <p key={i}>{text}</p>
@@ -122,7 +122,7 @@ export const ClaimableBonusNotification = memo(function ClaimableBonusNotificati
         </div>
         <div className={classes.buttons}>
           <PrimaryButton variant="purple" fullWidth={true} onClick={handleClaim}>
-            {t('claimableBonuses.button')}
+            {t('claimableBonuses.claimAll')}
           </PrimaryButton>
         </div>
         <Steps item={stepsItem} steps={steps} handleClose={handleClose} />

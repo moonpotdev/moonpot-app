@@ -153,6 +153,7 @@
         "sponsorTokenDecimals": 18
       }
     ],
+    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
