@@ -34,7 +34,6 @@ const styles = theme => ({
   max: {
     marginRight: '8px',
     borderRadius: '4px',
-    background: '#6B96BD',
     outline: 'none',
     textTransform: 'uppercase',
     color: 'rgba(255, 255, 255, 0.95)',

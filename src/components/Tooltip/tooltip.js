@@ -79,7 +79,6 @@ export function InterestTooltip({ pot }) {
   const bonusApr = new BigNumber(pot.bonusApr);
 
   const bonuses = pot.bonuses;
-  console.log(bonuses);
 
   /*-----Create Bonus Token Text-----*/
   var bonusCount = 0;
