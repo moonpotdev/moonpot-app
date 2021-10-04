@@ -6,7 +6,7 @@ import { BigNumber } from 'bignumber.js';
 import { TransListJoin } from '../TransListJoin';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
-import { TooltipWithIcon, InterestTooltip } from '../Tooltip/tooltip';
+import { InterestTooltip } from '../Tooltip/tooltip';
 import {
   translateToken,
   usePot,
@@ -17,9 +17,9 @@ import {
 import { DrawStat, DrawStatNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
 import {
-  investmentOdds,
   calculateUSDProjectedPrize,
   calculateZiggyUsdProjection,
+  investmentOdds,
 } from '../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import styles from './styles';

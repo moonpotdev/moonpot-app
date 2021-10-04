@@ -1,5 +1,4 @@
 import React, { memo, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { Translate } from '../../../../components/Translate';
 import { usePots } from '../../../../helpers/hooks';
 import { calculateTotalUsdPrize } from '../../../../helpers/utils';

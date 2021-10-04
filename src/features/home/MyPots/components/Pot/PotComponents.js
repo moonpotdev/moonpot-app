@@ -3,9 +3,9 @@ import { memo, useMemo } from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import {
-  investmentOdds,
   calculateUSDProjectedPrize,
   calculateZiggyUsdProjection,
+  investmentOdds,
 } from '../../../../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import { byDecimals, formatDecimals } from '../../../../../helpers/format';
@@ -13,7 +13,7 @@ import Countdown from '../../../../../components/Countdown';
 import { WinTotal } from '../../../../../components/Pot';
 import { InterestTooltip } from '../../../../../components/Tooltip/tooltip';
 import { Translate } from '../../../../../components/Translate';
-import { usePots, usePot, useTokenBalance } from '../../../../../helpers/hooks';
+import { usePots, useTokenBalance } from '../../../../../helpers/hooks';
 import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(styles);
