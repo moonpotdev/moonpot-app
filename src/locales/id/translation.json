@@ -102,7 +102,15 @@
     "myDetails": "Detail Saya",
     "myInterestRate": "Tingkat Keuntungan Saya",
     "myOdds": "Kesempatan menang Saya",
+    "tokenAPY": "{{token}} APY",
+    "tokenAPR": "{{token}} APR",
+    "totalAPY": "Jumlah APY",
+    "bonusTokenAPR": "Bonus {{token}} APR",
+    "superBoostTokenAPR": "Super Boost {{token}} APR",
     "tooltip": {
+      "standard": "Pot ini menggabungkan {{token}} anda secara otomatis dan memberikan token {{bonus}} untuk mencapai total APY.",
+      "standardNoBoost": "Pot ini menggabungkan {{token}} anda secara otomatis.",
+      "pots": "Pot ini mengharuskan anda untuk menggabungkan penghasilan POTS anda secara manual sekali sehari  untuk mencapai APY yang ditampilkan.",
       "interestBonusApy": "APY yang dicoret adalah keuntungan yang dibayarkan dalam aset yang disimpan dan digabungkan secara otomatis. APY emas termasuk token bonus tambahan yang tidak digabungkan dan dapat diklaim secara manual.",
       "interestCompoundApr": "APR adalah tingkat keuntungan tahunan yang diterima pada tiap deposit. Untuk mendapatkan APY yang lebih tinggi, Gabungkan keuntungan Anda setiap hari."
     },

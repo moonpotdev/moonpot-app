@@ -102,7 +102,15 @@
     "myDetails": "我的详细信息",
     "myInterestRate": "我的收益率",
     "myOdds": "我的中奖概率",
+    "tokenAPY": "{{token}} APY",
+    "tokenAPR": "{{token}} APR",
+    "totalAPY": "总 APY",
+    "bonusTokenAPR": "额外 {{token}} APR",
+    "superBoostTokenAPR": "超速增值 {{token}} APR",
     "tooltip": {
+      "standard": "此月盒会自动复投您的 {{token}} 并奖励额外的 {{bonus}} 以实现总 APY。",
+      "standardNoBoost": "此月盒自动复投您的 {{token}}。",
+      "pots": "此月盒需要您每天手动复合 POTS 收益一次，以达到显示的 APY。",
       "interestBonusApy": "划掉的 APY 是以存入的资产所支付的利息，并将自动复利。 金色的 APY 包括未复利的额外代币奖励，可以自行手动领取。",
       "interestCompoundApr": "APR是指从存款中获得的年利率。为了赚取更高的APY，请每天进行手动复投。"
     },
@@ -214,6 +222,6 @@
     "userWonPrize": "您赢得了一个奖品!"
   },
   "tokens": {
-    "4Belt USD LP": "USD Stablecoins"
+    "4Belt USD LP": "USD 稳定币"
   }
 }
