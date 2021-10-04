@@ -217,6 +217,8 @@ export const PrizeSplit = function ({
   sponsors,
   numberOfWinners,
 }) {
+  const classes = useStyles();
+
   const allPrizes = {
     [baseToken]: {
       tokens: awardBalance || new BigNumber(0),
@@ -241,18 +243,31 @@ export const PrizeSplit = function ({
   }
 
   const prizesOverZero = Object.entries(allPrizes).filter(([, total]) => total.usd.gte(0.01));
+  const totalPrizeEach = prizesOverZero
+    .reduce((overallTotal, [, prizeTotal]) => overallTotal.plus(prizeTotal.usd), new BigNumber(0))
+    .dividedBy(numberOfWinners);
 
-  return prizesOverZero.map(([token, total]) => {
-    const tokens = formatDecimals(total.tokens.dividedBy(numberOfWinners), 2);
-    const usd = formatDecimals(total.usd.dividedBy(numberOfWinners), 2);
-
-    return (
-      <div key={token}>
-        <span>
-          {tokens} {token}
-        </span>{' '}
-        (${usd})
+  return (
+    <>
+      <div className={classes.prizeSplitTotal}>
+        <Translate
+          i18nKey="pot.amountEach"
+          values={{ symbol: '$', amount: formatDecimals(totalPrizeEach, 2, 2) }}
+        />
       </div>
-    );
-  });
+      {prizesOverZero.map(([token, total]) => {
+        const tokens = formatDecimals(total.tokens.dividedBy(numberOfWinners), 2);
+        const usd = formatDecimals(total.usd.dividedBy(numberOfWinners), 2);
+
+        return (
+          <div key={token} className={classes.prizeSplitToken}>
+            <span>
+              {tokens} {token}
+            </span>{' '}
+            (${usd})
+          </div>
+        );
+      })}
+    </>
+  );
 };
