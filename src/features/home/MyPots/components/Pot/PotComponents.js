@@ -105,7 +105,7 @@ export const PotInfoBlock = function ({ item, active = true }) {
         </Grid>
         <Grid item xs={6}>
           <Typography className={classes.myDetailsValue} align={'right'}>
-            {formatDecimals(item.userBalance)} {item.token} ($
+            {formatDecimals(item.userBalance, 2)} {item.token} ($
             {formatDecimals(item.userBalance.multipliedBy(depositTokenPrice), 2)})
           </Typography>
         </Grid>

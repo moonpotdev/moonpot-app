@@ -34,7 +34,7 @@ const Stat = function ({ label, children }) {
 const StatDeposited = memo(function ({ token, contractAddress, tokenDecimals }) {
   const { t } = useTranslation();
   const userTotalBalance = useTokenBalance(contractAddress + ':total', tokenDecimals);
-  return <Stat label={t('pot.myToken', { token })}>{formatDecimals(userTotalBalance, 8)}</Stat>;
+  return <Stat label={t('pot.myToken', { token })}>{formatDecimals(userTotalBalance, 2)}</Stat>;
 });
 
 const StatEarned = memo(function ({ bonus }) {
@@ -42,7 +42,7 @@ const StatEarned = memo(function ({ bonus }) {
 
   return (
     <Stat label={t(bonusStatLabels[bonus.display], { token: bonus.symbol })}>
-      {formatDecimals(bonus.earned, 8)}
+      {formatDecimals(bonus.earned, 2)}
     </Stat>
   );
 });
@@ -79,7 +79,7 @@ const StatFee = memo(function ({ token, contractAddress, ticketSymbol, tokenDeci
       const max = 3600 * 24 * 10 * 1000;
       const relative = (timeLeft * 0.05) / max;
       const fee = ticketBalance.times(relative);
-      return formatDecimals(fee, 8);
+      return formatDecimals(fee, 2);
     }
 
     return 0;
@@ -259,7 +259,6 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
             i18nKey="withdraw.withdrawFeeNotice"
             values={{ percent: formatDecimals(pot.withdrawFee * 100, 2) }}
           />
-          ) : null}
         </div>
       ) : null}
       <div className={classes.fairplayNotice}>

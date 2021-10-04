@@ -97,7 +97,7 @@ const MyPots = ({ selected }) => {
               {/*Pots*/}
               <Cards sameHeight={false}>
                 {filtered.length === 0 ? (
-                  <NoPotsCard />
+                  <NoPotsCard selected={selected} />
                 ) : (
                   filtered.map(item => <Pot key={item.id} item={item} />)
                 )}

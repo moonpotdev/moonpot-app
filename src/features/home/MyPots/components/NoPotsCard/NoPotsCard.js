@@ -8,7 +8,7 @@ import reduxActions from '../../../../redux/actions';
 
 const useStyles = makeStyles(styles);
 
-export default function NoPotsCard() {
+export default function NoPotsCard({ selected }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const history = useHistory();
@@ -20,6 +20,8 @@ export default function NoPotsCard() {
       dispatch(reduxActions.wallet.connect());
     }
   };
+
+  console.log(selected);
 
   return (
     <Box className={classes.noActivePots}>
@@ -38,7 +40,11 @@ export default function NoPotsCard() {
         </Grid>
         <Grid item xs={12}>
           <Typography className={classes.noActivePotsText}>
-            {address ? t('youHaventEnteredMoonpots') : t('connectToJoin')}
+            {selected === 'active' ? (
+              <>{address ? t('youHaventEnteredMoonpots') : t('connectToJoin')}</>
+            ) : (
+              <>{address ? t('youHaventEnteredRetiredMoonpots') : t('connectToJoin')}</>
+            )}
           </Typography>
         </Grid>
         <Grid item xs={12}>
