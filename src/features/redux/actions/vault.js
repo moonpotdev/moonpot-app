@@ -78,35 +78,54 @@ function calculateZiggyPrediction(ziggy, others, prices) {
             }
           }
 
-          // Sponsor
-          const existingSponsor = projectedSponsors.find(
-            sponsor => sponsor.sponsorAddress === sponsorToken.address
-          );
-          if (existingSponsor) {
-            existingSponsor.sponsorBalance = existingSponsor.sponsorBalance.plus(potAward.tokens);
-            existingSponsor.sponsorBalanceUsd = existingSponsor.sponsorBalanceUsd.plus(
-              potAward.usd
-            );
-          } else {
-            projectedSponsors.push({
-              sponsorToken: sponsorToken.symbol,
-              sponsorOracleId: sponsorToken.oracleId,
-              sponsorAddress: sponsorToken.address,
-              sponsorTokenDecimals: sponsorToken.decimals,
-              sponsorBalance: potAward.tokens,
-              sponsorBalanceUsd: potAward.usd,
+          // Build prizes array
+          let prizes = [{ token: sponsorToken, award: potAward }];
+
+          // Are we awarding an LP?
+          if (sponsorToken.type === 'lp') {
+            const usdShare = potAward.usd.dividedBy(sponsorToken.lp.length);
+
+            prizes = sponsorToken.lp.map(symbol => {
+              const partToken = tokensByNetworkSymbol[pot.network][symbol];
+              const partTokenPrice = prices[partToken.oracleId] || 0;
+
+              return {
+                token: partToken,
+                award: {
+                  usd: usdShare,
+                  tokens: partTokenPrice ? usdShare.dividedBy(partTokenPrice) : new BigNumber(0),
+                },
+              };
             });
+          }
+
+          // Add each prize to sponsors array
+          for (const prize of prizes) {
+            // Sponsor
+            const existingSponsor = projectedSponsors.find(
+              sponsor => sponsor.sponsorAddress === prize.token.address
+            );
+            if (existingSponsor) {
+              existingSponsor.sponsorBalance = existingSponsor.sponsorBalance.plus(
+                prize.award.tokens
+              );
+              existingSponsor.sponsorBalanceUsd = existingSponsor.sponsorBalanceUsd.plus(
+                prize.award.usd
+              );
+            } else {
+              projectedSponsors.push({
+                sponsorToken: prize.token.symbol,
+                sponsorOracleId: prize.token.oracleId,
+                sponsorAddress: prize.token.address,
+                sponsorTokenDecimals: prize.token.decimals,
+                sponsorBalance: prize.award.tokens,
+                sponsorBalanceUsd: prize.award.usd,
+              });
+            }
           }
 
           // Add up the extra sponsor usd totals
           extraSponsorBalanceUsd = extraSponsorBalanceUsd.plus(potAward.usd);
-
-          console.log(
-            pot.id,
-            `${potAward.tokens.toFixed(8)} ${sponsorToken.symbol}`,
-            '/',
-            `$${potAward.usd.toFixed(2)}`
-          );
         }
       }
     }
@@ -117,16 +136,6 @@ function calculateZiggyPrediction(ziggy, others, prices) {
     // Sum total of all sponsors USD
     ziggy.projectedTotalSponsorBalanceUsd =
       ziggy.totalSponsorBalanceUsd.plus(extraSponsorBalanceUsd);
-
-    console.log(
-      'actual total usd =',
-      ziggy.awardBalanceUsd.plus(ziggy.totalSponsorBalanceUsd).toFixed(2),
-      'projected total usd =',
-      ziggy.awardBalanceUsd
-        .plus(ziggy.totalSponsorBalanceUsd)
-        .plus(extraSponsorBalanceUsd)
-        .toFixed(2)
-    );
   } else {
     ziggy.projectedTotalSponsorBalanceUsd = ziggy.totalSponsorBalanceUsd;
     ziggy.projectedSponsors = ziggy.sponsors;
@@ -497,9 +506,7 @@ function calculateBoost(rewardInfo, pool, prices, config) {
 
 const fetchPools = (item = false) => {
   if (item) {
-    console.warn(
-      "[DEPRECATED] Must update all pools at once for Ziggy' projected prize calculation"
-    );
+    console.warn('[DEPRECATED] Must update all pools at once for projected prize calculations');
   }
 
   return async (dispatch, getState) => {

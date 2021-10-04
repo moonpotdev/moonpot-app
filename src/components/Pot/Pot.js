@@ -242,7 +242,10 @@ export const PrizeSplit = function ({
     }
   }
 
-  const prizesOverZero = Object.entries(allPrizes).filter(([, total]) => total.usd.gte(0.01));
+  const prizesOverZero = Object.entries(allPrizes)
+    .filter(([, total]) => total.usd.gte(0.01))
+    .sort(([, totalA], [, totalB]) => totalB.usd.comparedTo(totalA.usd))
+    .sort(([tokenA]) => (tokenA === baseToken ? -1 : 1));
   const totalPrizeEach = prizesOverZero
     .reduce((overallTotal, [, prizeTotal]) => overallTotal.plus(prizeTotal.usd), new BigNumber(0))
     .dividedBy(numberOfWinners);

@@ -308,7 +308,6 @@
     "apyId": "cakev2-pots-busd",
     "vaultType": "lp",
     "duration": 14,
-    "ziggyPrizeToken": "BUSD",
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -364,7 +363,6 @@
     "apyId": "banana-pots-bnb",
     "vaultType": "lp",
     "duration": 14,
-    "ziggyPrizeToken": "BNB",
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
