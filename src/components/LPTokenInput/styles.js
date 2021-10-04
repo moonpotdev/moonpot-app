@@ -128,6 +128,10 @@ const styles = theme => ({
       color: '#DEE9ED',
     },
   },
+  inputVariantGreenStable: {
+    background: '#467268',
+    border: '2px solid #508276',
+  },
   tokenDropdownVariantTeal: {
     background: '#3C6259',
     border: '2px solid #6B96BD',
