@@ -186,6 +186,10 @@ function calculateProjections(pots, prices) {
       pot.projectedAwardBalance = pot.awardBalance;
       pot.projectedAwardBalanceUsd = pot.awardBalanceUsd;
     }
+
+    // Sponsors don't get projected
+    pot.projectedTotalSponsorBalanceUsd = pot.totalSponsorBalanceUsd;
+    pot.projectedSponsors = pot.sponsors;
   }
 
   // Ziggy's Pot
