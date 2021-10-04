@@ -2,18 +2,14 @@ import * as React from 'react';
 import { memo, useMemo } from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
-import {
-  investmentOdds,
-  calculateUSDProjectedPrize,
-  calculateZiggyUsdProjection,
-} from '../../../../../helpers/utils';
+import { investmentOdds } from '../../../../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import { byDecimals, formatDecimals } from '../../../../../helpers/format';
 import Countdown from '../../../../../components/Countdown';
 import { WinTotal } from '../../../../../components/Pot';
 import { InterestTooltip } from '../../../../../components/Tooltip/tooltip';
 import { Translate } from '../../../../../components/Translate';
-import { usePots, usePot, useTokenBalance } from '../../../../../helpers/hooks';
+import { useTokenBalance } from '../../../../../helpers/hooks';
 import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(styles);
@@ -22,7 +18,6 @@ export const PotTitle = function ({ item }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const pot = item;
-  const pots = usePots();
 
   return (
     <Grid item xs={8}>
@@ -33,11 +28,9 @@ export const PotTitle = function ({ item }) {
           </Typography>
           <div className={classes.potUsdTop}>
             <WinTotal
-              awardBalanceUsd={calculateUSDProjectedPrize({ pot })}
+              awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
               totalSponsorBalanceUsd={
-                item.id === 'pots'
-                  ? calculateZiggyUsdProjection({ pot, pots })
-                  : pot.totalSponsorBalanceUsd
+                pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
               }
             />
           </div>
