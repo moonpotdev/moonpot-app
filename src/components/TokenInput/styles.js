@@ -54,7 +54,6 @@ const styles = theme => ({
   variantPurpleAlt: {
     background: '#4F5887',
     border: '2px solid #586397',
-    border: '2px solid #586397',
     '& .MuiInputBase-input': {
       color: '#ABB2D9',
     },
