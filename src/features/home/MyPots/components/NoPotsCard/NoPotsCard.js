@@ -21,8 +21,6 @@ export default function NoPotsCard({ selected }) {
     }
   };
 
-  console.log(selected);
-
   return (
     <Box className={classes.noActivePots}>
       <Grid container>

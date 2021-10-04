@@ -164,7 +164,7 @@ const PotBonus = function ({ item, buttonVariant = 'purple' }) {
                 </Grid>
                 <Grid item xs={6}>
                   <Typography className={classes.myDetailsValue} align={'right'}>
-                    {formatDecimals(bonus.earned, 2)} {bonus.symbol} ($
+                    {formatDecimals(bonus.earned)} {bonus.symbol} ($
                     {formatDecimals(bonus.value, 2)})
                   </Typography>
                 </Grid>
