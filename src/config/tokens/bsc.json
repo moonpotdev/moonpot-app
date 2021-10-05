@@ -196,7 +196,7 @@
   },
   {
     "symbol": "xBLZD",
-    "address": "0x9a946c3cb16c08334b69ae249690c236ebd5583e",
+    "address": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
     "type": "single",
     "oracleId": "xBLZD",
     "decimals": 18
