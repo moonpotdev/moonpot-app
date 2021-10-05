@@ -43,8 +43,10 @@
   "vaultTitle": "存入 <span>{{token}}</span>, 获得 <span>{{apy}}% APY</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
   "playWithMoonpot": "使用Moonpot进行游戏",
   "youHaventEnteredMoonpots": "您尚未参与任何月盒.",
+  "youHaventEnteredRetiredMoonpots": "您未参与任何已退役的月盒。",
   "connectToJoin": "连接您的钱包以加入月盒。",
   "poweredBy": "技术支持来自",
+  "auditedBy": "审计来自",
   "upgradeWhy": "我们升级了 {{token}}月盒，以便能够为所有未来的Moonpots玩家添加不同的福利奖励。",
   "upgradeNextSteps": "由于此次的升级，您需要转移您的{{token}}至新的{{token}} 月盒。我们已添加了金额为${{amount}} {{boostToken}}的超速增值币到这一新的{{token}}月盒，以便让您获得更多的收益。",
   "upgradeMove": "转移 {{base}}",
@@ -173,7 +175,9 @@
       "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
       "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
     ],
-    "zapTooltip4Belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"],
+    "zapTooltip4Belt": [
+      "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
+    ],
     "inYourWallet": "您的钱包里有",
     "provider": "流动性提供者"
   },
@@ -222,5 +226,12 @@
   },
   "tokens": {
     "4Belt USD LP": "USD 稳定币"
+  },
+  "claimableBonuses": {
+    "explainer": [
+      "您现在可以通过一键点击，在所有活跃的月盒上领取您所赚取的额外 POTS 奖励。",
+      "随后，您可以将赚取的所有额外 POTS 奖励从您的钱包存入 Ziggy's Pot，这将是一次性的交易。"
+    ],
+    "claimAll": "领取所有赚取的额外 POTS 奖励"
   }
 }
