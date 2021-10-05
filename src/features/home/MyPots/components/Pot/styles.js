@@ -347,7 +347,6 @@ const styles = theme => ({
     display: 'block',
     textAlign: 'right',
     paddingBottom: '16px',
-    height: '56px',
   },
 });
 

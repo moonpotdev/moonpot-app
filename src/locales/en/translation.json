@@ -43,8 +43,10 @@
   "vaultTitle": "Deposit <span>{{token}}</span>, earn <span>{{apy}}% APY</span><wbr /> and a chance to win <span>{{currency}}{{amount}}</span>",
   "playWithMoonpot": "Play with Moonpot",
   "youHaventEnteredMoonpots": "You haven't entered any Moonpots yet.",
+  "youHaventEnteredRetiredMoonpots": "You are not entered in any retired Moonpots.",
   "connectToJoin": "Connect your wallet to join a Moonpot.",
   "poweredBy": "Powered by",
+  "auditedBy": "Audited by",
   "upgradeWhy": "We upgraded the {{token}} Pot in order to make it safer and fairer, as well as to allow us to automate more of our processes.",
   "upgradeNextSteps": "Because of the upgrade, you need to move your {{token}} to the new {{token}} Pot.  We have added a {{boostToken}} Super Boost to the new {{token}} Pot to help make it worthwhile for you.",
   "upgradeMove": "Move {{base}}",
@@ -83,8 +85,9 @@
     "closed": "Closed",
     "prizeSplit": "Projected Prize Split",
     "prizeSplitToolTip": "Live projection based on current TVL and interest rate",
-    "prizeSplitWinner": "{{count}} winner",
-    "prizeSplitWinner_plural": "{{count}} Winning Tickets (each)",
+    "prizeSplitWinner": "{{count}} Winning Ticket",
+    "prizeSplitWinner_plural": "{{count}} Winning Tickets",
+    "amountEach": "<span>{{symbol}}{{amount}}</span> each",
     "playWith": "Play with {{token}}",
     "playWithMore": "Play with more {{token}}",
     "odds": "1 in {{odds}}",
@@ -223,5 +226,12 @@
   },
   "tokens": {
     "4Belt USD LP": "USD Stablecoins"
+  },
+  "claimableBonuses": {
+    "explainer": [
+      "You can now claim your earned and bonus POTS across all of your active Moonpots with one click.",
+      "You can then deposit all your earned and bonus POTS from your wallet into Ziggy’s Pot in a single transaction."
+    ],
+    "claimAll": "Claim all earned & bonus POTS"
   }
 }

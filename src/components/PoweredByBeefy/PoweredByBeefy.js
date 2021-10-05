@@ -36,6 +36,19 @@ export function PoweredByBeefy({ className }) {
           className={classes.beefyLogo}
         />
       </div>
+      <div className={classes.poweredByItem}>
+        <Translate i18nKey="auditedBy" />
+      </div>
+      <div className={classes.poweredByItem}>
+        <Link
+          href={'https://www.certik.org/projects/moonpot'}
+          target="_blank"
+          rel="noreferrer"
+          className={classes.beefyLink}
+        >
+          Certik
+        </Link>
+      </div>
     </Box>
   );
 }

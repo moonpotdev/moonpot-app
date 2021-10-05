@@ -85,9 +85,9 @@
     "closed": "关闭",
     "prizeSplit": "预计奖金分配",
     "prizeSplitToolTip": "基于目前的TVL和利率的实时预测",
-    "prizeSplitWinner": "{{count}}中奖门票 (每个)",
-    "prizeSplitWinner_plural": "{{count}}中奖门票 (每个)",
-    "amountEach": "<span>{{symbol}}{{amount}}</span> each",
+    "prizeSplitWinner": "{{count}}个中奖门票 (每个)",
+    "prizeSplitWinner_plural": "{{count}}个中奖门票 (每个)",
+    "amountEach": "<span>{{symbol}}{{amount}}</span> 每个",
     "playWith": "使用 {{token}} 进行游戏",
     "playWithMore": "使用更多 {{token}} 进行游戏",
     "odds": "1/{{odds}}",
@@ -109,7 +109,7 @@
     "tokenAPR": "{{token}} APR",
     "totalAPY": "总 APY",
     "bonusTokenAPR": "额外 {{token}} APR",
-    "superBoostTokenAPR": "超速增值 {{token}} APR"
+    "superBoostTokenAPR": "超速增值 {{token}} APR",
     "tooltip": {
       "standard": "此月盒会自动复投您的 {{token}} 并奖励额外的 {{bonus}} 以实现总 APY。",
       "standardNoBoost": "此月盒自动复投您的 {{token}}。",
@@ -177,7 +177,7 @@
     ],
     "zapTooltip4Belt": [
       "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
-    ],
+    ], 
     "inYourWallet": "您的钱包里有",
     "provider": "流动性提供者"
   },
