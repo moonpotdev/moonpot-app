@@ -225,11 +225,7 @@ export const Draw = function ({ draw }) {
     <Card variant="purpleMid">
       <Grid container spacing={2} className={classes.rowLogoWonTotal}>
         <Grid item xs={4}>
-          <Logo
-            name={draw.pot.name}
-            baseToken={draw.pot.token}
-            sponsorToken={sponsorToken || draw.pot.sponsorToken}
-          />
+          <Logo baseToken={draw.pot.token} sponsorToken={sponsorToken || draw.pot.sponsorToken} />
         </Grid>
         <Grid item xs={8}>
           <Title name={draw.pot.name} />
