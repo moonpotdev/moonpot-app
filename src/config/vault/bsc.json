@@ -99,7 +99,7 @@
     "status": "active",
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0x838814CA813Ab84FC933715C177544dFc725026c",
+    "infoCardBeefyVaultAddress": "0x47a27220Db5458DB4b238fefCBb8178232cBFa5D",
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
