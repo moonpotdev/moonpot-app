@@ -74,6 +74,52 @@
     "compoundIsBonus": false
   },
   {
+    "id": "xblzd",
+    "name": "xBLZD",
+    "token": "xBLZD",
+    "tokenAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketXBLZD",
+    "rewardAddress": "0xf6A91F8d3EC0b1922433c4E929Ea61C85633E918",
+    "contractAddress": "0x55A50FE2372c0B8A4491d4CeC517258D69940547",
+    "prizePoolAddress": "0x861d4d8310006E6Ef115dF4A5D64A83e361aa29E",
+    "prizeStrategyAddress": "0x3442aB28A4de27f00eE6Aa960e0b9Ce9a9DBa976",
+    "pricePerShare": 1,
+    "oracleId": "xBLZD",
+    "apyId": "blizzard-xblzd",
+    "vaultType": "community",
+    "duration": 14,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x47a27220Db5458DB4b238fefCBb8178232cBFa5D",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "xBLZD",
+        "display": "bonus"
+      }
+    ],
+    "compoundIsBonus": true
+  },
+  {
     "id": "pacoca",
     "name": "PACOCA",
     "token": "PACOCA",
