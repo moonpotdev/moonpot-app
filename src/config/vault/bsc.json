@@ -77,7 +77,7 @@
     "id": "xblzd",
     "name": "xBLZD",
     "token": "xBLZD",
-    "tokenAddress": "0x9a946c3cb16c08334b69ae249690c236ebd5583e",
+    "tokenAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
     "tokenDecimals": 18,
     "rewardToken": "moonTicketXBLZD",
     "rewardAddress": "0xf6A91F8d3EC0b1922433c4E929Ea61C85633E918",
