@@ -2,3 +2,5 @@
 /.idea/
 .eslintcache
 /build/
+
+.env

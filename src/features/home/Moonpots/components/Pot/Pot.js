@@ -5,17 +5,7 @@ import { useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../../helpers/utils';
 import { Pot as BasePot, PrizeSplit } from '../../../../../components/Pot/Pot';
-import {
-  usePot,
-  useTokenAddressPrice,
-  usePots,
-  useTranslatedToken,
-} from '../../../../../helpers/hooks';
-import {
-  calculateTokenProjectedPrize,
-  calculateUSDProjectedPrize,
-  calculateZiggyTokenProjections,
-} from '../../../../../helpers/utils';
+import { usePot, useTokenAddressPrice, useTranslatedToken } from '../../../../../helpers/hooks';
 import { Translate } from '../../../../../components/Translate';
 import { byDecimals } from '../../../../../helpers/format';
 import { TooltipWithIcon } from '../../../../../components/Tooltip/tooltip';
@@ -89,10 +79,6 @@ function handleVariant(vaultType) {
 const Bottom = function ({ id }) {
   const classes = useStyles();
   const pot = usePot(id);
-  const pots = usePots();
-
-  const projectedTokenPrize = calculateTokenProjectedPrize({ pot });
-  const projectedUSDPrize = calculateUSDProjectedPrize({ pot });
 
   return (
     <>
@@ -114,11 +100,9 @@ const Bottom = function ({ id }) {
             <Grid item xs={9} className={classes.prizeSplitValue}>
               <PrizeSplit
                 baseToken={pot.token}
-                awardBalance={projectedTokenPrize}
-                awardBalanceUsd={projectedUSDPrize}
-                sponsors={
-                  pot.id === 'pots' ? calculateZiggyTokenProjections({ pot, pots }) : pot.sponsors
-                }
+                awardBalance={pot.projectedAwardBalance || pot.awardBalance}
+                awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
+                sponsors={pot.projectedSponsors || pot.sponsors}
                 numberOfWinners={pot.numberOfWinners}
               />
             </Grid>

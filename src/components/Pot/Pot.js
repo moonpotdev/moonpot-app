@@ -6,21 +6,11 @@ import { BigNumber } from 'bignumber.js';
 import { TransListJoin } from '../TransListJoin';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
-import { TooltipWithIcon, InterestTooltip } from '../Tooltip/tooltip';
-import {
-  translateToken,
-  usePot,
-  usePots,
-  useTokenBalance,
-  useTotalPrize,
-} from '../../helpers/hooks';
+import { InterestTooltip } from '../Tooltip/tooltip';
+import { translateToken, usePot, useTokenBalance, useTotalPrize } from '../../helpers/hooks';
 import { DrawStat, DrawStatNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
-import {
-  investmentOdds,
-  calculateUSDProjectedPrize,
-  calculateZiggyUsdProjection,
-} from '../../helpers/utils';
+import { investmentOdds } from '../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import styles from './styles';
 
@@ -66,6 +56,7 @@ const WinTokens = memo(function ({ depositToken, sponsors }) {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const sponsorTokens = sponsors
+    .filter(sponsor => sponsor.sponsorBalanceUsd.gte(0.01))
     .map(sponsor => sponsor.sponsorToken)
     .filter(token => token !== depositToken);
   const allTokens = [depositToken, ...sponsorTokens].map(symbol => translateToken(symbol, i18n, t));
@@ -78,11 +69,10 @@ const WinTokens = memo(function ({ depositToken, sponsors }) {
   );
 });
 
-const Interest = memo(function ({ baseApy, bonusApy, bonusApr }) {
+const Interest = memo(function ({ baseApy, bonusApy }) {
   const classes = useStyles();
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
-  const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;
   const totalApy = (hasBaseApy ? baseApy : 0) + (hasBonusApy ? bonusApy : 0);
 
   return (
@@ -166,8 +156,6 @@ const DepositWithOdds = memo(function ({
 export function Pot({ id, variant, bottom }) {
   const classes = useStyles();
   const pot = usePot(id);
-  const pots = usePots();
-  //console.log(pot);
 
   return (
     <Card variant={variant}>
@@ -178,19 +166,17 @@ export function Pot({ id, variant, bottom }) {
         <Grid item xs={8}>
           <Title name={pot.name} />
           <WinTotal
-            awardBalanceUsd={calculateUSDProjectedPrize({ pot })}
+            awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
             totalSponsorBalanceUsd={
-              pot.id === 'pots'
-                ? calculateZiggyUsdProjection({ pot, pots })
-                : pot.totalSponsorBalanceUsd
+              pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
             }
           />
-          <WinTokens depositToken={pot.token} sponsors={pot.sponsors} />
+          <WinTokens depositToken={pot.token} sponsors={pot.projectedSponsors || pot.sponsors} />
         </Grid>
       </Grid>
       <Grid container spacing={2} className={classes.rowDrawStats}>
         <Grid item xs={7}>
-          <DrawStatNextDraw frequency={pot.frequency}>
+          <DrawStatNextDraw duration={pot.duration}>
             <Countdown until={pot.expiresAt * 1000}>
               <Translate i18nKey="pot.statNextDrawCountdownFinished" />
             </Countdown>
@@ -215,7 +201,7 @@ export function Pot({ id, variant, bottom }) {
         </Grid>
         <Grid item xs={7}>
           <DrawStat i18nKey="pot.statInterest" tooltip={<InterestTooltip pot={pot} />}>
-            <Interest baseApy={pot.apy} bonusApy={pot.bonusApy} bonusApr={pot.bonusApr} />
+            <Interest baseApy={pot.apy} bonusApy={pot.bonusApy} />
           </DrawStat>
         </Grid>
       </Grid>
@@ -231,6 +217,8 @@ export const PrizeSplit = function ({
   sponsors,
   numberOfWinners,
 }) {
+  const classes = useStyles();
+
   const allPrizes = {
     [baseToken]: {
       tokens: awardBalance || new BigNumber(0),
@@ -254,19 +242,35 @@ export const PrizeSplit = function ({
     }
   }
 
-  const prizesOverZero = Object.entries(allPrizes).filter(([, total]) => total.usd.gte(0.01));
+  const prizesOverZero = Object.entries(allPrizes)
+    .filter(([, total]) => total.usd.gte(0.01))
+    .sort(([, totalA], [, totalB]) => totalB.usd.comparedTo(totalA.usd))
+    .sort(([tokenA]) => (tokenA === baseToken ? -1 : 1));
+  const totalPrizeEach = prizesOverZero
+    .reduce((overallTotal, [, prizeTotal]) => overallTotal.plus(prizeTotal.usd), new BigNumber(0))
+    .dividedBy(numberOfWinners);
 
-  return prizesOverZero.map(([token, total]) => {
-    const tokens = formatDecimals(total.tokens.dividedBy(numberOfWinners), 2);
-    const usd = formatDecimals(total.usd.dividedBy(numberOfWinners), 2);
-
-    return (
-      <div key={token}>
-        <span>
-          {tokens} {token}
-        </span>{' '}
-        (${usd})
+  return (
+    <>
+      <div className={classes.prizeSplitTotal}>
+        <Translate
+          i18nKey="pot.amountEach"
+          values={{ symbol: '$', amount: formatDecimals(totalPrizeEach, 2, 2) }}
+        />
       </div>
-    );
-  });
+      {prizesOverZero.map(([token, total]) => {
+        const tokens = formatDecimals(total.tokens.dividedBy(numberOfWinners), 2);
+        const usd = formatDecimals(total.usd.dividedBy(numberOfWinners), 2);
+
+        return (
+          <div key={token} className={classes.prizeSplitToken}>
+            <span>
+              {tokens} {token}
+            </span>{' '}
+            (${usd})
+          </div>
+        );
+      })}
+    </>
+  );
 };
