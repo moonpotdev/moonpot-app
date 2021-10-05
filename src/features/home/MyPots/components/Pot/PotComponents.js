@@ -2,18 +2,14 @@ import * as React from 'react';
 import { memo, useMemo } from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
-import {
-  investmentOdds,
-  calculateUSDProjectedPrize,
-  calculateZiggyUsdProjection,
-} from '../../../../../helpers/utils';
+import { investmentOdds } from '../../../../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import { byDecimals, formatDecimals } from '../../../../../helpers/format';
 import Countdown from '../../../../../components/Countdown';
 import { WinTotal } from '../../../../../components/Pot';
 import { InterestTooltip } from '../../../../../components/Tooltip/tooltip';
 import { Translate } from '../../../../../components/Translate';
-import { usePots, usePot, useTokenBalance } from '../../../../../helpers/hooks';
+import { useTokenBalance } from '../../../../../helpers/hooks';
 import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(styles);
@@ -22,7 +18,6 @@ export const PotTitle = function ({ item }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const pot = item;
-  const pots = usePots();
 
   return (
     <Grid item xs={8}>
@@ -33,11 +28,9 @@ export const PotTitle = function ({ item }) {
           </Typography>
           <div className={classes.potUsdTop}>
             <WinTotal
-              awardBalanceUsd={calculateUSDProjectedPrize({ pot })}
+              awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
               totalSponsorBalanceUsd={
-                item.id === 'pots'
-                  ? calculateZiggyUsdProjection({ pot, pots })
-                  : pot.totalSponsorBalanceUsd
+                pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
               }
             />
           </div>
@@ -63,11 +56,10 @@ export const PotTitle = function ({ item }) {
   );
 };
 
-const Interest = function ({ baseApy, bonusApy, bonusApr }) {
+const Interest = function ({ baseApy, bonusApy }) {
   const classes = useStyles();
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
-  const hasBonusApr = typeof bonusApr === 'number' && bonusApr > 0;
   const totalApy = (hasBaseApy ? baseApy : 0) + (hasBonusApy ? bonusApy : 0);
 
   return (
@@ -75,16 +67,6 @@ const Interest = function ({ baseApy, bonusApy, bonusApr }) {
       <div className={classes.interestValueApy}>
         <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
       </div>
-      {hasBaseApy && hasBonusApy ? (
-        <div className={classes.interestValueBaseApy}>
-          <Translate i18nKey="pot.statInterestApy" values={{ apy: baseApy.toFixed(2) }} />
-        </div>
-      ) : null}
-      {hasBonusApr ? (
-        <div className={classes.interestValueApr}>
-          <Translate i18nKey="pot.statInterestApr" values={{ apr: bonusApr.toFixed(2) }} />
-        </div>
-      ) : null}
     </div>
   );
 };
@@ -130,7 +112,7 @@ export const PotInfoBlock = function ({ item, active = true }) {
               </Typography>
             </Grid>
             <Grid item xs={6}>
-              <Interest baseApy={item.apy} bonusApy={item.bonusApy} bonusApr={item.bonusApr} />
+              <Interest baseApy={item.apy} bonusApy={item.bonusApy} />
             </Grid>
           </>
         ) : null}

@@ -1,13 +1,11 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Translate } from '../Translate/Translate';
+import { Translate } from '../Translate';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { Fade, Tooltip, Grid } from '@material-ui/core';
+import { Fade, Grid, Tooltip, Typography } from '@material-ui/core';
 import { HelpOutline } from '@material-ui/icons';
-import { Typography } from '@material-ui/core';
 import styles from './styles';
 import BigNumber from 'bignumber.js';
-import { fontWeight } from '@material-ui/system';
 
 const useStyles = makeStyles(styles);
 
@@ -79,7 +77,6 @@ export function InterestTooltip({ pot }) {
   const bonusApr = new BigNumber(pot.bonusApr);
 
   const bonuses = pot.bonuses;
-  console.log(bonuses);
 
   /*-----Create Bonus Token Text-----*/
   var bonusCount = 0;

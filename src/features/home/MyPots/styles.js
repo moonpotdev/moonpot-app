@@ -29,6 +29,9 @@ const styles = theme => ({
     paddingRight: '16px',
     margin: '0 auto',
   },
+  claimableBonuses: {
+    marginBottom: '24px',
+  },
 });
 
 export default styles;

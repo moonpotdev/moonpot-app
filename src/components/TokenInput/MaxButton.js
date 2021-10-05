@@ -4,10 +4,9 @@ import { BaseButton } from '../Buttons/BaseButton';
 
 export const MaxButton = withStyles({
   root: {
-    color: 'rgba(255, 255, 255, 0.95)',
     backgroundColor: styledBy('variant', {
       teal: '#6B96BD',
-      purple: '#B6ADCC',
+      purple: '#A094BD',
       purpleAlt: '#656FA5',
       green: '#2E657A',
       greenStable: '#508276',
@@ -15,21 +14,21 @@ export const MaxButton = withStyles({
     '&:hover': {
       color: 'rgba(255, 255, 255, 0.95)',
       backgroundColor: styledBy('variant', {
-        teal: '#628cad',
-        purple: '#B6ADCC',
-        purpleAlt: '#656FA5',
-        green: '#2E657A',
-        greenStable: '#508276',
+        teal: '#8EAFCD',
+        purple: '#BBB2D2',
+        purpleAlt: '#858DB7',
+        green: '#448097',
+        greenStable: '#64A092',
       }),
     },
     '&:focus': {
       color: 'rgba(255, 255, 255, 0.95)',
       backgroundColor: styledBy('variant', {
-        teal: '#628cad',
-        purple: '#B6ADCC',
-        purpleAlt: '#656FA5',
-        green: '#2E657A',
-        greenStable: '#508276',
+        teal: '#8EAFCD',
+        purple: '#BBB2D2',
+        purpleAlt: '#858DB7',
+        green: '#448097',
+        greenStable: '#64A092',
       }),
     },
     '& .MuiTouchRipple-child': {

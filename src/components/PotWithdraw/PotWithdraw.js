@@ -259,7 +259,6 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
             i18nKey="withdraw.withdrawFeeNotice"
             values={{ percent: formatDecimals(pot.withdrawFee * 100, 2) }}
           />
-          ) : null}
         </div>
       ) : null}
       <div className={classes.fairplayNotice}>

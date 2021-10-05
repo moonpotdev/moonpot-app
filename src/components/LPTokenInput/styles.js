@@ -34,7 +34,6 @@ const styles = theme => ({
   max: {
     marginRight: '8px',
     borderRadius: '4px',
-    background: '#6B96BD',
     outline: 'none',
     textTransform: 'uppercase',
     color: 'rgba(255, 255, 255, 0.95)',
@@ -97,22 +96,37 @@ const styles = theme => ({
   inputVariantTeal: {
     background: '#3F688D',
     border: '2px solid #6B96BD',
+    '& .MuiInputBase-input': {
+      color: '#AAC3D9',
+    },
   },
   inputVariantPurple: {
     background: '#8375A9',
     border: '2px solid #B6ADCC',
+    '& .MuiInputBase-input': {
+      color: '#D2CDE0',
+    },
   },
   inputVariantPurpleAlt: {
     background: '#4F5887',
     border: '2px solid #586397',
+    '& .MuiInputBase-input': {
+      color: '#ABB2D9',
+    },
   },
   inputVariantGreen: {
     background: '#275668',
     border: '2px solid #2E657A',
+    '& .MuiInputBase-input': {
+      color: '#DEE9ED',
+    },
   },
   inputVariantGreenStable: {
     background: '#467268',
     border: '2px solid #508276',
+    '& .MuiInputBase-input': {
+      color: '#DEE9ED',
+    },
   },
   tokenDropdownVariantTeal: {
     background: '#3C6259',

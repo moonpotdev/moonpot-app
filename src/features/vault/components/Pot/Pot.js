@@ -7,16 +7,11 @@ import styles from './styles';
 import { PotDeposit } from '../../../../components/PotDeposit';
 import { PotWithdraw } from '../../../../components/PotWithdraw';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import { useBonusesEarned, usePot, useTokenBalance, usePots } from '../../../../helpers/hooks';
+import { useBonusesEarned, usePot, useTokenBalance } from '../../../../helpers/hooks';
 import { Translate } from '../../../../components/Translate';
 import PotBonus from '../../../home/MyPots/components/Pot/PotBonus';
 import { useSelector } from 'react-redux';
 import { LPPotWithdraw } from '../../../../components/PotWithdraw/LPPotWithdraw';
-import {
-  calculateTokenProjectedPrize,
-  calculateUSDProjectedPrize,
-  calculateZiggyTokenProjections,
-} from '../../../../helpers/utils';
 import { TooltipWithIcon } from '../../../../components/Tooltip/tooltip';
 
 const useStyles = makeStyles(styles);
@@ -120,10 +115,6 @@ function handleVariant(vaultType) {
 
 const Bottom = function ({ id, onFairplayLearnMore, variant }) {
   const pot = usePot(id);
-  const pots = usePots();
-
-  const projectedTokenPrize = calculateTokenProjectedPrize({ pot });
-  const projectedUSDPrize = calculateUSDProjectedPrize({ pot });
 
   return (
     <CardAccordionGroup>
@@ -134,11 +125,9 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
         <PrizeSplitInner
           count={pot.numberOfWinners}
           baseToken={pot.token}
-          awardBalance={projectedTokenPrize}
-          awardBalanceUsd={projectedUSDPrize}
-          sponsors={
-            pot.id === 'pots' ? calculateZiggyTokenProjections({ pot, pots }) : pot.sponsors
-          }
+          awardBalance={pot.projectedAwardBalance || pot.awardBalance}
+          awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
+          sponsors={pot.projectedSponsors || pot.sponsors}
         />
       </CardAccordionItem>
       <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>

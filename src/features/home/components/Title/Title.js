@@ -1,12 +1,12 @@
 import React, { memo, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Translate } from '../../../../components/Translate';
-import { usePots } from '../../../../helpers/hooks';
-import { calculateTotalUsdPrize } from '../../../../helpers/utils';
 
 export const Title = memo(function ({ className }) {
-  const pots = usePots();
-  const totalPrizesAvailable = calculateTotalUsdPrize({ pots });
+  const totalPrizesAvailable = useSelector(
+    state =>
+      state.vaultReducer.projectedTotalPrizesAvailable || state.vaultReducer.totalPrizesAvailable
+  );
   const totalPrizesAvailableFormatted = useMemo(() => {
     return totalPrizesAvailable.toNumber().toLocaleString(undefined, {
       maximumFractionDigits: 0,
