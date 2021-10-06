@@ -58,6 +58,13 @@ const styles = theme => ({
       color: '#ABB2D9',
     },
   },
+  variantGreySide: {
+    background: '#3D4A5C',
+    border: '2px solid #51637B',
+    '& .MuiInputBase-input': {
+      color: '#D4DAE0',
+    },
+  },
 });
 
 export default styles;

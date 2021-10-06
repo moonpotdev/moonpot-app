@@ -69,7 +69,7 @@ const WinTokens = memo(function ({ depositToken, sponsors }) {
   );
 });
 
-const Interest = memo(function ({ baseApy, bonusApy }) {
+const Interest = memo(function ({ baseApy, bonusApy, noInterest }) {
   const classes = useStyles();
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
@@ -77,9 +77,15 @@ const Interest = memo(function ({ baseApy, bonusApy }) {
 
   return (
     <>
-      <div className={classes.interestValueApy}>
-        <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
-      </div>
+      {noInterest ? (
+        <div className={classes.interestValueApy}>
+          <Translate i18nKey="pot.prizeOnly" />
+        </div>
+      ) : (
+        <div className={classes.interestValueApy}>
+          <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
+        </div>
+      )}
     </>
   );
 });
@@ -201,7 +207,11 @@ export function Pot({ id, variant, bottom }) {
         </Grid>
         <Grid item xs={7}>
           <DrawStat i18nKey="pot.statInterest" tooltip={<InterestTooltip pot={pot} />}>
-            <Interest baseApy={pot.apy} bonusApy={pot.bonusApy} />
+            <Interest
+              baseApy={pot.apy}
+              bonusApy={pot.bonusApy}
+              noInterest={pot.vaultType === 'side' ? true : false}
+            />
           </DrawStat>
         </Grid>
       </Grid>

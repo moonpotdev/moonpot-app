@@ -10,6 +10,7 @@ export const MaxButton = withStyles({
       purpleAlt: '#656FA5',
       green: '#2E657A',
       greenStable: '#508276',
+      greySide: '#51637B',
     }),
     '&:hover': {
       color: 'rgba(255, 255, 255, 0.95)',
@@ -19,6 +20,7 @@ export const MaxButton = withStyles({
         purpleAlt: '#858DB7',
         green: '#448097',
         greenStable: '#64A092',
+        greySide: '#6C7D93',
       }),
     },
     '&:focus': {
@@ -29,6 +31,7 @@ export const MaxButton = withStyles({
         purpleAlt: '#858DB7',
         green: '#448097',
         greenStable: '#64A092',
+        greySide: '#6C7D93',
       }),
     },
     '& .MuiTouchRipple-child': {

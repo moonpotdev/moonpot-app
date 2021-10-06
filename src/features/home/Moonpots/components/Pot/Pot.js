@@ -70,6 +70,8 @@ function handleVariant(vaultType) {
     return 'green';
   } else if (vaultType === 'stable') {
     return 'greenStable';
+  } else if (vaultType === 'side') {
+    return 'greySide';
   }
 
   // default/main

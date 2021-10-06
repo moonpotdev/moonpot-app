@@ -59,6 +59,16 @@ const EolNotice = function ({ id }) {
   );
 };
 
+function handleButtonVariant(vaultType) {
+  if (vaultType === 'main') {
+    return 'teal';
+  } else if (vaultType === 'community') {
+    return 'blueCommunity';
+  } else if (vaultType === 'side') {
+    return 'greySide';
+  }
+}
+
 const BonusAccordionItem = memo(function ({ pot }) {
   const bonuses = useBonusesEarned(pot.id);
   const hasEarned = useMemo(() => bonuses.find(bonus => bonus.earned > 0) !== undefined, [bonuses]);
@@ -68,10 +78,7 @@ const BonusAccordionItem = memo(function ({ pot }) {
       titleKey={pot.id === 'pots' ? 'pot.earnings' : 'pot.bonusEarnings'}
       startOpen={true}
     >
-      <PotBonus
-        item={pot}
-        buttonVariant={pot.vaultType === 'community' ? 'blueCommunity' : 'teal'}
-      />
+      <PotBonus item={pot} buttonVariant={handleButtonVariant(pot.vaultType)} />
     </CardAccordionItem>
   ) : null;
 });
@@ -107,6 +114,8 @@ function handleVariant(vaultType) {
     return 'green';
   } else if (vaultType === 'stable') {
     return 'greenStable';
+  } else if (vaultType === 'side') {
+    return 'greySide';
   }
 
   // default/main

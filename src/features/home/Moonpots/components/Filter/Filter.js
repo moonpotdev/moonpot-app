@@ -43,6 +43,12 @@ const Filter = ({ className, selected }) => {
       >
         {t('buttons.communityPots')}
       </RoutedButton>
+      <RoutedButton
+        className={clsx(classes.button, { [classes.buttonActive]: selected === 'side' })}
+        to={{ pathname: '/side', state: { tabbed: true } }}
+      >
+        {t('buttons.sidePots')}
+      </RoutedButton>
     </Grid>
   );
 };
