@@ -93,6 +93,9 @@ function decorateDraw(draw, network) {
     }
   }
 
+  // TEMP FIX: remove 0 staked
+  obj.winners = obj.winners.filter(winner => winner.staked !== '0');
+
   return obj;
 }
 
