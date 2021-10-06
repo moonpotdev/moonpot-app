@@ -43,8 +43,10 @@
   "vaultTitle": "Depositkan <span>{{token}}</span>, Hasilkan <span>{{apy}}% APY</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
   "playWithMoonpot": "Bermain dengan Moonpot",
   "youHaventEnteredMoonpots": "Anda belum masuk ke Moonpots manapun.",
+  "youHaventEnteredRetiredMoonpots": "Anda belum masuk ke Moonpots yang tidak aktif.",
   "connectToJoin": "Hubungkan dompet Anda untuk bergabung dengan Moonpot.",
   "poweredBy": "Didukung oleh",
+  "auditedBy": "Diaudit oleh",
   "upgradeWhy": "Kami meningkatkan Pot {{token}} agar lebih aman dan adil, serta memungkinkan kami untuk mengotomatiskan lebih banyak proses kami.",
   "upgradeNextSteps": "Karena ada peningkatan, Anda perlu memindahkan {{token}} anda ke Pot {{token}} yang baru.  Kami telah menambahkan {{boostToken}} Superboost ke Pot {{token}} baru untuk membantu anda agar lebih bermanfaat.",
   "upgradeMove": "Pindahkan {{base}}",
@@ -224,5 +226,13 @@
   },
   "tokens": {
     "4Belt USD LP": "USD Stablecoins"
+  },
+  "claimableBonuses": {
+    "explainer": [
+      "Anda sekarang dapat mengklaim bonus POTS yang anda peroleh di semua Moonpot aktif anda dengan satu klik.",
+      "Anda kemudian dapat menyetor semua bonus POTS yang anda peroleh dari dompet anda ke dalam Ziggy's Pot dalam satu transaksi."
+    ],
+    "claimAll": "Klaim semua bonus POTS yang diperoleh"
   }
 }
+
