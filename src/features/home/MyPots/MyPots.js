@@ -77,7 +77,7 @@ const MyPots = ({ selected }) => {
           <Grid item>
             <RoutedButton
               className={clsx(classes.button, { [classes.buttonActive]: selected === 'active' })}
-              to="/my-moonpots"
+              to={{ pathname: '/my-moonpots', state: { tabbed: true } }}
             >
               {t('buttons.myActivePots')}
             </RoutedButton>
@@ -85,7 +85,7 @@ const MyPots = ({ selected }) => {
           <Grid item>
             <RoutedButton
               className={clsx(classes.button, { [classes.buttonActive]: selected === 'eol' })}
-              to="/my-moonpots/eol"
+              to={{ pathname: '/my-moonpots/eol', state: { tabbed: true } }}
             >
               {t('buttons.myPastPots')}
             </RoutedButton>

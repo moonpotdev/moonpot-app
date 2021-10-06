@@ -16,7 +16,7 @@ const SectionSelect = ({ selected, className }) => {
       <Grid item xs={6}>
         <RoutedButton
           className={clsx(classes.button, { [classes.buttonSelected]: selected === 'moonpots' })}
-          to="/"
+          to={{ pathname: '/', state: { tabbed: true } }}
         >
           {t('buttons.moonpots')}
         </RoutedButton>
@@ -24,7 +24,7 @@ const SectionSelect = ({ selected, className }) => {
       <Grid item xs={6}>
         <RoutedButton
           className={clsx(classes.button, { [classes.buttonSelected]: selected === 'my-moonpots' })}
-          to="/my-moonpots"
+          to={{ pathname: '/my-moonpots', state: { tabbed: true } }}
         >
           {t('buttons.myPots')}
         </RoutedButton>

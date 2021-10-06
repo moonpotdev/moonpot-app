@@ -15,31 +15,31 @@ const Filter = ({ className, selected }) => {
     <Grid container className={clsx(classes.buttonContainer, className)}>
       <RoutedButton
         className={clsx(classes.button, { [classes.buttonActive]: selected === 'all' })}
-        to="/"
+        to={{ pathname: '/', state: { tabbed: true } }}
       >
         {t('buttons.allPots')}
       </RoutedButton>
       <RoutedButton
         className={clsx(classes.button, { [classes.buttonActive]: selected === 'main' })}
-        to="/main"
+        to={{ pathname: '/main', state: { tabbed: true } }}
       >
         {t('buttons.mainPots')}
       </RoutedButton>
       <RoutedButton
         className={clsx(classes.button, { [classes.buttonActive]: selected === 'lp' })}
-        to="/lp"
+        to={{ pathname: '/lp', state: { tabbed: true } }}
       >
         {t('buttons.lpPots')}
       </RoutedButton>
       <RoutedButton
         className={clsx(classes.button, { [classes.buttonActive]: selected === 'stable' })}
-        to="/stable"
+        to={{ pathname: '/stable', state: { tabbed: true } }}
       >
         {t('buttons.stablePots')}
       </RoutedButton>
       <RoutedButton
         className={clsx(classes.button, { [classes.buttonActive]: selected === 'community' })}
-        to="/community"
+        to={{ pathname: '/community', state: { tabbed: true } }}
       >
         {t('buttons.communityPots')}
       </RoutedButton>

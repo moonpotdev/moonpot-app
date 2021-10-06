@@ -53,11 +53,13 @@ function Pages() {
 }
 
 const ScrollToTop = memo(function () {
-  const { pathname } = useLocation();
+  const { pathname, state } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (!state || !state.tabbed) {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, state]);
 
   return null;
 });
