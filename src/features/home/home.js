@@ -7,6 +7,7 @@ import Moonpots from './Moonpots/Moonpots';
 import MyPots from './MyPots/MyPots';
 import { Title } from './components/Title';
 import { useParams } from 'react-router';
+import { PoweredByBeefy } from '../../components/PoweredByBeefy';
 
 const useStyles = makeStyles(styles);
 
@@ -30,6 +31,7 @@ const Home = () => {
   return (
     <Container maxWidth={false} style={{ padding: '0', overflow: 'hidden' }}>
       <Title className={classes.mainTitle} />
+      <PoweredByBeefy />
       <div className={classes.tvlSpacer}>
         <TVL className={classes.totalTVL} />
       </div>
