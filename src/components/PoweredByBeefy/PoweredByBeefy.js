@@ -13,20 +13,18 @@ export function PoweredByBeefy({ className }) {
 
   return (
     <Box className={clsx(classes.poweredBy, className)}>
-      <div className={classes.poweredByItem}>
-        <Translate i18nKey="poweredBy" />
-      </div>
-      <div className={classes.poweredByItem}>
+      <div>
+        <Translate i18nKey="poweredBy" />{' '}
         <Link
           href={'https://www.beefy.finance/'}
           target="_blank"
           rel="noreferrer"
           className={classes.beefyLink}
         >
-          Beefy.Finance
+          Beefy
         </Link>
       </div>
-      <div className={classes.poweredByItem}>
+      <div className={classes.beefyLogoItem}>
         <img
           alt=""
           aria-hidden={true}
@@ -36,10 +34,8 @@ export function PoweredByBeefy({ className }) {
           className={classes.beefyLogo}
         />
       </div>
-      <div className={classes.poweredByItem}>
-        <Translate i18nKey="auditedBy" />
-      </div>
-      <div className={classes.poweredByItem}>
+      <div>
+        <Translate i18nKey="auditedBy" />{' '}
         <Link
           href={'https://www.certik.org/projects/moonpot'}
           target="_blank"

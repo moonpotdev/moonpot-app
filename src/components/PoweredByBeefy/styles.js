@@ -10,16 +10,15 @@ const styles = theme => ({
     justifyContent: 'center',
     textAlign: 'center',
   },
-  poweredByItem: {
-    paddingLeft: '0.12em',
-    paddingRight: '0.12em',
-  },
   beefyLink: {
     color: '#B4B2CC',
     textDecoration: 'underline',
     '&:hover, &focus': {
       color: '#B4B2CC',
     },
+  },
+  beefyLogoItem: {
+    padding: '0 8px',
   },
   beefyLogo: {
     verticalAlign: 'middle',
