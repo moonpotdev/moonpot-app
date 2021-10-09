@@ -80,7 +80,7 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
           {pot.interestBreakdown.buyback ? (
             <div className={classes.earningItem}>
               <div className={classes.earningLabel}>
-                {t('pot.infocards.earnings.buyback', { token: pot.token })}
+                {t('pot.infocards.earnings.buyback', { token: pot.name })}
               </div>
               <div className={classes.earningValue}>{pot.interestBreakdown.buyback}%</div>
             </div>

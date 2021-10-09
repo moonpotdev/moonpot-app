@@ -11,6 +11,7 @@ import { useFilterConfig, useFilteredPots } from './hooks/filter';
 import { Pot } from './components/Pot';
 import { Cards } from '../../../components/Cards';
 import { Translate } from '../../../components/Translate';
+import SidePotExplainer from '../../../components/SidePotExplainer/SidePotExplainer';
 
 const useStyles = makeStyles(styles);
 
@@ -56,6 +57,7 @@ const Moonpots = ({ selected }) => {
       <div className={classes.potsContainer}>
         <div className={classes.spacer}>
           <MigrationNotices potType={selected} className={classes.potsMigrationNotice} />
+          {selected === 'side' ? <SidePotExplainer /> : null}
           <Cards>
             {filtered.map(pot => (
               <Pot key={pot.id} variant={handleVariant(pot.vaultType)} id={pot.id} />

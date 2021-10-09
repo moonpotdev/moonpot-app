@@ -84,7 +84,12 @@ export const TokenInput = function ({
       onBlur={handleBlur}
       disabled={max.lte(0)}
       endAdornment={
-        <MaxButton variant={variant} onClick={handleMax} className={classes.max} disabled={false}>
+        <MaxButton
+          variant={variant}
+          onClick={handleMax}
+          className={classes.max}
+          disabled={max.lte(0)}
+        >
           {t('tokenInput.max')}
         </MaxButton>
       }

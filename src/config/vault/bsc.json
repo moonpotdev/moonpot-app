@@ -74,7 +74,7 @@
     "compoundIsBonus": false
   },
   {
-    "id": "sideCake",
+    "id": "side-cake",
     "name": "CAKE Side",
     "token": "CAKE",
     "tokenAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
@@ -85,7 +85,7 @@
     "prizePoolAddress": "0x5796152BAA9A5B723FbA206eDCc2E88CA66b4303",
     "prizeStrategyAddress": "0x14072Fb691F0087E005B2bd44E89478ea3249c7d",
     "pricePerShare": 1,
-    "oracleId": "CAKE",
+    "oracleId": "Cake",
     "apyId": "cake-cakev2",
     "vaultType": "side",
     "duration": 1,

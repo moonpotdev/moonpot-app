@@ -1,5 +1,3 @@
-import { fontWeight } from '@material-ui/system';
-
 // A lot of styles in here are used by other components; careful what you remove
 const styles = theme => ({
   mainTitle: {
@@ -413,22 +411,6 @@ const styles = theme => ({
   },
   docsLink: {
     textDecoration: 'none',
-  },
-  sidePotExplainer: {
-    fontSize: '15px',
-    '& span': {
-      color: '#F3BA2E',
-      textDecoration: 'underline',
-    },
-  },
-  learnMore: {
-    color: '#F3BA2E',
-    textDecoration: 'none',
-    marginTop: '16px',
-    '& .MuiSvgIcon-root': {
-      verticalAlign: 'middle',
-      marginLeft: '5px',
-    },
   },
 });
 

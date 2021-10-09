@@ -8,11 +8,10 @@ import { formatDecimals } from '../../helpers/format';
 import { usePot, useTotalPrize } from '../../helpers/hooks';
 import { Pot } from './components/Pot/Pot';
 import { InfoCards } from './components/InfoCards';
-import { Card } from '../../components/Cards/Cards';
-import { OpenInNew } from '@material-ui/icons';
 import { PoweredByBeefy } from '../../components/PoweredByBeefy';
 import clsx from 'clsx';
 import { Translate } from '../../components/Translate';
+import SidePotExplainer from '../../components/SidePotExplainer/SidePotExplainer';
 
 const useStyles = makeStyles(styles);
 
@@ -55,22 +54,6 @@ const VaultTitle = memo(function ({
     </Typography>
   );
 });
-
-const SidePotExplainer = () => {
-  const classes = useStyles();
-
-  return (
-    <Card variant="purpleDark" style={{ marginBottom: '24px' }}>
-      <Typography className={classes.sidePotExplainer}>
-        <Translate i18nKey="sidePotExplainer" />
-      </Typography>
-      <Typography className={classes.learnMore}>
-        <Translate i18nKey="learnMore" />
-        <OpenInNew fontSize="inherit" />
-      </Typography>
-    </Card>
-  );
-};
 
 function isInvalidPot(pot) {
   return !pot || pot.status !== 'active';

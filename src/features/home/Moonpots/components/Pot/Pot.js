@@ -81,7 +81,6 @@ function handleVariant(vaultType) {
 const Bottom = function ({ id }) {
   const classes = useStyles();
   const pot = usePot(id);
-  console.log(pot);
 
   return (
     <>

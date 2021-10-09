@@ -34,7 +34,9 @@
     "potsPrice": "POTS Price",
     "buyPots": "Buy POTS"
   },
-  "sidePotExplainer": "Side Pots give you the chance to win daily prizes without earning interest. If you want to earn interest and join bigger weekly and monthly draws, Ziggy recommends you join a <span>Main Pot</span> instead. ",
+  "sidePotExplainerA": "Side Pots give you the chance to win daily prizes without earning interest. If you want to earn interest and join bigger weekly and monthly draws, Ziggy recommends you join a",
+  "sidePotExplainerB": "instead.",
+  "mainPot": "Main Pot",
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><wbr /> and a chance to win <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposits (TVL)",
   "homeJoinCommunityTitle": "Join the Community",

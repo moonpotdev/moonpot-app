@@ -25,7 +25,7 @@ function slug(str) {
 
 export const Logo = memo(function ({ name, baseToken, sponsorToken, type }) {
   var src;
-  if (type != 'side') {
+  if (type !== 'side') {
     src = require('../../images/vault/' +
       slug(baseToken) +
       '/sponsored/' +
@@ -220,7 +220,10 @@ export function Pot({ id, variant, bottom }) {
           </DrawStat>
         </Grid>
         <Grid item xs={7}>
-          <DrawStat i18nKey="pot.statInterest" tooltip={<InterestTooltip pot={pot} />}>
+          <DrawStat
+            i18nKey="pot.statInterest"
+            tooltip={pot.vaultType !== 'side' ? <InterestTooltip pot={pot} /> : null}
+          >
             <Interest
               baseApy={pot.apy}
               bonusApy={pot.bonusApy}

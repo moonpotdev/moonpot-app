@@ -69,7 +69,6 @@ export function TooltipWithIcon({ i18nKey, i18nValues = {} }) {
 }
 
 export function InterestTooltip({ pot }) {
-  const { t } = useTranslation();
   const classes = useStyles();
 
   const baseApy = pot.apy;
@@ -100,7 +99,7 @@ export function InterestTooltip({ pot }) {
     const text = (
       <>
         <div style={{ width: '300px' }}>
-          {pot.token != 'POTS' ? (
+          {pot.token !== 'POTS' ? (
             <>
               {/*----------------STANDARD POTS----------------*/}
               {/*Base APY*/}
@@ -119,7 +118,7 @@ export function InterestTooltip({ pot }) {
               {/*Bonus APR*/}
               {pot.bonuses.map(bonus => (
                 <div key={bonus.id}>
-                  {bonus.apr != 0 ? (
+                  {bonus.apr !== 0 ? (
                     <Grid container style={{ width: '100%' }} key={bonus.id}>
                       <Grid item xs={6}>
                         <Typography align={'left'}>
@@ -200,9 +199,9 @@ export function InterestTooltip({ pot }) {
             ></div>
           </Grid>
           {/*Description*/}
-          {pot.token != 'POTS' ? (
+          {pot.token !== 'POTS' ? (
             <Typography style={{ marginRight: '32px', marginTop: '8px' }}>
-              {bonusTokens == '' ? (
+              {bonusTokens === '' ? (
                 <Translate
                   i18nKey="pot.tooltip.standardNoBoost"
                   values={{ token: pot.token, bonus: bonusTokens }}
