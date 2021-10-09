@@ -361,7 +361,12 @@ const getPools = async (items, state, dispatch) => {
         pool.underlyingApy = new BigNumber(apy[pool.apyId].totalApy).times(100).toNumber();
       } else {
         pool.apy = 0;
-        pool.underlyingApy = 0;
+        if (item.id === 'sideCake') {
+          pool.underlyingApy = new BigNumber(apy[pool.apyId].totalApy).times(100).toNumber();
+        } else {
+          pool.underlyingApy = 0;
+        }
+        //console.log(item)
       }
 
       const totalValueLocked = new BigNumber(item.totalValueLocked);

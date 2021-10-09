@@ -79,11 +79,11 @@
     "token": "CAKE",
     "tokenAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
     "tokenDecimals": 18,
-    "rewardToken": "moonTicketXBLZD",
-    "rewardAddress": "0xf6A91F8d3EC0b1922433c4E929Ea61C85633E918",
-    "contractAddress": "0x55A50FE2372c0B8A4491d4CeC517258D69940547",
-    "prizePoolAddress": "0x861d4d8310006E6Ef115dF4A5D64A83e361aa29E",
-    "prizeStrategyAddress": "0x3442aB28A4de27f00eE6Aa960e0b9Ce9a9DBa976",
+    "rewardToken": "moonTicketSideCake",
+    "rewardAddress": "0xADeEDCAaEaECbc8a86C80033cb142085ce0085C5",
+    "contractAddress": "0x40a522699ddC745278F85A9E78E4baD05702564e",
+    "prizePoolAddress": "0x5796152BAA9A5B723FbA206eDCc2E88CA66b4303",
+    "prizeStrategyAddress": "0x14072Fb691F0087E005B2bd44E89478ea3249c7d",
     "pricePerShare": 1,
     "oracleId": "CAKE",
     "apyId": "cake-cakev2",
@@ -98,24 +98,11 @@
     "status": "active",
     "withdrawFee": 0,
     "infoCardStrategy": "side",
-    "infoCardBeefyVaultAddress": "0x47a27220Db5458DB4b238fefCBb8178232cBFa5D",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "CAKE",
-        "display": "bonus"
-      }
-    ],
+    "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
+    "sponsorProjectName": "",
+    "sponsorToken": "NONE",
+    "sponsors": [],
+    "bonuses": [],
     "compoundIsBonus": true
   },
   {

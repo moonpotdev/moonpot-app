@@ -23,12 +23,21 @@ function slug(str) {
     .replace(/-{2,}/g, '-');
 }
 
-export const Logo = memo(function ({ name, baseToken, sponsorToken }) {
-  const src = require('../../images/vault/' +
-    slug(baseToken) +
-    '/sponsored/' +
-    slug(sponsorToken) +
-    '.svg').default;
+export const Logo = memo(function ({ name, baseToken, sponsorToken, type }) {
+  var src;
+  if (type != 'side') {
+    src = require('../../images/vault/' +
+      slug(baseToken) +
+      '/sponsored/' +
+      slug(sponsorToken) +
+      '.svg').default;
+  } else {
+    src = require('../../images/vault/' +
+      slug(baseToken) +
+      '/side/' +
+      slug(sponsorToken) +
+      '.svg').default;
+  }
   return <img src={src} alt="" width="90" height="90" aria-hidden={true} />;
 });
 
@@ -167,7 +176,12 @@ export function Pot({ id, variant, bottom }) {
     <Card variant={variant}>
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>
         <Grid item xs={4}>
-          <Logo name={pot.name} baseToken={pot.token} sponsorToken={pot.sponsorToken} />
+          <Logo
+            name={pot.name}
+            baseToken={pot.token}
+            sponsorToken={pot.sponsorToken}
+            type={pot.vaultType}
+          />
         </Grid>
         <Grid item xs={8}>
           <Title name={pot.name} />
