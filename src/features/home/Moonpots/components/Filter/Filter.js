@@ -7,48 +7,54 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
+const PotTypes = [
+  {
+    key: 'all',
+    path: '/',
+    label: 'buttons.allPots',
+  },
+  {
+    key: 'main',
+    path: '/main',
+    label: 'buttons.mainPots',
+  },
+  {
+    key: 'side',
+    path: '/side',
+    label: 'buttons.sidePots',
+  },
+  {
+    key: 'lp',
+    path: '/lp',
+    label: 'buttons.lpPots',
+  },
+  {
+    key: 'stable',
+    path: '/stable',
+    label: 'buttons.stablePots',
+  },
+  {
+    key: 'community',
+    path: '/community',
+    label: 'buttons.communityPots',
+  },
+];
+
 const Filter = ({ className, selected }) => {
   const { t } = useTranslation();
   const classes = useStyles();
 
   return (
     <Grid container className={clsx(classes.buttonContainer, className)}>
-      <RoutedButton
-        className={clsx(classes.button, { [classes.buttonActive]: selected === 'all' })}
-        to={{ pathname: '/', state: { tabbed: true } }}
-      >
-        {t('buttons.allPots')}
-      </RoutedButton>
-      <RoutedButton
-        className={clsx(classes.button, { [classes.buttonActive]: selected === 'main' })}
-        to={{ pathname: '/main', state: { tabbed: true } }}
-      >
-        {t('buttons.mainPots')}
-      </RoutedButton>
-      <RoutedButton
-        className={clsx(classes.button, { [classes.buttonActive]: selected === 'lp' })}
-        to={{ pathname: '/lp', state: { tabbed: true } }}
-      >
-        {t('buttons.lpPots')}
-      </RoutedButton>
-      <RoutedButton
-        className={clsx(classes.button, { [classes.buttonActive]: selected === 'stable' })}
-        to={{ pathname: '/stable', state: { tabbed: true } }}
-      >
-        {t('buttons.stablePots')}
-      </RoutedButton>
-      <RoutedButton
-        className={clsx(classes.button, { [classes.buttonActive]: selected === 'community' })}
-        to={{ pathname: '/community', state: { tabbed: true } }}
-      >
-        {t('buttons.communityPots')}
-      </RoutedButton>
-      <RoutedButton
-        className={clsx(classes.button, { [classes.buttonActive]: selected === 'side' })}
-        to={{ pathname: '/side', state: { tabbed: true } }}
-      >
-        {t('buttons.sidePots')}
-      </RoutedButton>
+      {PotTypes.map(type => (
+        <RoutedButton
+          key={type.key}
+          className={clsx(classes.button, { [classes.buttonActive]: selected === type.key })}
+          to={{ pathname: type.path, state: { tabbed: true } }}
+        >
+          {t(type.label)}
+        </RoutedButton>
+      ))}
     </Grid>
   );
 };
