@@ -11,7 +11,7 @@ const SidePotExplainer = () => {
   const classes = useStyles();
 
   return (
-    <Card variant="purpleDark" style={{ marginBottom: '24px' }}>
+    <Card variant="purpleInfo" style={{ marginBottom: '24px' }}>
       <Typography className={classes.sidePotExplainer}>
         <Trans i18nKey="sidePotExplainerA" />
         &nbsp;
