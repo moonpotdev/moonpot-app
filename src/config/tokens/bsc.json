@@ -216,5 +216,39 @@
     "oracleId": "xBLZD",
     "decimals": 18,
     "ticketFor": "xBLZD"
+  },
+  {
+    "symbol": "CAKE-BNB LP",
+    "address": "0x0eD7e52944161450477ee417DE9Cd3a859b14fD0",
+    "type": "lp",
+    "oracleId": "cakev2-cake-bnb",
+    "decimals": 18,
+    "zap": "0x18eBd035834941342E399c53f82988Fa6EDbeA05",
+    "lp": ["CAKE", "WBNB"]
+  },
+  {
+    "symbol": "moonTicketCakeV2CAKE-BNB",
+    "address": "0xea98B05Ce70254141803DCcf7772dEB347c0c692",
+    "type": "ticket",
+    "oracleId": "cakev2-cake-bnb",
+    "decimals": 18,
+    "ticketFor": "CAKE-BNB LP"
+  },
+  {
+    "symbol": "BIFI-BNB LP",
+    "address": "0xDDd3f9d5Bd347c55D18752c0C2075698EC657750",
+    "type": "lp",
+    "oracleId": "banana-bifi-bnb",
+    "decimals": 18,
+    "zap": "0x8d86b089696893bbc80ba598B54f8874F0dC4310",
+    "lp": ["WBNB", "BIFI"]
+  },
+  {
+    "symbol": "moonTicketApeBIFI-BNB",
+    "address": "0xCf3Eae892282657b85327230462749037cfA9D00",
+    "type": "ticket",
+    "oracleId": "banana-bifi-bnb",
+    "decimals": 18,
+    "ticketFor": "BIFI-BNB LP"
   }
 ]
