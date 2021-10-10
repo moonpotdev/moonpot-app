@@ -19,12 +19,7 @@ const Pot = function ({ item }) {
       <Grid container spacing={0}>
         {/*Pot Image*/}
         <Grid item xs={4} align={'left'} style={{ marginBottom: '24px' }}>
-          <Logo
-            name={item.name}
-            baseToken={item.token}
-            sponsorToken={item.sponsorToken}
-            type={item.vaultType}
-          />
+          <Logo baseToken={item.token} sponsorToken={item.sponsorToken} type={item.vaultType} />
         </Grid>
         {/*Pot Title*/}
         <PotTitle item={item} />

@@ -13,6 +13,7 @@ import { Translate } from '../Translate';
 import { investmentOdds } from '../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import styles from './styles';
+import { getPotIconSrc } from '../../helpers/getPotIconSrc';
 
 const useStyles = makeStyles(styles);
 
@@ -23,22 +24,28 @@ function slug(str) {
     .replace(/-{2,}/g, '-');
 }
 
-export const Logo = memo(function ({ name, baseToken, sponsorToken, type }) {
-  var src;
-  if (type !== 'side') {
-    src = require('../../images/vault/' +
-      slug(baseToken) +
-      '/sponsored/' +
-      slug(sponsorToken) +
-      '.svg').default;
-  } else {
-    src = require('../../images/vault/' +
-      slug(baseToken) +
-      '/side/' +
-      slug(sponsorToken) +
-      '.svg').default;
+export const Logo = memo(function ({ baseToken, sponsorToken, type }) {
+  const baseSlug = slug(baseToken);
+  const sponsorSlug = sponsorToken ? slug(sponsorToken) : 'unsponsored';
+  const typeSlug = type ? slug('type') : 'all';
+
+  const possibilities = [
+    `${baseSlug}/${typeSlug}/${sponsorSlug}`,
+    `${baseSlug}/${typeSlug}/unsponsored`,
+    `${baseSlug}/all/${sponsorSlug}`,
+    `${baseSlug}/all/unsponsored`,
+  ];
+
+  for (const key of possibilities) {
+    const src = getPotIconSrc(key, false);
+    if (src) {
+      return <img src={src} alt="" width="90" height="90" aria-hidden={true} />;
+    }
   }
-  return <img src={src} alt="" width="90" height="90" aria-hidden={true} />;
+
+  throw new Error(
+    `No pot icon available for ${baseSlug}/${typeSlug}/${sponsorSlug} or any fallbacks.`
+  );
 });
 
 const Title = memo(function ({ name }) {
@@ -176,12 +183,7 @@ export function Pot({ id, variant, bottom }) {
     <Card variant={variant}>
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>
         <Grid item xs={4}>
-          <Logo
-            name={pot.name}
-            baseToken={pot.token}
-            sponsorToken={pot.sponsorToken}
-            type={pot.vaultType}
-          />
+          <Logo baseToken={pot.token} sponsorToken={pot.sponsorToken} type={pot.vaultType} />
         </Grid>
         <Grid item xs={8}>
           <Title name={pot.name} />
