@@ -74,6 +74,112 @@
     "compoundIsBonus": false
   },
   {
+    "id": "cake-bnb",
+    "name": "CAKE-BNB LP",
+    "token": "CAKE-BNB LP",
+    "provider": "PancakeSwap",
+    "tokenAddress": "0x0eD7e52944161450477ee417DE9Cd3a859b14fD0",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketCakeV2CAKE-BNB",
+    "rewardAddress": "0xea98B05Ce70254141803DCcf7772dEB347c0c692",
+    "contractAddress": "0x51Ab463D9275d0688593aa3fbDdad6FF5eC4deA6",
+    "prizePoolAddress": "0x23EeBA30ceF310A8B9a53FE08e1BAc8E0769d2F2",
+    "prizeStrategyAddress": "0x446FA1E0e5394A919217F0d8a6b982b581B17663",
+    "pricePerShare": 1,
+    "oracleId": "cakev2-cake-bnb",
+    "apyId": "cakev2-cake-bnb",
+    "vaultType": "lp",
+    "duration": 14,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xb26642B6690E4c4c9A6dAd6115ac149c700C7dfE",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "supportsClaimAllBonuses": true,
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "CAKE-BNB LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ],
+    "compoundIsBonus": true
+  },
+  {
+    "id": "bifi-bnb",
+    "name": "BIFI-BNB LP",
+    "token": "BIFI-BNB LP",
+    "provider": "ApeSwap",
+    "tokenAddress": "0xDDd3f9d5Bd347c55D18752c0C2075698EC657750",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketApeBIFI-BNB",
+    "rewardAddress": "0xCf3Eae892282657b85327230462749037cfA9D00",
+    "contractAddress": "0x1CC0ba529104a6450444627A9802B3376C7173F7",
+    "prizePoolAddress": "0xD1df83dB6Cd8432e6C796dB3d13311aCf552c76F",
+    "prizeStrategyAddress": "0xDF62Ee78908261bB9e401b23F571C1C68b3A227f",
+    "pricePerShare": 1,
+    "oracleId": "banana-bifi-bnb",
+    "apyId": "banana-bifi-bnb",
+    "vaultType": "lp",
+    "duration": 14,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x1417633bF9Fed6753e7504DF036c30F205D30e7E",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "supportsClaimAllBonuses": true,
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "BIFI-BNB LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ],
+    "compoundIsBonus": true
+  },
+  {
     "id": "xblzd",
     "name": "xBLZD",
     "token": "xBLZD",
@@ -214,24 +320,6 @@
         "id": 1,
         "symbol": "POTS",
         "display": "bonus"
-      }
-    ],
-    "contributingToZiggy": [
-      {
-        "id": 0,
-        "token": "BUSD"
-      },
-      {
-        "id": 1,
-        "token": "USDT"
-      },
-      {
-        "id": 2,
-        "token": "USDC"
-      },
-      {
-        "id": 3,
-        "token": "DAI"
       }
     ],
     "compoundIsBonus": true
@@ -385,16 +473,6 @@
         "display": "bonus"
       }
     ],
-    "contributingToZiggy": [
-      {
-        "id": 0,
-        "token": "POTS"
-      },
-      {
-        "id": 1,
-        "token": "BUSD"
-      }
-    ],
     "compoundIsBonus": true
   },
   {
@@ -439,16 +517,6 @@
         "id": 1,
         "symbol": "POTS",
         "display": "bonus"
-      }
-    ],
-    "contributingToZiggy": [
-      {
-        "id": 0,
-        "token": "POTS"
-      },
-      {
-        "id": 1,
-        "token": "WBNB"
       }
     ],
     "compoundIsBonus": true

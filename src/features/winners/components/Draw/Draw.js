@@ -226,9 +226,9 @@ export const Draw = function ({ draw }) {
       <Grid container spacing={2} className={classes.rowLogoWonTotal}>
         <Grid item xs={4}>
           <Logo
-            name={draw.pot.name}
             baseToken={draw.pot.token}
             sponsorToken={sponsorToken || draw.pot.sponsorToken}
+            type={draw.pot.vaultType}
           />
         </Grid>
         <Grid item xs={8}>
