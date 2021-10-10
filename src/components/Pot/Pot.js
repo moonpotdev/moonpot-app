@@ -27,7 +27,7 @@ function slug(str) {
 export const Logo = memo(function ({ baseToken, sponsorToken, type }) {
   const baseSlug = slug(baseToken);
   const sponsorSlug = sponsorToken ? slug(sponsorToken) : 'unsponsored';
-  const typeSlug = type ? slug('type') : 'all';
+  const typeSlug = type ? slug(type) : 'all';
 
   const possibilities = [
     `${baseSlug}/${typeSlug}/${sponsorSlug}`,
