@@ -335,6 +335,46 @@ const styles = () => ({
       color: '#FFFFFF',
     },
   },
+  variantGreySide: {
+    color: '#FFFFFF',
+    backgroundColor: '#3D4A5C',
+    borderColor: '#47566B',
+    '& $title': {
+      color: '#FFFFFF',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#47566B',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#47566B',
+    },
+    '& $accordionItemTitle': {
+      color: '#FFFFFF',
+    },
+    '& $accordionItemInner': {
+      color: '#FFFFFF',
+    },
+  },
+  variantGreySideAlt: {
+    color: '#FFFFFF',
+    backgroundColor: '#333E4D',
+    borderColor: '#3D4A5C',
+    '& $title': {
+      color: '#FFFFFF',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#3D4A5C',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#3D4A5C',
+    },
+    '& $accordionItemTitle': {
+      color: '#FFFFFF',
+    },
+    '& $accordionItemInner': {
+      color: '#FFFFFF',
+    },
+  },
   variantWhite: {
     color: '#585464',
     backgroundColor: '#ffffff',

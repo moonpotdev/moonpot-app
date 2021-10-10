@@ -77,6 +77,14 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
               <div className={classes.earningValue}>{pot.interestBreakdown.prize}%</div>
             </div>
           ) : null}
+          {pot.interestBreakdown.buyback ? (
+            <div className={classes.earningItem}>
+              <div className={classes.earningLabel}>
+                {t('pot.infocards.earnings.buyback', { token: pot.name })}
+              </div>
+              <div className={classes.earningValue}>{pot.interestBreakdown.buyback}%</div>
+            </div>
+          ) : null}
           {pot.interestBreakdown.ziggyInterest ? (
             <div className={classes.earningItem}>
               <div className={classes.earningLabel}>

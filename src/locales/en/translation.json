@@ -13,7 +13,8 @@
     "play": "Play",
     "learnMore": "Learn More",
     "moonpots": "Moonpots",
-    "myPots": "My Pots"
+    "myPots": "My Pots",
+    "sidePots": "side"
   },
   "modals": {
     "unsupportedNetworkDetected": "Unsupported Network Detected",
@@ -33,6 +34,9 @@
     "potsPrice": "POTS Price",
     "buyPots": "Buy POTS"
   },
+  "sidePotExplainerA": "Side Pots give you the chance to win daily prizes without earning interest. If you want to earn interest and join bigger weekly and monthly draws, Ziggy recommends you join a",
+  "sidePotExplainerB": "instead.",
+  "mainPot": "Main Pot",
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><wbr /> and a chance to win <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposits (TVL)",
   "homeJoinCommunityTitle": "Join the Community",
@@ -41,6 +45,7 @@
   "migrationNoticeLearnMore": "Learn more.",
   "migrationNoticeMove": "Move my {{asset}}",
   "vaultTitle": "Deposit <span>{{token}}</span>, earn <span>{{apy}}% APY</span><wbr /> and a chance to win <span>{{currency}}{{amount}}</span>",
+  "vaultTitleSide": "Deposit <span>{{token}}</span>, and be entered for a chance to win <span>{{currency}}{{amount}}</span>",
   "playWithMoonpot": "Play with Moonpot",
   "youHaventEnteredMoonpots": "You haven't entered any Moonpots yet.",
   "youHaventEnteredRetiredMoonpots": "You are not entered in any retired Moonpots.",
@@ -108,6 +113,7 @@
     "tokenAPY": "{{token}} APY",
     "tokenAPR": "{{token}} APR",
     "totalAPY": "Total APY",
+    "prizeOnly": "Prize Only",
     "bonusTokenAPR": "Bonus {{token}} APR",
     "superBoostTokenAPR": "Super Boost {{token}} APR",
     "tooltip": {
@@ -131,6 +137,9 @@
             "Ziggy buys POTS off the open market with Moonpot.com’s revenue and gives that to POTS stakers as interest.",
             "There is also a monthly Prize Draw attached to Ziggy’s Pot where 10 lucky winners get a share of a prize pot made up of another 5% of the revenue from all the tokens across the Moonpot platform.",
             "For example, the September 1 Prize Draw included POTS, BIFI, CAKE and DODO, and came to a grand total of $723,760. Ziggy’s Pot is drawn every four weeks (on a Wednesday). No need to restake."
+          ],
+          "side": [
+            "The {{token}} Side Pot deposits your ${{token}} in the Beefy.Finance {{token}} Vault and autocompounds your earnings. Moonpot then sets aside 70% for the Side Pot prize, 20% for $POTS buybacks for the Main Pot’s bonus interest, and 10% for Ziggy’s (governance) Pot’s interest and prizes."
           ]
         },
         "beefyVaultAddress": "Beefy.Finance Vault Address",
@@ -139,6 +148,7 @@
       "earnings": {
         "title": "Strategy Breakdown",
         "tokenInterest": "Your {{token}} Interest",
+        "buyback": "$POTS Buyback for {{token}} POT Bonus interest",
         "nameMoonpotPrizeDraw": "{{name}} Moonpot Prize Draw",
         "ziggysPotInterest": "Ziggy's (Governance) Pot Interest",
         "ziggysPrizeDraw": "Ziggy's (Governance) Prize Draw",

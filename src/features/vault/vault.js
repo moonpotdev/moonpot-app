@@ -11,6 +11,7 @@ import { InfoCards } from './components/InfoCards';
 import { PoweredByBeefy } from '../../components/PoweredByBeefy';
 import clsx from 'clsx';
 import { Translate } from '../../components/Translate';
+import SidePotExplainer from '../../components/SidePotExplainer/SidePotExplainer';
 
 const useStyles = makeStyles(styles);
 
@@ -21,6 +22,7 @@ const VaultTitle = memo(function ({
   bonusApy,
   awardBalanceUsd,
   totalSponsorBalanceUsd,
+  vaultType,
 }) {
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
@@ -29,15 +31,26 @@ const VaultTitle = memo(function ({
 
   return (
     <Typography className={clsx(className)}>
-      <Translate
-        i18nKey="vaultTitle"
-        values={{
-          token,
-          apy: formatDecimals(totalApy, 2),
-          currency: '$',
-          amount: formatDecimals(totalPrize, 0),
-        }}
-      />
+      {vaultType === 'side' ? (
+        <Translate
+          i18nKey="vaultTitleSide"
+          values={{
+            token,
+            currency: '$',
+            amount: formatDecimals(totalPrize, 0),
+          }}
+        />
+      ) : (
+        <Translate
+          i18nKey="vaultTitle"
+          values={{
+            token,
+            apy: formatDecimals(totalApy, 2),
+            currency: '$',
+            amount: formatDecimals(totalPrize, 0),
+          }}
+        />
+      )}
     </Typography>
   );
 });
@@ -87,6 +100,8 @@ const Vault = () => {
       return 'greenDark';
     } else if (vaultType === 'stable') {
       return 'greenStableAlt';
+    } else if (vaultType === 'side') {
+      return 'greySideAlt';
     }
   }
 
@@ -100,8 +115,10 @@ const Vault = () => {
           baseApy={pot.apy}
           totalSponsorBalanceUsd={pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd}
           awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
+          vaultType={pot.vaultType}
         />
         <PoweredByBeefy className={classes.poweredBy} />
+        {pot.vaultType === 'side' ? <SidePotExplainer /> : null}
         <Pot
           id={id}
           onFairplayLearnMore={handleFairplayLearnMore}
