@@ -233,7 +233,7 @@
     "oracleId": "banana-bifi-bnb",
     "decimals": 18,
     "zap": "0x8d86b089696893bbc80ba598B54f8874F0dC4310",
-    "lp": ["BIFI", "WBNB"]
+    "lp": ["WBNB", "BIFI"]
   },
   {
     "symbol": "moonTicketApeBIFI-BNB",
