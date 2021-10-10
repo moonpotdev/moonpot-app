@@ -45,17 +45,19 @@ const Filter = ({ className, selected }) => {
   const classes = useStyles();
 
   return (
-    <Grid container className={clsx(classes.buttonContainer, className)}>
-      {PotTypes.map(type => (
-        <RoutedButton
-          key={type.key}
-          className={clsx(classes.button, { [classes.buttonActive]: selected === type.key })}
-          to={{ pathname: type.path, state: { tabbed: true } }}
-        >
-          {t(type.label)}
-        </RoutedButton>
-      ))}
-    </Grid>
+    <div className={classes.buttonsOuterContainer}>
+      <Grid container className={clsx(classes.buttonContainer, className)}>
+        {PotTypes.map(type => (
+          <RoutedButton
+            key={type.key}
+            className={clsx(classes.button, { [classes.buttonActive]: selected === type.key })}
+            to={{ pathname: type.path, state: { tabbed: true } }}
+          >
+            {t(type.label)}
+          </RoutedButton>
+        ))}
+      </Grid>
+    </div>
   );
 };
 
