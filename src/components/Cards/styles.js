@@ -115,6 +115,11 @@ const styles = () => ({
       color: '#EBF3F9',
     },
   },
+  variantPurpleInfo: {
+    color: '#DFDFEC',
+    backgroundColor: '#424270',
+    borderColor: '#555590',
+  },
   variantPurpleDarkAlt: {
     color: '#594C7B',
     backgroundColor: '#594C7B',
