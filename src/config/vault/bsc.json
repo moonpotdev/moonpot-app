@@ -16,6 +16,7 @@
     "vaultType": "main",
     "duration": 14,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "status": "active",
     "infoCardStrategy": "ziggy",
     "sponsorProjectName": "Moonpot",
@@ -91,7 +92,7 @@
     "vaultType": "side",
     "duration": 1,
     "fairplayDuration": 3,
-    "fairplayFeePercent": 2.5,
+    "fairplayTicketFee": 0.025,
     "interestBreakdown": {
       "prize": 70,
       "buyback": 20,
@@ -131,6 +132,7 @@
     "vaultType": "lp",
     "duration": 14,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -185,6 +187,7 @@
     "vaultType": "lp",
     "duration": 14,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -238,6 +241,7 @@
     "vaultType": "community",
     "duration": 14,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -285,6 +289,7 @@
     "vaultType": "community",
     "duration": 14,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -333,6 +338,7 @@
     "vaultType": "stable",
     "duration": 14,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "ziggyPrizeToken": "BUSD",
     "interestBreakdown": {
       "interest": 50,
@@ -386,6 +392,7 @@
     "vaultType": "main",
     "duration": 14,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -437,6 +444,7 @@
     "vaultType": "main",
     "duration": 7,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -494,6 +502,7 @@
     "vaultType": "lp",
     "duration": 14,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -586,6 +595,7 @@
     "vaultType": "main",
     "duration": 28,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "status": "eol",
     "eolDrawNumber": 1,
     "infoCardStrategy": "ziggy",
@@ -644,6 +654,7 @@
     "vaultType": "main",
     "duration": 7,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -707,6 +718,7 @@
     "vaultType": "community",
     "duration": 14,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -752,6 +764,7 @@
     "vaultType": "main",
     "duration": 7,
     "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
