@@ -139,7 +139,7 @@
             "Sebagai contoh, Pengundian Hadiah pada 1 September termasuk POTS, BIFI, CAKE dan DODO, dan menghasilkan total $723.760. Pot Ziggy diundi setiap empat minggu sekali (pada hari Rabu). Anda tidak perlu stake ulang."
           ],
           "side": [
-            "Side Pot {{token}} menyimpan setoran ${{token}} anda di Beefy.Finance {{token}} Vault. Semua pendapatan Pot digabungkan secara otomatis dan Moonpot menyisihkan 70% untuk hadiah Side Pot, 20% untuk pembelian kembali $POTS untuk keuntungan bonus Pot Utama, dan 10% untuk keuntungan dan hadiah Pot Ziggy (tata kelola)"
+            "Side Pot {{token}} menyimpan setoran ${{token}} anda di Beefy.Finance {{token}} Vault. Semua pendapatan Pot digabungkan secara otomatis dan Moonpot menyisihkan {{breakdownPrize}}% untuk hadiah Side Pot dan {{breakdownBuyback}}% untuk pembelian kembali $POTS untuk keuntungan bonus Pot Utama."
           ]
         },
         "beefyVaultAddress": "Alamat Brankas Beefy.Finance",
