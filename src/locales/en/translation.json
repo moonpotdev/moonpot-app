@@ -160,7 +160,7 @@
           "There is a basic {{duration}} day Fairplay Timelock to prevent players depositing right before the draw and then withdrawing quickly afterwards.",
           "If you want to withdraw earlier you’ll pay a 2.5%, or less, Fairness Fee. The Fairness Fee reduces every second down to zero over {{duration}} days.",
           "Depositing more {{token}} will reset your Fairness fee to a maximum of 2.5%, for your additional deposit.",
-          "If you win the prize, your Fairness Fee will be reset to 5% and reduce to zero for {{duration}} days after winning.",
+          "If you win the prize, your Fairness Fee will be reset to {{ticketFee}}% and reduce to zero for {{duration}} days after winning.",
           "These measures prevent bad actors from manipulating the prize draws."
         ]
       }
