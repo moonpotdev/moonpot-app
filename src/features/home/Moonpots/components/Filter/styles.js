@@ -1,6 +1,6 @@
 const styles = theme => ({
   buttonContainer: {
-    width: 'fit-content',
+    width: 'max-content',
     margin: '0 auto',
   },
   button: {
@@ -15,6 +15,9 @@ const styles = theme => ({
   buttonActive: {
     color: '#FFFFFF',
     borderBottom: '2px solid #fff',
+  },
+  buttonsOuterContainer: {
+    overflow: 'auto',
   },
 });
 

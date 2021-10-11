@@ -12,6 +12,7 @@ export const PrimaryButton = withStyles({
       blueCommunity: '#464E77',
       green: '#275668',
       greenStable: '#508276',
+      greySide: '#47566B',
     }),
     '&:hover': {
       backgroundColor: '#E6E6E6',
@@ -21,6 +22,7 @@ export const PrimaryButton = withStyles({
         blueCommunity: '#464E77',
         green: '#275668',
         greenStable: '#508276',
+        greySide: '#47566B',
       }),
     },
     '&:focus': {
@@ -31,6 +33,7 @@ export const PrimaryButton = withStyles({
         blueCommunity: '#464E77',
         green: '#275668',
         greenStable: '#508276',
+        greySide: '#47566B',
       }),
     },
     '& .MuiTouchRipple-child': {
@@ -40,6 +43,7 @@ export const PrimaryButton = withStyles({
         blueCommunity: '#BFC3D9',
         green: '#275668',
         greenStable: '#508276',
+        greySide: '#47566B',
       }),
     },
   },

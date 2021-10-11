@@ -348,20 +348,19 @@ const getPools = async (items, state, dispatch) => {
       pool.awardBalanceUsd = awardBalanceUsd;
       pool.fullAwardBalance = new BigNumber(item.awardBalance || '0').dividedBy(tokenDecimals);
 
-      if (
-        pool.apyId &&
-        pool.interestBreakdown &&
-        pool.interestBreakdown.interest &&
-        !isEmpty(apy) &&
-        pool.apyId in apy
-      ) {
-        pool.apy = new BigNumber(apy[pool.apyId].totalApy)
-          .times(pool.interestBreakdown.interest)
-          .toNumber();
+      if (pool.apyId && !isEmpty(apy) && pool.apyId in apy) {
         pool.underlyingApy = new BigNumber(apy[pool.apyId].totalApy).times(100).toNumber();
       } else {
-        pool.apy = 0;
         pool.underlyingApy = 0;
+      }
+
+      if (pool.underlyingApy && pool.interestBreakdown && pool.interestBreakdown.interest) {
+        pool.apy = new BigNumber(pool.underlyingApy)
+          .times(pool.interestBreakdown.interest)
+          .dividedBy(100)
+          .toNumber();
+      } else {
+        pool.apy = 0;
       }
 
       const totalValueLocked = new BigNumber(item.totalValueLocked);

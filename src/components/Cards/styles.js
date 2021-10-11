@@ -115,6 +115,11 @@ const styles = () => ({
       color: '#EBF3F9',
     },
   },
+  variantPurpleInfo: {
+    color: '#DFDFEC',
+    backgroundColor: '#424270',
+    borderColor: '#555590',
+  },
   variantPurpleDarkAlt: {
     color: '#594C7B',
     backgroundColor: '#594C7B',
@@ -327,6 +332,46 @@ const styles = () => ({
     },
     '& $accordionItem': {
       borderTopColor: '#467268',
+    },
+    '& $accordionItemTitle': {
+      color: '#FFFFFF',
+    },
+    '& $accordionItemInner': {
+      color: '#FFFFFF',
+    },
+  },
+  variantGreySide: {
+    color: '#FFFFFF',
+    backgroundColor: '#3D4A5C',
+    borderColor: '#47566B',
+    '& $title': {
+      color: '#FFFFFF',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#47566B',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#47566B',
+    },
+    '& $accordionItemTitle': {
+      color: '#FFFFFF',
+    },
+    '& $accordionItemInner': {
+      color: '#FFFFFF',
+    },
+  },
+  variantGreySideAlt: {
+    color: '#FFFFFF',
+    backgroundColor: '#333E4D',
+    borderColor: '#3D4A5C',
+    '& $title': {
+      color: '#FFFFFF',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#3D4A5C',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#3D4A5C',
     },
     '& $accordionItemTitle': {
       color: '#FFFFFF',

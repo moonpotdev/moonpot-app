@@ -25,7 +25,7 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
   return (
     <Cards className={clsx(className)} oneUp={true}>
       {pot.infoCardStrategy ? (
-        <Card variant="purpleDark" className={classes.strategy}>
+        <Card variant="purpleInfo" className={classes.strategy}>
           <CardTitle>{t('pot.infocards.strategy.title', { name: pot.name })}</CardTitle>
           {t('pot.infocards.strategy.body.' + pot.infoCardStrategy, {
             returnObjects: true,
@@ -59,7 +59,7 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
         </Card>
       ) : null}
       {pot.interestBreakdown ? (
-        <Card variant="purpleDark">
+        <Card variant="purpleInfo">
           <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
           {pot.interestBreakdown.interest ? (
             <div className={classes.earningItem}>
@@ -75,6 +75,14 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
                 {t('pot.infocards.earnings.nameMoonpotPrizeDraw', { name: pot.name })}
               </div>
               <div className={classes.earningValue}>{pot.interestBreakdown.prize}%</div>
+            </div>
+          ) : null}
+          {pot.interestBreakdown.buyback ? (
+            <div className={classes.earningItem}>
+              <div className={classes.earningLabel}>
+                {t('pot.infocards.earnings.buyback', { token: pot.name })}
+              </div>
+              <div className={classes.earningValue}>{pot.interestBreakdown.buyback}%</div>
             </div>
           ) : null}
           {pot.interestBreakdown.ziggyInterest ? (
@@ -101,7 +109,7 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
           ) : null}
         </Card>
       ) : null}
-      <Card variant="purpleDark" ref={fairplayRef} className={classes.fairplayRules}>
+      <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules}>
         <div className={classes.ziggyTimelock}>
           <img
             alt=""

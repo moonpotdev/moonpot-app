@@ -54,6 +54,14 @@
     "ticketFor": "CAKE"
   },
   {
+    "symbol": "moonTicketSideCake",
+    "address": "0xADeEDCAaEaECbc8a86C80033cb142085ce0085C5",
+    "type": "ticket",
+    "oracleId": "Cake",
+    "decimals": 18,
+    "ticketFor": "CAKE"
+  },
+  {
     "symbol": "BIFI",
     "address": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
     "type": "single",

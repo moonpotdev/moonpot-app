@@ -108,11 +108,15 @@ export const PotInfoBlock = function ({ item, active = true }) {
             <Grid item xs={6}>
               <Typography className={classes.myDetailsText} align={'left'}>
                 {t('pot.myInterestRate')}
-                <InterestTooltip pot={pot} />
+                {item.vaultType !== 'side' ? <InterestTooltip pot={pot} /> : null}
               </Typography>
             </Grid>
             <Grid item xs={6}>
-              <Interest baseApy={item.apy} bonusApy={item.bonusApy} />
+              {pot.vaultType !== 'side' ? (
+                <Interest baseApy={item.apy} bonusApy={item.bonusApy} />
+              ) : (
+                <Translate i18nKey="pot.prizeOnly" />
+              )}
             </Grid>
           </>
         ) : null}

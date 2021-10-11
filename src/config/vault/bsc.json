@@ -74,6 +74,38 @@
     "compoundIsBonus": false
   },
   {
+    "id": "side-cake",
+    "name": "CAKE Side",
+    "token": "CAKE",
+    "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketSideCake",
+    "rewardAddress": "0xADeEDCAaEaECbc8a86C80033cb142085ce0085C5",
+    "contractAddress": "0x40a522699ddC745278F85A9E78E4baD05702564e",
+    "prizePoolAddress": "0x5796152BAA9A5B723FbA206eDCc2E88CA66b4303",
+    "prizeStrategyAddress": "0x14072Fb691F0087E005B2bd44E89478ea3249c7d",
+    "pricePerShare": 1,
+    "oracleId": "Cake",
+    "apyId": "cake-cakev2",
+    "vaultType": "side",
+    "duration": 1,
+    "interestBreakdown": {
+      "prize": 70,
+      "buyback": 20,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
+    "status": "active",
+    "withdrawFee": 0,
+    "infoCardStrategy": "side",
+    "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
+    "sponsorProjectName": "",
+    "sponsorToken": "NONE",
+    "sponsors": [],
+    "bonuses": [],
+    "compoundIsBonus": true
+  },
+  {
     "id": "cake-bnb",
     "name": "CAKE-BNB LP",
     "token": "CAKE-BNB LP",
