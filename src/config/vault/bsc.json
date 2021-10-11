@@ -15,6 +15,7 @@
     "compoundApy": true,
     "vaultType": "main",
     "duration": 14,
+    "fairplayDuration": 10,
     "status": "active",
     "infoCardStrategy": "ziggy",
     "sponsorProjectName": "Moonpot",
@@ -89,8 +90,8 @@
     "apyId": "cake-cakev2",
     "vaultType": "side",
     "duration": 1,
-    "fairnessDuration": 3,
-    "fairnessFeePercent": 2.5,
+    "fairplayDuration": 3,
+    "fairplayFeePercent": 2.5,
     "interestBreakdown": {
       "prize": 70,
       "buyback": 20,
@@ -129,6 +130,7 @@
     "apyId": "cakev2-cake-bnb",
     "vaultType": "lp",
     "duration": 14,
+    "fairplayDuration": 10,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -182,6 +184,7 @@
     "apyId": "banana-bifi-bnb",
     "vaultType": "lp",
     "duration": 14,
+    "fairplayDuration": 10,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -234,6 +237,7 @@
     "apyId": "blizzard-xblzd",
     "vaultType": "community",
     "duration": 14,
+    "fairplayDuration": 10,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -280,6 +284,7 @@
     "apyId": "pacoca-pacoca",
     "vaultType": "community",
     "duration": 14,
+    "fairplayDuration": 10,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -327,6 +332,7 @@
     "apyId": "beltv2-4belt",
     "vaultType": "stable",
     "duration": 14,
+    "fairplayDuration": 10,
     "ziggyPrizeToken": "BUSD",
     "interestBreakdown": {
       "interest": 50,
@@ -379,6 +385,7 @@
     "apyId": "bifi-maxi-v2",
     "vaultType": "main",
     "duration": 14,
+    "fairplayDuration": 10,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -429,6 +436,7 @@
     "apyId": "cake-cakev2",
     "vaultType": "main",
     "duration": 7,
+    "fairplayDuration": 10,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -485,6 +493,7 @@
     "apyId": "cakev2-pots-busd",
     "vaultType": "lp",
     "duration": 14,
+    "fairplayDuration": 10,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -576,6 +585,7 @@
     "compoundApy": true,
     "vaultType": "main",
     "duration": 28,
+    "fairplayDuration": 10,
     "status": "eol",
     "eolDrawNumber": 1,
     "infoCardStrategy": "ziggy",
@@ -633,6 +643,7 @@
     "apyId": "cake-cakev2",
     "vaultType": "main",
     "duration": 7,
+    "fairplayDuration": 10,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -695,6 +706,7 @@
     "apyId": "banana-bananav2",
     "vaultType": "community",
     "duration": 14,
+    "fairplayDuration": 10,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
@@ -739,6 +751,7 @@
     "apyId": "cake-cakev2",
     "vaultType": "main",
     "duration": 7,
+    "fairplayDuration": 10,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,

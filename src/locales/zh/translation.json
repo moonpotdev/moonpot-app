@@ -166,7 +166,7 @@
     "token": "存入 {{token}}",
     "allToken": "存入所有 {{token}}",
     "amountToken": "存入 {{amount}} {{token}}",
-    "fairplayNotice": "我们设置了10天的公平游戏时间锁定期。如果想要提前提取资产，您必须支付2.5% 或更少的公平费用。公平费在十天内逐秒减少至零。",
+    "fairplayNotice": "我们设置了{{duration}}天的公平游戏时间锁定期。如果想要提前提取资产，您必须支付2.5% 或更少的公平费用。公平费在十天内逐秒减少至零。",
     "eolNotice": {
       "title": "已退役的月盒",
       "message": "您不能再向这个月盒进行存款了."

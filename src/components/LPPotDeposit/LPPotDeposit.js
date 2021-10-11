@@ -373,7 +373,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
         />
       </div>
       <div className={classes.fairplayNotice}>
-        <Translate i18nKey="deposit.fairplayNotice" />{' '}
+        <Translate i18nKey="deposit.fairplayNotice" values={{ duration: pot.fairplayDuration }} />{' '}
         {onLearnMore ? (
           <Link onClick={onLearnMore} className={classes.learnMore}>
             <Translate i18nKey="buttons.learnMore" />
