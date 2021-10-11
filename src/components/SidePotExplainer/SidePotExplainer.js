@@ -25,7 +25,7 @@ const SidePotExplainer = () => {
       </Typography>
       <a
         className={classes.learnMore}
-        href={`https://moonpot.com/alpha`}
+        href={`https://moonpot.com/alpha/launch/side-pots-are-ready-for-lift-off/`}
         rel="noreferrer"
         target="_blank"
       >
