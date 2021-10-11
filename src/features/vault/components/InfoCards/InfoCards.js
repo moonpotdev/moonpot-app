@@ -38,6 +38,14 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
           {t('pot.infocards.strategy.body.' + pot.infoCardStrategy, {
             returnObjects: true,
             token: pot.token,
+            name: pot.name,
+            breakdownInterest: pot.interestBreakdown?.interest || 0,
+            breakdownPrize: pot.interestBreakdown?.prize || 0,
+            breakdownBuyback: pot.interestBreakdown?.buyback || 0,
+            breakdownZiggyInterest: pot.interestBreakdown?.ziggyInterest || 0,
+            breakdownZiggyPrize: pot.interestBreakdown?.ziggyPrize || 0,
+            breakdownZiggyTotal:
+              (pot.interestBreakdown?.ziggyPrize || 0) + (pot.interestBreakdown?.ziggyPrize || 0),
           }).map((text, i) => (
             <p key={i}>{text}</p>
           ))}
