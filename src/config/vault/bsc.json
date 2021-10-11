@@ -101,9 +101,14 @@
     "withdrawFee": 0,
     "infoCardStrategy": "side",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
-    "sponsorProjectName": "",
-    "sponsorToken": "NONE",
-    "sponsors": [],
+    "sponsors": [
+      {
+        "sponsorToken": "CAKE",
+        "sponsorOracleId": "Cake",
+        "sponsorAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+        "sponsorTokenDecimals": 18
+      }
+    ],
     "bonuses": [],
     "compoundIsBonus": true
   },
