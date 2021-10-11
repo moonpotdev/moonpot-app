@@ -89,6 +89,8 @@
     "apyId": "cake-cakev2",
     "vaultType": "side",
     "duration": 1,
+    "fairnessDuration": 3,
+    "fairnessFeePercent": 2.5,
     "interestBreakdown": {
       "prize": 70,
       "buyback": 20,

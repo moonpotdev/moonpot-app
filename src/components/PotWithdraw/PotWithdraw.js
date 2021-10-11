@@ -60,7 +60,14 @@ const StatTimelock = memo(function ({ contractAddress }) {
   return <Stat label={t('pot.myFairplayTimelock')}>{formatTimeLeft(timeLeft)}</Stat>;
 });
 
-const StatFee = memo(function ({ token, contractAddress, ticketSymbol, tokenDecimals }) {
+const StatFee = memo(function ({
+  token,
+  contractAddress,
+  ticketSymbol,
+  tokenDecimals,
+  fairnessDuration,
+  fairnessFeePercent,
+}) {
   const { t } = useTranslation();
   const address = useSelector(state => state.walletReducer.address);
   const timeleft = useSelector(
@@ -76,14 +83,14 @@ const StatFee = memo(function ({ token, contractAddress, ticketSymbol, tokenDeci
     const timeLeft = endsAt - Date.now();
 
     if (address && ticketBalance.gt(0) && timeLeft > 0) {
-      const max = 3600 * 24 * 10 * 1000;
-      const relative = (timeLeft * 0.05) / max;
+      const max = 3600 * 24 * fairnessDuration * 1000;
+      const relative = (timeLeft * fairnessFeePercent) / 100 / max;
       const fee = ticketBalance.times(relative);
       return formatDecimals(fee, 8);
     }
 
     return 0;
-  }, [endsAt, ticketBalance, address]);
+  }, [endsAt, ticketBalance, address, fairnessDuration, fairnessFeePercent]);
 
   return (
     <Stat label={t('pot.myFairnessFee')}>
@@ -120,6 +127,8 @@ export const Stats = function ({ id }) {
         contractAddress={pot.contractAddress}
         tokenDecimals={pot.tokenDecimals}
         ticketSymbol={pot.rewardToken}
+        fairnessDuration={pot.fairnessDuration || 10}
+        fairnessFeePercent={pot.fairnessFeePercent || 5}
       />
     </div>
   );
