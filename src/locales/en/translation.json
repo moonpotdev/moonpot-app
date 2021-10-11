@@ -34,9 +34,6 @@
     "potsPrice": "POTS Price",
     "buyPots": "Buy POTS"
   },
-  "sidePotExplainerA": "Side Pots give you the chance to win daily prizes without earning interest. If you want to earn interest and join bigger weekly and monthly draws, Ziggy recommends you join a",
-  "sidePotExplainerB": "instead.",
-  "mainPot": "Main Pot",
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><wbr /> and a chance to win <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposits (TVL)",
   "homeJoinCommunityTitle": "Join the Community",
@@ -56,6 +53,7 @@
   "upgradeNextSteps": "Because of the upgrade, you need to move your {{token}} to the new {{token}} Pot.  We have added a {{boostToken}} Super Boost to the new {{token}} Pot to help make it worthwhile for you.",
   "upgradeMove": "Move {{base}}",
   "upgradeMoveWithdraw": "Move {{base}} and Withdraw {{bonus}}",
+  "sidePotExplainer": "Side Pots give you the chance to win daily prizes without earning interest. If you want to earn interest and join bigger weekly and monthly draws, Ziggy recommends you join a <MainPotLink>Main Pot</MainPotLink> instead.",
   "learnMore": "Learn more",
   "telegramSocialBlockBody": "Learn about Moonpot and get direct support from the community",
   "discordSocialBlockBody": "Join the conversation with our active community of developers",
