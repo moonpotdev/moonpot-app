@@ -9,11 +9,12 @@
     "mainPots": "核心",
     "communityPots": "社群",
     "lpPots": "LP",
-    "stablePots": "Stable",
+    "stablePots": "稳定币",
     "play": "开始游戏",
     "learnMore": "了解更多",
     "moonpots": "Moonpots",
     "myPots": "我的月盒"
+    "sidePots": "附属"
   },
   "modals": {
     "unsupportedNetworkDetected": "检测到不支持的网络",
@@ -33,6 +34,9 @@
     "potsPrice": "POTS 的价格",
     "buyPots": "购买 POTS"
   },
+  "sidePotExplainerA": "附属月盒让您有机会在不赚取利息的情况下赢得每日奖金。 如果您想赚取利息并参与更大的每周和每月抽奖活动，Ziggy 建议您改为参与",
+  "sidePotExplainerB": "。",
+  "mainPot": "核心月盒",
   "homeTitle": "存入 <span>加密资产</span>, 赚取<span>利息收入</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
   "homeTotalDeposits": "存款总额 (总锁仓量)",
   "homeJoinCommunityTitle": "加入我们的社群",
@@ -41,6 +45,7 @@
   "migrationNoticeLearnMore": "了解更多",
   "migrationNoticeMove": "转移我的{{asset}}",
   "vaultTitle": "存入 <span>{{token}}</span>, 获得 <span>{{apy}}% APY</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
+  "vaultTitleSide": "存入 <span>{{token}}</span>, 即有机会抱走奖金 <span>{{currency}}{{amount}}</span>",
   "playWithMoonpot": "使用Moonpot进行游戏",
   "youHaventEnteredMoonpots": "您尚未参与任何月盒.",
   "youHaventEnteredRetiredMoonpots": "您未参与任何已退役的月盒。",
@@ -108,6 +113,7 @@
     "tokenAPY": "{{token}} APY",
     "tokenAPR": "{{token}} APR",
     "totalAPY": "总 APY",
+    "prizeOnly": "仅限奖金",
     "bonusTokenAPR": "额外 {{token}} APR",
     "superBoostTokenAPR": "超速增值 {{token}} APR",
     "tooltip": {
@@ -131,6 +137,9 @@
             "Ziggy 使用 Moonpot.com 的收入从公开市场上购买 POTS，并将其作为利息提供给 POTS 质押者。",
             "Ziggy's 月盒还设有每月一次的抽奖活动，其中 10 位幸运的获胜者可以分享由整个Moonpot平台所有代币收入的5%组成的奖池。",
             "例如，9 月 1 日的抽奖活动奖励包括 POTS、BIFI、CAKE 和 DODO 代币，总奖金为 $723,760。 Ziggy's 月盒每四个星期（星期三）抽奖一次。参与抽奖的过程是自动化的，您无需每次手动重新质押进月盒以参与抽奖。"
+          ],
+          "side": [
+            "{{token}} 附属月盒将您的 ${{token}} 存入 Beefy.Finance {{token}} 金库。所有月盒收益都是自动复合的。Moonpot 预留了 70% 用于附属月盒奖金，20% 用于回购 $POTS 作为核心月盒的奖金利息，以及 10% 用于 Ziggy（治理）月盒的利息和奖金。"
           ]
         },
         "beefyVaultAddress": "Beefy 金库地址",
@@ -139,6 +148,7 @@
       "earnings": {
         "title": "收益明细",
         "tokenInterest": "您的 {{token}} 利息",
+        "buyback": "回购 $POTS 作为 {{token}} 月盒额外利息",
         "nameMoonpotPrizeDraw": "{{name}} Moonpot 抽奖活动",
         "ziggysPotInterest": "Ziggy's (治理) 月盒利息",
         "ziggysPrizeDraw": "Ziggy's (治理) 抽奖活动",
