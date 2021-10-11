@@ -1,13 +1,9 @@
 const styles = theme => ({
   sidePotExplainer: {
     fontSize: '15px',
-    '& span': {
+    '& a': {
       color: '#F3BA2E',
       textDecoration: 'underline',
-      '& a': {
-        color: 'inherit',
-        textDecoration: 'none',
-      },
     },
   },
   learnMore: {

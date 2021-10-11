@@ -4,7 +4,7 @@ import { Grid, Link, makeStyles } from '@material-ui/core';
 import { Logo } from '../../../../components/Pot';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../../config/tokens';
+import { tokensByNetworkAddress } from '../../../../config/tokens';
 import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
@@ -65,7 +65,7 @@ const useNormalizedWinnings = function (awards, drawToken) {
         const numericAmount = byDecimals(amount, tokenData.decimals);
         const price = new BigNumber(prices[tokenData.oracleId] || 0);
         const totalPrice = numericAmount.multipliedBy(price);
-        const symbol = tokenData.ticketFor || tokenData.symbol;
+        const symbol = tokenData.underlyingToken || tokenData.symbol;
 
         if (symbol in tokens) {
           tokens[symbol].amount = tokens[symbol].amount.plus(numericAmount);
@@ -151,16 +151,19 @@ const PrizePerWinner = memo(function ({ winnings }) {
   });
 });
 
-const Winners = memo(function ({ token, tokenDecimals, winners }) {
+const Winners = memo(function ({ network, tokenAddress, winners, ticketAddress }) {
   const { t } = useTranslation();
   const classes = useStyles();
   const prices = useSelector(state => state.pricesReducer.prices);
-  const tokenData = tokensByNetworkSymbol[network]?.[token];
+  const tokenData = tokensByNetworkAddress[network]?.[tokenAddress.toLowerCase()];
   const price = prices[tokenData.oracleId] || 0;
+  const tokenDecimals = tokenData.decimals;
+  const ticketData = tokensByNetworkAddress[network]?.[ticketAddress.toLowerCase()];
+  const ticketToStaked = ticketData.stakedMultiplier;
 
   const sortedWinners = useMemo(() => {
     const entries = winners.map((winner, index) => {
-      const staked = byDecimals(winner.staked, tokenDecimals).multipliedBy(2);
+      const staked = byDecimals(winner.staked, tokenDecimals).multipliedBy(ticketToStaked);
       const value = staked.multipliedBy(price);
 
       return {
@@ -172,7 +175,7 @@ const Winners = memo(function ({ token, tokenDecimals, winners }) {
     });
 
     return entries.sort((a, b) => (a.staked > b.staked) - (a.staked < b.staked));
-  }, [winners, price, tokenDecimals]);
+  }, [winners, price, tokenDecimals, ticketToStaked]);
 
   return (
     <Grid container spacing={2} className={classes.rowWinners}>
@@ -184,7 +187,7 @@ const Winners = memo(function ({ token, tokenDecimals, winners }) {
           <Grid item xs={6} key={winner.id}>
             <div className={classes.winnerAddress}>{formatAddressShort(winner.address)}</div>
             <div className={classes.winnerStaked}>
-              {t('winners.stakedAmountToken', { amount: stakedFormatted, token })}
+              {t('winners.stakedAmountToken', { amount: stakedFormatted, token: tokenData.symbol })}
             </div>
             <div>(${valueFormatted})</div>
           </Grid>
@@ -258,8 +261,9 @@ export const Draw = function ({ draw }) {
       <CardAccordionGroup>
         <CardAccordionItem titleKey="winners.winners">
           <Winners
-            token={draw.pot.token}
-            tokenDecimals={draw.pot.tokenDecimals}
+            network={draw.pot.network}
+            tokenAddress={draw.pot.tokenAddress}
+            ticketAddress={draw.pot.rewardAddress}
             winners={draw.winners}
           />
           <Link

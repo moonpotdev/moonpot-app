@@ -87,6 +87,7 @@
     "prizeSplitToolTip": "Proyeksi langsung berdasarkan TVL saat ini dan suku bunga",
     "prizeSplitWinner": "{{count}} Pemenang",
     "prizeSplitWinner_plural": "{{count}} Tiket Pemenang",
+    "amount": "<span>{{symbol}}{{amount}}</span>",
     "amountEach": "<span>{{symbol}}{{amount}}</span> Masing-masing",
     "playWith": "Bermain dengan {{token}}",
     "playWithMore": "Bermain dengan lebih banyak {{token}}",
@@ -165,7 +166,7 @@
     "token": "Deposit {{token}}",
     "allToken": "Deposit Semua {{token}}",
     "amountToken": "Deposit {{amount}} {{token}}",
-    "fairplayNotice": "Ada TimeLock Fairplay selama 10 hari. Jika Anda ingin menarik lebih awal, Anda akan membayar Biaya Fairness 2,5%, atau kurang. Biaya akan berkurang setiap detik.",
+    "fairplayNotice": "Ada TimeLock Fairplay selama {{duration}} hari. Jika Anda ingin menarik lebih awal, Anda akan membayar Biaya Fairness 2,5%, atau kurang. Biaya akan berkurang setiap detik.",
     "eolNotice": {
       "title": "Pot Tidak Aktif",
       "message": "Anda tidak dapat lagi Deposit ke pot ini."
@@ -235,4 +236,3 @@
     "claimAll": "Klaim semua bonus POTS yang diperoleh"
   }
 }
-

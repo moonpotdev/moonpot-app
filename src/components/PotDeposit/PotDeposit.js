@@ -65,14 +65,6 @@ const DepositSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
   return <Steps item={pot} steps={steps} handleClose={handleClose} />;
 };
 
-const handleDuration = vaultType => {
-  if (vaultType === 'side') {
-    return '3';
-  } else {
-    return '10';
-  }
-};
-
 export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -180,10 +172,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
         />
       </div>
       <div className={classes.fairplayNotice}>
-        <Translate
-          i18nKey="deposit.fairplayNotice"
-          values={{ duration: handleDuration(pot.vaultType) }}
-        />{' '}
+        <Translate i18nKey="deposit.fairplayNotice" values={{ duration: pot.fairplayDuration }} />{' '}
         {onLearnMore ? (
           <Link onClick={onLearnMore} className={classes.learnMore}>
             <Translate i18nKey="buttons.learnMore" />

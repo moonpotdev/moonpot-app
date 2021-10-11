@@ -87,6 +87,7 @@
     "prizeSplitToolTip": "基于目前的TVL和利率的实时预测",
     "prizeSplitWinner": "{{count}} 张中奖门票",
     "prizeSplitWinner_plural": "{{count}} 张中奖门票",
+    "amount": "<span>{{symbol}}{{amount}}</span>",
     "amountEach": "每张 <span>{{symbol}}{{amount}}</span>",
     "playWith": "使用 {{token}} 进行游戏",
     "playWithMore": "使用更多 {{token}} 进行游戏",
@@ -165,7 +166,7 @@
     "token": "存入 {{token}}",
     "allToken": "存入所有 {{token}}",
     "amountToken": "存入 {{amount}} {{token}}",
-    "fairplayNotice": "我们设置了10天的公平游戏时间锁定期。如果想要提前提取资产，您必须支付2.5% 或更少的公平费用。公平费在十天内逐秒减少至零。",
+    "fairplayNotice": "我们设置了{{duration}}天的公平游戏时间锁定期。如果想要提前提取资产，您必须支付2.5% 或更少的公平费用。公平费在十天内逐秒减少至零。",
     "eolNotice": {
       "title": "已退役的月盒",
       "message": "您不能再向这个月盒进行存款了."
@@ -175,9 +176,7 @@
       "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
       "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
     ],
-    "zapTooltip4Belt": [
-      "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
-    ], 
+    "zapTooltip4Belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"],
     "inYourWallet": "您的钱包里有",
     "provider": "流动性提供者"
   },
@@ -235,4 +234,3 @@
     "claimAll": "领取赚取的所有额外 POTS 奖励"
   }
 }
-

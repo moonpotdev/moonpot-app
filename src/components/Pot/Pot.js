@@ -283,7 +283,7 @@ export const PrizeSplit = function ({
     <>
       <div className={classes.prizeSplitTotal}>
         <Translate
-          i18nKey="pot.amountEach"
+          i18nKey={numberOfWinners === 1 ? 'pot.amount' : 'pot.amountEach'}
           values={{ symbol: '$', amount: formatDecimals(totalPrizeEach, 2, 2) }}
         />
       </div>
