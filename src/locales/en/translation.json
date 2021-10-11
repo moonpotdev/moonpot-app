@@ -138,7 +138,7 @@
             "For example, the September 1 Prize Draw included POTS, BIFI, CAKE and DODO, and came to a grand total of $723,760. Ziggy’s Pot is drawn every four weeks (on a Wednesday). No need to restake."
           ],
           "side": [
-            "The {{name}} Pot deposits your ${{token}} in the Beefy.Finance {{token}} Vault. All Pot earnings are autocompounded and Moonpot sets aside {{breakdownPrize}}% for the Side Pot prize, {{breakdownBuyback}}% for $POTS buybacks for the Main Pot’s bonus interest, and {{breakdownZiggyTotal}}% for Ziggy’s (governance) Pot’s interest and prizes."
+            "The {{name}} Pot deposits your ${{token}} in the Beefy.Finance {{token}} Vault. All Pot earnings are autocompounded and Moonpot sets aside {{breakdownPrize}}% for the Side Pot prize and {{breakdownBuyback}}% for $POTS buybacks for the Main Pot’s bonus interest."
           ]
         },
         "beefyVaultAddress": "Beefy.Finance Vault Address",
