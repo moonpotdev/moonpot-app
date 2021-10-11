@@ -13,7 +13,8 @@
     "play": "Bermain",
     "learnMore": "Pelajari lebih lanjut",
     "moonpots": "Moonpots",
-    "myPots": "Pots Saya"
+    "myPots": "Pots Saya",
+    "sidePots": "side"
   },
   "modals": {
     "unsupportedNetworkDetected": "Jaringan terdeteksi tidak didukung ",
@@ -41,6 +42,7 @@
   "migrationNoticeLearnMore": "Pelajari lebih lanjut.",
   "migrationNoticeMove": "Pindahkan {{asset}} saya",
   "vaultTitle": "Depositkan <span>{{token}}</span>, Hasilkan <span>{{apy}}% APY</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
+  "vaultTitleSide": "Setorkan <span>{{token}}</span>, Dan dapatkan sebuah kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
   "playWithMoonpot": "Bermain dengan Moonpot",
   "youHaventEnteredMoonpots": "Anda belum masuk ke Moonpots manapun.",
   "youHaventEnteredRetiredMoonpots": "Anda belum masuk ke Moonpots yang tidak aktif.",
@@ -51,6 +53,7 @@
   "upgradeNextSteps": "Karena ada peningkatan, Anda perlu memindahkan {{token}} anda ke Pot {{token}} yang baru.  Kami telah menambahkan {{boostToken}} Superboost ke Pot {{token}} baru untuk membantu anda agar lebih bermanfaat.",
   "upgradeMove": "Pindahkan {{base}}",
   "upgradeMoveWithdraw": "Pindahkan {{base}} dan Tarik {{bonus}}",
+  "sidePotExplainer": "Side Pots memberi Anda kesempatan untuk memenangkan hadiah harian tanpa mendapatkan bunga/keuntungan. Jika Anda ingin mendapatkan bunga/keuntungan dan bergabung dengan undian mingguan dan bulanan yang lebih besar, Ziggy merekomendasikan Anda untuk bergabung ke <MainPotLink>Pot Utama<MainPotLink> sebagai gantinya.",
   "learnMore": "Pelajari lebih lanjut",
   "telegramSocialBlockBody": "Pelajari tentang Moonpot dan dapatkan dukungan langsung dari komunitas",
   "discordSocialBlockBody": "Bergabunglah dengan percakapan komunitas aktif dari pengembang kami",
@@ -109,6 +112,7 @@
     "tokenAPY": "{{token}} APY",
     "tokenAPR": "{{token}} APR",
     "totalAPY": "Jumlah APY",
+    "prizeOnly": "Hanya Hadiah",
     "bonusTokenAPR": "Bonus {{token}} APR",
     "superBoostTokenAPR": "Super Boost {{token}} APR",
     "tooltip": {
@@ -132,6 +136,9 @@
             "Ziggy akan membeli POTS dari pasar terbuka dengan pendapatan Moonpot.com dan memberikannya kepada pemegang POTS sebagai keuntungan/bunga.",
             "Ada juga Undian Hadiah bulanan yang ditambahkan ke Pot Ziggy di mana 10 pemenang yang beruntung akan mendapatkan bagian dari hadiah pot sebanyak 5% dari pendapatan semua token di seluruh platform Moonpot.",
             "Sebagai contoh, Pengundian Hadiah pada 1 September termasuk POTS, BIFI, CAKE dan DODO, dan menghasilkan total $723.760. Pot Ziggy diundi setiap empat minggu sekali (pada hari Rabu). Anda tidak perlu stake ulang."
+          ],
+          "side": [
+            "Side Pot {{token}} menyimpan setoran ${{token}} anda di Beefy.Finance {{token}} Vault. Semua pendapatan Pot digabungkan secara otomatis dan Moonpot menyisihkan {{breakdownPrize}}% untuk hadiah Side Pot dan {{breakdownBuyback}}% untuk pembelian kembali $POTS untuk keuntungan bonus Pot Utama."
           ]
         },
         "beefyVaultAddress": "Alamat Brankas Beefy.Finance",
@@ -140,6 +147,7 @@
       "earnings": {
         "title": "Rincian Strategi",
         "tokenInterest": "Keuntungan {{token}} Anda",
+        "buyback": "Pembelian kembali $POTS untuk bonus keuntungan/bunga POT {{token}}",
         "nameMoonpotPrizeDraw": "Undian Hadiah Moonpot {{name}}",
         "ziggysPotInterest": "Keuntungan Pot Ziggy (Tata kelola)",
         "ziggysPrizeDraw": "Undian Hadiah Ziggy (Tata Kelola)",
@@ -149,10 +157,10 @@
         "title": "Aturan TimeLock Fairplay",
         "body": [
           "Hadiah berasal dari keuntungan yang dihasilkan oleh semua pemain Moonpot, jadi kami membutuhkan sebuah sistem untuk menjaga permainan ini tetap adil.",
-          "Ada TimeLock Fairplay selama sepuluh hari sebagai dasar untuk mencegah pemain menyetor tepat sebelum pengundian dimulai dan kemudian menariknya dengan cepat setelah undian selesai.",
-          "Jika Anda ingin melakukan penarikan lebih awal, Anda akan membayar Biaya Fairness sebanyak 2,5%, atau kurang. Biaya Fairness akan berkurang setiap detik dan akan menjadi nol selama sepuluh hari.",
+          "Ada TimeLock Fairplay selama {{duration}} hari sebagai dasar untuk mencegah pemain menyetor tepat sebelum pengundian dimulai dan kemudian menariknya dengan cepat setelah undian selesai.",
+          "Jika Anda ingin melakukan penarikan lebih awal, Anda akan membayar Biaya Fairness sebanyak 2,5%, atau kurang. Biaya Fairness akan berkurang setiap detik dan akan menjadi nol selama {{duration}} hari.",
           "Deposit/menyetorkan lebih banyak {{token}} akan menyetel ulang biaya Fairness Anda hingga maksimum 2,5%, untuk deposit tambahan Anda.",
-          "Jika Anda memenangkan hadiah, Biaya Fairness Anda akan diatur ulang menjadi 5% dan dikurangi menjadi nol selama sepuluh hari setelah Anda memenangkan hadiah.",
+          "Jika Anda memenangkan hadiah, Biaya Fairness Anda akan diatur ulang menjadi 5% dan dikurangi menjadi nol selama {{duration}} hari setelah Anda memenangkan hadiah.",
           "Langkah-langkah ini dapat mencegah pelaku jahat memanipulasi pengundian hadiah."
         ]
       }

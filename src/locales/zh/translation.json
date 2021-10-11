@@ -9,11 +9,12 @@
     "mainPots": "核心",
     "communityPots": "社群",
     "lpPots": "LP",
-    "stablePots": "Stable",
+    "stablePots": "稳定币",
     "play": "开始游戏",
     "learnMore": "了解更多",
     "moonpots": "Moonpots",
-    "myPots": "我的月盒"
+    "myPots": "我的月盒",
+    "sidePots": "附属"
   },
   "modals": {
     "unsupportedNetworkDetected": "检测到不支持的网络",
@@ -41,6 +42,7 @@
   "migrationNoticeLearnMore": "了解更多",
   "migrationNoticeMove": "转移我的{{asset}}",
   "vaultTitle": "存入 <span>{{token}}</span>, 获得 <span>{{apy}}% APY</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
+  "vaultTitleSide": "存入 <span>{{token}}</span>, 即有机会抱走奖金 <span>{{currency}}{{amount}}</span>",
   "playWithMoonpot": "使用Moonpot进行游戏",
   "youHaventEnteredMoonpots": "您尚未参与任何月盒.",
   "youHaventEnteredRetiredMoonpots": "您未参与任何已退役的月盒。",
@@ -51,6 +53,7 @@
   "upgradeNextSteps": "由于此次的升级，您需要转移您的{{token}}至新的{{token}} 月盒。我们已添加了金额为${{amount}} {{boostToken}}的超速增值币到这一新的{{token}}月盒，以便让您获得更多的收益。",
   "upgradeMove": "转移 {{base}}",
   "upgradeMoveWithdraw": "转移 {{base}} 和提取 {{bonus}}",
+  "sidePotExplainer": "附属月盒让您有机会在不赚取利息的情况下赢得每日奖金。 如果您想赚取利息并参与更大的每周和每月抽奖活动，Ziggy 建议您改为参与<MainPotLink>核心月盒<MainPotLink>。",
   "learnMore": "了解更多",
   "telegramSocialBlockBody": "了解更多关于Moonpot的资讯，并获得来自官方社群的帮助",
   "discordSocialBlockBody": "和我们活跃的开发者社群进行直接对话",
@@ -109,6 +112,7 @@
     "tokenAPY": "{{token}} APY",
     "tokenAPR": "{{token}} APR",
     "totalAPY": "总 APY",
+    "prizeOnly": "仅限奖金",
     "bonusTokenAPR": "额外 {{token}} APR",
     "superBoostTokenAPR": "超速增值 {{token}} APR",
     "tooltip": {
@@ -132,6 +136,9 @@
             "Ziggy 使用 Moonpot.com 的收入从公开市场上购买 POTS，并将其作为利息提供给 POTS 质押者。",
             "Ziggy's 月盒还设有每月一次的抽奖活动，其中 10 位幸运的获胜者可以分享由整个Moonpot平台所有代币收入的5%组成的奖池。",
             "例如，9 月 1 日的抽奖活动奖励包括 POTS、BIFI、CAKE 和 DODO 代币，总奖金为 $723,760。 Ziggy's 月盒每四个星期（星期三）抽奖一次。参与抽奖的过程是自动化的，您无需每次手动重新质押进月盒以参与抽奖。"
+          ],
+          "side": [
+            "{{token}} 附属月盒将您的 ${{token}} 存入 Beefy.Finance {{token}} 金库。所有月盒收益都是自动复合的。Moonpot 预留了 {{breakdownPrize}}% 用于附属月盒奖金和 {{breakdownBuyback}}% 用于回购 $POTS 作为核心月盒的奖金利息。"
           ]
         },
         "beefyVaultAddress": "Beefy 金库地址",
@@ -140,6 +147,7 @@
       "earnings": {
         "title": "收益明细",
         "tokenInterest": "您的 {{token}} 利息",
+        "buyback": "回购 $POTS 作为 {{token}} 月盒额外利息",
         "nameMoonpotPrizeDraw": "{{name}} Moonpot 抽奖活动",
         "ziggysPotInterest": "Ziggy's (治理) 月盒利息",
         "ziggysPrizeDraw": "Ziggy's (治理) 抽奖活动",
@@ -149,10 +157,10 @@
         "title": "公平游戏锁定期规则",
         "body": [
           "抽奖给出的奖金来自所有Moonpot玩家资产所产生的利息，因此我们需要一个完善的系统来保证这一游戏的公平性。",
-          "我们设置了10天的公平游戏时间锁定期，以防止玩家在抽奖快要开始前存入资产，在开奖结束后迅速提出。",
-          "如果想要提前提取资产，您必须支付2.5% 或更少的公平费用。公平费在十天内逐秒减少至零。",
+          "我们设置了 {{duration}} 天的公平游戏时间锁定期，以防止玩家在抽奖快要开始前存入资产，在开奖结束后迅速提出。",
+          "如果想要提前提取资产，您必须支付2.5% 或更少的公平费用。公平费在 {{duration}} 天内逐秒减少至零。",
           "存入更多的{{token}}为您的新存款会将您的公平费重置为最高 2.5%。",
-          "如果您中奖了，您的公平费会被重置到5%，在中奖后的10天内逐秒减少至0。",
+          "如果您中奖了，您的公平费会被重置到5%，在中奖后的 {{duration}} 天内逐秒减少至0。",
           "这些措施可以有效防止操控抽奖的作弊行为。"
         ]
       }
@@ -166,7 +174,7 @@
     "token": "存入 {{token}}",
     "allToken": "存入所有 {{token}}",
     "amountToken": "存入 {{amount}} {{token}}",
-    "fairplayNotice": "我们设置了{{duration}}天的公平游戏时间锁定期。如果想要提前提取资产，您必须支付2.5% 或更少的公平费用。公平费在十天内逐秒减少至零。",
+    "fairplayNotice": "我们设置了 {{duration}} 天的公平游戏时间锁定期。如果想要提前提取资产，您必须支付2.5% 或更少的公平费用。公平费逐秒减少至零。",
     "eolNotice": {
       "title": "已退役的月盒",
       "message": "您不能再向这个月盒进行存款了."
@@ -176,7 +184,9 @@
       "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
       "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
     ],
-    "zapTooltip4Belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"],
+    "zapTooltip4Belt": [
+      "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
+    ],  
     "inYourWallet": "您的钱包里有",
     "provider": "流动性提供者"
   },
