@@ -94,10 +94,8 @@
     "fairplayDuration": 3,
     "fairplayTicketFee": 0.025,
     "interestBreakdown": {
-      "prize": 70,
-      "buyback": 20,
-      "ziggyInterest": 5,
-      "ziggyPrize": 5
+      "prize": 80,
+      "buyback": 20
     },
     "status": "active",
     "withdrawFee": 0,
