@@ -12,7 +12,8 @@
     "type": "ticket",
     "oracleId": "POTS",
     "decimals": 18,
-    "ticketFor": "POTS"
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "moonTicketPotsV2",
@@ -20,7 +21,8 @@
     "type": "ticket",
     "oracleId": "POTS",
     "decimals": 18,
-    "ticketFor": "POTS"
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "CAKE",
@@ -35,7 +37,8 @@
     "type": "ticket",
     "oracleId": "Cake",
     "decimals": 18,
-    "ticketFor": "CAKE"
+    "underlyingToken": "CAKE",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "moonTicketCakeV2",
@@ -43,7 +46,8 @@
     "type": "ticket",
     "oracleId": "Cake",
     "decimals": 18,
-    "ticketFor": "CAKE"
+    "underlyingToken": "CAKE",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "moonTicketCakeV3",
@@ -51,7 +55,8 @@
     "type": "ticket",
     "oracleId": "Cake",
     "decimals": 18,
-    "ticketFor": "CAKE"
+    "underlyingToken": "CAKE",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "moonTicketSideCake",
@@ -59,7 +64,8 @@
     "type": "ticket",
     "oracleId": "Cake",
     "decimals": 18,
-    "ticketFor": "CAKE"
+    "underlyingToken": "CAKE",
+    "stakedMultiplier": 1
   },
   {
     "symbol": "BIFI",
@@ -74,7 +80,8 @@
     "type": "ticket",
     "oracleId": "BIFI",
     "decimals": 18,
-    "ticketFor": "BIFI"
+    "underlyingToken": "BIFI",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "DODO",
@@ -103,7 +110,8 @@
     "type": "ticket",
     "oracleId": "BANANA",
     "decimals": 18,
-    "ticketFor": "BANANA"
+    "underlyingToken": "BANANA",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "BUSD",
@@ -148,7 +156,8 @@
     "type": "ticket",
     "oracleId": "banana-pots-bnb",
     "decimals": 18,
-    "ticketFor": "POTS-BNB LP"
+    "underlyingToken": "POTS-BNB LP",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "POTS-BUSD LP",
@@ -165,7 +174,8 @@
     "type": "ticket",
     "oracleId": "cakev2-pots-busd",
     "decimals": 18,
-    "ticketFor": "POTS-BUSD LP"
+    "underlyingToken": "POTS-BUSD LP",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "4Belt USD LP",
@@ -185,7 +195,8 @@
     "type": "ticket",
     "oracleId": "belt-4belt",
     "decimals": 18,
-    "ticketFor": "4Belt USD LP"
+    "underlyingToken": "4Belt USD LP",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "PACOCA",
@@ -200,7 +211,8 @@
     "type": "ticket",
     "oracleId": "PACOCA",
     "decimals": 18,
-    "ticketFor": "PACOCA"
+    "underlyingToken": "PACOCA",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "xBLZD",
@@ -215,7 +227,8 @@
     "type": "ticket",
     "oracleId": "xBLZD",
     "decimals": 18,
-    "ticketFor": "xBLZD"
+    "underlyingToken": "xBLZD",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "CAKE-BNB LP",
@@ -232,7 +245,8 @@
     "type": "ticket",
     "oracleId": "cakev2-cake-bnb",
     "decimals": 18,
-    "ticketFor": "CAKE-BNB LP"
+    "underlyingToken": "CAKE-BNB LP",
+    "stakedMultiplier": 2
   },
   {
     "symbol": "BIFI-BNB LP",
@@ -249,6 +263,7 @@
     "type": "ticket",
     "oracleId": "banana-bifi-bnb",
     "decimals": 18,
-    "ticketFor": "BIFI-BNB LP"
+    "underlyingToken": "BIFI-BNB LP",
+    "stakedMultiplier": 2
   }
 ]
