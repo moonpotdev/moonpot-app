@@ -53,7 +53,7 @@
   "upgradeNextSteps": "由于此次的升级，您需要转移您的{{token}}至新的{{token}} 月盒。我们已添加了金额为${{amount}} {{boostToken}}的超速增值币到这一新的{{token}}月盒，以便让您获得更多的收益。",
   "upgradeMove": "转移 {{base}}",
   "upgradeMoveWithdraw": "转移 {{base}} 和提取 {{bonus}}",
-  "sidePotExplainer": "附属月盒让您有机会在不赚取利息的情况下赢得每日奖金。 如果您想赚取利息并参与更大的每周和每月抽奖活动，Ziggy 建议您改为参与<MainPotLink>核心月盒<MainPotLink>。",
+  "sidePotExplainer": "附属月盒让您有机会在不赚取利息的情况下赢得每日奖金。 如果您想赚取利息并参与更大的每周和每月抽奖活动，Ziggy 建议您改为参与<MainPotLink>核心月盒</MainPotLink>。",
   "learnMore": "了解更多",
   "telegramSocialBlockBody": "了解更多关于Moonpot的资讯，并获得来自官方社群的帮助",
   "discordSocialBlockBody": "和我们活跃的开发者社群进行直接对话",
@@ -184,9 +184,7 @@
       "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
       "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
     ],
-    "zapTooltip4Belt": [
-      "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
-    ],  
+    "zapTooltip4Belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"],
     "inYourWallet": "您的钱包里有",
     "provider": "流动性提供者"
   },

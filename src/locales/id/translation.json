@@ -53,7 +53,7 @@
   "upgradeNextSteps": "Karena ada peningkatan, Anda perlu memindahkan {{token}} anda ke Pot {{token}} yang baru.  Kami telah menambahkan {{boostToken}} Superboost ke Pot {{token}} baru untuk membantu anda agar lebih bermanfaat.",
   "upgradeMove": "Pindahkan {{base}}",
   "upgradeMoveWithdraw": "Pindahkan {{base}} dan Tarik {{bonus}}",
-  "sidePotExplainer": "Side Pots memberi Anda kesempatan untuk memenangkan hadiah harian tanpa mendapatkan bunga/keuntungan. Jika Anda ingin mendapatkan bunga/keuntungan dan bergabung dengan undian mingguan dan bulanan yang lebih besar, Ziggy merekomendasikan Anda untuk bergabung ke <MainPotLink>Pot Utama<MainPotLink> sebagai gantinya.",
+  "sidePotExplainer": "Side Pots memberi Anda kesempatan untuk memenangkan hadiah harian tanpa mendapatkan bunga/keuntungan. Jika Anda ingin mendapatkan bunga/keuntungan dan bergabung dengan undian mingguan dan bulanan yang lebih besar, Ziggy merekomendasikan Anda untuk bergabung ke <MainPotLink>Pot Utama</MainPotLink> sebagai gantinya.",
   "learnMore": "Pelajari lebih lanjut",
   "telegramSocialBlockBody": "Pelajari tentang Moonpot dan dapatkan dukungan langsung dari komunitas",
   "discordSocialBlockBody": "Bergabunglah dengan percakapan komunitas aktif dari pengembang kami",
