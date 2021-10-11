@@ -11,7 +11,7 @@ import { byDecimals, convertAmountToRawNumber } from '../../../helpers/format';
 import { config } from '../../../config/config';
 import gateManagerAbi from '../../../config/abi/gatemanager.json';
 import { MultiCall } from 'eth-multicall';
-import { objectArrayFlatten } from '../../../helpers/utils';
+import { getFairplayFeePercent, objectArrayFlatten } from '../../../helpers/utils';
 
 export function createZapInEstimate(potId, depositAddress, depositAmount) {
   const requestId = uniqid('in', potId);
@@ -70,15 +70,6 @@ export function createZapInEstimate(potId, depositAddress, depositAmount) {
   ];
 }
 
-function getFairplayFeePercent(secondsRemaining, days = 10) {
-  if (secondsRemaining) {
-    const max = 3600 * 24 * days;
-    return (secondsRemaining * 0.05) / max;
-  }
-
-  return 0;
-}
-
 function simpleZapOutEstimate(potId, wantTokenAddress) {
   const requestId = uniqid('out', potId);
 
@@ -102,6 +93,8 @@ function simpleZapOutEstimate(potId, wantTokenAddress) {
       const multicall = new MultiCall(web3, config[network].multicallAddress);
       const address = state.walletReducer.address;
       const isRemoveOnly = false;
+      const fairplayDuration = pot.fairplayDuration;
+      const fairplayTicketFee = pot.fairplayTicketFee;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
       const wantToken = tokensByNetworkAddress[network][wantTokenAddress.toLowerCase()];
       const token0Symbol = pairToken.lp[0];
@@ -127,7 +120,7 @@ function simpleZapOutEstimate(potId, wantTokenAddress) {
       const [results] = await multicall.all([calls]);
       const { ticketBalance, timeleft, userTotalBalance } = objectArrayFlatten(results);
 
-      const fairplayFee = getFairplayFeePercent(timeleft);
+      const fairplayFee = getFairplayFeePercent(timeleft, fairplayDuration, fairplayTicketFee);
 
       const depositBalance = new BigNumber(userTotalBalance).minus(ticketBalance);
       const ticketBalanceAfterWithdrawFee = new BigNumber(ticketBalance).multipliedBy(
@@ -197,6 +190,8 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
       const multicall = new MultiCall(web3, config[network].multicallAddress);
       const address = state.walletReducer.address;
       const isRemoveOnly = !wantTokenAddress;
+      const fairplayDuration = pot.fairplayDuration;
+      const fairplayTicketFee = pot.fairplayTicketFee;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
       const token0Symbol = pairToken.lp[0];
       const token1Symbol = pairToken.lp[1];
@@ -231,7 +226,7 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
       const { ticketBalance, totalSupply, reserves, timeleft, userTotalBalance, routerAddress } =
         objectArrayFlatten(results);
 
-      const fairplayFee = getFairplayFeePercent(timeleft);
+      const fairplayFee = getFairplayFeePercent(timeleft, fairplayDuration, fairplayTicketFee);
 
       const depositBalance = new BigNumber(userTotalBalance).minus(ticketBalance);
       const ticketBalanceAfterWithdrawFee = new BigNumber(ticketBalance).multipliedBy(

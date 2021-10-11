@@ -100,3 +100,12 @@ export function sortObjectsAsc(objectsArray, key) {
 export function sortObjectsDesc(objectsArray, key) {
   return objectsArray.sort((a, b) => (a[key] < b[key]) - (a[key] > b[key]));
 }
+
+export function getFairplayFeePercent(secondsRemaining, days = 10, fee = 0.05) {
+  if (secondsRemaining) {
+    const max = 3600 * 24 * days;
+    return (secondsRemaining * fee) / max;
+  }
+
+  return 0;
+}

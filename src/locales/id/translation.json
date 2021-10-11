@@ -92,6 +92,7 @@
     "prizeSplitToolTip": "Proyeksi langsung berdasarkan TVL saat ini dan suku bunga",
     "prizeSplitWinner": "{{count}} Pemenang",
     "prizeSplitWinner_plural": "{{count}} Tiket Pemenang",
+    "amount": "<span>{{symbol}}{{amount}}</span>",
     "amountEach": "<span>{{symbol}}{{amount}}</span> Masing-masing",
     "playWith": "Bermain dengan {{token}}",
     "playWithMore": "Bermain dengan lebih banyak {{token}}",
@@ -245,4 +246,3 @@
     "claimAll": "Klaim semua bonus POTS yang diperoleh"
   }
 }
-

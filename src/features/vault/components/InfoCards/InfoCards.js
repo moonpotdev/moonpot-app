@@ -17,14 +17,6 @@ import ziggyTimelock4x from '../../../../images/ziggy/timelock@4x.png';
 
 const useStyles = makeStyles(styles);
 
-const handleDuration = vaultType => {
-  if (vaultType === 'side') {
-    return 'three';
-  } else {
-    return 'ten';
-  }
-};
-
 export const InfoCards = function ({ id, className, fairplayRef }) {
   const pot = usePot(id);
   const classes = useStyles();
@@ -38,6 +30,14 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
           {t('pot.infocards.strategy.body.' + pot.infoCardStrategy, {
             returnObjects: true,
             token: pot.token,
+            name: pot.name,
+            breakdownInterest: pot.interestBreakdown?.interest || 0,
+            breakdownPrize: pot.interestBreakdown?.prize || 0,
+            breakdownBuyback: pot.interestBreakdown?.buyback || 0,
+            breakdownZiggyInterest: pot.interestBreakdown?.ziggyInterest || 0,
+            breakdownZiggyPrize: pot.interestBreakdown?.ziggyPrize || 0,
+            breakdownZiggyTotal:
+              (pot.interestBreakdown?.ziggyPrize || 0) + (pot.interestBreakdown?.ziggyPrize || 0),
           }).map((text, i) => (
             <p key={i}>{text}</p>
           ))}
@@ -132,7 +132,8 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
         {t('pot.infocards.fairplay.body', {
           returnObjects: true,
           token: pot.token,
-          duration: handleDuration(pot.vaultType),
+          duration: pot.fairplayDuration,
+          ticketFee: pot.fairplayTicketFee * 100,
         }).map((text, i) => (
           <p key={i}>{text}</p>
         ))}
