@@ -55,7 +55,7 @@
   },
   {
     "symbol": "moonTicketSideCake",
-    "address": "0xADeEDCAaEaECbc8a86C80033cb142085ce0085C5",
+    "address": "0xd1E54daB9Be66ad630adB84d83475EdEcF2d1D97",
     "type": "ticket",
     "oracleId": "Cake",
     "decimals": 18,
