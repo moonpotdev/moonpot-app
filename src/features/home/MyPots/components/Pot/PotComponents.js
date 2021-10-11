@@ -112,7 +112,11 @@ export const PotInfoBlock = function ({ item, active = true }) {
               </Typography>
             </Grid>
             <Grid item xs={6}>
-              <Interest baseApy={item.apy} bonusApy={item.bonusApy} />
+              {pot.vaultType !== 'side' ? (
+                <Interest baseApy={item.apy} bonusApy={item.bonusApy} />
+              ) : (
+                <Translate i18nKey="pot.prizeOnly" />
+              )}
             </Grid>
           </>
         ) : null}
