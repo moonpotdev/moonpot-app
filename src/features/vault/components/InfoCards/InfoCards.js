@@ -17,6 +17,14 @@ import ziggyTimelock4x from '../../../../images/ziggy/timelock@4x.png';
 
 const useStyles = makeStyles(styles);
 
+const handleDuration = vaultType => {
+  if (vaultType === 'side') {
+    return 'three';
+  } else {
+    return 'ten';
+  }
+};
+
 export const InfoCards = function ({ id, className, fairplayRef }) {
   const pot = usePot(id);
   const classes = useStyles();
@@ -124,6 +132,7 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
         {t('pot.infocards.fairplay.body', {
           returnObjects: true,
           token: pot.token,
+          duration: handleDuration(pot.vaultType),
         }).map((text, i) => (
           <p key={i}>{text}</p>
         ))}
