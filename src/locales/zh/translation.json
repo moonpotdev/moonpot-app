@@ -87,6 +87,7 @@
     "prizeSplitToolTip": "基于目前的TVL和利率的实时预测",
     "prizeSplitWinner": "{{count}} 张中奖门票",
     "prizeSplitWinner_plural": "{{count}} 张中奖门票",
+    "amount": "<span>{{symbol}}{{amount}}</span>",
     "amountEach": "每张 <span>{{symbol}}{{amount}}</span>",
     "playWith": "使用 {{token}} 进行游戏",
     "playWithMore": "使用更多 {{token}} 进行游戏",
@@ -175,9 +176,7 @@
       "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
       "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
     ],
-    "zapTooltip4Belt": [
-      "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
-    ], 
+    "zapTooltip4Belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"],
     "inYourWallet": "您的钱包里有",
     "provider": "流动性提供者"
   },
@@ -235,4 +234,3 @@
     "claimAll": "领取赚取的所有额外 POTS 奖励"
   }
 }
-

@@ -92,6 +92,7 @@
     "prizeSplitToolTip": "Live projection based on current TVL and interest rate",
     "prizeSplitWinner": "{{count}} Winning Ticket",
     "prizeSplitWinner_plural": "{{count}} Winning Tickets",
+    "amount": "<span>{{symbol}}{{amount}}</span>",
     "amountEach": "<span>{{symbol}}{{amount}}</span> each",
     "playWith": "Play with {{token}}",
     "playWithMore": "Play with more {{token}}",
