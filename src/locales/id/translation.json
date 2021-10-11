@@ -14,6 +14,7 @@
     "learnMore": "Pelajari lebih lanjut",
     "moonpots": "Moonpots",
     "myPots": "Pots Saya"
+    "sidePots": "side"
   },
   "modals": {
     "unsupportedNetworkDetected": "Jaringan terdeteksi tidak didukung ",
@@ -33,6 +34,9 @@
     "potsPrice": "Harga POTS",
     "buyPots": "Beli POTS"
   },
+  "sidePotExplainerA": "Side Pots give you the chance to win daily prizes without earning interest. If you want to earn interest and join bigger weekly and monthly draws, Ziggy recommends you join a",
+  "sidePotExplainerB": "instead.",
+  "mainPot": "Main Pot",
   "homeTitle": "Depositkan <span>crypto</span>, Hasilkan <span>keuntungan</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposit (TVL)",
   "homeJoinCommunityTitle": "Bergabung dengan komunitas",
@@ -41,6 +45,7 @@
   "migrationNoticeLearnMore": "Pelajari lebih lanjut.",
   "migrationNoticeMove": "Pindahkan {{asset}} saya",
   "vaultTitle": "Depositkan <span>{{token}}</span>, Hasilkan <span>{{apy}}% APY</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
+  "vaultTitleSide": "Deposit <span>{{token}}</span>, and be entered for a chance to win <span>{{currency}}{{amount}}</span>",
   "playWithMoonpot": "Bermain dengan Moonpot",
   "youHaventEnteredMoonpots": "Anda belum masuk ke Moonpots manapun.",
   "youHaventEnteredRetiredMoonpots": "Anda belum masuk ke Moonpots yang tidak aktif.",
@@ -108,6 +113,7 @@
     "tokenAPY": "{{token}} APY",
     "tokenAPR": "{{token}} APR",
     "totalAPY": "Jumlah APY",
+    "prizeOnly": "Prize Only",
     "bonusTokenAPR": "Bonus {{token}} APR",
     "superBoostTokenAPR": "Super Boost {{token}} APR",
     "tooltip": {
@@ -131,6 +137,9 @@
             "Ziggy akan membeli POTS dari pasar terbuka dengan pendapatan Moonpot.com dan memberikannya kepada pemegang POTS sebagai keuntungan/bunga.",
             "Ada juga Undian Hadiah bulanan yang ditambahkan ke Pot Ziggy di mana 10 pemenang yang beruntung akan mendapatkan bagian dari hadiah pot sebanyak 5% dari pendapatan semua token di seluruh platform Moonpot.",
             "Sebagai contoh, Pengundian Hadiah pada 1 September termasuk POTS, BIFI, CAKE dan DODO, dan menghasilkan total $723.760. Pot Ziggy diundi setiap empat minggu sekali (pada hari Rabu). Anda tidak perlu stake ulang."
+          ],
+          "side": [
+            "The {{token}} Side Pot deposits your ${{token}} in the Beefy.Finance {{token}} Vault. All Pot earnings are autocompounded and Moonpot sets aside 70% for the Side Pot prize, 20% for $POTS buybacks for the Main Pot’s bonus interest, and 10% for Ziggy’s (governance) Pot’s interest and prizes."
           ]
         },
         "beefyVaultAddress": "Alamat Brankas Beefy.Finance",
@@ -139,6 +148,7 @@
       "earnings": {
         "title": "Rincian Strategi",
         "tokenInterest": "Keuntungan {{token}} Anda",
+        "buyback": "$POTS Buyback for {{token}} POT Bonus interest",
         "nameMoonpotPrizeDraw": "Undian Hadiah Moonpot {{name}}",
         "ziggysPotInterest": "Keuntungan Pot Ziggy (Tata kelola)",
         "ziggysPrizeDraw": "Undian Hadiah Ziggy (Tata Kelola)",
