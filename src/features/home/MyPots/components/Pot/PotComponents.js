@@ -56,7 +56,7 @@ export const PotTitle = function ({ item }) {
   );
 };
 
-const Interest = function ({ baseApy, bonusApy }) {
+const Interest = function ({ baseApy, bonusApy, noInterest }) {
   const classes = useStyles();
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
@@ -65,7 +65,11 @@ const Interest = function ({ baseApy, bonusApy }) {
   return (
     <div className={classes.interestContainer}>
       <div className={classes.interestValueApy}>
-        <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
+        {noInterest ? (
+          <Translate i18nKey="pot.prizeOnly" />
+        ) : (
+          <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
+        )}
       </div>
     </div>
   );
@@ -112,11 +116,11 @@ export const PotInfoBlock = function ({ item, active = true }) {
               </Typography>
             </Grid>
             <Grid item xs={6}>
-              {pot.vaultType !== 'side' ? (
-                <Interest baseApy={item.apy} bonusApy={item.bonusApy} />
-              ) : (
-                <Translate i18nKey="pot.prizeOnly" />
-              )}
+              <Interest
+                baseApy={item.apy}
+                bonusApy={item.bonusApy}
+                noInterest={item.vaultType === 'side' ? true : false}
+              />
             </Grid>
           </>
         ) : null}
