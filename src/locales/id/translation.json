@@ -42,7 +42,7 @@
   "migrationNoticeLearnMore": "Pelajari lebih lanjut.",
   "migrationNoticeMove": "Pindahkan {{asset}} saya",
   "vaultTitle": "Depositkan <span>{{token}}</span>, Hasilkan <span>{{apy}}% APY</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
-  "vaultTitleSide": "Setorkan <span>{{token}}</span>, Dan dapatkan sebuah kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
+  "vaultTitleSide": "Depositkan <span>{{token}}</span>, Dan dapatkan sebuah kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
   "playWithMoonpot": "Bermain dengan Moonpot",
   "youHaventEnteredMoonpots": "Anda belum masuk ke Moonpots manapun.",
   "youHaventEnteredRetiredMoonpots": "Anda belum masuk ke Moonpots yang tidak aktif.",
