@@ -9,12 +9,12 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-  },
-  beefyLink: {
-    color: '#B4B2CC',
-    textDecoration: 'underline',
-    '&:hover, &focus': {
+    '& a': {
       color: '#B4B2CC',
+      textDecoration: 'underline',
+      '&:hover, &focus': {
+        color: '#B4B2CC',
+      },
     },
   },
   beefyLogoItem: {
