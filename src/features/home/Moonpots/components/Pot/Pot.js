@@ -10,6 +10,7 @@ import { Translate } from '../../../../../components/Translate';
 import { byDecimals } from '../../../../../helpers/format';
 import { TooltipWithIcon } from '../../../../../components/Tooltip/tooltip';
 import styles from './styles';
+import { tokensByNetworkAddress } from '../../../../../config/tokens';
 
 const useStyles = makeStyles(styles);
 
@@ -33,16 +34,20 @@ const Play = memo(function ({ id, token, contractAddress, variant }) {
 
 const NewDepositOdds = memo(function ({
   tokenAddress,
+  ticketAddress,
   tokenDecimals,
   ticketTotalSupply,
   depositAmountUsd,
   winners,
+  network = 'bsc',
 }) {
-  const tokenPrice = useTokenAddressPrice(tokenAddress);
+  const tokenPrice = useTokenAddressPrice(tokenAddress, network);
+  const stakedMultiplier =
+    tokensByNetworkAddress[network][ticketAddress.toLowerCase()].stakedMultiplier;
 
   const odds = useMemo(() => {
     if (tokenPrice) {
-      const depositAmountTickets = depositAmountUsd / tokenPrice / 2;
+      const depositAmountTickets = depositAmountUsd / tokenPrice / stakedMultiplier;
 
       return investmentOdds(
         byDecimals(ticketTotalSupply, tokenDecimals),
@@ -53,7 +58,7 @@ const NewDepositOdds = memo(function ({
     }
 
     return 0;
-  }, [ticketTotalSupply, depositAmountUsd, tokenPrice, winners, tokenDecimals]);
+  }, [ticketTotalSupply, depositAmountUsd, tokenPrice, winners, tokenDecimals, stakedMultiplier]);
 
   return (
     <Translate
@@ -122,6 +127,7 @@ const Bottom = function ({ id }) {
       <div className={classes.rowOdds}>
         <NewDepositOdds
           tokenAddress={pot.tokenAddress}
+          ticketAddress={pot.rewardAddress}
           tokenDecimals={pot.tokenDecimals}
           ticketTotalSupply={pot.totalTickets}
           depositAmountUsd={1000}
