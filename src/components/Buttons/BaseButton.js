@@ -1,8 +1,8 @@
 import { Button, withStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { forwardRef, useCallback } from 'react';
+import { forwardRef, useCallback, useMemo } from 'react';
 
-export const RoutedButton = forwardRef(function ({ to, ...rest }, ref) {
+export const RoutedButton = forwardRef(function ({ to, href, ...rest }, ref) {
   const history = useHistory();
   const handleClick = useCallback(
     e => {
@@ -13,8 +13,19 @@ export const RoutedButton = forwardRef(function ({ to, ...rest }, ref) {
     },
     [history, to]
   );
+  const generatedHref = useMemo(() => {
+    if (href) {
+      return href;
+    } else if (to && typeof to === 'string') {
+      return to.substr(0, 1) === '/' ? '/#' + to : to;
+    } else if (to && to.pathname && typeof to.pathname === 'string') {
+      return to.pathname.substr(0, 1) === '/' ? '/#' + to.pathname : to.pathname;
+    }
 
-  return <Button ref={ref} onClick={to ? handleClick : null} {...rest} />;
+    return null;
+  }, [to, href]);
+
+  return <Button ref={ref} href={generatedHref} onClick={to ? handleClick : null} {...rest} />;
 });
 
 const VariantButton = forwardRef(function ({ variant, ...rest }, ref) {
