@@ -14,6 +14,7 @@ import { investmentOdds } from '../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import styles from './styles';
 import { getPotIconSrc } from '../../helpers/getPotIconSrc';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles(styles);
 
@@ -39,7 +40,16 @@ export const Logo = memo(function ({ baseToken, sponsorToken, type }) {
   for (const key of possibilities) {
     const src = getPotIconSrc(key, false);
     if (src) {
-      return <img src={src} alt="" width="90" height="90" aria-hidden={true} />;
+      return (
+        <img
+          src={src}
+          alt=""
+          width="90"
+          height="90"
+          aria-hidden={true}
+          style={{ cursor: 'pointer' }}
+        />
+      );
     }
   }
 
@@ -178,15 +188,16 @@ const DepositWithOdds = memo(function ({
 export function Pot({ id, variant, bottom }) {
   const classes = useStyles();
   const pot = usePot(id);
+  const history = useHistory();
 
   return (
     <Card variant={variant}>
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>
-        <Grid item xs={4}>
+        <Grid item xs={4} onClick={() => history.push(`/pot/${pot.id}`)}>
           <Logo baseToken={pot.token} sponsorToken={pot.sponsorToken} type={pot.vaultType} />
         </Grid>
         <Grid item xs={8}>
-          <Title name={pot.name} />
+          <Title name={pot.name} onClick={() => history.push(`/pot/${pot.id}`)} />
           <WinTotal
             awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
             totalSponsorBalanceUsd={
