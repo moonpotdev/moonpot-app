@@ -7,18 +7,26 @@ import { Card } from '../../../../../components/Cards';
 import { useTranslation } from 'react-i18next';
 import { PotInfoBlock, PotTitle } from './PotComponents';
 import { Logo } from '../../../../../components/Pot';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles(styles);
 
 const Pot = function ({ item }) {
   const classes = useStyles();
   const { t } = useTranslation();
+  const history = useHistory();
 
   return (
     <Card variant={item.status === 'active' ? 'purpleLight' : 'purpleDarkAlt'}>
       <Grid container spacing={0}>
         {/*Pot Image*/}
-        <Grid item xs={4} align={'left'} style={{ marginBottom: '24px' }}>
+        <Grid
+          item
+          xs={4}
+          align={'left'}
+          style={{ marginBottom: '24px' }}
+          onClick={() => history.push(`/pot/${item.id}`)}
+        >
           <Logo baseToken={item.token} sponsorToken={item.sponsorToken} type={item.vaultType} />
         </Grid>
         {/*Pot Title*/}

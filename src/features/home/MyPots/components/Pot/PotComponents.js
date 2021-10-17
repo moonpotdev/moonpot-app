@@ -11,6 +11,7 @@ import { InterestTooltip } from '../../../../../components/Tooltip/tooltip';
 import { Translate } from '../../../../../components/Translate';
 import { useTokenBalance } from '../../../../../helpers/hooks';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles(styles);
 
@@ -18,12 +19,13 @@ export const PotTitle = function ({ item }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const pot = item;
+  const history = useHistory();
 
   return (
     <Grid item xs={8}>
       {item.status === 'active' ? (
         <React.Fragment>
-          <Typography className={classes.title}>
+          <Typography className={classes.title} onClick={() => history.push(`/pot/${pot.id}`)}>
             <Translate i18nKey="pot.title" values={{ name: item.name }} />
           </Typography>
           <div className={classes.potUsdTop}>

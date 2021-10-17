@@ -1,28 +1,35 @@
-import React from 'react';
-import { Box, Link, makeStyles } from '@material-ui/core';
-
+import React, { memo } from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core';
+import { Translate } from '../Translate';
 import BeefyCow from '../../images/beefy.svg';
 import styles from './styles';
-import clsx from 'clsx';
-import { Translate } from '../Translate';
 
 const useStyles = makeStyles(styles);
 
-export function PoweredByBeefy({ className }) {
+const BeefyLink = memo(function ({ children }) {
+  return (
+    <a href="https://www.beefy.finance/" target="_blank" rel="noreferrer">
+      {children}
+    </a>
+  );
+});
+
+const CertikLink = memo(function ({ children }) {
+  return (
+    <a href="https://www.certik.org/projects/moonpot" target="_blank" rel="noreferrer">
+      {children}
+    </a>
+  );
+});
+
+export const PoweredByBeefy = memo(function PoweredByBeefy({ className }) {
   const classes = useStyles();
 
   return (
-    <Box className={clsx(classes.poweredBy, className)}>
+    <div className={clsx(classes.poweredBy, className)}>
       <div>
-        <Translate i18nKey="poweredBy" />{' '}
-        <Link
-          href={'https://www.beefy.finance/'}
-          target="_blank"
-          rel="noreferrer"
-          className={classes.beefyLink}
-        >
-          Beefy
-        </Link>
+        <Translate i18nKey="poweredByBeefy" components={{ BeefyLink: <BeefyLink /> }} />
       </div>
       <div className={classes.beefyLogoItem}>
         <img
@@ -35,16 +42,8 @@ export function PoweredByBeefy({ className }) {
         />
       </div>
       <div>
-        <Translate i18nKey="auditedBy" />{' '}
-        <Link
-          href={'https://www.certik.org/projects/moonpot'}
-          target="_blank"
-          rel="noreferrer"
-          className={classes.beefyLink}
-        >
-          Certik
-        </Link>
+        <Translate i18nKey="auditedByCertik" components={{ CertikLink: <CertikLink /> }} />
       </div>
-    </Box>
+    </div>
   );
-}
+});

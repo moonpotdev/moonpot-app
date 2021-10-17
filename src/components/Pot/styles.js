@@ -10,6 +10,7 @@ const styles = theme => ({
     textAlign: 'right',
     letterSpacing: '1px',
     textTransform: 'uppercase',
+    cursor: 'pointer',
   },
   winTotalPrize: {
     color: '#FFFFFF',
