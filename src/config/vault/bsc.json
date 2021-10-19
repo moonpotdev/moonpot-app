@@ -25,7 +25,7 @@
       {
         "sponsorToken": "POTS",
         "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
       },
       {
@@ -211,7 +211,7 @@
       {
         "sponsorToken": "POTS",
         "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
       }
     ],
@@ -265,11 +265,11 @@
       {
         "sponsorToken": "POTS",
         "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
       }
     ],
-    "supportsClaimAllBonuses": true,
+    "supportsClaimAllBonuses": false,
     "bonuses": [
       {
         "id": 0,
@@ -319,7 +319,7 @@
       {
         "sponsorToken": "POTS",
         "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
       }
     ],
@@ -559,7 +559,7 @@
       {
         "sponsorToken": "POTS",
         "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
       }
     ],
@@ -715,7 +715,7 @@
       {
         "sponsorToken": "POTS",
         "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
       },
       {
