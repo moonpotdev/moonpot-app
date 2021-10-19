@@ -265,5 +265,21 @@
     "decimals": 18,
     "underlyingToken": "BIFI-BNB LP",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "BABY",
+    "address": "0x53E562b9B7E5E94b81f10e96Ee70Ad06df3D2657",
+    "type": "single",
+    "oracleId": "BABY",
+    "decimals": 18
+  },
+  {
+    "symbol": "moonTicketBabySwap",
+    "address": "0x7E22d782811Bd5CF60BC9a513139B1354ff8b120",
+    "type": "ticket",
+    "oracleId": "BABY",
+    "decimals": 18,
+    "underlyingToken": "BABY",
+    "stakedMultiplier": 2
   }
 ]
