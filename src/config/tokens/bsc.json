@@ -222,7 +222,7 @@
     "decimals": 18
   },
   {
-    "symbol": "moonTicketXBLZD",
+    "symbol": "moonTicketxBLZD",
     "address": "0xf6A91F8d3EC0b1922433c4E929Ea61C85633E918",
     "type": "ticket",
     "oracleId": "xBLZD",
