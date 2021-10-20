@@ -438,7 +438,7 @@
     "token": "xBLZD",
     "tokenAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
     "tokenDecimals": 18,
-    "rewardToken": "moonTicketXBLZD",
+    "rewardToken": "moonTicketxBLZD",
     "rewardAddress": "0xf6A91F8d3EC0b1922433c4E929Ea61C85633E918",
     "contractAddress": "0x55A50FE2372c0B8A4491d4CeC517258D69940547",
     "prizePoolAddress": "0x861d4d8310006E6Ef115dF4A5D64A83e361aa29E",
