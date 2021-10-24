@@ -222,7 +222,7 @@
     "decimals": 18
   },
   {
-    "symbol": "moonTicketXBLZD",
+    "symbol": "moonTicketxBLZD",
     "address": "0xf6A91F8d3EC0b1922433c4E929Ea61C85633E918",
     "type": "ticket",
     "oracleId": "xBLZD",
@@ -264,6 +264,22 @@
     "oracleId": "banana-bifi-bnb",
     "decimals": 18,
     "underlyingToken": "BIFI-BNB LP",
+    "stakedMultiplier": 2
+  },
+  {
+    "symbol": "BABY",
+    "address": "0x53E562b9B7E5E94b81f10e96Ee70Ad06df3D2657",
+    "type": "single",
+    "oracleId": "BABY",
+    "decimals": 18
+  },
+  {
+    "symbol": "moonTicketBabySwap",
+    "address": "0x7E22d782811Bd5CF60BC9a513139B1354ff8b120",
+    "type": "ticket",
+    "oracleId": "BABY",
+    "decimals": 18,
+    "underlyingToken": "BABY",
     "stakedMultiplier": 2
   }
 ]

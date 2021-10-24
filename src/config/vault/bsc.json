@@ -25,7 +25,7 @@
       {
         "sponsorToken": "POTS",
         "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
       },
       {
@@ -211,7 +211,7 @@
       {
         "sponsorToken": "POTS",
         "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
       }
     ],
@@ -220,6 +220,60 @@
       {
         "id": 0,
         "symbol": "Belt LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ],
+    "compoundIsBonus": true
+  },
+  {
+    "id": "baby",
+    "name": "BABY",
+    "token": "BABY",
+    "tokenAddress": "0x53E562b9B7E5E94b81f10e96Ee70Ad06df3D2657",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBabySwap",
+    "rewardAddress": "0x7E22d782811Bd5CF60BC9a513139B1354ff8b120",
+    "contractAddress": "0xe70D2F4719EEACcbCdFb5494CE19FAFceEe0d3b8",
+    "prizePoolAddress": "0x167DDF000AD0680BD62e2c4B17D38731cea70D08",
+    "prizeStrategyAddress": "0x625359D1217FDDf8455420140BE250147d89645b",
+    "pricePerShare": 1,
+    "oracleId": "BABY",
+    "apyId": "baby-baby",
+    "vaultType": "community",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x87F9A89B51dA28CE8653A700d362CDa9b9bA7d88",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "supportsClaimAllBonuses": false,
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "BABY",
         "display": "bonus"
       },
       {
@@ -265,7 +319,7 @@
       {
         "sponsorToken": "POTS",
         "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
       }
     ],
@@ -384,7 +438,7 @@
     "token": "xBLZD",
     "tokenAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
     "tokenDecimals": 18,
-    "rewardToken": "moonTicketXBLZD",
+    "rewardToken": "moonTicketxBLZD",
     "rewardAddress": "0xf6A91F8d3EC0b1922433c4E929Ea61C85633E918",
     "contractAddress": "0x55A50FE2372c0B8A4491d4CeC517258D69940547",
     "prizePoolAddress": "0x861d4d8310006E6Ef115dF4A5D64A83e361aa29E",
@@ -505,7 +559,7 @@
       {
         "sponsorToken": "POTS",
         "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
       }
     ],
@@ -661,7 +715,7 @@
       {
         "sponsorToken": "POTS",
         "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3fcca8648651e5b974dd6d3e50f61567779772a8",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
       },
       {
