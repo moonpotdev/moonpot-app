@@ -212,10 +212,8 @@
     "bonusExplainer": "Anda akan terus mendapatkan bonus {{token}} hingga akhir undian. Anda dapat mengklaim sebanyak yang anda suka.",
     "potsExplainer": "Anda akan terus mendapatkan bonus {{token}} hingga akhir undian. Anda dapat mengklaim sebanyak yang anda suka.",
     "compoundExplainer": "Menggabungkan lebih banyak {{token}} akan meningkatkan Biaya Fairness dan TimeLock Fairplay Anda secara proporsional dengan jumlah yang didepositkan. Biaya ini akan berkurang setiap detik setelah Anda deposit. Anda tidak akan membayar Biaya Fairness tambahan pada deposit lama Anda.",
-    "compoundToken": "Gabungkan {{token}}",
     "compoundBonusToken": "Gabungkan Bonus {{token}}",
-    "withdrawBonusTokens": "Tarik Bonus {{tokens}}",
-    "withdrawEarnedTokens": "Tarik {{tokens}} yang didapat"
+    "withdrawBonusTokens": "Tarik Bonus {{tokens}}"
   },
   "wallet": {
     "connect": "Hubungkan Wallet"

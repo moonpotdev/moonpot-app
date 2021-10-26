@@ -5,11 +5,11 @@
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
-    "rewardToken": "moonTicketPotsV2",
-    "rewardAddress": "0xeA32bB31A4a5Ab38226c5824FB54D4e271a3253a",
-    "contractAddress": "0x1f491F500C64118d6435A3387ff4A8a1749a8C28",
-    "prizePoolAddress": "0x24B18744d1B79F21056aF8CB0789c39d28014478",
-    "prizeStrategyAddress": "0xa10519eFE8E4fa5507D47A15Bcbeb7fb30F923B1",
+    "rewardToken": "moonTicketPotsV3",
+    "rewardAddress": "0x08F4FCe6EEbC475B07897ff1826a811D8081e625",
+    "contractAddress": "0x58980ecE2804eb0F3784D27A5fb3c20890184FD5",
+    "prizePoolAddress": "0xc61DfFffE822f3b79dDC49C5ABD603AA7db82316",
+    "prizeStrategyAddress": "0x902c97766A0dF8b88Bbce7dbE61Dabc5B8686cA1",
     "pricePerShare": 1,
     "oracleId": "POTS",
     "compoundApy": true,
@@ -18,6 +18,9 @@
     "fairplayDuration": 10,
     "fairplayTicketFee": 0.05,
     "status": "active",
+    "supportsAutocompound": true,
+    "supportsClaimAllBonuses": false,
+    "supportsPartialWithdraw": true,
     "infoCardStrategy": "ziggy",
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "CAKE",
@@ -65,7 +68,85 @@
         "sponsorTokenDecimals": 18
       }
     ],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "WBNB",
+        "display": "superBoost"
+      }
+    ]
+  },
+  {
+    "id": "pots-v2",
+    "name": "Ziggy's",
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketPotsV2",
+    "rewardAddress": "0xeA32bB31A4a5Ab38226c5824FB54D4e271a3253a",
+    "contractAddress": "0x1f491F500C64118d6435A3387ff4A8a1749a8C28",
+    "prizePoolAddress": "0x24B18744d1B79F21056aF8CB0789c39d28014478",
+    "prizeStrategyAddress": "0xa10519eFE8E4fa5507D47A15Bcbeb7fb30F923B1",
+    "pricePerShare": 1,
+    "oracleId": "POTS",
+    "compoundApy": true,
+    "vaultType": "main",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "status": "eol",
+    "migrationNeeded": true,
+    "migrationContractAddress": "0x58980ecE2804eb0F3784D27A5fb3c20890184FD5",
+    "migrationRewardAddress": "0x08F4FCe6EEbC475B07897ff1826a811D8081e625",
+    "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/we-ve-been-busy/",
     "supportsClaimAllBonuses": true,
+    "infoCardStrategy": "ziggy",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "CAKE",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "CAKE",
+        "sponsorOracleId": "Cake",
+        "sponsorAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BANANA",
+        "sponsorOracleId": "BANANA",
+        "sponsorAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BIFI",
+        "sponsorOracleId": "BIFI",
+        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BUSD",
+        "sponsorOracleId": "BUSD",
+        "sponsorAddress": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "WBNB",
+        "sponsorOracleId": "WBNB",
+        "sponsorAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "PACOCA",
+        "sponsorOracleId": "PACOCA",
+        "sponsorAddress": "0x55671114d774ee99D653D6C12460c780a67f1D18",
+        "sponsorTokenDecimals": 18
+      }
+    ],
     "bonuses": [
       {
         "id": 0,
@@ -78,8 +159,7 @@
         "symbol": "WBNB",
         "display": "superBoost"
       }
-    ],
-    "compoundIsBonus": false
+    ]
   },
   {
     "id": "cake",
@@ -106,6 +186,7 @@
       "ziggyPrize": 5
     },
     "status": "active",
+    "supportsClaimAllBonuses": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
     "sponsorProjectName": "Moonpot",
@@ -118,7 +199,6 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -135,8 +215,7 @@
         "symbol": "WBNB",
         "display": "superBoost"
       }
-    ],
-    "compoundIsBonus": true
+    ]
   },
   {
     "id": "side-cake",
@@ -172,8 +251,7 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "bonuses": [],
-    "compoundIsBonus": true
+    "bonuses": []
   },
   {
     "id": "4belt",
@@ -202,6 +280,7 @@
       "ziggyPrize": 5
     },
     "status": "active",
+    "supportsClaimAllBonuses": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x1bBBf8910E5A074c7B62D891Dbab9f4af82C14D4",
@@ -215,7 +294,6 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -227,8 +305,7 @@
         "symbol": "POTS",
         "display": "bonus"
       }
-    ],
-    "compoundIsBonus": true
+    ]
   },
   {
     "id": "baby",
@@ -256,6 +333,7 @@
       "treasury": 2
     },
     "status": "active",
+    "supportsClaimAllBonuses": false,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x87F9A89B51dA28CE8653A700d362CDa9b9bA7d88",
@@ -269,7 +347,6 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "supportsClaimAllBonuses": false,
     "bonuses": [
       {
         "id": 0,
@@ -281,8 +358,7 @@
         "symbol": "POTS",
         "display": "bonus"
       }
-    ],
-    "compoundIsBonus": true
+    ]
   },
   {
     "id": "pacoca",
@@ -310,6 +386,7 @@
       "treasury": 2
     },
     "status": "active",
+    "supportsClaimAllBonuses": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x21403739A1Dc0e3ceC70CBD5ceaE78fF25F102a4",
@@ -323,7 +400,6 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -335,8 +411,7 @@
         "symbol": "POTS",
         "display": "bonus"
       }
-    ],
-    "compoundIsBonus": true
+    ]
   },
   {
     "id": "banana",
@@ -364,12 +439,12 @@
       "treasury": 2
     },
     "status": "active",
+    "supportsClaimAllBonuses": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xED4ea41Daf652964789b16e3Ff76eC07d99d2340",
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [],
-    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -381,8 +456,7 @@
         "symbol": "POTS",
         "display": "bonus"
       }
-    ],
-    "compoundIsBonus": true
+    ]
   },
   {
     "id": "pots-busd",
@@ -411,13 +485,13 @@
       "treasury": 2
     },
     "status": "active",
+    "supportsClaimAllBonuses": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x3106d9B3d5e04ff5D575212140FAb1Cf17C8933F",
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [],
-    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -429,8 +503,7 @@
         "symbol": "POTS",
         "display": "bonus"
       }
-    ],
-    "compoundIsBonus": true
+    ]
   },
   {
     "id": "xblzd",
@@ -477,8 +550,7 @@
         "symbol": "xBLZD",
         "display": "bonus"
       }
-    ],
-    "compoundIsBonus": true
+    ]
   },
   {
     "id": "pots-bnb",
@@ -505,13 +577,13 @@
       "treasury": 2
     },
     "status": "active",
+    "supportsClaimAllBonuses": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xbFa24f7C2376c28407504Fb8512797dD8D316aBf",
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [],
-    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -523,8 +595,7 @@
         "symbol": "POTS",
         "display": "bonus"
       }
-    ],
-    "compoundIsBonus": true
+    ]
   },
   {
     "id": "bifi",
@@ -551,6 +622,7 @@
       "ziggyPrize": 5
     },
     "status": "active",
+    "supportsClaimAllBonuses": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xeffFD962696ac768c3C9C84e2D4CC1bC9C54983d",
     "sponsorProjectName": "Moonpot",
@@ -563,7 +635,6 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -575,8 +646,7 @@
         "symbol": "POTS",
         "display": "bonus"
       }
-    ],
-    "compoundIsBonus": true
+    ]
   },
   {
     "id": "cake-bnb",
@@ -605,6 +675,7 @@
       "treasury": 2
     },
     "status": "active",
+    "supportsClaimAllBonuses": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xb26642B6690E4c4c9A6dAd6115ac149c700C7dfE",
@@ -618,7 +689,6 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -630,8 +700,7 @@
         "symbol": "POTS",
         "display": "bonus"
       }
-    ],
-    "compoundIsBonus": true
+    ]
   },
   {
     "id": "bifi-bnb",
@@ -660,6 +729,7 @@
       "treasury": 2
     },
     "status": "active",
+    "supportsClaimAllBonuses": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x1417633bF9Fed6753e7504DF036c30F205D30e7E",
@@ -673,7 +743,6 @@
         "sponsorTokenDecimals": 18
       }
     ],
-    "supportsClaimAllBonuses": true,
     "bonuses": [
       {
         "id": 0,
@@ -685,8 +754,7 @@
         "symbol": "POTS",
         "display": "bonus"
       }
-    ],
-    "compoundIsBonus": true
+    ]
   },
   {
     "id": "pots-v1",
@@ -738,14 +806,10 @@
         "display": "bonus"
       }
     ],
-    "compoundIsBonus": false,
     "migrationNeeded": true,
     "migrationContractAddress": "0x1f491F500C64118d6435A3387ff4A8a1749a8C28",
     "migrationRewardAddress": "0xeA32bB31A4a5Ab38226c5824FB54D4e271a3253a",
-    "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/we-ve-been-busy/",
-    "migrationExplainer": [
-      "After you move your POTS today, you won’t have to move it again. You will be entered into future Moonpots without having to make transactions each week."
-    ]
+    "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/we-ve-been-busy/"
   },
   {
     "id": "cake-v2",
@@ -802,14 +866,10 @@
         "display": "bonus"
       }
     ],
-    "compoundIsBonus": true,
     "migrationNeeded": true,
     "migrationContractAddress": "0x3789840c8697Aee0d02159003D7501588De3ceD9",
     "migrationRewardAddress": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
-    "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/we-ve-been-busy/",
-    "migrationExplainer": [
-      "After you move your CAKE today, you won’t have to move it again. You will be entered into future Moonpots without having to make transactions each week."
-    ]
+    "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/we-ve-been-busy/"
   },
   {
     "id": "cake-bifi",
@@ -856,9 +916,6 @@
     "migrationContractAddress": "0x3789840c8697Aee0d02159003D7501588De3ceD9",
     "migrationRewardAddress": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
     "migrationLearnMoreUrl": "https://moonpot.com/alpha/learn/how-to-move-cake-from-the-retired-cake-moonpot/",
-    "migrationExplainer": [
-      "After you move your CAKE today, you won’t have to move it again. You will be entered into future Moonpots without having to make transactions each week."
-    ],
     "winnersTransaction": "0x770ddd1d57b19437a0cf563923cb3799d31a5ca3e20a3080e4286d4fede54109"
   }
 ]

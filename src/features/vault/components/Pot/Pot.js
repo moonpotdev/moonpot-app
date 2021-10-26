@@ -1,12 +1,11 @@
 import React, { memo, useMemo } from 'react';
 import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
-import { Grid, makeStyles, Typography } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import { LPPotDeposit } from '../../../../components/LPPotDeposit/LPPotDeposit';
 import { Pot as BasePot, PrizeSplit } from '../../../../components/Pot/Pot';
 import styles from './styles';
 import { PotDeposit } from '../../../../components/PotDeposit';
 import { PotWithdraw } from '../../../../components/PotWithdraw';
-import { Alert, AlertTitle } from '@material-ui/lab';
 import { useBonusesEarned, usePot, useTokenBalance } from '../../../../helpers/hooks';
 import { Translate } from '../../../../components/Translate';
 import PotBonus from '../../../home/MyPots/components/Pot/PotBonus';
@@ -42,22 +41,6 @@ const PrizeSplitInner = memo(function ({
     </Grid>
   );
 });
-
-const EolNotice = function ({ id }) {
-  const pot = usePot(id);
-
-  const classes = useStyles();
-  return (
-    <Alert severity={'warning'} className={classes.migrationNotice}>
-      <AlertTitle>
-        <Translate i18nKey="deposit.eolNotice.title" />
-      </AlertTitle>
-      <Typography>
-        <Translate i18nKey="deposit.eolNotice.message" values={{ token: pot.token }} />
-      </Typography>
-    </Alert>
-  );
-};
 
 function handleButtonVariant(vaultType) {
   if (vaultType === 'main') {
@@ -156,9 +139,7 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
               />
             )}
           </>
-        ) : (
-          <EolNotice id={id} />
-        )}
+        ) : null}
       </CardAccordionItem>
       <BonusAccordionItem pot={pot} />
       <WithdrawAccordionItem pot={pot} onFairplayLearnMore={onFairplayLearnMore} />

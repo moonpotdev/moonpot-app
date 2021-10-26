@@ -281,5 +281,14 @@
     "decimals": 18,
     "underlyingToken": "BABY",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "moonTicketPotsV3",
+    "address": "0x08F4FCe6EEbC475B07897ff1826a811D8081e625",
+    "type": "ticket",
+    "oracleId": "POTS",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
   }
 ]

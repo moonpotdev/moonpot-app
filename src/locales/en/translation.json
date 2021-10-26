@@ -38,9 +38,6 @@
   "homeTotalDeposits": "Total Deposits (TVL)",
   "homeJoinCommunityTitle": "Join the Community",
   "homeJoinCommunityBody": "You can suggest a new pot in one of our channels, or join our devs to build one for your favourite project.",
-  "migrationNoticeTitle": "Please move your {{asset}} to the new upgraded {{pot}} Moonpot.",
-  "migrationNoticeLearnMore": "Learn more.",
-  "migrationNoticeMove": "Move my {{asset}}",
   "vaultTitle": "Deposit <span>{{token}}</span>, earn <span>{{apy}}% APY</span><wbr /> and a chance to win <span>{{currency}}{{amount}}</span>",
   "vaultTitleSide": "Deposit <span>{{token}}</span>, and be entered for a chance to win <span>{{currency}}{{amount}}</span>",
   "playWithMoonpot": "Play with Moonpot",
@@ -49,10 +46,6 @@
   "connectToJoin": "Connect your wallet to join a Moonpot.",
   "poweredByBeefy": "Powered by <BeefyLink>Beefy</BeefyLink>",
   "auditedByCertik": "Audited by <CertikLink>Certik</CertikLink>",
-  "upgradeWhy": "We upgraded the {{token}} Pot in order to make it safer and fairer, as well as to allow us to automate more of our processes.",
-  "upgradeNextSteps": "Because of the upgrade, you need to move your {{token}} to the new {{token}} Pot.  We have added a {{boostToken}} Super Boost to the new {{token}} Pot to help make it worthwhile for you.",
-  "upgradeMove": "Move {{base}}",
-  "upgradeMoveWithdraw": "Move {{base}} and Withdraw {{bonus}}",
   "sidePotExplainer": "Side Pots give you the chance to win daily prizes without earning interest. If you want to earn interest and join bigger weekly and monthly draws, Ziggy recommends you join a <MainPotLink>Main Pot</MainPotLink> instead.",
   "learnMore": "Learn more",
   "telegramSocialBlockBody": "Learn about Moonpot and get direct support from the community",
@@ -191,6 +184,7 @@
     "provider": "Liquidity provider"
   },
   "withdraw": {
+    "token": "Withdraw {{token}}",
     "all": "Withdraw All",
     "allToken": "Withdraw All {{token}}",
     "allTokenAs": "Withdraw All as {{token}}",
@@ -199,10 +193,6 @@
     "mySuperBoostToken": "My Super Boost {{token}}",
     "fairplayNotice": "Fairplay Timelock rules apply.",
     "withdrawFeeNotice": "Withdraw fee of {{percent}}% applies.",
-    "migrationNotice": {
-      "title": "Migration Needed",
-      "message": "Withdrawing your {{token}}, instead of moving it to the new Moonpot, means you will miss out on future bonus earnings and your chance to win the next {{token}} Prize."
-    },
     "zapExplainer": "Withdraw LP or ZAP⚡ out to {{tokens}}"
   },
   "bonus": {
@@ -212,10 +202,8 @@
     "bonusExplainer": "You will continue to earn bonus {{tokens}} until the end of the draw. You can claim as many times as you like.",
     "potsExplainer": "You will continue to earn {{tokens}} until the end of the draw. You can claim as many times as you like.",
     "compoundExplainer": "Compounding more {{token}} will increase your Fairness Fee and Fairplay Timelock proportionally to the amount deposited. This fee reduces every second after you deposit. You won't pay any additional Fairness Fees on your older deposits.",
-    "compoundToken": "Compound {{token}}",
     "compoundBonusToken": "Compound Bonus {{token}}",
-    "withdrawBonusTokens": "Withdraw Bonus {{tokens}}",
-    "withdrawEarnedTokens": "Withdraw Earned {{tokens}}"
+    "withdrawBonusTokens": "Withdraw Bonus {{tokens}}"
   },
   "wallet": {
     "connect": "Connect Wallet"
@@ -242,5 +230,40 @@
       "You can then deposit all your earned and bonus POTS from your wallet into Ziggy’s Pot in a single transaction."
     ],
     "claimAll": "Claim all earned & bonus POTS"
+  },
+  "migration": {
+    "viewRetiredPot": "View Retired Pot",
+    "learnMore": "Learn more.",
+    "migrateToken": "Migrate {{token}}",
+    "migrateTokenAndClaim": "Migrate {{token}} and Claim Earnings",
+    "notice": {
+      "all": {
+        "title": "{{name}} Pot Migration",
+        "content": [
+          "We have upgraded {{name}} Pot in order to make it safer and fairer, as well as to allow us to automate more of our processes. You need to move your {{token}} to the new {{name}} Pot to continue earning interest and be eligible for the next prize draw."
+        ]
+      },
+      "pots-v2": {
+        "title": "Ziggy’s Pot Migration: Autocompound update",
+        "content": [
+          "We have upgraded Ziggy’s Pot to autocompound. You need to move your POTS to the new Ziggy’s Pot to continue earning interest and be eligible for the next prize draw."
+        ]
+      }
+    },
+    "details": {
+      "all": [
+        "We upgraded the {{name}} Pot in order to make it safer and fairer, as well as to allow us to automate more of our processes.",
+        "Because of the upgrade, you need to move your {{token}} to the new {{name}} Pot."
+      ],
+      "pots-v2": [
+        "Ziggy’s pot now autocompounds!",
+        "We have upgraded Ziggy’s pot to autocompound. You need to move your POTS to the new Ziggy’s Pot to continue earning interest and be eligible for the next prize draw."
+      ]
+    },
+    "withdraw": {
+      "all": [
+        "Withdrawing your {{token}} will stop you earning interest on your {{token}}. This will make you ineligible for the next prize draw. You will need to manually deposit to be eligible again."
+      ]
+    }
   }
 }

@@ -1,17 +1,26 @@
-import React, { memo, useCallback, useEffect, useMemo } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBonusesEarned, usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
-import { Link, makeStyles, Typography } from '@material-ui/core';
+import { Link, makeStyles } from '@material-ui/core';
 import styles from './styles';
 import { useTranslation } from 'react-i18next';
-import { formatDecimals, formatTimeLeft } from '../../helpers/format';
+import {
+  bigNumberTruncate,
+  convertAmountToRawNumber,
+  formatDecimals,
+  formatTimeLeft,
+} from '../../helpers/format';
 import reduxActions from '../../features/redux/actions';
 import { getFairplayFeePercent, isEmpty } from '../../helpers/utils';
 import Steps from '../../features/vault/components/Steps';
-import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
-import { Alert, AlertTitle } from '@material-ui/lab';
 import { Translate } from '../Translate';
+import { SecondaryButton } from '../Buttons/SecondaryButton';
+import { TokenInput } from '../TokenInput';
+import { PrimaryButton } from '../Buttons/PrimaryButton';
+import BigNumber from 'bignumber.js';
+import { Alert, AlertText } from '../Alert';
+import { InfoOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles(styles);
 
@@ -182,16 +191,25 @@ export const WithdrawSteps = function ({ pot, steps, setSteps, onClose, onFinish
   return <Steps item={pot} steps={steps} handleClose={handleClose} />;
 };
 
-export const MigrationNotice = function ({ token }) {
+export const MigrationNotice = function ({ id, name, token }) {
+  const { t, i18n } = useTranslation();
   const classes = useStyles();
+
+  const migrationWithdrawKey = i18n.exists(`migration.withdraw.${id}`)
+    ? `migration.withdraw.${id}`
+    : 'migration.withdraw.all';
+
   return (
-    <Alert severity={'warning'} className={classes.migrationNotice}>
-      <AlertTitle>
-        <Translate i18nKey="withdraw.migrationNotice.title" />
-      </AlertTitle>
-      <Typography>
-        <Translate i18nKey="withdraw.migrationNotice.message" values={{ token }} />
-      </Typography>
+    <Alert Icon={InfoOutlined} variant="purpleLight" className={classes.migrationNotice}>
+      <AlertText>
+        {t(migrationWithdrawKey, {
+          returnObjects: true,
+          token: token,
+          name: name,
+        }).map((text, index) => (
+          <p key={index}>{text}</p>
+        ))}
+      </AlertText>
     </Alert>
   );
 };
@@ -200,7 +218,12 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
+  const [inputValue, setInputValue] = useState('');
+  const [isPartialWithdrawAll, setIsPartialWithdrawAll] = useState(false);
+  const [partialWithdrawAmount, setPartialWithdrawAmount] = useState(() => new BigNumber(0));
+  const [canWithdrawPartial, setCanWithdrawPartial] = useState(false);
   const address = useSelector(state => state.walletReducer.address);
+  const totalBalance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);
   const ticketBalance = useTokenBalance(pot.rewardToken, pot.tokenDecimals);
   const ticketAllowance = useTokenAllowance(
     pot.contractAddress,
@@ -213,7 +236,8 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
     items: [],
     finished: false,
   }));
-  const canWithdraw = address && ticketBalance.gt(0);
+  const canWithdrawAll = address && totalBalance.gt(0);
+  const supportsPartialWithdraw = pot.supportsPartialWithdraw;
 
   const handleWithdraw = () => {
     const steps = [];
@@ -230,11 +254,15 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
         });
       }
 
+      const amount = supportsPartialWithdraw
+        ? convertAmountToRawNumber(partialWithdrawAmount, pot.tokenDecimals)
+        : 0;
+      const isMax = !supportsPartialWithdraw || isPartialWithdrawAll;
       steps.push({
         step: 'withdraw',
         message: 'Confirm withdraw transaction on wallet to complete.',
         action: () =>
-          dispatch(reduxActions.wallet.withdraw(pot.network, pot.contractAddress, 0, true)),
+          dispatch(reduxActions.wallet.withdraw(pot.network, pot.contractAddress, amount, isMax)),
         pending: false,
       });
 
@@ -242,25 +270,64 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
     }
   };
 
+  // input string to bignumber
+  useEffect(() => {
+    const value = bigNumberTruncate(inputValue, 8);
+    setPartialWithdrawAmount(value);
+    setCanWithdrawPartial(address && totalBalance.gt(0) && value.gt(0));
+  }, [inputValue, address, totalBalance]);
+
   return (
     <>
       <Stats id={id} />
-      {canWithdraw && pot.migrationNeeded ? <MigrationNotice token={pot.token} /> : null}
-      <div className={classes.buttonHolder}>
-        {address ? (
-          <PrimaryButton
-            variant={variant}
-            onClick={handleWithdraw}
-            disabled={!canWithdraw}
-            fullWidth={true}
-          >
-            <Translate i18nKey="withdraw.all" />
-          </PrimaryButton>
-        ) : (
-          <WalletConnectButton variant="teal" fullWidth={true} />
-        )}
-        <WithdrawSteps pot={pot} steps={steps} setSteps={setSteps} />
-      </div>
+      {canWithdrawAll && pot.migrationNeeded ? <MigrationNotice token={pot.token} /> : null}
+      {supportsPartialWithdraw ? (
+        <>
+          <div className={classes.inputHolder}>
+            <TokenInput
+              variant={variant}
+              token={pot.token}
+              value={inputValue}
+              max={totalBalance}
+              setValue={setInputValue}
+              setIsMax={setIsPartialWithdrawAll}
+            />
+          </div>
+          <div className={classes.buttonHolder}>
+            {address ? (
+              <SecondaryButton
+                variant={variant}
+                onClick={handleWithdraw}
+                disabled={!canWithdrawPartial}
+                fullWidth={true}
+              >
+                <Translate
+                  i18nKey={isPartialWithdrawAll ? 'withdraw.allToken' : 'withdraw.token'}
+                  values={{ token: pot.token }}
+                />
+              </SecondaryButton>
+            ) : (
+              <WalletConnectButton variant={variant} fullWidth={true} />
+            )}
+          </div>
+        </>
+      ) : (
+        <div className={classes.buttonHolder}>
+          {address ? (
+            <PrimaryButton
+              variant={variant}
+              onClick={handleWithdraw}
+              disabled={!canWithdrawAll}
+              fullWidth={true}
+            >
+              <Translate i18nKey="withdraw.allToken" values={{ token: pot.token }} />
+            </PrimaryButton>
+          ) : (
+            <WalletConnectButton variant={variant} fullWidth={true} />
+          )}
+        </div>
+      )}
+      <WithdrawSteps pot={pot} steps={steps} setSteps={setSteps} />
       {pot.withdrawFee ? (
         <div className={classes.fairplayNotice}>
           <Translate
