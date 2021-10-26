@@ -72,6 +72,16 @@ const getBalances = async (pools, state, dispatch) => {
       address: pot.contractAddress,
     });
 
+    // allowance of pot to spend mooToken
+    if ('mooTokenAddress' in pot && pot.mooTokenAddress) {
+      const mooTokenContract = new web3[network].eth.Contract(erc20Abi, pot.mooTokenAddress);
+      calls[network].push({
+        allowance: mooTokenContract.methods.allowance(address, pot.contractAddress),
+        token: pot.mooTokenAddress,
+        spender: pot.contractAddress,
+      });
+    }
+
     // lp
     if (pot.vaultType === 'lp' || pot.vaultType === 'stable') {
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
@@ -156,9 +166,12 @@ const getBalances = async (pools, state, dispatch) => {
     }
 
     if (response.allowance !== undefined) {
-      tokens[response.token].allowance = {
-        ...tokens[response.token].allowance,
-        [response.spender]: response.allowance,
+      tokens[response.token] = {
+        ...tokens[response.token],
+        allowance: {
+          ...(tokens[response.token]?.allowance || {}),
+          [response.spender]: response.allowance,
+        },
       };
     }
 

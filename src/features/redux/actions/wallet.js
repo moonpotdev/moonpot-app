@@ -404,7 +404,6 @@ const withdraw = (network, contractAddr, amount, max) => {
             console.log(error);
           });
       } else {
-        // TODO check function is correct
         const method = contract.methods.withdrawInstantlyFromMoonPotPrizePool(amount);
         const [estimateError, options] = await estimateGas(network, method, { from: address });
 

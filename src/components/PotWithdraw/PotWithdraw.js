@@ -230,6 +230,11 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
     pot.rewardToken,
     pot.tokenDecimals
   );
+  const mooTokenAllowance = useTokenAllowance(
+    pot.contractAddress,
+    pot.mooTokenAddress,
+    pot.tokenDecimals
+  );
   const [steps, setSteps] = React.useState(() => ({
     modal: false,
     currentStep: -1,
@@ -241,14 +246,27 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
 
   const handleWithdraw = () => {
     const steps = [];
-    if (address && ticketBalance.gt(0)) {
-      if (ticketAllowance.lt(ticketBalance)) {
+    if (address && totalBalance.gt(0)) {
+      if (ticketAllowance.lt(ticketBalance) || ticketAllowance.lte(0)) {
         steps.push({
           step: 'approve',
           message: 'Approval transactions happen once per pot.',
           action: () =>
             dispatch(
               reduxActions.wallet.approval(pot.network, pot.rewardAddress, pot.contractAddress)
+            ),
+          pending: false,
+        });
+      }
+
+      // Approve mooToken for partial withdraw by Ziggy
+      if ('mooTokenAddress' in pot && mooTokenAllowance.lte(0)) {
+        steps.push({
+          step: 'approve',
+          message: 'Approval transactions happen once per pot.',
+          action: () =>
+            dispatch(
+              reduxActions.wallet.approval(pot.network, pot.mooTokenAddress, pot.contractAddress)
             ),
           pending: false,
         });

@@ -10,6 +10,7 @@
     "contractAddress": "0x4942Be9Ce3488cb39AEf3206D28fbE7056035C45",
     "prizePoolAddress": "0xB396eb68009696E979e06B898Fa8769FAD39a281",
     "prizeStrategyAddress": "0x3E7A4Ba5DF967a7Ff6a57294B307C3f63b6d1B45",
+    "mooTokenAddress": "0xC264c0D6e8A35AbB7a118e9592aD400f640471D9",
     "pricePerShare": 1,
     "oracleId": "POTS",
     "compoundApy": true,
