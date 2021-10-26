@@ -16,14 +16,14 @@
     "vaultType": "main",
     "duration": 14,
     "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
+    "fairplayTicketFee": 0.025,
     "status": "active",
     "supportsAutocompound": true,
     "supportsClaimAllBonuses": false,
     "supportsPartialWithdraw": true,
     "infoCardStrategy": "ziggy",
     "sponsorProjectName": "Moonpot",
-    "sponsorToken": "CAKE",
+    "sponsorToken": "POTS",
     "sponsors": [
       {
         "sponsorToken": "POTS",
@@ -66,13 +66,18 @@
         "sponsorOracleId": "PACOCA",
         "sponsorAddress": "0x55671114d774ee99D653D6C12460c780a67f1D18",
         "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
+      },
       {
-        "id": 1,
-        "symbol": "WBNB",
-        "display": "superBoost"
+        "sponsorToken": "xBLZD",
+        "sponsorOracleId": "xBLZD",
+        "sponsorAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BABY",
+        "sponsorOracleId": "BABY",
+        "sponsorAddress": "0x53E562b9B7E5E94b81f10e96Ee70Ad06df3D2657",
+        "sponsorTokenDecimals": 18
       }
     ]
   },
