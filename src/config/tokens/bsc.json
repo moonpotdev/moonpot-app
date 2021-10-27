@@ -284,7 +284,7 @@
   },
   {
     "symbol": "moonTicketPotsV3",
-    "address": "0x7022F0964679B816b70AaDf4C6C8d3c1fF3e1013",
+    "address": "0xCd3941d4825c08991b98930ef18062f6df2959d4",
     "type": "ticket",
     "oracleId": "POTS",
     "decimals": 18,
