@@ -5,7 +5,6 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Fade, Grid, Tooltip, Typography } from '@material-ui/core';
 import { HelpOutline } from '@material-ui/icons';
 import styles from './styles';
-import BigNumber from 'bignumber.js';
 
 const useStyles = makeStyles(styles);
 
@@ -73,7 +72,7 @@ export function InterestTooltip({ pot }) {
 
   const baseApy = pot.apy;
   const bonusApy = pot.bonusApy;
-  const bonusApr = new BigNumber(pot.bonusApr);
+  // const bonusApr = new BigNumber(pot.bonusApr);
 
   const bonuses = pot.bonuses;
 

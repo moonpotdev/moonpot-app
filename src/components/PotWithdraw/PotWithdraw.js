@@ -76,6 +76,7 @@ const StatFee = memo(function ({
   tokenDecimals,
   fairplayDuration,
   fairplayTicketFee,
+  ppfs,
 }) {
   const { t } = useTranslation();
   const address = useSelector(state => state.walletReducer.address);
@@ -93,12 +94,12 @@ const StatFee = memo(function ({
 
     if (address && ticketBalance.gt(0) && timeLeft > 0) {
       const relative = getFairplayFeePercent(timeLeft / 1000, fairplayDuration, fairplayTicketFee);
-      const fee = ticketBalance.times(relative);
+      const fee = ticketBalance.times(ppfs).times(relative);
       return formatDecimals(fee, 8);
     }
 
     return 0;
-  }, [endsAt, ticketBalance, address, fairplayDuration, fairplayTicketFee]);
+  }, [endsAt, ticketBalance, address, fairplayDuration, fairplayTicketFee, ppfs]);
 
   return (
     <Stat label={t('pot.myFairnessFee')}>
@@ -137,6 +138,7 @@ export const Stats = function ({ id }) {
         ticketSymbol={pot.rewardToken}
         fairplayDuration={pot.fairplayDuration}
         fairplayTicketFee={pot.fairplayTicketFee}
+        ppfs={pot.ppfs}
       />
     </div>
   );
