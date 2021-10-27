@@ -105,7 +105,7 @@
     "migrationNeeded": true,
     "migrationContractAddress": "0xB5dFbd996c1B2fddd6E040Fa858CBa462d553a75",
     "migrationRewardAddress": "0xf9E587E492250dd902EFEdc7D3f7bB2248E5d77F",
-    "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/we-ve-been-busy/",
+    "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/ziggy-s-pot-redeployment/",
     "supportsClaimAllBonuses": true,
     "infoCardStrategy": "ziggy",
     "sponsorProjectName": "Moonpot",
