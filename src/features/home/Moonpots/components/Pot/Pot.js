@@ -39,6 +39,7 @@ const NewDepositOdds = memo(function ({
   ticketTotalSupply,
   depositAmountUsd,
   winners,
+  ppfs,
   network = 'bsc',
 }) {
   const tokenPrice = useTokenAddressPrice(tokenAddress, network);
@@ -47,7 +48,7 @@ const NewDepositOdds = memo(function ({
 
   const odds = useMemo(() => {
     if (tokenPrice) {
-      const depositAmountTickets = depositAmountUsd / tokenPrice / stakedMultiplier;
+      const depositAmountTickets = depositAmountUsd / tokenPrice / stakedMultiplier / ppfs;
 
       return investmentOdds(
         byDecimals(ticketTotalSupply, tokenDecimals),
@@ -58,7 +59,15 @@ const NewDepositOdds = memo(function ({
     }
 
     return 0;
-  }, [ticketTotalSupply, depositAmountUsd, tokenPrice, winners, tokenDecimals, stakedMultiplier]);
+  }, [
+    ticketTotalSupply,
+    depositAmountUsd,
+    tokenPrice,
+    winners,
+    tokenDecimals,
+    stakedMultiplier,
+    ppfs,
+  ]);
 
   return (
     <Translate
@@ -131,6 +140,7 @@ const Bottom = function ({ id }) {
           tokenDecimals={pot.tokenDecimals}
           ticketTotalSupply={pot.totalTickets}
           depositAmountUsd={1000}
+          ppfs={pot.ppfs || 1}
           winners={pot.numberOfWinners}
         />
         <br />

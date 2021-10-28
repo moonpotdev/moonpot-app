@@ -78,7 +78,7 @@ export const TokenInput = function ({
         />
       }
       className={clsx(classes.input, variantClass(classes, 'variant', variant), className)}
-      placeholder={t('tokenInput.placeholder', { token })}
+      placeholder={'0.0'}
       value={value}
       onChange={handleChange}
       onBlur={handleBlur}

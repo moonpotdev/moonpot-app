@@ -9,10 +9,14 @@ import { Translate } from '../../../../../components/Translate';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 import { useBonusesEarned, useTokenAllowance, useTokenBalance } from '../../../../../helpers/hooks';
 import { convertAmountToRawNumber } from '../../../../../helpers/format';
+import { useTranslation } from 'react-i18next';
+import { Alert, AlertText } from '../../../../../components/Alert';
+import { InfoOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles(styles);
 
 export const PotMigrate = function ({ item }) {
+  const { t, i18n } = useTranslation();
   const wallet = useSelector(state => state.walletReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -142,42 +146,38 @@ export const PotMigrate = function ({ item }) {
     }
   }, [steps, wallet.action]);
 
+  const migrationDetailsKey = i18n.exists(`migration.details.${item.id}`)
+    ? `migration.details.${item.id}`
+    : 'migration.details.all';
+
   return (
     <Grid item xs={12}>
       <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
       <Grid container>
         <Grid item xs={12}>
-          <Typography className={classes.myPotsUpgradeText} align={'left'}>
-            <Translate i18nKey="upgradeWhy" values={{ token: item.token }} />
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography className={classes.myPotsUpgradeText} align={'left'}>
-            <Translate
-              i18nKey="upgradeNextSteps"
-              values={{
+          <Alert Icon={InfoOutlined} variant="purpleLight">
+            <AlertText>
+              {t(migrationDetailsKey, {
+                returnObjects: true,
                 token: item.token,
-                amount: '50,000',
-                boostToken: 'BNB',
-              }}
-            />
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography className={classes.learnMoreText} align={'left'}>
-            {item.migrationLearnMoreUrl ? (
-              <a
-                href={item.migrationLearnMoreUrl}
-                className={classes.link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Translate i18nKey="migrationNoticeLearnMore" />
-              </a>
-            ) : null}
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
+                name: item.name,
+              }).map((text, index) => (
+                <p key={index}>{text}</p>
+              ))}
+              {item.migrationLearnMoreUrl ? (
+                <p>
+                  <a
+                    href={item.migrationLearnMoreUrl}
+                    className={classes.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Translate i18nKey="migration.learnMore" />
+                  </a>
+                </p>
+              ) : null}
+            </AlertText>
+          </Alert>
           <PrimaryButton
             onClick={() => handleMigrator(item)}
             className={classes.eolMoveBtn}
@@ -186,8 +186,8 @@ export const PotMigrate = function ({ item }) {
             disabled={item.userBalance.lte(0)}
           >
             <Translate
-              i18nKey={bonusTokens ? 'upgradeMoveWithdraw' : 'upgradeMove'}
-              values={{ base: item.token, bonus: bonusTokens }}
+              i18nKey={bonusTokens ? 'migration.migrateTokenAndClaim' : 'migration.migrateToken'}
+              values={{ token: item.token, bonus: bonusTokens }}
             />
           </PrimaryButton>
         </Grid>

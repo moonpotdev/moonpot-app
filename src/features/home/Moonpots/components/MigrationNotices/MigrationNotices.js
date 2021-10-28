@@ -1,57 +1,54 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { Box, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import styles from './styles';
 import { useTranslation } from 'react-i18next';
-import alertIcon from '../../../../../images/icons/alert.svg';
-import { ButtonLink } from '../../../../../components/ButtonLink/ButtonLink';
 import { useTokenBalance } from '../../../../../helpers/hooks';
+import { Card, Cards, CardTitle } from '../../../../../components/Cards';
+import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 
 const useStyles = makeStyles(styles);
 
 function MigrationNotice({ pot }) {
   const classes = useStyles();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const balance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);
   const hasBalance = balance.gt(0);
 
   if (hasBalance) {
+    const title = i18n.exists(`migration.notice.${pot.id}.title`)
+      ? `migration.notice.${pot.id}.title`
+      : 'migration.notice.all.title';
+    const content = i18n.exists(`migration.notice.${pot.id}.content`)
+      ? `migration.notice.${pot.id}.content`
+      : 'migration.notice.all.content';
+
     return (
-      <Box className={classes.notice}>
+      <Card variant="purpleDark" className={classes.notice}>
+        <CardTitle>{t(title, { token: pot.token, name: pot.name })}</CardTitle>
         <div className={classes.text}>
-          <img
-            className={classes.alertIcon}
-            src={alertIcon}
-            width="20"
-            height="20"
-            alt=""
-            aria-hidden={true}
-            role="presentation"
-          />
-          <p>
-            {t('migrationNoticeTitle', { asset: pot.token, pot: pot.name })}
-            {pot.migrationLearnMoreUrl ? (
-              <>
-                {' '}
-                <a
-                  href={pot.migrationLearnMoreUrl}
-                  className={classes.link}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {t('migrationNoticeLearnMore')}
-                </a>
-              </>
-            ) : null}
-          </p>
-          {pot.migrationExplainer
-            ? pot.migrationExplainer.map((text, index) => <p key={index}>{text}</p>)
-            : null}
+          {t(content, { returnObjects: true, token: pot.token, name: pot.name }).map(
+            (text, index) => (
+              <p key={index}>{text}</p>
+            )
+          )}
+          {pot.migrationLearnMoreUrl ? (
+            <p>
+              <a
+                href={pot.migrationLearnMoreUrl}
+                className={classes.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t('migration.learnMore')}
+              </a>
+            </p>
+          ) : null}
         </div>
-        <ButtonLink to="/my-moonpots/eol" className={classes.button}>
-          {t('migrationNoticeMove', { asset: pot.token })}
-        </ButtonLink>
-      </Box>
+        <PrimaryButton to="/my-moonpots/eol" variant="purple" fullWidth={true}>
+          {t('migration.viewRetiredPot', { asset: pot.token })}
+        </PrimaryButton>
+      </Card>
     );
   }
 
@@ -77,11 +74,11 @@ export function MigrationNotices({ potType }) {
 
   if (currentAddress && hasPotsNeedingMigration) {
     return (
-      <div className={classes.notices}>
+      <Cards className={classes.notices} oneUp={true}>
         {potsNeedingMigration.map(pot => (
           <MigrationNotice key={pot.id} pot={pot} />
         ))}
-      </div>
+      </Cards>
     );
   }
 
