@@ -5,6 +5,7 @@ import { config } from '../../../config/config';
 import { compound, isEmpty } from '../../../helpers/utils';
 import { byDecimals, formatTvl } from '../../../helpers/format';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
+import beefyVaultAbi from '../../../config/abi/beefyvault.json';
 
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 const ecr20Abi = require('../../../config/abi/erc20.json');
@@ -233,6 +234,7 @@ const getPools = async (items, state, dispatch) => {
   const prizePool = [];
   const strategy = [];
   const ticket = [];
+  const mooToken = [];
 
   for (let key in web3) {
     multicall[key] = new MultiCall(web3[key], config[key].multicallAddress);
@@ -241,6 +243,7 @@ const getPools = async (items, state, dispatch) => {
     strategy[key] = [];
     prizePool[key] = [];
     ticket[key] = [];
+    mooToken[key] = [];
   }
 
   for (let key in items) {
@@ -301,15 +304,28 @@ const getPools = async (items, state, dispatch) => {
       id: pool.id,
       prizePoolBalance: prizePoolContract.methods.balance(),
     });
+
+    // === PPFS
+    if ('mooTokenAddress' in pool && pool.mooTokenAddress) {
+      const mooTokenContract = new web3[pool.network].eth.Contract(
+        beefyVaultAbi,
+        pool.mooTokenAddress
+      );
+      mooToken[pool.network].push({
+        id: pool.id,
+        ppfs: mooTokenContract.methods.getPricePerFullShare(),
+      });
+    }
   }
 
   const promises = [];
-  for (const key in multicall) {
-    promises.push(multicall[key].all([calls[key]]));
-    promises.push(multicall[key].all([strategy[key]]));
-    promises.push(multicall[key].all([sponsors[key]]));
-    promises.push(multicall[key].all([ticket[key]]));
-    promises.push(multicall[key].all([prizePool[key]]));
+  const groups = [calls, strategy, sponsors, ticket, prizePool, mooToken];
+  for (const network in multicall) {
+    for (const group of groups) {
+      if (group[network] && group[network].length) {
+        promises.push(multicall[network].all([group[network]]));
+      }
+    }
   }
   const results = await Promise.allSettled(promises);
 
@@ -429,6 +445,12 @@ const getPools = async (items, state, dispatch) => {
     // === PrizePool
     if (!isEmpty(item.prizePoolBalance)) {
       pool.prizePoolBalance = item.prizePoolBalance;
+    }
+
+    // === mooToken
+    if (!isEmpty(item.ppfs)) {
+      const ppfs = new BigNumber(item.ppfs || 1).dividedBy(new BigNumber(10).exponentiatedBy(18));
+      pool.ppfs = ppfs.toNumber();
     }
 
     // New ref for sponsors for state update

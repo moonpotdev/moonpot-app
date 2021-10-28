@@ -17,6 +17,7 @@ const initialPools = () => {
       pool['apy'] = 0;
       pool['tvl'] = 0;
       pool['tokenPrice'] = 0;
+      pool['ppfs'] = 1;
       pool['prizePoolBalance'] = '0';
       pool['awardBalance'] = new BigNumber(0);
       pool['awardBalanceUsd'] = new BigNumber(0);

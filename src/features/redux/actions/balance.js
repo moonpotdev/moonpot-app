@@ -5,6 +5,7 @@ import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/t
 import prizePoolAbi from '../../../config/abi/prizepool.json';
 import erc20Abi from '../../../config/abi/erc20.json';
 import gateManagerAbi from '../../../config/abi/gatemanager.json';
+import beefyVaultAbi from '../../../config/abi/beefyvault.json';
 
 const getBalances = async (pools, state, dispatch) => {
   const address = state.walletReducer.address;
@@ -71,6 +72,18 @@ const getBalances = async (pools, state, dispatch) => {
       token: pot.contractAddress + ':fee',
       address: pot.contractAddress,
     });
+
+    // Ticket represents mooToken
+    if ('mooTokenAddress' in pot && pot.mooTokenAddress) {
+      const mooTokenContract = new web3[network].eth.Contract(beefyVaultAbi, pot.mooTokenAddress);
+
+      // allowance of pot to spend mooToken
+      calls[network].push({
+        allowance: mooTokenContract.methods.allowance(address, pot.contractAddress),
+        token: pot.mooTokenAddress,
+        spender: pot.contractAddress,
+      });
+    }
 
     // lp
     if (pot.vaultType === 'lp' || pot.vaultType === 'stable') {
@@ -156,9 +169,12 @@ const getBalances = async (pools, state, dispatch) => {
     }
 
     if (response.allowance !== undefined) {
-      tokens[response.token].allowance = {
-        ...tokens[response.token].allowance,
-        [response.spender]: response.allowance,
+      tokens[response.token] = {
+        ...tokens[response.token],
+        allowance: {
+          ...(tokens[response.token]?.allowance || {}),
+          [response.spender]: response.allowance,
+        },
       };
     }
 

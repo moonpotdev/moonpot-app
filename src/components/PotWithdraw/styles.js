@@ -21,6 +21,9 @@ const styles = theme => ({
   migrationNotice: {
     marginTop: '16px',
   },
+  inputHolder: {
+    marginTop: '16px',
+  },
   buttonHolder: {
     marginTop: '16px',
   },

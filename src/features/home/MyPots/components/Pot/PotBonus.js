@@ -186,9 +186,7 @@ const PotBonus = function ({ item, buttonVariant = 'purple' }) {
             fullWidth={true}
             disabled={!canCompound}
           >
-            {item.compoundIsBonus
-              ? t('bonus.compoundBonusToken', { token: item.token })
-              : t('bonus.compoundToken', { token: item.token })}
+            {t('bonus.compoundBonusToken', { token: item.token })}
           </PrimaryButton>
           <Typography className={clsx(classes.explainerText, classes.compoundExplainerText)}>
             {t('bonus.compoundExplainer', { token: item.token })}
@@ -202,9 +200,7 @@ const PotBonus = function ({ item, buttonVariant = 'purple' }) {
           fullWidth={true}
           disabled={!canWithdrawBonus}
         >
-          {item.compoundIsBonus
-            ? t('bonus.withdrawBonusTokens', { tokens: earnedTokens })
-            : t('bonus.withdrawEarnedTokens', { tokens: earnedTokens })}
+          {t('bonus.withdrawBonusTokens', { tokens: earnedTokens })}
         </SecondaryButton>
       </Grid>
     </Grid>

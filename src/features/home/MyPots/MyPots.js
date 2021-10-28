@@ -13,6 +13,7 @@ import styles from './styles';
 import { RoutedButton } from '../../../components/Buttons/BaseButton';
 import clsx from 'clsx';
 import { ClaimableBonusNotification } from '../../../components/ClaimableBonusNotification';
+import { MigrationNotices } from '../Moonpots/components/MigrationNotices/MigrationNotices';
 
 const useStyles = makeStyles(styles);
 
@@ -91,11 +92,13 @@ const MyPots = ({ selected }) => {
             </RoutedButton>
           </Grid>
         </Grid>
-
         <div className={classes.potsContainer}>
           <div className={classes.spacer}>
             {selected === 'active' ? (
-              <ClaimableBonusNotification className={classes.claimableBonuses} />
+              <>
+                <MigrationNotices potType="all" />
+                <ClaimableBonusNotification className={classes.claimableBonuses} />
+              </>
             ) : null}
             <Cards sameHeight={false}>
               {filtered.length === 0 ? (
