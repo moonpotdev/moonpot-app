@@ -375,6 +375,8 @@ const getPools = async (items, state, dispatch) => {
           .times(pool.interestBreakdown.interest)
           .dividedBy(100)
           .toNumber();
+      } else if (pool.underlyingApy && 'mooTokenAddress' in pool && pool.mooTokenAddress) {
+        pool.apy = pool.underlyingApy;
       } else {
         pool.apy = 0;
       }
