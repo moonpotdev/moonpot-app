@@ -231,37 +231,37 @@
     "claimAll": "Klaim semua bonus POTS yang diperoleh"
   },
   "migration": {
-    "viewRetiredPot": "View Retired Pot",
-    "learnMore": "Learn more.",
-    "migrateToken": "Migrate {{token}}",
-    "migrateTokenAndClaim": "Migrate {{token}} and Claim Earnings",
+    "viewRetiredPot": "Lihat Pot Tidak Aktif",
+    "learnMore": "Pelajari Lagi.",
+    "migrateToken": "Migrasi {{token}}",
+    "migrateTokenAndClaim": "Migrasi {{token}} dan Klaim Penghasilan",
     "notice": {
       "all": {
-        "title": "{{name}} Pot Migration",
+        "title": "Migrasi Pot {{name}}",
         "content": [
-          "We have upgraded {{name}} Pot in order to make it safer and fairer, as well as to allow us to automate more of our processes. You need to move your {{token}} to the new {{name}} Pot to continue earning interest and be eligible for the next prize draw."
+          "Kami telah meningkatkan Pot {{name}} agar lebih aman dan adil, serta memungkinkan kami untuk mengotomatiskan lebih banyak proses kami. Anda harus memindahkan {{token}} Anda ke Pot {{name}} yang baru untuk terus mendapatkan keuntungan dan memenuhi syarat untuk undian hadiah berikutnya."
         ]
       },
       "pots-v2": {
-        "title": "Ziggy’s Pot Migration: Autocompound update",
+        "title": " Migrasi Ziggy’s Pot : Update Autocompound",
         "content": [
-          "We have upgraded Ziggy’s Pot to autocompound and allow partial withdrawals. You need to move your POTS to the new Ziggy’s Pot to continue earning interest and be eligible for the next prize draw."
+          "Kami telah meningkatkan Pot Ziggy's ke autocompound dan bisa ditarik sebagian. Anda perlu memindahkan POTS Anda ke Pot Ziggy yang baru untuk terus mendapatkan keuntungan dan memenuhi syarat untuk pengundian hadiah berikutnya."
         ]
       }
     },
     "details": {
       "all": [
-        "We upgraded the {{name}} Pot in order to make it safer and fairer, as well as to allow us to automate more of our processes.",
-        "Because of the upgrade, you need to move your {{token}} to the new {{name}} Pot."
+        "Kami meningkatkan Pot {{name}} agar lebih aman dan adil, serta memungkinkan kami untuk mengotomatiskan lebih banyak proses kami.",
+        "Karena peningkatan, Anda perlu memindahkan {{token}} Anda ke Pot {{name}} yang baru."
       ],
       "pots-v2": [
-        "Ziggy’s pot now autocompounds!",
-        "We have upgraded Ziggy’s pot to autocompound and allow partial withdrawals. You need to move your POTS to the new Ziggy’s Pot to continue earning interest and be eligible for the next prize draw."
+        "Sekarang Ziggy’s pot bisa autocompounds!",
+        "Kami telah mengupgrade pot Ziggy menjadi autocompound dan bisa ditarik sebagian. Anda perlu memindahkan POTS Anda ke Pot Ziggy yang baru untuk terus mendapatkan keuntungan dan memenuhi syarat untuk pengundian hadiah berikutnya."
       ]
     },
     "withdraw": {
       "all": [
-        "Withdrawing your {{token}} will stop you earning interest on your {{token}}. This will make you ineligible for the next prize draw. You will need to manually deposit to be eligible again."
+        "Penarikan {{token}} Anda akan menghentikan Anda untuk mendapatkan keuntungan atas {{token}} Anda. Ini akan membuat Anda tidak memenuhi syarat untuk undian hadiah berikutnya. Anda harus menyetor secara manual agar memenuhi syarat lagi."
       ]
     }
   }
