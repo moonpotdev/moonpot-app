@@ -5,14 +5,14 @@ import styles from './styles';
 import BigNumber from 'bignumber.js';
 import { bigNumberTruncate, convertAmountToRawNumber, formatDecimals } from '../../helpers/format';
 import reduxActions from '../../features/redux/actions';
-import Steps from '../../features/vault/components/Steps';
+import Steps from '../../features/vault/components/Steps/Steps';
 import { indexBy, isEmpty } from '../../helpers/utils';
-import { LPTokenInput } from '../LPTokenInput/LPTokenInput';
+import { ZapTokenInput } from '../ZapTokenInput/ZapTokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { usePot, useSymbolOrList, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
-import { Translate } from '../Translate';
+import { Translate } from '../Translate/Translate';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
 import { config } from '../../config/config';
 import { createZapInEstimate } from '../../features/redux/actions/zap';
@@ -146,7 +146,7 @@ function useDepositTokens(network, lpAddress) {
   );
 }*/
 
-export const LPPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
+export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
@@ -331,7 +331,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
       {/*  />*/}
       {/*</div>*/}
       <div className={classes.inputHolder}>
-        <LPTokenInput
+        <ZapTokenInput
           tokens={depositTokens}
           selected={selectedTokenSymbol}
           value={inputValue}

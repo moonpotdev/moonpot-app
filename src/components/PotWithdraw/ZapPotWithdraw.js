@@ -153,7 +153,7 @@ function useUnwrappedTokensSymbols(network, tokens) {
   }, [network, tokens]);
 }
 
-export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
+export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
