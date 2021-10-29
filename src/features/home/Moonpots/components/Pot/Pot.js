@@ -43,7 +43,6 @@ const NewDepositOdds = memo(function ({
   network = 'bsc',
 }) {
   const tokenPrice = useTokenAddressPrice(tokenAddress, network);
-  console.log(tokensByNetworkAddress);
   const stakedMultiplier =
     tokensByNetworkAddress[network][ticketAddress.toLowerCase()].stakedMultiplier;
 
