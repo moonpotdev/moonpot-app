@@ -202,6 +202,15 @@
     "lpLast": true
   },
   {
+    "symbol": "moonTicketBeltBNB",
+    "address": "0xfF4226328b92470691E5D1De4D2a974D132ef28E",
+    "type": "ticket",
+    "oracleId": "belt-beltbnb",
+    "decimals": 18,
+    "underlyingToken": "BeltBNB",
+    "stakedMultiplier": 2
+  },
+  {
     "symbol": "moonTicketBelt4LP",
     "address": "0x49d46111DDD93C526486b88E17C4f8b1Ea0F682e",
     "type": "ticket",
