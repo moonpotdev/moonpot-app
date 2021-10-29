@@ -190,6 +190,18 @@
     "lpLast": true
   },
   {
+    "symbol": "BeltBNB",
+    "icon": "beltbnb",
+    "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "type": "lp",
+    "oracleId": "belt-beltbnb",
+    "decimals": 18,
+    "zap": "0xBC106076552d0DbA0705C76b0344C533Cb63788C",
+    "lp": ["WBNB"],
+    "lpDisplayOrder": ["WBNB"],
+    "lpLast": true
+  },
+  {
     "symbol": "moonTicketBelt4LP",
     "address": "0x49d46111DDD93C526486b88E17C4f8b1Ea0F682e",
     "type": "ticket",
