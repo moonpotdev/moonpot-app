@@ -196,7 +196,7 @@
     "type": "lp",
     "oracleId": "belt-beltbnb",
     "decimals": 18,
-    "zap": "0xBC106076552d0DbA0705C76b0344C533Cb63788C",
+    "zap": "0x8dFa9eD55a6341DF169005c7703E5BA1D8eCB10D",
     "lp": ["WBNB"],
     "lpDisplayOrder": ["WBNB"],
     "lpLast": true
