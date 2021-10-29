@@ -232,6 +232,52 @@
     ]
   },
   {
+    "id": "bnb",
+    "name": "BNB",
+    "token": "BeltBNB",
+    "tokenAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBNB",
+    "rewardAddress": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
+    "contractAddress": "0x3789840c8697Aee0d02159003D7501588De3ceD9",
+    "prizePoolAddress": "0xba72E7FFB471f1fe7CacDfB6ab1c443C0Ca43f3D",
+    "prizeStrategyAddress": "0x127795F46AF6B848D98CbBCC832e7EC69c85E886",
+    "pricePerShare": 1,
+    "oracleId": "BeltBNB",
+    "apyId": "belt-beltbnb",
+    "vaultType": "main",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xC34Ae91312A3c3F9420691922040a5DEe1698E52",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "side-cake",
     "name": "CAKE Side",
     "token": "CAKE",
