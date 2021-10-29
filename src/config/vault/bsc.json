@@ -235,7 +235,7 @@
     "id": "bnb",
     "name": "BNB",
     "token": "BeltBNB",
-    "tokenAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "tokenAddress": "0xa8bb71facdd46445644c277f9499dd22f6f0a30c",
     "tokenDecimals": 18,
     "rewardToken": "moonTicketBeltBNB",
     "rewardAddress": "0xfF4226328b92470691E5D1De4D2a974D132ef28E",

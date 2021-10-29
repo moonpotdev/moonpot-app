@@ -192,7 +192,7 @@
   {
     "symbol": "BeltBNB",
     "icon": "beltbnb",
-    "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "address": "0xa8bb71facdd46445644c277f9499dd22f6f0a30c",
     "type": "lp",
     "oracleId": "belt-beltbnb",
     "decimals": 18,
