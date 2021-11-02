@@ -257,7 +257,6 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
             pending: false,
           });
         }
-
         // Zap
         steps.push({
           step: 'withdraw',
