@@ -47,7 +47,7 @@ const useDrawSponsor = function (depositTokenAddress, ticketTokenAddress, awards
   }, [depositTokenAddress, ticketTokenAddress, awards]);
 };
 
-const useNormalizedWinnings = function (awards, drawToken) {
+const useNormalizedWinnings = function (awards, drawToken, ticketAddress, ppfs) {
   const prices = useSelector(state => state.pricesReducer.prices);
 
   return useMemo(() => {
@@ -62,7 +62,14 @@ const useNormalizedWinnings = function (awards, drawToken) {
     for (const { token, amount } of awards) {
       const tokenData = tokensByNetworkAddress[network]?.[token.toLowerCase()];
       if (tokenData) {
-        const numericAmount = byDecimals(amount, tokenData.decimals);
+        let numericAmount = byDecimals(amount, tokenData.decimals);
+
+        // Handle PPFS for reward in pot tickets
+        if (token.toLowerCase() === ticketAddress.toLowerCase()) {
+          const pricePerFullShare = byDecimals(ppfs || '1000000000000000000', 18);
+          numericAmount = numericAmount.multipliedBy(pricePerFullShare);
+        }
+
         const price = new BigNumber(prices[tokenData.oracleId] || 0);
         const totalPrice = numericAmount.multipliedBy(price);
         const symbol = tokenData.underlyingToken || tokenData.symbol;
@@ -87,7 +94,7 @@ const useNormalizedWinnings = function (awards, drawToken) {
       amount: token.amount.toNumber(),
       value: token.value.toNumber(),
     }));
-  }, [awards, prices, drawToken]);
+  }, [awards, prices, drawToken, ppfs, ticketAddress]);
 };
 
 const Title = memo(function ({ name }) {
@@ -220,7 +227,12 @@ const UserWonDraw = memo(function ({ winners }) {
 
 export const Draw = function ({ draw }) {
   const classes = useStyles();
-  const winnings = useNormalizedWinnings(draw.awards, draw.pot.token);
+  const winnings = useNormalizedWinnings(
+    draw.awards,
+    draw.pot.token,
+    draw.pot.rewardAddress,
+    draw.ppfs
+  );
   const totalPrizeValue = useTotalPrizeValue(winnings, draw.winners.length);
   const sponsorToken = useDrawSponsor(draw.pot.tokenAddress, draw.pot.rewardAddress, draw.awards);
 

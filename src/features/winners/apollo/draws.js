@@ -24,6 +24,7 @@ const query = gql`
       txHash
       timestamp
       totalPlayers
+      ppfs
       prizePool {
         address
       }
