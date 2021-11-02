@@ -662,6 +662,8 @@ const zapIn = (
         swapOutToken.decimals
       );
 
+      console.log(tokenAmountOutMinRaw);
+
       if (isNative) {
         const method = contract.methods.beamInETH(potAddress, tokenAmountOutMinRaw);
         const [estimateError, options] = await estimateGas(network, method, {

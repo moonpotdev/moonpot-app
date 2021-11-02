@@ -13,7 +13,69 @@ import gateManagerAbi from '../../../config/abi/gatemanager.json';
 import { MultiCall } from 'eth-multicall';
 import { getFairplayFeePercent, objectArrayFlatten } from '../../../helpers/utils';
 
+function simpleZapInEstimate(potId, depositAddress, depositAmount) {
+  const requestId = uniqid('in', potId);
+
+  return [
+    requestId,
+    async (dispatch, getState) => {
+      dispatch({
+        type: ZAP_SWAP_ESTIMATE_PENDING,
+        payload: {
+          requestId,
+          potId,
+          depositAddress,
+          depositAmount,
+        },
+      });
+
+      const state = getState();
+      const pot = state.vaultReducer.pools[potId];
+      const network = pot.network;
+      const web3 = state.walletReducer.rpc[network];
+      const wrappedNative = config[network].nativeCurrency.wrappedAddress;
+      const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
+      const isNative = !depositAddress;
+      const swapInToken = isNative
+        ? tokensByNetworkAddress[network][wrappedNative.toLowerCase()]
+        : tokensByNetworkAddress[network][depositAddress.toLowerCase()];
+      const zapContract = new web3.eth.Contract(zapAbi, pairToken.zap);
+
+      const result = {
+        0: depositAmount.toNumber() * 1000000000000000000 + '',
+        1: '1',
+        2: pairToken.address,
+        swapInAmount: depositAmount.toNumber() * 1000000000000000000 + '',
+        swapOutAmount: '1',
+        swapTokenOut: pairToken.address,
+      };
+
+      const swapOutToken = tokensByNetworkAddress[network][result.swapTokenOut.toLowerCase()];
+
+      dispatch({
+        type: ZAP_SWAP_ESTIMATE_COMPLETE,
+        payload: {
+          requestId,
+          potId,
+          isNative,
+          zapAddress: pairToken.zap,
+          swapInAddress: swapInToken.address,
+          swapInToken,
+          swapInAmount: depositAmount,
+          swapOutAddress: swapOutToken.address,
+          swapOutToken,
+          swapOutAmount: BigNumber(0.0000000000000000001),
+        },
+      });
+    },
+  ];
+}
+
 export function createZapInEstimate(potId, depositAddress, depositAmount) {
+  if (potId === 'bnb') {
+    return simpleZapInEstimate(potId, depositAddress, depositAmount);
+  }
+
   const requestId = uniqid('in', potId);
 
   return [
