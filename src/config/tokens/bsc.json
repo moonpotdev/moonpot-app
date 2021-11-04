@@ -286,9 +286,15 @@
     "symbol": "moonTicketPOTSv3",
     "address": "0xCd3941d4825c08991b98930ef18062f6df2959d4",
     "type": "ticket",
-    "oracleId": "POTS",
     "decimals": 18,
-    "underlyingToken": "POTS",
+    "underlyingToken": "mooPOTS",
     "stakedMultiplier": 1
+  },
+  {
+    "symbol": "mooPOTS",
+    "address": "0xC264c0D6e8A35AbB7a118e9592aD400f640471D9",
+    "type": "moo",
+    "decimals": 18,
+    "underlyingToken": "POTS"
   }
 ]

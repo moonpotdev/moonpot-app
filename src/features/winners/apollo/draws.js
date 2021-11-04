@@ -28,13 +28,13 @@ const query = gql`
       prizePool {
         address
       }
-      awards {
-        token
-        amount
-      }
       winners {
         address
         staked
+        awards {
+          token
+          amount
+        }
       }
     }
   }

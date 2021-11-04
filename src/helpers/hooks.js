@@ -91,7 +91,7 @@ export function useTokenEarned(id, token, tokenDecimals) {
 export function useTokenAddressPrice(address, network = 'bsc') {
   const tokenData = tokensByNetworkAddress[network]?.[address.toLowerCase()];
   return useSelector(state =>
-    tokenData ? state.pricesReducer.prices[tokenData.oracleId] || 0 : 0
+    tokenData ? state.pricesReducer.byNetworkAddress[tokenData.network][tokenData.address] || 0 : 0
   );
 }
 
