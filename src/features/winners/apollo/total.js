@@ -36,7 +36,7 @@ export const useTotalPrizeValue = function () {
   });
 
   const prizePools = !loading && !error ? data?.prizePools : null;
-  const prices = useSelector(state => state.pricesReducer.prices);
+  const prices = useSelector(state => state.pricesReducer.byNetworkAddress[network]);
 
   const total = useMemo(() => {
     let sum = new BigNumber(0);
@@ -47,7 +47,7 @@ export const useTotalPrizeValue = function () {
           const tokenData = tokensByNetworkAddress[network]?.[token.toLowerCase()];
           if (tokenData) {
             const numericAmount = byDecimals(amount, tokenData.decimals);
-            const price = new BigNumber(prices[tokenData.oracleId] || 0);
+            const price = new BigNumber(prices[tokenData.address] || 0);
             sum = sum.plus(numericAmount.multipliedBy(price));
           } else {
             console.error(`No token for ${token} on ${network} found`);

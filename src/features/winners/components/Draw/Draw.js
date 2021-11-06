@@ -8,7 +8,7 @@ import { tokensByNetworkAddress } from '../../../../config/tokens';
 import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
-import { formatAddressShort } from '../../../../helpers/utils';
+import { formatAddressShort, getUnderylingToken } from '../../../../helpers/utils';
 import { ErrorOutline } from '@material-ui/icons';
 import BigNumber from 'bignumber.js';
 import clsx from 'clsx';
@@ -18,76 +18,111 @@ import { Translate } from '../../../../components/Translate';
 const useStyles = makeStyles(styles);
 const network = 'bsc';
 
-const useTotalPrizeValue = function (winnings, numberOfWinners) {
+const useTotalPrizeValue = function (winners) {
   return useMemo(() => {
     let sum = 0;
 
-    for (const { value } of winnings) {
-      sum += value * numberOfWinners;
+    for (const winner of winners) {
+      for (const award of winner.awards) {
+        sum += award.value;
+      }
     }
 
     return sum;
-  }, [winnings, numberOfWinners]);
+  }, [winners]);
 };
 
-const useDrawSponsor = function (depositTokenAddress, ticketTokenAddress, awards) {
+const useDrawSponsor = function (depositTokenAddress, ticketTokenAddress, winners) {
   return useMemo(() => {
     const depositTokenAddressLower = depositTokenAddress.toLowerCase();
     const ticketTokenAddressLower = ticketTokenAddress.toLowerCase();
 
     // Return first token which isn't base token
-    for (const { token } of awards) {
-      const tokenAddress = token.toLowerCase();
-      if (tokenAddress !== depositTokenAddressLower && tokenAddress !== ticketTokenAddressLower) {
-        return tokensByNetworkAddress[network]?.[tokenAddress]?.symbol;
+    for (const winner of winners) {
+      for (const { token } of winner.awards) {
+        const tokenAddress = token.toLowerCase();
+        if (tokenAddress !== depositTokenAddressLower && tokenAddress !== ticketTokenAddressLower) {
+          return tokensByNetworkAddress[network]?.[tokenAddress]?.symbol;
+        }
       }
     }
 
     return null;
-  }, [depositTokenAddress, ticketTokenAddress, awards]);
+  }, [depositTokenAddress, ticketTokenAddress, winners]);
 };
 
-const useNormalizedWinnings = function (awards, drawToken) {
+function normalizeWinnings(awards, drawToken, ticketAddress, ticketPPFS, prices) {
+  const tokens = {
+    [drawToken]: {
+      symbol: drawToken,
+      amount: new BigNumber(0),
+      value: new BigNumber(0),
+    },
+  };
+
+  for (const { token, amount } of awards) {
+    const tokenData = tokensByNetworkAddress[network]?.[token.toLowerCase()];
+    if (tokenData) {
+      let numericAmount = byDecimals(amount, tokenData.decimals);
+
+      // Handle PPFS for reward in pot tickets
+      if (token.toLowerCase() === ticketAddress.toLowerCase()) {
+        const pricePerFullShare = byDecimals(ticketPPFS || '1000000000000000000', 18);
+        numericAmount = numericAmount.multipliedBy(pricePerFullShare);
+      }
+
+      const underlyingToken = getUnderylingToken(tokenData);
+      const price = new BigNumber(prices[underlyingToken.oracleId] || 0);
+      const totalPrice = numericAmount.multipliedBy(price);
+      const symbol = underlyingToken.symbol;
+
+      if (symbol in tokens) {
+        tokens[symbol].amount = tokens[symbol].amount.plus(numericAmount);
+        tokens[symbol].value = tokens[symbol].value.plus(totalPrice);
+      } else {
+        tokens[symbol] = {
+          symbol: symbol,
+          amount: numericAmount,
+          value: totalPrice,
+        };
+      }
+    } else {
+      console.error(`No token for ${token} on ${network} found`);
+    }
+  }
+
+  return Object.values(tokens).map(token => ({
+    symbol: token.symbol,
+    amount: token.amount.toNumber(),
+    value: token.value.toNumber(),
+  }));
+}
+
+function normalizeStaked(stakedAmount, ticketAddress, ticketPPFS, prices) {
+  const ticketToken = tokensByNetworkAddress[network][ticketAddress.toLowerCase()];
+  const underlyingToken = getUnderylingToken(ticketToken);
+  const price = new BigNumber(prices[underlyingToken.oracleId] || 0);
+  const pricePerFullShare = byDecimals(ticketPPFS || '1000000000000000000', 18);
+  const numericAmount = byDecimals(stakedAmount, ticketToken.decimals)
+    .multipliedBy(pricePerFullShare)
+    .multipliedBy(ticketToken.stakedMultiplier);
+
+  return {
+    staked: numericAmount.toNumber(),
+    stakedValue: numericAmount.multipliedBy(price).toNumber(),
+  };
+}
+
+const useNormalizedWinners = function (winners, drawToken, ticketAddress, ticketPPFS) {
   const prices = useSelector(state => state.pricesReducer.prices);
 
   return useMemo(() => {
-    const tokens = {
-      [drawToken]: {
-        symbol: drawToken,
-        amount: new BigNumber(0),
-        value: new BigNumber(0),
-      },
-    };
-
-    for (const { token, amount } of awards) {
-      const tokenData = tokensByNetworkAddress[network]?.[token.toLowerCase()];
-      if (tokenData) {
-        const numericAmount = byDecimals(amount, tokenData.decimals);
-        const price = new BigNumber(prices[tokenData.oracleId] || 0);
-        const totalPrice = numericAmount.multipliedBy(price);
-        const symbol = tokenData.underlyingToken || tokenData.symbol;
-
-        if (symbol in tokens) {
-          tokens[symbol].amount = tokens[symbol].amount.plus(numericAmount);
-          tokens[symbol].value = tokens[symbol].value.plus(totalPrice);
-        } else {
-          tokens[symbol] = {
-            symbol: symbol,
-            amount: numericAmount,
-            value: totalPrice,
-          };
-        }
-      } else {
-        console.error(`No token for ${token} on ${network} found`);
-      }
-    }
-
-    return Object.values(tokens).map(token => ({
-      symbol: token.symbol,
-      amount: token.amount.toNumber(),
-      value: token.value.toNumber(),
+    return winners.map(winner => ({
+      ...winner,
+      awards: normalizeWinnings(winner.awards, drawToken, ticketAddress, ticketPPFS, prices),
+      ...normalizeStaked(winner.staked, ticketAddress, ticketPPFS, prices),
     }));
-  }, [awards, prices, drawToken]);
+  }, [winners, prices, drawToken, ticketPPFS, ticketAddress]);
 };
 
 const Title = memo(function ({ name }) {
@@ -112,9 +147,11 @@ const ValueWon = memo(function ({ currency, amount }) {
   );
 });
 
-const WonTokens = memo(function ({ winnings }) {
+const WonTokens = memo(function ({ winners }) {
   const classes = useStyles();
-  const allTokens = winnings.map(winning => winning.symbol);
+  const allTokens = new Set();
+
+  winners.forEach(winner => winner.awards.forEach(award => allTokens.add(award.symbol)));
 
   return (
     <div className={classes.wonTotalTokens}>
@@ -136,10 +173,10 @@ const Players = memo(function ({ players }) {
   });
 });
 
-const PrizePerWinner = memo(function ({ winnings }) {
+const PrizePerWinner = memo(function ({ winners }) {
   const classes = useStyles();
 
-  return Object.values(winnings).map(prize => {
+  return Object.values(winners[0].awards).map(prize => {
     return (
       <div key={prize.symbol} className={classes.prizePerWinner}>
         <span className={classes.perWinnerToken}>
@@ -151,31 +188,25 @@ const PrizePerWinner = memo(function ({ winnings }) {
   });
 });
 
-const Winners = memo(function ({ network, tokenAddress, winners, ticketAddress }) {
+const Winners = memo(function ({ network, tokenAddress, winners }) {
   const { t } = useTranslation();
   const classes = useStyles();
-  const prices = useSelector(state => state.pricesReducer.prices);
   const tokenData = tokensByNetworkAddress[network]?.[tokenAddress.toLowerCase()];
-  const price = prices[tokenData.oracleId] || 0;
-  const tokenDecimals = tokenData.decimals;
-  const ticketData = tokensByNetworkAddress[network]?.[ticketAddress.toLowerCase()];
-  const ticketToStaked = ticketData.stakedMultiplier;
 
   const sortedWinners = useMemo(() => {
     const entries = winners.map((winner, index) => {
-      const staked = byDecimals(winner.staked, tokenDecimals).multipliedBy(ticketToStaked);
-      const value = staked.multipliedBy(price);
-
       return {
         id: winner.address + index,
-        staked: staked.toNumber(),
-        value: value.toNumber(),
+        staked: winner.staked,
+        value: winner.stakedValue,
         address: winner.address,
       };
     });
 
     return entries.sort((a, b) => (a.staked > b.staked) - (a.staked < b.staked));
-  }, [winners, price, tokenDecimals, ticketToStaked]);
+  }, [winners]);
+
+  console.log(sortedWinners);
 
   return (
     <Grid container spacing={2} className={classes.rowWinners}>
@@ -220,9 +251,15 @@ const UserWonDraw = memo(function ({ winners }) {
 
 export const Draw = function ({ draw }) {
   const classes = useStyles();
-  const winnings = useNormalizedWinnings(draw.awards, draw.pot.token);
-  const totalPrizeValue = useTotalPrizeValue(winnings, draw.winners.length);
-  const sponsorToken = useDrawSponsor(draw.pot.tokenAddress, draw.pot.rewardAddress, draw.awards);
+  const winners = useNormalizedWinners(
+    draw.winners,
+    draw.pot.token,
+    draw.pot.rewardAddress,
+    draw.ppfs
+  );
+  console.log(draw.pot.id, winners);
+  const totalPrizeValue = useTotalPrizeValue(winners);
+  const sponsorToken = useDrawSponsor(draw.pot.tokenAddress, draw.pot.rewardAddress, draw.winners);
 
   return (
     <Card variant="purpleMid">
@@ -237,7 +274,7 @@ export const Draw = function ({ draw }) {
         <Grid item xs={8}>
           <Title name={draw.pot.name} />
           <ValueWon currency="$" amount={totalPrizeValue} />
-          <WonTokens winnings={winnings} />
+          <WonTokens winners={winners} />
         </Grid>
       </Grid>
       <UserWonDraw winners={draw.winners} />
@@ -254,7 +291,7 @@ export const Draw = function ({ draw }) {
         </Grid>
         <Grid item xs={12}>
           <DrawStat i18nKey="winners.prizePerWinner">
-            <PrizePerWinner winnings={winnings} />
+            <PrizePerWinner winners={winners} />
           </DrawStat>
         </Grid>
       </Grid>
@@ -263,8 +300,7 @@ export const Draw = function ({ draw }) {
           <Winners
             network={draw.pot.network}
             tokenAddress={draw.pot.tokenAddress}
-            ticketAddress={draw.pot.rewardAddress}
-            winners={draw.winners}
+            winners={winners}
           />
           <Link
             href={`https://bscscan.com/tx/${draw.txHash}`}

@@ -1,5 +1,6 @@
 import { config } from '../config/config';
 import BigNumber from 'bignumber.js';
+import { tokensByNetworkSymbol } from '../config/tokens';
 
 let trimReg = /(^\s*)|(\s*$)/g;
 
@@ -108,4 +109,16 @@ export function getFairplayFeePercent(secondsRemaining, days = 10, fee = 0.05) {
   }
 
   return 0;
+}
+
+export function getApiCacheBuster() {
+  return Math.trunc(Date.now() / (1000 * 60));
+}
+
+export function getUnderylingToken(token) {
+  while (token.underlyingToken) {
+    token = tokensByNetworkSymbol[token.network][token.underlyingToken];
+  }
+
+  return token;
 }
