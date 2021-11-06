@@ -38,21 +38,14 @@
   "homeTotalDeposits": "Total Deposit (TVL)",
   "homeJoinCommunityTitle": "Bergabung dengan komunitas",
   "homeJoinCommunityBody": "Anda dapat menyarankan pot baru di salah satu saluran kami, atau bergabung dengan pengembang kami untuk membangun salah satu project favorit anda.",
-  "migrationNoticeTitle": "Pindahkan {{asset}} saya untuk peningkatan Moonpot {{pot}} terbaru.",
-  "migrationNoticeLearnMore": "Pelajari lebih lanjut.",
-  "migrationNoticeMove": "Pindahkan {{asset}} saya",
   "vaultTitle": "Depositkan <span>{{token}}</span>, Hasilkan <span>{{apy}}% APY</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
-  "vaultTitleSide": "Setorkan <span>{{token}}</span>, Dan dapatkan sebuah kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
+  "vaultTitleSide": "Depositkan <span>{{token}}</span>, Dan dapatkan sebuah kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
   "playWithMoonpot": "Bermain dengan Moonpot",
   "youHaventEnteredMoonpots": "Anda belum masuk ke Moonpots manapun.",
   "youHaventEnteredRetiredMoonpots": "Anda belum masuk ke Moonpots yang tidak aktif.",
   "connectToJoin": "Hubungkan dompet Anda untuk bergabung dengan Moonpot.",
   "poweredByBeefy": "Didukung oleh <BeefyLink>Beefy</BeefyLink>",
   "auditedByCertik": "Diaudit oleh <CertikLink>Certik</CertikLink>",
-  "upgradeWhy": "Kami meningkatkan Pot {{token}} agar lebih aman dan adil, serta memungkinkan kami untuk mengotomatiskan lebih banyak proses kami.",
-  "upgradeNextSteps": "Karena ada peningkatan, Anda perlu memindahkan {{token}} anda ke Pot {{token}} yang baru.  Kami telah menambahkan {{boostToken}} Superboost ke Pot {{token}} baru untuk membantu anda agar lebih bermanfaat.",
-  "upgradeMove": "Pindahkan {{base}}",
-  "upgradeMoveWithdraw": "Pindahkan {{base}} dan Tarik {{bonus}}",
   "sidePotExplainer": "Side Pots memberi Anda kesempatan untuk memenangkan hadiah harian tanpa mendapatkan bunga/keuntungan. Jika Anda ingin mendapatkan bunga/keuntungan dan bergabung dengan undian mingguan dan bulanan yang lebih besar, Ziggy merekomendasikan Anda untuk bergabung ke <MainPotLink>Pot Utama</MainPotLink> sebagai gantinya.",
   "learnMore": "Pelajari lebih lanjut",
   "telegramSocialBlockBody": "Pelajari tentang Moonpot dan dapatkan dukungan langsung dari komunitas",
@@ -132,7 +125,6 @@
           ],
           "ziggy": [
             "Dengan stake $POTS di Ziggy's Pot, Anda akan menerima APY yang dihasilkan sebesar 5% dari pendapatan semua Moonpot lainnya.",
-            "Itu berarti APY anda akan dihasilkan oleh pendapatan dari Pot BANANA, BIFI, CAKE, dan LP kami — dan ditambah semua Moonpot lain yang anda lihat pada saat diluncurkan di platform.",
             "Ziggy akan membeli POTS dari pasar terbuka dengan pendapatan Moonpot.com dan memberikannya kepada pemegang POTS sebagai keuntungan/bunga.",
             "Ada juga Undian Hadiah bulanan yang ditambahkan ke Pot Ziggy di mana 10 pemenang yang beruntung akan mendapatkan bagian dari hadiah pot sebanyak 5% dari pendapatan semua token di seluruh platform Moonpot.",
             "Sebagai contoh, Pengundian Hadiah pada 1 September termasuk POTS, BIFI, CAKE dan DODO, dan menghasilkan total $723.760. Pot Ziggy diundi setiap empat minggu sekali (pada hari Rabu). Anda tidak perlu stake ulang."
@@ -191,6 +183,7 @@
     "provider": "Penyedia likuiditas"
   },
   "withdraw": {
+    "token": "Tarik {{token}}",
     "all": "Tarik semua",
     "allToken": "Tarik semua {{token}}",
     "allTokenAs": "Tarik semua sebagai {{token}}",
@@ -199,10 +192,6 @@
     "mySuperBoostToken": "Super Boost {{token}} Saya",
     "fairplayNotice": "Aturan TimeLock Fairplay berlaku.",
     "withdrawFeeNotice": "Biaya penarikan {{percent}}% berlaku.",
-    "migrationNotice": {
-      "title": "Perlu Migrasi",
-      "message": "Penarikan {{token}} Anda, sebaliknya jika memindahkannya ke Moonpot yang baru, berarti anda akan kehilangan penghasilan bonus di masa mendatang dan kesempatan anda untuk memenangkan Hadiah {{token}} berikutnya."
-    },
     "zapExplainer": "Penarikan LP atau ZAP⚡ Keluarkan {{tokens}}"
   },
   "bonus": {
@@ -240,5 +229,40 @@
       "Anda kemudian dapat menyetor semua bonus POTS yang anda peroleh dari dompet anda ke dalam Ziggy's Pot dalam satu transaksi."
     ],
     "claimAll": "Klaim semua bonus POTS yang diperoleh"
+  },
+  "migration": {
+    "viewRetiredPot": "Lihat Pot Tidak Aktif",
+    "learnMore": "Pelajari Lagi.",
+    "migrateToken": "Migrasi {{token}}",
+    "migrateTokenAndClaim": "Migrasi {{token}} dan Klaim Penghasilan",
+    "notice": {
+      "all": {
+        "title": "Migrasi Pot {{name}}",
+        "content": [
+          "Kami telah meningkatkan Pot {{name}} agar lebih aman dan adil, serta memungkinkan kami untuk mengotomatiskan lebih banyak proses kami. Anda harus memindahkan {{token}} Anda ke Pot {{name}} yang baru untuk terus mendapatkan keuntungan dan memenuhi syarat untuk undian hadiah berikutnya."
+        ]
+      },
+      "pots-v2": {
+        "title": " Migrasi Ziggy’s Pot : Update Autocompound",
+        "content": [
+          "Kami telah meningkatkan Pot Ziggy's ke autocompound dan bisa ditarik sebagian. Anda perlu memindahkan POTS Anda ke Pot Ziggy yang baru untuk terus mendapatkan keuntungan dan memenuhi syarat untuk pengundian hadiah berikutnya."
+        ]
+      }
+    },
+    "details": {
+      "all": [
+        "Kami meningkatkan Pot {{name}} agar lebih aman dan adil, serta memungkinkan kami untuk mengotomatiskan lebih banyak proses kami.",
+        "Karena peningkatan, Anda perlu memindahkan {{token}} Anda ke Pot {{name}} yang baru."
+      ],
+      "pots-v2": [
+        "Sekarang Ziggy’s pot bisa autocompounds!",
+        "Kami telah mengupgrade pot Ziggy menjadi autocompound dan bisa ditarik sebagian. Anda perlu memindahkan POTS Anda ke Pot Ziggy yang baru untuk terus mendapatkan keuntungan dan memenuhi syarat untuk pengundian hadiah berikutnya."
+      ]
+    },
+    "withdraw": {
+      "all": [
+        "Penarikan {{token}} Anda akan menghentikan Anda untuk mendapatkan keuntungan atas {{token}} Anda. Ini akan membuat Anda tidak memenuhi syarat untuk undian hadiah berikutnya. Anda harus menyetor secara manual agar memenuhi syarat lagi."
+      ]
+    }
   }
 }
