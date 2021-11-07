@@ -296,5 +296,14 @@
     "type": "moo",
     "decimals": 18,
     "underlyingToken": "POTS"
+  },
+  {
+    "symbol": "moonTicketCakeV4",
+    "address": "0x6B9c7C3aE69852De54A7b7b1F0C99851271Af9a1",
+    "type": "ticket",
+    "oracleId": "Cake",
+    "decimals": 18,
+    "underlyingToken": "CAKE",
+    "stakedMultiplier": 2
   }
 ]
