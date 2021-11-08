@@ -188,7 +188,7 @@
     "rewardAddress": "0x6B9c7C3aE69852De54A7b7b1F0C99851271Af9a1",
     "contractAddress": "0xa5fEBEB2FfAEC64D3cEE5e24829934f8DC3BDC28",
     "prizePoolAddress": "0xC4aeCF2ab2Bd5a9bE154618f4Cb035a73feA40a5",
-    "prizeStrategyAddress": "0xd2fad1fcc390587B0521b359415524dC3CF8e587",
+    "prizeStrategyAddress": "0x6cC56668E864278e210d78896Edb14a27Fd0F4f7",
     "pricePerShare": 1,
     "oracleId": "Cake",
     "apyId": "cake-cakev2",
