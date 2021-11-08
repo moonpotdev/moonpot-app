@@ -19,6 +19,9 @@
     "duration": 14,
     "fairplayDuration": 10,
     "fairplayTicketFee": 0.025,
+    "interestBreakdown": {
+      "interest": 100
+    },
     "status": "active",
     "supportsAutocompound": true,
     "supportsClaimAllBonuses": false,
