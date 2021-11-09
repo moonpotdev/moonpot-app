@@ -11,7 +11,6 @@ const styles = theme => ({
   nftStrategyContainer: {
     '& span': {
       '& strong': {
-        fontWeight: 400,
         color: '#F3BA2E',
       },
     },
