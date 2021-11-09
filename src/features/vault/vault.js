@@ -102,6 +102,8 @@ const Vault = () => {
       return 'greenStableAlt';
     } else if (vaultType === 'side') {
       return 'greySideAlt';
+    } else if (vaultType === 'nft') {
+      return 'purpleNftAlt';
     }
   }
 

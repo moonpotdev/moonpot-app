@@ -67,18 +67,26 @@ const Title = memo(function ({ name }) {
   );
 });
 
-export const WinTotal = memo(function ({ awardBalanceUsd, totalSponsorBalanceUsd }) {
+export const WinTotal = memo(function ({
+  awardBalanceUsd,
+  totalSponsorBalanceUsd,
+  isNftPot,
+  winNft,
+}) {
   const classes = useStyles();
   const totalPrize = useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd);
 
   return (
     <div className={classes.winTotalPrize}>
-      <Translate i18nKey="pot.winTotalPrize" values={{ prize: `$${totalPrize}` }} />
+      <Translate
+        i18nKey="pot.winTotalPrize"
+        values={isNftPot ? { prize: winNft + ' NFT' } : { prize: `$${totalPrize}` }}
+      />
     </div>
   );
 });
 
-const WinTokens = memo(function ({ depositToken, sponsors }) {
+const WinTokens = memo(function ({ depositToken, sponsors, isNftPot }) {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const sponsorTokens = sponsors
@@ -89,7 +97,7 @@ const WinTokens = memo(function ({ depositToken, sponsors }) {
 
   return (
     <div className={classes.winTotalTokens}>
-      <Translate i18nKey="pot.winTotalTokensIn" />
+      <Translate i18nKey={isNftPot ? 'pot.stake' : 'pot.winTotalTokensIn'} />
       <TransListJoin list={allTokens} />
     </div>
   );
@@ -189,6 +197,9 @@ export function Pot({ id, variant, bottom }) {
   const classes = useStyles();
   const pot = usePot(id);
   const history = useHistory();
+  const isNftPot = pot.vaultType === 'nft';
+
+  console.log(variant);
 
   return (
     <Card variant={variant}>
@@ -203,8 +214,14 @@ export function Pot({ id, variant, bottom }) {
             totalSponsorBalanceUsd={
               pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
             }
+            isNftPot={isNftPot}
+            winNft={pot.name}
           />
-          <WinTokens depositToken={pot.token} sponsors={pot.projectedSponsors || pot.sponsors} />
+          <WinTokens
+            depositToken={pot.token}
+            sponsors={pot.projectedSponsors || pot.sponsors}
+            isNftPot={isNftPot}
+          />
         </Grid>
       </Grid>
       <Grid container spacing={2} className={classes.rowDrawStats}>
@@ -235,12 +252,16 @@ export function Pot({ id, variant, bottom }) {
         <Grid item xs={7}>
           <DrawStat
             i18nKey="pot.statInterest"
-            tooltip={pot.vaultType !== 'side' ? <InterestTooltip pot={pot} /> : null}
+            tooltip={
+              pot.vaultType !== 'side' && pot.vaultType !== 'nft' ? (
+                <InterestTooltip pot={pot} />
+              ) : null
+            }
           >
             <Interest
               baseApy={pot.apy}
               bonusApy={pot.bonusApy}
-              noInterest={pot.vaultType === 'side' ? true : false}
+              noInterest={pot.vaultType === 'side' || pot.vaultType === 'nft' ? true : false}
             />
           </DrawStat>
         </Grid>
@@ -312,5 +333,18 @@ export const PrizeSplit = function ({
         );
       })}
     </>
+  );
+};
+
+export const NFTPrizeSplit = function ({ numberOfWinners }) {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.prizeSplitTotal}>
+      <Translate
+        i18nKey={numberOfWinners === 1 ? 'pot.amount' : 'pot.amountEach'}
+        values={{ symbol: '', amount: numberOfWinners + ' NFT' }}
+      />
+    </div>
   );
 };

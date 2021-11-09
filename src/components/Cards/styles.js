@@ -380,6 +380,46 @@ const styles = () => ({
       color: '#FFFFFF',
     },
   },
+  variantPurpleNft: {
+    color: '#FFFFFF',
+    backgroundColor: '#5C285A',
+    borderColor: '#6E306C',
+    '& $title': {
+      color: '#FFFFFF',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#6E306C',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#6E306C',
+    },
+    '& $accordionItemTitle': {
+      color: '#FFFFFF',
+    },
+    '& $accordionItemInner': {
+      color: '#FFFFFF',
+    },
+  },
+  variantPurpleNftAlt: {
+    color: '#FFFFFF',
+    backgroundColor: '#501B4E',
+    borderColor: '#632161',
+    '& $title': {
+      color: '#FFFFFF',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#632161',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#632161',
+    },
+    '& $accordionItemTitle': {
+      color: '#FFFFFF',
+    },
+    '& $accordionItemInner': {
+      color: '#FFFFFF',
+    },
+  },
   variantWhite: {
     color: '#585464',
     backgroundColor: '#ffffff',

@@ -14,7 +14,8 @@
     "learnMore": "Learn More",
     "moonpots": "Moonpots",
     "myPots": "My Pots",
-    "sidePots": "side"
+    "sidePots": "side",
+    "nftPots": "NFT"
   },
   "modals": {
     "unsupportedNetworkDetected": "Unsupported Network Detected",
@@ -66,6 +67,7 @@
     "titleRetired": "Retired {{name}} Pot",
     "winTotalPrize": "Win <span>{{prize}}</span>",
     "winTotalTokensIn": "in ",
+    "stake": "Stake ",
     "statNextDraw": "Next Draw",
     "statNextDrawDaily": "Next Daily Draw",
     "statNextDrawWeekly": "Next Weekly Draw",
@@ -79,6 +81,7 @@
     "statDeposit": "Your Deposit",
     "prizeDraw": "Prize Draw",
     "closed": "Closed",
+    "prizeSplitNFT": "Prize Split",
     "prizeSplit": "Projected Prize Split",
     "prizeSplitToolTip": "Live projection based on current TVL and interest rate",
     "prizeSplitWinner": "{{count}} Winning Ticket",
