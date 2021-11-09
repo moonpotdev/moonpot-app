@@ -2,6 +2,7 @@ import React from 'react';
 import { usePot } from '../../../../helpers/hooks';
 import { Box, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import { Translate } from '../../../../components/Translate/Translate';
 import { OpenInNew } from '@material-ui/icons';
 import { Card, Cards, CardTitle } from '../../../../components/Cards';
 import styles from './styles';
@@ -50,6 +51,52 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
                 className={classes.link}
               >
                 {t('pot.infocards.strategy.beefyVaultAddress')} <OpenInNew fontSize="inherit" />
+              </a>
+            </p>
+          ) : null}
+          <p>
+            <a
+              href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
+              rel="noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
+              {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
+              <OpenInNew fontSize="inherit" />
+            </a>
+          </p>
+        </Card>
+      ) : null}
+      {pot.nftInfoCardStrategy ? (
+        <Card variant="purpleInfo" className={classes.strategy}>
+          <img
+            alt=""
+            width="80"
+            height="80"
+            sizes="80px"
+            src={
+              <img
+                alt=""
+                width="80"
+                height="80"
+                sizes="80px"
+                src={require('../../../../images/nftsponsor/' + pot.name.toLowerCase() + '.png')}
+              />
+            }
+          />
+          <CardTitle>{t('pot.infocards.strategy.titleNFT', { name: pot.name })}</CardTitle>
+          <div className={classes.nftStrategyContainer}>
+            <Translate i18nKey={'pot.infocards.strategy.body.' + pot.nftInfoCardStrategy} />
+          </div>
+          {pot.nftInfoCardProjectLink ? (
+            <p>
+              <a
+                href={pot.nftInfoCardProjectLink}
+                rel="noreferrer"
+                target="_blank"
+                className={classes.link}
+              >
+                {pot.sponsorProjectName} <OpenInNew fontSize="inherit" />
               </a>
             </p>
           ) : null}
@@ -129,14 +176,29 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
           />
         </div>
         <CardTitle>{t('pot.infocards.fairplay.title', { name: pot.name })}</CardTitle>
-        {t('pot.infocards.fairplay.body', {
-          returnObjects: true,
-          token: pot.token,
-          duration: pot.fairplayDuration,
-          ticketFee: pot.fairplayTicketFee * 100,
-        }).map((text, i) => (
-          <p key={i}>{text}</p>
-        ))}
+        {pot.vaultType === 'nft' ? (
+          <>
+            {t('pot.infocards.fairplay.bodyNFT', {
+              returnObjects: true,
+              token: pot.token,
+              duration: pot.fairplayDuration,
+              ticketFee: pot.fairplayTicketFee * 100,
+            }).map((text, i) => (
+              <p key={i}>{text}</p>
+            ))}
+          </>
+        ) : (
+          <>
+            {t('pot.infocards.fairplay.body', {
+              returnObjects: true,
+              token: pot.token,
+              duration: pot.fairplayDuration,
+              ticketFee: pot.fairplayTicketFee * 100,
+            }).map((text, i) => (
+              <p key={i}>{text}</p>
+            ))}
+          </>
+        )}
       </Card>
       <Box className={classes.ziggyPlay}>
         <img

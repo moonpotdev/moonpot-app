@@ -121,6 +121,7 @@
     "infocards": {
       "strategy": {
         "title": "{{name}} Pot Strategy",
+        "titleNFT": "{{name}} NFT Pot Strategy",
         "body": {
           "beefy": [
             "This strategy deposits your {{token}} tokens in the Beefy.Finance {{token}} vault. Beefy autocompounds the {{token}} earnings.",
@@ -134,7 +135,8 @@
           ],
           "side": [
             "The {{name}} Pot deposits your ${{token}} in the Beefy.Finance {{token}} Vault. All Pot earnings are autocompounded and Moonpot sets aside {{breakdownPrize}}% for the Side Pot prize and {{breakdownBuyback}}% for $POTS buybacks for the Main Pot’s bonus interest."
-          ]
+          ],
+          "armznft": "We've partnered with Play2Earn game Armz Legends for our first NFT Pot. Cadets staking POTS in the NFT Moonpot can win one of 3 ARMZ NFTs (ERC-721) distributed daily over the next 100 days.<br/><br/>Rarities include:<br/>150 x Common<br/>100 x Rare<br/>40 x Epic<br/><span>10 x <strong>Legendary</strong></span><br/><br/>Winners can use their NFTs to earn $PROT in Armz Legends battles or trade them on the upcoming Armz Legends NFT marketplace.<br/><br/>"
         },
         "beefyVaultAddress": "Beefy.Finance Vault Address",
         "moonpotStrategyAddress": "{{name}} Pot Strategy Address"
@@ -157,6 +159,10 @@
           "Depositing more {{token}} will reset your Fairness fee to a maximum of 2.5%, for your additional deposit.",
           "If you win the prize, your Fairness Fee will be reset to {{ticketFee}}% and reduce to zero for {{duration}} days after winning.",
           "These measures prevent bad actors from manipulating the prize draws."
+        ],
+        "bodyNFT": [
+          "A Fairplay Timelock is in place to guarantee fairness for all Cadets. This lasts 72 hours for daily NFT Pots and 10 days for weekly NFT Pots.",
+          "Withdrawing early will incur a Fairness Fee up to 2.5% that funds Ziggy's Pot's APY."
         ]
       }
     }

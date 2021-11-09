@@ -8,6 +8,14 @@ const styles = theme => ({
       marginBottom: '0',
     },
   },
+  nftStrategyContainer: {
+    '& span': {
+      '& strong': {
+        fontWeight: 400,
+        color: '#F3BA2E',
+      },
+    },
+  },
   link: {
     color: '#F3BA2E',
     textDecoration: 'none',

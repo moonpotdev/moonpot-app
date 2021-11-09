@@ -107,9 +107,10 @@
     "status": "active",
     "supportsClaimAllBonuses": false,
     "withdrawFee": 0,
-    "infoCardStrategy": "beefy",
+    "nftInfoCardStrategy": "armznft",
     "infoCardBeefyVaultAddress": "0x21403739A1Dc0e3ceC70CBD5ceaE78fF25F102a4",
-    "sponsorProjectName": "Moonpot",
+    "nftInfoCardProjectLink": "https://armzlegends.com/",
+    "sponsorProjectName": "Armz Legends",
     "sponsorToken": "ARMZ",
     "sponsors": [],
     "bonuses": []
