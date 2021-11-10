@@ -19,6 +19,9 @@
     "duration": 14,
     "fairplayDuration": 10,
     "fairplayTicketFee": 0.025,
+    "interestBreakdown": {
+      "interest": 100
+    },
     "status": "active",
     "supportsAutocompound": true,
     "supportsClaimAllBonuses": false,
@@ -181,11 +184,11 @@
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
     "tokenDecimals": 18,
-    "rewardToken": "moonTicketCakeV3",
-    "rewardAddress": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
-    "contractAddress": "0x3789840c8697Aee0d02159003D7501588De3ceD9",
-    "prizePoolAddress": "0xba72E7FFB471f1fe7CacDfB6ab1c443C0Ca43f3D",
-    "prizeStrategyAddress": "0x127795F46AF6B848D98CbBCC832e7EC69c85E886",
+    "rewardToken": "moonTicketCakeV4",
+    "rewardAddress": "0x6B9c7C3aE69852De54A7b7b1F0C99851271Af9a1",
+    "contractAddress": "0xa5fEBEB2FfAEC64D3cEE5e24829934f8DC3BDC28",
+    "prizePoolAddress": "0xC4aeCF2ab2Bd5a9bE154618f4Cb035a73feA40a5",
+    "prizeStrategyAddress": "0x6cC56668E864278e210d78896Edb14a27Fd0F4f7",
     "pricePerShare": 1,
     "oracleId": "Cake",
     "apyId": "cake-cakev2",
@@ -223,11 +226,6 @@
         "id": 1,
         "symbol": "POTS",
         "display": "bonus"
-      },
-      {
-        "id": 2,
-        "symbol": "WBNB",
-        "display": "superBoost"
       }
     ]
   },
@@ -594,6 +592,7 @@
       "treasury": 2
     },
     "status": "active",
+    "supportsClaimAllBonuses": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x47a27220Db5458DB4b238fefCBb8178232cBFa5D",
@@ -611,6 +610,11 @@
       {
         "id": 0,
         "symbol": "xBLZD",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
         "display": "bonus"
       }
     ]
@@ -878,6 +882,66 @@
     "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/we-ve-been-busy/"
   },
   {
+    "id": "cake-v3",
+    "name": "CAKE",
+    "token": "CAKE",
+    "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketCakeV3",
+    "rewardAddress": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
+    "contractAddress": "0x3789840c8697Aee0d02159003D7501588De3ceD9",
+    "prizePoolAddress": "0xba72E7FFB471f1fe7CacDfB6ab1c443C0Ca43f3D",
+    "prizeStrategyAddress": "0x127795F46AF6B848D98CbBCC832e7EC69c85E886",
+    "pricePerShare": 1,
+    "oracleId": "Cake",
+    "apyId": "cake-cakev2",
+    "vaultType": "main",
+    "duration": 7,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
+    "status": "eol",
+    "eolDrawNumber": 9,
+    "supportsClaimAllBonuses": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "CAKE",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      },
+      {
+        "id": 2,
+        "symbol": "WBNB",
+        "display": "superBoost"
+      }
+    ],
+    "migrationNeeded": true,
+    "migrationContractAddress": "0xa5fEBEB2FfAEC64D3cEE5e24829934f8DC3BDC28",
+    "migrationRewardAddress": "0x6B9c7C3aE69852De54A7b7b1F0C99851271Af9a1"
+  },
+  {
     "id": "cake-v2",
     "name": "CAKE",
     "token": "CAKE",
@@ -933,12 +997,12 @@
       }
     ],
     "migrationNeeded": true,
-    "migrationContractAddress": "0x3789840c8697Aee0d02159003D7501588De3ceD9",
-    "migrationRewardAddress": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
+    "migrationContractAddress": "0xa5fEBEB2FfAEC64D3cEE5e24829934f8DC3BDC28",
+    "migrationRewardAddress": "0x6B9c7C3aE69852De54A7b7b1F0C99851271Af9a1",
     "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/we-ve-been-busy/"
   },
   {
-    "id": "cake-bifi",
+    "id": "cake-v1",
     "name": "CAKE",
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
@@ -979,8 +1043,8 @@
     "bonusAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
     "bonusTokenDecimals": 18,
     "migrationNeeded": true,
-    "migrationContractAddress": "0x3789840c8697Aee0d02159003D7501588De3ceD9",
-    "migrationRewardAddress": "0xc812402a36a4E4D6331Afa89bF92A89f8B6BD9C7",
+    "migrationContractAddress": "0xa5fEBEB2FfAEC64D3cEE5e24829934f8DC3BDC28",
+    "migrationRewardAddress": "0x6B9c7C3aE69852De54A7b7b1F0C99851271Af9a1",
     "migrationLearnMoreUrl": "https://moonpot.com/alpha/learn/how-to-move-cake-from-the-retired-cake-moonpot/",
     "winnersTransaction": "0x770ddd1d57b19437a0cf563923cb3799d31a5ca3e20a3080e4286d4fede54109"
   }

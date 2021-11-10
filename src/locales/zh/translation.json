@@ -38,9 +38,6 @@
   "homeTotalDeposits": "存款总额 (总锁仓量)",
   "homeJoinCommunityTitle": "加入我们的社群",
   "homeJoinCommunityBody": "您可以通过以下官方社交媒体渠道，告诉我们您对于新增月盒的建议，或者加入我们的开发团队，为您喜爱的项目创建新的月盒。",
-  "migrationNoticeTitle": "请将您的 {{asset}} 转移至全新升级的{{pot}}月盒。",
-  "migrationNoticeLearnMore": "了解更多",
-  "migrationNoticeMove": "转移我的{{asset}}",
   "vaultTitle": "存入 <span>{{token}}</span>, 获得 <span>{{apy}}% APY</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
   "vaultTitleSide": "存入 <span>{{token}}</span>, 即有机会抱走奖金 <span>{{currency}}{{amount}}</span>",
   "playWithMoonpot": "使用Moonpot进行游戏",
@@ -49,10 +46,6 @@
   "connectToJoin": "连接您的钱包以加入月盒。",
   "poweredByBeefy": "由 <BeefyLink>Beefy</BeefyLink> 提供技术支持",
   "auditedByCertik": "由 <CertikLink>Certik</CertikLink> 审计",
-  "upgradeWhy": "我们升级了 {{token}}月盒，以便能够为所有未来的Moonpots玩家添加不同的福利奖励。",
-  "upgradeNextSteps": "由于此次的升级，您需要转移您的{{token}}至新的{{token}} 月盒。我们已添加了金额为${{amount}} {{boostToken}}的超速增值币到这一新的{{token}}月盒，以便让您获得更多的收益。",
-  "upgradeMove": "转移 {{base}}",
-  "upgradeMoveWithdraw": "转移 {{base}} 和提取 {{bonus}}",
   "sidePotExplainer": "附属月盒让您有机会在不赚取利息的情况下赢得每日奖金。 如果您想赚取利息并参与更大的每周和每月抽奖活动，Ziggy 建议您改为参与<MainPotLink>核心月盒</MainPotLink>。",
   "learnMore": "了解更多",
   "telegramSocialBlockBody": "了解更多关于Moonpot的资讯，并获得来自官方社群的帮助",
@@ -131,14 +124,13 @@
             "所有在Beefy机枪池赚取的 {{token}}收益将被分配给 Moonpot 玩家。一半用于支付利息，另一半则用作抽奖奖金以及未来 Ziggy (治理）月盒给出的奖励。"
           ],
           "ziggy": [
-            "通过在 Ziggy 月盒中质押 $POTS，您将获得由所有其他月盒收入的 5% 所产生的 APY。",
-            "这意味着您的 APY 是由我们的 BANANA、BIFI、CAKE 和 LP 月盒以及您在平台上看到的所有任何其他月盒的收入所产生的。",
+            "通过在 Ziggy 月盒中质押 $POTS，您将获得由所有核心、附属、LP、稳定币及社群月盒收入的 5% 所产生的 APY。",
             "Ziggy 使用 Moonpot.com 的收入从公开市场上购买 POTS，并将其作为利息提供给 POTS 质押者。",
             "Ziggy's 月盒还设有每月一次的抽奖活动，其中 10 位幸运的获胜者可以分享由整个Moonpot平台所有代币收入的5%组成的奖池。",
             "例如，9 月 1 日的抽奖活动奖励包括 POTS、BIFI、CAKE 和 DODO 代币，总奖金为 $723,760。 Ziggy's 月盒每四个星期（星期三）抽奖一次。参与抽奖的过程是自动化的，您无需每次手动重新质押进月盒以参与抽奖。"
           ],
           "side": [
-            "{{token}} 附属月盒将您的 ${{token}} 存入 Beefy.Finance {{token}} 金库。所有月盒收益都是自动复合的。Moonpot 预留了 {{breakdownPrize}}% 用于附属月盒奖金和 {{breakdownBuyback}}% 用于回购 $POTS 作为核心月盒的奖金利息。"
+            "{{name}} 附属月盒将您的 ${{token}} 存入 Beefy.Finance {{token}} 金库。所有月盒收益都是自动复合的。Moonpot 预留了 {{breakdownPrize}}% 用于附属月盒奖金和 {{breakdownBuyback}}% 用于回购 $POTS 作为核心月盒的奖金利息。"
           ]
         },
         "beefyVaultAddress": "Beefy 金库地址",
@@ -184,11 +176,14 @@
       "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
       "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
     ],
-    "zapTooltip4Belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"],
+    "zapTooltip4Belt": [
+      "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
+    ],
     "inYourWallet": "您的钱包里有",
     "provider": "流动性提供者"
   },
   "withdraw": {
+    "token": "提取 {{token}}",
     "all": "提取所有",
     "allToken": "提取所有 {{token}}",
     "allTokenAs": "提取所有为 {{token}}",
@@ -197,10 +192,6 @@
     "mySuperBoostToken": "我的超速增值 {{token}}",
     "fairplayNotice": "公平游戏锁定期规则适用",
     "withdrawFeeNotice": "{{percent}}% 的提款费适用。",
-    "migrationNotice": {
-      "title": "需要进行迁移",
-      "message": "选择提取您的 {{token}}，而不是转移到新的月盒，意味着您将错过未来的额外收益，以及赢取下一次{{token}}大奖的机会。"
-    },
     "zapExplainer": "提取 LP 或使用 ZAP⚡ 提取为 {{tokens}}"
   },
   "bonus": {
@@ -238,5 +229,40 @@
       "随后，您可以将赚取的所有额外 POTS 奖励从钱包存入 Ziggy 月盒，这将是一次性的交易。"
     ],
     "claimAll": "领取赚取的所有额外 POTS 奖励"
+  },
+  "migration": {
+    "viewRetiredPot": "查看已退役月盒",
+    "learnMore": "了解更多。",
+    "migrateToken": "转移 {{token}}",
+    "migrateTokenAndClaim": "转移 {{token}} 并领取收益",
+    "notice": {
+      "all": {
+        "title": "{{name}} 月盒迁移",
+        "content": [
+          "我们升级了 {{name}} 月盒以使其更安全及更公平，并让我们能够自动化更多流程。您需要将您的 {{token}} 移至新的 {{name}} 月盒以持续赚取利息并有资格参与下一次抽奖。"
+        ]
+      },
+      "pots-v2": {
+        "title": "Ziggy 月盒迁移：自动复投更新",
+        "content": [
+          "我们已将 Ziggy 月盒升级为自动复投并允许部分提款。您需要将您的 POTS 转移至新的 Ziggy 月盒，以持续赚取利息并有资格参与下一次抽奖。"
+        ]
+      }
+    },
+    "details": {
+      "all": [
+        "我们升级了 {{name}} 月盒以使其更安全及更公平，并让我们能够自动化更多流程。",
+        "由于此次升级，您需要将您的 {{token}} 转移至新的 {{name}} 月盒。"
+      ],
+      "pots-v2": [
+        "Ziggy 月盒现已自动复投！",
+        "我们已将 Ziggy 月盒升级为自动复投并允许部分提款。您需要将您的 POTS 转移至新的 Ziggy 月盒，以持续赚取利息并有资格参与下一次抽奖。"
+      ]
+    },
+    "withdraw": {
+      "all": [
+        "提取您的 {{token}} 将停止您在 {{token}} 上赚取利息。这将使您失去参与下次抽奖的资格。您将需要手动存款以再次获得资格。"
+      ]
+    }
   }
 }

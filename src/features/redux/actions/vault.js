@@ -48,9 +48,17 @@ function calculateZiggyPrediction(ziggy, others, prices) {
       // If pot contributes to Ziggy's prize and will be drawn at least once before ziggy
       if (pot.interestBreakdown && pot.interestBreakdown.ziggyPrize) {
         if (pot.expiresAt < ziggyDrawCutoff) {
-          // prize=3, interest=50 ==> multiplier=0.06
-          const afterFeesMultiplier =
-            (pot.interestBreakdown.ziggyPrize || 0) / (100 - (pot.interestBreakdown.interest || 0));
+          // How much of prize pool interest goes to ziggy as prize
+          const prizePoolInterestMultiplier = calculatePrizePoolInterestMultiplier(
+            pot,
+            'ziggyPrize'
+          );
+          // How much of the award balance goes to ziggy as prize
+          const awardBalancePrizeMultiplier = calculateAwardBalancePrizeMultiplier(
+            pot,
+            'ziggyPrize'
+          );
+
           // Calculate time of last draw of this pot, before ziggy's draw cutoff, allowing for multiple draws
           const lastDrawBeforeZiggy = timeLastDrawBefore(
             pot.expiresAt,
@@ -61,7 +69,8 @@ function calculateZiggyPrediction(ziggy, others, prices) {
           const potAward = calculateProjectedPotAward(
             pot,
             lastDrawBeforeZiggy,
-            afterFeesMultiplier
+            awardBalancePrizeMultiplier,
+            prizePoolInterestMultiplier
           );
 
           // Which token we are adding to sponsors
@@ -145,25 +154,30 @@ function calculateZiggyPrediction(ziggy, others, prices) {
   return ziggy;
 }
 
-function calculateProjectedPotAward(pot, untilWhen, afterFeesMultiplier) {
+function calculateProjectedPotAward(
+  pot,
+  untilWhen,
+  awardBalancePrizeMultiplier,
+  prizePoolInterestMultiplier
+) {
   // Now in seconds
   const nowSeconds = Date.now() / 1000;
   // Only the balance in prize pool earns interest for prize
   const amountEarning = byDecimals(pot.prizePoolBalance, pot.tokenDecimals);
   // Days until draw (floating point)
   const daysUntilDraw = (untilWhen - nowSeconds) / 86400;
-  // Underlying yield source interest % (350% -> 3.5)
-  const apy = pot.underlyingApy / 100;
-  // "Uncompound" APY to get daily
-  const dpy = Math.pow(apy + 1, 1 / 365) - 1;
+  // Daily interest from vault (not trading)
+  const dpy = pot.apyBreakdown.vaultApr / 365;
   // Recompound to get interest until draw
   const interestUntilDraw = Math.pow(1 + dpy, daysUntilDraw) - 1;
   // Interest earned in tokens, after fees
-  const tokenInterest = amountEarning.multipliedBy(interestUntilDraw);
-  // New award balance after fees
-  const projectedTokenAwardBalance = pot.fullAwardBalance
-    .plus(tokenInterest)
-    .multipliedBy(afterFeesMultiplier);
+  const tokenInterest = amountEarning
+    .multipliedBy(interestUntilDraw)
+    .multipliedBy(prizePoolInterestMultiplier);
+  // Current awardBalance that goes to prize
+  const currentAwardBalance = pot.fullAwardBalance.multipliedBy(awardBalancePrizeMultiplier);
+  // New award balance
+  const projectedTokenAwardBalance = currentAwardBalance.plus(tokenInterest);
 
   return {
     tokens: projectedTokenAwardBalance,
@@ -181,12 +195,18 @@ function calculateProjections(pots, prices) {
   for (const pot of activePots) {
     // Only make projections for pots drawing in the future/that have a prize component
     if (pot.interestBreakdown && pot.interestBreakdown.prize && pot.expiresAt > nowSeconds) {
-      // prize=40, interest=50 ==> multiplier=0.8
-      const afterFeesMultiplier =
-        (pot.interestBreakdown.prize || 0) / (100 - (pot.interestBreakdown.interest || 0));
+      // How much of prize pool interest goes to prize
+      const prizePoolInterestMultiplier = calculatePrizePoolInterestMultiplier(pot);
+      // How much of the award balance goes to prize
+      const awardBalancePrizeMultiplier = calculateAwardBalancePrizeMultiplier(pot);
 
       // Calculate interest up until draw
-      const projectedAward = calculateProjectedPotAward(pot, pot.expiresAt, afterFeesMultiplier);
+      const projectedAward = calculateProjectedPotAward(
+        pot,
+        pot.expiresAt,
+        awardBalancePrizeMultiplier,
+        prizePoolInterestMultiplier
+      );
 
       // Projections...
       pot.projectedAwardBalance = projectedAward.tokens;
@@ -348,35 +368,23 @@ const getPools = async (items, state, dispatch) => {
 
     // === Gate
     if ('awardBalance' in item) {
-      const awardMultiplier = pool.interestBreakdown
-        ? (pool.interestBreakdown.prize || 0) / (100 - (pool.interestBreakdown.interest || 0))
-        : 1;
+      const awardMultiplier = calculateAwardBalancePrizeMultiplier(pool);
 
       const tokenDecimals = new BigNumber(10).exponentiatedBy(pool.tokenDecimals);
+      const fullAwardBalance = new BigNumber(item.awardBalance || '0').dividedBy(tokenDecimals);
       const awardPrice = pool.oracleId in prices ? prices[pool.oracleId] : 0;
-      const awardBalance = new BigNumber(item.awardBalance || '0')
-        .times(awardMultiplier)
-        .dividedBy(tokenDecimals);
+      const awardBalance = fullAwardBalance.times(awardMultiplier);
       const awardBalanceUsd = awardBalance.times(awardPrice);
 
       pool.tokenPrice = awardPrice;
       pool.awardBalance = awardBalance;
       pool.awardBalanceUsd = awardBalanceUsd;
-      pool.fullAwardBalance = new BigNumber(item.awardBalance || '0').dividedBy(tokenDecimals);
+      pool.fullAwardBalance = fullAwardBalance;
+      pool.apyBreakdown = getApyBreakdown(pool.apyId, apy);
 
-      if (pool.apyId && !isEmpty(apy) && pool.apyId in apy) {
-        pool.underlyingApy = new BigNumber(apy[pool.apyId].totalApy).times(100).toNumber();
-      } else {
-        pool.underlyingApy = 0;
-      }
-
-      if (pool.underlyingApy && pool.interestBreakdown && pool.interestBreakdown.interest) {
-        pool.apy = new BigNumber(pool.underlyingApy)
-          .times(pool.interestBreakdown.interest)
-          .dividedBy(100)
-          .toNumber();
-      } else if (pool.underlyingApy && 'mooTokenAddress' in pool && pool.mooTokenAddress) {
-        pool.apy = pool.underlyingApy;
+      if (pool.apyBreakdown.totalApy && pool.interestBreakdown && pool.interestBreakdown.interest) {
+        pool.apy =
+          calculatePlayerApy(pool.apyBreakdown, pool.interestBreakdown.interest / 100) * 100;
       } else {
         pool.apy = 0;
       }
@@ -494,6 +502,125 @@ const getPools = async (items, state, dispatch) => {
 
   return true;
 };
+
+/**
+ * Computes missing values in breakdown, assuming all apy is farm apy if not present
+ * @param {string} id
+ * @param {object} apys
+ * @returns {{totalApy: number, vaultApr: number, tradingApr: number}}
+ */
+function getApyBreakdown(id, apys) {
+  const out = {
+    totalApy: 0,
+    vaultApr: 0,
+    tradingApr: 0,
+  };
+
+  if (id in apys && 'totalApy' in apys[id]) {
+    const apy = apys[id];
+
+    out.totalApy = apy.totalApy;
+
+    if ('tradingApr' in apy) {
+      out.tradingApr = apy.tradingApr;
+    }
+
+    if ('vaultApr' in apy) {
+      out.vaultApr = apy.vaultApr;
+    } else {
+      // assume all apy is from vault, compounded once per day
+      out.vaultApr = (Math.pow(apy.totalApy + 1, 1 / 365) - 1) * 365;
+    }
+  }
+
+  return out;
+}
+
+/**
+ * Calculate the players APY: share of vault + 100% of trading
+ *
+ * @param {{totalApy: number, vaultApr: number, tradingApr: number}} apy Object from getApyBreakdown
+ * @param {number} ratio Player interest ratio 0-1
+ * @param {int} [compounds] Number of compounds per year
+ * @returns {number} 0 - 1
+ */
+function calculatePlayerApy(apy, ratio, compounds = 365) {
+  const dailyVaultPr = apy.vaultApr / compounds;
+  const vaultApy = (Math.pow(1 + dailyVaultPr, compounds) - 1) * ratio;
+
+  return (1 + vaultApy) * (1 + apy.tradingApr) - 1;
+}
+
+/**
+ * Calculate how much of awardBalance is for the prize
+ *
+ * @param {object} pot Pot from config
+ * @param {string} [prizeKey]
+ * @returns {number} 0 - 1; how much of awardBalance is for the prize
+ */
+function calculateAwardBalancePrizeMultiplier(pot, prizeKey = 'prize') {
+  if ('interestBreakdown' in pot) {
+    const breakdown = pot.interestBreakdown;
+    const awardBalancePercent = getPercentToAwardBalance(breakdown);
+    const prizePercent = prizeKey in breakdown ? breakdown[prizeKey] : 0;
+
+    // Nothing is going to award balance
+    if (awardBalancePercent === 0) {
+      // Everything in awardBalance must be fairness fees
+      return 1;
+    }
+
+    // Prize balance is % going to prize / % going to awardBalance
+    return prizePercent / awardBalancePercent;
+  }
+
+  // No interest; everything in awardBalance must be fairness fees
+  return 1;
+}
+
+/**
+ * What % of total interest generated goes to awardBalance
+ *
+ * @param {{prize: number, interest: number, ziggyInterest: number, ziggyPrize: number, buyback: number}} breakdown
+ * @returns {number}
+ */
+function getPercentToAwardBalance(breakdown) {
+  const nonAwardBalance = ['interest'];
+  let percentToAwardBalance = 100;
+
+  for (const [key, percent] of Object.entries(breakdown)) {
+    if (nonAwardBalance.includes(key)) {
+      percentToAwardBalance -= percent;
+    }
+  }
+
+  return percentToAwardBalance;
+}
+
+/**
+ * Calculates how much of interest generated by prize pool goes to the prize
+ * @param {object} pot
+ * @param {string} [prizeKey]
+ */
+function calculatePrizePoolInterestMultiplier(pot, prizeKey = 'prize') {
+  if ('interestBreakdown' in pot) {
+    const breakdown = pot.interestBreakdown;
+    const awardBalancePercent = getPercentToAwardBalance(breakdown);
+    const prizePercent = prizeKey in breakdown ? breakdown[prizeKey] : 0;
+
+    // Nothing is going to award balance
+    if (awardBalancePercent === 0) {
+      // No interest
+      return 0;
+    }
+
+    // Prize interest is % going to prize / % going to awardBalance
+    return prizePercent / awardBalancePercent;
+  }
+
+  // No interest
+  return 0;
+}
 
 function calculateBoost(rewardInfo, pool, prices, config) {
   const now = Date.now() / 1000;

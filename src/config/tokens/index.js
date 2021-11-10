@@ -2,7 +2,10 @@ import { config } from '../config';
 import { indexBy } from '../../helpers/utils';
 
 export const tokensByNetwork = Object.fromEntries(
-  Object.keys(config).map(network => [network, require(`./${network}.json`)])
+  Object.keys(config).map(network => [
+    network,
+    require(`./${network}.json`).map(token => ({ ...token, network })),
+  ])
 );
 
 export const tokensByNetworkAddress = Object.fromEntries(

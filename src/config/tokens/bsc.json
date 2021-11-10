@@ -307,9 +307,24 @@
     "symbol": "moonTicketPOTSv3",
     "address": "0xCd3941d4825c08991b98930ef18062f6df2959d4",
     "type": "ticket",
-    "oracleId": "POTS",
     "decimals": 18,
-    "underlyingToken": "POTS",
+    "underlyingToken": "mooPOTS",
     "stakedMultiplier": 1
+  },
+  {
+    "symbol": "mooPOTS",
+    "address": "0xC264c0D6e8A35AbB7a118e9592aD400f640471D9",
+    "type": "moo",
+    "decimals": 18,
+    "underlyingToken": "POTS"
+  },
+  {
+    "symbol": "moonTicketCakeV4",
+    "address": "0x6B9c7C3aE69852De54A7b7b1F0C99851271Af9a1",
+    "type": "ticket",
+    "oracleId": "Cake",
+    "decimals": 18,
+    "underlyingToken": "CAKE",
+    "stakedMultiplier": 2
   }
 ]
