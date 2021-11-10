@@ -305,5 +305,14 @@
     "decimals": 18,
     "underlyingToken": "CAKE",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "moonTicketArmz",
+    "address": "0xAee5266AcC52fF7a7f4f81573582985779f16a5c",
+    "type": "ticket",
+    "oracleId": "POTS",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 2
   }
 ]

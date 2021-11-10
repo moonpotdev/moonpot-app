@@ -341,7 +341,7 @@ export const NFTPrizeSplit = function ({ numberOfWinners }) {
     <div className={classes.prizeSplitTotal}>
       <Translate
         i18nKey={numberOfWinners === 1 ? 'pot.amount' : 'pot.amountEach'}
-        values={{ symbol: '', amount: numberOfWinners + ' NFT' }}
+        values={{ symbol: '', amount: '1 NFT' }}
       />
     </div>
   );
