@@ -34,6 +34,8 @@ export const PotTitle = function ({ item }) {
               totalSponsorBalanceUsd={
                 pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
               }
+              isNftPot={pot.vaultType === 'nft'}
+              winNft={pot.name}
             />
           </div>
           <Typography className={classes.myPotsNextWeeklyDrawText} align={'right'}>
@@ -92,6 +94,7 @@ export const PotInfoBlock = function ({ item, active = true }) {
   const depositTokenPrice = useSelector(state => state.pricesReducer.prices[item.oracleId]);
   const { t } = useTranslation();
   const pot = item;
+  const isPrizeOnly = item.vaultType === 'side' || item.vaultType === 'nft';
 
   return (
     <Grid item xs={12}>
@@ -114,14 +117,14 @@ export const PotInfoBlock = function ({ item, active = true }) {
             <Grid item xs={6}>
               <Typography className={classes.myDetailsText} align={'left'}>
                 {t('pot.myInterestRate')}
-                {item.vaultType !== 'side' ? <InterestTooltip pot={pot} /> : null}
+                {isPrizeOnly ? <InterestTooltip pot={pot} /> : null}
               </Typography>
             </Grid>
             <Grid item xs={6}>
               <Interest
                 baseApy={item.apy}
                 bonusApy={item.bonusApy}
-                noInterest={item.vaultType === 'side' ? true : false}
+                noInterest={isPrizeOnly ? true : false}
               />
             </Grid>
           </>
