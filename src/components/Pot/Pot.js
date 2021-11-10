@@ -199,8 +199,6 @@ export function Pot({ id, variant, bottom }) {
   const history = useHistory();
   const isNftPot = pot.vaultType === 'nft';
 
-  console.log(variant);
-
   return (
     <Card variant={variant}>
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>

@@ -74,15 +74,8 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
             width="80"
             height="80"
             sizes="80px"
-            src={
-              <img
-                alt=""
-                width="80"
-                height="80"
-                sizes="80px"
-                src={require('../../../../images/nftsponsor/' + pot.name.toLowerCase() + '.png')}
-              />
-            }
+            style={{ marginBottom: '22px' }}
+            src={require('../../../../images/info/' + pot.id.toLowerCase() + '.png').default}
           />
           <CardTitle>{t('pot.infocards.strategy.titleNFT', { name: pot.name })}</CardTitle>
           <div className={classes.nftStrategyContainer}>
