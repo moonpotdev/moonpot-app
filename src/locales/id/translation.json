@@ -247,6 +247,27 @@
         "content": [
           "Kami telah meningkatkan Pot Ziggy's ke autocompound dan bisa ditarik sebagian. Anda perlu memindahkan POTS Anda ke Pot Ziggy yang baru untuk terus mendapatkan keuntungan dan memenuhi syarat untuk pengundian hadiah berikutnya."
         ]
+      },
+      "cake-v1": {
+        "title": "{{name}} Pot Migration",
+        "content": [
+          "We have upgraded the {{name}} Pot to improve its functionality. To continue earning interest and enter prize draws, you will need to move your {{token}} to the new {{name}} Pot.",
+          "Claiming bonus POTS will now automatically stake them in to Ziggy's Pot for you. The new {{name}} Pot is also now upgradeable, reducing the need for further migrations in the future."
+        ]
+      },
+      "cake-v2": {
+        "title": "{{name}} Pot Migration",
+        "content": [
+          "We have upgraded the {{name}} Pot to improve its functionality. To continue earning interest and enter prize draws, you will need to move your {{token}} to the new {{name}} Pot.",
+          "Claiming bonus POTS will now automatically stake them in to Ziggy's Pot for you. The new {{name}} Pot is also now upgradeable, reducing the need for further migrations in the future."
+        ]
+      },
+      "cake-v3": {
+        "title": "{{name}} Pot Migration",
+        "content": [
+          "We have upgraded the {{name}} Pot to improve its functionality. To continue earning interest and enter prize draws, you will need to move your {{token}} to the new {{name}} Pot.",
+          "Claiming bonus POTS will now automatically stake them in to Ziggy's Pot for you. The new {{name}} Pot is also now upgradeable, reducing the need for further migrations in the future."
+        ]
       }
     },
     "details": {
@@ -257,6 +278,18 @@
       "pots-v2": [
         "Sekarang Ziggy’s pot bisa autocompounds!",
         "Kami telah mengupgrade pot Ziggy menjadi autocompound dan bisa ditarik sebagian. Anda perlu memindahkan POTS Anda ke Pot Ziggy yang baru untuk terus mendapatkan keuntungan dan memenuhi syarat untuk pengundian hadiah berikutnya."
+      ],
+      "cake-v1": [
+        "We have upgraded the {{name}} Pot to improve its functionality. To continue earning interest and enter prize draws, you will need to move your {{token}} to the new {{name}} Pot.",
+        "Claiming bonus POTS will now automatically stake them in to Ziggy's Pot for you. The new {{name}} Pot is also now upgradeable, reducing the need for further migrations in the future."
+      ],
+      "cake-v2": [
+        "We have upgraded the {{name}} Pot to improve its functionality. To continue earning interest and enter prize draws, you will need to move your {{token}} to the new {{name}} Pot.",
+        "Claiming bonus POTS will now automatically stake them in to Ziggy's Pot for you. The new {{name}} Pot is also now upgradeable, reducing the need for further migrations in the future."
+      ],
+      "cake-v3": [
+        "We have upgraded the {{name}} Pot to improve its functionality. To continue earning interest and enter prize draws, you will need to move your {{token}} to the new {{name}} Pot.",
+        "Claiming bonus POTS will now automatically stake them in to Ziggy's Pot for you. The new {{name}} Pot is also now upgradeable, reducing the need for further migrations in the future."
       ]
     },
     "withdraw": {
