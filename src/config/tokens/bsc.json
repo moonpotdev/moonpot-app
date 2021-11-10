@@ -313,6 +313,6 @@
     "oracleId": "POTS",
     "decimals": 18,
     "underlyingToken": "POTS",
-    "stakedMultiplier": 2
+    "stakedMultiplier": 1
   }
 ]
