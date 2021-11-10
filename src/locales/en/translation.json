@@ -41,6 +41,7 @@
   "homeJoinCommunityBody": "You can suggest a new pot in one of our channels, or join our devs to build one for your favourite project.",
   "vaultTitle": "Deposit <span>{{token}}</span>, earn <span>{{apy}}% APY</span><wbr /> and a chance to win <span>{{currency}}{{amount}}</span>",
   "vaultTitleSide": "Deposit <span>{{token}}</span>, and be entered for a chance to win <span>{{currency}}{{amount}}</span>",
+  "vaultTitleNFT": "Stake <span>{{token}}</span> and be entered for a chance to win an <span>{{sponsor}} NFT</span>",
   "playWithMoonpot": "Play with Moonpot",
   "youHaventEnteredMoonpots": "You haven't entered any Moonpots yet.",
   "youHaventEnteredRetiredMoonpots": "You are not entered in any retired Moonpots.",

@@ -92,7 +92,7 @@
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
-    "rewardToken": "moonTicketArmz",
+    "rewardToken": "moonTicketPotsArmz",
     "rewardAddress": "0xAee5266AcC52fF7a7f4f81573582985779f16a5c",
     "contractAddress": "0x1B94406052a30F698B096e35d1C7031F0B577972",
     "prizePoolAddress": "0x9a2941F01f12b8b846A50f6Aa83A77a66bb70aEF",
