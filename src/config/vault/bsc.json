@@ -103,7 +103,7 @@
     "vaultType": "nft",
     "duration": 1,
     "fairplayDuration": 3,
-    "fairplayTicketFee": 0.05,
+    "fairplayTicketFee": 0.025,
     "status": "active",
     "supportsClaimAllBonuses": false,
     "withdrawFee": 0,
