@@ -32,14 +32,12 @@ function simpleZapInEstimate(potId, depositAddress, depositAmount) {
       const state = getState();
       const pot = state.vaultReducer.pools[potId];
       const network = pot.network;
-      const web3 = state.walletReducer.rpc[network];
       const wrappedNative = config[network].nativeCurrency.wrappedAddress;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
       const isNative = !depositAddress;
       const swapInToken = isNative
         ? tokensByNetworkAddress[network][wrappedNative.toLowerCase()]
         : tokensByNetworkAddress[network][depositAddress.toLowerCase()];
-      const zapContract = new web3.eth.Contract(zapAbi, pairToken.zap);
 
       const result = {
         0: depositAmount.toNumber() * 1000000000000000000 + '',
