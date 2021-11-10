@@ -543,6 +543,7 @@
       "treasury": 2
     },
     "status": "active",
+    "supportsClaimAllBonuses": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x47a27220Db5458DB4b238fefCBb8178232cBFa5D",
@@ -560,6 +561,11 @@
       {
         "id": 0,
         "symbol": "xBLZD",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
         "display": "bonus"
       }
     ]
