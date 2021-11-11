@@ -247,6 +247,7 @@
     "duration": 14,
     "fairplayDuration": 10,
     "fairplayTicketFee": 0.05,
+    "ziggyPrizeToken": "WBNB",
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
