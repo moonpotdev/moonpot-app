@@ -171,14 +171,17 @@
       "title": "Pot Tidak Aktif",
       "message": "Anda tidak dapat lagi Deposit ke pot ini."
     },
-    "zapExplainer": "Deposit LP atau ZAP⚡ Masukkan {{tokens}}",
-    "zapTooltip": [
-      "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi.",
-      "Setengah dari token Anda akan dijual untuk menyeimbangkan pasangan likuiditas, setelah itu likuiditas akan diberikan dan LP token akan didepositkan ke dalam Pot ini."
-    ],
-    "zapTooltip4Belt": [
-      "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi."
-    ],
+    "zapExplainer": "Deposit {{token}} atau ZAP⚡ Masukkan {{tokens}}",
+    "zapTooltip": {
+      "all": [
+        "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi.",
+        "Setengah dari token Anda akan dijual untuk menyeimbangkan pasangan likuiditas, setelah itu likuiditas akan diberikan dan LP token akan didepositkan ke dalam Pot ini."
+      ],
+      "4belt": [
+        "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi."
+      ],
+      "beltbnb": ["ZAP lets you create beltBNB tokens and deposit with just one transaction."]
+    },
     "inYourWallet": "Di dompet Anda",
     "provider": "Penyedia likuiditas"
   },
@@ -192,7 +195,7 @@
     "mySuperBoostToken": "Super Boost {{token}} Saya",
     "fairplayNotice": "Aturan TimeLock Fairplay berlaku.",
     "withdrawFeeNotice": "Biaya penarikan {{percent}}% berlaku.",
-    "zapExplainer": "Penarikan LP atau ZAP⚡ Keluarkan {{tokens}}"
+    "zapExplainer": "Penarikan {{token}} atau ZAP⚡ Keluarkan {{tokens}}"
   },
   "bonus": {
     "myBonusEarnings": "Penghasilan Bonus Saya",

@@ -190,7 +190,7 @@
     "lpLast": true
   },
   {
-    "symbol": "BeltBNB",
+    "symbol": "beltBNB",
     "icon": "beltbnb",
     "address": "0xa8Bb71facdd46445644C277F9499Dd22f6F0A30C",
     "type": "lp",
@@ -207,7 +207,7 @@
     "type": "ticket",
     "oracleId": "belt-beltbnb",
     "decimals": 18,
-    "underlyingToken": "BeltBNB",
+    "underlyingToken": "beltBNB",
     "stakedMultiplier": 2
   },
   {

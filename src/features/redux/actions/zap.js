@@ -13,7 +13,7 @@ import gateManagerAbi from '../../../config/abi/gatemanager.json';
 import { MultiCall } from 'eth-multicall';
 import { getFairplayFeePercent, objectArrayFlatten } from '../../../helpers/utils';
 
-function simpleZapInEstimate(potId, depositAddress, depositAmount) {
+function fakeZapInEstimate(potId, depositAddress, depositAmount) {
   const requestId = uniqid('in', potId);
 
   return [
@@ -39,17 +39,6 @@ function simpleZapInEstimate(potId, depositAddress, depositAmount) {
         ? tokensByNetworkAddress[network][wrappedNative.toLowerCase()]
         : tokensByNetworkAddress[network][depositAddress.toLowerCase()];
 
-      const result = {
-        0: depositAmount.toNumber() * 1000000000000000000 + '',
-        1: '1',
-        2: pairToken.address,
-        swapInAmount: depositAmount.toNumber() * 1000000000000000000 + '',
-        swapOutAmount: '1',
-        swapTokenOut: pairToken.address,
-      };
-
-      const swapOutToken = tokensByNetworkAddress[network][result.swapTokenOut.toLowerCase()];
-
       dispatch({
         type: ZAP_SWAP_ESTIMATE_COMPLETE,
         payload: {
@@ -60,9 +49,9 @@ function simpleZapInEstimate(potId, depositAddress, depositAmount) {
           swapInAddress: swapInToken.address,
           swapInToken,
           swapInAmount: depositAmount,
-          swapOutAddress: swapOutToken.address,
-          swapOutToken,
-          swapOutAmount: BigNumber(0.0000000000000000001),
+          swapOutAddress: pairToken.address,
+          swapOutToken: pairToken,
+          swapOutAmount: byDecimals(1, pairToken.decimals, true),
         },
       });
     },
@@ -70,8 +59,8 @@ function simpleZapInEstimate(potId, depositAddress, depositAmount) {
 }
 
 export function createZapInEstimate(potId, depositAddress, depositAmount) {
-  if (potId === 'bnb') {
-    return simpleZapInEstimate(potId, depositAddress, depositAmount);
+  if (potId === 'beltbnb') {
+    return fakeZapInEstimate(potId, depositAddress, depositAmount);
   }
 
   const requestId = uniqid('in', potId);
@@ -120,17 +109,17 @@ export function createZapInEstimate(potId, depositAddress, depositAmount) {
           zapAddress: pairToken.zap,
           swapInAddress: swapInToken.address,
           swapInToken,
-          swapInAmount: byDecimals(result.swapAmountIn, swapInToken.decimals),
+          swapInAmount: byDecimals(result.swapAmountIn, swapInToken.decimals, true),
           swapOutAddress: swapOutToken.address,
           swapOutToken,
-          swapOutAmount: byDecimals(result.swapAmountOut, swapOutToken.decimals),
+          swapOutAmount: byDecimals(result.swapAmountOut, swapOutToken.decimals, true),
         },
       });
     },
   ];
 }
 
-function simpleZapOutEstimate(potId, wantTokenAddress) {
+function fakeZapOutEstimate(potId, wantTokenAddress) {
   const requestId = uniqid('out', potId);
 
   return [
@@ -152,23 +141,13 @@ function simpleZapOutEstimate(potId, wantTokenAddress) {
       const web3 = state.walletReducer.rpc[network];
       const multicall = new MultiCall(web3, config[network].multicallAddress);
       const address = state.walletReducer.address;
-      var isRemoveOnly;
-      if (potId === 'bnb') {
-        isRemoveOnly = true;
-      } else {
-        isRemoveOnly = false;
-      }
+      const isRemoveOnly = potId === 'beltbnb';
       const fairplayDuration = pot.fairplayDuration;
       const fairplayTicketFee = pot.fairplayTicketFee;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
       const wantToken = tokensByNetworkAddress[network][wantTokenAddress.toLowerCase()];
       const token0Symbol = pairToken.lp[0];
-      var token1Symbol;
-      if (potId === 'bnb') {
-        token1Symbol = pairToken.lp[0];
-      } else {
-        token1Symbol = pairToken.lp[1];
-      }
+      const token1Symbol = pairToken.lp.length > 1 ? pairToken.lp[1] : pairToken.lp[0];
       const token0 = tokensByNetworkSymbol[network][token0Symbol];
       const token1 = tokensByNetworkSymbol[network][token1Symbol];
       const ticketContract = new web3.eth.Contract(erc20Abi, pot.rewardAddress);
@@ -235,8 +214,8 @@ function simpleZapOutEstimate(potId, wantTokenAddress) {
 }
 
 export function createZapOutEstimate(potId, wantTokenAddress) {
-  if (potId === '4belt' || potId === 'bnb') {
-    return simpleZapOutEstimate(potId, wantTokenAddress);
+  if (potId === '4belt' || potId === 'beltbnb') {
+    return fakeZapOutEstimate(potId, wantTokenAddress);
   }
   const requestId = uniqid('out', potId);
 

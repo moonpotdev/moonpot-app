@@ -12,10 +12,11 @@ import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { usePot, useSymbolOrList, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
-import { Translate } from '../Translate/Translate';
+import { Translate } from '../Translate';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
 import { config } from '../../config/config';
 import { createZapInEstimate } from '../../features/redux/actions/zap';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(styles);
 
@@ -146,6 +147,15 @@ function useDepositTokens(network, lpAddress) {
   );
 }*/
 
+function ZapDepositTooltip({ id }) {
+  const { i18n } = useTranslation();
+  const potKey = `deposit.zapTooltip.${id}`;
+  const key = i18n.exists(potKey) ? potKey : 'deposit.zapTooltip.all';
+
+  return <TooltipWithIcon i18nKey={key} />;
+}
+
+ZapDepositTooltip.propTypes = {};
 export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -295,10 +305,11 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
       <Grid container>
         <Grid item xs={12}>
           <div className={classes.subHeaderHolder}>
-            <Translate i18nKey="deposit.zapExplainer" values={{ tokens: depositSingleSymbols }} />
-            <TooltipWithIcon
-              i18nKey={id === '4belt' ? 'deposit.zapTooltip4Belt' : 'deposit.zapTooltip'}
+            <Translate
+              i18nKey="deposit.zapExplainer"
+              values={{ token: pot.token, tokens: depositSingleSymbols }}
             />
+            <ZapDepositTooltip id={pot.id} />
           </div>
         </Grid>
         <Grid item xs={6}>

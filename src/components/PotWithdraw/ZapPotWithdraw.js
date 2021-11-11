@@ -294,7 +294,10 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
       {canWithdraw && pot.migrationNeeded ? <MigrationNotice token={pot.token} /> : null}
       <div className={classes.buttonHolder}>
         <div className={classes.zapInfoHolder}>
-          <Translate i18nKey="withdraw.zapExplainer" values={{ tokens: withdrawSingleSymbols }} />
+          <Translate
+            i18nKey="withdraw.zapExplainer"
+            values={{ token: pot.token, tokens: withdrawSingleSymbols }}
+          />
           {/*<TooltipWithIcon i18nKey="withdraw.zapTooltip" />*/}
         </div>
         {/*<div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>*/}

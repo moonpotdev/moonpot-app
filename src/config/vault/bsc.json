@@ -230,9 +230,9 @@
     ]
   },
   {
-    "id": "bnb",
+    "id": "beltbnb",
     "name": "BNB",
-    "token": "BeltBNB",
+    "token": "beltBNB",
     "tokenAddress": "0xa8Bb71facdd46445644C277F9499Dd22f6F0A30C",
     "tokenDecimals": 18,
     "rewardToken": "moonTicketBeltBNB",
