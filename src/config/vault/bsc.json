@@ -255,7 +255,6 @@
       "ziggyPrize": 5
     },
     "status": "active",
-    "supportsClaimAllBonuses": true,
     "isZap": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xC34Ae91312A3c3F9420691922040a5DEe1698E52",
@@ -270,6 +269,11 @@
       }
     ],
     "bonuses": [
+      {
+        "id": 0,
+        "symbol": "beltBNB",
+        "display": "bonus"
+      },
       {
         "id": 1,
         "symbol": "POTS",
