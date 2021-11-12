@@ -10,7 +10,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { MaxButton } from '../TokenInput/MaxButton';
-import { TokenIcon } from '../TokenIcon';
+import { TokenIcon } from '../TokenIcon/TokenIcon';
 
 const MAX_DECIMALS = 8;
 const useStyles = makeStyles(styles);
@@ -22,7 +22,7 @@ function DropdownIcon(props) {
   return <KeyboardArrowDownIcon {...props} viewBox="6 8.59000015258789 12 7.409999847412109" />;
 }
 
-export const LPTokenInput = function ({
+export const ZapTokenInput = function ({
   variant = 'green',
   selected,
   tokens,

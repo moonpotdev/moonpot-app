@@ -171,14 +171,15 @@
       "title": "已退役的月盒",
       "message": "您不能再向这个月盒进行存款了."
     },
-    "zapExplainer": "存入 LP 或使用 {{tokens}} 执行 ZAP⚡ 功能",
-    "zapTooltip": [
-      "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
-      "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
-    ],
-    "zapTooltip4Belt": [
-      "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
-    ],
+    "zapExplainer": "存入 {{token}} 或使用 {{tokens}} 执行 ZAP⚡ 功能",
+    "zapTooltip": {
+      "all": [
+        "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
+        "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
+      ],
+      "4belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"],
+      "beltbnb": ["ZAP lets you create beltBNB tokens and deposit with just one transaction."]
+    },
     "inYourWallet": "您的钱包里有",
     "provider": "流动性提供者"
   },
@@ -192,7 +193,7 @@
     "mySuperBoostToken": "我的超速增值 {{token}}",
     "fairplayNotice": "公平游戏锁定期规则适用",
     "withdrawFeeNotice": "{{percent}}% 的提款费适用。",
-    "zapExplainer": "提取 LP 或使用 ZAP⚡ 提取为 {{tokens}}"
+    "zapExplainer": "提取 {{token}} 或使用 ZAP⚡ 提取为 {{tokens}}"
   },
   "bonus": {
     "myBonusEarnings": "我的额外收益",

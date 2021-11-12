@@ -40,7 +40,7 @@ const initialTokens = (() => {
         address: pot.tokenAddress,
       };
 
-      if (pot.vaultType === 'lp' || pot.vaultType === 'stable') {
+      if (pot.isZap) {
         const pairToken = tokensByNetworkAddress[pot.network][pot.tokenAddress.toLowerCase()];
 
         if (pairToken.zap) {

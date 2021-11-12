@@ -5,9 +5,9 @@ import styles from './styles';
 import BigNumber from 'bignumber.js';
 import { bigNumberTruncate, convertAmountToRawNumber, formatDecimals } from '../../helpers/format';
 import reduxActions from '../../features/redux/actions';
-import Steps from '../../features/vault/components/Steps';
+import Steps from '../../features/vault/components/Steps/Steps';
 import { indexBy, isEmpty } from '../../helpers/utils';
-import { LPTokenInput } from '../LPTokenInput/LPTokenInput';
+import { ZapTokenInput } from '../ZapTokenInput/ZapTokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
@@ -16,6 +16,7 @@ import { Translate } from '../Translate';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
 import { config } from '../../config/config';
 import { createZapInEstimate } from '../../features/redux/actions/zap';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(styles);
 
@@ -146,7 +147,16 @@ function useDepositTokens(network, lpAddress) {
   );
 }*/
 
-export const LPPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
+function ZapDepositTooltip({ id }) {
+  const { i18n } = useTranslation();
+  const potKey = `deposit.zapTooltip.${id}`;
+  const key = i18n.exists(potKey) ? potKey : 'deposit.zapTooltip.all';
+
+  return <TooltipWithIcon i18nKey={key} />;
+}
+
+ZapDepositTooltip.propTypes = {};
+export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
@@ -295,10 +305,11 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
       <Grid container>
         <Grid item xs={12}>
           <div className={classes.subHeaderHolder}>
-            <Translate i18nKey="deposit.zapExplainer" values={{ tokens: depositSingleSymbols }} />
-            <TooltipWithIcon
-              i18nKey={id === '4belt' ? 'deposit.zapTooltip4Belt' : 'deposit.zapTooltip'}
+            <Translate
+              i18nKey="deposit.zapExplainer"
+              values={{ token: pot.token, tokens: depositSingleSymbols }}
             />
+            <ZapDepositTooltip id={pot.id} />
           </div>
         </Grid>
         <Grid item xs={6}>
@@ -308,7 +319,9 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
         </Grid>
         <Grid item xs={6}>
           <div className={classes.label} style={{ textAlign: 'right' }}>
-            <Translate i18nKey="deposit.provider" />
+            {pot.vaultType === 'lp' || pot.vaultType === 'stable' ? (
+              <Translate i18nKey="deposit.provider" />
+            ) : null}
           </div>
         </Grid>
         <Grid item xs={6}>
@@ -317,7 +330,9 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
           </div>
         </Grid>
         <Grid item xs={6} style={{ textAlign: 'right' }}>
-          <div className={classes.value}>{pot.provider}</div>
+          {pot.vaultType === 'lp' || pot.vaultType === 'stable' ? (
+            <div className={classes.value}>{pot.provider}</div>
+          ) : null}
         </Grid>
       </Grid>
       {/*<div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>*/}
@@ -331,7 +346,7 @@ export const LPPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
       {/*  />*/}
       {/*</div>*/}
       <div className={classes.inputHolder}>
-        <LPTokenInput
+        <ZapTokenInput
           tokens={depositTokens}
           selected={selectedTokenSymbol}
           value={inputValue}

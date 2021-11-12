@@ -171,14 +171,17 @@
       "title": "Pot Retired",
       "message": "You can no longer deposit in to this pot."
     },
-    "zapExplainer": "Deposit LP or ZAP⚡ in {{tokens}}",
-    "zapTooltip": [
-      "ZAP lets you create liquidity pool tokens and make deposits with just one transaction.",
-      "Half of your tokens will be sold to balance the liquidity pair, after which liquidity will be provided and LP tokens deposited into this Pot."
-    ],
-    "zapTooltip4Belt": [
-      "ZAP lets you create liquidity pool tokens and make deposits with just one transaction."
-    ],
+    "zapExplainer": "Deposit {{token}} or ZAP⚡ in {{tokens}}",
+    "zapTooltip": {
+      "all": [
+        "ZAP lets you create liquidity pool tokens and make deposits with just one transaction.",
+        "Half of your tokens will be sold to balance the liquidity pair, after which liquidity will be provided and LP tokens deposited into this Pot."
+      ],
+      "4belt": [
+        "ZAP lets you create liquidity pool tokens and make deposits with just one transaction."
+      ],
+      "beltbnb": ["ZAP lets you create beltBNB tokens and deposit with just one transaction."]
+    },
     "inYourWallet": "In your wallet",
     "provider": "Liquidity provider"
   },
@@ -192,7 +195,7 @@
     "mySuperBoostToken": "My Super Boost {{token}}",
     "fairplayNotice": "Fairplay Timelock rules apply.",
     "withdrawFeeNotice": "Withdraw fee of {{percent}}% applies.",
-    "zapExplainer": "Withdraw LP or ZAP⚡ out to {{tokens}}"
+    "zapExplainer": "Withdraw {{token}} or ZAP⚡ out to {{tokens}}"
   },
   "bonus": {
     "myBonusEarnings": "My Bonus Earnings",

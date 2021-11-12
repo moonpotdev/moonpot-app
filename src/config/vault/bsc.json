@@ -230,6 +230,58 @@
     ]
   },
   {
+    "id": "beltbnb",
+    "name": "BNB",
+    "token": "beltBNB",
+    "tokenAddress": "0xa8Bb71facdd46445644C277F9499Dd22f6F0A30C",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBeltBNB",
+    "rewardAddress": "0xfF4226328b92470691E5D1De4D2a974D132ef28E",
+    "contractAddress": "0x183Df4bBB21e6c9B0F23c91BA5b4A1A7D5FdC374",
+    "prizePoolAddress": "0xD0dcC357774a304e9EC4297EE6cCb286e6C987CD",
+    "prizeStrategyAddress": "0x9462206716850d44f6eC1FEaD08818d170Bde3F8",
+    "pricePerShare": 1,
+    "oracleId": "belt-beltbnb",
+    "apyId": "belt-beltbnb",
+    "vaultType": "main",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "ziggyPrizeToken": "WBNB",
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
+    "status": "active",
+    "isZap": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xC34Ae91312A3c3F9420691922040a5DEe1698E52",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "beltBNB",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "side-cake",
     "name": "CAKE Side",
     "token": "CAKE",
@@ -293,6 +345,7 @@
     },
     "status": "active",
     "supportsClaimAllBonuses": true,
+    "isZap": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x1bBBf8910E5A074c7B62D891Dbab9f4af82C14D4",
@@ -498,6 +551,7 @@
     },
     "status": "active",
     "supportsClaimAllBonuses": true,
+    "isZap": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x3106d9B3d5e04ff5D575212140FAb1Cf17C8933F",
@@ -596,6 +650,7 @@
     },
     "status": "active",
     "supportsClaimAllBonuses": true,
+    "isZap": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xbFa24f7C2376c28407504Fb8512797dD8D316aBf",
@@ -694,6 +749,7 @@
     },
     "status": "active",
     "supportsClaimAllBonuses": true,
+    "isZap": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xb26642B6690E4c4c9A6dAd6115ac149c700C7dfE",
@@ -748,6 +804,7 @@
     },
     "status": "active",
     "supportsClaimAllBonuses": true,
+    "isZap": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x1417633bF9Fed6753e7504DF036c30F205D30e7E",
