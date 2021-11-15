@@ -76,18 +76,6 @@ function calculateZiggyPrediction(ziggy, others, prices) {
           // Which token we are adding to sponsors
           let sponsorToken = tokensByNetworkAddress[pot.network][pot.tokenAddress.toLowerCase()];
 
-          // We are converting from the prize token to another before adding ziggy's prize?
-          if (pot.ziggyPrizeToken) {
-            const token = tokensByNetworkSymbol[pot.network][pot.ziggyPrizeToken];
-            if (token) {
-              // Convert from this token to that token
-              const tokenPrice = prices[token.oracleId] || 0;
-              potAward.tokens = tokenPrice ? potAward.usd.dividedBy(tokenPrice) : new BigNumber(0);
-              // Now awarding in this token
-              sponsorToken = token;
-            }
-          }
-
           // Build prizes array
           let prizes = [{ token: sponsorToken, award: potAward }];
 
@@ -109,8 +97,20 @@ function calculateZiggyPrediction(ziggy, others, prices) {
             });
           }
 
+          // Convert everything that isn't BUSD or POTS to BUSD
+          const BUSD = tokensByNetworkSymbol[pot.network]['BUSD'];
+          const BUSDPrice = prices[BUSD.oracleId] || 1;
+          const convertedPrizes = prizes.map(prize => {
+            if (prize.token.symbol !== 'POTS' && prize.token.symbol !== 'BUSD') {
+              prize.token = BUSD;
+              prize.award.tokens = prize.award.usd.dividedBy(BUSDPrice);
+            }
+
+            return prize;
+          });
+
           // Add each prize to sponsors array
-          for (const prize of prizes) {
+          for (const prize of convertedPrizes) {
             // Sponsor
             const existingSponsor = projectedSponsors.find(
               sponsor => sponsor.sponsorAddress === prize.token.address
