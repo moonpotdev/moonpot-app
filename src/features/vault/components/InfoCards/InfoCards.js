@@ -134,6 +134,7 @@ export const InfoCards = function ({ id, className, fairplayRef }) {
           token: pot.token,
           duration: pot.fairplayDuration,
           ticketFee: pot.fairplayTicketFee * 100,
+          fairplayFee: pot.fairplayFee * 100,
         }).map((text, i) => (
           <p key={i}>{text}</p>
         ))}

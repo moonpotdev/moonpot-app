@@ -672,6 +672,8 @@
     "apyId": "banana-pots-bnb",
     "vaultType": "lp",
     "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
