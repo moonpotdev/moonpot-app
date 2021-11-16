@@ -115,6 +115,12 @@
     "sponsorToken": "POTS",
     "sponsors": [
       {
+        "sponsorToken": "WATCH",
+        "sponsorOracleId": "WATCH",
+        "sponsorAddress": "0x7A9f28EB62C791422Aa23CeAE1dA9C847cBeC9b0",
+        "sponsorTokenDecimals": 18
+      },
+      {
         "sponsorToken": "POTS",
         "sponsorOracleId": "POTS",
         "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
