@@ -101,7 +101,7 @@
     "vaultType": "community",
     "duration": 28,
     "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
+    "fairplayTicketFee": 0.1,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
