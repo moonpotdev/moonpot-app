@@ -179,6 +179,22 @@ function calculateProjectedPotAward(
   // New award balance
   const projectedTokenAwardBalance = currentAwardBalance.plus(tokenInterest);
 
+  // console.log(pot.id, {
+  //   amountEarning: amountEarning.toString(10),
+  //   daysUntilDraw: daysUntilDraw,
+  //   dpy: dpy,
+  //   interestUntilDraw: interestUntilDraw,
+  //   tokenInterest: tokenInterest.toString(10),
+  // });
+
+  if (pot.id === 'watch') {
+    const watchPrize = new BigNumber(75000 * 0.4);
+    return {
+      tokens: watchPrize,
+      usd: watchPrize.multipliedBy(pot.tokenPrice),
+    };
+  }
+
   return {
     tokens: projectedTokenAwardBalance,
     usd: projectedTokenAwardBalance.multipliedBy(pot.tokenPrice),
