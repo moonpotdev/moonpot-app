@@ -172,7 +172,10 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
         />
       </div>
       <div className={classes.fairplayNotice}>
-        <Translate i18nKey="deposit.fairplayNotice" values={{ duration: pot.fairplayDuration }} />{' '}
+        <Translate
+          i18nKey="deposit.fairplayNotice"
+          values={{ duration: pot.fairplayDuration, fee: pot.fairplayFee * 100 }}
+        />{' '}
         {onLearnMore ? (
           <Link onClick={onLearnMore} className={classes.learnMore}>
             <Translate i18nKey="buttons.learnMore" />

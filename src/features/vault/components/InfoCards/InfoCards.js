@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { usePot } from '../../../../helpers/hooks';
 import { Box, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
@@ -17,137 +17,173 @@ import ziggyTimelock4x from '../../../../images/ziggy/timelock@4x.png';
 
 const useStyles = makeStyles(styles);
 
-export const InfoCards = function ({ id, className, fairplayRef }) {
+const StrategyInfoCard = memo(function ({ pot, classes, t }) {
+  if (!pot.infoCardStrategy) {
+    return null;
+  }
+
+  return (
+    <Card variant="purpleInfo" className={classes.strategy}>
+      <CardTitle>{t('pot.infocards.strategy.title', { name: pot.name })}</CardTitle>
+      {t('pot.infocards.strategy.body.' + pot.infoCardStrategy, {
+        returnObjects: true,
+        token: pot.token,
+        name: pot.name,
+        breakdownInterest: pot.interestBreakdown?.interest || 0,
+        breakdownPrize: pot.interestBreakdown?.prize || 0,
+        breakdownBuyback: pot.interestBreakdown?.buyback || 0,
+        breakdownZiggyInterest: pot.interestBreakdown?.ziggyInterest || 0,
+        breakdownZiggyPrize: pot.interestBreakdown?.ziggyPrize || 0,
+        breakdownZiggyTotal:
+          (pot.interestBreakdown?.ziggyPrize || 0) + (pot.interestBreakdown?.ziggyPrize || 0),
+      }).map((text, i) => (
+        <p key={i}>{text}</p>
+      ))}
+      {pot.infoCardStrategy === 'beefy' && pot.infoCardBeefyVaultAddress ? (
+        <p>
+          <a
+            href={`https://bscscan.com/address/${pot.infoCardBeefyVaultAddress}`}
+            rel="noreferrer"
+            target="_blank"
+            className={classes.link}
+          >
+            {t('pot.infocards.strategy.beefyVaultAddress')} <OpenInNew fontSize="inherit" />
+          </a>
+        </p>
+      ) : null}
+      <p>
+        <a
+          href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
+          rel="noreferrer"
+          target="_blank"
+          className={classes.link}
+        >
+          {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
+          <OpenInNew fontSize="inherit" />
+        </a>
+      </p>
+    </Card>
+  );
+});
+
+const InterestBreakdownInfoCard = memo(function ({ pot, classes, t }) {
+  if (!pot.interestBreakdown) {
+    return null;
+  }
+
+  return (
+    <Card variant="purpleInfo">
+      <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
+      {pot.interestBreakdown.interest ? (
+        <div className={classes.earningItem}>
+          <div className={classes.earningLabel}>
+            {t('pot.infocards.earnings.tokenInterest', { token: pot.token })}
+          </div>
+          <div className={classes.earningValue}>{pot.interestBreakdown.interest}%</div>
+        </div>
+      ) : null}
+      {pot.interestBreakdown.prize ? (
+        <div className={classes.earningItem}>
+          <div className={classes.earningLabel}>
+            {t('pot.infocards.earnings.nameMoonpotPrizeDraw', { name: pot.name })}
+          </div>
+          <div className={classes.earningValue}>{pot.interestBreakdown.prize}%</div>
+        </div>
+      ) : null}
+      {pot.interestBreakdown.buyback ? (
+        <div className={classes.earningItem}>
+          <div className={classes.earningLabel}>
+            {t('pot.infocards.earnings.buyback', { token: pot.token })}
+          </div>
+          <div className={classes.earningValue}>{pot.interestBreakdown.buyback}%</div>
+        </div>
+      ) : null}
+      {pot.interestBreakdown.ziggyInterest ? (
+        <div className={classes.earningItem}>
+          <div className={classes.earningLabel}>
+            {t('pot.infocards.earnings.ziggysPotInterest')}
+          </div>
+          <div className={classes.earningValue}>{pot.interestBreakdown.ziggyInterest}%</div>
+        </div>
+      ) : null}
+      {pot.interestBreakdown.ziggyPrize ? (
+        <div className={classes.earningItem}>
+          <div className={classes.earningLabel}>{t('pot.infocards.earnings.ziggysPrizeDraw')}</div>
+          <div className={classes.earningValue}>{pot.interestBreakdown.ziggyPrize}%</div>
+        </div>
+      ) : null}
+      {pot.interestBreakdown.treasury ? (
+        <div className={classes.earningItem}>
+          <div className={classes.earningLabel}>{t('pot.infocards.earnings.treasury')}</div>
+          <div className={classes.earningValue}>{pot.interestBreakdown.treasury}%</div>
+        </div>
+      ) : null}
+    </Card>
+  );
+});
+
+const FairplayInfoCard = memo(function ({ pot, classes, t, fairplayRef }) {
+  return (
+    <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules}>
+      <div className={classes.ziggyTimelock}>
+        <img
+          alt=""
+          width="80"
+          height="80"
+          sizes="80px"
+          src={ziggyTimelock1x}
+          srcSet={`${ziggyTimelock1x} 80w, ${ziggyTimelock2x} 160w, ${ziggyTimelock3x} 240w, ${ziggyTimelock4x} 320w`}
+        />
+      </div>
+      <CardTitle>{t('pot.infocards.fairplay.title', { name: pot.name })}</CardTitle>
+      {t('pot.infocards.fairplay.body', {
+        returnObjects: true,
+        token: pot.token,
+        duration: pot.fairplayDuration,
+        ticketFee: pot.fairplayTicketFee * 100,
+        fairplayFee: pot.fairplayFee * 100,
+      }).map((text, i) => (
+        <p key={i}>{text}</p>
+      ))}
+    </Card>
+  );
+});
+
+const defaultInfoCards = ['strategy', 'breakdown', 'fairplay'];
+const cardComponentMap = {
+  strategy: StrategyInfoCard,
+  breakdown: InterestBreakdownInfoCard,
+  fairplay: FairplayInfoCard,
+};
+
+export const InfoCards = memo(function ({ id, className, fairplayRef }) {
   const pot = usePot(id);
   const classes = useStyles();
   const { t } = useTranslation();
+  const infoCards = pot.infoCards || defaultInfoCards;
 
-  return (
-    <Cards className={clsx(className)} oneUp={true}>
-      {pot.infoCardStrategy ? (
-        <Card variant="purpleInfo" className={classes.strategy}>
-          <CardTitle>{t('pot.infocards.strategy.title', { name: pot.name })}</CardTitle>
-          {t('pot.infocards.strategy.body.' + pot.infoCardStrategy, {
-            returnObjects: true,
-            token: pot.token,
-            name: pot.name,
-            breakdownInterest: pot.interestBreakdown?.interest || 0,
-            breakdownPrize: pot.interestBreakdown?.prize || 0,
-            breakdownBuyback: pot.interestBreakdown?.buyback || 0,
-            breakdownZiggyInterest: pot.interestBreakdown?.ziggyInterest || 0,
-            breakdownZiggyPrize: pot.interestBreakdown?.ziggyPrize || 0,
-            breakdownZiggyTotal:
-              (pot.interestBreakdown?.ziggyPrize || 0) + (pot.interestBreakdown?.ziggyPrize || 0),
-          }).map((text, i) => (
-            <p key={i}>{text}</p>
-          ))}
-          {pot.infoCardBeefyVaultAddress ? (
-            <p>
-              <a
-                href={`https://bscscan.com/address/${pot.infoCardBeefyVaultAddress}`}
-                rel="noreferrer"
-                target="_blank"
-                className={classes.link}
-              >
-                {t('pot.infocards.strategy.beefyVaultAddress')} <OpenInNew fontSize="inherit" />
-              </a>
-            </p>
-          ) : null}
-          <p>
-            <a
-              href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
-              rel="noreferrer"
-              target="_blank"
-              className={classes.link}
-            >
-              {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
-              <OpenInNew fontSize="inherit" />
-            </a>
-          </p>
-        </Card>
-      ) : null}
-      {pot.interestBreakdown ? (
-        <Card variant="purpleInfo">
-          <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
-          {pot.interestBreakdown.interest ? (
-            <div className={classes.earningItem}>
-              <div className={classes.earningLabel}>
-                {t('pot.infocards.earnings.tokenInterest', { token: pot.token })}
-              </div>
-              <div className={classes.earningValue}>{pot.interestBreakdown.interest}%</div>
-            </div>
-          ) : null}
-          {pot.interestBreakdown.prize ? (
-            <div className={classes.earningItem}>
-              <div className={classes.earningLabel}>
-                {t('pot.infocards.earnings.nameMoonpotPrizeDraw', { name: pot.name })}
-              </div>
-              <div className={classes.earningValue}>{pot.interestBreakdown.prize}%</div>
-            </div>
-          ) : null}
-          {pot.interestBreakdown.buyback ? (
-            <div className={classes.earningItem}>
-              <div className={classes.earningLabel}>
-                {t('pot.infocards.earnings.buyback', { token: pot.token })}
-              </div>
-              <div className={classes.earningValue}>{pot.interestBreakdown.buyback}%</div>
-            </div>
-          ) : null}
-          {pot.interestBreakdown.ziggyInterest ? (
-            <div className={classes.earningItem}>
-              <div className={classes.earningLabel}>
-                {t('pot.infocards.earnings.ziggysPotInterest')}
-              </div>
-              <div className={classes.earningValue}>{pot.interestBreakdown.ziggyInterest}%</div>
-            </div>
-          ) : null}
-          {pot.interestBreakdown.ziggyPrize ? (
-            <div className={classes.earningItem}>
-              <div className={classes.earningLabel}>
-                {t('pot.infocards.earnings.ziggysPrizeDraw')}
-              </div>
-              <div className={classes.earningValue}>{pot.interestBreakdown.ziggyPrize}%</div>
-            </div>
-          ) : null}
-          {pot.interestBreakdown.treasury ? (
-            <div className={classes.earningItem}>
-              <div className={classes.earningLabel}>{t('pot.infocards.earnings.treasury')}</div>
-              <div className={classes.earningValue}>{pot.interestBreakdown.treasury}%</div>
-            </div>
-          ) : null}
-        </Card>
-      ) : null}
-      <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules}>
-        <div className={classes.ziggyTimelock}>
+  if (infoCards.length) {
+    return (
+      <Cards className={clsx(className)} oneUp={true}>
+        {infoCards.map(key => {
+          const InfoCard = cardComponentMap[key];
+          return InfoCard ? (
+            <InfoCard key={key} pot={pot} t={t} classes={classes} fairplayRef={fairplayRef} />
+          ) : null;
+        })}
+        <Box className={classes.ziggyPlay}>
           <img
             alt=""
-            width="80"
-            height="80"
-            sizes="80px"
-            src={ziggyTimelock1x}
-            srcSet={`${ziggyTimelock1x} 80w, ${ziggyTimelock2x} 160w, ${ziggyTimelock3x} 240w, ${ziggyTimelock4x} 320w`}
+            width="240"
+            height="240"
+            sizes="240px"
+            src={ziggyPlay1x}
+            srcSet={`${ziggyPlay1x} 240w, ${ziggyPlay2x} 480w, ${ziggyPlay3x} 720w, ${ziggyPlay4x} 960w`}
           />
-        </div>
-        <CardTitle>{t('pot.infocards.fairplay.title', { name: pot.name })}</CardTitle>
-        {t('pot.infocards.fairplay.body', {
-          returnObjects: true,
-          token: pot.token,
-          duration: pot.fairplayDuration,
-          ticketFee: pot.fairplayTicketFee * 100,
-        }).map((text, i) => (
-          <p key={i}>{text}</p>
-        ))}
-      </Card>
-      <Box className={classes.ziggyPlay}>
-        <img
-          alt=""
-          width="240"
-          height="240"
-          sizes="240px"
-          src={ziggyPlay1x}
-          srcSet={`${ziggyPlay1x} 240w, ${ziggyPlay2x} 480w, ${ziggyPlay3x} 720w, ${ziggyPlay4x} 960w`}
-        />
-      </Box>
-    </Cards>
-  );
-};
+        </Box>
+      </Cards>
+    );
+  }
+
+  return null;
+});
