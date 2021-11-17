@@ -122,38 +122,6 @@ const InterestBreakdownInfoCard = memo(function ({ pot, classes, t }) {
   );
 });
 
-const WatchBreakdownInfoCard = memo(function ({ pot, classes, t }) {
-  return (
-    <Card variant="purpleInfo">
-      <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
-      <div className={classes.earningItem}>
-        <div className={classes.earningLabel}>
-          {t('pot.infocards.earnings.tokenInterest', { token: pot.token })}
-        </div>
-        <div className={classes.earningValue}>50%</div>
-      </div>
-      <div className={classes.earningItem}>
-        <div className={classes.earningLabel}>
-          {t('pot.infocards.earnings.nameMoonpotPrizeDraw', { name: pot.name })}
-        </div>
-        <div className={classes.earningValue}>40%</div>
-      </div>
-      <div className={classes.earningItem}>
-        <div className={classes.earningLabel}>{t('pot.infocards.earnings.ziggysPotInterest')}</div>
-        <div className={classes.earningValue}>5%</div>
-      </div>
-      <div className={classes.earningItem}>
-        <div className={classes.earningLabel}>{t('pot.infocards.earnings.ziggysPrizeDraw')}</div>
-        <div className={classes.earningValue}>3%</div>
-      </div>
-      <div className={classes.earningItem}>
-        <div className={classes.earningLabel}>{t('pot.infocards.earnings.treasury')}</div>
-        <div className={classes.earningValue}>2%</div>
-      </div>
-    </Card>
-  );
-});
-
 const FairplayInfoCard = memo(function ({ pot, classes, t, fairplayRef }) {
   return (
     <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules}>
@@ -186,7 +154,6 @@ const cardComponentMap = {
   strategy: StrategyInfoCard,
   breakdown: InterestBreakdownInfoCard,
   fairplay: FairplayInfoCard,
-  watchBreakdown: WatchBreakdownInfoCard,
 };
 
 export const InfoCards = memo(function ({ id, className, fairplayRef }) {

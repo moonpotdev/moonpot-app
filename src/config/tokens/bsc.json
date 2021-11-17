@@ -335,18 +335,11 @@
     "decimals": 18
   },
   {
-    "symbol": "mooWatch",
-    "address": "0xf1371cec8E7f0972CEc5517c023E7D4C4018e22c",
-    "type": "moo",
-    "decimals": 18,
-    "underlyingToken": "WATCH"
-  },
-  {
     "symbol": "moonTicketPotsWatch",
-    "address": "0xE8f5c796dF3f68722a58E251e1172cAe148Ee3A5",
+    "address": "0x665a361ab68Cd1671884cf9AFb7dC4F40745eB3E",
     "type": "ticket",
     "decimals": 18,
-    "underlyingToken": "mooWatch",
-    "stakedMultiplier": 1
+    "underlyingToken": "WATCH",
+    "stakedMultiplier": 2
   }
 ]
