@@ -109,8 +109,8 @@
     "status": "active",
     "supportsAutocompound": true,
     "supportsPartialWithdraw": true,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0xf1371cec8E7f0972CEc5517c023E7D4C4018e22c",
+    "infoCards": ["strategy", "watchBreakdown", "fairplay"],
+    "infoCardStrategy": "watch",
     "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [

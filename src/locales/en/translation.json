@@ -131,6 +131,10 @@
           ],
           "side": [
             "The {{name}} Pot deposits your ${{token}} in the Beefy.Finance {{token}} Vault. All Pot earnings are autocompounded and Moonpot sets aside {{breakdownPrize}}% for the Side Pot prize and {{breakdownBuyback}}% for $POTS buybacks for the Main Pot’s bonus interest."
+          ],
+          "watch": [
+            "This strategy deposits your {{token}} tokens in a Moonpot {{token}} vault, which autocompounds your {{token}} tokens from a fixed supply of {{token}} provided by the Yieldwatch team.",
+            "All of the {{token}} provided by Yieldwatch goes to Moonpot players. Half is used to give you interest. The other half is used for Prize Draws and Ziggy's Pot rewards."
           ]
         },
         "beefyVaultAddress": "Beefy.Finance Vault Address",
