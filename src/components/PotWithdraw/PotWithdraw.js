@@ -11,14 +11,13 @@ import {
   formatTimeLeft,
 } from '../../helpers/format';
 import reduxActions from '../../features/redux/actions';
-import { getFairplayFeePercent, isEmpty } from '../../helpers/utils';
+import { getFairplayFeePercent, isEmpty, ZERO } from '../../helpers/utils';
 import Steps from '../../features/vault/components/Steps';
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { Translate } from '../Translate';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { TokenInput } from '../TokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-import BigNumber from 'bignumber.js';
 import { Alert, AlertText } from '../Alert';
 import { InfoOutlined } from '@material-ui/icons';
 
@@ -222,7 +221,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
   const pot = usePot(id);
   const [inputValue, setInputValue] = useState('');
   const [isPartialWithdrawAll, setIsPartialWithdrawAll] = useState(false);
-  const [partialWithdrawAmount, setPartialWithdrawAmount] = useState(() => new BigNumber(0));
+  const [partialWithdrawAmount, setPartialWithdrawAmount] = useState(() => ZERO);
   const [canWithdrawPartial, setCanWithdrawPartial] = useState(false);
   const address = useSelector(state => state.walletReducer.address);
   const totalBalance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);

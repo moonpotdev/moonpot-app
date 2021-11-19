@@ -2,11 +2,10 @@ import { Link, makeStyles } from '@material-ui/core';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles';
-import BigNumber from 'bignumber.js';
 import { bigNumberTruncate, convertAmountToRawNumber } from '../../helpers/format';
 import reduxActions from '../../features/redux/actions';
 import Steps from '../../features/vault/components/Steps';
-import { isEmpty } from '../../helpers/utils';
+import { isEmpty, ZERO } from '../../helpers/utils';
 import { TokenInput } from '../TokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 
@@ -73,7 +72,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const balance = useTokenBalance(pot.token, pot.tokenDecimals);
   const allowance = useTokenAllowance(pot.contractAddress, pot.token, pot.tokenDecimals);
   const [inputValue, setInputValue] = useState('');
-  const [depositAmount, setDepositAmount] = useState(() => new BigNumber(0));
+  const [depositAmount, setDepositAmount] = useState(() => ZERO);
   const [isDepositAll, setIsDepositAll] = useState(false);
   const [canDeposit, setCanDeposit] = useState(false);
   const [steps, setSteps] = React.useState(() => ({

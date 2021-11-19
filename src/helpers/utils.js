@@ -4,6 +4,8 @@ import { tokensByNetworkSymbol } from '../config/tokens';
 
 let trimReg = /(^\s*)|(\s*$)/g;
 
+export const ZERO = new BigNumber(0);
+
 export function isEmpty(key) {
   if (key === undefined || key === '' || key === null) {
     return true;

@@ -99,9 +99,12 @@ async function updatePrices() {
   };
 
   try {
-    const request = await axios.get('https://api.beefy.finance/prices?_=' + getApiCacheBuster(), {
-      timeout: 2000,
-    });
+    const request = await axios.get(
+      'https://beefy-api.herokuapp.com/prices?_=' + getApiCacheBuster(),
+      {
+        timeout: 2000,
+      }
+    );
     return request.status === 200 ? request.data : retry();
   } catch (err) {
     console.log('error fetchPrices()', err);
@@ -117,9 +120,12 @@ async function updateLPPrices() {
   };
 
   try {
-    const request = await axios.get('https://api.beefy.finance/lps?_=' + getApiCacheBuster(), {
-      timeout: 2000,
-    });
+    const request = await axios.get(
+      'https://beefy-api.herokuapp.com/lps?_=' + getApiCacheBuster(),
+      {
+        timeout: 2000,
+      }
+    );
     return request.status === 200 ? request.data : retry();
   } catch (err) {
     console.log('error fetchPrices()', err);
@@ -135,7 +141,7 @@ async function updateApy() {
   };
   try {
     const request = await axios.get(
-      'https://api.beefy.finance/apy/breakdown?_=' + getApiCacheBuster(),
+      'https://beefy-api.herokuapp.com/apy/breakdown?_=' + getApiCacheBuster(),
       { timeout: 2000 }
     );
     return request.status === 200 ? request.data : retry();

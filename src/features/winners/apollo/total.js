@@ -5,6 +5,7 @@ import { tokensByNetworkAddress } from '../../../config/tokens';
 import { byDecimals } from '../../../helpers/format';
 import { potsByNetworkPrizePoolAddress } from '../../../config/vault';
 import BigNumber from 'bignumber.js';
+import { ZERO } from '../../../helpers/utils';
 
 const query = gql`
   query ($pools: [String!]) {
@@ -39,7 +40,7 @@ export const useTotalPrizeValue = function () {
   const prices = useSelector(state => state.pricesReducer.byNetworkAddress[network]);
 
   const total = useMemo(() => {
-    let sum = new BigNumber(0);
+    let sum = ZERO;
 
     if (prizePools && prizePools.length) {
       for (const prizePool of prizePools) {
