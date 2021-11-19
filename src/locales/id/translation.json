@@ -131,6 +131,10 @@
           ],
           "side": [
             "Side Pot {{token}} menyimpan setoran ${{token}} anda di Beefy.Finance {{token}} Vault. Semua pendapatan Pot digabungkan secara otomatis dan Moonpot menyisihkan {{breakdownPrize}}% untuk hadiah Side Pot dan {{breakdownBuyback}}% untuk pembelian kembali $POTS untuk keuntungan bonus Pot Utama."
+          ],
+          "watch": [
+            "Strategi ini menyimpan token {{token}} anda di brankas Moonpot {{token}}, yang secara otomatis menggabungkan token {{token}} anda dari pasokan tetap {{token}} yang disediakan oleh tim Yieldwatch.",
+            "Semua {{token}} yang disediakan oleh Yieldwatch diberikan kepada pemain Moonpot. Setengah digunakan untuk memberi anda bunga. Setengah lainnya digunakan untuk Hadiah Undian dan hadiah Ziggy's Pot."
           ]
         },
         "beefyVaultAddress": "Alamat Brankas Beefy.Finance",
