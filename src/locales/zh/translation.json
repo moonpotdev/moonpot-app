@@ -131,6 +131,10 @@
           ],
           "side": [
             "{{name}} 附属月盒将您的 ${{token}} 存入 Beefy.Finance {{token}} 金库。所有月盒收益都是自动复合的。Moonpot 预留了 {{breakdownPrize}}% 用于附属月盒奖金和 {{breakdownBuyback}}% 用于回购 $POTS 作为核心月盒的奖金利息。"
+          ],
+          "watch": [
+            "此策略将您的 {{token}} 代币存放在 Moonpot {{token}} 金库中，该金库从 Yieldwatch 团队提供的固定 {{token}} 供应中自动复投您的 {{token}} 代币。",
+            "Yieldwatch 提供的所有 {{token}} 都归于 Moonpot 玩家。一半将用来给您分发收益。另一半则用于抽奖和 Ziggy 的月盒奖励。"
           ]
         },
         "beefyVaultAddress": "Beefy 金库地址",
