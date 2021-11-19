@@ -150,9 +150,9 @@
         "body": [
           "Hadiah berasal dari keuntungan yang dihasilkan oleh semua pemain Moonpot, jadi kami membutuhkan sebuah sistem untuk menjaga permainan ini tetap adil.",
           "Ada TimeLock Fairplay selama {{duration}} hari sebagai dasar untuk mencegah pemain menyetor tepat sebelum pengundian dimulai dan kemudian menariknya dengan cepat setelah undian selesai.",
-          "Jika Anda ingin melakukan penarikan lebih awal, Anda akan membayar Biaya Fairness sebanyak 2,5%, atau kurang. Biaya Fairness akan berkurang setiap detik dan akan menjadi nol selama {{duration}} hari.",
-          "Deposit/menyetorkan lebih banyak {{token}} akan menyetel ulang biaya Fairness Anda hingga maksimum 2,5%, untuk deposit tambahan Anda.",
-          "Jika Anda memenangkan hadiah, Biaya Fairness Anda akan diatur ulang menjadi 5% dan dikurangi menjadi nol selama {{duration}} hari setelah Anda memenangkan hadiah.",
+          "Jika Anda ingin melakukan penarikan lebih awal, Anda akan membayar Biaya Fairness sebanyak {{fairplayFee}}%, atau kurang. Biaya Fairness akan berkurang setiap detik dan akan menjadi nol selama {{duration}} hari.",
+          "Deposit/menyetorkan lebih banyak {{token}} akan menyetel ulang biaya Fairness Anda hingga maksimum {{fairplayFee}}%, untuk deposit tambahan Anda.",
+          "Jika Anda memenangkan hadiah, Biaya Fairness Anda akan diatur ulang menjadi {{ticketFee}}% dan dikurangi menjadi nol selama {{duration}} hari setelah Anda memenangkan hadiah.",
           "Langkah-langkah ini dapat mencegah pelaku jahat memanipulasi pengundian hadiah."
         ]
       }
@@ -166,7 +166,7 @@
     "token": "Deposit {{token}}",
     "allToken": "Deposit Semua {{token}}",
     "amountToken": "Deposit {{amount}} {{token}}",
-    "fairplayNotice": "Ada TimeLock Fairplay selama {{duration}} hari. Jika Anda ingin menarik lebih awal, Anda akan membayar Biaya Fairness 2,5%, atau kurang. Biaya akan berkurang setiap detik.",
+    "fairplayNotice": "Ada TimeLock Fairplay selama {{duration}} hari. Jika Anda ingin menarik lebih awal, Anda akan membayar Biaya Fairness {{fee}}%, atau kurang. Biaya akan berkurang setiap detik.",
     "eolNotice": {
       "title": "Pot Tidak Aktif",
       "message": "Anda tidak dapat lagi Deposit ke pot ini."

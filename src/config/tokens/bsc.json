@@ -326,5 +326,20 @@
     "decimals": 18,
     "underlyingToken": "CAKE",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "WATCH",
+    "address": "0x7A9f28EB62C791422Aa23CeAE1dA9C847cBeC9b0",
+    "type": "single",
+    "oracleId": "WATCH",
+    "decimals": 18
+  },
+  {
+    "symbol": "moonTicketPotsWatch",
+    "address": "0x665a361ab68Cd1671884cf9AFb7dC4F40745eB3E",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "WATCH",
+    "stakedMultiplier": 2
   }
 ]
