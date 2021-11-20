@@ -96,6 +96,7 @@
     "contractAddress": "0x33F83bD5C8180Ae1a9A01983b327bD7d95B39560",
     "prizePoolAddress": "0x429E0A5713Ba489849efb94505cc351B5b905416",
     "prizeStrategyAddress": "0x69C7c5beCb6e47f1bE6a21e5040cE402D35962cb",
+    "rewardPool": "0xE3C50fe260B7a258C8B16C36a98FB6D2DEeDD90E",
     "oracleId": "WATCH",
     "apyId": "pots-watch",
     "vaultType": "community",

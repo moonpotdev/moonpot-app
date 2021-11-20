@@ -2,11 +2,10 @@ import { Grid, Link, makeStyles } from '@material-ui/core';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles';
-import BigNumber from 'bignumber.js';
 import { bigNumberTruncate, convertAmountToRawNumber, formatDecimals } from '../../helpers/format';
 import reduxActions from '../../features/redux/actions';
 import Steps from '../../features/vault/components/Steps/Steps';
-import { indexBy, isEmpty } from '../../helpers/utils';
+import { indexBy, isEmpty, ZERO } from '../../helpers/utils';
 import { ZapTokenInput } from '../ZapTokenInput/ZapTokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
@@ -184,7 +183,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
     depositTokensBySymbol[selectedTokenSymbol].decimals
   );
   const [inputValue, setInputValue] = useState('');
-  const [depositAmount, setDepositAmount] = useState(() => new BigNumber(0));
+  const [depositAmount, setDepositAmount] = useState(() => ZERO);
   const [isDepositAll, setIsDepositAll] = useState(false);
   const [steps, setSteps] = useState(() => ({
     modal: false,

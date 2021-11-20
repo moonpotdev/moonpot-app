@@ -2,7 +2,7 @@ import { HOME_FETCH_POOLS_BEGIN, HOME_FETCH_POOLS_DONE } from '../constants';
 import BigNumber from 'bignumber.js';
 import { MultiCall } from 'eth-multicall';
 import { config } from '../../../config/config';
-import { compound, isEmpty } from '../../../helpers/utils';
+import { compound, isEmpty, ZERO } from '../../../helpers/utils';
 import { byDecimals, formatTvl } from '../../../helpers/format';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
 import beefyVaultAbi from '../../../config/abi/beefyvault.json';
@@ -11,6 +11,7 @@ const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 const ecr20Abi = require('../../../config/abi/erc20.json');
 const prizeStrategyAbi = require('../../../config/abi/prizestrategy.json');
 const prizePoolAbi = require('../../../config/abi/prizepool.json');
+const rewardPoolAbi = require('../../../config/abi/rewardPool.json');
 
 function timeLastDrawBefore(nextDraw, durationDays, beforeWhen) {
   const duration = durationDays * 24 * 60 * 60;
@@ -37,7 +38,7 @@ function calculateZiggyPrediction(ziggy, others, prices) {
   // Only if not currently being drawn
   if (ziggy.expiresAt > nowSeconds) {
     const ziggyDrawCutoff = ziggy.expiresAt - drawCutoff;
-    let extraSponsorBalanceUsd = new BigNumber(0);
+    let extraSponsorBalanceUsd = ZERO;
     const projectedSponsors = ziggy.sponsors.map(s => ({
       ...s,
       sponsorBalance: new BigNumber(s.sponsorBalance),
@@ -91,7 +92,7 @@ function calculateZiggyPrediction(ziggy, others, prices) {
                 token: partToken,
                 award: {
                   usd: usdShare,
-                  tokens: partTokenPrice ? usdShare.dividedBy(partTokenPrice) : new BigNumber(0),
+                  tokens: partTokenPrice ? usdShare.dividedBy(partTokenPrice) : ZERO,
                 },
               };
             });
@@ -154,46 +155,56 @@ function calculateZiggyPrediction(ziggy, others, prices) {
   return ziggy;
 }
 
-function calculateProjectedPotAward(
-  pot,
-  untilWhen,
-  awardBalancePrizeMultiplier,
-  prizePoolInterestMultiplier
-) {
+function getTokenInterestUntil(pot, untilWhen, prizePoolInterestMultiplier) {
   // Now in seconds
   const nowSeconds = Date.now() / 1000;
   // Only the balance in prize pool earns interest for prize
   const amountEarning = byDecimals(pot.prizePoolBalance, pot.tokenDecimals);
+  // Days until draw (floating point)
+  const secondsUntilDraw = untilWhen - nowSeconds;
+
+  // Special reward pool handling
+  if (pot.rewardPool) {
+    // Avoid divided by zero
+    if (pot.rewardPoolRate.isZero() || pot.rewardPoolTotalSupply.isZero()) {
+      return ZERO;
+    }
+
+    // How much will be rewarded between now and draw
+    // Note: assumes reward pool won't finish before draw date
+    const rewardsLeft = pot.rewardPoolRate.multipliedBy(secondsUntilDraw);
+    // How much of that prize pool will get
+    const earnedUntilDraw = rewardsLeft
+      .multipliedBy(amountEarning)
+      .dividedBy(pot.rewardPoolTotalSupply);
+
+    // After fees
+    return earnedUntilDraw.multipliedBy(prizePoolInterestMultiplier);
+  }
+
   // Days until draw (floating point)
   const daysUntilDraw = (untilWhen - nowSeconds) / 86400;
   // Daily interest from vault (not trading)
   const dpy = pot.apyBreakdown.vaultApr / 365;
   // Recompound to get interest until draw
   const interestUntilDraw = Math.pow(1 + dpy, daysUntilDraw) - 1;
-  // Interest earned in tokens, after fees
-  const tokenInterest = amountEarning
-    .multipliedBy(interestUntilDraw)
-    .multipliedBy(prizePoolInterestMultiplier);
+  // Interest earned in tokens
+  const earnedUntilDraw = amountEarning.multipliedBy(interestUntilDraw);
+  // After fees
+  return earnedUntilDraw.multipliedBy(prizePoolInterestMultiplier);
+}
+
+function calculateProjectedPotAward(
+  pot,
+  untilWhen,
+  awardBalancePrizeMultiplier,
+  prizePoolInterestMultiplier
+) {
+  const tokenInterest = getTokenInterestUntil(pot, untilWhen, prizePoolInterestMultiplier);
   // Current awardBalance that goes to prize
   const currentAwardBalance = pot.fullAwardBalance.multipliedBy(awardBalancePrizeMultiplier);
   // New award balance
   const projectedTokenAwardBalance = currentAwardBalance.plus(tokenInterest);
-
-  // console.log(pot.id, {
-  //   amountEarning: amountEarning.toString(10),
-  //   daysUntilDraw: daysUntilDraw,
-  //   dpy: dpy,
-  //   interestUntilDraw: interestUntilDraw,
-  //   tokenInterest: tokenInterest.toString(10),
-  // });
-
-  if (pot.id === 'watch') {
-    const watchPrize = new BigNumber(75000 * 0.4);
-    return {
-      tokens: watchPrize,
-      usd: watchPrize.multipliedBy(pot.tokenPrice),
-    };
-  }
 
   return {
     tokens: projectedTokenAwardBalance,
@@ -245,7 +256,7 @@ function calculateProjections(pots, prices) {
 }
 
 function calculateProjectedTotalPrizesAvailable(pots) {
-  let total = new BigNumber(0);
+  let total = ZERO;
   for (const pot of Object.values(pots)) {
     if (pot.status === 'active') {
       total = total
@@ -271,6 +282,7 @@ const getPools = async (items, state, dispatch) => {
   const strategy = [];
   const ticket = [];
   const mooToken = [];
+  const rewardPool = [];
 
   for (let key in web3) {
     multicall[key] = new MultiCall(web3[key], config[key].multicallAddress);
@@ -280,6 +292,7 @@ const getPools = async (items, state, dispatch) => {
     prizePool[key] = [];
     ticket[key] = [];
     mooToken[key] = [];
+    rewardPool[key] = [];
   }
 
   for (let key in items) {
@@ -341,7 +354,7 @@ const getPools = async (items, state, dispatch) => {
       prizePoolBalance: prizePoolContract.methods.balance(),
     });
 
-    // === PPFS
+    // === PPFS TODO: use ppfs from prices instead
     if ('mooTokenAddress' in pool && pool.mooTokenAddress) {
       const mooTokenContract = new web3[pool.network].eth.Contract(
         beefyVaultAbi,
@@ -352,10 +365,24 @@ const getPools = async (items, state, dispatch) => {
         ppfs: mooTokenContract.methods.getPricePerFullShare(),
       });
     }
+
+    // Rewardpool
+    if ('rewardPool' in pool && pool.rewardPool) {
+      const rewardPoolContract = new web3[pool.network].eth.Contract(
+        rewardPoolAbi,
+        pool.rewardPool
+      );
+      rewardPool[pool.network].push({
+        id: pool.id,
+        rewardPoolRate: rewardPoolContract.methods.rewardRate(),
+        rewardPoolPeriodFinish: rewardPoolContract.methods.periodFinish(),
+        rewardPoolTotalSupply: rewardPoolContract.methods.totalSupply(),
+      });
+    }
   }
 
   const promises = [];
-  const groups = [calls, strategy, sponsors, ticket, prizePool, mooToken];
+  const groups = [calls, strategy, sponsors, ticket, prizePool, mooToken, rewardPool];
   for (const network in multicall) {
     for (const group of groups) {
       if (group[network] && group[network].length) {
@@ -375,8 +402,8 @@ const getPools = async (items, state, dispatch) => {
     response = [...response, ...result.value[0]];
   });
 
-  let totalPrizesAvailable = new BigNumber(0);
-  let totalTvl = new BigNumber(0);
+  let totalPrizesAvailable = ZERO;
+  let totalTvl = ZERO;
 
   for (let i = 0; i < response.length; i++) {
     const item = response[i];
@@ -479,6 +506,22 @@ const getPools = async (items, state, dispatch) => {
       pool.ppfs = ppfs.toNumber();
     }
 
+    // == rewardPool
+    if (!isEmpty(item.rewardPoolRate)) {
+      const nowSeconds = Date.now() / 1000;
+      if (
+        isEmpty(item.rewardPoolPeriodFinish) ||
+        item.rewardPoolPeriodFinish === '0' ||
+        item.rewardPoolPeriodFinish < nowSeconds
+      ) {
+        pool.rewardPoolRate = ZERO;
+        pool.rewardPoolTotalSupply = ZERO;
+      } else {
+        pool.rewardPoolRate = byDecimals(item.rewardPoolRate, pool.tokenDecimals);
+        pool.rewardPoolTotalSupply = byDecimals(item.rewardPoolTotalSupply, pool.tokenDecimals);
+      }
+    }
+
     // New ref for sponsors for state update
     pool.sponsors = [...pool.sponsors];
   }
@@ -486,7 +529,7 @@ const getPools = async (items, state, dispatch) => {
   // == Sums per pool
   for (const pool of Object.values(items)) {
     // === Total USD of prize sponsors
-    pool.totalSponsorBalanceUsd = new BigNumber(0);
+    pool.totalSponsorBalanceUsd = ZERO;
     pool.sponsors.forEach(sponsor => {
       pool.totalSponsorBalanceUsd = pool.totalSponsorBalanceUsd.plus(sponsor.sponsorBalanceUsd);
     });

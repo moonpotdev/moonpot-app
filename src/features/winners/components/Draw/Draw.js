@@ -8,7 +8,7 @@ import { tokensByNetworkAddress } from '../../../../config/tokens';
 import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
-import { formatAddressShort, getUnderylingToken } from '../../../../helpers/utils';
+import { formatAddressShort, getUnderylingToken, ZERO } from '../../../../helpers/utils';
 import { ErrorOutline } from '@material-ui/icons';
 import BigNumber from 'bignumber.js';
 import clsx from 'clsx';
@@ -55,8 +55,8 @@ function normalizeWinnings(awards, drawToken, ticketAddress, ticketPPFS, prices)
   const tokens = {
     [drawToken]: {
       symbol: drawToken,
-      amount: new BigNumber(0),
-      value: new BigNumber(0),
+      amount: ZERO,
+      value: ZERO,
     },
   };
 
