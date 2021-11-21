@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js';
+import { ZERO } from './utils';
 
 export const formatApy = (apy, placeholder = '???') => {
   if (!apy) return placeholder;
@@ -135,7 +136,7 @@ export function calculateTotalPrize(item) {
   let total = a.plus(s);
 
   if (isNaN(total.toFixed(0))) {
-    total = BigNumber(0);
+    total = ZERO;
   }
 
   return '$' + total.toFixed(total > 1 ? 0 : 4);
@@ -145,7 +146,7 @@ export function bigNumberTruncate(number, maxDecimals) {
   const bn = BigNumber.isBigNumber(number) ? number : new BigNumber(number || 0);
 
   if (bn.isNaN()) {
-    return new BigNumber(0);
+    return ZERO;
   }
 
   return bn.decimalPlaces(maxDecimals, BigNumber.ROUND_DOWN);
