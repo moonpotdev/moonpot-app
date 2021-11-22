@@ -141,7 +141,7 @@ function fakeZapOutEstimate(potId, wantTokenAddress) {
       const web3 = state.walletReducer.rpc[network];
       const multicall = new MultiCall(web3, config[network].multicallAddress);
       const address = state.walletReducer.address;
-      const isRemoveOnly = potId === 'beltbnb';
+      const isRemoveOnly = potId === 'beltbnb' || potId === 'ibalpaca';
       const fairplayDuration = pot.fairplayDuration;
       const fairplayTicketFee = pot.fairplayTicketFee;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
