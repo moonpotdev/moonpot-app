@@ -59,7 +59,7 @@ function fakeZapInEstimate(potId, depositAddress, depositAmount) {
 }
 
 export function createZapInEstimate(potId, depositAddress, depositAmount) {
-  if (potId === 'beltbnb') {
+  if (potId === 'beltbnb' || potId === 'ibalpaca') {
     return fakeZapInEstimate(potId, depositAddress, depositAmount);
   }
 
@@ -214,7 +214,7 @@ function fakeZapOutEstimate(potId, wantTokenAddress) {
 }
 
 export function createZapOutEstimate(potId, wantTokenAddress) {
-  if (potId === '4belt' || potId === 'beltbnb') {
+  if (potId === '4belt' || potId === 'beltbnb' || potId === 'ibalpaca') {
     return fakeZapOutEstimate(potId, wantTokenAddress);
   }
   const requestId = uniqid('out', potId);

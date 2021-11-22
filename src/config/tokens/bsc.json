@@ -341,5 +341,29 @@
     "decimals": 18,
     "underlyingToken": "WATCH",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "ALPACA",
+    "address": "0x8F0528cE5eF7B51152A59745bEfDD91D97091d2F",
+    "type": "single",
+    "oracleId": "ALPACA",
+    "decimals": 18
+  },
+  {
+    "symbol": "ibALPACA",
+    "address": "0xf1bE8ecC990cBcb90e166b71E368299f0116d421",
+    "type": "single",
+    "oracleId": "alpaca-ibalpaca",
+    "decimals": 18,
+    "zap": "0xd90c06D9D85277D88ECd67376bc8738b0385d07d",
+    "lp": ["ALPACA"]
+  },
+  {
+    "symbol": "moonTicketibAlpaca",
+    "address": "0x032df2bbF3544b8FC2F848353306DF056b592D39",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "ibALPACA",
+    "stakedMultiplier": 2
   }
 ]
