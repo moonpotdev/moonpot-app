@@ -111,7 +111,7 @@
     },
     "status": "active",
     "isZap": true,
-    "supportsClaimAllBonuses": false,
+    "supportsClaimAllBonuses": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x6EB4F8975b15F34AdccFDE830087Fc8FdB006C36",
     "sponsorProjectName": "Moonpot",
