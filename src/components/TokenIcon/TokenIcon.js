@@ -7,11 +7,12 @@ const useStyles = makeStyles(styles);
 
 export const TokenIcon = memo(function TokenImage({ token, className }) {
   const classes = useStyles();
+  const isTwoTokenLP = token.type === 'lp' && token.lp && token.lp.length === 2;
   const classNames = clsx(
     {
       [classes.icon]: true,
-      [classes.lpWithdraw]: !token.icon && token.type === 'lp' && !token.isRemove,
-      [classes.lpRemove]: !token.icon && token.type === 'lp' && token.isRemove === true,
+      [classes.lpWithdraw]: !token.icon && isTwoTokenLP && !token.isRemove,
+      [classes.lpRemove]: !token.icon && isTwoTokenLP && token.isRemove === true,
     },
     className
   );
@@ -30,7 +31,7 @@ export const TokenIcon = memo(function TokenImage({ token, className }) {
     );
   }
 
-  if (token.type === 'lp') {
+  if (isTwoTokenLP) {
     return (
       <div className={classNames}>
         <img
