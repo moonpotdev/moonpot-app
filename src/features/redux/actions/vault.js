@@ -693,7 +693,7 @@ function calculateBoost(rewardInfo, pool, prices, config) {
     const compoundable =
       pool.compoundApy === true && boostAddress === pool.tokenAddress.toLowerCase();
     const boostDecimals = new BigNumber(10).exponentiatedBy(boostData.decimals);
-    const boostPrice = boostData.symbol in prices ? prices[boostData.symbol] : 0;
+    const boostPrice = boostData.oracleId in prices ? prices[boostData.oracleId] : 0;
     const boostRate = new BigNumber(rewardInfo[3]);
     const boostYearly = boostRate.times(3600).times(24).times(365);
     const boostYearlyUsd = boostYearly.times(boostPrice).dividedBy(boostDecimals);
