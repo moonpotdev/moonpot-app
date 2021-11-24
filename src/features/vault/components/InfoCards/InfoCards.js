@@ -69,14 +69,6 @@ const StrategyInfoCard = memo(function ({ pot, classes, t }) {
       )}
       {pot.nftInfoCardStrategy ? (
         <Card variant="purpleInfo" className={classes.strategy}>
-          <img
-            alt=""
-            width="80"
-            height="80"
-            sizes="80px"
-            style={{ marginBottom: '22px' }}
-            src={require('../../../../images/info/' + pot.id.toLowerCase() + '.svg').default}
-          />
           <CardTitle>{t('pot.infocards.strategy.titleNFT', { name: pot.name })}</CardTitle>
           <div className={classes.nftStrategyContainer}>
             <Translate i18nKey={'pot.infocards.strategy.body.' + pot.nftInfoCardStrategy} />

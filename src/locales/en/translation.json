@@ -137,7 +137,7 @@
           "side": [
             "The {{name}} Pot deposits your ${{token}} in the Beefy.Finance {{token}} Vault. All Pot earnings are autocompounded and Moonpot sets aside {{breakdownPrize}}% for the Side Pot prize and {{breakdownBuyback}}% for $POTS buybacks for the Main Pot’s bonus interest."
           ],
-          "armznft": "We've partnered with Play2Earn game Armz Legends for our first NFT Pot. Cadets staking POTS in the NFT Moonpot can win one of 3 ARMZ NFTs (ERC-721) distributed daily over the next 100 days.<br/><br/>Rarities include:<br/>150 x <strong>Common</strong><br/>100 x <strong>Rare</strong><br/>40 x <strong>Epic</strong><br/><span>10 x <strong>Legendary</strong></span><br/><br/>Winners can use their NFTs to earn $PROT in Armz Legends battles or trade them on the upcoming Armz Legends NFT marketplace.<br/><br/>",
+          "ziggyversenft": "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling.<br/><br/>Rarities included:<br/><strong>Armour Gold</strong> 15 / 50<br/><strong>Armour Moonstone</strong> 76 / 100<br/><strong>Armour Jade </strong>100 / 150<br/><br/>",
           "watch": [
             "This strategy deposits your {{token}} tokens in a Moonpot {{token}} vault, which autocompounds your {{token}} tokens from a fixed supply of {{token}} provided by the Yieldwatch team.",
             "All of the {{token}} provided by Yieldwatch goes to Moonpot players. Half is used to give you interest. The other half is used for Prize Draws and Ziggy's Pot rewards."
