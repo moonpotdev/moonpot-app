@@ -19,39 +19,54 @@ import ziggyTimelock4x from '../../../../images/ziggy/timelock@4x.png';
 const useStyles = makeStyles(styles);
 
 const StrategyInfoCard = memo(function ({ pot, classes, t }) {
-  if (!pot.infoCardStrategy) {
+  if (!pot.infoCardStrategy && !pot.nftInfoCardStrategy) {
     return null;
   }
 
   return (
-    <Card variant="purpleInfo" className={classes.strategy}>
-      <CardTitle>{t('pot.infocards.strategy.title', { name: pot.name })}</CardTitle>
-      {t('pot.infocards.strategy.body.' + pot.infoCardStrategy, {
-        returnObjects: true,
-        token: pot.token,
-        name: pot.name,
-        breakdownInterest: pot.interestBreakdown?.interest || 0,
-        breakdownPrize: pot.interestBreakdown?.prize || 0,
-        breakdownBuyback: pot.interestBreakdown?.buyback || 0,
-        breakdownZiggyInterest: pot.interestBreakdown?.ziggyInterest || 0,
-        breakdownZiggyPrize: pot.interestBreakdown?.ziggyPrize || 0,
-        breakdownZiggyTotal:
-          (pot.interestBreakdown?.ziggyPrize || 0) + (pot.interestBreakdown?.ziggyPrize || 0),
-      }).map((text, i) => (
-        <p key={i}>{text}</p>
-      ))}
-      {pot.infoCardStrategy === 'beefy' && pot.infoCardBeefyVaultAddress ? (
-        <p>
-          <a
-            href={`https://bscscan.com/address/${pot.infoCardBeefyVaultAddress}`}
-            rel="noreferrer"
-            target="_blank"
-            className={classes.link}
-          >
-            {t('pot.infocards.strategy.beefyVaultAddress')} <OpenInNew fontSize="inherit" />
-          </a>
-        </p>
-      ) : null}
+    <>
+      {pot.infoCardStrategy && (
+        <Card variant="purpleInfo" className={classes.strategy}>
+          <CardTitle>{t('pot.infocards.strategy.title', { name: pot.name })}</CardTitle>
+          {t('pot.infocards.strategy.body.' + pot.infoCardStrategy, {
+            returnObjects: true,
+            token: pot.token,
+            name: pot.name,
+            breakdownInterest: pot.interestBreakdown?.interest || 0,
+            breakdownPrize: pot.interestBreakdown?.prize || 0,
+            breakdownBuyback: pot.interestBreakdown?.buyback || 0,
+            breakdownZiggyInterest: pot.interestBreakdown?.ziggyInterest || 0,
+            breakdownZiggyPrize: pot.interestBreakdown?.ziggyPrize || 0,
+            breakdownZiggyTotal:
+              (pot.interestBreakdown?.ziggyPrize || 0) + (pot.interestBreakdown?.ziggyPrize || 0),
+          }).map((text, i) => (
+            <p key={i}>{text}</p>
+          ))}
+          {pot.infoCardStrategy === 'beefy' && pot.infoCardBeefyVaultAddress ? (
+            <p>
+              <a
+                href={`https://bscscan.com/address/${pot.infoCardBeefyVaultAddress}`}
+                rel="noreferrer"
+                target="_blank"
+                className={classes.link}
+              >
+                {t('pot.infocards.strategy.beefyVaultAddress')} <OpenInNew fontSize="inherit" />
+              </a>
+            </p>
+          ) : null}
+          <p>
+            <a
+              href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
+              rel="noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
+              {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
+              <OpenInNew fontSize="inherit" />
+            </a>
+          </p>
+        </Card>
+      )}
       {pot.nftInfoCardStrategy ? (
         <Card variant="purpleInfo" className={classes.strategy}>
           <img
@@ -91,18 +106,7 @@ const StrategyInfoCard = memo(function ({ pot, classes, t }) {
           </p>
         </Card>
       ) : null}
-      <p>
-        <a
-          href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
-          rel="noreferrer"
-          target="_blank"
-          className={classes.link}
-        >
-          {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
-          <OpenInNew fontSize="inherit" />
-        </a>
-      </p>
-    </Card>
+    </>
   );
 });
 
