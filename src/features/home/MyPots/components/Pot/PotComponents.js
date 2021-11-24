@@ -34,8 +34,7 @@ export const PotTitle = function ({ item }) {
               totalSponsorBalanceUsd={
                 pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
               }
-              isNftPot={pot.vaultType === 'nft'}
-              winNft={pot.name}
+              winToken={pot.winToken}
             />
           </div>
           <Typography className={classes.myPotsNextWeeklyDrawText} align={'right'}>

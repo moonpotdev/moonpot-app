@@ -8,12 +8,11 @@ const styles = theme => ({
       marginBottom: '0',
     },
   },
-  nftStrategyContainer: {
-    '& span': {
-      '& strong': {
-        color: '#F3BA2E',
-      },
-    },
+  nftRarities: {
+    marginBottom: '1em',
+  },
+  nftRarityName: {
+    fontWeight: 'bold',
   },
   link: {
     color: '#F3BA2E',

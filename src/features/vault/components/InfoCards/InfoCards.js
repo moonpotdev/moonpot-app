@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import { usePot } from '../../../../helpers/hooks';
 import { Box, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { Translate } from '../../../../components/Translate/Translate';
 import { OpenInNew } from '@material-ui/icons';
 import { Card, Cards, CardTitle } from '../../../../components/Cards';
 import styles from './styles';
@@ -19,86 +18,101 @@ import ziggyTimelock4x from '../../../../images/ziggy/timelock@4x.png';
 const useStyles = makeStyles(styles);
 
 const StrategyInfoCard = memo(function ({ pot, classes, t }) {
-  if (!pot.infoCardStrategy && !pot.nftInfoCardStrategy) {
+  if (!pot.infoCardStrategy) {
     return null;
   }
 
   return (
-    <>
-      {pot.infoCardStrategy && (
-        <Card variant="purpleInfo" className={classes.strategy}>
-          <CardTitle>{t('pot.infocards.strategy.title', { name: pot.name })}</CardTitle>
-          {t('pot.infocards.strategy.body.' + pot.infoCardStrategy, {
-            returnObjects: true,
-            token: pot.token,
-            name: pot.name,
-            breakdownInterest: pot.interestBreakdown?.interest || 0,
-            breakdownPrize: pot.interestBreakdown?.prize || 0,
-            breakdownBuyback: pot.interestBreakdown?.buyback || 0,
-            breakdownZiggyInterest: pot.interestBreakdown?.ziggyInterest || 0,
-            breakdownZiggyPrize: pot.interestBreakdown?.ziggyPrize || 0,
-            breakdownZiggyTotal:
-              (pot.interestBreakdown?.ziggyPrize || 0) + (pot.interestBreakdown?.ziggyPrize || 0),
-          }).map((text, i) => (
-            <p key={i}>{text}</p>
-          ))}
-          {pot.infoCardStrategy === 'beefy' && pot.infoCardBeefyVaultAddress ? (
-            <p>
-              <a
-                href={`https://bscscan.com/address/${pot.infoCardBeefyVaultAddress}`}
-                rel="noreferrer"
-                target="_blank"
-                className={classes.link}
-              >
-                {t('pot.infocards.strategy.beefyVaultAddress')} <OpenInNew fontSize="inherit" />
-              </a>
-            </p>
-          ) : null}
-          <p>
-            <a
-              href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
-              rel="noreferrer"
-              target="_blank"
-              className={classes.link}
-            >
-              {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
-              <OpenInNew fontSize="inherit" />
-            </a>
-          </p>
-        </Card>
-      )}
-      {/* NFT POT INFO */}
-      {pot.nftInfoCardStrategy ? (
-        <Card variant="purpleInfo" className={classes.strategy}>
-          <CardTitle>{t('pot.infocards.strategy.titleNFT', { name: pot.name })}</CardTitle>
-          <div className={classes.nftStrategyContainer}>
-            <Translate i18nKey={'pot.infocards.strategy.body.' + pot.nftInfoCardStrategy} />
-          </div>
-          {pot.nftInfoCardProjectLink ? (
-            <p>
-              <a
-                href={pot.nftInfoCardProjectLink}
-                rel="noreferrer"
-                target="_blank"
-                className={classes.link}
-              >
-                {pot.sponsorProjectName} <OpenInNew fontSize="inherit" />
-              </a>
-            </p>
-          ) : null}
-          <p>
-            <a
-              href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
-              rel="noreferrer"
-              target="_blank"
-              className={classes.link}
-            >
-              {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
-              <OpenInNew fontSize="inherit" />
-            </a>
-          </p>
-        </Card>
+    <Card variant="purpleInfo" className={classes.strategy}>
+      <CardTitle>{t('pot.infocards.strategy.title', { name: pot.name })}</CardTitle>
+      {t('pot.infocards.strategy.body.' + pot.infoCardStrategy, {
+        returnObjects: true,
+        token: pot.token,
+        name: pot.name,
+        breakdownInterest: pot.interestBreakdown?.interest || 0,
+        breakdownPrize: pot.interestBreakdown?.prize || 0,
+        breakdownBuyback: pot.interestBreakdown?.buyback || 0,
+        breakdownZiggyInterest: pot.interestBreakdown?.ziggyInterest || 0,
+        breakdownZiggyPrize: pot.interestBreakdown?.ziggyPrize || 0,
+        breakdownZiggyTotal:
+          (pot.interestBreakdown?.ziggyPrize || 0) + (pot.interestBreakdown?.ziggyPrize || 0),
+      }).map((text, i) => (
+        <p key={i}>{text}</p>
+      ))}
+      {pot.infoCardStrategy === 'beefy' && pot.infoCardBeefyVaultAddress ? (
+        <p>
+          <a
+            href={`https://bscscan.com/address/${pot.infoCardBeefyVaultAddress}`}
+            rel="noreferrer"
+            target="_blank"
+            className={classes.link}
+          >
+            {t('pot.infocards.strategy.beefyVaultAddress')} <OpenInNew fontSize="inherit" />
+          </a>
+        </p>
       ) : null}
+      <p>
+        <a
+          href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
+          rel="noreferrer"
+          target="_blank"
+          className={classes.link}
+        >
+          {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
+          <OpenInNew fontSize="inherit" />
+        </a>
+      </p>
+    </Card>
+  );
+});
+
+const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
+  if (!pot.infoCardStrategy) {
+    return null;
+  }
+
+  const bodyKey = `pot.infocards.nft-strategy.${pot.infoCardStrategy}.body`;
+  const body = i18n.exists(bodyKey)
+    ? t(bodyKey, {
+        returnObjects: true,
+        token: pot.token,
+        name: pot.name,
+      })
+    : null;
+
+  const raritiesKey = `pot.infocards.nft-strategy.${pot.infoCardStrategy}.rarities`;
+  const rarities = i18n.exists(raritiesKey)
+    ? t(raritiesKey, {
+        returnObjects: true,
+      })
+    : null;
+
+  return (
+    <>
+      <Card variant="purpleInfo" className={classes.strategy}>
+        <CardTitle>{t('pot.infocards.nft-strategy.title', { name: pot.name })}</CardTitle>
+        {body ? body.map((text, i) => <p key={i}>{text}</p>) : null}
+        {rarities ? (
+          <div className={classes.nftRarities}>
+            {Object.entries(rarities).map(([name, count]) => (
+              <div>
+                <span className={classes.nftRarityName}>{name}</span>: {count}
+              </div>
+            ))}
+          </div>
+        ) : null}
+        <p>
+          <a
+            href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
+            rel="noreferrer"
+            target="_blank"
+            className={classes.link}
+          >
+            {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
+            <OpenInNew fontSize="inherit" />
+          </a>
+        </p>
+      </Card>
     </>
   );
 });
@@ -173,29 +187,42 @@ const FairplayInfoCard = memo(function ({ pot, classes, t, fairplayRef }) {
         />
       </div>
       <CardTitle>{t('pot.infocards.fairplay.title', { name: pot.name })}</CardTitle>
-      {pot.vaultType === 'nft' ? (
-        <>
-          {t('pot.infocards.fairplay.bodyNFT', {
-            returnObjects: true,
-            token: pot.token,
-            duration: pot.fairplayDuration,
-            ticketFee: pot.fairplayTicketFee * 100,
-          }).map((text, i) => (
-            <p key={i}>{text}</p>
-          ))}
-        </>
-      ) : (
-        <>
-          {t('pot.infocards.fairplay.body', {
-            returnObjects: true,
-            token: pot.token,
-            duration: pot.fairplayDuration,
-            ticketFee: pot.fairplayTicketFee * 100,
-          }).map((text, i) => (
-            <p key={i}>{text}</p>
-          ))}
-        </>
-      )}
+      {t('pot.infocards.fairplay.body', {
+        returnObjects: true,
+        token: pot.token,
+        duration: pot.fairplayDuration,
+        ticketFee: pot.fairplayTicketFee * 100,
+        fairplayFee: pot.fairplayFee * 100,
+      }).map((text, i) => (
+        <p key={i}>{text}</p>
+      ))}
+    </Card>
+  );
+});
+
+const NFTFairplayInfoCard = memo(function ({ pot, classes, t, fairplayRef }) {
+  return (
+    <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules}>
+      <div className={classes.ziggyTimelock}>
+        <img
+          alt=""
+          width="80"
+          height="80"
+          sizes="80px"
+          src={ziggyTimelock1x}
+          srcSet={`${ziggyTimelock1x} 80w, ${ziggyTimelock2x} 160w, ${ziggyTimelock3x} 240w, ${ziggyTimelock4x} 320w`}
+        />
+      </div>
+      <CardTitle>{t('pot.infocards.nft-fairplay.title', { name: pot.name })}</CardTitle>
+      {t('pot.infocards.nft-fairplay.body', {
+        returnObjects: true,
+        token: pot.token,
+        duration: pot.fairplayDuration,
+        ticketFee: pot.fairplayTicketFee * 100,
+        fairplayFee: pot.fairplayFee * 100,
+      }).map((text, i) => (
+        <p key={i}>{text}</p>
+      ))}
     </Card>
   );
 });
@@ -205,12 +232,14 @@ const cardComponentMap = {
   strategy: StrategyInfoCard,
   breakdown: InterestBreakdownInfoCard,
   fairplay: FairplayInfoCard,
+  'nft-strategy': NFTStrategyInfoCard,
+  'nft-fairplay': NFTFairplayInfoCard,
 };
 
 export const InfoCards = memo(function ({ id, className, fairplayRef }) {
   const pot = usePot(id);
   const classes = useStyles();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const infoCards = pot.infoCards || defaultInfoCards;
 
   if (infoCards.length) {
@@ -219,7 +248,14 @@ export const InfoCards = memo(function ({ id, className, fairplayRef }) {
         {infoCards.map(key => {
           const InfoCard = cardComponentMap[key];
           return InfoCard ? (
-            <InfoCard key={key} pot={pot} t={t} classes={classes} fairplayRef={fairplayRef} />
+            <InfoCard
+              key={key}
+              pot={pot}
+              t={t}
+              classes={classes}
+              fairplayRef={fairplayRef}
+              i18n={i18n}
+            />
           ) : null;
         })}
         <Box className={classes.ziggyPlay}>

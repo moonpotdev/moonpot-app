@@ -68,7 +68,7 @@
     "titleRetired": "Retired {{name}} Pot",
     "winTotalPrize": "Win <span>{{prize}}</span>",
     "winTotalTokensIn": "in ",
-    "stake": "Stake ",
+    "stakeToken": "Stake <span>{{token}}</span>",
     "statNextDraw": "Next Draw",
     "statNextDrawDaily": "Next Daily Draw",
     "statNextDrawWeekly": "Next Weekly Draw",
@@ -122,7 +122,6 @@
     "infocards": {
       "strategy": {
         "title": "{{name}} Pot Strategy",
-        "titleNFT": "{{name}} NFT Pot Strategy",
         "body": {
           "beefy": [
             "This strategy deposits your {{token}} tokens in the Beefy.Finance {{token}} vault. Beefy autocompounds the {{token}} earnings.",
@@ -137,7 +136,6 @@
           "side": [
             "The {{name}} Pot deposits your ${{token}} in the Beefy.Finance {{token}} Vault. All Pot earnings are autocompounded and Moonpot sets aside {{breakdownPrize}}% for the Side Pot prize and {{breakdownBuyback}}% for $POTS buybacks for the Main Pot’s bonus interest."
           ],
-          "ziggyversenft": "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling.<br/><br/>Rarities included:<br/><strong>Armour Gold</strong> 15 / 50<br/><strong>Armour Moonstone</strong> 76 / 100<br/><strong>Armour Jade </strong>100 / 150<br/><br/>",
           "watch": [
             "This strategy deposits your {{token}} tokens in a Moonpot {{token}} vault, which autocompounds your {{token}} tokens from a fixed supply of {{token}} provided by the Yieldwatch team.",
             "All of the {{token}} provided by Yieldwatch goes to Moonpot players. Half is used to give you interest. The other half is used for Prize Draws and Ziggy's Pot rewards."
@@ -145,6 +143,20 @@
         },
         "beefyVaultAddress": "Beefy.Finance Vault Address",
         "moonpotStrategyAddress": "{{name}} Pot Strategy Address"
+      },
+      "nft-strategy": {
+        "title": "{{name}} Pot Strategy",
+        "ziggyverse-armour": {
+          "body": [
+            "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling.",
+            "Rarities included:"
+          ],
+          "rarities": {
+            "Armour Gold": "15 / 50",
+            "Armour Moonstone": "76 / 100",
+            "Armour Jade": "100 / 150"
+          }
+        }
       },
       "earnings": {
         "title": "Strategy Breakdown",
@@ -168,6 +180,13 @@
         "bodyNFT": [
           "A Fairplay Timelock is in place to guarantee fairness for all Cadets. This lasts 72 hours for daily NFT Pots and 10 days for weekly NFT Pots.",
           "Withdrawing early will incur a Fairness Fee up to 2.5% that funds Ziggy's Pot's APY."
+        ]
+      },
+      "nft-fairplay": {
+        "title": "Fairplay Timelock Rules",
+        "body": [
+          "A Fairplay Timelock is in place to guarantee fairness for all Cadets. This lasts 72 hours for daily NFT Pots and 10 days for weekly NFT Pots.",
+          "Withdrawing early will incur a Fairness Fee up to {{ticketFee}}% that funds Ziggy's Pot's APY."
         ]
       }
     }

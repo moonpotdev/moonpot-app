@@ -2,7 +2,6 @@ import React, { memo, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
 import { Card } from '../Cards';
-import { TransListJoin } from '../TransListJoin';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
 import { InterestTooltip } from '../Tooltip/tooltip';
@@ -14,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './styles';
 import { getPotIconSrc } from '../../helpers/getPotIconSrc';
 import { useHistory } from 'react-router';
+import { TransListJoin } from '../TransListJoin';
 
 const useStyles = makeStyles(styles);
 
@@ -66,12 +66,7 @@ const Title = memo(function ({ name }) {
   );
 });
 
-export const WinTotal = memo(function ({
-  awardBalanceUsd,
-  totalSponsorBalanceUsd,
-  isNftPot,
-  winNft,
-}) {
+export const WinTotal = memo(function ({ awardBalanceUsd, totalSponsorBalanceUsd, winToken }) {
   const classes = useStyles();
   const totalPrize = useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd);
 
@@ -79,7 +74,7 @@ export const WinTotal = memo(function ({
     <div className={classes.winTotalPrize}>
       <Translate
         i18nKey="pot.winTotalPrize"
-        values={isNftPot ? { prize: winNft + ' NFT' } : { prize: `$${totalPrize}` }}
+        values={winToken ? { prize: winToken } : { prize: `$${totalPrize}` }}
       />
     </div>
   );
@@ -96,8 +91,14 @@ const WinTokens = memo(function ({ depositToken, sponsors, isNftPot }) {
 
   return (
     <div className={classes.winTotalTokens}>
-      <Translate i18nKey={isNftPot ? 'pot.stake' : 'pot.winTotalTokensIn'} />
-      <TransListJoin list={allTokens} />
+      {isNftPot ? (
+        <Translate i18nKey="pot.stakeToken" values={{ token: depositToken }} />
+      ) : (
+        <>
+          <Translate i18nKey="pot.winTotalTokensIn" />
+          <TransListJoin list={allTokens} />
+        </>
+      )}
     </div>
   );
 });
@@ -201,18 +202,17 @@ export function Pot({ id, variant, bottom }) {
   return (
     <Card variant={variant}>
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>
-        <Grid item xs={4} onClick={() => history.push(`/pot/${pot.id}`)}>
+        <Grid item xs="auto" onClick={() => history.push(`/pot/${pot.id}`)}>
           <Logo baseToken={pot.token} sponsorToken={pot.sponsorToken} type={pot.vaultType} />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs="auto" className={classes.columnTitleWinTotal}>
           <Title name={pot.name} onClick={() => history.push(`/pot/${pot.id}`)} />
           <WinTotal
             awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
             totalSponsorBalanceUsd={
               pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
             }
-            isNftPot={isNftPot}
-            winNft={pot.name}
+            winToken={pot.winToken}
           />
           <WinTokens
             depositToken={pot.token}
