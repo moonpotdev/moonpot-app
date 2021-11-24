@@ -67,6 +67,7 @@ const StrategyInfoCard = memo(function ({ pot, classes, t }) {
           </p>
         </Card>
       )}
+      {/* NFT POT INFO */}
       {pot.nftInfoCardStrategy ? (
         <Card variant="purpleInfo" className={classes.strategy}>
           <CardTitle>{t('pot.infocards.strategy.titleNFT', { name: pot.name })}</CardTitle>
