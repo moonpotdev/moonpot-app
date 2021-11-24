@@ -86,7 +86,7 @@ const getBalances = async (pools, state, dispatch) => {
     }
 
     // lp
-    if (pot.vaultType === 'lp' || pot.vaultType === 'stable') {
+    if (pot.isZap) {
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
 
       if (pairToken.zap) {

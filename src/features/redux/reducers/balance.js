@@ -21,14 +21,10 @@ const initialTokens = (() => {
     const nativeTokenSymbol = nativeCurrency.symbol;
     const nativeWrappedTokenSymbol = nativeCurrency.wrappedSymbol;
     const zapAllowances = Object.fromEntries(
-      tokensByNetwork[net]
-        .filter(token => token.type === 'lp' && token.zap)
-        .map(token => [token.zap, 0])
+      tokensByNetwork[net].filter(token => !!token.zap).map(token => [token.zap, 0])
     );
     const zapAllowancesInfinity = Object.fromEntries(
-      tokensByNetwork[net]
-        .filter(token => token.type === 'lp' && token.zap)
-        .map(token => [token.zap, MAX_UINT256])
+      tokensByNetwork[net].filter(token => !!token.zap).map(token => [token.zap, MAX_UINT256])
     );
 
     for (const key in networkPools) {
@@ -40,7 +36,7 @@ const initialTokens = (() => {
         address: pot.tokenAddress,
       };
 
-      if (pot.vaultType === 'lp' || pot.vaultType === 'stable') {
+      if (pot.isZap) {
         const pairToken = tokensByNetworkAddress[pot.network][pot.tokenAddress.toLowerCase()];
 
         if (pairToken.zap) {

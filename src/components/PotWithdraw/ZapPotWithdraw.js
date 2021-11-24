@@ -8,10 +8,10 @@ import reduxActions from '../../features/redux/actions';
 import { indexBy, variantClass } from '../../helpers/utils';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
-import { Translate } from '../Translate';
+import { Translate } from '../Translate/Translate';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
 import { config } from '../../config/config';
-import { TokenIcon } from '../TokenIcon';
+import { TokenIcon } from '../TokenIcon/TokenIcon';
 import { createZapOutEstimate } from '../../features/redux/actions/zap';
 import { MigrationNotice, Stats, WithdrawSteps } from './PotWithdraw';
 import styles from './styles';
@@ -153,7 +153,7 @@ function useUnwrappedTokensSymbols(network, tokens) {
   }, [network, tokens]);
 }
 
-export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
+export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
@@ -257,7 +257,6 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
             pending: false,
           });
         }
-
         // Zap
         steps.push({
           step: 'withdraw',
@@ -295,7 +294,10 @@ export const LPPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) {
       {canWithdraw && pot.migrationNeeded ? <MigrationNotice token={pot.token} /> : null}
       <div className={classes.buttonHolder}>
         <div className={classes.zapInfoHolder}>
-          <Translate i18nKey="withdraw.zapExplainer" values={{ tokens: withdrawSingleSymbols }} />
+          <Translate
+            i18nKey="withdraw.zapExplainer"
+            values={{ token: pot.token, tokens: withdrawSingleSymbols }}
+          />
           {/*<TooltipWithIcon i18nKey="withdraw.zapTooltip" />*/}
         </div>
         {/*<div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>*/}

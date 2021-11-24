@@ -662,6 +662,8 @@ const zapIn = (
         swapOutToken.decimals
       );
 
+      // console.log(tokenAmountOutMinRaw);
+
       if (isNative) {
         const method = contract.methods.beamInETH(potAddress, tokenAmountOutMinRaw);
         const [estimateError, options] = await estimateGas(network, method, {
@@ -771,6 +773,12 @@ const zapOut = (
     if (address && provider) {
       const web3 = await new Web3(provider);
       const contract = new web3.eth.Contract(zapAbi, zapAddress);
+
+      // console.log(potAddress);
+      // console.log(zapAddress);
+      // console.log(address);
+      // console.log(network);
+      // console.log(isRemoveOnly);
 
       if (isRemoveOnly) {
         const method = contract.methods.beamOut(potAddress, true);

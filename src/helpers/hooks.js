@@ -5,6 +5,7 @@ import { byDecimals } from './format';
 import { tokensByNetworkAddress } from '../config/tokens';
 import { useTranslation } from 'react-i18next';
 import { WALLET_CONNECT_DONE } from '../features/redux/constants';
+import { ZERO } from './utils';
 
 export function usePrevious(value) {
   const ref = useRef();
@@ -74,7 +75,7 @@ export function useTokenAllowance(spender, tokenSymbol, tokenDecimals) {
       return byDecimals(bn, tokenDecimals);
     }
 
-    return new BigNumber(0);
+    return ZERO;
   }, [allowance, spender, tokenSymbol, tokenDecimals]);
 }
 
@@ -115,7 +116,7 @@ export function useRewardEarned(potId, rewardToken, rewardTokenDecimals) {
       return byDecimals(new BigNumber(earned), rewardTokenDecimals);
     }
 
-    return new BigNumber(0);
+    return ZERO;
   }, [earned, rewardToken, rewardTokenDecimals, address]);
 }
 

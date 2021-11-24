@@ -2,7 +2,6 @@ import React, { memo, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
 import { Card } from '../Cards';
-import { BigNumber } from 'bignumber.js';
 import { TransListJoin } from '../TransListJoin';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
@@ -10,7 +9,7 @@ import { InterestTooltip } from '../Tooltip/tooltip';
 import { translateToken, usePot, useTokenBalance, useTotalPrize } from '../../helpers/hooks';
 import { DrawStat, DrawStatNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
-import { investmentOdds } from '../../helpers/utils';
+import { investmentOdds, ZERO } from '../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import styles from './styles';
 import { getPotIconSrc } from '../../helpers/getPotIconSrc';
@@ -280,23 +279,23 @@ export const PrizeSplit = function ({
 
   const allPrizes = {
     [baseToken]: {
-      tokens: awardBalance || new BigNumber(0),
-      usd: awardBalanceUsd || new BigNumber(0),
+      tokens: awardBalance || ZERO,
+      usd: awardBalanceUsd || ZERO,
     },
   };
 
   for (const sponsor of sponsors) {
     if (sponsor.sponsorToken in allPrizes) {
       allPrizes[sponsor.sponsorToken].tokens = allPrizes[sponsor.sponsorToken].tokens.plus(
-        sponsor.sponsorBalance || new BigNumber(0)
+        sponsor.sponsorBalance || ZERO
       );
       allPrizes[sponsor.sponsorToken].usd = allPrizes[sponsor.sponsorToken].usd.plus(
-        sponsor.sponsorBalanceUsd || new BigNumber(0)
+        sponsor.sponsorBalanceUsd || ZERO
       );
     } else {
       allPrizes[sponsor.sponsorToken] = {
-        tokens: sponsor.sponsorBalance || new BigNumber(0),
-        usd: sponsor.sponsorBalanceUsd || new BigNumber(0),
+        tokens: sponsor.sponsorBalance || ZERO,
+        usd: sponsor.sponsorBalanceUsd || ZERO,
       };
     }
   }
@@ -306,7 +305,7 @@ export const PrizeSplit = function ({
     .sort(([, totalA], [, totalB]) => totalB.usd.comparedTo(totalA.usd))
     .sort(([tokenA]) => (tokenA === baseToken ? -1 : 1));
   const totalPrizeEach = prizesOverZero
-    .reduce((overallTotal, [, prizeTotal]) => overallTotal.plus(prizeTotal.usd), new BigNumber(0))
+    .reduce((overallTotal, [, prizeTotal]) => overallTotal.plus(prizeTotal.usd), ZERO)
     .dividedBy(numberOfWinners);
 
   return (

@@ -2,7 +2,8 @@ import { HOME_FETCH_POOLS_BEGIN, HOME_FETCH_POOLS_DONE } from '../constants';
 import { config } from '../../../config/config';
 import BigNumber from 'bignumber.js';
 import { potsByNetwork } from '../../../config/vault';
-import { tokensByNetworkSymbol } from '../../../config/tokens';
+import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
+import { ZERO } from '../../../helpers/utils';
 
 const initialPools = () => {
   const pools = [];
@@ -18,21 +19,27 @@ const initialPools = () => {
       pool['tvl'] = 0;
       pool['tokenPrice'] = 0;
       pool['ppfs'] = 1;
+      pool['fairplayFee'] =
+        pool.fairplayTicketFee /
+        (tokensByNetworkAddress[pool.network][pool.rewardAddress.toLowerCase()].stakedMultiplier ||
+          1);
       pool['prizePoolBalance'] = '0';
-      pool['awardBalance'] = new BigNumber(0);
-      pool['awardBalanceUsd'] = new BigNumber(0);
-      pool['projectedAwardBalance'] = new BigNumber(0);
-      pool['projectedAwardBalanceUsd'] = new BigNumber(0);
-      pool['sponsorBalance'] = new BigNumber(0);
-      pool['totalSponsorBalanceUsd'] = new BigNumber(0);
-      pool['projectedTotalSponsorBalanceUsd'] = new BigNumber(0);
-      pool['totalStakedUsd'] = new BigNumber(0);
+      pool['awardBalance'] = ZERO;
+      pool['awardBalanceUsd'] = ZERO;
+      pool['projectedAwardBalance'] = ZERO;
+      pool['projectedAwardBalanceUsd'] = ZERO;
+      pool['sponsorBalance'] = ZERO;
+      pool['totalSponsorBalanceUsd'] = ZERO;
+      pool['projectedTotalSponsorBalanceUsd'] = ZERO;
+      pool['totalStakedUsd'] = ZERO;
+      pool['rewardPoolRate'] = ZERO;
+      pool['rewardPoolTotalSupply'] = ZERO;
       pool['numberOfWinners'] = new BigNumber(5);
       pool['totalTickets'] = '0';
       pool['defaultOrder'] = defaultOrder++;
       pool.sponsors.forEach(sponsor => {
-        sponsor.sponsorBalance = new BigNumber(0);
-        sponsor.sponsorBalanceUsd = new BigNumber(0);
+        sponsor.sponsorBalance = ZERO;
+        sponsor.sponsorBalanceUsd = ZERO;
       });
       pool.projectedSponsors = pool.sponsors.map(s => ({
         ...s,
@@ -59,8 +66,8 @@ const initialPools = () => {
 const initialState = {
   pools: initialPools(),
   totalTvl: 0,
-  totalPrizesAvailable: new BigNumber(0),
-  projectedTotalPrizesAvailable: new BigNumber(0),
+  totalPrizesAvailable: ZERO,
+  projectedTotalPrizesAvailable: ZERO,
   lastUpdated: 0,
   isPoolsLoading: false,
   isFirstTime: true,

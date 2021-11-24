@@ -1,8 +1,8 @@
 import React, { memo, useMemo } from 'react';
 import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
 import { Grid, makeStyles } from '@material-ui/core';
-import { LPPotDeposit } from '../../../../components/LPPotDeposit/LPPotDeposit';
 import { Pot as BasePot, PrizeSplit, NFTPrizeSplit } from '../../../../components/Pot/Pot';
+import { ZapPotDeposit } from '../../../../components/ZapPotDeposit/ZapPotDeposit';
 import styles from './styles';
 import { PotDeposit } from '../../../../components/PotDeposit';
 import { PotWithdraw } from '../../../../components/PotWithdraw';
@@ -10,7 +10,7 @@ import { useBonusesEarned, usePot, useTokenBalance } from '../../../../helpers/h
 import { Translate } from '../../../../components/Translate';
 import PotBonus from '../../../home/MyPots/components/Pot/PotBonus';
 import { useSelector } from 'react-redux';
-import { LPPotWithdraw } from '../../../../components/PotWithdraw/LPPotWithdraw';
+import { ZapPotWithdraw } from '../../../../components/PotWithdraw/ZapPotWithdraw';
 import { TooltipWithIcon } from '../../../../components/Tooltip/tooltip';
 
 const useStyles = makeStyles(styles);
@@ -79,8 +79,8 @@ const WithdrawAccordionItem = memo(function ({ pot, onFairplayLearnMore }) {
 
   return hasDeposit ? (
     <CardAccordionItem titleKey="pot.withdraw">
-      {pot.vaultType === 'lp' || pot.vaultType === 'stable' ? (
-        <LPPotWithdraw
+      {pot.isZap ? (
+        <ZapPotWithdraw
           id={pot.id}
           onLearnMore={onFairplayLearnMore}
           variant={handleVariant(pot.vaultType)}
@@ -136,8 +136,8 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
       <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
         {pot.status === 'active' ? (
           <>
-            {pot.vaultType === 'lp' || pot.vaultType === 'stable' ? (
-              <LPPotDeposit
+            {pot.isZap ? (
+              <ZapPotDeposit
                 id={id}
                 onLearnMore={onFairplayLearnMore}
                 variant={handleVariant(pot.vaultType)}
