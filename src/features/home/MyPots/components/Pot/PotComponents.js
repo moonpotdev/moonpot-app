@@ -59,7 +59,7 @@ export const PotTitle = function ({ item }) {
   );
 };
 
-const Interest = function ({ baseApy, bonusApy, noInterest }) {
+const Interest = function ({ baseApy, bonusApy, prizeOnly }) {
   const classes = useStyles();
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
@@ -68,7 +68,7 @@ const Interest = function ({ baseApy, bonusApy, noInterest }) {
   return (
     <div className={classes.interestContainer}>
       <div className={classes.interestValueApy}>
-        {noInterest ? (
+        {prizeOnly ? (
           <Translate i18nKey="pot.prizeOnly" />
         ) : (
           <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
@@ -120,11 +120,7 @@ export const PotInfoBlock = function ({ item, active = true }) {
               </Typography>
             </Grid>
             <Grid item xs={6}>
-              <Interest
-                baseApy={item.apy}
-                bonusApy={item.bonusApy}
-                noInterest={isPrizeOnly ? true : false}
-              />
+              <Interest baseApy={item.apy} bonusApy={item.bonusApy} prizeOnly={isPrizeOnly} />
             </Grid>
           </>
         ) : null}

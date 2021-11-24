@@ -103,7 +103,7 @@ const WinTokens = memo(function ({ depositToken, sponsors, isNftPot }) {
   );
 });
 
-const Interest = memo(function ({ baseApy, bonusApy, noInterest }) {
+const Interest = memo(function ({ baseApy, bonusApy, prizeOnly }) {
   const classes = useStyles();
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
@@ -111,7 +111,7 @@ const Interest = memo(function ({ baseApy, bonusApy, noInterest }) {
 
   return (
     <>
-      {noInterest ? (
+      {prizeOnly ? (
         <div className={classes.interestValueApy}>
           <Translate i18nKey="pot.prizeOnly" />
         </div>
@@ -258,7 +258,7 @@ export function Pot({ id, variant, bottom }) {
             <Interest
               baseApy={pot.apy}
               bonusApy={pot.bonusApy}
-              noInterest={pot.vaultType === 'side' || pot.vaultType === 'nft' ? true : false}
+              prizeOnly={pot.vaultType === 'side' || pot.vaultType === 'nft'}
             />
           </DrawStat>
         </Grid>
