@@ -365,5 +365,13 @@
     "decimals": 18,
     "underlyingToken": "ibALPACA",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "moonTicketPotsZiggyVerse",
+    "address": "0x7eA00eD5843276E90b07Dfc01a484ad862C08aEE",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
   }
 ]

@@ -34,6 +34,7 @@ export const PotTitle = function ({ item }) {
               totalSponsorBalanceUsd={
                 pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
               }
+              winToken={pot.winToken}
             />
           </div>
           <Typography className={classes.myPotsNextWeeklyDrawText} align={'right'}>
@@ -58,7 +59,7 @@ export const PotTitle = function ({ item }) {
   );
 };
 
-const Interest = function ({ baseApy, bonusApy, noInterest }) {
+const Interest = function ({ baseApy, bonusApy, prizeOnly }) {
   const classes = useStyles();
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
@@ -67,7 +68,7 @@ const Interest = function ({ baseApy, bonusApy, noInterest }) {
   return (
     <div className={classes.interestContainer}>
       <div className={classes.interestValueApy}>
-        {noInterest ? (
+        {prizeOnly ? (
           <Translate i18nKey="pot.prizeOnly" />
         ) : (
           <Translate i18nKey="pot.statInterestApy" values={{ apy: totalApy.toFixed(2) }} />
@@ -92,6 +93,7 @@ export const PotInfoBlock = function ({ item, active = true }) {
   const depositTokenPrice = useSelector(state => state.pricesReducer.prices[item.oracleId]);
   const { t } = useTranslation();
   const pot = item;
+  const isPrizeOnly = item.vaultType === 'side' || item.vaultType === 'nft';
 
   return (
     <Grid item xs={12}>
@@ -114,15 +116,11 @@ export const PotInfoBlock = function ({ item, active = true }) {
             <Grid item xs={6}>
               <Typography className={classes.myDetailsText} align={'left'}>
                 {t('pot.myInterestRate')}
-                {item.vaultType !== 'side' ? <InterestTooltip pot={pot} /> : null}
+                {isPrizeOnly ? <InterestTooltip pot={pot} /> : null}
               </Typography>
             </Grid>
             <Grid item xs={6}>
-              <Interest
-                baseApy={item.apy}
-                bonusApy={item.bonusApy}
-                noInterest={item.vaultType === 'side' ? true : false}
-              />
+              <Interest baseApy={item.apy} bonusApy={item.bonusApy} prizeOnly={isPrizeOnly} />
             </Grid>
           </>
         ) : null}

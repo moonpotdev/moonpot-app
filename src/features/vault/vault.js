@@ -18,6 +18,7 @@ const useStyles = makeStyles(styles);
 const VaultTitle = memo(function ({
   className,
   token,
+  sponsorToken,
   baseApy,
   bonusApy,
   awardBalanceUsd,
@@ -38,6 +39,14 @@ const VaultTitle = memo(function ({
             token,
             currency: '$',
             amount: formatDecimals(totalPrize, 0),
+          }}
+        />
+      ) : vaultType === 'nft' ? (
+        <Translate
+          i18nKey="vaultTitleNFT"
+          values={{
+            token,
+            sponsor: sponsorToken,
           }}
         />
       ) : (
@@ -102,6 +111,8 @@ const Vault = () => {
       return 'greenStableAlt';
     } else if (vaultType === 'side') {
       return 'greySideAlt';
+    } else if (vaultType === 'nft') {
+      return 'purpleNftAlt';
     }
   }
 
@@ -111,6 +122,7 @@ const Vault = () => {
         <VaultTitle
           className={classes.mainTitle}
           token={pot.token}
+          sponsorToken={pot.sponsorToken}
           bonusApy={pot.bonusApy}
           baseApy={pot.apy}
           totalSponsorBalanceUsd={pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd}

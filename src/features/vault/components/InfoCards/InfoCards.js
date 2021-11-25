@@ -66,6 +66,57 @@ const StrategyInfoCard = memo(function ({ pot, classes, t }) {
   );
 });
 
+const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
+  if (!pot.infoCardStrategy) {
+    return null;
+  }
+
+  const bodyKey = `pot.infocards.nft-strategy.${pot.infoCardStrategy}.body`;
+  const body = i18n.exists(bodyKey)
+    ? t(bodyKey, {
+        returnObjects: true,
+        token: pot.token,
+        name: pot.name,
+      })
+    : null;
+
+  const raritiesKey = `pot.infocards.nft-strategy.${pot.infoCardStrategy}.rarities`;
+  const rarities = i18n.exists(raritiesKey)
+    ? t(raritiesKey, {
+        returnObjects: true,
+      })
+    : null;
+
+  return (
+    <>
+      <Card variant="purpleInfo" className={classes.strategy}>
+        <CardTitle>{t('pot.infocards.nft-strategy.title', { name: pot.name })}</CardTitle>
+        {body ? body.map((text, i) => <p key={i}>{text}</p>) : null}
+        {rarities ? (
+          <div className={classes.nftRarities}>
+            {Object.entries(rarities).map(([name, count]) => (
+              <div>
+                <span className={classes.nftRarityName}>{name}</span>: {count}
+              </div>
+            ))}
+          </div>
+        ) : null}
+        <p>
+          <a
+            href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
+            rel="noreferrer"
+            target="_blank"
+            className={classes.link}
+          >
+            {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
+            <OpenInNew fontSize="inherit" />
+          </a>
+        </p>
+      </Card>
+    </>
+  );
+});
+
 const InterestBreakdownInfoCard = memo(function ({ pot, classes, t }) {
   if (!pot.interestBreakdown) {
     return null;
@@ -149,17 +200,46 @@ const FairplayInfoCard = memo(function ({ pot, classes, t, fairplayRef }) {
   );
 });
 
+const NFTFairplayInfoCard = memo(function ({ pot, classes, t, fairplayRef }) {
+  return (
+    <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules}>
+      <div className={classes.ziggyTimelock}>
+        <img
+          alt=""
+          width="80"
+          height="80"
+          sizes="80px"
+          src={ziggyTimelock1x}
+          srcSet={`${ziggyTimelock1x} 80w, ${ziggyTimelock2x} 160w, ${ziggyTimelock3x} 240w, ${ziggyTimelock4x} 320w`}
+        />
+      </div>
+      <CardTitle>{t('pot.infocards.nft-fairplay.title', { name: pot.name })}</CardTitle>
+      {t('pot.infocards.nft-fairplay.body', {
+        returnObjects: true,
+        token: pot.token,
+        duration: pot.fairplayDuration,
+        ticketFee: pot.fairplayTicketFee * 100,
+        fairplayFee: pot.fairplayFee * 100,
+      }).map((text, i) => (
+        <p key={i}>{text}</p>
+      ))}
+    </Card>
+  );
+});
+
 const defaultInfoCards = ['strategy', 'breakdown', 'fairplay'];
 const cardComponentMap = {
   strategy: StrategyInfoCard,
   breakdown: InterestBreakdownInfoCard,
   fairplay: FairplayInfoCard,
+  'nft-strategy': NFTStrategyInfoCard,
+  'nft-fairplay': NFTFairplayInfoCard,
 };
 
 export const InfoCards = memo(function ({ id, className, fairplayRef }) {
   const pot = usePot(id);
   const classes = useStyles();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const infoCards = pot.infoCards || defaultInfoCards;
 
   if (infoCards.length) {
@@ -168,7 +248,14 @@ export const InfoCards = memo(function ({ id, className, fairplayRef }) {
         {infoCards.map(key => {
           const InfoCard = cardComponentMap[key];
           return InfoCard ? (
-            <InfoCard key={key} pot={pot} t={t} classes={classes} fairplayRef={fairplayRef} />
+            <InfoCard
+              key={key}
+              pot={pot}
+              t={t}
+              classes={classes}
+              fairplayRef={fairplayRef}
+              i18n={i18n}
+            />
           ) : null;
         })}
         <Box className={classes.ziggyPlay}>

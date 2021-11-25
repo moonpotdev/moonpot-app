@@ -1,6 +1,10 @@
 const styles = theme => ({
   rowLogoWinTotal: {
     marginBottom: `${24 - 8}px`,
+    flexWrap: 'nowrap',
+  },
+  columnTitleWinTotal: {
+    flexGrow: '1',
   },
   title: {
     color: '#EBF3F9',

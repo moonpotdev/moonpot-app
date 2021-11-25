@@ -45,6 +45,8 @@ const Moonpots = ({ selected }) => {
       return 'greenStable';
     } else if (vaultType === 'side') {
       return 'greySide';
+    } else if (vaultType === 'nft') {
+      return 'purpleNft';
     }
 
     // default/main

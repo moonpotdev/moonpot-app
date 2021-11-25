@@ -65,6 +65,13 @@ const styles = theme => ({
       color: '#D4DAE0',
     },
   },
+  variantPurpleNft: {
+    background: '#632161',
+    border: '2px solid #772874',
+    '& .MuiInputBase-input': {
+      color: '#D4DAE0',
+    },
+  },
 });
 
 export default styles;
