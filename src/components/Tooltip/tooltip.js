@@ -180,6 +180,7 @@ export function InterestTooltip({ pot }) {
     );
 
     return text;
+    //eslint-disable-next-line
   }, [pot.bonuses, pot.id]);
 
   return (

@@ -11,6 +11,7 @@ export const MaxButton = withStyles({
       green: '#2E657A',
       greenStable: '#508276',
       greySide: '#51637B',
+      purpleNft: '#501B4E',
     }),
     '&:hover': {
       color: 'rgba(255, 255, 255, 0.95)',
@@ -21,6 +22,7 @@ export const MaxButton = withStyles({
         green: '#448097',
         greenStable: '#64A092',
         greySide: '#6C7D93',
+        purpleNft: '#501B4E',
       }),
     },
     '&:focus': {
@@ -32,6 +34,7 @@ export const MaxButton = withStyles({
         green: '#448097',
         greenStable: '#64A092',
         greySide: '#6C7D93',
+        purpleNft: '#501B4E',
       }),
     },
     '& .MuiTouchRipple-child': {
@@ -41,6 +44,7 @@ export const MaxButton = withStyles({
         purpleAlt: '#656FA5',
         green: '#2E657A',
         greenStable: '#508276',
+        purpleNft: '#501B4E',
       }),
     },
   },

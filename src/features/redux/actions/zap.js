@@ -59,7 +59,7 @@ function fakeZapInEstimate(potId, depositAddress, depositAmount) {
 }
 
 export function createZapInEstimate(potId, depositAddress, depositAmount) {
-  if (potId === 'beltbnb') {
+  if (potId === 'beltbnb' || potId === 'ibalpaca') {
     return fakeZapInEstimate(potId, depositAddress, depositAmount);
   }
 
@@ -141,7 +141,7 @@ function fakeZapOutEstimate(potId, wantTokenAddress) {
       const web3 = state.walletReducer.rpc[network];
       const multicall = new MultiCall(web3, config[network].multicallAddress);
       const address = state.walletReducer.address;
-      const isRemoveOnly = potId === 'beltbnb';
+      const isRemoveOnly = potId === 'beltbnb' || potId === 'ibalpaca';
       const fairplayDuration = pot.fairplayDuration;
       const fairplayTicketFee = pot.fairplayTicketFee;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
@@ -214,7 +214,7 @@ function fakeZapOutEstimate(potId, wantTokenAddress) {
 }
 
 export function createZapOutEstimate(potId, wantTokenAddress) {
-  if (potId === '4belt' || potId === 'beltbnb') {
+  if (potId === '4belt' || potId === 'beltbnb' || potId === 'ibalpaca') {
     return fakeZapOutEstimate(potId, wantTokenAddress);
   }
   const requestId = uniqid('out', potId);

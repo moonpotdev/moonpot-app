@@ -8,6 +8,21 @@ const styles = theme => ({
       marginBottom: '0',
     },
   },
+  nftShowcase: {
+    marginBottom: '1em',
+  },
+  nftShowcaseItem: {
+    textAlign: 'center',
+  },
+  nftShowcaseImg: {
+    display: 'block',
+    width: '100%',
+    height: 'auto',
+  },
+  nftShowcaseItemName: {
+    marginTop: '8px',
+    fontWeight: 'bold',
+  },
   link: {
     color: '#F3BA2E',
     textDecoration: 'none',

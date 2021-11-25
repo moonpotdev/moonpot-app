@@ -14,7 +14,8 @@
     "learnMore": "Learn More",
     "moonpots": "Moonpots",
     "myPots": "My Pots",
-    "sidePots": "side"
+    "sidePots": "side",
+    "nftPots": "NFT"
   },
   "modals": {
     "unsupportedNetworkDetected": "Unsupported Network Detected",
@@ -40,6 +41,7 @@
   "homeJoinCommunityBody": "You can suggest a new pot in one of our channels, or join our devs to build one for your favourite project.",
   "vaultTitle": "Deposit <span>{{token}}</span>, earn <span>{{apy}}% APY</span><wbr /> and a chance to win <span>{{currency}}{{amount}}</span>",
   "vaultTitleSide": "Deposit <span>{{token}}</span>, and be entered for a chance to win <span>{{currency}}{{amount}}</span>",
+  "vaultTitleNFT": "Stake <span>{{token}}</span> and be entered for a chance to win an <span>{{sponsor}} NFT</span>",
   "playWithMoonpot": "Play with Moonpot",
   "youHaventEnteredMoonpots": "You haven't entered any Moonpots yet.",
   "youHaventEnteredRetiredMoonpots": "You are not entered in any retired Moonpots.",
@@ -66,6 +68,7 @@
     "titleRetired": "Retired {{name}} Pot",
     "winTotalPrize": "Win <span>{{prize}}</span>",
     "winTotalTokensIn": "in ",
+    "stakeToken": "Stake <span>{{token}}</span>",
     "statNextDraw": "Next Draw",
     "statNextDrawDaily": "Next Daily Draw",
     "statNextDrawWeekly": "Next Weekly Draw",
@@ -79,6 +82,7 @@
     "statDeposit": "Your Deposit",
     "prizeDraw": "Prize Draw",
     "closed": "Closed",
+    "prizeSplitNFT": "Prize Split",
     "prizeSplit": "Projected Prize Split",
     "prizeSplitToolTip": "Live projection based on current TVL and interest rate",
     "prizeSplitWinner": "{{count}} Winning Ticket",
@@ -140,6 +144,30 @@
         "beefyVaultAddress": "Beefy.Finance Vault Address",
         "moonpotStrategyAddress": "{{name}} Pot Strategy Address"
       },
+      "nft-strategy": {
+        "title": "{{name}} Pot Strategy",
+        "nftCollectionLink": "View the collection",
+        "ziggyverse-armour-nft": {
+          "body": [
+            "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling.",
+            "Each forged NFT in the Ziggyverse Armour Collection will allow you to claim a custom Moonpot branded SafePal Hardware Wallet."
+          ],
+          "rarities": {
+            "gold": {
+              "name": "Armour - Gold",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "Armour - Moonstone",
+              "rarity": "76 / 100"
+            },
+            "jade": {
+              "name": "Armour - Jade",
+              "rarity": "110 / 150"
+            }
+          }
+        }
+      },
       "earnings": {
         "title": "Strategy Breakdown",
         "tokenInterest": "Your {{token}} Interest",
@@ -158,6 +186,17 @@
           "Depositing more {{token}} will reset your Fairness fee to a maximum of {{fairplayFee}}%, for your additional deposit.",
           "If you win the prize, your Fairness Fee will be reset to {{ticketFee}}% and reduce to zero for {{duration}} days after winning.",
           "These measures prevent bad actors from manipulating the prize draws."
+        ],
+        "bodyNFT": [
+          "A Fairplay Timelock is in place to guarantee fairness for all Cadets. This lasts 72 hours for daily NFT Pots and 10 days for weekly NFT Pots.",
+          "Withdrawing early will incur a Fairness Fee up to 2.5% that funds Ziggy's Pot's APY."
+        ]
+      },
+      "nft-fairplay": {
+        "title": "Fairplay Timelock Rules",
+        "body": [
+          "A Fairplay Timelock is in place to guarantee fairness for all Cadets. This lasts 72 hours for daily NFT Pots and 10 days for weekly NFT Pots.",
+          "Withdrawing early will incur a Fairness Fee up to {{ticketFee}}% that funds Ziggy's Pot's APY."
         ]
       }
     }
@@ -184,7 +223,8 @@
       "4belt": [
         "ZAP lets you create liquidity pool tokens and make deposits with just one transaction."
       ],
-      "beltbnb": ["ZAP lets you create beltBNB tokens and deposit with just one transaction."]
+      "beltbnb": ["ZAP lets you create beltBNB tokens and deposit with just one transaction."],
+      "ibalpaca": ["ZAP lets you create ibALPACA tokens and deposit with just one transaction."]
     },
     "inYourWallet": "In your wallet",
     "provider": "Liquidity provider"

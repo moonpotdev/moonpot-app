@@ -86,6 +86,86 @@
     ]
   },
   {
+    "id": "ziggyverse-armour-nft",
+    "name": "Ziggyverse NFT",
+    "winToken": "Ziggyverse Armour NFT",
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketPotsZiggyVerse",
+    "rewardAddress": "0x7eA00eD5843276E90b07Dfc01a484ad862C08aEE",
+    "contractAddress": "0x33bD1Abce7A4862b6f69fb83160e031d4b52f539",
+    "prizePoolAddress": "0x58e338F27D5574B16e3e61062a31ADe00a816558",
+    "prizeStrategyAddress": "0xC0ecc09E561E114AEa20612EA4f6eb457935b58d",
+    "pricePerShare": 1,
+    "oracleId": "POTS",
+    "apyId": "pots-pots",
+    "vaultType": "nft",
+    "duration": 1,
+    "fairplayDuration": 3,
+    "fairplayTicketFee": 0.025,
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "withdrawFee": 0,
+    "infoCards": ["nft-strategy", "nft-fairplay"],
+    "infoCardStrategy": "ziggyverse-armour",
+    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
+    "sponsors": [],
+    "bonuses": []
+  },
+  {
+    "id": "ibalpaca",
+    "name": "ALPACA",
+    "token": "ibALPACA",
+    "tokenAddress": "0xf1bE8ecC990cBcb90e166b71E368299f0116d421",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketibAlpaca",
+    "rewardAddress": "0x032df2bbF3544b8FC2F848353306DF056b592D39",
+    "contractAddress": "0x55CC95eCE05f730E4bc2c40BEEcc615950ab4c1C",
+    "prizePoolAddress": "0x363a439DDc3CaE38f568e5827F1502a24128d920",
+    "prizeStrategyAddress": "0xE9AA25dB8B225543429a0E69dbf6c600a3Ad23AD",
+    "oracleId": "alpaca-ibalpaca",
+    "apyId": "alpaca-ibalpaca",
+    "vaultType": "community",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "isZap": true,
+    "supportsClaimAllBonuses": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x6EB4F8975b15F34AdccFDE830087Fc8FdB006C36",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "ibALPACA",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "watch",
     "name": "WATCH",
     "token": "WATCH",

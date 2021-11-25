@@ -4,7 +4,7 @@ import { Grid, makeStyles } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../../helpers/utils';
-import { Pot as BasePot, PrizeSplit } from '../../../../../components/Pot/Pot';
+import { Pot as BasePot, PrizeSplit, NFTPrizeSplit } from '../../../../../components/Pot/Pot';
 import { usePot, useTokenAddressPrice, useTranslatedToken } from '../../../../../helpers/hooks';
 import { Translate } from '../../../../../components/Translate';
 import { byDecimals } from '../../../../../helpers/format';
@@ -86,6 +86,8 @@ function handleVariant(vaultType) {
     return 'greenStable';
   } else if (vaultType === 'side') {
     return 'greySide';
+  } else if (vaultType === 'nft') {
+    return 'purpleNft';
   }
 
   // default/main
@@ -95,35 +97,49 @@ function handleVariant(vaultType) {
 const Bottom = function ({ id }) {
   const classes = useStyles();
   const pot = usePot(id);
+  const isNftPot = pot.vaultType === 'nft';
 
   return (
     <>
       <CardAccordionGroup className={classes.rowPrizeSplit}>
-        <CardAccordionItem
-          titleKey="pot.prizeSplit"
-          collapsable={false}
-          tooltip={
-            <TooltipWithIcon
-              i18nKey={'pot.prizeSplitToolTip'}
-              style={{ marginLeft: '0', marginRight: 'auto' }}
-            />
-          }
-        >
-          <Grid container>
-            <Grid item xs={3}>
-              <Translate i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
+        {isNftPot ? (
+          <CardAccordionItem titleKey="pot.prizeSplitNFT" collapsable={false}>
+            <Grid container>
+              <Grid item xs={3}>
+                <Translate i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
+              </Grid>
+              <Grid item xs={9} className={classes.prizeSplitValue}>
+                <NFTPrizeSplit numberOfWinners={pot.numberOfWinners} />
+              </Grid>
             </Grid>
-            <Grid item xs={9} className={classes.prizeSplitValue}>
-              <PrizeSplit
-                baseToken={pot.token}
-                awardBalance={pot.projectedAwardBalance || pot.awardBalance}
-                awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
-                sponsors={pot.projectedSponsors || pot.sponsors}
-                numberOfWinners={pot.numberOfWinners}
+          </CardAccordionItem>
+        ) : (
+          <CardAccordionItem
+            titleKey="pot.prizeSplit"
+            collapsable={false}
+            tooltip={
+              <TooltipWithIcon
+                i18nKey={'pot.prizeSplitToolTip'}
+                style={{ marginLeft: '0', marginRight: 'auto' }}
               />
+            }
+          >
+            <Grid container>
+              <Grid item xs={3}>
+                <Translate i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
+              </Grid>
+              <Grid item xs={9} className={classes.prizeSplitValue}>
+                <PrizeSplit
+                  baseToken={pot.token}
+                  awardBalance={pot.projectedAwardBalance || pot.awardBalance}
+                  awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
+                  sponsors={pot.projectedSponsors || pot.sponsors}
+                  numberOfWinners={pot.numberOfWinners}
+                />
+              </Grid>
             </Grid>
-          </Grid>
-        </CardAccordionItem>
+          </CardAccordionItem>
+        )}
       </CardAccordionGroup>
       <div className={classes.rowPlay}>
         <Play
