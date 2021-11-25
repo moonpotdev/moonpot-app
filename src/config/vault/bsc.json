@@ -109,6 +109,7 @@
     "withdrawFee": 0,
     "infoCards": ["nft-strategy", "nft-fairplay"],
     "infoCardStrategy": "ziggyverse-armour",
+    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
     "sponsors": [],
     "bonuses": []
   },

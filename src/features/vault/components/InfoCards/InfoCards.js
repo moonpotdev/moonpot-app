@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { usePot } from '../../../../helpers/hooks';
-import { Box, makeStyles } from '@material-ui/core';
+import { Box, Grid, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { OpenInNew } from '@material-ui/icons';
 import { Card, Cards, CardTitle } from '../../../../components/Cards';
@@ -67,11 +67,7 @@ const StrategyInfoCard = memo(function ({ pot, classes, t }) {
 });
 
 const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
-  if (!pot.infoCardStrategy) {
-    return null;
-  }
-
-  const bodyKey = `pot.infocards.nft-strategy.${pot.infoCardStrategy}.body`;
+  const bodyKey = `pot.infocards.nft-strategy.${pot.id}.body`;
   const body = i18n.exists(bodyKey)
     ? t(bodyKey, {
         returnObjects: true,
@@ -80,7 +76,7 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
       })
     : null;
 
-  const raritiesKey = `pot.infocards.nft-strategy.${pot.infoCardStrategy}.rarities`;
+  const raritiesKey = `pot.infocards.nft-strategy.${pot.id}.rarities`;
   const rarities = i18n.exists(raritiesKey)
     ? t(raritiesKey, {
         returnObjects: true,
@@ -93,13 +89,34 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
         <CardTitle>{t('pot.infocards.nft-strategy.title', { name: pot.name })}</CardTitle>
         {body ? body.map((text, i) => <p key={i}>{text}</p>) : null}
         {rarities ? (
-          <div className={classes.nftRarities}>
-            {Object.entries(rarities).map(([name, count]) => (
-              <div>
-                <span className={classes.nftRarityName}>{name}</span>: {count}
-              </div>
+          <Grid container spacing={1} className={classes.nftShowcase}>
+            {Object.entries(rarities).map(([key, item]) => (
+              <Grid item xs={4} className={classes.nftShowcaseItem} key={key}>
+                <img
+                  src={require(`../../../../images/nfts/${pot.id}/${key}.png`).default}
+                  width={1000}
+                  height={1200}
+                  className={classes.nftShowcaseImg}
+                  alt={item.name}
+                />
+                <div className={classes.nftShowcaseItemName}>{item.name}</div>
+                <div className={classes.nftShowcaseItemRarity}>{item.rarity}</div>
+              </Grid>
             ))}
-          </div>
+          </Grid>
+        ) : null}
+        {pot.infoCardNftStrategyCollection ? (
+          <p>
+            <a
+              href={pot.infoCardNftStrategyCollection}
+              rel="noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
+              {t('pot.infocards.nft-strategy.nftCollectionLink', { name: pot.name })}{' '}
+              <OpenInNew fontSize="inherit" />
+            </a>
+          </p>
         ) : null}
         <p>
           <a

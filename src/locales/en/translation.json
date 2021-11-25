@@ -146,15 +146,25 @@
       },
       "nft-strategy": {
         "title": "{{name}} Pot Strategy",
-        "ziggyverse-armour": {
+        "nftCollectionLink": "View the collection",
+        "ziggyverse-armour-nft": {
           "body": [
             "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling.",
-            "Rarities included:"
+            "Each forged NFT in the Ziggyverse Armour Collection will allow you to claim a custom Moonpot branded SafePal Hardware Wallet."
           ],
           "rarities": {
-            "Armour Gold": "15 / 50",
-            "Armour Moonstone": "76 / 100",
-            "Armour Jade": "110 / 150"
+            "gold": {
+              "name": "Armour - Gold",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "Armour - Moonstone",
+              "rarity": "76 / 100"
+            },
+            "jade": {
+              "name": "Armour - Jade",
+              "rarity": "110 / 150"
+            }
           }
         }
       },

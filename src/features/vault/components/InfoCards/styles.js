@@ -8,10 +8,19 @@ const styles = theme => ({
       marginBottom: '0',
     },
   },
-  nftRarities: {
+  nftShowcase: {
     marginBottom: '1em',
   },
-  nftRarityName: {
+  nftShowcaseItem: {
+    textAlign: 'center',
+  },
+  nftShowcaseImg: {
+    display: 'block',
+    width: '100%',
+    height: 'auto',
+  },
+  nftShowcaseItemName: {
+    marginTop: '8px',
     fontWeight: 'bold',
   },
   link: {
