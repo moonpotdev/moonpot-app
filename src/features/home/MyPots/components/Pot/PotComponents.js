@@ -116,7 +116,7 @@ export const PotInfoBlock = function ({ item, active = true }) {
             <Grid item xs={6}>
               <Typography className={classes.myDetailsText} align={'left'}>
                 {t('pot.myInterestRate')}
-                {isPrizeOnly ? <InterestTooltip pot={pot} /> : null}
+                {isPrizeOnly ? null : <InterestTooltip pot={pot} />}
               </Typography>
             </Grid>
             <Grid item xs={6}>
