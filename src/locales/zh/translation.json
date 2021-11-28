@@ -15,6 +15,7 @@
     "moonpots": "Moonpots",
     "myPots": "我的月盒",
     "sidePots": "附属"
+    "nftPots": "NFT"
   },
   "modals": {
     "unsupportedNetworkDetected": "检测到不支持的网络",
@@ -40,6 +41,7 @@
   "homeJoinCommunityBody": "您可以通过以下官方社交媒体渠道，告诉我们您对于新增月盒的建议，或者加入我们的开发团队，为您喜爱的项目创建新的月盒。",
   "vaultTitle": "存入 <span>{{token}}</span>, 获得 <span>{{apy}}% APY</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
   "vaultTitleSide": "存入 <span>{{token}}</span>, 即有机会抱走奖金 <span>{{currency}}{{amount}}</span>",
+  "vaultTitleNFT": "Stake <span>{{token}}</span> and be entered for a chance to win an <span>{{sponsor}} NFT</span>",
   "playWithMoonpot": "使用Moonpot进行游戏",
   "youHaventEnteredMoonpots": "您尚未参与任何月盒.",
   "youHaventEnteredRetiredMoonpots": "您未参与任何已退役的月盒。",
@@ -66,6 +68,7 @@
     "titleRetired": "已退役 {{name}} 月盒",
     "winTotalPrize": "赢取 <span>{{prize}}</span>",
     "winTotalTokensIn": "的 ",
+    "stakeToken": "质押 <span>{{token}}</span>",
     "statNextDraw": "下次抽奖",
     "statNextDrawDaily": "距下一次每天抽奖",
     "statNextDrawWeekly": "距下一次每周抽奖",
@@ -79,6 +82,7 @@
     "statDeposit": "您存入的资产",
     "prizeDraw": "抽奖活动",
     "closed": "关闭",
+    "prizeSplit": "奖金分配",
     "prizeSplit": "预计奖金分配",
     "prizeSplitToolTip": "基于目前的TVL和利率的实时预测",
     "prizeSplitWinner": "{{count}} 张中奖门票",
@@ -131,10 +135,38 @@
           ],
           "side": [
             "{{name}} 附属月盒将您的 ${{token}} 存入 Beefy.Finance {{token}} 金库。所有月盒收益都是自动复合的。Moonpot 预留了 {{breakdownPrize}}% 用于附属月盒奖金和 {{breakdownBuyback}}% 用于回购 $POTS 作为核心月盒的奖金利息。"
+          ],
+          "watch": [
+            "此策略将您的 {{token}} 代币存放在 Moonpot {{token}} 金库中，该金库从 Yieldwatch 团队提供的固定 {{token}} 供应中自动复投您的 {{token}} 代币。",
+            "Yieldwatch 提供的所有 {{token}} 都归于 Moonpot 玩家。一半将用来给您分发收益。另一半则用于抽奖和 Ziggy 的月盒奖励。"
           ]
         },
         "beefyVaultAddress": "Beefy 金库地址",
         "moonpotStrategyAddress": "Moonpot 策略地址"
+      },
+      "nft-strategy": {
+        "title": "{{name}} 月盒策略",
+        "nftCollectionLink": "查看收藏品",
+        "ziggyverse-armour-nft": {
+          "body": [
+            "这是 Moonpot 学员们新旅程的开始。收集和铸造 Ziggy 在旅途中发现的神秘瓦片，并在未来使用它们来铸造异国的生物以用于耕种和战斗。",
+            "Ziggyverse 盔甲系列中每个已铸造的NFT将允许您领取一个定制的 Moonpot 品牌 SafePal 硬体钱包。"
+          ],
+          "rarities": {
+            "gold": {
+              "name": "盔甲 - 金色",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "盔甲 - 月光石",
+              "rarity": "76 / 100"
+            },
+            "jade": {
+              "name": "盔甲 - 玉",
+              "rarity": "110 / 150"
+            }
+          }
+        }
       },
       "earnings": {
         "title": "收益明细",
@@ -154,6 +186,17 @@
           "存入更多的{{token}}为您的新存款会将您的公平费重置为最高 {{fairplayFee}}%。",
           "如果您中奖了，您的公平费会被重置到{{ticketFee}}%，在中奖后的 {{duration}} 天内逐秒减少至0。",
           "这些措施可以有效防止操控抽奖的作弊行为。"
+        ],
+        "bodyNFT": [
+          "团队设置了公平游戏时间锁定期以确保所有学员都能公平地进行游戏。这表示每日 NFT 月盒的公平游戏锁定期为 72 小时，而每周 NFT 月盒的公平游戏锁定期则为期 10 天。",
+          "提前取款将抽取高达 2.5% 的公平费用，该费用将用以提供Ziggy's Pot 的 APY。"
+        ]
+      },
+      "nft-fairplay": {
+        "title": "公平游戏锁定期规则",
+        "body": [
+          "团队设置了公平游戏时间锁定期以确保所有学员都能公平地进行游戏。这表示每日 NFT 月盒的公平游戏锁定期为 72 小时，而每周 NFT 月盒的公平游戏锁定期则为期 10 天。",
+          "提前取款将抽取高达 {{ticketFee}}% 的公平费用，该费用将用以提供Ziggy's Pot 的 APY。"
         ]
       }
     }
@@ -177,8 +220,11 @@
         "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
         "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
       ],
-      "4belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"],
-      "beltbnb": ["ZAP lets you create beltBNB tokens and deposit with just one transaction."]
+      "4belt": [
+        "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
+      ],
+      "beltbnb": ["ZAP 可让您创建 beltBNB 代币并只通过一笔交易进行存款。"]
+      "ibalpaca": ["ZAP 可让您创建 ibALPACA 代币并只通过一笔交易进行存款。"]
     },
     "inYourWallet": "您的钱包里有",
     "provider": "流动性提供者"
@@ -248,6 +294,27 @@
         "content": [
           "我们已将 Ziggy 月盒升级为自动复投并允许部分提款。您需要将您的 POTS 转移至新的 Ziggy 月盒，以持续赚取利息并有资格参与下一次抽奖。"
         ]
+    },
+    "cake-v1": {
+        "title": "{{name}} 月盒迁移",
+        "content": [
+          "我们已将 {{name}} 月盒进行升级以改进其功能。您需要将您的 {{token}} 转移至新的 {{name}} 月盒，以持续赚取利息并有资格参与下一次抽奖。",
+          "目前领取的额外 POTS 奖励将自动帮您质押进入 Ziggy's 月盒。 新的 {{name}} 月盒现在也可进行升级，从而减少未来进一步迁移的需要。"
+        ]
+      },
+      "cake-v2": {
+        "title": "{{name}} 月盒迁移",
+        "content": [
+          "我们已将 {{name}} 月盒进行升级以改进其功能。您需要将您的 {{token}} 转移至新的 {{name}} 月盒，以持续赚取利息并有资格参与下一次抽奖。",
+          "目前领取的额外 POTS 奖励将自动帮您质押进入 Ziggy's 月盒。 新的 {{name}} 月盒现在也可进行升级，从而减少未来进一步迁移的需要。"
+        ]
+      },
+      "cake-v3": {
+        "title": "{{name}} 月盒迁移",
+        "content": [
+          "我们已将 {{name}} 月盒进行升级以改进其功能。您需要将您的 {{token}} 转移至新的 {{name}} 月盒，以持续赚取利息并有资格参与下一次抽奖。",
+          "目前领取的额外 POTS 奖励将自动帮您质押进入 Ziggy's 月盒。 新的 {{name}} 月盒现在也可进行升级，从而减少未来进一步迁移的需要。"
+        ]
       }
     },
     "details": {
@@ -258,6 +325,18 @@
       "pots-v2": [
         "Ziggy 月盒现已自动复投！",
         "我们已将 Ziggy 月盒升级为自动复投并允许部分提款。您需要将您的 POTS 转移至新的 Ziggy 月盒，以持续赚取利息并有资格参与下一次抽奖。"
+      ],
+      "cake-v1": [
+        "我们已将 {{name}} 月盒进行升级以改进其功能。您需要将您的 {{token}} 转移至新的 {{name}} 月盒，以持续赚取利息并有资格参与下一次抽奖。",
+        "目前领取的额外 POTS 奖励将自动帮您质押进入 Ziggy's 月盒。 新的 {{name}} 月盒现在也可进行升级，从而减少未来进一步迁移的需要。"
+      ],
+      "cake-v2": [
+        "我们已将 {{name}} 月盒进行升级以改进其功能。您需要将您的 {{token}} 转移至新的 {{name}} 月盒，以持续赚取利息并有资格参与下一次抽奖。",
+        "目前领取的额外 POTS 奖励将自动帮您质押进入 Ziggy's 月盒。 新的 {{name}} 月盒现在也可进行升级，从而减少未来进一步迁移的需要。"
+      ],
+      "cake-v3": [
+        "我们已将 {{name}} 月盒进行升级以改进其功能。您需要将您的 {{token}} 转移至新的 {{name}} 月盒，以持续赚取利息并有资格参与下一次抽奖。",
+        "目前领取的额外 POTS 奖励将自动帮您质押进入 Ziggy's 月盒。 新的 {{name}} 月盒现在也可进行升级，从而减少未来进一步迁移的需要。"
       ]
     },
     "withdraw": {
@@ -267,3 +346,4 @@
     }
   }
 }
+
