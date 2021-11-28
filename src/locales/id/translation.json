@@ -14,7 +14,7 @@
     "learnMore": "Pelajari lebih lanjut",
     "moonpots": "Moonpots",
     "myPots": "Pots Saya",
-    "sidePots": "side"
+    "sidePots": "side",
     "nftPots": "NFT"
   },
   "modals": {
@@ -223,7 +223,7 @@
       "4belt": [
         "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi."
       ],
-      "beltbnb": ["ZAP memungkinkan Anda membuat token beltBNB dan Deposit hanya dengan satu transaksi."]
+      "beltbnb": ["ZAP memungkinkan Anda membuat token beltBNB dan Deposit hanya dengan satu transaksi."],
       "ibalpaca": ["ZAP memungkinkan Anda membuat token ibALPACA dan Deposit hanya dengan satu transaksi."]
     },
     "inYourWallet": "Di dompet Anda",
