@@ -114,6 +114,50 @@
     "bonuses": []
   },
   {
+    "id": "dep-bnb",
+    "name": "DEP-BNB LP",
+    "token": "DEP-BNB LP",
+    "provider": "ApeSwap",
+    "tokenAddress": "0x6518709dC42F70Dbf89934cA382F1d9dB26370e8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketApe DEP-BNB",
+    "rewardAddress": "0xAD5146cd3dAe87bE55c95510eBA874C6b7EC04c9",
+    "contractAddress": "0x6b62838F16DE114033Eb17aDFE9039D03Ecbc10A",
+    "prizePoolAddress": "0xa6453e2aB42846D7Fe99b03a6B09483E8cCd5355",
+    "prizeStrategyAddress": "0x017220fE95BfE467447Eae2F5D6a66f069045512",
+    "oracleId": "banana-wbnb-dep",
+    "apyId": "banana-wbnb-dep",
+    "vaultType": "lp",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "isZap": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x62BA2D4A572664036c35f0D76cEe81cC8b77199b",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "DEP-BNB LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "DEP",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "ibalpaca",
     "name": "ALPACA",
     "token": "ibALPACA",
