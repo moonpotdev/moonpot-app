@@ -373,5 +373,30 @@
     "decimals": 18,
     "underlyingToken": "POTS",
     "stakedMultiplier": 1
+  },
+  {
+    "symbol": "DEP",
+    "address": "0xcaF5191fc480F43e4DF80106c7695ECA56E48B18",
+    "type": "single",
+    "oracleId": "DEP",
+    "decimals": 18
+  },
+  {
+    "symbol": "DEP-BNB LP",
+    "address": "0x6518709dC42F70Dbf89934cA382F1d9dB26370e8",
+    "type": "lp",
+    "oracleId": "banana-wbnb-dep",
+    "decimals": 18,
+    "zap": "0x8d86b089696893bbc80ba598B54f8874F0dC4310",
+    "lp": ["WBNB", "DEP"]
+  },
+  {
+    "symbol": "moonTicketApe DEP-BNB",
+    "address": "0xAD5146cd3dAe87bE55c95510eBA874C6b7EC04c9",
+    "type": "ticket",
+    "oracleId": "banana-wbnb-dep",
+    "decimals": 18,
+    "underlyingToken": "DEP-BNB LP",
+    "stakedMultiplier": 2
   }
 ]
