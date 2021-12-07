@@ -1,4 +1,5 @@
 import { config } from '../../../config/config';
+import { createReducer } from '@reduxjs/toolkit';
 
 const initialState = {
   prices: [],
@@ -8,20 +9,14 @@ const initialState = {
   lastUpdated: 0,
 };
 
-const pricesReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'FETCH_PRICES':
-      return {
-        ...state,
-        prices: action.payload.prices,
-        apy: action.payload.apy,
-        ppfs: action.payload.ppfs,
-        byNetworkAddress: action.payload.byNetworkAddress,
-        lastUpdated: action.payload.lastUpdated,
-      };
-    default:
-      return state;
-  }
-};
+const pricesReducer = createReducer(initialState, builder => {
+  builder.addCase('FETCH_PRICES', (state, action) => {
+    state.prices = action.payload.prices;
+    state.apy = action.payload.apy;
+    state.ppfs = action.payload.ppfs;
+    state.byNetworkAddress = action.payload.byNetworkAddress;
+    state.lastUpdated = action.payload.lastUpdated;
+  });
+});
 
 export default pricesReducer;

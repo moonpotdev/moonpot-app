@@ -8,7 +8,7 @@ import { tokensByNetworkAddress } from '../../../../config/tokens';
 import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
-import { formatAddressShort, getUnderylingToken, ZERO } from '../../../../helpers/utils';
+import { formatAddressShort, getUnderylingToken } from '../../../../helpers/utils';
 import { ErrorOutline } from '@material-ui/icons';
 import BigNumber from 'bignumber.js';
 import clsx from 'clsx';
@@ -52,16 +52,12 @@ const useDrawSponsor = function (depositTokenAddress, ticketTokenAddress, winner
 };
 
 function normalizeWinnings(awards, drawToken, ticketAddress, ticketPPFS, prices) {
-  const tokens = {
-    [drawToken]: {
-      symbol: drawToken,
-      amount: ZERO,
-      value: ZERO,
-    },
-  };
+  const tokens = {};
 
-  for (const { token, amount } of awards) {
+  for (const { token, amount, tokenIds } of awards) {
+    const isNFT = tokenIds && tokenIds.length > 0;
     const tokenData = tokensByNetworkAddress[network]?.[token.toLowerCase()];
+
     if (tokenData) {
       let numericAmount = byDecimals(amount, tokenData.decimals);
 
@@ -75,15 +71,24 @@ function normalizeWinnings(awards, drawToken, ticketAddress, ticketPPFS, prices)
       const price = new BigNumber(prices[underlyingToken.oracleId] || 0);
       const totalPrice = numericAmount.multipliedBy(price);
       const symbol = underlyingToken.symbol;
+      const address = underlyingToken.address;
+      const nftIds = isNFT ? tokenIds : [];
 
       if (symbol in tokens) {
         tokens[symbol].amount = tokens[symbol].amount.plus(numericAmount);
         tokens[symbol].value = tokens[symbol].value.plus(totalPrice);
+
+        if (isNFT) {
+          tokens[symbol].nftIds = [...tokens[symbol].nftIds, ...nftIds];
+        }
       } else {
         tokens[symbol] = {
+          address: address,
           symbol: symbol,
           amount: numericAmount,
           value: totalPrice,
+          isNFT: isNFT,
+          nftIds: nftIds,
         };
       }
     } else {
@@ -92,9 +97,12 @@ function normalizeWinnings(awards, drawToken, ticketAddress, ticketPPFS, prices)
   }
 
   return Object.values(tokens).map(token => ({
+    address: token.address,
     symbol: token.symbol,
     amount: token.amount.toNumber(),
     value: token.value.toNumber(),
+    isNFT: token.isNFT,
+    nftIds: token.nftIds,
   }));
 }
 
@@ -134,6 +142,11 @@ const Title = memo(function ({ name }) {
   );
 });
 
+const NFT = memo(function ({ address, id }) {
+  // TODO
+  return null;
+});
+
 const ValueWon = memo(function ({ currency, amount }) {
   const classes = useStyles();
   const amountFormatted = amount.toLocaleString(undefined, {
@@ -143,6 +156,16 @@ const ValueWon = memo(function ({ currency, amount }) {
   return (
     <div className={classes.valueWon}>
       <Translate i18nKey="winners.valueWon" values={{ currency, amount: amountFormatted }} />
+    </div>
+  );
+});
+
+const NFTWon = memo(function ({ name }) {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.valueWon}>
+      <Translate i18nKey="winners.valueWon" values={{ currency: '', amount: name }} />
     </div>
   );
 });
@@ -182,11 +205,20 @@ const PrizePerWinner = memo(function ({ winners }) {
         <span className={classes.perWinnerToken}>
           {formatDecimals(prize.amount, 2)} {prize.symbol}
         </span>{' '}
-        <span className={classes.perWinnerValue}>(${formatDecimals(prize.value, 2)})</span>
+        {prize.isNFT ? null : (
+          <span className={classes.perWinnerValue}>(${formatDecimals(prize.value, 2)})</span>
+        )}
       </div>
     );
   });
 });
+
+function getNftsFromAwards(awards) {
+  return awards
+    .filter(award => award.isNFT)
+    .map(award => award.nftIds.map(id => ({ address: award.address, id: id })))
+    .flat();
+}
 
 const Winners = memo(function ({ network, tokenAddress, winners }) {
   const { t } = useTranslation();
@@ -200,13 +232,14 @@ const Winners = memo(function ({ network, tokenAddress, winners }) {
         staked: winner.staked,
         value: winner.stakedValue,
         address: winner.address,
+        nfts: getNftsFromAwards(winner.awards),
       };
     });
 
     return entries.sort((a, b) => (a.staked > b.staked) - (a.staked < b.staked));
   }, [winners]);
 
-  console.log(sortedWinners);
+  // console.log(sortedWinners);
 
   return (
     <Grid container spacing={2} className={classes.rowWinners}>
@@ -221,6 +254,11 @@ const Winners = memo(function ({ network, tokenAddress, winners }) {
               {t('winners.stakedAmountToken', { amount: stakedFormatted, token: tokenData.symbol })}
             </div>
             <div>(${valueFormatted})</div>
+            {winner.nfts.length
+              ? winner.nfts.map(nft => (
+                  <NFT key={`${nft.address}#${nft.id}`} address={nft.address} id={nft.id} />
+                ))
+              : null}
           </Grid>
         );
       })}
@@ -251,30 +289,39 @@ const UserWonDraw = memo(function ({ winners }) {
 
 export const Draw = function ({ draw }) {
   const classes = useStyles();
+  console.log(draw.pot.id, draw.winners);
   const winners = useNormalizedWinners(
     draw.winners,
     draw.pot.token,
     draw.pot.rewardAddress,
     draw.ppfs
   );
-  console.log(draw.pot.id, winners);
+  // console.log(draw.pot.id, winners);
   const totalPrizeValue = useTotalPrizeValue(winners);
   const sponsorToken = useDrawSponsor(draw.pot.tokenAddress, draw.pot.rewardAddress, draw.winners);
 
   return (
     <Card variant="purpleMid">
       <Grid container spacing={2} className={classes.rowLogoWonTotal}>
-        <Grid item xs={4}>
+        <Grid item xs="auto">
           <Logo
             baseToken={draw.pot.token}
             sponsorToken={sponsorToken || draw.pot.sponsorToken}
             type={draw.pot.vaultType}
           />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs="auto" className={classes.columnTitleValueWon}>
           <Title name={draw.pot.name} />
-          <ValueWon currency="$" amount={totalPrizeValue} />
-          <WonTokens winners={winners} />
+          {draw.pot.vaultType === 'nft' ? (
+            <>
+              <NFTWon name={draw.pot.winToken || 'NFT'} />
+            </>
+          ) : (
+            <>
+              <ValueWon currency="$" amount={totalPrizeValue} />
+              <WonTokens winners={winners} />
+            </>
+          )}
         </Grid>
       </Grid>
       <UserWonDraw winners={draw.winners} />

@@ -5,9 +5,9 @@ import pricesReducer from './prices';
 import earnedReducer from './earned';
 import modalReducer from './modal';
 import zapReducer from './zap';
-import { combineReducers } from 'redux';
+import winnersReducer from '../../winners/redux/reducer';
 
-const rootReducer = combineReducers({
+const reducers = {
   walletReducer,
   vaultReducer,
   balanceReducer,
@@ -15,6 +15,7 @@ const rootReducer = combineReducers({
   earnedReducer,
   modalReducer,
   zapReducer,
-});
+  winners: winnersReducer,
+};
 
-export default rootReducer;
+export default reducers;

@@ -1,6 +1,7 @@
 import { EARNED_FETCH_EARNED_BEGIN, EARNED_FETCH_EARNED_DONE, EARNED_RESET } from '../constants';
 import { config } from '../../../config/config';
 import { potsByNetwork } from '../../../config/vault';
+import { createReducer } from '@reduxjs/toolkit';
 
 const initialEarned = (() => {
   const earned = [];
@@ -25,26 +26,22 @@ const initialState = {
   isEarnedFirstTime: true,
 };
 
-const earnedReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case EARNED_FETCH_EARNED_BEGIN:
-      return {
-        ...state,
-        isBalancesLoading: state.isEarnedFirstTime,
-      };
-    case EARNED_FETCH_EARNED_DONE:
-      return {
-        ...state,
-        earned: action.payload.earned,
-        lastUpdated: action.payload.lastUpdated,
-        isEarnedLoading: false,
-        isEarnedFirstTime: false,
-      };
-    case EARNED_RESET:
-      return { ...initialState };
-    default:
-      return state;
-  }
-};
+const earnedReducer = createReducer(initialState, builder => {
+  builder
+    .addCase(EARNED_FETCH_EARNED_BEGIN, (state, action) => {
+      state.isBalancesLoading = state.isEarnedFirstTime;
+    })
+    .addCase(EARNED_FETCH_EARNED_DONE, (state, action) => {
+      state.earned = action.payload.earned;
+      state.lastUpdated = action.payload.lastUpdated;
+      state.isEarnedLoading = false;
+      state.isEarnedFirstTime = false;
+    })
+    .addCase(EARNED_RESET, (state, action) => {
+      for (const key in initialState) {
+        state[key] = initialState[key];
+      }
+    });
+});
 
 export default earnedReducer;

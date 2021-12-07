@@ -26,7 +26,11 @@ function derivePrice(token, tokens, prices, ppfs) {
     return derivePrice(underlying, tokens, prices, ppfs);
   }
 
-  if (!token.oracleId || !(token.oracleId in prices)) {
+  if (!token.oracleId) {
+    return 0;
+  }
+
+  if (!(token.oracleId in prices)) {
     throw new Error(
       `Oracle ${token.oracleId} not found in prices for ${token.symbol}/${token.address}`
     );

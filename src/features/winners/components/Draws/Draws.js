@@ -1,21 +1,46 @@
-import React from 'react';
-import { Draw } from '../Draw';
-import { Card, Cards } from '../../../../components/Cards';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchDraws } from '../../redux/draws';
 import { RouteLoading } from '../../../../components/RouteLoading';
-import { useDraws } from '../../apollo/draws';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { Cards } from '../../../../components/Cards';
+import { Draw } from '../Draw';
+
+function useDraws() {
+  const dispatch = useDispatch();
+  const hasMore = useSelector(state => state.winners.hasMore);
+  const draws = useSelector(state => state.winners.draws);
+  const pending = useSelector(state => state.winners.pending);
+  const firstLoad = useSelector(state => state.winners.firstLoad);
+  const drawsCount = draws.length;
+  const oldestDraw = draws.length ? draws[draws.length - 1] : null;
+
+  const nextPage = useCallback(() => {
+    if (!pending && hasMore && oldestDraw) {
+      dispatch(fetchDraws(oldestDraw.timestamp));
+    }
+  }, [dispatch, hasMore, pending, oldestDraw]);
+
+  useEffect(() => {
+    if (firstLoad) {
+      dispatch(fetchDraws(0));
+    }
+  }, [dispatch, firstLoad]);
+
+  return [draws, drawsCount, nextPage, hasMore, firstLoad];
+}
 
 export const Draws = function () {
-  const { error, draws, fetchMore, hasMore } = useDraws();
+  const [draws, drawsCount, nextPage, hasMore, firstLoad] = useDraws();
 
-  if (error) {
-    return <Card variant="purpleDark">{JSON.stringify(error)}</Card>;
+  if (firstLoad) {
+    return <RouteLoading />;
   }
 
   return (
     <InfiniteScroll
-      dataLength={draws ? draws.length : 0}
-      next={fetchMore}
+      dataLength={drawsCount}
+      next={nextPage}
       hasMore={hasMore}
       loader={<RouteLoading />}
       style={{ overflow: 'visible' }}

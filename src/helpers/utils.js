@@ -56,8 +56,12 @@ export function compound(r, n = 365, t = 1, c = 1) {
 
 export const styledBy = (property, mapping) => props => mapping[props[property]];
 
-export function indexBy(arr, key, keyTransform = k => k) {
-  return Object.fromEntries(arr.map(item => [keyTransform(item[key]), item]));
+export function indexBy(arr, key, keyTransform = null) {
+  if (keyTransform) {
+    return Object.fromEntries(arr.map(item => [keyTransform(item[key]), item]));
+  }
+
+  return Object.fromEntries(arr.map(item => [item[key], item]));
 }
 
 export function groupBy(arr, key, keyTransform = k => k) {
