@@ -206,7 +206,7 @@ const Winners = memo(function ({ network, tokenAddress, winners }) {
     return entries.sort((a, b) => (a.staked > b.staked) - (a.staked < b.staked));
   }, [winners]);
 
-  console.log(sortedWinners);
+  // console.log(sortedWinners);
 
   return (
     <Grid container spacing={2} className={classes.rowWinners}>
@@ -257,7 +257,7 @@ export const Draw = function ({ draw }) {
     draw.pot.rewardAddress,
     draw.ppfs
   );
-  console.log(draw.pot.id, winners);
+  // console.log(draw.pot.id, winners);
   const totalPrizeValue = useTotalPrizeValue(winners);
   const sponsorToken = useDrawSponsor(draw.pot.tokenAddress, draw.pot.rewardAddress, draw.winners);
 

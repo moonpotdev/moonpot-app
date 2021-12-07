@@ -119,7 +119,9 @@ export const useDraws = function () {
 
   const draws = useMemo(() => {
     if (prizeDraws && prizeDraws.length) {
-      return prizeDraws.map(draw => decorateDraw(draw, network)).filter(draw => !!draw.pot);
+      return prizeDraws
+        .map(draw => decorateDraw(draw, network))
+        .filter(draw => !!draw.pot && draw.winners.length > 0);
     }
 
     return null;
