@@ -114,6 +114,45 @@
     "bonuses": []
   },
   {
+    "id": "wings",
+    "name": "WINGS",
+    "token": "WINGS",
+    "tokenAddress": "0x0487b824c8261462F88940f97053E65bDb498446",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketWings",
+    "rewardAddress": "0x5D5Fb49C0ED2168AC2A370148F633AcA0735f83c",
+    "contractAddress": "0x892cb8055D33cC357f6b24eA4413beED80502c01",
+    "prizePoolAddress": "0x8d30803308012B3EC5bf7a4B65F98c22E8bd3dF2",
+    "prizeStrategyAddress": "0xd4A6d629e657870dbE1E3B79B482DA3C3D778AED",
+    "oracleId": "WINGS",
+    "apyId": "jetswap-wings",
+    "vaultType": "community",
+    "type": "single",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x5e784882E8D2ac69777713f0e71100741b8aC2F6",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "WINGS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "dep-bnb",
     "name": "DEP-BNB LP",
     "token": "DEP-BNB LP",
