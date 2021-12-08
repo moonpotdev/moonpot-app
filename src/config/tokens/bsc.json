@@ -398,5 +398,21 @@
     "decimals": 18,
     "underlyingToken": "DEP-BNB LP",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "WINGS",
+    "address": "0x0487b824c8261462F88940f97053E65bDb498446",
+    "type": "single",
+    "oracleId": "WINGS",
+    "decimals": 18
+  },
+  {
+    "symbol": "moonTicketWings",
+    "address": "0x5D5Fb49C0ED2168AC2A370148F633AcA0735f83c",
+    "type": "ticket",
+    "oracleId": "WINGS",
+    "decimals": 18,
+    "underlyingToken": "WINGS",
+    "stakedMultiplier": 2
   }
 ]
