@@ -33,10 +33,11 @@ const links = [
     href: 'https://docs.moonpot.com',
     external: true,
   },
-  // {
-  //   label: 'header.vote',
-  //   href: '#',
-  // },
+  {
+    label: 'header.vote',
+    href: 'https://vote.moonpot.com',
+    external: true,
+  },
 ];
 
 const buyPotsUrl = 'https://app.1inch.io/#/56/classic/swap/BUSD/POTS';
