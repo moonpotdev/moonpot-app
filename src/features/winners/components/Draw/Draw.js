@@ -289,7 +289,7 @@ const UserWonDraw = memo(function ({ winners }) {
 
 export const Draw = function ({ draw }) {
   const classes = useStyles();
-  console.log(draw.pot.id, draw.winners);
+  // console.log(draw.pot.id, draw.winners);
   const winners = useNormalizedWinners(
     draw.winners,
     draw.pot.token,

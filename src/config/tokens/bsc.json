@@ -416,6 +416,31 @@
     "stakedMultiplier": 2
   },
   {
+    "symbol": "HOTCROSS",
+    "address": "0x4FA7163E153419E0E1064e418dd7A99314Ed27b6",
+    "type": "single",
+    "oracleId": "HOTCROSS",
+    "decimals": 18
+  },
+  {
+    "symbol": "HOTCROSS-BUSD LP",
+    "address": "0x3B9Aa711D1D90A4f8639f66C227881729a3317F2",
+    "type": "lp",
+    "oracleId": "banana-hotcross-busd",
+    "decimals": 18,
+    "zap": "0x8d86b089696893bbc80ba598B54f8874F0dC4310",
+    "lp": ["HOTCROSS", "BUSD"]
+  },
+  {
+    "symbol": "moonTicketHotcross",
+    "address": "0xDF1bbE524Ef0D4EBF6eb82e1b1DcA96448725138",
+    "type": "ticket",
+    "oracleId": "banana-hotcross-busd",
+    "decimals": 18,
+    "underlyingToken": "HOTCROSS-BUSD LP",
+    "stakedMultiplier": 2
+  },
+  {
     "symbol": "Ziggyverse Armour NFT",
     "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
     "type": "nft",

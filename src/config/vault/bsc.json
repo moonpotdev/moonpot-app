@@ -114,6 +114,51 @@
     "bonuses": []
   },
   {
+    "id": "hotcross-busd-lp",
+    "name": "HOTCROSS-BUSD LP",
+    "token": "HOTCROSS-BUSD LP",
+    "provider": "ApeSwap",
+    "tokenAddress": "0x3B9Aa711D1D90A4f8639f66C227881729a3317F2",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketHotcross",
+    "rewardAddress": "0xDF1bbE524Ef0D4EBF6eb82e1b1DcA96448725138",
+    "contractAddress": "0x7bB08762821d25123403dA4723c6538da7825657",
+    "prizePoolAddress": "0xEFdD6AE3481474266Ddf7ef128205Dd7DCDB7f6d",
+    "prizeStrategyAddress": "0x13cE95c78B86a2346CEc87C5356f06c071652bf2",
+    "oracleId": "banana-hotcross-busd",
+    "apyId": "banana-hotcross-busd",
+    "vaultType": "lp",
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "isZap": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xF3a599fe4E0f7ce7f5dDA19B1b54FDf82cdA7520",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "HOTCROSS-BUSD LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "HOTCROSS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "wings",
     "name": "WINGS",
     "token": "WINGS",
