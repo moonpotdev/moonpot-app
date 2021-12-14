@@ -77,23 +77,6 @@ const NewDepositOdds = memo(function ({
   );
 });
 
-function handleVariant(vaultType) {
-  if (vaultType === 'community') {
-    return 'blueCommunity';
-  } else if (vaultType === 'lp') {
-    return 'green';
-  } else if (vaultType === 'stable') {
-    return 'greenStable';
-  } else if (vaultType === 'side') {
-    return 'greySide';
-  } else if (vaultType === 'nft') {
-    return 'purpleNft';
-  }
-
-  // default/main
-  return 'teal';
-}
-
 const Bottom = function ({ id }) {
   const classes = useStyles();
   const pot = usePot(id);
@@ -103,7 +86,7 @@ const Bottom = function ({ id }) {
     <>
       <CardAccordionGroup className={classes.rowPrizeSplit}>
         {isNftPot ? (
-          <CardAccordionItem titleKey="pot.prizeSplitNFT" collapsable={false}>
+          <CardAccordionItem titleKey="pot.prizeSplitNFT" collapsable={true}>
             <Grid container>
               <Grid item xs={3}>
                 <Translate i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
@@ -116,7 +99,7 @@ const Bottom = function ({ id }) {
         ) : (
           <CardAccordionItem
             titleKey="pot.prizeSplit"
-            collapsable={false}
+            collapsable={true}
             tooltip={
               <TooltipWithIcon
                 i18nKey={'pot.prizeSplitToolTip'}
@@ -146,7 +129,7 @@ const Bottom = function ({ id }) {
           id={pot.id}
           token={pot.token}
           contractAddress={pot.contractAddress}
-          variant={handleVariant(pot.vaultType)}
+          variant={'teal'}
         />
       </div>
       <div className={classes.rowOdds}>
@@ -167,5 +150,5 @@ const Bottom = function ({ id }) {
 };
 
 export const Pot = function ({ id, variant }) {
-  return <BasePot id={id} variant={variant} bottom={<Bottom id={id} />} />;
+  return <BasePot id={id} variant={variant} bottom={<Bottom id={id} />} simple={true} />;
 };

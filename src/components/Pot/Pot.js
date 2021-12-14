@@ -193,14 +193,14 @@ const DepositWithOdds = memo(function ({
   );
 });
 
-export function Pot({ id, variant, bottom }) {
+export function Pot({ id, variant, bottom, simple }) {
   const classes = useStyles();
   const pot = usePot(id);
   const history = useHistory();
   const isNftPot = pot.vaultType === 'nft';
 
   return (
-    <Card variant={variant}>
+    <Card variant={variant} style={{ height: 'fit-content' }}>
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>
         <Grid item xs="auto" onClick={() => history.push(`/pot/${pot.id}`)}>
           <Logo baseToken={pot.token} sponsorToken={pot.sponsorToken} type={pot.vaultType} />
@@ -222,31 +222,35 @@ export function Pot({ id, variant, bottom }) {
         </Grid>
       </Grid>
       <Grid container spacing={2} className={classes.rowDrawStats}>
-        <Grid item xs={7}>
+        <Grid item xs={simple ? 6 : 7}>
           <DrawStatNextDraw duration={pot.duration}>
             <Countdown until={pot.expiresAt * 1000}>
               <Translate i18nKey="pot.statNextDrawCountdownFinished" />
             </Countdown>
           </DrawStatNextDraw>
         </Grid>
-        <Grid item xs={5}>
-          <DrawStat i18nKey="pot.statTVL">
-            <TVL totalStakedUsd={pot.totalStakedUsd} />
-          </DrawStat>
-        </Grid>
-        <Grid item xs={5}>
-          <DrawStat i18nKey="pot.statDeposit">
-            <DepositWithOdds
-              contractAddress={pot.contractAddress}
-              depositToken={pot.token}
-              tokenDecimals={pot.tokenDecimals}
-              ticketToken={pot.rewardToken}
-              ticketTotalSupply={pot.totalTickets}
-              winners={pot.numberOfWinners}
-            />
-          </DrawStat>
-        </Grid>
-        <Grid item xs={7}>
+        {!simple ? (
+          <>
+            <Grid item xs={5}>
+              <DrawStat i18nKey="pot.statTVL">
+                <TVL totalStakedUsd={pot.totalStakedUsd} />
+              </DrawStat>
+            </Grid>
+            <Grid item xs={5}>
+              <DrawStat i18nKey="pot.statDeposit">
+                <DepositWithOdds
+                  contractAddress={pot.contractAddress}
+                  depositToken={pot.token}
+                  tokenDecimals={pot.tokenDecimals}
+                  ticketToken={pot.rewardToken}
+                  ticketTotalSupply={pot.totalTickets}
+                  winners={pot.numberOfWinners}
+                />
+              </DrawStat>
+            </Grid>
+          </>
+        ) : null}
+        <Grid item xs={simple ? 6 : 7}>
           <DrawStat
             i18nKey="pot.statInterest"
             tooltip={

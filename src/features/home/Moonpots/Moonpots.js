@@ -36,23 +36,6 @@ const Moonpots = ({ selected }) => {
     }
   }, [dispatch, address]);
 
-  function handleVariant(vaultType) {
-    if (vaultType === 'community') {
-      return 'blueCommunity';
-    } else if (vaultType === 'lp') {
-      return 'green';
-    } else if (vaultType === 'stable') {
-      return 'greenStable';
-    } else if (vaultType === 'side') {
-      return 'greySide';
-    } else if (vaultType === 'nft') {
-      return 'purpleNft';
-    }
-
-    // default/main
-    return 'tealLight';
-  }
-
   return (
     <React.Fragment>
       <Filter selected={selected} />
@@ -62,7 +45,7 @@ const Moonpots = ({ selected }) => {
           {selected === 'side' ? <SidePotExplainer /> : null}
           <Cards>
             {filtered.map(pot => (
-              <Pot key={pot.id} variant={handleVariant(pot.vaultType)} id={pot.id} />
+              <Pot key={pot.id} variant={'tealLight'} id={pot.id} />
             ))}
           </Cards>
           {selected === 'community' ? (
