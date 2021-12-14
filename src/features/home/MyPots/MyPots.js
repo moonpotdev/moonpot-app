@@ -29,8 +29,6 @@ const MyPots = ({ selected }) => {
   const dispatch = useDispatch();
 
   const filtered = useMemo(() => {
-    let data = [];
-
     const check = item => {
       if (item.status !== selected) {
         return false;
@@ -40,22 +38,24 @@ const MyPots = ({ selected }) => {
         return false;
       }
 
-      return item;
+      return true;
     };
 
-    for (const [, item] of Object.entries(vault.pools)) {
-      if (check(item)) {
+    return Object.values(vault.pools)
+      .filter(check)
+      .map(item => {
         if (walletAddress && !isEmpty(tokenBalances[item.contractAddress + ':total'])) {
-          item.userBalance = byDecimals(
-            new BigNumber(tokenBalances[item.contractAddress + ':total'].balance),
-            item.tokenDecimals
-          );
+          return {
+            ...item,
+            userBalance: byDecimals(
+              new BigNumber(tokenBalances[item.contractAddress + ':total'].balance),
+              item.tokenDecimals
+            ),
+          };
         }
-        data.push(item);
-      }
-    }
 
-    return data;
+        return item;
+      });
   }, [selected, vault.pools, tokenBalances, walletAddress]);
 
   useEffect(() => {

@@ -1,30 +1,20 @@
-import {
-    SHOW_MODAL,
-    HIDE_MODAL,
-} from "../constants";
+import { SHOW_MODAL, HIDE_MODAL } from '../constants';
+import { createReducer } from '@reduxjs/toolkit';
 
 const initialState = {
-    isOpen: false,
-    modalType: null,
-}
+  isOpen: false,
+  modalType: null,
+};
 
-const modalReducer = (state = initialState, action) => {
-    switch(action.type){
-        case SHOW_MODAL: 
-            return {
-                ...state,
-                isOpen: true,
-                modalType: action.payload,
-            }
-        case HIDE_MODAL:
-            return {
-                ...state,
-                isOpen: false
-            }
-        default:
-            return state
-    }
-}
-
+const modalReducer = createReducer(initialState, builder => {
+  builder
+    .addCase(SHOW_MODAL, (state, action) => {
+      state.isOpen = true;
+      state.modalType = action.payload;
+    })
+    .addCase(HIDE_MODAL, (state, action) => {
+      state.isOpen = false;
+    });
+});
 
 export default modalReducer;

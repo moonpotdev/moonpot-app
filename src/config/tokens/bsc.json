@@ -439,5 +439,11 @@
     "decimals": 18,
     "underlyingToken": "HOTCROSS-BUSD LP",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "Ziggyverse Armour NFT",
+    "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
+    "type": "nft",
+    "decimals": 0
   }
 ]

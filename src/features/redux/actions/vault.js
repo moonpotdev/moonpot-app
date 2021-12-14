@@ -407,7 +407,7 @@ const getPools = async (items, state, dispatch) => {
 
   for (let i = 0; i < response.length; i++) {
     const item = response[i];
-    const pool = pools[item.id];
+    const pool = { ...pools[item.id] };
 
     // === Gate
     if ('awardBalance' in item) {
@@ -482,17 +482,23 @@ const getPools = async (items, state, dispatch) => {
 
     // === Sponsor Tokens
     if (!isEmpty(item.sponsorBalance)) {
-      const sponsor = pool.sponsors.find(s => s.sponsorToken === item.sponsorToken);
+      pool.sponsors = pool.sponsors.map(sponsor => {
+        if (sponsor.sponsorToken === item.sponsorToken) {
+          const sponsorPrice =
+            sponsor.sponsorOracleId in prices ? prices[sponsor.sponsorOracleId] : 0;
+          const sponsorBalance = new BigNumber(item.sponsorBalance);
+          const sponsorBalanceUsd = sponsorBalance.times(new BigNumber(sponsorPrice));
+          const decimals = new BigNumber(10).exponentiatedBy(sponsor.sponsorTokenDecimals);
 
-      if (sponsor) {
-        const sponsorPrice =
-          sponsor.sponsorOracleId in prices ? prices[sponsor.sponsorOracleId] : 0;
-        const sponsorBalance = new BigNumber(item.sponsorBalance);
-        const sponsorBalanceUsd = sponsorBalance.times(new BigNumber(sponsorPrice));
-        const decimals = new BigNumber(10).exponentiatedBy(sponsor.sponsorTokenDecimals);
-        sponsor.sponsorBalance = sponsorBalance.dividedBy(decimals);
-        sponsor.sponsorBalanceUsd = sponsorBalanceUsd.dividedBy(decimals);
-      }
+          return {
+            ...sponsor,
+            sponsorBalance: sponsorBalance.dividedBy(decimals),
+            sponsorBalanceUsd: sponsorBalanceUsd.dividedBy(decimals),
+          };
+        }
+
+        return sponsor;
+      });
     }
 
     // === PrizePool
@@ -522,12 +528,12 @@ const getPools = async (items, state, dispatch) => {
       }
     }
 
-    // New ref for sponsors for state update
-    pool.sponsors = [...pool.sponsors];
+    // Update
+    pools[item.id] = pool;
   }
 
   // == Sums per pool
-  for (const pool of Object.values(items)) {
+  for (const pool of Object.values(pools)) {
     // === Total USD of prize sponsors
     pool.totalSponsorBalanceUsd = ZERO;
     pool.sponsors.forEach(sponsor => {
