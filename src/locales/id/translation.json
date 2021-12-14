@@ -14,7 +14,8 @@
     "learnMore": "Pelajari lebih lanjut",
     "moonpots": "Moonpots",
     "myPots": "Pots Saya",
-    "sidePots": "side"
+    "sidePots": "side",
+    "nftPots": "NFT"
   },
   "modals": {
     "unsupportedNetworkDetected": "Jaringan terdeteksi tidak didukung ",
@@ -40,6 +41,7 @@
   "homeJoinCommunityBody": "Anda dapat menyarankan pot baru di salah satu saluran kami, atau bergabung dengan pengembang kami untuk membangun salah satu project favorit anda.",
   "vaultTitle": "Depositkan <span>{{token}}</span>, Hasilkan <span>{{apy}}% APY</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
   "vaultTitleSide": "Depositkan <span>{{token}}</span>, Dan dapatkan sebuah kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
+  "vaultTitleNFT": "Stake <span>{{token}}</span> and be entered for a chance to win an <span>{{sponsor}} NFT</span>",
   "playWithMoonpot": "Bermain dengan Moonpot",
   "youHaventEnteredMoonpots": "Anda belum masuk ke Moonpots manapun.",
   "youHaventEnteredRetiredMoonpots": "Anda belum masuk ke Moonpots yang tidak aktif.",
@@ -66,6 +68,7 @@
     "titleRetired": "Pot {{name}} Tidak Aktif",
     "winTotalPrize": "Menangkan <span>{{prize}}</span>",
     "winTotalTokensIn": "di ",
+    "stakeToken": "Stake <span>{{token}}</span>",
     "statNextDraw": "Pengundian Berikutnya",
     "statNextDrawDaily": "Pengundian Harian Berikutnya",
     "statNextDrawWeekly": "Pengundian Mingguan Berikutnya",
@@ -79,6 +82,7 @@
     "statDeposit": "Deposit Anda",
     "prizeDraw": "Undian Hadiah",
     "closed": "Ditutup",
+    "prizeSplitNFT": "Prize Split",
     "prizeSplit": "Proyeksi Pembagian Hadiah",
     "prizeSplitToolTip": "Proyeksi langsung berdasarkan TVL saat ini dan suku bunga",
     "prizeSplitWinner": "{{count}} Pemenang",
@@ -126,15 +130,43 @@
           "ziggy": [
             "Dengan stake $POTS di Ziggy's Pot, Anda akan menerima APY yang dihasilkan sebesar 5% dari pendapatan semua Moonpot lainnya.",
             "Ziggy akan membeli POTS dari pasar terbuka dengan pendapatan Moonpot.com dan memberikannya kepada pemegang POTS sebagai keuntungan/bunga.",
-            "Ada juga Undian Hadiah bulanan yang ditambahkan ke Pot Ziggy di mana 10 pemenang yang beruntung akan mendapatkan bagian dari hadiah pot sebanyak 5% dari pendapatan semua token di seluruh platform Moonpot.",
+            "Ada juga Undian Hadiah bulanan yang ditambahkan ke Pot Ziggy. 10 pemenang yang beruntung akan mendapatkan bagian dari hadiah pot sebanyak 5% dari pendapatan semua token di seluruh platform Moonpot.",
             "Sebagai contoh, Pengundian Hadiah pada 1 September termasuk POTS, BIFI, CAKE dan DODO, dan menghasilkan total $723.760. Pot Ziggy diundi setiap empat minggu sekali (pada hari Rabu). Anda tidak perlu stake ulang."
           ],
           "side": [
-            "Side Pot {{token}} menyimpan setoran ${{token}} anda di Beefy.Finance {{token}} Vault. Semua pendapatan Pot digabungkan secara otomatis dan Moonpot menyisihkan {{breakdownPrize}}% untuk hadiah Side Pot dan {{breakdownBuyback}}% untuk pembelian kembali $POTS untuk keuntungan bonus Pot Utama."
+            "Pot {{token}} menyimpan setoran ${{token}} anda di Beefy.Finance {{token}} Vault. Semua pendapatan Pot digabungkan secara otomatis dan Moonpot menyisihkan {{breakdownPrize}}% untuk hadiah Side Pot dan {{breakdownBuyback}}% untuk pembelian kembali $POTS untuk keuntungan bonus Pot Utama."
+          ],
+          "watch": [
+            "Strategi ini menyimpan token {{token}} Anda di brankas Moonpot {{token}}, yang secara otomatis menggabungkan token {{token}} Anda dari pasokan tetap {{token}} yang disediakan oleh tim Yieldwatch.",
+            "Semua {{token}} yang disediakan oleh Yieldwatch diberikan kepada pemain Moonpot. Setengah akan digunakan untuk memberikan Anda keuntungan. Setengahnya lagi akan digunakan untuk Hadiah Undian dan hadiah Ziggy Pot."
           ]
         },
         "beefyVaultAddress": "Alamat Brankas Beefy.Finance",
         "moonpotStrategyAddress": "Alamat Strategi Pot {{name}}"
+      },
+      "nft-strategy": {
+        "title": "Strategi pot {{name}}",
+        "nftCollectionLink": "Lihat Koleksi",
+        "ziggyverse-armour-nft": {
+          "body": [
+            "Ini adalah awal dari perjalanan baru bagi Cadet Moonpot. Kumpulkan dan tempa Tiles misterius yang ditemukan oleh Ziggy dalam perjalanan mereka. Gunakan mereka di masa depan untuk mencetak makhluk eksotis untuk Farming dan Battling.",
+            "Setiap NFT yang ditempa / dibuat dalam Koleksi Ziggyverse Armor akan memungkinkan Anda untuk mengklaim sebuah Hardware Wallet khusus dari Safepal bermerk Moonpot."
+          ],
+          "rarities": {
+            "gold": {
+              "name": "Armour - Gold",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "Armour - Moonstone",
+              "rarity": "76 / 100"
+            },
+            "jade": {
+              "name": "Armour - Jade",
+              "rarity": "110 / 150"
+            }
+          }
+        }
       },
       "earnings": {
         "title": "Rincian Strategi",
@@ -150,10 +182,21 @@
         "body": [
           "Hadiah berasal dari keuntungan yang dihasilkan oleh semua pemain Moonpot, jadi kami membutuhkan sebuah sistem untuk menjaga permainan ini tetap adil.",
           "Ada TimeLock Fairplay selama {{duration}} hari sebagai dasar untuk mencegah pemain menyetor tepat sebelum pengundian dimulai dan kemudian menariknya dengan cepat setelah undian selesai.",
-          "Jika Anda ingin melakukan penarikan lebih awal, Anda akan membayar Biaya Fairness sebanyak {{fairplayFee}}%, atau kurang. Biaya Fairness akan berkurang setiap detik dan akan menjadi nol selama {{duration}} hari.",
+          "Jika Anda ingin melakukan penarikan lebih awal Anda akan membayar Biaya Fairness sebanyak {{fairplayFee}}%, atau kurang. Biaya Fairness akan berkurang setiap detik dan akan menjadi nol selama {{duration}} hari.",
           "Deposit/menyetorkan lebih banyak {{token}} akan menyetel ulang biaya Fairness Anda hingga maksimum {{fairplayFee}}%, untuk deposit tambahan Anda.",
           "Jika Anda memenangkan hadiah, Biaya Fairness Anda akan diatur ulang menjadi {{ticketFee}}% dan dikurangi menjadi nol selama {{duration}} hari setelah Anda memenangkan hadiah.",
           "Langkah-langkah ini dapat mencegah pelaku jahat memanipulasi pengundian hadiah."
+          ],
+        "bodyNFT": [
+          "Timelock Fairplay tersedia untuk menjamin keadilan bagi semua Cadet. Ini berlangsung 72 jam untuk Pot NFT harian dan 10 hari untuk Pot NFT mingguan.",
+          "Penarikan lebih awal akan dikenakan Biaya Fairness hingga 2,5% untuk mendanai APY Ziggy Pot."
+        ]
+      },
+      "nft-fairplay": {
+        "title": "Aturan Fairplay Timelock",
+        "body": [
+          "Timelock Fairplay tersedia untuk menjamin keadilan bagi semua Cadet. Ini berlangsung 72 jam untuk Pot NFT harian dan 10 hari untuk Pot NFT mingguan.",
+          "Penarikan lebih awal akan dikenakan Biaya Fairness hingga {{ticketFee}}% untuk mendanai APY Ziggy Pot."
         ]
       }
     }
@@ -180,7 +223,8 @@
       "4belt": [
         "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi."
       ],
-      "beltbnb": ["ZAP lets you create beltBNB tokens and deposit with just one transaction."]
+      "beltbnb": ["ZAP memungkinkan Anda membuat token beltBNB dan Deposit hanya dengan satu transaksi."],
+      "ibalpaca": ["ZAP memungkinkan Anda membuat token ibALPACA dan Deposit hanya dengan satu transaksi."]
     },
     "inYourWallet": "Di dompet Anda",
     "provider": "Penyedia likuiditas"
@@ -246,9 +290,30 @@
         ]
       },
       "pots-v2": {
-        "title": " Migrasi Ziggy’s Pot : Update Autocompound",
+        "title": " Migrasi Ziggy's Pot : Update Autocompound",
         "content": [
           "Kami telah meningkatkan Pot Ziggy's ke autocompound dan bisa ditarik sebagian. Anda perlu memindahkan POTS Anda ke Pot Ziggy yang baru untuk terus mendapatkan keuntungan dan memenuhi syarat untuk pengundian hadiah berikutnya."
+        ]
+      },
+      "cake-v1": {
+        "title": "Migrasi Pot {{name}}",
+        "content": [
+          "Kami telah meningkatkan Pot {{name}} untuk meningkatkan fungsinya. Untuk terus mendapatkan keuntungan dan mengikuti undian berhadiah, Anda harus memindahkan {{token}} Anda ke Pot {{name}} yang baru.",
+          "Mengklaim bonus POTS sekarang akan secara otomatis memasukkannya ke Pot Ziggy untuk Anda. Pot {{name}} baru sekarang juga dapat diupgrade, mengurangi kebutuhan untuk migrasi lebih lanjut di masa mendatang."
+        ]
+      },
+      "cake-v2": {
+        "title": "Migrasi Pot {{name}}",
+        "content": [
+          "Kami telah meningkatkan Pot {{name}} untuk meningkatkan fungsinya. Untuk terus mendapatkan keuntungan dan mengikuti undian berhadiah, Anda harus memindahkan {{token}} Anda ke Pot {{name}} yang baru.",
+          "Mengklaim bonus POTS sekarang akan secara otomatis memasukkannya ke Pot Ziggy untuk Anda. Pot {{name}} baru sekarang juga dapat diupgrade, mengurangi kebutuhan untuk migrasi lebih lanjut di masa mendatang."
+        ]
+      },
+      "cake-v3": {
+        "title": "Migrasi Pot {{name}}",
+        "content": [
+          "Kami telah meningkatkan Pot {{name}} untuk meningkatkan fungsinya. Untuk terus mendapatkan keuntungan dan mengikuti undian berhadiah, Anda harus memindahkan {{token}} Anda ke Pot {{name}} yang baru.",
+          "Mengklaim bonus POTS sekarang akan secara otomatis memasukkannya ke Pot Ziggy untuk Anda. Pot {{name}} baru sekarang juga dapat diupgrade, mengurangi kebutuhan untuk migrasi lebih lanjut di masa mendatang."
         ]
       }
     },
@@ -260,6 +325,18 @@
       "pots-v2": [
         "Sekarang Ziggy’s pot bisa autocompounds!",
         "Kami telah mengupgrade pot Ziggy menjadi autocompound dan bisa ditarik sebagian. Anda perlu memindahkan POTS Anda ke Pot Ziggy yang baru untuk terus mendapatkan keuntungan dan memenuhi syarat untuk pengundian hadiah berikutnya."
+      ],
+      "cake-v1": [
+        "Kami telah meningkatkan Pot {{name}} untuk meningkatkan fungsinya. Untuk terus mendapatkan keuntungan dan mengikuti undian berhadiah, Anda harus memindahkan {{token}} Anda ke Pot {{name}} yang baru.",
+        "Mengklaim bonus POTS sekarang akan secara otomatis memasukkannya ke Pot Ziggy untuk Anda. Pot {{name}} baru sekarang juga dapat diupgrade, mengurangi kebutuhan untuk migrasi lebih lanjut di masa mendatang."
+      ],
+      "cake-v2": [
+        "Kami telah meningkatkan Pot {{name}} untuk meningkatkan fungsinya. Untuk terus mendapatkan keuntungan dan mengikuti undian berhadiah, Anda harus memindahkan {{token}} Anda ke Pot {{name}} yang baru.",
+        "Mengklaim bonus POTS sekarang akan secara otomatis memasukkannya ke Pot Ziggy untuk Anda. Pot {{name}} baru sekarang juga dapat diupgrade, mengurangi kebutuhan untuk migrasi lebih lanjut di masa mendatang."
+      ],
+      "cake-v3": [
+        "Kami telah meningkatkan Pot {{name}} untuk meningkatkan fungsinya. Untuk terus mendapatkan keuntungan dan mengikuti undian berhadiah, Anda harus memindahkan {{token}} Anda ke Pot {{name}} yang baru.",
+        "Mengklaim bonus POTS sekarang akan secara otomatis memasukkannya ke Pot Ziggy untuk Anda. Pot {{name}} baru sekarang juga dapat diupgrade, mengurangi kebutuhan untuk migrasi lebih lanjut di masa mendatang."
       ]
     },
     "withdraw": {
