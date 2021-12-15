@@ -6,6 +6,7 @@ const styles = theme => ({
     background: '#393960',
     paddingTop: '32px',
     borderTop: '2px solid #4C4C80',
+    paddingBottom: '40px',
   },
   communityJoin: {
     margin: '0 auto',

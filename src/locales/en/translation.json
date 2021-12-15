@@ -33,7 +33,9 @@
     "vote": "Vote",
     "winners": "Winners",
     "potsPrice": "POTS Price",
-    "buyPots": "Buy POTS"
+    "buyPots": "Buy POTS",
+    "audit": "Audit",
+    "articles": "Articles"
   },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><wbr /> and a chance to win <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposits (TVL)",

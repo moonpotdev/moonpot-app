@@ -8,9 +8,10 @@ const styles = theme => ({
     // backgroundColor: 'red',
   },
   light: {
-    backgroundColor: '#393960',
+    backgroundColor: '#262640',
     maxWidth: 'none',
-    paddingBottom: '32px',
+    marginTop: 8,
+    paddingBottom: 32,
   },
   footerBtn: {
     width: '100%',
@@ -26,6 +27,24 @@ const styles = theme => ({
       marginRight: '10px',
       padding: '0',
     },
+  },
+  footerLinks: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: 24,
+  },
+  footerStats: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    padding: '4px 8px !important',
+  },
+  textButton: {
+    color: '#CDCDE4',
+    textSize: '15px',
+    paddingLeft: 12,
+    paddingRight: 12,
+    textDecoration: 'none',
   },
   footerIcons: {
     flex: 1,
