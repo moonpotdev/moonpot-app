@@ -508,6 +508,7 @@
       "ziggyPrize": 5
     },
     "status": "active",
+    "supportsClaimAllBonuses": true,
     "isZap": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xC34Ae91312A3c3F9420691922040a5DEe1698E52",
@@ -650,7 +651,7 @@
       "treasury": 2
     },
     "status": "active",
-    "supportsClaimAllBonuses": false,
+    "supportsClaimAllBonuses": true,
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x87F9A89B51dA28CE8653A700d362CDa9b9bA7d88",
