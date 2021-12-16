@@ -5,6 +5,7 @@ import pricesReducer from './prices';
 import earnedReducer from './earned';
 import modalReducer from './modal';
 import zapReducer from './zap';
+import buybacksReducer from './buybacks';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   earnedReducer,
   modalReducer,
   zapReducer,
+  buybacksReducer,
 });
 
 export default rootReducer;

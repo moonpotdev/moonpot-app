@@ -84,6 +84,10 @@ export default function App() {
   }, [dispatch]);
 
   React.useEffect(() => {
+    dispatch(reduxActions.buybacks.fetchBuybacks());
+  }, []);
+
+  React.useEffect(() => {
     dispatch(reduxActions.wallet.createWeb3Modal());
   }, [dispatch]);
 

@@ -12,6 +12,10 @@ const Footer = ({ variant }) => {
   const { t } = useTranslation();
   const classes = useStyles();
 
+  //Buybacks Data
+  const buybacks = useSelector(state => state.buybacksReducer.buybacks || []);
+  console.log(buybacks);
+
   //TVL Data
   const tvl = useSelector(state => state.vaultReducer.totalTvl || 0).toLocaleString(undefined, {
     maximumFractionDigits: 0,

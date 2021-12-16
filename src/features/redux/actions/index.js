@@ -5,6 +5,7 @@ import prices from './prices';
 import earned from './earned';
 import modal from './modal';
 import zap from './zap';
+import buybacks from './buybacks';
 
 const reduxActions = {
   wallet,
@@ -14,6 +15,7 @@ const reduxActions = {
   earned,
   modal,
   zap,
+  buybacks,
 };
 
 export default reduxActions;
