@@ -13,8 +13,11 @@ const Footer = ({ variant }) => {
   const classes = useStyles();
 
   //Buybacks Data
-  const buybacks = useSelector(state => state.buybacksReducer.buybacks || []);
-  console.log(buybacks);
+  const lastWeekBuybacks = useSelector(state => state.buybacksReducer.lastBuybacksTotal || 0);
+  const potsPrice = useSelector(state => state.pricesReducer.prices['POTS'] || 0);
+  const lastWeekBuybackUSD = (lastWeekBuybacks * potsPrice).toLocaleString(undefined, {
+    maximumFractionDigits: 0,
+  });
 
   //TVL Data
   const tvl = useSelector(state => state.vaultReducer.totalTvl || 0).toLocaleString(undefined, {
@@ -49,7 +52,7 @@ const Footer = ({ variant }) => {
             <StatButton label={'HOLDERS'} value={'25.6K'} />
             <StatButton label={'PRIZES'} value={'$' + totalFormatted} />
             <StatButton label={'TVL'} value={'$' + tvl} />
-            <StatButton label={'BUYBACK'} value={'$34K'} />
+            <StatButton label={'BUYBACK'} value={'$' + lastWeekBuybackUSD} />
           </Grid>
           <Grid className={classes.footerIcons} item xs={12}>
             <Link href={'https://github.com/moonpotdev'}>
