@@ -441,9 +441,17 @@
     "stakedMultiplier": 2
   },
   {
-    "symbol": "Ziggyverse Armour NFT",
+    "symbol": "Ziggyverse NFT",
     "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
     "type": "nft",
     "decimals": 0
+  },
+  {
+    "symbol": "moonTicketPotsZiggyVerseAgility",
+    "address": "0x075570d24c67EC8F87c5d8458BFFe01A729c3B40",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
   }
 ]
