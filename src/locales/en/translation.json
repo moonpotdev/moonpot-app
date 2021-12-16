@@ -166,6 +166,25 @@
               "rarity": "110 / 150"
             }
           }
+        },
+        "ziggyverse-agility-nft": {
+          "body": [
+            "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling."
+          ],
+          "rarities": {
+            "gold": {
+              "name": "Agility - Gold",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "Agility - Moonstone",
+              "rarity": "40 / 100"
+            },
+            "jade": {
+              "name": "Agility - Jade",
+              "rarity": "110 / 150"
+            }
+          }
         }
       },
       "earnings": {
