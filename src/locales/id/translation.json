@@ -130,7 +130,7 @@
           "ziggy": [
             "Dengan stake $POTS di Ziggy's Pot, Anda akan menerima APY yang dihasilkan sebesar 5% dari pendapatan semua Moonpot lainnya.",
             "Ziggy akan membeli POTS dari pasar terbuka dengan pendapatan Moonpot.com dan memberikannya kepada pemegang POTS sebagai keuntungan/bunga.",
-            "Ada juga Undian Hadiah bulanan yang ditambahkan ke Pot Ziggy. 10 pemenang yang beruntung akan mendapatkan bagian dari hadiah pot sebanyak 5% dari pendapatan semua token di seluruh platform Moonpot.",
+            "Ada juga Undian Hadiah dua minggu sekali yang ditambahkan ke Pot Ziggy. 10 pemenang yang beruntung akan mendapatkan bagian dari hadiah pot sebanyak 5% dari pendapatan semua token di seluruh platform Moonpot.",
             "Sebagai contoh, Pengundian Hadiah pada 1 September termasuk POTS, BIFI, CAKE dan DODO, dan menghasilkan total $723.760. Pot Ziggy diundi setiap empat minggu sekali (pada hari Rabu). Anda tidak perlu stake ulang."
           ],
           "side": [
@@ -163,6 +163,25 @@
             },
             "jade": {
               "name": "Armour - Jade",
+              "rarity": "110 / 150"
+            }
+          }
+        },
+        "ziggyverse-agility-nft": {
+          "body": [
+            "Ini adalah awal dari perjalanan baru bagi Cadet Moonpot. Kumpulkan dan tempa Tiles misterius yang ditemukan oleh Ziggy dalam perjalanan mereka. Gunakan mereka di masa depan untuk mencetak makhluk eksotis untuk Farming dan Battling."
+          ],
+          "rarities": {
+            "gold": {
+              "name": "Agility - Gold",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "Agility - Moonstone",
+              "rarity": "40 / 100"
+            },
+            "jade": {
+              "name": "Agility - Jade",
               "rarity": "110 / 150"
             }
           }
