@@ -38,11 +38,11 @@ const Home = () => {
       </div>
       <div className={classes.backgroundWrapper}>
         <div className={classes.mainContainer}>
-          <Grid container>
-            <Grid item style={{ marginRight: 'auto', marginLeft: 0 }}>
+          <Grid container className={classes.filters}>
+            <Grid item className={classes.filterContainerLeft}>
               <SectionSelect selected={top} />
             </Grid>
-            <Grid item style={{ marginLeft: 'auto', marginRight: 32 }}>
+            <Grid item className={classes.filterContainerRight}>
               <Filter selected={bottom} />
             </Grid>
           </Grid>

@@ -27,13 +27,31 @@ const styles = theme => ({
     margin: '0 auto',
   },
   mainContainer: {
-    margin: '0 auto',
-    width: 'min-content',
     marginTop: '32px',
   },
   backgroundWrapper: {
     background: '#393960',
     borderTop: '2px solid #4C4C80',
+  },
+  filters: {
+    width: 'auto',
+    maxWidth: '1596px',
+    margin: '0 auto',
+  },
+  filterContainerLeft: {
+    marginRight: 'auto',
+    marginLeft: 0,
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
+  },
+  filterContainerRight: {
+    marginLeft: 'auto',
+    marginRight: 32,
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      margin: 0,
+    },
   },
 });
 

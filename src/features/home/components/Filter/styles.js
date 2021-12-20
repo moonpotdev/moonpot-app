@@ -2,6 +2,11 @@ const styles = theme => ({
   buttonContainer: {
     width: 'max-content',
     margin: '0 auto',
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: '450px',
+      width: 'auto',
+      padding: '0 16px',
+    },
   },
   button: {
     fontSize: '15px',
@@ -23,6 +28,10 @@ const styles = theme => ({
     border: '2px solid #555590',
     borderRadius: '8px',
     width: '220px',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      margin: '0 0 16px 0',
+    },
     '& .MuiSelect-select': {
       padding: '8px 24px',
       height: '24px',
