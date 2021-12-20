@@ -14,8 +14,12 @@
     "learnMore": "Learn More",
     "moonpots": "Moonpots",
     "myPots": "My Pots",
-    "sidePots": "side",
-    "nftPots": "NFT"
+    "sidePots": "Side",
+    "nftPots": "NFT",
+    "nextDraw": "Next Draw",
+    "prize": "Prize",
+    "apy": "APY",
+    "default": "Default"
   },
   "modals": {
     "unsupportedNetworkDetected": "Unsupported Network Detected",
@@ -58,6 +62,8 @@
   "telegramSocialBlockButton": "Join our Telegram",
   "discordSocialBlockButton": "Join our Discord",
   "twitterSocialBlockButton": "Follow our Twitter",
+  "potType": "Pot Type:",
+  "sortBy": "Sort by:",
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",

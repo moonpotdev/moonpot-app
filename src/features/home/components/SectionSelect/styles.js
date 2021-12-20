@@ -1,15 +1,15 @@
 const styles = theme => ({
   buttonsContainer: {
-    margin: '0 auto',
-    borderRadius: '25px',
-    border: '2px solid #4C4C80',
+    borderRadius: '8px',
+    border: '2px solid #555590',
     background: '#393960',
     height: '44px',
     width: '344px',
     marginBottom: '32px',
+    marginLeft: '32px',
   },
   button: {
-    borderRadius: '25px',
+    borderRadius: '8px',
     padding: '0',
     marginTop: '-2px',
     marginLeft: '-2px',

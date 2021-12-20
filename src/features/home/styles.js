@@ -26,6 +26,15 @@ const styles = theme => ({
     paddingRight: '16px',
     margin: '0 auto',
   },
+  mainContainer: {
+    margin: '0 auto',
+    width: 'min-content',
+    marginTop: '32px',
+  },
+  backgroundWrapper: {
+    background: '#393960',
+    borderTop: '2px solid #4C4C80',
+  },
 });
 
 export default styles;

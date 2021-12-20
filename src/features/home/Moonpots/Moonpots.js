@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
-import Filter from './components/Filter';
 import reduxActions from '../../redux/actions';
 import { MigrationNotices } from './components/MigrationNotices/MigrationNotices';
 import ZiggyMaintenance from '../../../images/ziggy/maintenance.svg';
@@ -12,8 +11,15 @@ import { Pot } from './components/Pot';
 import { Cards } from '../../../components/Cards';
 import { Translate } from '../../../components/Translate';
 import SidePotExplainer from '../../../components/SidePotExplainer/SidePotExplainer';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
+
+//create your forceUpdate hook
+function useForceUpdate() {
+  const [value, setValue] = useState(0); // integer state
+  return () => setValue(value => value + 1); // update the state to force render
+}
 
 const Moonpots = ({ selected }) => {
   const dispatch = useDispatch();
@@ -23,6 +29,8 @@ const Moonpots = ({ selected }) => {
   const classes = useStyles();
   const [filterConfig] = useFilterConfig();
   const filtered = useFilteredPots(pots, selected, filterConfig);
+  let { filter } = useParams();
+  const forceUpdate = useForceUpdate();
 
   useEffect(() => {
     if (pricesLastUpdated > 0) {
@@ -36,9 +44,29 @@ const Moonpots = ({ selected }) => {
     }
   }, [dispatch, address]);
 
+  useEffect(() => {
+    if (filter === 'next-draw') {
+      filtered.sort(function (a, b) {
+        return a.expiresAt - b.expiresAt;
+      });
+    } else if (filter === 'prize') {
+      filtered.sort(function (a, b) {
+        return b.projectedAwardBalanceUsd.toFixed(5) - a.projectedAwardBalanceUsd.toFixed(5);
+      });
+    } else if (filter === 'apy') {
+      filtered.sort(function (a, b) {
+        return b.apy + b.bonusApy - (a.apy + a.bonusApy);
+      });
+    } else {
+      filtered.sort(function (a, b) {
+        return a.defaultOrder - b.defaultOrder;
+      });
+    }
+    forceUpdate();
+  }, [filter, filtered]);
+
   return (
     <React.Fragment>
-      <Filter selected={selected} />
       <div className={classes.potsContainer}>
         <div className={classes.spacer}>
           <MigrationNotices potType={selected} className={classes.potsMigrationNotice} />

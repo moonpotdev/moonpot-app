@@ -28,6 +28,7 @@ function Pages() {
           exact
           path={[
             '/:bottom(all|main|lp|stable|community|side|nft)?',
+            '/:bottom(all|main|lp|stable|community|side|nft)?/:filter(default|next-draw|prize|apy)?',
             '/:top(my-moonpots)/:bottom(eol)?',
           ]}
         >
@@ -85,7 +86,7 @@ export default function App() {
 
   React.useEffect(() => {
     dispatch(reduxActions.buybacks.fetchBuybacks());
-  }, []);
+  }, [dispatch]);
 
   React.useEffect(() => {
     dispatch(reduxActions.wallet.createWeb3Modal());
