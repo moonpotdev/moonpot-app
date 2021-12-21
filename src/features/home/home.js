@@ -37,17 +37,16 @@ const Home = () => {
         <TVL className={classes.totalTVL} />
       </div>
       <div className={classes.backgroundWrapper}>
-        <div className={classes.mainContainer}>
-          <Grid container className={classes.filters}>
-            <Grid item className={classes.filterContainerLeft}>
-              <SectionSelect selected={top} />
-            </Grid>
-            <Grid item className={classes.filterContainerRight}>
-              <Filter selected={bottom} />
-            </Grid>
+        <Grid container className={classes.filters}>
+          <Grid item className={classes.filterContainerLeft}>
+            <SectionSelect selected={top} />
           </Grid>
-          {top === 'moonpots' ? <Moonpots selected={bottom} /> : <MyPots selected={bottom} />}
-        </div>
+          <div className={classes.placeholder} />
+          <Grid item className={classes.filterContainerRight}>
+            <Filter selected={bottom} />
+          </Grid>
+        </Grid>
+        {top === 'moonpots' ? <Moonpots selected={bottom} /> : <MyPots selected={bottom} />}
       </div>
     </Container>
   );

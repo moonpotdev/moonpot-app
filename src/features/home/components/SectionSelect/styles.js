@@ -6,10 +6,8 @@ const styles = theme => ({
     height: '44px',
     width: '344px',
     marginBottom: '32px',
-    marginLeft: '32px',
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: '16px',
-      margin: 'auto',
+    [theme.breakpoints.down('1073')]: {
+      margin: '0 16px 16px',
     },
   },
   button: {

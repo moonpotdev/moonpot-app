@@ -1,10 +1,12 @@
 const styles = theme => ({
   buttonContainer: {
     width: 'max-content',
-    margin: '0 auto',
-    [theme.breakpoints.down('sm')]: {
-      maxWidth: '450px',
+    marginRight: 0,
+    marginLeft: 'auto',
+    [theme.breakpoints.down('1073')]: {
+      maxWidth: '532px',
       width: 'auto',
+      margin: '0 auto',
       padding: '0 16px',
     },
   },
@@ -28,7 +30,7 @@ const styles = theme => ({
     border: '2px solid #555590',
     borderRadius: '8px',
     width: '220px',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('1073')]: {
       width: '100%',
       margin: '0 0 16px 0',
     },

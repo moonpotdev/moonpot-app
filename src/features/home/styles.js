@@ -26,29 +26,36 @@ const styles = theme => ({
     paddingRight: '16px',
     margin: '0 auto',
   },
-  mainContainer: {
-    marginTop: '32px',
-  },
   backgroundWrapper: {
     background: '#393960',
     borderTop: '2px solid #4C4C80',
+    paddingTop: '32px',
   },
   filters: {
     width: 'auto',
-    maxWidth: '1596px',
+    maxWidth: '1572px',
     margin: '0 auto',
   },
   filterContainerLeft: {
-    marginRight: 'auto',
-    marginLeft: 0,
-    [theme.breakpoints.down('sm')]: {
-      width: '100%',
+    margin: '0 12px',
+    width: '500px',
+    [theme.breakpoints.down('1073')]: {
+      margin: '0 auto',
+      width: '532px',
+    },
+  },
+  placeholder: {
+    width: '500px',
+    margin: '0 12px',
+    [theme.breakpoints.down('1597')]: {
+      width: 0,
+      margin: 0,
     },
   },
   filterContainerRight: {
-    marginLeft: 'auto',
-    marginRight: 32,
-    [theme.breakpoints.down('sm')]: {
+    margin: '0 12px',
+    width: '500px',
+    [theme.breakpoints.down('1073')]: {
       width: '100%',
       margin: 0,
     },
