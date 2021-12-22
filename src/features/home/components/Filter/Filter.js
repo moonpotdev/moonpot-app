@@ -114,7 +114,7 @@ const Filter = ({ className, selected }) => {
   React.useEffect(() => {
     //Push path for my pots page
     if (top === 'my-moonpots') {
-      //Check for valid filter selection, if not set to default for section
+      //Check for valid filter selection, if not set to default for my pots
       if (currentSort === 'active' || currentSort === 'eol') {
         history.push('/my-moonpots/' + currentPath + '/' + currentSort);
       } else {
@@ -122,6 +122,7 @@ const Filter = ({ className, selected }) => {
         history.push('/my-moonpots/' + currentPath + '/active');
       }
     } else {
+      //Check for valid filter selection, if not set to default for moonpots
       if (currentSort !== 'active' && currentSort !== 'eol') {
         history.push('/' + currentPath + '/' + currentSort);
       } else {

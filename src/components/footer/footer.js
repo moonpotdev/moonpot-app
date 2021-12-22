@@ -12,6 +12,9 @@ const Footer = ({ variant }) => {
   const { t } = useTranslation();
   const classes = useStyles();
 
+  //Holders Data
+  const cadets = useSelector(state => state.holdersReducer.totalHolders || 0);
+
   //Buybacks Data
   const lastWeekBuybacks = useSelector(state => state.buybacksReducer.lastBuybacksTotal || 0);
   const potsPrice = useSelector(state => state.pricesReducer.prices['POTS'] || 0);
@@ -49,10 +52,10 @@ const Footer = ({ variant }) => {
             </Link>
           </Grid>
           <Grid item xs={12} className={classes.footerStats}>
-            <StatButton label={'HOLDERS'} value={'25.6K'} />
-            <StatButton label={'PRIZES'} value={'$' + totalFormatted} />
-            <StatButton label={'TVL'} value={'$' + tvl} />
-            <StatButton label={'BUYBACK'} value={'$' + lastWeekBuybackUSD} />
+            <StatButton label={t('footer.cadets')} value={cadets} />
+            <StatButton label={t('footer.prizes')} value={'$' + totalFormatted} />
+            <StatButton label={t('footer.tvl')} value={'$' + tvl} />
+            <StatButton label={t('footer.buybacks')} value={'$' + lastWeekBuybackUSD} />
           </Grid>
           <Grid className={classes.footerIcons} item xs={12}>
             <Link href={'https://github.com/moonpotdev'}>

@@ -41,6 +41,12 @@
     "audit": "Audit",
     "articles": "Articles"
   },
+  "footer": {
+    "cadets": "CADETS",
+    "prizes": "PRIZES",
+    "tvl": "TVL",
+    "buybacks": "BUYBACKS"
+  },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><wbr /> and a chance to win <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposits (TVL)",
   "homeJoinCommunityTitle": "Join the Community",

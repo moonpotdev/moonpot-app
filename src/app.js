@@ -91,6 +91,10 @@ export default function App() {
     dispatch(reduxActions.wallet.createWeb3Modal());
   }, [dispatch]);
 
+  React.useEffect(() => {
+    dispatch(reduxActions.holders.fetchHolders());
+  }, [dispatch]);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

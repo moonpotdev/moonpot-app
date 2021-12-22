@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Grid, makeStyles } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
+import { Container, makeStyles } from '@material-ui/core';
 import reduxActions from '../../redux/actions';
 import BigNumber from 'bignumber.js';
 import { isEmpty } from '../../../helpers/utils';
@@ -10,15 +9,12 @@ import NoPotsCard from './components/NoPotsCard/NoPotsCard';
 import Pot from './components/Pot/Pot';
 import { Cards } from '../../../components/Cards';
 import styles from './styles';
-import { RoutedButton } from '../../../components/Buttons/BaseButton';
-import clsx from 'clsx';
 import { ClaimableBonusNotification } from '../../../components/ClaimableBonusNotification';
 import { MigrationNotices } from '../Moonpots/components/MigrationNotices/MigrationNotices';
 
 const useStyles = makeStyles(styles);
 
 const MyPots = ({ selected, bottom }) => {
-  const { t } = useTranslation();
   const classes = useStyles();
   const { vault, prices } = useSelector(state => ({
     vault: state.vaultReducer,
@@ -78,24 +74,6 @@ const MyPots = ({ selected, bottom }) => {
   return (
     <React.Fragment>
       <Container maxWidth={false} style={{ padding: '0' }}>
-        {/* <Grid container spacing={2}>
-          <Grid item>
-            <RoutedButton
-              className={clsx(classes.button, { [classes.buttonActive]: selected === 'active' })}
-              to={{ pathname: '/my-moonpots', state: { tabbed: true } }}
-            >
-              {t('buttons.myActivePots')}
-            </RoutedButton>
-          </Grid>
-          <Grid item>
-            <RoutedButton
-              className={clsx(classes.button, { [classes.buttonActive]: selected === 'eol' })}
-              to={{ pathname: '/my-moonpots/eol', state: { tabbed: true } }}
-            >
-              {t('buttons.myPastPots')}
-            </RoutedButton>
-          </Grid>
-        </Grid> */}
         <div className={classes.potsContainer}>
           <div className={classes.spacer}>
             {selected === 'active' ? (
