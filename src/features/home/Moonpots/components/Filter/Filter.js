@@ -14,6 +14,11 @@ const PotTypes = [
     label: 'buttons.allPots',
   },
   {
+    key: 'xmas',
+    path: '/xmas',
+    label: 'buttons.xmasPots',
+  },
+  {
     key: 'main',
     path: '/main',
     label: 'buttons.mainPots',
