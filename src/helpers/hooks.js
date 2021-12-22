@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { byDecimals } from './format';
+import { byDecimals, formatDecimals } from './format';
 import { tokensByNetworkAddress } from '../config/tokens';
 import { useTranslation } from 'react-i18next';
 import { WALLET_CONNECT_DONE } from '../features/redux/constants';
@@ -98,8 +98,7 @@ export function useTokenAddressPrice(address, network = 'bsc') {
 
 export function usePot(id) {
   // TODO: replace state instead of update existing objects so we don't have to do this
-  const pots = useSelector(state => state.vaultReducer.pools);
-  return id in pots ? pots[id] : null;
+  return useSelector(state => state.vaultReducer.pools[id]);
 }
 
 export function usePots() {
@@ -195,4 +194,21 @@ export function useImpersonate() {
     },
     [dispatch]
   );
+}
+
+export function useDeposit(contractAddress, decimals, format = true) {
+  const address = useSelector(state => state.walletReducer.address);
+  const balance256 = useSelector(
+    state => state.balanceReducer.tokens[contractAddress + ':total']?.balance
+  );
+
+  return useMemo(() => {
+    if (address && balance256) {
+      return format
+        ? formatDecimals(byDecimals(balance256, decimals), 2)
+        : byDecimals(balance256, decimals);
+    }
+
+    return 0;
+  }, [address, balance256, decimals, format]);
 }

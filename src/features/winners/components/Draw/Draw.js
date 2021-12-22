@@ -8,7 +8,7 @@ import { tokensByNetworkAddress } from '../../../../config/tokens';
 import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
-import { formatAddressShort, getUnderylingToken } from '../../../../helpers/utils';
+import { formatAddressShort, getUnderylingToken, listJoin } from '../../../../helpers/utils';
 import { ErrorOutline } from '@material-ui/icons';
 import BigNumber from 'bignumber.js';
 import clsx from 'clsx';
@@ -160,16 +160,6 @@ const ValueWon = memo(function ({ currency, amount }) {
   );
 });
 
-const NFTWon = memo(function ({ name }) {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.valueWon}>
-      <Translate i18nKey="winners.valueWon" values={{ currency: '', amount: name }} />
-    </div>
-  );
-});
-
 const WonTokens = memo(function ({ winners }) {
   const classes = useStyles();
   const allTokens = new Set();
@@ -287,6 +277,77 @@ const UserWonDraw = memo(function ({ winners }) {
   return null;
 });
 
+const WonPrizeTokens = memo(function ({ totalPrizeValue, winners }) {
+  return (
+    <>
+      <ValueWon currency="$" amount={totalPrizeValue} />
+      <WonTokens winners={winners} />
+    </>
+  );
+});
+
+const WonPrizeNfts = memo(function ({ nfts }) {
+  const classes = useStyles();
+  const prizes = useMemo(() => listJoin(nfts, '???'), [nfts]);
+
+  return (
+    <div className={classes.valueWon}>
+      <Translate i18nKey="winners.valueWon" values={{ currency: '', amount: prizes }} />
+    </div>
+  );
+});
+
+const WonPrizeBoth = memo(function ({ nfts, totalPrizeValue, winners }) {
+  const classes = useStyles();
+  const amountFormatted = useMemo(
+    () =>
+      '$' +
+      totalPrizeValue.toLocaleString(undefined, {
+        maximumFractionDigits: 0,
+      }),
+    [totalPrizeValue]
+  );
+  const prizes = useMemo(
+    () => listJoin([amountFormatted, ...nfts], '???'),
+    [amountFormatted, nfts]
+  );
+
+  return (
+    <>
+      <div className={classes.valueWon}>
+        <Translate i18nKey="winners.valueWon" values={{ currency: '', amount: prizes }} />
+      </div>
+      <WonTokens winners={winners} />
+    </>
+  );
+});
+
+const WonPrize = memo(function ({ nfts, totalPrizeValue, winners }) {
+  const nftsWon = (nfts || [])
+    .filter(nft => {
+      for (const winner of winners) {
+        for (const award of winner.awards) {
+          if (award.isNFT && award.address.toLowerCase() === nft.address.toLowerCase()) {
+            return true;
+          }
+        }
+      }
+
+      return false;
+    })
+    .map(nft => nft.name);
+  const prizeNfts = totalPrizeValue <= 0 && nftsWon.length;
+  const prizeBoth = totalPrizeValue > 0 && nftsWon.length;
+
+  if (prizeNfts) {
+    return <WonPrizeNfts nfts={nftsWon} />;
+  } else if (prizeBoth) {
+    return <WonPrizeBoth totalPrizeValue={totalPrizeValue} winners={winners} nfts={nftsWon} />;
+  }
+
+  return <WonPrizeTokens totalPrizeValue={totalPrizeValue} winners={winners} />;
+});
+
 export const Draw = function ({ draw }) {
   const classes = useStyles();
   // console.log(draw.pot.id, draw.winners);
@@ -305,23 +366,13 @@ export const Draw = function ({ draw }) {
       <Grid container spacing={2} className={classes.rowLogoWonTotal}>
         <Grid item xs="auto">
           <Logo
-            baseToken={draw.pot.token}
+            icon={draw.pot.icon || draw.pot.id}
             sponsorToken={sponsorToken || draw.pot.sponsorToken}
-            type={draw.pot.vaultType}
           />
         </Grid>
         <Grid item xs="auto" className={classes.columnTitleValueWon}>
           <Title name={draw.pot.name} />
-          {draw.pot.vaultType === 'nft' ? (
-            <>
-              <NFTWon name={draw.pot.winToken || 'NFT'} />
-            </>
-          ) : (
-            <>
-              <ValueWon currency="$" amount={totalPrizeValue} />
-              <WonTokens winners={winners} />
-            </>
-          )}
+          <WonPrize nfts={draw.pot.nfts} winners={winners} totalPrizeValue={totalPrizeValue} />
         </Grid>
       </Grid>
       <UserWonDraw winners={draw.winners} />

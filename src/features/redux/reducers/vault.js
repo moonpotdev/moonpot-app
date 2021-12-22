@@ -19,7 +19,6 @@ const initialPools = () => {
       pool['apy'] = 0;
       pool['tvl'] = 0;
       pool['tokenPrice'] = 0;
-      pool['ppfs'] = 1;
       pool['fairplayFee'] =
         pool.fairplayTicketFee /
         (tokensByNetworkAddress[pool.network][pool.rewardAddress.toLowerCase()].stakedMultiplier ||
@@ -37,6 +36,11 @@ const initialPools = () => {
       pool['rewardPoolTotalSupply'] = ZERO;
       pool['numberOfWinners'] = new BigNumber(5);
       pool['totalTickets'] = '0';
+      pool['stakeMax'] = '0';
+      pool['isPrizeOnly'] =
+        !('interestBreakdown' in pool) ||
+        !('interest' in pool.interestBreakdown) ||
+        !pool.interestBreakdown.interest;
       pool['defaultOrder'] = defaultOrder++;
       pool.sponsors.forEach(sponsor => {
         sponsor.sponsorBalance = ZERO;

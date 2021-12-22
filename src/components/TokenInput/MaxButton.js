@@ -12,6 +12,7 @@ export const MaxButton = withStyles({
       greenStable: '#508276',
       greySide: '#51637B',
       purpleNft: '#501B4E',
+      purpleXmas: '#501B4E',
     }),
     '&:hover': {
       color: 'rgba(255, 255, 255, 0.95)',

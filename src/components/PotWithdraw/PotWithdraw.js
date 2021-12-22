@@ -20,6 +20,7 @@ import { TokenInput } from '../TokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { Alert, AlertText } from '../Alert';
 import { InfoOutlined } from '@material-ui/icons';
+import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
 
 const useStyles = makeStyles(styles);
 
@@ -69,13 +70,13 @@ const StatTimelock = memo(function ({ contractAddress }) {
 });
 
 const StatFee = memo(function ({
+  network,
   token,
   contractAddress,
-  ticketSymbol,
+  ticketAddress,
   tokenDecimals,
   fairplayDuration,
   fairplayTicketFee,
-  ppfs,
 }) {
   const { t } = useTranslation();
   const address = useSelector(state => state.walletReducer.address);
@@ -85,8 +86,11 @@ const StatFee = memo(function ({
   const timeleftUpdatedAt = useSelector(
     state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleftUpdated
   );
+  const ticket = tokensByNetworkAddress[network][ticketAddress.toLowerCase()];
+  const underlying = tokensByNetworkSymbol[network][ticket.underlyingToken];
+  const ppfs = useSelector(state => state.pricesReducer.ppfs[network]?.[underlying.address] || 1);
   const endsAt = (timeleftUpdatedAt + timeleft) * 1000;
-  const ticketBalance = useTokenBalance(ticketSymbol, tokenDecimals);
+  const ticketBalance = useTokenBalance(ticket.symbol, tokenDecimals);
 
   const fairnessFee = useMemo(() => {
     const timeLeft = endsAt - Date.now();
@@ -129,16 +133,20 @@ export const Stats = function ({ id }) {
         tokenDecimals={pot.tokenDecimals}
       />
       <BonusStats id={id} />
-      <StatTimelock contractAddress={pot.contractAddress} />
-      <StatFee
-        token={pot.token}
-        contractAddress={pot.contractAddress}
-        tokenDecimals={pot.tokenDecimals}
-        ticketSymbol={pot.rewardToken}
-        fairplayDuration={pot.fairplayDuration}
-        fairplayTicketFee={pot.fairplayTicketFee}
-        ppfs={pot.ppfs}
-      />
+      {pot.fairplayDuration > 0 ? (
+        <>
+          <StatTimelock contractAddress={pot.contractAddress} />
+          <StatFee
+            token={pot.token}
+            network={pot.network}
+            contractAddress={pot.contractAddress}
+            tokenDecimals={pot.tokenDecimals}
+            ticketAddress={pot.rewardAddress}
+            fairplayDuration={pot.fairplayDuration}
+            fairplayTicketFee={pot.fairplayTicketFee}
+          />
+        </>
+      ) : null}
     </div>
   );
 };
@@ -355,14 +363,16 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
           />
         </div>
       ) : null}
-      <div className={classes.fairplayNotice}>
-        <Translate i18nKey="withdraw.fairplayNotice" />{' '}
-        {onLearnMore ? (
-          <Link onClick={onLearnMore} className={classes.learnMore}>
-            <Translate i18nKey="buttons.learnMore" />
-          </Link>
-        ) : null}
-      </div>
+      {pot.fairplayDuration > 0 ? (
+        <div className={classes.fairplayNotice}>
+          <Translate i18nKey="withdraw.fairplayNotice" />{' '}
+          {onLearnMore ? (
+            <Link onClick={onLearnMore} className={classes.learnMore}>
+              <Translate i18nKey="buttons.learnMore" />
+            </Link>
+          ) : null}
+        </div>
+      ) : null}
     </>
   );
 };

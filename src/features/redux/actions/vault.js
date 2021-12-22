@@ -5,7 +5,6 @@ import { config } from '../../../config/config';
 import { compound, isEmpty, ZERO } from '../../../helpers/utils';
 import { byDecimals, formatTvl } from '../../../helpers/format';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
-import beefyVaultAbi from '../../../config/abi/beefyvault.json';
 
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 const ecr20Abi = require('../../../config/abi/erc20.json');
@@ -27,7 +26,7 @@ function timeLastDrawBefore(nextDraw, durationDays, beforeWhen) {
   return nextDraw;
 }
 
-function calculateZiggyPrediction(ziggy, others, prices) {
+function calculateZiggyPrediction(ziggy, others, pricesByNetworkAddress) {
   const nowSeconds = Date.now() / 1000;
   const drawCutoff = 5 * 60; // 5 minutes - bot should automate it
 
@@ -86,7 +85,7 @@ function calculateZiggyPrediction(ziggy, others, prices) {
 
             prizes = sponsorToken.lp.map(symbol => {
               const partToken = tokensByNetworkSymbol[pot.network][symbol];
-              const partTokenPrice = prices[partToken.oracleId] || 0;
+              const partTokenPrice = pricesByNetworkAddress[pot.network]?.[partToken.address] || 0;
 
               return {
                 token: partToken,
@@ -100,7 +99,7 @@ function calculateZiggyPrediction(ziggy, others, prices) {
 
           // Convert everything that isn't BUSD or POTS to BUSD
           const BUSD = tokensByNetworkSymbol[pot.network]['BUSD'];
-          const BUSDPrice = prices[BUSD.oracleId] || 1;
+          const BUSDPrice = pricesByNetworkAddress[pot.network]?.[BUSD.address] || 1;
           const convertedPrizes = prizes.map(prize => {
             if (prize.token.symbol !== 'POTS' && prize.token.symbol !== 'BUSD') {
               prize.token = BUSD;
@@ -212,7 +211,7 @@ function calculateProjectedPotAward(
   };
 }
 
-function calculateProjections(pots, prices) {
+function calculateProjections(pots, pricesByNetworkAddress) {
   const activePots = Object.values(pots).filter(
     pot => pot.id !== 'pots' && pot.status === 'active'
   );
@@ -250,7 +249,7 @@ function calculateProjections(pots, prices) {
   }
 
   // Ziggy's Pot
-  pots['pots'] = calculateZiggyPrediction(pots['pots'], activePots, prices);
+  pots['pots'] = calculateZiggyPrediction(pots['pots'], activePots, pricesByNetworkAddress);
 
   return pots;
 }
@@ -272,7 +271,7 @@ const getPools = async (items, state, dispatch) => {
   console.log('redux getPools processing...');
   const web3 = state.walletReducer.rpc;
   const pools = { ...state.vaultReducer.pools }; // need new object ref so filters can re-run when any pool changes
-  const prices = state.pricesReducer.prices;
+  const pricesByNetworkAddress = state.pricesReducer.byNetworkAddress;
   const apy = state.pricesReducer.apy;
 
   const multicall = [];
@@ -305,6 +304,7 @@ const getPools = async (items, state, dispatch) => {
       id: pool.id,
       awardBalance: gateContract.methods.awardBalance(),
       totalValueLocked: gateContract.methods.TVL(),
+      stakeMax: gateContract.methods.stakeMax(),
     };
 
     if ('bonuses' in pool) {
@@ -353,18 +353,6 @@ const getPools = async (items, state, dispatch) => {
       id: pool.id,
       prizePoolBalance: prizePoolContract.methods.balance(),
     });
-
-    // === PPFS TODO: use ppfs from prices instead
-    if ('mooTokenAddress' in pool && pool.mooTokenAddress) {
-      const mooTokenContract = new web3[pool.network].eth.Contract(
-        beefyVaultAbi,
-        pool.mooTokenAddress
-      );
-      mooToken[pool.network].push({
-        id: pool.id,
-        ppfs: mooTokenContract.methods.getPricePerFullShare(),
-      });
-    }
 
     // Rewardpool
     if ('rewardPool' in pool && pool.rewardPool) {
@@ -415,10 +403,11 @@ const getPools = async (items, state, dispatch) => {
 
       const tokenDecimals = new BigNumber(10).exponentiatedBy(pool.tokenDecimals);
       const fullAwardBalance = new BigNumber(item.awardBalance || '0').dividedBy(tokenDecimals);
-      const awardPrice = pool.oracleId in prices ? prices[pool.oracleId] : 0;
+      const awardPrice = pricesByNetworkAddress[pool.network]?.[pool.tokenAddress] || 0;
       const awardBalance = fullAwardBalance.times(awardMultiplier);
       const awardBalanceUsd = awardBalance.times(awardPrice);
 
+      pool.stakeMax = item.stakeMax;
       pool.tokenPrice = awardPrice;
       pool.awardBalance = awardBalance;
       pool.awardBalanceUsd = awardBalanceUsd;
@@ -445,7 +434,7 @@ const getPools = async (items, state, dispatch) => {
           .map(bonusConfig => {
             const rewardInfo = item['rewardInfo_' + bonusConfig.id];
             if (rewardInfo) {
-              return calculateBoost(rewardInfo, pool, prices, bonusConfig);
+              return calculateBoost(rewardInfo, pool, pricesByNetworkAddress, bonusConfig);
             }
 
             return null;
@@ -484,8 +473,7 @@ const getPools = async (items, state, dispatch) => {
     if (!isEmpty(item.sponsorBalance)) {
       pool.sponsors = pool.sponsors.map(sponsor => {
         if (sponsor.sponsorToken === item.sponsorToken) {
-          const sponsorPrice =
-            sponsor.sponsorOracleId in prices ? prices[sponsor.sponsorOracleId] : 0;
+          const sponsorPrice = pricesByNetworkAddress[pool.network]?.[sponsor.sponsorAddress] || 0;
           const sponsorBalance = new BigNumber(item.sponsorBalance);
           const sponsorBalanceUsd = sponsorBalance.times(new BigNumber(sponsorPrice));
           const decimals = new BigNumber(10).exponentiatedBy(sponsor.sponsorTokenDecimals);
@@ -504,12 +492,6 @@ const getPools = async (items, state, dispatch) => {
     // === PrizePool
     if (!isEmpty(item.prizePoolBalance)) {
       pool.prizePoolBalance = item.prizePoolBalance;
-    }
-
-    // === mooToken
-    if (!isEmpty(item.ppfs)) {
-      const ppfs = new BigNumber(item.ppfs || 1).dividedBy(new BigNumber(10).exponentiatedBy(18));
-      pool.ppfs = ppfs.toNumber();
     }
 
     // == rewardPool
@@ -549,7 +531,7 @@ const getPools = async (items, state, dispatch) => {
     totalTvl = totalTvl.plus(pool.totalStakedUsd);
   }
 
-  const poolsWithProjections = calculateProjections(pools, prices);
+  const poolsWithProjections = calculateProjections(pools, pricesByNetworkAddress);
   const projectedTotalPrizesAvailable =
     calculateProjectedTotalPrizesAvailable(poolsWithProjections);
 
@@ -687,7 +669,7 @@ function calculatePrizePoolInterestMultiplier(pot, prizeKey = 'prize') {
   return 0;
 }
 
-function calculateBoost(rewardInfo, pool, prices, config) {
+function calculateBoost(rewardInfo, pool, pricesByNetworkAddress, config) {
   const now = Date.now() / 1000;
   const periodFinish = new BigNumber(rewardInfo[2]);
   const alwaysActive = config.alwaysActive === true;
@@ -699,7 +681,7 @@ function calculateBoost(rewardInfo, pool, prices, config) {
     const compoundable =
       pool.compoundApy === true && boostAddress === pool.tokenAddress.toLowerCase();
     const boostDecimals = new BigNumber(10).exponentiatedBy(boostData.decimals);
-    const boostPrice = boostData.oracleId in prices ? prices[boostData.oracleId] : 0;
+    const boostPrice = pricesByNetworkAddress[pool.network]?.[boostAddress] || 0;
     const boostRate = new BigNumber(rewardInfo[3]);
     const boostYearly = boostRate.times(3600).times(24).times(365);
     const boostYearlyUsd = boostYearly.times(boostPrice).dividedBy(boostDecimals);

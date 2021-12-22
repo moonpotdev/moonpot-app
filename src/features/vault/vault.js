@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect } from 'react';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import { Redirect, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, makeStyles, Typography } from '@material-ui/core';
@@ -12,54 +12,59 @@ import { PoweredByBeefy } from '../../components/PoweredByBeefy';
 import clsx from 'clsx';
 import { Translate } from '../../components/Translate';
 import SidePotExplainer from '../../components/SidePotExplainer/SidePotExplainer';
+import { listJoin } from '../../helpers/utils';
 
 const useStyles = makeStyles(styles);
 
 const VaultTitle = memo(function ({
   className,
   token,
-  sponsorToken,
   baseApy,
   bonusApy,
   awardBalanceUsd,
   totalSponsorBalanceUsd,
-  vaultType,
+  nfts,
+  isPrizeOnly,
+  nftPrizeOnly,
 }) {
+  const hasNftPrize = nfts && nfts.length > 0;
+  const hasTokenPrize = !nftPrizeOnly;
+  const hasTokenInterest = !isPrizeOnly;
+
   const hasBaseApy = typeof baseApy === 'number' && baseApy > 0;
   const hasBonusApy = typeof bonusApy === 'number' && bonusApy > 0;
   const totalApy = (hasBaseApy ? baseApy : 0) + (hasBonusApy ? bonusApy : 0);
   const totalPrize = useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd);
+  const prizes = useMemo(() => {
+    const out = [];
+
+    if (hasTokenPrize) {
+      out.push('$' + formatDecimals(totalPrize, 0));
+    }
+
+    if (hasNftPrize) {
+      nfts.forEach(nft => out.push(nft.name));
+    }
+
+    if (out.length) {
+      return listJoin(out);
+    }
+
+    return '???';
+  }, [hasTokenPrize, totalPrize, hasNftPrize, nfts]);
+
+  const titleKey = hasTokenInterest ? 'vaultTitle' : 'vaultTitlePrizeOnly';
 
   return (
     <Typography className={clsx(className)}>
-      {vaultType === 'side' ? (
-        <Translate
-          i18nKey="vaultTitleSide"
-          values={{
-            token,
-            currency: '$',
-            amount: formatDecimals(totalPrize, 0),
-          }}
-        />
-      ) : vaultType === 'nft' ? (
-        <Translate
-          i18nKey="vaultTitleNFT"
-          values={{
-            token,
-            sponsor: sponsorToken,
-          }}
-        />
-      ) : (
-        <Translate
-          i18nKey="vaultTitle"
-          values={{
-            token,
-            apy: formatDecimals(totalApy, 2),
-            currency: '$',
-            amount: formatDecimals(totalPrize, 0),
-          }}
-        />
-      )}
+      <Translate
+        i18nKey={titleKey}
+        values={{
+          token,
+          apy: formatDecimals(totalApy, 2),
+          prizes,
+        }}
+      />
     </Typography>
   );
 });
@@ -68,12 +73,30 @@ function isInvalidPot(pot) {
   return !pot || pot.status !== 'active';
 }
 
-const Vault = () => {
-  const { id } = useParams();
-  const classes = useStyles();
+const VaultDataLoader = memo(function VaultDataLoader({ id }) {
   const dispatch = useDispatch();
   const address = useSelector(state => state.walletReducer.address);
   const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
+
+  useEffect(() => {
+    if (id && pricesLastUpdated > 0) {
+      dispatch(reduxActions.vault.fetchPools());
+    }
+  }, [dispatch, id, pricesLastUpdated]);
+
+  useEffect(() => {
+    if (id && address) {
+      dispatch(reduxActions.balance.fetchBalances(id));
+      dispatch(reduxActions.earned.fetchEarned(id));
+    }
+  }, [dispatch, id, address]);
+
+  return null;
+});
+
+const Vault = () => {
+  const { id } = useParams();
+  const classes = useStyles();
   const fairplayRef = React.useRef(null);
   const pot = usePot(id);
 
@@ -82,19 +105,6 @@ const Vault = () => {
       window.scrollTo(0, fairplayRef.current.offsetTop);
     }
   }, [fairplayRef]);
-
-  useEffect(() => {
-    if (pot && pricesLastUpdated > 0) {
-      dispatch(reduxActions.vault.fetchPools());
-    }
-  }, [dispatch, pot, pricesLastUpdated]);
-
-  useEffect(() => {
-    if (pot && address) {
-      dispatch(reduxActions.balance.fetchBalances(pot));
-      dispatch(reduxActions.earned.fetchEarned(pot));
-    }
-  }, [dispatch, pot, address]);
 
   if (isInvalidPot(pot)) {
     return <Redirect to="/" />;
@@ -113,21 +123,25 @@ const Vault = () => {
       return 'greySideAlt';
     } else if (vaultType === 'nft') {
       return 'purpleNftAlt';
+    } else if (vaultType === 'xmas') {
+      return 'purpleXmasAlt';
     }
   }
 
   return (
     <div className="App">
+      <VaultDataLoader id={id} />
       <Container maxWidth="lg">
         <VaultTitle
           className={classes.mainTitle}
           token={pot.token}
-          sponsorToken={pot.sponsorToken}
+          nftPrizeOnly={pot.nftPrizeOnly}
+          isPrizeOnly={pot.isPrizeOnly}
+          nfts={pot.nfts}
           bonusApy={pot.bonusApy}
           baseApy={pot.apy}
           totalSponsorBalanceUsd={pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd}
           awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
-          vaultType={pot.vaultType}
         />
         <PoweredByBeefy className={classes.poweredBy} />
         {pot.vaultType === 'side' ? <SidePotExplainer /> : null}

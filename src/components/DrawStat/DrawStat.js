@@ -22,7 +22,9 @@ export const DrawStat = memo(function ({ i18nKey, tooltip, labelClass, valueClas
 
 export const DrawStatNextDraw = memo(function ({ duration, ...rest }) {
   const i18nKey = useMemo(() => {
-    if (duration >= 28) {
+    if (duration === 'once') {
+      return 'pot.statNextDrawOnce';
+    } else if (duration >= 28) {
       return 'pot.statNextDrawMonthly';
     } else if (duration >= 14) {
       return 'pot.statNextDrawBiWeekly';

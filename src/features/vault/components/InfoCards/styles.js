@@ -23,6 +23,19 @@ const styles = theme => ({
     marginTop: '8px',
     fontWeight: 'bold',
   },
+  merchShowcase: {
+    marginBottom: '1em',
+    textAlign: 'center',
+    '& figure': {
+      padding: '0',
+      margin: '0',
+      width: '100%',
+      display: 'block',
+    },
+    '& img': {
+      maxWidth: '100%',
+    },
+  },
   link: {
     color: '#F3BA2E',
     textDecoration: 'none',

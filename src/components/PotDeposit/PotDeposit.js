@@ -1,8 +1,8 @@
 import { Link, makeStyles } from '@material-ui/core';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles';
-import { bigNumberTruncate, convertAmountToRawNumber } from '../../helpers/format';
+import { bigNumberTruncate, byDecimals, convertAmountToRawNumber } from '../../helpers/format';
 import reduxActions from '../../features/redux/actions';
 import Steps from '../../features/vault/components/Steps';
 import { isEmpty, ZERO } from '../../helpers/utils';
@@ -10,8 +10,9 @@ import { TokenInput } from '../TokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
-import { usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
+import { useDeposit, usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
 import { Translate } from '../Translate';
+import BigNumber from 'bignumber.js';
 
 const useStyles = makeStyles(styles);
 
@@ -70,6 +71,16 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const pot = usePot(id);
   const address = useSelector(state => state.walletReducer.address);
   const balance = useTokenBalance(pot.token, pot.tokenDecimals);
+  const stakeMax = useMemo(
+    () => byDecimals(pot.stakeMax, pot.tokenDecimals),
+    [pot.stakeMax, pot.tokenDecimals]
+  );
+  const alreadyStaked = useDeposit(pot.contractAddress, pot.tokenDecimals, false);
+  const availableToStake = useMemo(
+    () => (stakeMax.gte(ZERO) ? BigNumber.min(balance, stakeMax.minus(alreadyStaked)) : balance),
+    [balance, stakeMax, alreadyStaked]
+  );
+  const hasTokenBalance = balance.gt(ZERO);
   const allowance = useTokenAllowance(pot.contractAddress, pot.token, pot.tokenDecimals);
   const [inputValue, setInputValue] = useState('');
   const [depositAmount, setDepositAmount] = useState(() => ZERO);
@@ -81,6 +92,17 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
     items: [],
     finished: false,
   }));
+
+  const setIsMax = useCallback(
+    isMax => {
+      if (isMax) {
+        setIsDepositAll(availableToStake.eq(balance));
+      } else {
+        setIsDepositAll(false);
+      }
+    },
+    [setIsDepositAll, availableToStake, balance]
+  );
 
   const handleDeposit = () => {
     const steps = [];
@@ -125,8 +147,8 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   useEffect(() => {
     const value = bigNumberTruncate(inputValue, 8);
     setDepositAmount(value);
-    setCanDeposit(address && balance.gt(0) && value.gt(0));
-  }, [inputValue, address, balance]);
+    setCanDeposit(address && hasTokenBalance && value.gt(0) && value.lte(availableToStake));
+  }, [inputValue, address, hasTokenBalance, availableToStake]);
 
   return (
     <>
@@ -135,9 +157,9 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
           variant={variant}
           token={pot.token}
           value={inputValue}
-          max={balance}
+          max={availableToStake}
           setValue={setInputValue}
-          setIsMax={setIsDepositAll}
+          setIsMax={setIsMax}
         />
       </div>
       <div className={classes.buttonHolder}>
@@ -170,17 +192,27 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
           onFinish={handleStepsClose}
         />
       </div>
-      <div className={classes.fairplayNotice}>
-        <Translate
-          i18nKey="deposit.fairplayNotice"
-          values={{ duration: pot.fairplayDuration, fee: pot.fairplayFee * 100 }}
-        />{' '}
-        {onLearnMore ? (
-          <Link onClick={onLearnMore} className={classes.learnMore}>
-            <Translate i18nKey="buttons.learnMore" />
-          </Link>
-        ) : null}
-      </div>
+      {stakeMax.gt(ZERO) ? (
+        <div className={classes.maximumDepositNotice}>
+          <Translate
+            i18nKey="deposit.maximumDepositNotice"
+            values={{ amount: stakeMax.toString(10), token: pot.token }}
+          />
+        </div>
+      ) : null}
+      {pot.fairplayDuration > 0 ? (
+        <div className={classes.fairplayNotice}>
+          <Translate
+            i18nKey="deposit.fairplayNotice"
+            values={{ duration: pot.fairplayDuration, fee: pot.fairplayFee * 100 }}
+          />{' '}
+          {onLearnMore ? (
+            <Link onClick={onLearnMore} className={classes.learnMore}>
+              <Translate i18nKey="buttons.learnMore" />
+            </Link>
+          ) : null}
+        </div>
+      ) : null}
     </>
   );
 };

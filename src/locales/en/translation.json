@@ -39,9 +39,8 @@
   "homeTotalDeposits": "Total Deposits (TVL)",
   "homeJoinCommunityTitle": "Join the Community",
   "homeJoinCommunityBody": "You can suggest a new pot in one of our channels, or join our devs to build one for your favourite project.",
-  "vaultTitle": "Deposit <span>{{token}}</span>, earn <span>{{apy}}% APY</span><wbr /> and a chance to win <span>{{currency}}{{amount}}</span>",
-  "vaultTitleSide": "Deposit <span>{{token}}</span>, and be entered for a chance to win <span>{{currency}}{{amount}}</span>",
-  "vaultTitleNFT": "Stake <span>{{token}}</span> and be entered for a chance to win an <span>{{sponsor}} NFT</span>",
+  "vaultTitle": "Deposit <span>{{token}}</span>, earn <span>{{apy}}% APY</span><wbr /> and a chance to win <span>{{prizes}}</span>",
+  "vaultTitlePrizeOnly": "Deposit <span>{{token}}</span>, and be entered for a chance to win <span>{{prizes}}</span>",
   "playWithMoonpot": "Play with Moonpot",
   "youHaventEnteredMoonpots": "You haven't entered any Moonpots yet.",
   "youHaventEnteredRetiredMoonpots": "You are not entered in any retired Moonpots.",
@@ -70,6 +69,7 @@
     "winTotalTokensIn": "in ",
     "stakeToken": "Stake <span>{{token}}</span>",
     "statNextDraw": "Next Draw",
+    "statNextDrawOnce": "One-Time Draw",
     "statNextDrawDaily": "Next Daily Draw",
     "statNextDrawWeekly": "Next Weekly Draw",
     "statNextDrawBiWeekly": "Next Bi-Weekly Draw",
@@ -82,8 +82,8 @@
     "statDeposit": "Your Deposit",
     "prizeDraw": "Prize Draw",
     "closed": "Closed",
-    "prizeSplitNFT": "Prize Split",
-    "prizeSplit": "Projected Prize Split",
+    "prizeSplit": "Prize Split",
+    "prizeSplitProjected": "Projected Prize Split",
     "prizeSplitToolTip": "Live projection based on current TVL and interest rate",
     "prizeSplitWinner": "{{count}} Winning Ticket",
     "prizeSplitWinner_plural": "{{count}} Winning Tickets",
@@ -187,6 +187,37 @@
           }
         }
       },
+      "xmas-strategy": {
+        "title": "{{name}} Pot",
+        "xmas-pots": {
+          "body": [
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim maximus auctor. Sed euismod fringilla dui, quis scelerisque libero consectetur quis. Praesent nec eros molestie tellus placerat bibendum sed sit amet mauris. Nulla ut tristique nunc. In hac habitasse platea dictumst. Etiam non nulla accumsan risus condimentum ultrices.",
+            "Phasellus ac pharetra augue. Nulla tempus risus sapien, non rhoncus leo sagittis non. Nunc pretium ex ac lorem pharetra venenatis. Praesent gravida nisi massa, iaculis pretium urna hendrerit at. Suspendisse eleifend venenatis magna a dapibus. Aenean pharetra ante ipsum, nec faucibus nibh commodo id."
+          ],
+          "merch": {
+            "beefy-moonpot-tshirt-front.png": { "title": "T-Shirt - Front" },
+            "beefy-moonpot-tshirt-back.png": { "title": "T-Shirt - Back" }
+          }
+        },
+        "xmas-moobifi": {
+          "body": [
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim maximus auctor. Sed euismod fringilla dui, quis scelerisque libero consectetur quis. Praesent nec eros molestie tellus placerat bibendum sed sit amet mauris. Nulla ut tristique nunc. In hac habitasse platea dictumst. Etiam non nulla accumsan risus condimentum ultrices.",
+            "Phasellus ac pharetra augue. Nulla tempus risus sapien, non rhoncus leo sagittis non. Nunc pretium ex ac lorem pharetra venenatis. Praesent gravida nisi massa, iaculis pretium urna hendrerit at. Suspendisse eleifend venenatis magna a dapibus. Aenean pharetra ante ipsum, nec faucibus nibh commodo id."
+          ],
+          "merch": {
+            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+          }
+        },
+        "xmas-moochristmasbeefy": {
+          "body": [
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim maximus auctor. Sed euismod fringilla dui, quis scelerisque libero consectetur quis. Praesent nec eros molestie tellus placerat bibendum sed sit amet mauris. Nulla ut tristique nunc. In hac habitasse platea dictumst. Etiam non nulla accumsan risus condimentum ultrices.",
+            "Phasellus ac pharetra augue. Nulla tempus risus sapien, non rhoncus leo sagittis non. Nunc pretium ex ac lorem pharetra venenatis. Praesent gravida nisi massa, iaculis pretium urna hendrerit at. Suspendisse eleifend venenatis magna a dapibus. Aenean pharetra ante ipsum, nec faucibus nibh commodo id."
+          ],
+          "merch": {
+            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+          }
+        }
+      },
       "earnings": {
         "title": "Strategy Breakdown",
         "tokenInterest": "Your {{token}} Interest",
@@ -229,6 +260,7 @@
     "allToken": "Deposit All {{token}}",
     "amountToken": "Deposit {{amount}} {{token}}",
     "fairplayNotice": "There's a {{duration}} day Fairplay Timelock. If you want to withdraw earlier you’ll pay a {{fee}}%, or less, Fairness Fee. The fee reduces every second.",
+    "maximumDepositNotice": "Maximum total deposit: {{amount}} {{token}}",
     "eolNotice": {
       "title": "Pot Retired",
       "message": "You can no longer deposit in to this pot."
