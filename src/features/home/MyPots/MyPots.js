@@ -78,7 +78,7 @@ const MyPots = ({ selected, bottom }) => {
   return (
     <React.Fragment>
       <Container maxWidth={false} style={{ padding: '0' }}>
-        <Grid container spacing={2}>
+        {/* <Grid container spacing={2}>
           <Grid item>
             <RoutedButton
               className={clsx(classes.button, { [classes.buttonActive]: selected === 'active' })}
@@ -95,7 +95,7 @@ const MyPots = ({ selected, bottom }) => {
               {t('buttons.myPastPots')}
             </RoutedButton>
           </Grid>
-        </Grid>
+        </Grid> */}
         <div className={classes.potsContainer}>
           <div className={classes.spacer}>
             {selected === 'active' ? (

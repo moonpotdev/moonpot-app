@@ -69,6 +69,19 @@ const sortByTypes = [
   },
 ];
 
+const mySortByTypes = [
+  {
+    key: 'active',
+    path: 'active',
+    label: 'buttons.myActivePots',
+  },
+  {
+    key: 'eol',
+    path: 'eol',
+    label: 'buttons.myPastPots',
+  },
+];
+
 const iconComponent = props => {
   return (
     <ExpandMoreIcon
@@ -99,10 +112,22 @@ const Filter = ({ className, selected }) => {
   };
 
   React.useEffect(() => {
+    //Push path for my pots page
     if (top === 'my-moonpots') {
-      history.push('/my-moonpots/' + currentPath);
+      //Check for valid filter selection, if not set to default for section
+      if (currentSort === 'active' || currentSort === 'eol') {
+        history.push('/my-moonpots/' + currentPath + '/' + currentSort);
+      } else {
+        setCurrentSort('active');
+        history.push('/my-moonpots/' + currentPath + '/active');
+      }
     } else {
-      history.push('/' + currentPath + '/' + currentSort);
+      if (currentSort !== 'active' && currentSort !== 'eol') {
+        history.push('/' + currentPath + '/' + currentSort);
+      } else {
+        setCurrentSort('default');
+        history.push('/' + currentPath + '/default');
+      }
     }
   }, [currentPath, currentSort, history, top]);
 
@@ -158,14 +183,23 @@ const Filter = ({ className, selected }) => {
             getContentAnchorEl: null,
           }}
         >
-          {sortByTypes.map(type => (
-            <MenuItem key={type.key} value={type.path}>
-              <div style={{ display: 'flex' }}>
-                <Typography className={classes.selectLabel}>{t('sortBy')}&nbsp;</Typography>
-                <Typography className={classes.selectValue}>{t(type.label)}</Typography>
-              </div>
-            </MenuItem>
-          ))}
+          {top !== 'my-moonpots'
+            ? sortByTypes.map(type => (
+                <MenuItem key={type.key} value={type.path}>
+                  <div style={{ display: 'flex' }}>
+                    <Typography className={classes.selectLabel}>{t('sortBy')}&nbsp;</Typography>
+                    <Typography className={classes.selectValue}>{t(type.label)}</Typography>
+                  </div>
+                </MenuItem>
+              ))
+            : mySortByTypes.map(type => (
+                <MenuItem key={type.key} value={type.path}>
+                  <div style={{ display: 'flex' }}>
+                    <Typography className={classes.selectLabel}>{t('sortBy')}&nbsp;</Typography>
+                    <Typography className={classes.selectValue}>{t(type.label)}</Typography>
+                  </div>
+                </MenuItem>
+              ))}
         </Select>
       </Grid>
     </div>
