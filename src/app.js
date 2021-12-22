@@ -27,9 +27,8 @@ function Pages() {
         <Route
           exact
           path={[
-            '/:bottom(all|main|lp|stable|community|side|nft)?',
             '/:bottom(all|main|lp|stable|community|side|nft)?/:filter(default|next-draw|prize|apy)?',
-            '/:top(my-moonpots)/:bottom(eol)?',
+            '/:top(my-moonpots)/:bottom(all|main|lp|stable|community|side|nft)?/:filter(active|eol)?',
           ]}
         >
           <Home />

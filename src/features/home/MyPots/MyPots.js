@@ -17,7 +17,7 @@ import { MigrationNotices } from '../Moonpots/components/MigrationNotices/Migrat
 
 const useStyles = makeStyles(styles);
 
-const MyPots = ({ selected }) => {
+const MyPots = ({ selected, bottom }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const { vault, prices } = useSelector(state => ({
@@ -33,6 +33,10 @@ const MyPots = ({ selected }) => {
 
     const check = item => {
       if (item.status !== selected) {
+        return false;
+      }
+
+      if (item.vaultType !== bottom && bottom !== 'all') {
         return false;
       }
 
@@ -56,7 +60,7 @@ const MyPots = ({ selected }) => {
     }
 
     return data;
-  }, [selected, vault.pools, tokenBalances, walletAddress]);
+  }, [selected, vault.pools, tokenBalances, walletAddress, bottom]);
 
   useEffect(() => {
     if (prices.lastUpdated > 0) {

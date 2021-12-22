@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import styles from './styles';
 import clsx from 'clsx';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles(styles);
 
@@ -68,13 +69,22 @@ const sortByTypes = [
   },
 ];
 
+const iconComponent = props => {
+  return (
+    <ExpandMoreIcon
+      style={{ color: '#8F8FBC' }}
+      className={props.className + ' ' + useStyles.icon}
+    />
+  );
+};
+
 const Filter = ({ className, selected }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const history = useHistory();
 
   //Get params from route
-  let { filter, bottom } = useParams();
+  let { filter, bottom, top } = useParams();
   //Current pot type
   const [currentPath, setCurrentPath] = useState(bottom || 'all');
   //Current filter type
@@ -89,8 +99,12 @@ const Filter = ({ className, selected }) => {
   };
 
   React.useEffect(() => {
-    history.push('/' + currentPath + '/' + currentSort);
-  }, [currentPath, currentSort, history]);
+    if (top === 'my-moonpots') {
+      history.push('/my-moonpots/' + currentPath);
+    } else {
+      history.push('/' + currentPath + '/' + currentSort);
+    }
+  }, [currentPath, currentSort, history, top]);
 
   return (
     <div className={classes.buttonsOuterContainer}>
@@ -101,6 +115,7 @@ const Filter = ({ className, selected }) => {
           onChange={handlePathChange}
           value={currentPath}
           disableUnderline
+          IconComponent={iconComponent}
           MenuProps={{
             classes: { paper: classes.menuStyle },
             anchorOrigin: {
@@ -129,6 +144,7 @@ const Filter = ({ className, selected }) => {
           onChange={handleSortChange}
           value={currentSort}
           disableUnderline
+          IconComponent={iconComponent}
           MenuProps={{
             classes: { paper: classes.menuStyle },
             anchorOrigin: {

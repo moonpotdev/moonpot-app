@@ -13,21 +13,24 @@ import Filter from './components/Filter';
 const useStyles = makeStyles(styles);
 
 function useSelectedParams() {
-  let { top, bottom } = useParams();
+  let { top, bottom, filter } = useParams();
   if (!top) {
     top = 'moonpots';
   }
 
   if (!bottom) {
-    bottom = top === 'moonpots' ? 'all' : 'active';
+    bottom = 'all';
   }
 
-  return { top, bottom };
+  if (!filter) {
+    filter = top === 'moonpots' ? 'all' : 'active';
+  }
+  return { top, bottom, filter };
 }
 
 const Home = () => {
   const classes = useStyles();
-  const { top, bottom } = useSelectedParams();
+  const { top, bottom, filter } = useSelectedParams();
 
   return (
     <Container maxWidth={false} style={{ padding: '0', overflow: 'hidden' }}>
@@ -46,7 +49,11 @@ const Home = () => {
             <Filter selected={bottom} />
           </Grid>
         </Grid>
-        {top === 'moonpots' ? <Moonpots selected={bottom} /> : <MyPots selected={bottom} />}
+        {top === 'moonpots' ? (
+          <Moonpots selected={bottom} />
+        ) : (
+          <MyPots selected={filter} bottom={bottom} />
+        )}
       </div>
     </Container>
   );
