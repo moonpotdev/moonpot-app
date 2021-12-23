@@ -444,6 +444,7 @@
     "symbol": "Ziggyverse NFT",
     "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
     "type": "nft",
+    "subtype": "erc1155",
     "decimals": 0
   },
   {
@@ -498,6 +499,7 @@
     "symbol": "Beefy x Moonpot Merch NFT",
     "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
     "type": "nft",
+    "subtype": "erc721",
     "decimals": 0
   }
 ]

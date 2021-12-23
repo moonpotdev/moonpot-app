@@ -25,7 +25,7 @@
       {
         "name": "T-Shirt NFT",
         "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
-        "type": "erc1155"
+        "type": "erc721"
       }
     ],
     "bonuses": []
@@ -68,7 +68,7 @@
       {
         "name": "Hoodie NFT",
         "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
-        "type": "erc1155"
+        "type": "erc721"
       }
     ],
     "bonuses": []
@@ -111,7 +111,7 @@
       {
         "name": "Hoodie NFT",
         "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
-        "type": "erc1155"
+        "type": "erc721"
       }
     ],
     "bonuses": []
