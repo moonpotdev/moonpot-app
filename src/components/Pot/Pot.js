@@ -14,7 +14,7 @@ import {
 } from '../../helpers/hooks';
 import { DrawStat, DrawStatNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
-import { investmentOdds, listJoin, variantClass, ZERO } from '../../helpers/utils';
+import { investmentOdds, listJoin, ZERO } from '../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import styles from './styles';
 import { getPotIconSrc } from '../../helpers/getPotIconSrc';

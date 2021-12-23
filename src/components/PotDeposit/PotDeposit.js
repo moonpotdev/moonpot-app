@@ -77,7 +77,10 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   );
   const alreadyStaked = useDeposit(pot.contractAddress, pot.tokenDecimals, false);
   const availableToStake = useMemo(
-    () => (stakeMax.gte(ZERO) ? BigNumber.min(balance, stakeMax.minus(alreadyStaked)) : balance),
+    () =>
+      stakeMax.gt(ZERO)
+        ? BigNumber.min(balance, BigNumber.max(ZERO, stakeMax.minus(alreadyStaked)))
+        : balance,
     [balance, stakeMax, alreadyStaked]
   );
   const hasTokenBalance = balance.gt(ZERO);
