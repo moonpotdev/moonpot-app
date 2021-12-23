@@ -192,8 +192,9 @@
         "title": "{{name}} Pot",
         "xmas-pots": {
           "body": [
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim maximus auctor. Sed euismod fringilla dui, quis scelerisque libero consectetur quis. Praesent nec eros molestie tellus placerat bibendum sed sit amet mauris. Nulla ut tristique nunc. In hac habitasse platea dictumst. Etiam non nulla accumsan risus condimentum ultrices.",
-            "Phasellus ac pharetra augue. Nulla tempus risus sapien, non rhoncus leo sagittis non. Nunc pretium ex ac lorem pharetra venenatis. Praesent gravida nisi massa, iaculis pretium urna hendrerit at. Suspendisse eleifend venenatis magna a dapibus. Aenean pharetra ante ipsum, nec faucibus nibh commodo id."
+            "Being part of the cowmoonity not only feels cool, it also looks cool.",
+            "By participating in this Christmas Pot you have a chance of winning a limited edition t-shirt from Beefy Store.",
+            "This Pot contains 70 NFTs which can be exchanged for a promo code to order a free t-shirt from Beefy Store. Stake POTS to participate, draw every day, until 31st Dec."
           ],
           "merch": {
             "beefy-moonpot-tshirt-front.png": { "title": "T-Shirt - Front" },
@@ -202,8 +203,9 @@
         },
         "xmas-moobifi": {
           "body": [
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim maximus auctor. Sed euismod fringilla dui, quis scelerisque libero consectetur quis. Praesent nec eros molestie tellus placerat bibendum sed sit amet mauris. Nulla ut tristique nunc. In hac habitasse platea dictumst. Etiam non nulla accumsan risus condimentum ultrices.",
-            "Phasellus ac pharetra augue. Nulla tempus risus sapien, non rhoncus leo sagittis non. Nunc pretium ex ac lorem pharetra venenatis. Praesent gravida nisi massa, iaculis pretium urna hendrerit at. Suspendisse eleifend venenatis magna a dapibus. Aenean pharetra ante ipsum, nec faucibus nibh commodo id."
+            "Being part of the cowmoonity not only feels cool, it also looks cool.",
+            "By participating in this Christmas Pot you have a chance of winning a limited edition hoodie from Beefy Store, POTS and BIFI tokens. Three prizes for every winning ticket.",
+            "This Pot contains 125 NFTs which can be exchanged for a promo code to order a free hoodie from Beefy Store, along with a prize of BIFI and POTS. Stake mooBIFI to participate, draw on 31st Dec."
           ],
           "merch": {
             "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
@@ -211,8 +213,9 @@
         },
         "xmas-moochristmasbeefy": {
           "body": [
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim maximus auctor. Sed euismod fringilla dui, quis scelerisque libero consectetur quis. Praesent nec eros molestie tellus placerat bibendum sed sit amet mauris. Nulla ut tristique nunc. In hac habitasse platea dictumst. Etiam non nulla accumsan risus condimentum ultrices.",
-            "Phasellus ac pharetra augue. Nulla tempus risus sapien, non rhoncus leo sagittis non. Nunc pretium ex ac lorem pharetra venenatis. Praesent gravida nisi massa, iaculis pretium urna hendrerit at. Suspendisse eleifend venenatis magna a dapibus. Aenean pharetra ante ipsum, nec faucibus nibh commodo id."
+            "Being part of the cowmoonity not only feels cool, it also looks cool.",
+            "By participating in this Christmas Pot you have a chance of winning a limited edition hoodie from Beefy Store, POTS and BIFI tokens. Three prizes for every winning ticket.",
+            "This Pot contains 15 NFTs which can be exchanged for a promo code to order a free hoodie from Beefy Store, along with a prize of BIFI and POTS. Stake mooChristmasBeefy to participate, draw on 31st Dec."
           ],
           "merch": {
             "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }

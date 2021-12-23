@@ -51,7 +51,7 @@ export const PrimaryButton = withStyles({
         greenStable: '#508276',
         greySide: '#47566B',
         purpleNft: '#ab63a6',
-        purpleXmas: '#a39ed9',
+        purpleXmas: '#D0CEE3',
       }),
     },
   },
