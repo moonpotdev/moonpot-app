@@ -41,7 +41,7 @@
   "homeJoinCommunityBody": "您可以通过以下官方社交媒体渠道，告诉我们您对于新增月盒的建议，或者加入我们的开发团队，为您喜爱的项目创建新的月盒。",
   "vaultTitle": "存入 <span>{{token}}</span>, 获得 <span>{{apy}}% APY</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
   "vaultTitleSide": "存入 <span>{{token}}</span>, 即有机会抱走奖金 <span>{{currency}}{{amount}}</span>",
-  "vaultTitleNFT": "Stake <span>{{token}}</span> and be entered for a chance to win an <span>{{sponsor}} NFT</span>",
+  "vaultTitleNFT": "质押 <span>{{token}}</span>，即有机会赢取一个 <span>{{sponsor}} NFT</span>",
   "playWithMoonpot": "使用Moonpot进行游戏",
   "youHaventEnteredMoonpots": "您尚未参与任何月盒.",
   "youHaventEnteredRetiredMoonpots": "您未参与任何已退役的月盒。",
@@ -166,8 +166,27 @@
               "rarity": "110 / 150"
             }
           }
-        }
       },
+      "ziggyverse-agility-nft": {
+          "body": [
+            "这是 Moonpot 学员们新旅程的开始。收集和铸造 Ziggy 在旅途中发现的神秘瓦片，并在未来使用它们来铸造异国的生物以用于耕种和战斗。"
+          ],
+          "rarities": {
+            "gold": {
+              "name": "敏捷性 - 金色",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "敏捷性 - 月光石",
+              "rarity": "40 / 100"
+            },
+            "jade": {
+              "name": "敏捷性 - 玉",
+              "rarity": "110 / 150"
+            }
+          }
+        }
+      },  
       "earnings": {
         "title": "收益明细",
         "tokenInterest": "您的 {{token}} 利息",
@@ -220,8 +239,10 @@
         "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
         "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
       ],
-      "4belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"],
-      "beltbnb": ["ZAP 可让您创建 beltBNB 代币并只通过一笔交易进行存款。"],
+      "4belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
+      ],
+      "beltbnb": [
+       "ZAP 可让您创建 beltBNB 代币并只通过一笔交易进行存款。"],
       "ibalpaca": ["ZAP 可让您创建 ibALPACA 代币并只通过一笔交易进行存款。"]
     },
     "inYourWallet": "您的钱包里有",
