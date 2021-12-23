@@ -493,5 +493,11 @@
     "decimals": 18,
     "underlyingToken": "POTS",
     "stakedMultiplier": 1
+  },
+  {
+    "symbol": "Beefy x Moonpot Merch NFT",
+    "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
+    "type": "nft",
+    "decimals": 0
   }
 ]
