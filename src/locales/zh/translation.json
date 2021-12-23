@@ -40,7 +40,7 @@
   "homeJoinCommunityTitle": "加入我们的社群",
   "homeJoinCommunityBody": "您可以通过以下官方社交媒体渠道，告诉我们您对于新增月盒的建议，或者加入我们的开发团队，为您喜爱的项目创建新的月盒。",
   "vaultTitle": "存入 <span>{{token}}</span>, 获得 <span>{{apy}}% APY</span><br /> 还有机会抱走奖金<span>{{prizes}}</span>",
-  "vaultTitlePrizeOnly": "存入 <span>{{token}}</span>, 即有机会抱走奖金 <span>{{prizes}}</span>",
+  "vaultTitleSide": "存入 <span>{{token}}</span>, 即有机会抱走奖金 <span>{{prizes}}</span>",
   "playWithMoonpot": "使用Moonpot进行游戏",
   "youHaventEnteredMoonpots": "您尚未参与任何月盒.",
   "youHaventEnteredRetiredMoonpots": "您未参与任何已退役的月盒。",
@@ -162,6 +162,25 @@
             },
             "jade": {
               "name": "盔甲 - 玉",
+              "rarity": "110 / 150"
+            }
+          }
+        },
+        "ziggyverse-agility-nft": {
+          "body": [
+            "这是 Moonpot 学员们新旅程的开始。收集和铸造 Ziggy 在旅途中发现的神秘瓦片，并在未来使用它们来铸造异国的生物以用于耕种和战斗。"
+          ],
+          "rarities": {
+            "gold": {
+              "name": "敏捷性 - 金色",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "敏捷性 - 月光石",
+              "rarity": "40 / 100"
+            },
+            "jade": {
+              "name": "敏捷性 - 玉",
               "rarity": "110 / 150"
             }
           }
