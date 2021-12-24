@@ -674,8 +674,8 @@ function calculateBoost(rewardInfo, pool, pricesByNetworkAddress, config) {
   const periodFinish = new BigNumber(rewardInfo[2]);
   const alwaysActive = config.alwaysActive === true;
   const isActive = periodFinish > now || alwaysActive;
-  const boostAddress = rewardInfo[0].toLowerCase();
-  const boostData = tokensByNetworkAddress[pool.network][boostAddress];
+  const boostAddress = rewardInfo[0];
+  const boostData = tokensByNetworkAddress[pool.network][boostAddress.toLowerCase()];
 
   if (isActive) {
     const compoundable =
