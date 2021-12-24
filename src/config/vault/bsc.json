@@ -189,6 +189,11 @@
         "id": 1,
         "symbol": "POTS",
         "display": "bonus"
+      },
+      {
+        "id": 2,
+        "symbol": "MILK",
+        "display": "superBoost"
       }
     ]
   },

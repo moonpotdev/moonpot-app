@@ -453,5 +453,12 @@
     "decimals": 18,
     "underlyingToken": "POTS",
     "stakedMultiplier": 1
+  },
+  {
+    "symbol": "MILK",
+    "address": "0xBf37f781473f3b50E82C668352984865eac9853f",
+    "type": "single",
+    "oracleId": "MILK",
+    "decimals": 18
   }
 ]
