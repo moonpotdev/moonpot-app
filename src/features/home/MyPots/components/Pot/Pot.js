@@ -27,7 +27,7 @@ const Pot = function ({ item }) {
           style={{ marginBottom: '24px' }}
           onClick={() => history.push(`/pot/${item.id}`)}
         >
-          <Logo baseToken={item.token} sponsorToken={item.sponsorToken} type={item.vaultType} />
+          <Logo icon={item.icon || item.id} sponsorToken={item.sponsorToken} />
         </Grid>
         {/*Pot Title*/}
         <PotTitle item={item} />

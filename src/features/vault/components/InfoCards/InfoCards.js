@@ -134,6 +134,59 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
   );
 });
 
+const XmasStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
+  const bodyKey = `pot.infocards.xmas-strategy.${pot.id}.body`;
+  const body = i18n.exists(bodyKey)
+    ? t(bodyKey, {
+        returnObjects: true,
+        token: pot.token,
+        name: pot.name,
+      })
+    : null;
+
+  const merchKey = `pot.infocards.xmas-strategy.${pot.id}.merch`;
+  const merch = i18n.exists(merchKey)
+    ? t(merchKey, {
+        returnObjects: true,
+      })
+    : null;
+
+  return (
+    <>
+      <Card variant="purpleInfo" className={classes.strategy}>
+        <CardTitle>{t('pot.infocards.xmas-strategy.title', { name: pot.name })}</CardTitle>
+        {body ? body.map((text, i) => <p key={i}>{text}</p>) : null}
+        {merch ? (
+          <Grid container spacing={1} className={classes.merchShowcase}>
+            {Object.entries(merch).map(([filename, item]) => (
+              <Grid item key={filename} xs>
+                <figure>
+                  <img
+                    src={require(`../../../../images/merch/${filename}`).default}
+                    alt={item.title}
+                  />
+                  <figcaption>{item.title}</figcaption>
+                </figure>
+              </Grid>
+            ))}
+          </Grid>
+        ) : null}
+        <p>
+          <a
+            href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
+            rel="noreferrer"
+            target="_blank"
+            className={classes.link}
+          >
+            {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
+            <OpenInNew fontSize="inherit" />
+          </a>
+        </p>
+      </Card>
+    </>
+  );
+});
+
 const InterestBreakdownInfoCard = memo(function ({ pot, classes, t }) {
   if (!pot.interestBreakdown) {
     return null;
@@ -251,6 +304,7 @@ const cardComponentMap = {
   fairplay: FairplayInfoCard,
   'nft-strategy': NFTStrategyInfoCard,
   'nft-fairplay': NFTFairplayInfoCard,
+  'xmas-strategy': XmasStrategyInfoCard,
 };
 
 export const InfoCards = memo(function ({ id, className, fairplayRef }) {

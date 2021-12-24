@@ -27,7 +27,7 @@ function Pages() {
         <Route
           exact
           path={[
-            '/:bottom(all|main|lp|stable|community|side|nft)?',
+            '/:bottom(all|xmas|main|lp|stable|community|side|nft)?',
             '/:top(my-moonpots)/:bottom(eol)?',
           ]}
         >

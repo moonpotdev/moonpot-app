@@ -39,9 +39,8 @@
   "homeTotalDeposits": "Total Deposit (TVL)",
   "homeJoinCommunityTitle": "Bergabung dengan komunitas",
   "homeJoinCommunityBody": "Anda dapat menyarankan pot baru di salah satu saluran kami, atau bergabung dengan pengembang kami untuk membangun salah satu project favorit anda.",
-  "vaultTitle": "Depositkan <span>{{token}}</span>, Hasilkan <span>{{apy}}% APY</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
-  "vaultTitleSide": "Depositkan <span>{{token}}</span>, Dan dapatkan sebuah kesempatan untuk memenangkan <span>{{currency}}{{amount}}</span>",
-  "vaultTitleNFT": "Stake <span>{{token}}</span> and be entered for a chance to win an <span>{{sponsor}} NFT</span>",
+  "vaultTitle": "Depositkan <span>{{token}}</span>, Hasilkan <span>{{apy}}% APY</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>{{prizes}}</span>",
+  "vaultTitlePrizeOnly": "Depositkan <span>{{token}}</span>, Dan dapatkan sebuah kesempatan untuk memenangkan <span>{{prizes}}</span>",
   "playWithMoonpot": "Bermain dengan Moonpot",
   "youHaventEnteredMoonpots": "Anda belum masuk ke Moonpots manapun.",
   "youHaventEnteredRetiredMoonpots": "Anda belum masuk ke Moonpots yang tidak aktif.",
@@ -82,8 +81,8 @@
     "statDeposit": "Deposit Anda",
     "prizeDraw": "Undian Hadiah",
     "closed": "Ditutup",
-    "prizeSplitNFT": "Prize Split",
-    "prizeSplit": "Proyeksi Pembagian Hadiah",
+    "prizeSplit": "Prize Split",
+    "prizeSplitProjected": "Proyeksi Pembagian Hadiah",
     "prizeSplitToolTip": "Proyeksi langsung berdasarkan TVL saat ini dan suku bunga",
     "prizeSplitWinner": "{{count}} Pemenang",
     "prizeSplitWinner_plural": "{{count}} Tiket Pemenang",
@@ -205,7 +204,7 @@
           "Deposit/menyetorkan lebih banyak {{token}} akan menyetel ulang biaya Fairness Anda hingga maksimum {{fairplayFee}}%, untuk deposit tambahan Anda.",
           "Jika Anda memenangkan hadiah, Biaya Fairness Anda akan diatur ulang menjadi {{ticketFee}}% dan dikurangi menjadi nol selama {{duration}} hari setelah Anda memenangkan hadiah.",
           "Langkah-langkah ini dapat mencegah pelaku jahat memanipulasi pengundian hadiah."
-          ],
+        ],
         "bodyNFT": [
           "Timelock Fairplay tersedia untuk menjamin keadilan bagi semua Cadet. Ini berlangsung 72 jam untuk Pot NFT harian dan 10 hari untuk Pot NFT mingguan.",
           "Penarikan lebih awal akan dikenakan Biaya Fairness hingga 2,5% untuk mendanai APY Ziggy Pot."
@@ -242,8 +241,12 @@
       "4belt": [
         "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi."
       ],
-      "beltbnb": ["ZAP memungkinkan Anda membuat token beltBNB dan Deposit hanya dengan satu transaksi."],
-      "ibalpaca": ["ZAP memungkinkan Anda membuat token ibALPACA dan Deposit hanya dengan satu transaksi."]
+      "beltbnb": [
+        "ZAP memungkinkan Anda membuat token beltBNB dan Deposit hanya dengan satu transaksi."
+      ],
+      "ibalpaca": [
+        "ZAP memungkinkan Anda membuat token ibALPACA dan Deposit hanya dengan satu transaksi."
+      ]
     },
     "inYourWallet": "Di dompet Anda",
     "provider": "Penyedia likuiditas"

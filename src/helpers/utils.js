@@ -5,6 +5,7 @@ import { tokensByNetworkSymbol } from '../config/tokens';
 let trimReg = /(^\s*)|(\s*$)/g;
 
 export const ZERO = new BigNumber(0);
+export const ONE = new BigNumber(1);
 
 export function isEmpty(key) {
   if (key === undefined || key === '' || key === null) {
@@ -127,4 +128,12 @@ export function getUnderylingToken(token) {
   }
 
   return token;
+}
+
+export function listJoin(list, emptyValue = '', sep = ', ', final = ' & ') {
+  if (list && list.length > 0) {
+    return list.length > 1 ? list.slice(0, -1).join(sep) + final + list[list.length - 1] : list[0];
+  }
+
+  return emptyValue;
 }

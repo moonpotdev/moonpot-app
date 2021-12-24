@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
 import { Grid, makeStyles } from '@material-ui/core';
-import { Pot as BasePot, PrizeSplit, NFTPrizeSplit } from '../../../../components/Pot/Pot';
+import { Pot as BasePot, PrizeSplit } from '../../../../components/Pot/Pot';
 import { ZapPotDeposit } from '../../../../components/ZapPotDeposit/ZapPotDeposit';
 import styles from './styles';
 import { PotDeposit } from '../../../../components/PotDeposit';
@@ -19,9 +19,9 @@ const PrizeSplitInner = memo(function ({
   awardBalance,
   awardBalanceUsd,
   baseToken,
-  count,
   sponsors,
-  isNftPot,
+  nfts,
+  nftPrizeOnly,
   numberOfWinners,
 }) {
   const classes = useStyles();
@@ -29,20 +29,18 @@ const PrizeSplitInner = memo(function ({
   return (
     <Grid container>
       <Grid item xs={3}>
-        <Translate i18nKey="pot.prizeSplitWinner" values={{ count: count }} />
+        <Translate i18nKey="pot.prizeSplitWinner" values={{ count: numberOfWinners }} />
       </Grid>
       <Grid item xs={9} className={classes.prizeSplitValue}>
-        {isNftPot ? (
-          <NFTPrizeSplit numberOfWinners={numberOfWinners} />
-        ) : (
-          <PrizeSplit
-            baseToken={baseToken}
-            awardBalance={awardBalance}
-            awardBalanceUsd={awardBalanceUsd}
-            sponsors={sponsors}
-            numberOfWinners={count}
-          />
-        )}
+        <PrizeSplit
+          baseToken={baseToken}
+          awardBalance={awardBalance}
+          awardBalanceUsd={awardBalanceUsd}
+          sponsors={sponsors}
+          numberOfWinners={numberOfWinners}
+          nfts={nfts}
+          nftPrizeOnly={nftPrizeOnly}
+        />
       </Grid>
     </Grid>
   );
@@ -107,6 +105,8 @@ function handleVariant(vaultType) {
     return 'greySide';
   } else if (vaultType === 'nft') {
     return 'purpleNft';
+  } else if (vaultType === 'xmas') {
+    return 'purpleXmas';
   }
 
   // default/main
@@ -115,21 +115,20 @@ function handleVariant(vaultType) {
 
 const Bottom = function ({ id, onFairplayLearnMore, variant }) {
   const pot = usePot(id);
-  const isNftPot = pot.vaultType === 'nft';
 
   return (
     <CardAccordionGroup>
       <CardAccordionItem
-        titleKey={isNftPot ? 'pot.prizeSplitNFT' : 'pot.prizeSplit'}
-        tooltip={!isNftPot && <TooltipWithIcon i18nKey={'pot.prizeSplitToolTip'} />}
+        titleKey={pot.isPrizeOnly ? 'pot.prizeSplit' : 'pot.prizeSplitProjected'}
+        tooltip={pot.isPrizeOnly ? null : <TooltipWithIcon i18nKey={'pot.prizeSplitToolTip'} />}
       >
         <PrizeSplitInner
-          count={pot.numberOfWinners}
           baseToken={pot.token}
           awardBalance={pot.projectedAwardBalance || pot.awardBalance}
           awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
           sponsors={pot.projectedSponsors || pot.sponsors}
-          isNftPot={isNftPot}
+          nftPrizeOnly={pot.nftPrizeOnly}
+          nfts={pot.nfts}
           numberOfWinners={pot.numberOfWinners}
         />
       </CardAccordionItem>

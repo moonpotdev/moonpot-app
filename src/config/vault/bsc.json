@@ -1,5 +1,122 @@
 [
   {
+    "id": "xmas-pots",
+    "name": "Ziggy's Xmas",
+    "theme": "xmas",
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketPOTSChristmas",
+    "rewardAddress": "0xe7f07A75A0E1E138bA9B1E1a3Ef241c33450b43B",
+    "contractAddress": "0xfda459b09Bd39460A4640210a9a49fBACCbb3AB2",
+    "prizePoolAddress": "0xD3e7B4Da5938EC2E598Be0b7a87a93196a836a4C",
+    "prizeStrategyAddress": "0x9bE0FF9709c3dE78b9608215Dee2DaEE60E31903",
+    "vaultType": "xmas",
+    "duration": 1,
+    "fairplayDuration": 0,
+    "fairplayTicketFee": 0,
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "infoCards": ["xmas-strategy"],
+    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "T-Shirt NFT",
+        "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
+        "type": "erc721"
+      }
+    ],
+    "bonuses": []
+  },
+  {
+    "id": "xmas-moobifi",
+    "name": "mooBIFI Xmas",
+    "theme": "xmas",
+    "token": "mooBIFI",
+    "tokenAddress": "0xf7069e41C57EcC5F122093811d8c75bdB5f7c14e",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketmooBIFIChristmas",
+    "rewardAddress": "0x5B76F59D1A9Eb70B3961bc70b28Ea5e7e9400E49",
+    "contractAddress": "0x65b3F4780fd12f7acf3b060C0e8a4C975bebfC00",
+    "prizePoolAddress": "0x80f34481Caae2518A0f2d8ec7ecEc356E30200c2",
+    "prizeStrategyAddress": "0x06bfc4f035141F120580f2b3fAAd10A87e10c66e",
+    "vaultType": "xmas",
+    "duration": "once",
+    "fairplayDuration": 0,
+    "fairplayTicketFee": 0,
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "infoCards": ["xmas-strategy"],
+    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BIFI",
+        "sponsorOracleId": "BIFI",
+        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "nfts": [
+      {
+        "name": "Hoodie NFT",
+        "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
+        "type": "erc721"
+      }
+    ],
+    "bonuses": []
+  },
+  {
+    "id": "xmas-moochristmasbeefy",
+    "name": "mooChristmasBeefy Xmas",
+    "theme": "xmas",
+    "token": "mooChristmasBeefy",
+    "tokenAddress": "0xA1448795fc2489EadAF5e90d8c7d4cbdc8EF5D19",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketmooChristmasBeefyChristmas",
+    "rewardAddress": "0x73Ad14BE0eDC8E3979B5b5C351acB697616846fD",
+    "contractAddress": "0x5a5cca50711E2548f230E0CfbF8275fF02b69F4A",
+    "prizePoolAddress": "0x7a504f1dda61Cbc3D5E4AaEA7Ca8c857d6303D8C",
+    "prizeStrategyAddress": "0x903bF786CaBB83A7c7DD4afa14E4Fc2569b0A908",
+    "vaultType": "xmas",
+    "duration": "once",
+    "fairplayDuration": 0,
+    "fairplayTicketFee": 0,
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "infoCards": ["xmas-strategy"],
+    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BIFI",
+        "sponsorOracleId": "BIFI",
+        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "nfts": [
+      {
+        "name": "Hoodie NFT",
+        "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
+        "type": "erc721"
+      }
+    ],
+    "bonuses": []
+  },
+  {
     "id": "pots",
     "name": "Ziggy's",
     "token": "POTS",
@@ -36,51 +153,9 @@
         "sponsorTokenDecimals": 18
       },
       {
-        "sponsorToken": "CAKE",
-        "sponsorOracleId": "Cake",
-        "sponsorAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "BANANA",
-        "sponsorOracleId": "BANANA",
-        "sponsorAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "BIFI",
-        "sponsorOracleId": "BIFI",
-        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
-        "sponsorTokenDecimals": 18
-      },
-      {
         "sponsorToken": "BUSD",
         "sponsorOracleId": "BUSD",
         "sponsorAddress": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "WBNB",
-        "sponsorOracleId": "WBNB",
-        "sponsorAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "PACOCA",
-        "sponsorOracleId": "PACOCA",
-        "sponsorAddress": "0x55671114d774ee99D653D6C12460c780a67f1D18",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "xBLZD",
-        "sponsorOracleId": "xBLZD",
-        "sponsorAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "BABY",
-        "sponsorOracleId": "BABY",
-        "sponsorAddress": "0x53E562b9B7E5E94b81f10e96Ee70Ad06df3D2657",
         "sponsorTokenDecimals": 18
       }
     ]
@@ -88,7 +163,7 @@
   {
     "id": "ziggyverse-agility-nft",
     "name": "Ziggyverse NFT",
-    "winToken": "Ziggyverse Agility NFT",
+    "icon": "ziggyverse",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
@@ -97,7 +172,6 @@
     "contractAddress": "0xce6f016bCfD2EE7da66F33Ff5E66eF3fB1D7316B",
     "prizePoolAddress": "0xBF28F3320fE54085f5a5A2E93B64858C5d995d43",
     "prizeStrategyAddress": "0x4a905E141F19c53f3588a9d12A94f579e66631d4",
-    "pricePerShare": 1,
     "oracleId": "POTS",
     "apyId": "pots-pots",
     "vaultType": "nft",
@@ -111,12 +185,20 @@
     "infoCardStrategy": "ziggyverse-agility",
     "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
     "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "Ziggyverse Agility NFT",
+        "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
+        "type": "erc1155"
+      }
+    ],
     "bonuses": []
   },
   {
     "id": "ziggyverse-armour-nft",
     "name": "Ziggyverse NFT",
-    "winToken": "Ziggyverse Armour NFT",
+    "icon": "ziggyverse",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
@@ -125,7 +207,6 @@
     "contractAddress": "0x33bD1Abce7A4862b6f69fb83160e031d4b52f539",
     "prizePoolAddress": "0x58e338F27D5574B16e3e61062a31ADe00a816558",
     "prizeStrategyAddress": "0xC0ecc09E561E114AEa20612EA4f6eb457935b58d",
-    "pricePerShare": 1,
     "oracleId": "POTS",
     "apyId": "pots-pots",
     "vaultType": "nft",
@@ -139,6 +220,14 @@
     "infoCardStrategy": "ziggyverse-armour",
     "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
     "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "Ziggyverse Armour NFT",
+        "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
+        "type": "erc1155"
+      }
+    ],
     "bonuses": []
   },
   {
@@ -564,97 +653,6 @@
         "sponsorOracleId": "POTS",
         "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
-      }
-    ]
-  },
-  {
-    "id": "pots-v2",
-    "name": "Ziggy's",
-    "token": "POTS",
-    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketPotsV2",
-    "rewardAddress": "0xeA32bB31A4a5Ab38226c5824FB54D4e271a3253a",
-    "contractAddress": "0x1f491F500C64118d6435A3387ff4A8a1749a8C28",
-    "prizePoolAddress": "0x24B18744d1B79F21056aF8CB0789c39d28014478",
-    "prizeStrategyAddress": "0xa10519eFE8E4fa5507D47A15Bcbeb7fb30F923B1",
-    "oracleId": "POTS",
-    "compoundApy": true,
-    "vaultType": "main",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "status": "eol",
-    "eolDrawNumber": 3,
-    "migrationNeeded": true,
-    "migrationContractAddress": "0x1F50ff82b414d4822FFB2B24939C4Bd931A5fee0",
-    "migrationRewardAddress": "0xCd3941d4825c08991b98930ef18062f6df2959d4",
-    "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/ziggy-s-pot-redeployment/",
-    "supportsClaimAllBonuses": true,
-    "infoCardStrategy": "ziggy",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "CAKE",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "CAKE",
-        "sponsorOracleId": "Cake",
-        "sponsorAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "BANANA",
-        "sponsorOracleId": "BANANA",
-        "sponsorAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "BIFI",
-        "sponsorOracleId": "BIFI",
-        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "BUSD",
-        "sponsorOracleId": "BUSD",
-        "sponsorAddress": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "WBNB",
-        "sponsorOracleId": "WBNB",
-        "sponsorAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "PACOCA",
-        "sponsorOracleId": "PACOCA",
-        "sponsorAddress": "0x55671114d774ee99D653D6C12460c780a67f1D18",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "xBLZD",
-        "sponsorOracleId": "xBLZD",
-        "sponsorAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "POTS",
-        "display": "earned",
-        "alwaysActive": true
-      },
-      {
-        "id": 1,
-        "symbol": "WBNB",
-        "display": "superBoost"
       }
     ]
   },
@@ -1120,8 +1118,101 @@
     ]
   },
   {
+    "id": "pots-v2",
+    "pots": "pots",
+    "name": "Ziggy's",
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketPotsV2",
+    "rewardAddress": "0xeA32bB31A4a5Ab38226c5824FB54D4e271a3253a",
+    "contractAddress": "0x1f491F500C64118d6435A3387ff4A8a1749a8C28",
+    "prizePoolAddress": "0x24B18744d1B79F21056aF8CB0789c39d28014478",
+    "prizeStrategyAddress": "0xa10519eFE8E4fa5507D47A15Bcbeb7fb30F923B1",
+    "oracleId": "POTS",
+    "compoundApy": true,
+    "vaultType": "main",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "status": "eol",
+    "eolDrawNumber": 3,
+    "migrationNeeded": true,
+    "migrationContractAddress": "0x1F50ff82b414d4822FFB2B24939C4Bd931A5fee0",
+    "migrationRewardAddress": "0xCd3941d4825c08991b98930ef18062f6df2959d4",
+    "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/ziggy-s-pot-redeployment/",
+    "supportsClaimAllBonuses": true,
+    "infoCardStrategy": "ziggy",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "CAKE",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "CAKE",
+        "sponsorOracleId": "Cake",
+        "sponsorAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BANANA",
+        "sponsorOracleId": "BANANA",
+        "sponsorAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BIFI",
+        "sponsorOracleId": "BIFI",
+        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BUSD",
+        "sponsorOracleId": "BUSD",
+        "sponsorAddress": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "WBNB",
+        "sponsorOracleId": "WBNB",
+        "sponsorAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "PACOCA",
+        "sponsorOracleId": "PACOCA",
+        "sponsorAddress": "0x55671114d774ee99D653D6C12460c780a67f1D18",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "xBLZD",
+        "sponsorOracleId": "xBLZD",
+        "sponsorAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "POTS",
+        "display": "earned",
+        "alwaysActive": true
+      },
+      {
+        "id": 1,
+        "symbol": "WBNB",
+        "display": "superBoost"
+      }
+    ]
+  },
+  {
     "id": "pots-v1",
     "name": "Ziggy's",
+    "pots": "pots",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
@@ -1176,6 +1267,7 @@
   {
     "id": "cake-v3",
     "name": "CAKE",
+    "icon": "cake",
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
     "tokenDecimals": 18,
@@ -1235,6 +1327,7 @@
   {
     "id": "cake-v2",
     "name": "CAKE",
+    "icon": "cake",
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
     "tokenDecimals": 18,
@@ -1294,6 +1387,7 @@
   {
     "id": "cake-v1",
     "name": "CAKE",
+    "icon": "cake",
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
     "tokenDecimals": 18,

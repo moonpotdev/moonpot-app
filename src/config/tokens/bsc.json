@@ -444,6 +444,7 @@
     "symbol": "Ziggyverse NFT",
     "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
     "type": "nft",
+    "subtype": "erc1155",
     "decimals": 0
   },
   {
@@ -460,5 +461,52 @@
     "type": "single",
     "oracleId": "MILK",
     "decimals": 18
+  },
+  {
+    "symbol": "mooBIFI",
+    "address": "0xf7069e41C57EcC5F122093811d8c75bdB5f7c14e",
+    "type": "moo",
+    "decimals": 18,
+    "underlyingToken": "BIFI",
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "moonTicketmooBIFIChristmas",
+    "address": "0x5B76F59D1A9Eb70B3961bc70b28Ea5e7e9400E49",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "mooBIFI",
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "mooChristmasBeefy",
+    "address": "0xA1448795fc2489EadAF5e90d8c7d4cbdc8EF5D19",
+    "type": "fixed",
+    "price": 1,
+    "decimals": 18,
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "moonTicketmooChristmasBeefyChristmas",
+    "address": "0x73Ad14BE0eDC8E3979B5b5C351acB697616846fD",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "mooChristmasBeefy",
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "moonTicketPOTSChristmas",
+    "address": "0xe7f07A75A0E1E138bA9B1E1a3Ef241c33450b43B",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "Beefy x Moonpot Merch NFT",
+    "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
   }
 ]

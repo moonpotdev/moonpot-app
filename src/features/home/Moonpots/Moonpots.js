@@ -15,6 +15,25 @@ import SidePotExplainer from '../../../components/SidePotExplainer/SidePotExplai
 
 const useStyles = makeStyles(styles);
 
+function handleVariant(vaultType) {
+  if (vaultType === 'community') {
+    return 'blueCommunity';
+  } else if (vaultType === 'lp') {
+    return 'green';
+  } else if (vaultType === 'stable') {
+    return 'greenStable';
+  } else if (vaultType === 'side') {
+    return 'greySide';
+  } else if (vaultType === 'nft') {
+    return 'purpleNft';
+  } else if (vaultType === 'xmas') {
+    return 'purpleXmas';
+  }
+
+  // default/main
+  return 'tealLight';
+}
+
 const Moonpots = ({ selected }) => {
   const dispatch = useDispatch();
   const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
@@ -35,23 +54,6 @@ const Moonpots = ({ selected }) => {
       dispatch(reduxActions.balance.fetchBalances());
     }
   }, [dispatch, address]);
-
-  function handleVariant(vaultType) {
-    if (vaultType === 'community') {
-      return 'blueCommunity';
-    } else if (vaultType === 'lp') {
-      return 'green';
-    } else if (vaultType === 'stable') {
-      return 'greenStable';
-    } else if (vaultType === 'side') {
-      return 'greySide';
-    } else if (vaultType === 'nft') {
-      return 'purpleNft';
-    }
-
-    // default/main
-    return 'tealLight';
-  }
 
   return (
     <React.Fragment>

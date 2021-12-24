@@ -200,6 +200,12 @@ const getBalances = async (pools, state, dispatch) => {
 
 const getBalancesSingle = async (item, state, dispatch) => {
   console.log('redux getBalancesSingle() processing...');
+
+  // Allow calling by id
+  if (typeof item === 'string' && item in state.vaultReducer.pools) {
+    item = state.vaultReducer.pools[item];
+  }
+
   return await getBalances({ [item.id]: item }, state, dispatch);
 };
 
