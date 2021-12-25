@@ -23,15 +23,15 @@ function derivePrice(token, tokens, prices, ppfs) {
       return ppfs[token.network][token.address] * derivePrice(underlying, tokens, prices, ppfs);
     }
 
-    if (token.type === 'fixed') {
-      if (!(token.price in token)) {
-        throw new Error(`Fixed "price" not found for ${token.symbol}/${token.address}`);
-      }
+    return derivePrice(underlying, tokens, prices, ppfs);
+  }
 
-      return token.price;
+  if (token.type === 'fixed') {
+    if (!('price' in token)) {
+      throw new Error(`Fixed "price" not found for ${token.symbol}/${token.address}`);
     }
 
-    return derivePrice(underlying, tokens, prices, ppfs);
+    return token.price;
   }
 
   if (!token.oracleId) {
