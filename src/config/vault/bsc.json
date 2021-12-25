@@ -1119,7 +1119,7 @@
   },
   {
     "id": "pots-v2",
-    "pots": "pots",
+    "icon": "pots",
     "name": "Ziggy's",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
@@ -1212,7 +1212,7 @@
   {
     "id": "pots-v1",
     "name": "Ziggy's",
-    "pots": "pots",
+    "icon": "pots",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
