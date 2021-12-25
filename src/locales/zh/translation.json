@@ -7,6 +7,7 @@
     "myPastPots": "使用过的月盒",
     "allPots": "所有月盒",
     "mainPots": "核心",
+    "xmasPots": "圣诞",
     "communityPots": "社群",
     "lpPots": "LP",
     "stablePots": "稳定币",
@@ -69,6 +70,7 @@
     "winTotalTokensIn": "的 ",
     "stakeToken": "质押 <span>{{token}}</span>",
     "statNextDraw": "下次抽奖",
+    "statNextDrawOnce": "一次性抽奖",
     "statNextDrawDaily": "距下一次每天抽奖",
     "statNextDrawWeekly": "距下一次每周抽奖",
     "statNextDrawBiWeekly": "距下一次双周抽奖",
@@ -186,6 +188,40 @@
           }
         }
       },
+      "xmas-strategy": {
+        "title": "{{name}} Pot",
+        "xmas-pots": {
+          "body": [
+            "成为社区的一份子不仅感觉很酷，而且看起来也很酷。",
+            "通过参与此圣诞月盒，您将有机会从 Beefy 商店赢取限量版 T 恤。",
+            "此月盒包含 70 个 NFT，可将其兑换为促销代码以从 Beefy 商店免费订购一件T恤。质押 POTS 参与，每天将进行抽奖，直到 12 月 31 日。"
+          ],
+          "merch": {
+            "beefy-moonpot-tshirt-front.png": { "title": "T-Shirt - Front" },
+            "beefy-moonpot-tshirt-back.png": { "title": "T-Shirt - Back" }
+          }
+        },
+        "xmas-moobifi": {
+          "body": [
+            "成为社区的一份子不仅感觉很酷，而且看起来也很酷。",
+            "通过参与此圣诞月盒，您将有机会从 Beefy 商店赢取限量版 T 恤, POTS 及 BIFI 代币. 每张中奖彩票可获三份奖品。",
+            "此月盒包含 125 个 NFT，可将其兑换为促销代码以从 Beefy 商店免费订购一件连帽衫，以及 BIFI 和 POTS 奖品. 质押 mooBIFI 参与，抽奖日期为 12 月 31 日。"
+          ],
+          "merch": {
+            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+          }
+        },
+        "xmas-moochristmasbeefy": {
+          "body": [
+            "成为社区的一份子不仅感觉很酷，而且看起来也很酷。",
+            "通过参与此圣诞月盒，您将有机会从 Beefy 商店赢取限量版 T 恤, POTS 及 BIFI 代币. 每张中奖彩票可获三份奖品。",
+            "此月盒包含 15 个 NFT，可将其兑换为促销代码以从 Beefy 商店免费订购一件连帽衫，以及 BIFI 和 POTS 奖品. 质押 mooChristmasBeefy 参与，抽奖日期为 12 月 31 日。."
+          ],
+          "merch": {
+            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+          }
+        }
+      },
       "earnings": {
         "title": "收益明细",
         "tokenInterest": "您的 {{token}} 利息",
@@ -228,6 +264,7 @@
     "allToken": "存入所有 {{token}}",
     "amountToken": "存入 {{amount}} {{token}}",
     "fairplayNotice": "我们设置了 {{duration}} 天的公平游戏时间锁定期。如果想要提前提取资产，您必须支付{{fee}}% 或更少的公平费用。公平费逐秒减少至零。",
+    "maximumDepositNotice": "最高存款总额: {{amount}} {{token}}",
     "eolNotice": {
       "title": "已退役的月盒",
       "message": "您不能再向这个月盒进行存款了."
@@ -238,7 +275,9 @@
         "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
         "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
       ],
-      "4belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"],
+      "4belt": [
+        "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
+      ],
       "beltbnb": ["ZAP 可让您创建 beltBNB 代币并只通过一笔交易进行存款。"],
       "ibalpaca": ["ZAP 可让您创建 ibALPACA 代币并只通过一笔交易进行存款。"]
     },
