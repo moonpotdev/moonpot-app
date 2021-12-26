@@ -766,7 +766,7 @@
     "id": "banana",
     "name": "BANANA",
     "token": "BANANA",
-    "tokenAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
+    "tokenAddress": "0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95",
     "tokenDecimals": 18,
     "rewardToken": "moonTicketBanana",
     "rewardAddress": "0x87f697905732c6FAa5Def3bfE23AaDA5eAC33Ee8",
