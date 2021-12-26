@@ -19,7 +19,6 @@
     "status": "active",
     "supportsClaimAllBonuses": false,
     "infoCards": ["xmas-strategy"],
-    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
     "sponsors": [],
     "nftPrizeOnly": true,
     "nfts": [
@@ -50,7 +49,6 @@
     "status": "active",
     "supportsClaimAllBonuses": false,
     "infoCards": ["xmas-strategy"],
-    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
     "sponsors": [
       {
         "sponsorToken": "POTS",
@@ -93,7 +91,6 @@
     "status": "active",
     "supportsClaimAllBonuses": false,
     "infoCards": ["xmas-strategy"],
-    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
     "sponsors": [
       {
         "sponsorToken": "POTS",

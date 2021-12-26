@@ -59,7 +59,9 @@ function normalizeWinnings(awards, drawToken, ticketAddress, ticketPPFS, prices)
     const tokenData = tokensByNetworkAddress[network]?.[token.toLowerCase()];
 
     if (tokenData) {
-      let numericAmount = byDecimals(amount, tokenData.decimals);
+      let numericAmount = isNFT
+        ? new BigNumber(tokenIds.length)
+        : byDecimals(amount, tokenData.decimals);
 
       // Handle PPFS for reward in pot tickets
       if (token.toLowerCase() === ticketAddress.toLowerCase()) {
