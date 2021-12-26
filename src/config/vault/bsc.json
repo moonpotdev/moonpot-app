@@ -11,6 +11,7 @@
     "contractAddress": "0xfda459b09Bd39460A4640210a9a49fBACCbb3AB2",
     "prizePoolAddress": "0xD3e7B4Da5938EC2E598Be0b7a87a93196a836a4C",
     "prizeStrategyAddress": "0x9bE0FF9709c3dE78b9608215Dee2DaEE60E31903",
+    "oracleId": "POTS",
     "vaultType": "xmas",
     "duration": 1,
     "fairplayDuration": 0,
