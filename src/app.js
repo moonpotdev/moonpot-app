@@ -1,4 +1,5 @@
 import React, { memo, Suspense, useEffect } from 'react';
+import ReactGA from 'react-ga';
 import { load } from 'fathom-client';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -20,6 +21,12 @@ const Vault = React.lazy(() => import(`./features/vault`));
 const Winners = React.lazy(() => import(`./features/winners`));
 const Dao = React.lazy(() => import(`./features/dao`));
 
+const updateTracking = () => {
+  window.ga('send', 'pageview', {
+    page: window.location.pathname,
+  });
+};
+
 function Pages() {
   return (
     <Suspense fallback={<RouteLoading />}>
@@ -30,6 +37,7 @@ function Pages() {
             '/:bottom(all|xmas|main|lp|stable|community|side|nft)?',
             '/:top(my-moonpots)/:bottom(eol)?',
           ]}
+          component={updateTracking}
         >
           <Home />
           <Footer variant="light" />
@@ -76,6 +84,17 @@ export default function App() {
     load(process.env.REACT_APP_FATHOM_SITE_ID, {
       url: process.env.REACT_APP_FATHOM_SITE_URL,
       spa: 'hash',
+    });
+  });
+
+  React.useEffect(() => {
+    ReactGA.initialize(process.env.GA_TRACKING_ID, {
+      debug: true,
+      titleCase: false,
+      gaOptions: {
+        siteSpeedSampleRate: 100,
+        cookieDomain: 'none',
+      },
     });
   });
 

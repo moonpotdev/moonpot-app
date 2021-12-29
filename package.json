@@ -23,6 +23,7 @@
     "react-animate-height": "^2.0.23",
     "react-dom": "^17.0.1",
     "react-focus-lock": "^2.5.2",
+    "react-ga": "^3.3.0",
     "react-i18next": "^11.10.0",
     "react-infinite-scroll-component": "^6.1.0",
     "react-media": "^1.10.0",
