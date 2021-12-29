@@ -111,7 +111,7 @@ async function updatePrices() {
   };
 
   try {
-    const request = await axios.get('https://moonpot-beefy-api.herokuapp.com/prices', {
+    const request = await axios.get('https://api.beefy.finance/prices?_=' + getApiCacheBuster(), {
       timeout: 2000,
     });
     return request.status === 200 ? request.data : retry();
@@ -129,7 +129,7 @@ async function updateLPPrices() {
   };
 
   try {
-    const request = await axios.get('https://moonpot-beefy-api.herokuapp.com/lps', {
+    const request = await axios.get('https://api.beefy.finance/lps?_=' + getApiCacheBuster(), {
       timeout: 2000,
     });
     return request.status === 200 ? request.data : retry();
@@ -146,9 +146,10 @@ async function updateApy() {
     return await updateApy();
   };
   try {
-    const request = await axios.get('https://moonpot-beefy-api.herokuapp.com/apy/breakdown', {
-      timeout: 2000,
-    });
+    const request = await axios.get(
+      'https://api.beefy.finance/apy/breakdown?_=' + getApiCacheBuster(),
+      { timeout: 2000 }
+    );
     return request.status === 200 ? request.data : retry();
   } catch (err) {
     console.log('error fetchApy()', err);
