@@ -1,5 +1,4 @@
 import React, { memo, Suspense, useEffect } from 'react';
-import ReactGA from 'react-ga';
 import { load } from 'fathom-client';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -13,6 +12,7 @@ import Footer from './components/footer';
 import ModalPopup from './components/Modal/modal.js';
 import { useLocation } from 'react-router';
 import { useImpersonate } from './helpers/hooks';
+import { GoogleAnalytics } from './googleAnalytics';
 
 require('dotenv').config();
 
@@ -20,12 +20,6 @@ const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
 const Winners = React.lazy(() => import(`./features/winners`));
 const Dao = React.lazy(() => import(`./features/dao`));
-
-const updateTracking = () => {
-  window.ga('send', 'pageview', {
-    page: window.location.pathname,
-  });
-};
 
 function Pages() {
   return (
@@ -37,7 +31,6 @@ function Pages() {
             '/:bottom(all|main|lp|stable|community|side)?',
             '/:top(my-moonpots)/:bottom(eol)?',
           ]}
-          component={updateTracking}
         >
           <Home />
           <Footer variant="light" />
@@ -88,17 +81,6 @@ export default function App() {
   });
 
   React.useEffect(() => {
-    ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID, {
-      debug: true,
-      titleCase: false,
-      gaOptions: {
-        siteSpeedSampleRate: 100,
-        cookieDomain: 'auto',
-      },
-    });
-  });
-
-  React.useEffect(() => {
     dispatch(reduxActions.prices.fetchPrices());
   }, [dispatch]);
 
@@ -112,6 +94,7 @@ export default function App() {
       <ModalPopup />
       <HashRouter>
         <ScrollToTop />
+        <GoogleAnalytics />
         <Header />
         <Pages />
       </HashRouter>
