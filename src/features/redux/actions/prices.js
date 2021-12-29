@@ -106,7 +106,7 @@ async function updatePPFS(web3, existing) {
 async function updatePrices() {
   console.log('redux fetchPrices called.');
   const retry = async () => {
-    await sleep(1000);
+    await sleep(10000);
     return await updatePrices();
   };
 
@@ -124,7 +124,7 @@ async function updatePrices() {
 async function updateLPPrices() {
   console.log('redux fetchLPPrices called.');
   const retry = async () => {
-    await sleep(1000);
+    await sleep(10000);
     return await updateLPPrices();
   };
 
@@ -142,7 +142,7 @@ async function updateLPPrices() {
 async function updateApy() {
   console.log('redux fetchApy called.');
   const retry = async () => {
-    await sleep(1000);
+    await sleep(10000);
     return await updateApy();
   };
   try {
