@@ -93,7 +93,7 @@ export default function App() {
       titleCase: false,
       gaOptions: {
         siteSpeedSampleRate: 100,
-        cookieDomain: 'none',
+        cookieDomain: 'auto',
       },
     });
   });
