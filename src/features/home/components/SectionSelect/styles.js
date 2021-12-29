@@ -3,8 +3,8 @@ const styles = theme => ({
     borderRadius: '8px',
     border: '2px solid #555590',
     background: '#393960',
-    height: '44px',
-    width: '344px',
+    height: '42px',
+    width: 'fit-content',
     marginBottom: '32px',
     [theme.breakpoints.down('1073')]: {
       margin: '0 16px 16px',
@@ -12,14 +12,14 @@ const styles = theme => ({
   },
   button: {
     borderRadius: '8px',
-    padding: '0',
     marginTop: '-2px',
     marginLeft: '-2px',
     border: 'none',
     height: '42px',
     fontSize: '15px',
     lineHeight: '24px',
-    width: '172px',
+    width: 'auto',
+    padding: '0 24px',
   },
   buttonSelected: {
     border: '2px solid #F3BA2E',
