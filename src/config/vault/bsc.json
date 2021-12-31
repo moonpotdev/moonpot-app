@@ -1,120 +1,5 @@
 [
   {
-    "id": "xmas-pots",
-    "name": "Ziggy's Xmas",
-    "theme": "xmas",
-    "token": "POTS",
-    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketPOTSChristmas",
-    "rewardAddress": "0xe7f07A75A0E1E138bA9B1E1a3Ef241c33450b43B",
-    "contractAddress": "0xfda459b09Bd39460A4640210a9a49fBACCbb3AB2",
-    "prizePoolAddress": "0xD3e7B4Da5938EC2E598Be0b7a87a93196a836a4C",
-    "prizeStrategyAddress": "0x9bE0FF9709c3dE78b9608215Dee2DaEE60E31903",
-    "oracleId": "POTS",
-    "vaultType": "xmas",
-    "duration": 1,
-    "fairplayDuration": 0,
-    "fairplayTicketFee": 0,
-    "status": "active",
-    "supportsClaimAllBonuses": false,
-    "infoCards": ["xmas-strategy"],
-    "sponsors": [],
-    "nftPrizeOnly": true,
-    "nfts": [
-      {
-        "name": "T-Shirt NFT",
-        "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
-        "type": "erc721"
-      }
-    ],
-    "bonuses": []
-  },
-  {
-    "id": "xmas-moobifi",
-    "name": "mooBIFI Xmas",
-    "theme": "xmas",
-    "token": "mooBIFI",
-    "tokenAddress": "0xf7069e41C57EcC5F122093811d8c75bdB5f7c14e",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketmooBIFIChristmas",
-    "rewardAddress": "0x5B76F59D1A9Eb70B3961bc70b28Ea5e7e9400E49",
-    "contractAddress": "0x65b3F4780fd12f7acf3b060C0e8a4C975bebfC00",
-    "prizePoolAddress": "0x80f34481Caae2518A0f2d8ec7ecEc356E30200c2",
-    "prizeStrategyAddress": "0x06bfc4f035141F120580f2b3fAAd10A87e10c66e",
-    "vaultType": "xmas",
-    "duration": "once",
-    "fairplayDuration": 0,
-    "fairplayTicketFee": 0,
-    "status": "active",
-    "supportsClaimAllBonuses": false,
-    "infoCards": ["xmas-strategy"],
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "BIFI",
-        "sponsorOracleId": "BIFI",
-        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "nfts": [
-      {
-        "name": "Hoodie NFT",
-        "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
-        "type": "erc721"
-      }
-    ],
-    "bonuses": []
-  },
-  {
-    "id": "xmas-moochristmasbeefy",
-    "name": "mooChristmasBeefy Xmas",
-    "theme": "xmas",
-    "token": "mooChristmasBeefy",
-    "tokenAddress": "0xA1448795fc2489EadAF5e90d8c7d4cbdc8EF5D19",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketmooChristmasBeefyChristmas",
-    "rewardAddress": "0x73Ad14BE0eDC8E3979B5b5C351acB697616846fD",
-    "contractAddress": "0x5a5cca50711E2548f230E0CfbF8275fF02b69F4A",
-    "prizePoolAddress": "0x7a504f1dda61Cbc3D5E4AaEA7Ca8c857d6303D8C",
-    "prizeStrategyAddress": "0x903bF786CaBB83A7c7DD4afa14E4Fc2569b0A908",
-    "vaultType": "xmas",
-    "duration": "once",
-    "fairplayDuration": 0,
-    "fairplayTicketFee": 0,
-    "status": "active",
-    "supportsClaimAllBonuses": false,
-    "infoCards": ["xmas-strategy"],
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "BIFI",
-        "sponsorOracleId": "BIFI",
-        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "nfts": [
-      {
-        "name": "Hoodie NFT",
-        "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
-        "type": "erc721"
-      }
-    ],
-    "bonuses": []
-  },
-  {
     "id": "pots",
     "name": "Ziggy's",
     "token": "POTS",
@@ -1428,5 +1313,123 @@
     "migrationRewardAddress": "0x6B9c7C3aE69852De54A7b7b1F0C99851271Af9a1",
     "migrationLearnMoreUrl": "https://moonpot.com/alpha/learn/how-to-move-cake-from-the-retired-cake-moonpot/",
     "winnersTransaction": "0x770ddd1d57b19437a0cf563923cb3799d31a5ca3e20a3080e4286d4fede54109"
+  },
+  {
+    "id": "xmas-pots",
+    "name": "Ziggy's Xmas",
+    "theme": "xmas",
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketPOTSChristmas",
+    "rewardAddress": "0xe7f07A75A0E1E138bA9B1E1a3Ef241c33450b43B",
+    "contractAddress": "0xfda459b09Bd39460A4640210a9a49fBACCbb3AB2",
+    "prizePoolAddress": "0xD3e7B4Da5938EC2E598Be0b7a87a93196a836a4C",
+    "prizeStrategyAddress": "0x9bE0FF9709c3dE78b9608215Dee2DaEE60E31903",
+    "oracleId": "POTS",
+    "vaultType": "xmas",
+    "duration": 1,
+    "fairplayDuration": 0,
+    "fairplayTicketFee": 0,
+    "status": "eol",
+    "eolDrawNumber": 7,
+    "supportsClaimAllBonuses": false,
+    "infoCards": ["xmas-strategy"],
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "T-Shirt NFT",
+        "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
+        "type": "erc721"
+      }
+    ],
+    "bonuses": []
+  },
+  {
+    "id": "xmas-moobifi",
+    "name": "mooBIFI Xmas",
+    "theme": "xmas",
+    "token": "mooBIFI",
+    "tokenAddress": "0xf7069e41C57EcC5F122093811d8c75bdB5f7c14e",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketmooBIFIChristmas",
+    "rewardAddress": "0x5B76F59D1A9Eb70B3961bc70b28Ea5e7e9400E49",
+    "contractAddress": "0x65b3F4780fd12f7acf3b060C0e8a4C975bebfC00",
+    "prizePoolAddress": "0x80f34481Caae2518A0f2d8ec7ecEc356E30200c2",
+    "prizeStrategyAddress": "0x06bfc4f035141F120580f2b3fAAd10A87e10c66e",
+    "vaultType": "xmas",
+    "duration": "once",
+    "fairplayDuration": 0,
+    "fairplayTicketFee": 0,
+    "status": "eol",
+    "eolDrawNumber": 1,
+    "supportsClaimAllBonuses": false,
+    "infoCards": ["xmas-strategy"],
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BIFI",
+        "sponsorOracleId": "BIFI",
+        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "nfts": [
+      {
+        "name": "Hoodie NFT",
+        "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
+        "type": "erc721"
+      }
+    ],
+    "bonuses": []
+  },
+  {
+    "id": "xmas-moochristmasbeefy",
+    "name": "mooChristmasBeefy Xmas",
+    "theme": "xmas",
+    "token": "mooChristmasBeefy",
+    "tokenAddress": "0xA1448795fc2489EadAF5e90d8c7d4cbdc8EF5D19",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketmooChristmasBeefyChristmas",
+    "rewardAddress": "0x73Ad14BE0eDC8E3979B5b5C351acB697616846fD",
+    "contractAddress": "0x5a5cca50711E2548f230E0CfbF8275fF02b69F4A",
+    "prizePoolAddress": "0x7a504f1dda61Cbc3D5E4AaEA7Ca8c857d6303D8C",
+    "prizeStrategyAddress": "0x903bF786CaBB83A7c7DD4afa14E4Fc2569b0A908",
+    "vaultType": "xmas",
+    "duration": "once",
+    "fairplayDuration": 0,
+    "fairplayTicketFee": 0,
+    "status": "eol",
+    "eolDrawNumber": 1,
+    "supportsClaimAllBonuses": false,
+    "infoCards": ["xmas-strategy"],
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BIFI",
+        "sponsorOracleId": "BIFI",
+        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "nfts": [
+      {
+        "name": "Hoodie NFT",
+        "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
+        "type": "erc721"
+      }
+    ],
+    "bonuses": []
   }
 ]
