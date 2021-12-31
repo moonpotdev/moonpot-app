@@ -11,7 +11,7 @@ const EOLLayout = function ({ item }) {
       {item.migrationContractAddress ? <PotMigrate item={item} /> : null}
       <CardAccordionGroup>
         {/*Bonus*/}
-        {item.migrationContractAddress ? null : (
+        {item.migrationContractAddress || !('bonuses' in item) || !item.bonuses.length ? null : (
           <CardAccordionItem titleKey="pot.bonusEarnings">
             <PotBonus item={item} />
           </CardAccordionItem>
