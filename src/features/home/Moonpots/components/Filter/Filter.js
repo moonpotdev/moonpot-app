@@ -4,10 +4,15 @@ import { useTranslation } from 'react-i18next';
 import { RoutedButton } from '../../../../../components/Buttons/BaseButton';
 import styles from './styles';
 import clsx from 'clsx';
+import { potsAll } from '../../../../../config/vault';
+import { arrayUnique } from '../../../../../helpers/utils';
 
 const useStyles = makeStyles(styles);
 
-const PotTypes = [
+const activePotTypes = arrayUnique(
+  potsAll.filter(pot => pot.status === 'active').map(pot => pot.vaultType)
+);
+const potTypeTabs = [
   {
     key: 'all',
     path: '/',
@@ -48,7 +53,7 @@ const PotTypes = [
     path: '/side',
     label: 'buttons.sidePots',
   },
-];
+].filter(type => type.key === 'all' || activePotTypes.includes(type.key));
 
 const Filter = ({ className, selected }) => {
   const { t } = useTranslation();
@@ -57,7 +62,7 @@ const Filter = ({ className, selected }) => {
   return (
     <div className={classes.buttonsOuterContainer}>
       <Grid container className={clsx(classes.buttonContainer, className)}>
-        {PotTypes.map(type => (
+        {potTypeTabs.map(type => (
           <RoutedButton
             key={type.key}
             className={clsx(classes.button, { [classes.buttonActive]: selected === type.key })}
