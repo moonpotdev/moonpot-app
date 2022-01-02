@@ -15,6 +15,9 @@ const SORT_COMPARE_FUNCTIONS = {
   defaultOrder: compareNumber,
   totalStakedUsd: compareBigNumber,
   name: compareStringCaseInsensitive,
+  expiresAt: compareNumber,
+  projectedAwardBalanceUsd: compareBigNumber,
+  apyBreakdown: compareApy,
 };
 
 function filterIncludePot(pot, vaultType, config) {
@@ -34,6 +37,7 @@ function filterIncludePot(pot, vaultType, config) {
 }
 
 function compareNumber(a, b) {
+  console.log(a);
   return (a > b) - (a < b);
 }
 
@@ -47,6 +51,14 @@ function compareBigNumber(a, b) {
   if (a.lt(b)) return -1;
   if (a.gt(b)) return 1;
   return 0;
+}
+
+function compareApy(a, b) {
+  try {
+    return b.totalApy - a.totalApy;
+  } catch {
+    return 0;
+  }
 }
 
 function sortPots(pots, key, dir) {
@@ -63,6 +75,7 @@ function sortPots(pots, key, dir) {
 }
 
 export function useFilteredPots(pots, vaultType, config) {
+  console.log(config);
   return useMemo(() => {
     const filtered = Object.values(pots).filter(pot => filterIncludePot(pot, vaultType, config));
 

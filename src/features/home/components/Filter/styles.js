@@ -53,6 +53,9 @@ const styles = theme => ({
     color: '#8F8FBC',
     fontWeight: '500',
   },
+  selectLableSelected: {
+    color: 'red !important',
+  },
   menuStyle: {
     border: '2px solid #555590',
     borderRadius: '8px',

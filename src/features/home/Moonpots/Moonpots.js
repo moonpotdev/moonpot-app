@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
 import reduxActions from '../../redux/actions';
@@ -11,27 +11,31 @@ import { Pot } from './components/Pot';
 import { Cards } from '../../../components/Cards';
 import { Translate } from '../../../components/Translate';
 import SidePotExplainer from '../../../components/SidePotExplainer/SidePotExplainer';
-import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
 
-//force a update after updating the filter
-function useForceUpdate() {
-  //eslint-disable-next-line
-  const [value, setValue] = useState(0); // integer state
-  return () => setValue(value => value + 1); // update the state to force render
+function getKey(sort) {
+  if (sort === 'next-draw') {
+    return ['expiresAt', 'asc'];
+  } else if (sort === 'prize') {
+    return ['projectedAwardBalanceUsd', 'desc'];
+  } else if (sort === 'apy') {
+    return ['apyBreakdown', 'asc'];
+  } else {
+    return ['defaultOrder', 'asc'];
+  }
 }
 
-const Moonpots = ({ selected }) => {
+const Moonpots = ({ selected, sort }) => {
   const dispatch = useDispatch();
   const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
   const address = useSelector(state => state.walletReducer.address);
-  const pots = useSelector(state => state.vaultReducer.pools, shallowEqual);
+  //cannot use shallowEqual as we need the page to reevaluate the sort once the apy/prize/draw data loads
+  const pots = useSelector(state => state.vaultReducer.pools);
   const classes = useStyles();
-  const [filterConfig] = useFilterConfig();
+  const [filterConfig, setFilterConfig] = useFilterConfig();
   const filtered = useFilteredPots(pots, selected, filterConfig);
-  let { filter } = useParams();
-  const forceUpdate = useForceUpdate();
+  const [sortKey, sortDir] = getKey(sort);
 
   useEffect(() => {
     if (pricesLastUpdated > 0) {
@@ -46,26 +50,10 @@ const Moonpots = ({ selected }) => {
   }, [dispatch, address]);
 
   useEffect(() => {
-    if (filter === 'next-draw') {
-      filtered.sort(function (a, b) {
-        return a.expiresAt - b.expiresAt;
-      });
-    } else if (filter === 'prize') {
-      filtered.sort(function (a, b) {
-        return b.projectedAwardBalanceUsd.toFixed(5) - a.projectedAwardBalanceUsd.toFixed(5);
-      });
-    } else if (filter === 'apy') {
-      filtered.sort(function (a, b) {
-        return b.apy + b.bonusApy - (a.apy + a.bonusApy);
-      });
-    } else {
-      filtered.sort(function (a, b) {
-        return a.defaultOrder - b.defaultOrder;
-      });
+    if (sortKey !== filterConfig.sortKey || sortDir !== filterConfig.sortDir) {
+      setFilterConfig({ ...filterConfig, sortKey, sortDir, version: filterConfig.version + 1 });
     }
-    forceUpdate();
-    //eslint-disable-next-line
-  }, [filter, filtered]);
+  }, [filterConfig, setFilterConfig, sortKey, sortDir, pots]);
 
   return (
     <React.Fragment>

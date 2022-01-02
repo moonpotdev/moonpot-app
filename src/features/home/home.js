@@ -50,7 +50,7 @@ const Home = () => {
           </Grid>
         </Grid>
         {top === 'moonpots' ? (
-          <Moonpots selected={bottom} />
+          <Moonpots selected={bottom} sort={filter} />
         ) : (
           <MyPots selected={filter} bottom={bottom} />
         )}
