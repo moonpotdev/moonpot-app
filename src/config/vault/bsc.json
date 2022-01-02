@@ -15,7 +15,7 @@
     "apyId": "pots-pots",
     "compoundApy": true,
     "vaultType": "main",
-    "duration": 14,
+    "duration": 7,
     "fairplayDuration": 10,
     "fairplayTicketFee": 0.025,
     "interestBreakdown": {
