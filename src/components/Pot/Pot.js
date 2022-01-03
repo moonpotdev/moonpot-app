@@ -5,15 +5,22 @@ import { Card } from '../Cards';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals } from '../../helpers/format';
 import { InterestTooltip } from '../Tooltip/tooltip';
-import { translateToken, usePot, useTokenBalance, useTotalPrize } from '../../helpers/hooks';
+import {
+  translateToken,
+  useDeposit,
+  usePot,
+  useTokenBalance,
+  useTotalPrize,
+} from '../../helpers/hooks';
 import { DrawStat, DrawStatNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
-import { investmentOdds, ZERO } from '../../helpers/utils';
+import { investmentOdds, listJoin, ZERO } from '../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import styles from './styles';
 import { getPotIconSrc } from '../../helpers/getPotIconSrc';
 import { useHistory } from 'react-router';
 import { TransListJoin } from '../TransListJoin';
+import BigNumber from 'bignumber.js';
 
 const useStyles = makeStyles(styles);
 
@@ -24,17 +31,11 @@ function slug(str) {
     .replace(/-{2,}/g, '-');
 }
 
-export const Logo = memo(function ({ baseToken, sponsorToken, type }) {
-  const baseSlug = slug(baseToken);
+export const Logo = memo(function ({ icon, sponsorToken }) {
+  const iconSlug = slug(icon);
   const sponsorSlug = sponsorToken ? slug(sponsorToken) : 'unsponsored';
-  const typeSlug = type ? slug(type) : 'all';
 
-  const possibilities = [
-    `${baseSlug}/${typeSlug}/${sponsorSlug}`,
-    `${baseSlug}/${typeSlug}/unsponsored`,
-    `${baseSlug}/all/${sponsorSlug}`,
-    `${baseSlug}/all/unsponsored`,
-  ];
+  const possibilities = [`${iconSlug}/${sponsorSlug}`, `${iconSlug}/unsponsored`];
 
   for (const key of possibilities) {
     const src = getPotIconSrc(key, false);
@@ -52,9 +53,7 @@ export const Logo = memo(function ({ baseToken, sponsorToken, type }) {
     }
   }
 
-  throw new Error(
-    `No pot icon available for ${baseSlug}/${typeSlug}/${sponsorSlug} or any fallbacks.`
-  );
+  throw new Error(`No pot icon available for ${iconSlug}/${sponsorSlug} or any fallbacks.`);
 });
 
 const Title = memo(function ({ name }) {
@@ -66,41 +65,134 @@ const Title = memo(function ({ name }) {
   );
 });
 
-export const WinTotal = memo(function ({ awardBalanceUsd, totalSponsorBalanceUsd, winToken }) {
+const WinFeatureTokens = memo(function WinFeatureTokens({
+  awardBalanceUsd,
+  totalSponsorBalanceUsd,
+  sponsors,
+  depositToken,
+}) {
   const classes = useStyles();
   const totalPrize = useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd);
 
   return (
-    <div className={classes.winTotalPrize}>
-      <Translate
-        i18nKey="pot.winTotalPrize"
-        values={winToken ? { prize: winToken } : { prize: `$${totalPrize}` }}
+    <>
+      <div className={classes.winTotalPrize}>
+        <Translate i18nKey="pot.winTotalPrize" values={{ prize: `$${totalPrize}` }} />
+      </div>
+      <WinTokens
+        depositToken={depositToken}
+        awardBalanceUsd={awardBalanceUsd}
+        sponsors={sponsors}
       />
-    </div>
+    </>
   );
 });
 
-const WinTokens = memo(function ({ depositToken, sponsors, isNftPot }) {
-  const { t, i18n } = useTranslation();
+const WinFeatureNFTs = memo(function WinFeatureNFTs({ nfts, depositToken }) {
   const classes = useStyles();
-  const sponsorTokens = sponsors
-    .filter(sponsor => sponsor.sponsorBalanceUsd.gte(0.01))
-    .map(sponsor => sponsor.sponsorToken)
-    .filter(token => token !== depositToken);
-  const allTokens = [depositToken, ...sponsorTokens].map(symbol => translateToken(symbol, i18n, t));
+  const prizeList = useMemo(() => {
+    const nftNames = nfts.map(nft => nft.name);
+    return listJoin(nftNames);
+  }, [nfts]);
 
   return (
-    <div className={classes.winTotalTokens}>
-      {isNftPot ? (
+    <>
+      <div className={classes.winTotalPrize}>
+        <Translate i18nKey="pot.winTotalPrize" values={{ prize: prizeList }} />
+      </div>
+      <div className={classes.winTotalTokens}>
         <Translate i18nKey="pot.stakeToken" values={{ token: depositToken }} />
-      ) : (
-        <>
-          <Translate i18nKey="pot.winTotalTokensIn" />
-          <TransListJoin list={allTokens} />
-        </>
-      )}
-    </div>
+      </div>
+    </>
   );
+});
+
+const WinFeatureBoth = memo(function WinFeatureBoth({
+  awardBalanceUsd,
+  totalSponsorBalanceUsd,
+  sponsors,
+  nfts,
+  depositToken,
+}) {
+  const classes = useStyles();
+  const totalPrize = useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd);
+  const nftNames = useMemo(() => {
+    return nfts.map(nft => nft.name);
+  }, [nfts]);
+
+  return (
+    <>
+      <div className={classes.winTotalPrize}>
+        <Translate i18nKey="pot.winTotalPrize" values={{ prize: `$${totalPrize}` }} />
+      </div>
+      <WinTokens
+        depositToken={depositToken}
+        awardBalanceUsd={awardBalanceUsd}
+        sponsors={sponsors}
+        nfts={nftNames}
+      />
+    </>
+  );
+});
+
+export const WinFeature = memo(function WinFeature({
+  awardBalanceUsd,
+  totalSponsorBalanceUsd,
+  nfts,
+  depositToken,
+  sponsors,
+  nftPrizeOnly,
+}) {
+  // No NFTs -> Tokens Only
+  if (!nfts || nfts.length === 0) {
+    return (
+      <WinFeatureTokens
+        totalSponsorBalanceUsd={totalSponsorBalanceUsd}
+        awardBalanceUsd={awardBalanceUsd}
+        sponsors={sponsors}
+        depositToken={depositToken}
+      />
+    );
+  }
+
+  // No Tokens -> NFTs only
+  if (nftPrizeOnly) {
+    return <WinFeatureNFTs nfts={nfts} depositToken={depositToken} />;
+  }
+
+  // Both
+  return (
+    <WinFeatureBoth
+      nfts={nfts}
+      awardBalanceUsd={awardBalanceUsd}
+      sponsors={sponsors}
+      totalSponsorBalanceUsd={totalSponsorBalanceUsd}
+      depositToken={depositToken}
+    />
+  );
+});
+
+const WinTokens = memo(function WinTokens({ depositToken, awardBalanceUsd, sponsors, nfts = [] }) {
+  const { t, i18n } = useTranslation();
+  const classes = useStyles();
+  const awardsDepositToken = depositToken && awardBalanceUsd.gte(0.01);
+  const allTokens = useMemo(() => {
+    const sponsorTokens = sponsors
+      .filter(sponsor => sponsor.sponsorBalanceUsd.gte(0.01))
+      .map(sponsor => sponsor.sponsorToken);
+    const sponsorTokensWithoutDepositToken = sponsorTokens.filter(token => token !== depositToken);
+    const tokens = awardsDepositToken
+      ? [depositToken, ...sponsorTokensWithoutDepositToken, ...nfts]
+      : [...sponsorTokens, ...nfts];
+    return tokens.map(symbol => translateToken(symbol, i18n, t));
+  }, [awardsDepositToken, depositToken, sponsors, t, i18n, nfts]);
+
+  return allTokens.length ? (
+    <div className={classes.winTotalTokens}>
+      <Translate i18nKey="pot.winTotalTokensIn" />
+      <TransListJoin list={allTokens} />
+    </div>
+  ) : null;
 });
 
 const Interest = memo(function ({ baseApy, bonusApy, prizeOnly }) {
@@ -136,21 +228,6 @@ const TVL = memo(function ({ totalStakedUsd }) {
 
   return '$0';
 });
-
-function useDeposit(contractAddress, decimals) {
-  const address = useSelector(state => state.walletReducer.address);
-  const balance256 = useSelector(
-    state => state.balanceReducer.tokens[contractAddress + ':total']?.balance
-  );
-
-  return useMemo(() => {
-    if (address && balance256) {
-      return formatDecimals(byDecimals(balance256, decimals), 2);
-    }
-
-    return 0;
-  }, [address, balance256, decimals]);
-}
 
 function useDepositOdds(ticketTotalSupply, winners, ticketToken, tokenDecimals) {
   const address = useSelector(state => state.walletReducer.address);
@@ -197,27 +274,24 @@ export function Pot({ id, variant, bottom, simple }) {
   const classes = useStyles();
   const pot = usePot(id);
   const history = useHistory();
-  const isNftPot = pot.vaultType === 'nft';
 
   return (
     <Card variant={variant} style={{ height: 'fit-content' }}>
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>
         <Grid item xs="auto" onClick={() => history.push(`/pot/${pot.id}`)}>
-          <Logo baseToken={pot.token} sponsorToken={pot.sponsorToken} type={pot.vaultType} />
+          <Logo icon={pot.icon || pot.id} sponsorToken={pot.sponsorToken} />
         </Grid>
         <Grid item xs="auto" className={classes.columnTitleWinTotal}>
           <Title name={pot.name} onClick={() => history.push(`/pot/${pot.id}`)} />
-          <WinTotal
+          <WinFeature
             awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
             totalSponsorBalanceUsd={
               pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
             }
-            winToken={pot.winToken}
-          />
-          <WinTokens
+            sponsors={pot.sponsors}
+            nfts={pot.nfts}
             depositToken={pot.token}
-            sponsors={pot.projectedSponsors || pot.sponsors}
-            isNftPot={isNftPot}
+            nftPrizeOnly={pot.nftPrizeOnly}
           />
         </Grid>
       </Grid>
@@ -253,17 +327,9 @@ export function Pot({ id, variant, bottom, simple }) {
         <Grid item xs={simple ? 6 : 7}>
           <DrawStat
             i18nKey="pot.statInterest"
-            tooltip={
-              pot.vaultType !== 'side' && pot.vaultType !== 'nft' ? (
-                <InterestTooltip pot={pot} />
-              ) : null
-            }
+            tooltip={pot.isPrizeOnly ? null : <InterestTooltip pot={pot} />}
           >
-            <Interest
-              baseApy={pot.apy}
-              bonusApy={pot.bonusApy}
-              prizeOnly={pot.vaultType === 'side' || pot.vaultType === 'nft'}
-            />
+            <Interest baseApy={pot.apy} bonusApy={pot.bonusApy} prizeOnly={pot.isPrizeOnly} />
           </DrawStat>
         </Grid>
       </Grid>
@@ -278,74 +344,80 @@ export const PrizeSplit = function ({
   awardBalanceUsd,
   sponsors,
   numberOfWinners,
+  nfts,
+  nftPrizeOnly,
 }) {
   const classes = useStyles();
 
   const allPrizes = {
     [baseToken]: {
-      tokens: awardBalance || ZERO,
-      usd: awardBalanceUsd || ZERO,
+      tokens: nftPrizeOnly ? ZERO : awardBalance || ZERO,
+      usd: nftPrizeOnly ? ZERO : awardBalanceUsd || ZERO,
+      isNft: false,
     },
   };
 
-  for (const sponsor of sponsors) {
-    if (sponsor.sponsorToken in allPrizes) {
-      allPrizes[sponsor.sponsorToken].tokens = allPrizes[sponsor.sponsorToken].tokens.plus(
-        sponsor.sponsorBalance || ZERO
-      );
-      allPrizes[sponsor.sponsorToken].usd = allPrizes[sponsor.sponsorToken].usd.plus(
-        sponsor.sponsorBalanceUsd || ZERO
-      );
-    } else {
-      allPrizes[sponsor.sponsorToken] = {
-        tokens: sponsor.sponsorBalance || ZERO,
-        usd: sponsor.sponsorBalanceUsd || ZERO,
+  if (!nftPrizeOnly) {
+    for (const sponsor of sponsors) {
+      if (sponsor.sponsorToken in allPrizes) {
+        allPrizes[sponsor.sponsorToken].tokens = allPrizes[sponsor.sponsorToken].tokens.plus(
+          sponsor.sponsorBalance || ZERO
+        );
+        allPrizes[sponsor.sponsorToken].usd = allPrizes[sponsor.sponsorToken].usd.plus(
+          sponsor.sponsorBalanceUsd || ZERO
+        );
+      } else {
+        allPrizes[sponsor.sponsorToken] = {
+          tokens: sponsor.sponsorBalance || ZERO,
+          usd: sponsor.sponsorBalanceUsd || ZERO,
+          isNft: false,
+        };
+      }
+    }
+  }
+
+  if (nfts && nfts.length) {
+    for (const nft of nfts) {
+      allPrizes[nft.name] = {
+        tokens: new BigNumber(numberOfWinners),
+        usd: ZERO,
+        isNft: true,
       };
     }
   }
 
   const prizesOverZero = Object.entries(allPrizes)
-    .filter(([, total]) => total.usd.gte(0.01))
+    .filter(([, total]) => total.isNft || total.usd.gte(0.01))
     .sort(([, totalA], [, totalB]) => totalB.usd.comparedTo(totalA.usd))
     .sort(([tokenA]) => (tokenA === baseToken ? -1 : 1));
   const totalPrizeEach = prizesOverZero
     .reduce((overallTotal, [, prizeTotal]) => overallTotal.plus(prizeTotal.usd), ZERO)
     .dividedBy(numberOfWinners);
+  const allNfts = prizesOverZero.every(([, total]) => total.isNft);
 
   return (
     <>
-      <div className={classes.prizeSplitTotal}>
-        <Translate
-          i18nKey={numberOfWinners === 1 ? 'pot.amount' : 'pot.amountEach'}
-          values={{ symbol: '$', amount: formatDecimals(totalPrizeEach, 2, 2) }}
-        />
-      </div>
+      {allNfts ? null : (
+        <div className={classes.prizeSplitTotal}>
+          <Translate
+            i18nKey={numberOfWinners === 1 ? 'pot.amount' : 'pot.amountEach'}
+            values={{ symbol: '$', amount: formatDecimals(totalPrizeEach, 2, 2) }}
+          />
+        </div>
+      )}
       {prizesOverZero.map(([token, total]) => {
         const tokens = formatDecimals(total.tokens.dividedBy(numberOfWinners), 2);
-        const usd = formatDecimals(total.usd.dividedBy(numberOfWinners), 2);
+        const usd = total.isNft ? null : formatDecimals(total.usd.dividedBy(numberOfWinners), 2);
 
         return (
           <div key={token} className={classes.prizeSplitToken}>
             <span>
               {tokens} {token}
             </span>{' '}
-            (${usd})
+            {total.isNft ? null : <>(${usd})</>}
           </div>
         );
       })}
     </>
-  );
-};
-
-export const NFTPrizeSplit = function ({ numberOfWinners }) {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.prizeSplitTotal}>
-      <Translate
-        i18nKey={numberOfWinners === 1 ? 'pot.amount' : 'pot.amountEach'}
-        values={{ symbol: '', amount: '1 NFT' }}
-      />
-    </div>
   );
 };

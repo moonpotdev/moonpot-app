@@ -1,5 +1,6 @@
 import { config } from '../../../config/config';
 import Web3 from 'web3';
+import { createReducer } from '@reduxjs/toolkit';
 
 const initialCurrency = () => {
   const storage = localStorage.getItem('moon_site_currency');
@@ -47,54 +48,37 @@ const initialState = {
   action: initialAction(),
 };
 
-const walletReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'WALLET_DISCONNECT':
-      return {
-        ...state,
-        address: null,
-      };
-    case 'WALLET_CONNECT_BEGIN':
-      return {
-        ...state,
-        pending: true,
-      };
-    case 'WALLET_CONNECT_DONE':
-      return {
-        ...state,
-        pending: false,
-        address: action.payload.address,
-      };
-    case 'WALLET_CREATE_MODAL':
-      return {
-        ...state,
-        web3modal: action.payload.data,
-      };
-    case 'SET_NETWORK':
-      return {
-        ...state,
-        network: action.payload.network,
-        clients: action.payload.clients,
-        rpc: false,
-      };
-    case 'SET_CURRENCY':
-      return {
-        ...state,
-        currency: action.payload.currency,
-      };
-    case 'WALLET_ACTION':
-      return {
-        ...state,
-        action: { result: action.payload.result, data: action.payload.data },
-      };
-    case 'WALLET_ACTION_RESET':
-      return {
-        ...state,
-        action: initialAction(),
-      };
-    default:
-      return state;
-  }
-};
+const walletReducer = createReducer(initialState, builder => {
+  builder
+    .addCase('WALLET_DISCONNECT', (state, action) => {
+      state.address = null;
+    })
+    .addCase('WALLET_CONNECT_BEGIN', (state, action) => {
+      state.pending = true;
+    })
+    .addCase('WALLET_CONNECT_DONE', (state, action) => {
+      state.pending = false;
+      state.address = action.payload.address;
+    })
+    .addCase('WALLET_CREATE_MODAL', (state, action) => {
+      state.web3modal = action.payload.data;
+    })
+    .addCase('SET_NETWORK', (state, action) => {
+      state.network = action.payload.network;
+      state.clients = action.payload.clients;
+      state.rpc = false;
+    })
+    .addCase('SET_CURRENCY', (state, action) => {
+      state.currency = action.payload.currency;
+    })
+    .addCase('WALLET_ACTION', (state, action) => {
+      state.action.result = action.payload.result;
+      state.action.data = action.payload.data;
+    })
+    .addCase('WALLET_ACTION_RESET', (state, action) => {
+      state.action.result = null;
+      state.action.data = null;
+    });
+});
 
 export default walletReducer;

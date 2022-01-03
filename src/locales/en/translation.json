@@ -7,6 +7,7 @@
     "myPastPots": "Retired Pots",
     "allPots": "All",
     "mainPots": "Main",
+    "xmasPots": "Xmas",
     "communityPots": "Community",
     "lpPots": "LP",
     "stablePots": "Stable",
@@ -52,9 +53,8 @@
   "homeTotalDeposits": "Total Deposits (TVL)",
   "homeJoinCommunityTitle": "Join the Community",
   "homeJoinCommunityBody": "You can suggest a new pot in one of our channels, or join our devs to build one for your favourite project.",
-  "vaultTitle": "Deposit <span>{{token}}</span>, earn <span>{{apy}}% APY</span><wbr /> and a chance to win <span>{{currency}}{{amount}}</span>",
-  "vaultTitleSide": "Deposit <span>{{token}}</span>, and be entered for a chance to win <span>{{currency}}{{amount}}</span>",
-  "vaultTitleNFT": "Stake <span>{{token}}</span> and be entered for a chance to win an <span>{{sponsor}} NFT</span>",
+  "vaultTitle": "Deposit <span>{{token}}</span>, earn <span>{{apy}}% APY</span><wbr /> and a chance to win <span>{{prizes}}</span>",
+  "vaultTitlePrizeOnly": "Deposit <span>{{token}}</span>, and be entered for a chance to win <span>{{prizes}}</span>",
   "playWithMoonpot": "Play with Moonpot",
   "youHaventEnteredMoonpots": "You haven't entered any Moonpots yet.",
   "youHaventEnteredRetiredMoonpots": "You are not entered in any retired Moonpots.",
@@ -85,6 +85,7 @@
     "winTotalTokensIn": "in ",
     "stakeToken": "Stake <span>{{token}}</span>",
     "statNextDraw": "Next Draw",
+    "statNextDrawOnce": "One-Time Draw",
     "statNextDrawDaily": "Next Daily Draw",
     "statNextDrawWeekly": "Next Weekly Draw",
     "statNextDrawBiWeekly": "Next Bi-Weekly Draw",
@@ -97,8 +98,8 @@
     "statDeposit": "Your Deposit",
     "prizeDraw": "Prize Draw",
     "closed": "Closed",
-    "prizeSplitNFT": "Prize Split",
-    "prizeSplit": "Projected Prize Split",
+    "prizeSplit": "Prize Split",
+    "prizeSplitProjected": "Projected Prize Split",
     "prizeSplitToolTip": "Live projection based on current TVL and interest rate",
     "prizeSplitWinner": "{{count}} Winning Ticket",
     "prizeSplitWinner_plural": "{{count}} Winning Tickets",
@@ -181,6 +182,59 @@
               "rarity": "110 / 150"
             }
           }
+        },
+        "ziggyverse-agility-nft": {
+          "body": [
+            "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling."
+          ],
+          "rarities": {
+            "gold": {
+              "name": "Agility - Gold",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "Agility - Moonstone",
+              "rarity": "40 / 100"
+            },
+            "jade": {
+              "name": "Agility - Jade",
+              "rarity": "110 / 150"
+            }
+          }
+        }
+      },
+      "xmas-strategy": {
+        "title": "{{name}} Pot",
+        "xmas-pots": {
+          "body": [
+            "Being part of the cowmoonity not only feels cool, it also looks cool.",
+            "By participating in this Christmas Pot you have a chance of winning a limited edition t-shirt from Beefy Store.",
+            "This Pot contains 70 NFTs which can be exchanged for a promo code to order a free t-shirt from Beefy Store. Stake POTS to participate, draw every day, until 31st Dec."
+          ],
+          "merch": {
+            "beefy-moonpot-tshirt-front.png": { "title": "T-Shirt - Front" },
+            "beefy-moonpot-tshirt-back.png": { "title": "T-Shirt - Back" }
+          }
+        },
+        "xmas-moobifi": {
+          "body": [
+            "Being part of the cowmoonity not only feels cool, it also looks cool.",
+            "By participating in this Christmas Pot you have a chance of winning a limited edition hoodie from Beefy Store, POTS and BIFI tokens. Three prizes for every winning ticket.",
+            "This Pot contains 125 NFTs which can be exchanged for a promo code to order a free hoodie from Beefy Store, along with a prize of BIFI and POTS. Stake mooBIFI to participate, draw on 31st Dec."
+          ],
+          "merch": {
+            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+          }
+        },
+        "xmas-moochristmasbeefy": {
+          "body": [
+            "Being part of the cowmoonity not only feels cool, it also looks cool.",
+            "By participating in this Christmas Pot you have a chance of winning a limited edition hoodie from Beefy Store, POTS and BIFI tokens. Three prizes for every winning ticket.",
+            "This Pot contains 15 NFTs which can be exchanged for a promo code to order a free hoodie from Beefy Store, along with a prize of BIFI and POTS. Stake mooChristmasBeefy to participate, draw on 31st Dec."
+          ],
+          "merch": {
+            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+          }
         }
       },
       "earnings": {
@@ -225,6 +279,7 @@
     "allToken": "Deposit All {{token}}",
     "amountToken": "Deposit {{amount}} {{token}}",
     "fairplayNotice": "There's a {{duration}} day Fairplay Timelock. If you want to withdraw earlier you’ll pay a {{fee}}%, or less, Fairness Fee. The fee reduces every second.",
+    "maximumDepositNotice": "Maximum total deposit: {{amount}} {{token}}",
     "eolNotice": {
       "title": "Pot Retired",
       "message": "You can no longer deposit in to this pot."

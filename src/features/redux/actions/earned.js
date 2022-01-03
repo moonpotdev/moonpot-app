@@ -5,7 +5,7 @@ import { config } from '../../../config/config';
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 
 const getEarned = async (pots, state, dispatch) => {
-  console.log('redux getEarnedAll() processing...');
+  console.log('redux getEarned() processing...');
   const address = state.walletReducer.address;
   const web3 = state.walletReducer.rpc;
   const earned = { ...state.earnedReducer.earned };
@@ -64,6 +64,12 @@ const getEarned = async (pots, state, dispatch) => {
 
 const getEarnedSingle = async (item, state, dispatch) => {
   console.log('redux getEarnedSingle() processing...');
+
+  // Allow calling by id
+  if (typeof item === 'string' && item in state.vaultReducer.pools) {
+    item = state.vaultReducer.pools[item];
+  }
+
   return await getEarned({ [item.id]: item }, state, dispatch);
 };
 

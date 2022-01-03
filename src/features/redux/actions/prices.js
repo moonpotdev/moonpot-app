@@ -26,7 +26,19 @@ function derivePrice(token, tokens, prices, ppfs) {
     return derivePrice(underlying, tokens, prices, ppfs);
   }
 
-  if (!token.oracleId || !(token.oracleId in prices)) {
+  if (token.type === 'fixed') {
+    if (!('price' in token)) {
+      throw new Error(`Fixed "price" not found for ${token.symbol}/${token.address}`);
+    }
+
+    return token.price;
+  }
+
+  if (!token.oracleId) {
+    return 0;
+  }
+
+  if (!(token.oracleId in prices)) {
     throw new Error(
       `Oracle ${token.oracleId} not found in prices for ${token.symbol}/${token.address}`
     );
@@ -94,7 +106,7 @@ async function updatePPFS(web3, existing) {
 async function updatePrices() {
   console.log('redux fetchPrices called.');
   const retry = async () => {
-    await sleep(1000);
+    await sleep(10000);
     return await updatePrices();
   };
 
@@ -112,7 +124,7 @@ async function updatePrices() {
 async function updateLPPrices() {
   console.log('redux fetchLPPrices called.');
   const retry = async () => {
-    await sleep(1000);
+    await sleep(10000);
     return await updateLPPrices();
   };
 
@@ -130,7 +142,7 @@ async function updateLPPrices() {
 async function updateApy() {
   console.log('redux fetchApy called.');
   const retry = async () => {
-    await sleep(1000);
+    await sleep(10000);
     return await updateApy();
   };
   try {

@@ -72,6 +72,13 @@ const styles = theme => ({
       color: '#D4DAE0',
     },
   },
+  variantPurpleXmas: {
+    background: '#827DB5',
+    border: '2px solid #928DBE',
+    '& .MuiInputBase-input': {
+      color: '#D2CDE0',
+    },
+  },
 });
 
 export default styles;

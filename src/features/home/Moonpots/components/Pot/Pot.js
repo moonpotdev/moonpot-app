@@ -4,7 +4,7 @@ import { Grid, makeStyles } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 import { investmentOdds } from '../../../../../helpers/utils';
-import { Pot as BasePot, PrizeSplit, NFTPrizeSplit } from '../../../../../components/Pot/Pot';
+import { Pot as BasePot, PrizeSplit } from '../../../../../components/Pot/Pot';
 import { usePot, useTokenAddressPrice, useTranslatedToken } from '../../../../../helpers/hooks';
 import { Translate } from '../../../../../components/Translate';
 import { byDecimals } from '../../../../../helpers/format';
@@ -33,25 +33,23 @@ const Play = memo(function ({ id, token, contractAddress, variant }) {
 });
 
 const NewDepositOdds = memo(function ({
-  tokenAddress,
   ticketAddress,
-  tokenDecimals,
   ticketTotalSupply,
   depositAmountUsd,
   winners,
-  ppfs,
   network = 'bsc',
 }) {
-  const tokenPrice = useTokenAddressPrice(tokenAddress, network);
-  const stakedMultiplier =
-    tokensByNetworkAddress[network][ticketAddress.toLowerCase()].stakedMultiplier;
+  const ticketPrice = useTokenAddressPrice(ticketAddress, network);
+  const ticket = tokensByNetworkAddress[network][ticketAddress.toLowerCase()];
+  const stakedMultiplier = ticket.stakedMultiplier;
+  const ticketDecimals = ticket.tokenDecimals;
 
   const odds = useMemo(() => {
-    if (tokenPrice) {
-      const depositAmountTickets = depositAmountUsd / tokenPrice / stakedMultiplier / ppfs;
+    if (ticketPrice) {
+      const depositAmountTickets = depositAmountUsd / ticketPrice / stakedMultiplier;
 
       return investmentOdds(
-        byDecimals(ticketTotalSupply, tokenDecimals),
+        byDecimals(ticketTotalSupply, ticketDecimals),
         winners,
         0,
         depositAmountTickets
@@ -59,15 +57,7 @@ const NewDepositOdds = memo(function ({
     }
 
     return 0;
-  }, [
-    ticketTotalSupply,
-    depositAmountUsd,
-    tokenPrice,
-    winners,
-    tokenDecimals,
-    stakedMultiplier,
-    ppfs,
-  ]);
+  }, [ticketTotalSupply, depositAmountUsd, ticketPrice, winners, ticketDecimals, stakedMultiplier]);
 
   return (
     <Translate
@@ -80,49 +70,32 @@ const NewDepositOdds = memo(function ({
 const Bottom = function ({ id }) {
   const classes = useStyles();
   const pot = usePot(id);
-  const isNftPot = pot.vaultType === 'nft';
 
   return (
     <>
       <CardAccordionGroup className={classes.rowPrizeSplit}>
-        {isNftPot ? (
-          <CardAccordionItem titleKey="pot.prizeSplitNFT" collapsable={true}>
-            <Grid container>
-              <Grid item xs={3}>
-                <Translate i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
-              </Grid>
-              <Grid item xs={9} className={classes.prizeSplitValue}>
-                <NFTPrizeSplit numberOfWinners={pot.numberOfWinners} />
-              </Grid>
+        <CardAccordionItem
+          titleKey={pot.isPrizeOnly ? 'pot.prizeSplit' : 'pot.prizeSplitProjected'}
+          tooltip={pot.isPrizeOnly ? null : <TooltipWithIcon i18nKey={'pot.prizeSplitToolTip'} />}
+          collapsable={true}
+        >
+          <Grid container>
+            <Grid item xs={3}>
+              <Translate i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
             </Grid>
-          </CardAccordionItem>
-        ) : (
-          <CardAccordionItem
-            titleKey="pot.prizeSplit"
-            collapsable={true}
-            tooltip={
-              <TooltipWithIcon
-                i18nKey={'pot.prizeSplitToolTip'}
-                style={{ marginLeft: '0', marginRight: 'auto' }}
+            <Grid item xs={9} className={classes.prizeSplitValue}>
+              <PrizeSplit
+                baseToken={pot.token}
+                awardBalance={pot.projectedAwardBalance || pot.awardBalance}
+                awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
+                sponsors={pot.projectedSponsors || pot.sponsors}
+                numberOfWinners={pot.numberOfWinners}
+                nfts={pot.nfts}
+                nftPrizeOnly={pot.nftPrizeOnly}
               />
-            }
-          >
-            <Grid container>
-              <Grid item xs={3}>
-                <Translate i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
-              </Grid>
-              <Grid item xs={9} className={classes.prizeSplitValue}>
-                <PrizeSplit
-                  baseToken={pot.token}
-                  awardBalance={pot.projectedAwardBalance || pot.awardBalance}
-                  awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
-                  sponsors={pot.projectedSponsors || pot.sponsors}
-                  numberOfWinners={pot.numberOfWinners}
-                />
-              </Grid>
             </Grid>
-          </CardAccordionItem>
-        )}
+          </Grid>
+        </CardAccordionItem>
       </CardAccordionGroup>
       <div className={classes.rowPlay}>
         <Play
@@ -134,12 +107,9 @@ const Bottom = function ({ id }) {
       </div>
       <div className={classes.rowOdds}>
         <NewDepositOdds
-          tokenAddress={pot.tokenAddress}
           ticketAddress={pot.rewardAddress}
-          tokenDecimals={pot.tokenDecimals}
           ticketTotalSupply={pot.totalTickets}
           depositAmountUsd={1000}
-          ppfs={pot.ppfs || 1}
           winners={pot.numberOfWinners}
         />
         <br />

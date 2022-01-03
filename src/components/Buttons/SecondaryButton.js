@@ -10,6 +10,7 @@ export const SecondaryButton = withStyles({
       teal: '#14222E',
       purple: '#42385B',
       blueCommunity: '#24283D',
+      purpleXmas: '#3B3762',
     }),
     '&:hover': {
       color: '#FFFFFF',
@@ -17,6 +18,7 @@ export const SecondaryButton = withStyles({
         teal: '#0C151C',
         purple: '#2B253C',
         blueCommunity: '#181B2A',
+        purpleXmas: '#272541',
       }),
     },
     '&:focus': {
@@ -25,6 +27,7 @@ export const SecondaryButton = withStyles({
         teal: '#0C151C',
         purple: '#2B253C',
         blueCommunity: '#181B2A',
+        purpleXmas: '#272541',
       }),
     },
     '& .MuiTouchRipple-child': {
@@ -32,6 +35,7 @@ export const SecondaryButton = withStyles({
         teal: '#05080B',
         purple: '#201B2C',
         blueCommunity: '#06060A',
+        purpleXmas: '#19182A',
       }),
     },
   },

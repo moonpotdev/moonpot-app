@@ -4,6 +4,7 @@ import BigNumber from 'bignumber.js';
 import { potsByNetwork } from '../../../config/vault';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
 import { ZERO } from '../../../helpers/utils';
+import { createReducer } from '@reduxjs/toolkit';
 
 const initialPools = () => {
   const pools = [];
@@ -18,7 +19,6 @@ const initialPools = () => {
       pool['apy'] = 0;
       pool['tvl'] = 0;
       pool['tokenPrice'] = 0;
-      pool['ppfs'] = 1;
       pool['fairplayFee'] =
         pool.fairplayTicketFee /
         (tokensByNetworkAddress[pool.network][pool.rewardAddress.toLowerCase()].stakedMultiplier ||
@@ -36,6 +36,11 @@ const initialPools = () => {
       pool['rewardPoolTotalSupply'] = ZERO;
       pool['numberOfWinners'] = new BigNumber(5);
       pool['totalTickets'] = '0';
+      pool['stakeMax'] = '0';
+      pool['isPrizeOnly'] =
+        !('interestBreakdown' in pool) ||
+        !('interest' in pool.interestBreakdown) ||
+        !pool.interestBreakdown.interest;
       pool['defaultOrder'] = defaultOrder++;
       pool.sponsors.forEach(sponsor => {
         sponsor.sponsorBalance = ZERO;
@@ -73,27 +78,20 @@ const initialState = {
   isFirstTime: true,
 };
 
-const vaultReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case HOME_FETCH_POOLS_BEGIN:
-      return {
-        ...state,
-        isPoolsLoading: state.isFirstTime,
-      };
-    case HOME_FETCH_POOLS_DONE:
-      return {
-        ...state,
-        pools: action.payload.pools,
-        totalTvl: action.payload.totalTvl,
-        totalPrizesAvailable: action.payload.totalPrizesAvailable,
-        projectedTotalPrizesAvailable: action.payload.projectedTotalPrizesAvailable,
-        lastUpdated: action.payload.lastUpdated,
-        isPoolsLoading: action.payload.isPoolsLoading,
-        isFirstTime: false,
-      };
-    default:
-      return state;
-  }
-};
+const vaultReducer = createReducer(initialState, builder => {
+  builder
+    .addCase(HOME_FETCH_POOLS_BEGIN, (state, action) => {
+      state.isPoolsLoading = state.isFirstTime;
+    })
+    .addCase(HOME_FETCH_POOLS_DONE, (state, action) => {
+      state.pools = action.payload.pools;
+      state.totalTvl = action.payload.totalTvl;
+      state.totalPrizesAvailable = action.payload.totalPrizesAvailable;
+      state.projectedTotalPrizesAvailable = action.payload.projectedTotalPrizesAvailable;
+      state.lastUpdated = action.payload.lastUpdated;
+      state.isPoolsLoading = action.payload.isPoolsLoading;
+      state.isFirstTime = false;
+    });
+});
 
 export default vaultReducer;

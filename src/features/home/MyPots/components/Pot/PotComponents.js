@@ -6,7 +6,7 @@ import { investmentOdds } from '../../../../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import { byDecimals, formatDecimals } from '../../../../../helpers/format';
 import Countdown from '../../../../../components/Countdown';
-import { WinTotal } from '../../../../../components/Pot';
+import { WinFeature } from '../../../../../components/Pot';
 import { InterestTooltip } from '../../../../../components/Tooltip/tooltip';
 import { Translate } from '../../../../../components/Translate';
 import { useTokenBalance } from '../../../../../helpers/hooks';
@@ -29,12 +29,15 @@ export const PotTitle = function ({ item }) {
             <Translate i18nKey="pot.title" values={{ name: item.name }} />
           </Typography>
           <div className={classes.potUsdTop}>
-            <WinTotal
+            <WinFeature
               awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
               totalSponsorBalanceUsd={
                 pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
               }
-              winToken={pot.winToken}
+              sponsors={pot.sponsors}
+              nfts={pot.nfts}
+              depositToken={pot.token}
+              nftPrizeOnly={pot.nftPrizeOnly}
             />
           </div>
           <Typography className={classes.myPotsNextWeeklyDrawText} align={'right'}>
@@ -90,10 +93,11 @@ const DepositedOdds = memo(function ({ ticketTotalSupply, winners, ticketToken, 
 
 export const PotInfoBlock = function ({ item, active = true }) {
   const classes = useStyles();
-  const depositTokenPrice = useSelector(state => state.pricesReducer.prices[item.oracleId]);
+  const depositTokenPrice = useSelector(
+    state => state.pricesReducer.byNetworkAddress[item.network][item.tokenAddress]
+  );
   const { t } = useTranslation();
   const pot = item;
-  const isPrizeOnly = item.vaultType === 'side' || item.vaultType === 'nft';
 
   return (
     <Grid item xs={12}>
@@ -116,11 +120,11 @@ export const PotInfoBlock = function ({ item, active = true }) {
             <Grid item xs={6}>
               <Typography className={classes.myDetailsText} align={'left'}>
                 {t('pot.myInterestRate')}
-                {isPrizeOnly ? null : <InterestTooltip pot={pot} />}
+                {item.isPrizeOnly ? null : <InterestTooltip pot={pot} />}
               </Typography>
             </Grid>
             <Grid item xs={6}>
-              <Interest baseApy={item.apy} bonusApy={item.bonusApy} prizeOnly={isPrizeOnly} />
+              <Interest baseApy={item.apy} bonusApy={item.bonusApy} prizeOnly={item.isPrizeOnly} />
             </Grid>
           </>
         ) : null}

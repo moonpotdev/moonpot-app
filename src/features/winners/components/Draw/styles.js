@@ -1,6 +1,7 @@
 const styles = theme => ({
   rowLogoWonTotal: {
     marginBottom: `${24 - 8}px`,
+    flexWrap: 'nowrap',
   },
   title: {
     color: '#EBF3F9',
@@ -20,6 +21,9 @@ const styles = theme => ({
     '& > span': {
       color: '#F3BA2E',
     },
+  },
+  columnTitleValueWon: {
+    flexGrow: '1',
   },
   wonTotalTokens: {
     textAlign: 'right',

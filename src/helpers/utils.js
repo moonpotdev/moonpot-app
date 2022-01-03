@@ -5,6 +5,7 @@ import { tokensByNetworkSymbol } from '../config/tokens';
 let trimReg = /(^\s*)|(\s*$)/g;
 
 export const ZERO = new BigNumber(0);
+export const ONE = new BigNumber(1);
 
 export function isEmpty(key) {
   if (key === undefined || key === '' || key === null) {
@@ -56,8 +57,12 @@ export function compound(r, n = 365, t = 1, c = 1) {
 
 export const styledBy = (property, mapping) => props => mapping[props[property]];
 
-export function indexBy(arr, key, keyTransform = k => k) {
-  return Object.fromEntries(arr.map(item => [keyTransform(item[key]), item]));
+export function indexBy(arr, key, keyTransform = null) {
+  if (keyTransform) {
+    return Object.fromEntries(arr.map(item => [keyTransform(item[key]), item]));
+  }
+
+  return Object.fromEntries(arr.map(item => [item[key], item]));
 }
 
 export function groupBy(arr, key, keyTransform = k => k) {
@@ -123,4 +128,12 @@ export function getUnderylingToken(token) {
   }
 
   return token;
+}
+
+export function listJoin(list, emptyValue = '', sep = ', ', final = ' & ') {
+  if (list && list.length > 0) {
+    return list.length > 1 ? list.slice(0, -1).join(sep) + final + list[list.length - 1] : list[0];
+  }
+
+  return emptyValue;
 }
