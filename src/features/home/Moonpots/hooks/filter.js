@@ -29,7 +29,11 @@ function filterIncludePot(pot, vaultType, config) {
     return false;
   }
 
-  if (vaultType !== 'all' && vaultType !== pot.vaultType) {
+  if (vaultType !== 'all' && vaultType !== pot.vaultType && vaultType !== 'featured') {
+    return false;
+  }
+
+  if (vaultType === 'featured' && pot.featured !== true) {
     return false;
   }
 
@@ -37,7 +41,6 @@ function filterIncludePot(pot, vaultType, config) {
 }
 
 function compareNumber(a, b) {
-  console.log(a);
   return (a > b) - (a < b);
 }
 
@@ -75,7 +78,6 @@ function sortPots(pots, key, dir) {
 }
 
 export function useFilteredPots(pots, vaultType, config) {
-  console.log(config);
   return useMemo(() => {
     const filtered = Object.values(pots).filter(pot => filterIncludePot(pot, vaultType, config));
 

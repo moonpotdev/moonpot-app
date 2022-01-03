@@ -10,6 +10,11 @@ const useStyles = makeStyles(styles);
 
 const PotTypes = [
   {
+    key: 'featured',
+    path: 'featured',
+    label: 'buttons.featured',
+  },
+  {
     key: 'all',
     path: 'all',
     label: 'buttons.allPots',
