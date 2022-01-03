@@ -463,6 +463,13 @@
     "decimals": 18
   },
   {
+    "symbol": "AOT",
+    "address": "0x9589014F7a8547B89A6331eEEe32b7fBd5852af9",
+    "type": "single",
+    "oracleId": "AOT",
+    "decimals": 6
+  },
+  {
     "symbol": "mooBIFI",
     "address": "0xf7069e41C57EcC5F122093811d8c75bdB5f7c14e",
     "type": "moo",
