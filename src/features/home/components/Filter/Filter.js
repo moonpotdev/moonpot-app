@@ -104,7 +104,7 @@ const Filter = ({ className, selected, sort }) => {
   //Get params from route
   let { filter, bottom, top } = useParams();
   //Current pot type
-  const [currentPath, setCurrentPath] = useState(bottom || 'all');
+  const [currentPath, setCurrentPath] = useState(bottom || 'featured');
   //Current filter type
   const [currentSort, setCurrentSort] = useState(filter || 'default');
   //Handle change of pot
