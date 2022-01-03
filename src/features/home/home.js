@@ -46,7 +46,7 @@ const Home = () => {
           </Grid>
           <div className={classes.placeholder} />
           <Grid item className={classes.filterContainerRight}>
-            <Filter selected={bottom} />
+            <Filter selected={bottom} sort={filter} />
           </Grid>
         </Grid>
         {top === 'moonpots' ? (

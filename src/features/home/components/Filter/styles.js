@@ -9,6 +9,12 @@ const styles = theme => ({
       margin: '0 auto',
       padding: '0 16px',
     },
+    '& .Mui-focused': {
+      '& .MuiSelect-root': {
+        backgroundColor: '#303050 !important',
+        borderRadius: '8px',
+      },
+    },
   },
   button: {
     fontSize: '15px',
@@ -40,6 +46,21 @@ const styles = theme => ({
       background: 'none',
     },
     marginLeft: '16px',
+    '& .MuiSelect-root': {
+      '& div': {
+        '& .MuiTypography-root': {
+          display: 'initial',
+        },
+        '& p:nth-child(2)': {
+          color: '#ffffff !important',
+        },
+      },
+    },
+  },
+  selectRoot: {
+    '&$selected': {
+      backgroundColor: '#303050',
+    },
   },
   selectValue: {
     fontSize: '15px',
@@ -47,7 +68,14 @@ const styles = theme => ({
     color: '#FFFFFF',
     fontWeight: '500',
   },
+  selectValueSelected: {
+    fontSize: '15px',
+    lineHeight: '24px',
+    color: '#8F8FBC',
+    fontWeight: '500',
+  },
   selectLabel: {
+    display: 'none',
     fontSize: '15px',
     lineHeight: '24px',
     color: '#8F8FBC',
@@ -57,9 +85,22 @@ const styles = theme => ({
     color: 'red !important',
   },
   menuStyle: {
+    width: '220px',
+    [theme.breakpoints.down('1073')]: {
+      width: '500px',
+      maxWidth: '90%',
+    },
+    marginLeft: '-2px',
+    marginTop: '4px',
     border: '2px solid #555590',
     borderRadius: '8px',
-    backgroundColor: '#393960',
+    backgroundColor: '#303050',
+    '& .MuiList-root': {
+      padding: '4px 8px',
+      '& .Mui-selected': {
+        backgroundColor: '#303050',
+      },
+    },
   },
 });
 

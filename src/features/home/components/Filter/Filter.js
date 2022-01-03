@@ -91,7 +91,7 @@ const iconComponent = props => {
   );
 };
 
-const Filter = ({ className, selected }) => {
+const Filter = ({ className, selected, sort }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const history = useHistory();
@@ -143,7 +143,10 @@ const Filter = ({ className, selected }) => {
           disableUnderline
           IconComponent={iconComponent}
           MenuProps={{
-            classes: { paper: classes.menuStyle },
+            classes: {
+              paper: classes.menuStyle,
+              root: classes.selectRoot,
+            },
             anchorOrigin: {
               vertical: 'bottom',
               horizontal: 'left',
@@ -159,7 +162,13 @@ const Filter = ({ className, selected }) => {
             <MenuItem key={type.key} value={type.path}>
               <div style={{ display: 'flex' }}>
                 <Typography className={classes.selectLabel}>{t('potType')}&nbsp;</Typography>
-                <Typography className={classes.selectValue}>{t(type.label)}</Typography>
+                <Typography
+                  className={
+                    selected === type.key ? classes.selectValueSelected : classes.selectValue
+                  }
+                >
+                  {t(type.label)}
+                </Typography>
               </div>
             </MenuItem>
           ))}
@@ -189,7 +198,13 @@ const Filter = ({ className, selected }) => {
                 <MenuItem key={type.key} value={type.path}>
                   <div style={{ display: 'flex' }}>
                     <Typography className={classes.selectLabel}>{t('sortBy')}&nbsp;</Typography>
-                    <Typography className={classes.selectValue}>{t(type.label)}</Typography>
+                    <Typography
+                      className={
+                        sort === type.key ? classes.selectValueSelected : classes.selectValue
+                      }
+                    >
+                      {t(type.label)}
+                    </Typography>
                   </div>
                 </MenuItem>
               ))
@@ -197,7 +212,13 @@ const Filter = ({ className, selected }) => {
                 <MenuItem key={type.key} value={type.path}>
                   <div style={{ display: 'flex' }}>
                     <Typography className={classes.selectLabel}>{t('sortBy')}&nbsp;</Typography>
-                    <Typography className={classes.selectValue}>{t(type.label)}</Typography>
+                    <Typography
+                      className={
+                        sort === type.key ? classes.selectValueSelected : classes.selectValue
+                      }
+                    >
+                      {t(type.label)}
+                    </Typography>
                   </div>
                 </MenuItem>
               ))}

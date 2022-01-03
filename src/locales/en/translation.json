@@ -5,7 +5,7 @@
     "deposit": "Deposit",
     "myActivePots": "Active Pots",
     "myPastPots": "Retired Pots",
-    "allPots": "All Pots",
+    "allPots": "All",
     "mainPots": "Main",
     "communityPots": "Community",
     "lpPots": "LP",
@@ -19,7 +19,8 @@
     "nextDraw": "Next Draw",
     "prize": "Prize",
     "apy": "APY",
-    "default": "Default"
+    "default": "Default",
+    "featured": "Featured"
   },
   "modals": {
     "unsupportedNetworkDetected": "Unsupported Network Detected",
