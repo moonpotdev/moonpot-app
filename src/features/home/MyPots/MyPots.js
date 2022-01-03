@@ -30,7 +30,11 @@ const MyPots = ({ selected, bottom }) => {
         return false;
       }
 
-      if (item.vaultType !== bottom && bottom !== 'all') {
+      if (item.vaultType !== bottom && bottom !== 'all' && bottom !== 'featured') {
+        return false;
+      }
+
+      if (bottom === 'featured' && item.featured !== true) {
         return false;
       }
 
