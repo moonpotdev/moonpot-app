@@ -231,7 +231,7 @@ const Filter = ({ className, selected, sort }) => {
             : mySortByTypes.map(type => (
                 <MenuItem key={type.key} value={type.path}>
                   <div style={{ display: 'flex' }}>
-                    <Typography className={classes.selectLabel}>{t('sortBy')}&nbsp;</Typography>
+                    <Typography className={classes.selectLabel}>{t('potStatus')}&nbsp;</Typography>
                     <Typography
                       className={
                         sort === type.key ? classes.selectValueSelected : classes.selectValue

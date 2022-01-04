@@ -47,7 +47,7 @@ const Footer = ({ variant }) => {
             <Link href={'https://vote.moonpot.com/#/'}>
               <Typography className={classes.textButton}>{t('header.vote')}</Typography>
             </Link>
-            <Link>
+            <Link href={'https://www.certik.com/projects/moonpot'}>
               <Typography className={classes.textButton}>{t('header.audit')}</Typography>
             </Link>
           </Grid>

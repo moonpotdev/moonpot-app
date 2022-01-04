@@ -45,6 +45,9 @@ const styles = theme => ({
     paddingLeft: 12,
     paddingRight: 12,
     textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'none',
+    },
   },
   footerIcons: {
     flex: 1,

@@ -3,8 +3,8 @@
     "ziggyMoonpotGuide": "Ziggy's Guide to Moonpot",
     "moonpotAlpha": "Moonpot Alpha Articles",
     "deposit": "Deposit",
-    "myActivePots": "Active Pots",
-    "myPastPots": "Retired Pots",
+    "myActivePots": "Active",
+    "myPastPots": "Retired",
     "allPots": "All",
     "mainPots": "Main",
     "xmasPots": "Xmas",
@@ -71,6 +71,7 @@
   "twitterSocialBlockButton": "Follow our Twitter",
   "potType": "Pot Type:",
   "sortBy": "Sort by:",
+  "potStatus": "Pot Status:",
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",
