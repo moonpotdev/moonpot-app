@@ -129,9 +129,14 @@ const Filter = ({ className, selected, sort }) => {
           state: { tabbed: true },
         });
       } else {
+        setCurrentPath('all');
         setCurrentSort('active');
+        // history.push({
+        //   pathname: '/my-moonpots/' + currentPath + '/active',
+        //   state: { tabbed: true },
+        // });
         history.push({
-          pathname: '/my-moonpots/' + currentPath + '/active',
+          pathname: '/my-moonpots/all/active',
           state: { tabbed: true },
         });
       }
