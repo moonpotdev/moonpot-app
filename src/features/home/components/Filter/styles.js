@@ -15,6 +15,11 @@ const styles = theme => ({
         borderRadius: '8px',
       },
     },
+    '& .MuiInput-root': {
+      '& .MuiSvgIcon-root': {
+        marginRight: 12,
+      },
+    },
   },
   button: {
     fontSize: '15px',

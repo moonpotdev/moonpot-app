@@ -93,6 +93,13 @@ const Footer = ({ variant }) => {
                 className={classes.footerImage}
               />
             </Link>
+            <Link href={'https://www.facebook.com/Moonpot-111024264744176/'}>
+              <img
+                alt="Facebook"
+                src={require('../../images/footer/facebook.svg').default}
+                className={classes.footerImage}
+              />
+            </Link>
           </Grid>
         </Grid>
       </Container>

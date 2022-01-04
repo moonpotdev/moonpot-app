@@ -103,8 +103,11 @@ const Filter = ({ className, selected, sort }) => {
 
   //Get params from route
   let { filter, bottom, top } = useParams();
+  console.log(top);
   //Current pot type
-  const [currentPath, setCurrentPath] = useState(bottom || 'featured');
+  const [currentPath, setCurrentPath] = useState(
+    bottom || top === 'my-moonpots' ? 'all' : 'featured'
+  );
   //Current filter type
   const [currentSort, setCurrentSort] = useState(filter || 'default');
   //Handle change of pot
@@ -121,18 +124,30 @@ const Filter = ({ className, selected, sort }) => {
     if (top === 'my-moonpots') {
       //Check for valid filter selection, if not set to default for my pots
       if (currentSort === 'active' || currentSort === 'eol') {
-        history.push('/my-moonpots/' + currentPath + '/' + currentSort);
+        history.push({
+          pathname: '/my-moonpots/' + currentPath + '/' + currentSort,
+          state: { tabbed: true },
+        });
       } else {
         setCurrentSort('active');
-        history.push('/my-moonpots/' + currentPath + '/active');
+        history.push({
+          pathname: '/my-moonpots/' + currentPath + '/active',
+          state: { tabbed: true },
+        });
       }
     } else {
       //Check for valid filter selection, if not set to default for moonpots
       if (currentSort !== 'active' && currentSort !== 'eol') {
-        history.push('/' + currentPath + '/' + currentSort);
+        history.push({
+          pathname: '/' + currentPath + '/' + currentSort,
+          state: { tabbed: true },
+        });
       } else {
         setCurrentSort('default');
-        history.push('/' + currentPath + '/default');
+        history.push({
+          pathname: '/' + currentPath + '/default',
+          state: { tabbed: true },
+        });
       }
     }
   }, [currentPath, currentSort, history, top]);
