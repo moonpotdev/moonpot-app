@@ -16,7 +16,7 @@ const Footer = ({ variant }) => {
   const cadets = useSelector(state => state.holdersReducer.totalHolders || 0);
 
   //Buybacks Data
-  const lastWeekBuybacks = useSelector(state => state.buybacksReducer.lastBuybacksTotal || 0);
+  const lastWeekBuybacks = useSelector(state => state.buybacksReducer.lastWeekBuyback || 0);
   const potsPrice = useSelector(state => state.pricesReducer.prices['POTS'] || 0);
   const lastWeekBuybackUSD = (lastWeekBuybacks * potsPrice).toLocaleString(undefined, {
     maximumFractionDigits: 0,

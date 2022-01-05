@@ -4,17 +4,19 @@ const fetchBuybacks = () => {
   return dispatch => {
     console.log('redux fetchBuybacks called.');
     dispatch(fetchBuybacksBegin());
-    return fetch('https://api.moonpot.com/buybacks')
+    return fetch('https://potsprice.herokuapp.com/buyback', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        'Access-Control-Allow-Headers':
+          'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+      },
+    })
       .then(res => res.json())
       .then(json => {
-        const rawBuybacks = json['data'];
-        var buybackTotal = 0;
-        var lastBuybackTotal = 0;
-        for (const pot in rawBuybacks) {
-          buybackTotal += rawBuybacks[pot]['allTimeBuyback'];
-          lastBuybackTotal += rawBuybacks[pot]['lastBuyback'];
-        }
-        dispatch(fetchBuybacksSuccess(rawBuybacks, buybackTotal, lastBuybackTotal));
+        const lastWeekBuyback = json['lastWeekBuyback'];
+        dispatch(fetchBuybacksSuccess(lastWeekBuyback));
         return json;
       })
       .catch(error => dispatch(fetchBuybacksFailure(error)));
@@ -25,9 +27,9 @@ const fetchBuybacksBegin = () => ({
   type: FETCH_BUYBACKS_BEGIN,
 });
 
-const fetchBuybacksSuccess = (buybacks, buybacksTotal, lastBuybacksTotal) => ({
+const fetchBuybacksSuccess = lastWeekBuyback => ({
   type: FETCH_BUYBACKS_SUCCESS,
-  payload: { buybacks, buybacksTotal, lastBuybacksTotal },
+  payload: { lastWeekBuyback },
 });
 
 const fetchBuybacksFailure = error => ({

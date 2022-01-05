@@ -1,9 +1,7 @@
 import { FETCH_BUYBACKS_BEGIN, FETCH_BUYBACKS_SUCCESS, FETCH_BUYBACKS_FAILURE } from '../constants';
 
 const initialState = {
-  buybacks: [],
-  buybacksTotal: 0,
-  lastBuybacksTotal: 0,
+  lastWeekBuyback: 0,
   loading: false,
   error: null,
 };
@@ -20,9 +18,7 @@ const buybacksReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        buybacks: action.payload.buybacks,
-        buybacksTotal: action.payload.buybacksTotal,
-        lastBuybacksTotal: action.payload.lastBuybacksTotal,
+        lastWeekBuyback: action.payload.lastWeekBuyback,
       };
     case FETCH_BUYBACKS_FAILURE:
       return {
