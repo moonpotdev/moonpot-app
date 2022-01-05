@@ -103,7 +103,6 @@ const Filter = ({ className, selected, sort }) => {
 
   //Get params from route
   let { filter, bottom, top } = useParams();
-  console.log(top);
   //Current pot type
   const [currentPath, setCurrentPath] = useState(
     bottom || top === 'my-moonpots' ? 'all' : 'featured'
@@ -131,10 +130,6 @@ const Filter = ({ className, selected, sort }) => {
       } else {
         setCurrentPath('all');
         setCurrentSort('active');
-        // history.push({
-        //   pathname: '/my-moonpots/' + currentPath + '/active',
-        //   state: { tabbed: true },
-        // });
         history.push({
           pathname: '/my-moonpots/all/active',
           state: { tabbed: true },

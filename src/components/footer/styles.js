@@ -1,7 +1,7 @@
 const styles = theme => ({
   footer: {
     minHeight: '100%',
-    padding: '8px 40px',
+    padding: '8px 0',
     textAlign: 'center',
     flex: 1,
     justifyContent: 'flex-end',
