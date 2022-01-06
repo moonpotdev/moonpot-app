@@ -68,7 +68,7 @@ const sortByTypes = [
     label: 'buttons.prize',
   },
   {
-    apy: 'apy',
+    key: 'apy',
     path: 'apy',
     label: 'buttons.apy',
   },

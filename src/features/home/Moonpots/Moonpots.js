@@ -51,7 +51,7 @@ const Moonpots = ({ selected, sort }) => {
 
   useEffect(() => {
     if (sortKey !== filterConfig.sortKey || sortDir !== filterConfig.sortDir) {
-      setFilterConfig({ ...filterConfig, sortKey, sortDir, version: filterConfig.version + 1 });
+      setFilterConfig({ ...filterConfig, sortKey, sortDir });
     }
   }, [filterConfig, setFilterConfig, sortKey, sortDir, pots]);
 

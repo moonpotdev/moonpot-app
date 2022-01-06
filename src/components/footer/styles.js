@@ -32,6 +32,12 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     marginTop: 24,
+    '& .MuiLink-root': {
+      textDecoration: 'none',
+      '&:hover': {
+        textDecoration: 'none',
+      },
+    },
   },
   footerStats: {
     display: 'flex',
@@ -41,13 +47,9 @@ const styles = theme => ({
   },
   textButton: {
     color: '#CDCDE4',
-    textSize: '15px',
+    fontSize: '15px',
     paddingLeft: 12,
     paddingRight: 12,
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'none',
-    },
   },
   footerIcons: {
     flex: 1,
