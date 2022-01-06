@@ -15,7 +15,7 @@
     "apyId": "pots-pots",
     "compoundApy": true,
     "vaultType": "main",
-    "duration": 14,
+    "duration": 7,
     "fairplayDuration": 10,
     "fairplayTicketFee": 0.025,
     "interestBreakdown": {
@@ -36,59 +36,52 @@
         "sponsorTokenDecimals": 18
       },
       {
-        "sponsorToken": "CAKE",
-        "sponsorOracleId": "Cake",
-        "sponsorAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "BANANA",
-        "sponsorOracleId": "BANANA",
-        "sponsorAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "BIFI",
-        "sponsorOracleId": "BIFI",
-        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
-        "sponsorTokenDecimals": 18
-      },
-      {
         "sponsorToken": "BUSD",
         "sponsorOracleId": "BUSD",
         "sponsorAddress": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "WBNB",
-        "sponsorOracleId": "WBNB",
-        "sponsorAddress": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "PACOCA",
-        "sponsorOracleId": "PACOCA",
-        "sponsorAddress": "0x55671114d774ee99D653D6C12460c780a67f1D18",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "xBLZD",
-        "sponsorOracleId": "xBLZD",
-        "sponsorAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "BABY",
-        "sponsorOracleId": "BABY",
-        "sponsorAddress": "0x53E562b9B7E5E94b81f10e96Ee70Ad06df3D2657",
         "sponsorTokenDecimals": 18
       }
     ]
   },
   {
+    "id": "ziggyverse-agility-nft",
+    "name": "Ziggyverse NFT",
+    "icon": "ziggyverse",
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketPotsZiggyVerseAgility",
+    "rewardAddress": "0x075570d24c67EC8F87c5d8458BFFe01A729c3B40",
+    "contractAddress": "0xce6f016bCfD2EE7da66F33Ff5E66eF3fB1D7316B",
+    "prizePoolAddress": "0xBF28F3320fE54085f5a5A2E93B64858C5d995d43",
+    "prizeStrategyAddress": "0x4a905E141F19c53f3588a9d12A94f579e66631d4",
+    "oracleId": "POTS",
+    "apyId": "pots-pots",
+    "vaultType": "nft",
+    "duration": 1,
+    "fairplayDuration": 3,
+    "fairplayTicketFee": 0.025,
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "withdrawFee": 0,
+    "infoCards": ["nft-strategy", "nft-fairplay"],
+    "infoCardStrategy": "ziggyverse-agility",
+    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "Ziggyverse Agility NFT",
+        "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
+        "type": "erc1155"
+      }
+    ],
+    "bonuses": []
+  },
+  {
     "id": "ziggyverse-armour-nft",
     "name": "Ziggyverse NFT",
-    "winToken": "Ziggyverse Armour NFT",
+    "icon": "ziggyverse",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
@@ -97,7 +90,6 @@
     "contractAddress": "0x33bD1Abce7A4862b6f69fb83160e031d4b52f539",
     "prizePoolAddress": "0x58e338F27D5574B16e3e61062a31ADe00a816558",
     "prizeStrategyAddress": "0xC0ecc09E561E114AEa20612EA4f6eb457935b58d",
-    "pricePerShare": 1,
     "oracleId": "POTS",
     "apyId": "pots-pots",
     "vaultType": "nft",
@@ -111,7 +103,347 @@
     "infoCardStrategy": "ziggyverse-armour",
     "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
     "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "Ziggyverse Armour NFT",
+        "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
+        "type": "erc1155"
+      }
+    ],
     "bonuses": []
+  },
+  {
+    "id": "cake",
+    "name": "CAKE",
+    "token": "CAKE",
+    "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketCakeV4",
+    "rewardAddress": "0x6B9c7C3aE69852De54A7b7b1F0C99851271Af9a1",
+    "contractAddress": "0xa5fEBEB2FfAEC64D3cEE5e24829934f8DC3BDC28",
+    "prizePoolAddress": "0xC4aeCF2ab2Bd5a9bE154618f4Cb035a73feA40a5",
+    "prizeStrategyAddress": "0x6cC56668E864278e210d78896Edb14a27Fd0F4f7",
+    "oracleId": "Cake",
+    "apyId": "cake-cakev2",
+    "vaultType": "main",
+    "type": "single",
+    "duration": 7,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "CAKE",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      },
+      {
+        "id": 2,
+        "symbol": "MILK",
+        "display": "superBoost"
+      },
+      {
+        "id": 3,
+        "symbol": "AOT",
+        "display": "superBoost"
+      }
+    ]
+  },
+  {
+    "id": "4belt",
+    "name": "4Belt USD",
+    "token": "4Belt USD LP",
+    "provider": "Belt",
+    "tokenAddress": "0x9cb73F20164e399958261c289Eb5F9846f4D1404",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBelt4LP",
+    "rewardAddress": "0x49d46111DDD93C526486b88E17C4f8b1Ea0F682e",
+    "contractAddress": "0xAc02606cAD10FB8FaC90C201Ee9072f4912Aa5c1",
+    "prizePoolAddress": "0x8243B29f44c895f5141FA5DB43Cf15D8f1A9eB21",
+    "prizeStrategyAddress": "0x063221c7743eF6AA49b32Ca249F1AFF2266f0e2A",
+    "oracleId": "belt-4belt",
+    "apyId": "beltv2-4belt",
+    "vaultType": "stable",
+    "type": "belt",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "isZap": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x1bBBf8910E5A074c7B62D891Dbab9f4af82C14D4",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "Belt LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "beltbnb",
+    "name": "BNB",
+    "token": "beltBNB",
+    "tokenAddress": "0xa8Bb71facdd46445644C277F9499Dd22f6F0A30C",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBeltBNB",
+    "rewardAddress": "0xfF4226328b92470691E5D1De4D2a974D132ef28E",
+    "contractAddress": "0x183Df4bBB21e6c9B0F23c91BA5b4A1A7D5FdC374",
+    "prizePoolAddress": "0xD0dcC357774a304e9EC4297EE6cCb286e6C987CD",
+    "prizeStrategyAddress": "0x9462206716850d44f6eC1FEaD08818d170Bde3F8",
+    "oracleId": "belt-beltbnb",
+    "apyId": "belt-beltbnb",
+    "vaultType": "main",
+    "type": "belt",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "isZap": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xC34Ae91312A3c3F9420691922040a5DEe1698E52",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "beltBNB",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "side-cake",
+    "name": "CAKE Side",
+    "token": "CAKE",
+    "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketSideCake",
+    "rewardAddress": "0xd1E54daB9Be66ad630adB84d83475EdEcF2d1D97",
+    "contractAddress": "0x73c37A4b64CD0Fcb612147F188912a5082151D68",
+    "prizePoolAddress": "0x154D571f9C8214a04531F80AcD7902d9ed4B98D8",
+    "prizeStrategyAddress": "0xA54eB6e78ee185a1c577874Bcc5288FAb2feC3E5",
+    "oracleId": "Cake",
+    "apyId": "cake-cakev2",
+    "vaultType": "side",
+    "type": "single",
+    "duration": 1,
+    "fairplayDuration": 3,
+    "fairplayTicketFee": 0.025,
+    "interestBreakdown": {
+      "prize": 80,
+      "buyback": 20
+    },
+    "status": "active",
+    "withdrawFee": 0,
+    "infoCardStrategy": "side",
+    "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
+    "sponsors": [
+      {
+        "sponsorToken": "CAKE",
+        "sponsorOracleId": "Cake",
+        "sponsorAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": []
+  },
+  {
+    "id": "hotcross-busd-lp",
+    "name": "HOTCROSS-BUSD LP",
+    "token": "HOTCROSS-BUSD LP",
+    "provider": "ApeSwap",
+    "tokenAddress": "0x3B9Aa711D1D90A4f8639f66C227881729a3317F2",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketHotcross",
+    "rewardAddress": "0xDF1bbE524Ef0D4EBF6eb82e1b1DcA96448725138",
+    "contractAddress": "0x7bB08762821d25123403dA4723c6538da7825657",
+    "prizePoolAddress": "0xEFdD6AE3481474266Ddf7ef128205Dd7DCDB7f6d",
+    "prizeStrategyAddress": "0x13cE95c78B86a2346CEc87C5356f06c071652bf2",
+    "oracleId": "banana-hotcross-busd",
+    "apyId": "banana-hotcross-busd",
+    "vaultType": "lp",
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "isZap": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xF3a599fe4E0f7ce7f5dDA19B1b54FDf82cdA7520",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "HOTCROSS-BUSD LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "HOTCROSS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "wings",
+    "name": "WINGS",
+    "token": "WINGS",
+    "tokenAddress": "0x0487b824c8261462F88940f97053E65bDb498446",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketWings",
+    "rewardAddress": "0x5D5Fb49C0ED2168AC2A370148F633AcA0735f83c",
+    "contractAddress": "0x892cb8055D33cC357f6b24eA4413beED80502c01",
+    "prizePoolAddress": "0x8d30803308012B3EC5bf7a4B65F98c22E8bd3dF2",
+    "prizeStrategyAddress": "0xd4A6d629e657870dbE1E3B79B482DA3C3D778AED",
+    "oracleId": "WINGS",
+    "apyId": "jetswap-wings",
+    "vaultType": "community",
+    "type": "single",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x5e784882E8D2ac69777713f0e71100741b8aC2F6",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "WINGS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "dep-bnb",
+    "name": "DEP-BNB LP",
+    "token": "DEP-BNB LP",
+    "provider": "ApeSwap",
+    "tokenAddress": "0x6518709dC42F70Dbf89934cA382F1d9dB26370e8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketApe DEP-BNB",
+    "rewardAddress": "0xAD5146cd3dAe87bE55c95510eBA874C6b7EC04c9",
+    "contractAddress": "0x6b62838F16DE114033Eb17aDFE9039D03Ecbc10A",
+    "prizePoolAddress": "0xa6453e2aB42846D7Fe99b03a6B09483E8cCd5355",
+    "prizeStrategyAddress": "0x017220fE95BfE467447Eae2F5D6a66f069045512",
+    "oracleId": "banana-wbnb-dep",
+    "apyId": "banana-wbnb-dep",
+    "vaultType": "lp",
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "isZap": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x62BA2D4A572664036c35f0D76cEe81cC8b77199b",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "DEP-BNB LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "DEP",
+        "display": "bonus"
+      }
+    ]
   },
   {
     "id": "ibalpaca",
@@ -127,6 +459,7 @@
     "oracleId": "alpaca-ibalpaca",
     "apyId": "alpaca-ibalpaca",
     "vaultType": "community",
+    "type": "single",
     "duration": 14,
     "fairplayDuration": 10,
     "fairplayTicketFee": 0.05,
@@ -180,6 +513,7 @@
     "oracleId": "WATCH",
     "apyId": "pots-watch",
     "vaultType": "community",
+    "type": "single",
     "duration": 28,
     "fairplayDuration": 10,
     "fairplayTicketFee": 0.1,
@@ -211,7 +545,469 @@
     ]
   },
   {
+    "id": "baby",
+    "name": "BABY",
+    "token": "BABY",
+    "tokenAddress": "0x53E562b9B7E5E94b81f10e96Ee70Ad06df3D2657",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBabySwap",
+    "rewardAddress": "0x7E22d782811Bd5CF60BC9a513139B1354ff8b120",
+    "contractAddress": "0xe70D2F4719EEACcbCdFb5494CE19FAFceEe0d3b8",
+    "prizePoolAddress": "0x167DDF000AD0680BD62e2c4B17D38731cea70D08",
+    "prizeStrategyAddress": "0x625359D1217FDDf8455420140BE250147d89645b",
+    "oracleId": "BABY",
+    "apyId": "baby-baby",
+    "vaultType": "community",
+    "type": "single",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x87F9A89B51dA28CE8653A700d362CDa9b9bA7d88",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "BABY",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "pacoca",
+    "name": "PACOCA",
+    "token": "PACOCA",
+    "tokenAddress": "0x55671114d774ee99D653D6C12460c780a67f1D18",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketPacoca",
+    "rewardAddress": "0x76b0Fbdf8437126C3aA16995F2d2c2b0DdAbEDD8",
+    "contractAddress": "0xB9208616368c362c531aFE3b813a5cef181399b7",
+    "prizePoolAddress": "0xC95382A725df5c037D51330eD14F48035240fD1d",
+    "prizeStrategyAddress": "0x0DbD64Ce578a67b915b7558a928d15A1A580b69e",
+    "oracleId": "PACOCA",
+    "apyId": "pacoca-pacoca",
+    "vaultType": "community",
+    "type": "single",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x21403739A1Dc0e3ceC70CBD5ceaE78fF25F102a4",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "PACOCA",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "banana",
+    "name": "BANANA",
+    "token": "BANANA",
+    "tokenAddress": "0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBanana",
+    "rewardAddress": "0x87f697905732c6FAa5Def3bfE23AaDA5eAC33Ee8",
+    "contractAddress": "0x2c85A6aA1974230d3e91bA32956271E5A11b0392",
+    "prizePoolAddress": "0xB721fCd19489141d58ccF5A8Bb9FD3d1E030A02b",
+    "prizeStrategyAddress": "0x04F3fd08504a7Fc9d4A01985c15EbC3a0F342013",
+    "oracleId": "BANANA",
+    "apyId": "banana-bananav2",
+    "vaultType": "community",
+    "type": "single",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xED4ea41Daf652964789b16e3Ff76eC07d99d2340",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "BANANA",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "pots-busd",
+    "name": "POTS-BUSD LP",
+    "token": "POTS-BUSD LP",
+    "provider": "PancakeSwap",
+    "tokenAddress": "0xF90BAA331Cfd40F094476E752Bf272892170d399",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketCakeV2POTS-BUSD",
+    "rewardAddress": "0xB0177Aa9d7BDcBc4841993C3153c987A74462198",
+    "contractAddress": "0xDEb80263181735c907b6b5e9cA4bAcBB2d34FC07",
+    "prizePoolAddress": "0x5eB0fFc97e728DE8A605a14bb1c497AA4501B439",
+    "prizeStrategyAddress": "0x252eCEe8F7C40f2A3Ee8C1aB3Cc23F7EB136DC41",
+    "oracleId": "cakev2-pots-busd",
+    "apyId": "cakev2-pots-busd",
+    "vaultType": "lp",
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "isZap": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x3106d9B3d5e04ff5D575212140FAb1Cf17C8933F",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "POTS-BUSD LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "xblzd",
+    "name": "xBLZD",
+    "token": "xBLZD",
+    "tokenAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketxBLZD",
+    "rewardAddress": "0xf6A91F8d3EC0b1922433c4E929Ea61C85633E918",
+    "contractAddress": "0x55A50FE2372c0B8A4491d4CeC517258D69940547",
+    "prizePoolAddress": "0x861d4d8310006E6Ef115dF4A5D64A83e361aa29E",
+    "prizeStrategyAddress": "0x3442aB28A4de27f00eE6Aa960e0b9Ce9a9DBa976",
+    "oracleId": "xBLZD",
+    "apyId": "blizzard-xblzd",
+    "vaultType": "community",
+    "type": "single",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x47a27220Db5458DB4b238fefCBb8178232cBFa5D",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "xBLZD",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "pots-bnb",
+    "name": "POTS-BNB LP",
+    "token": "POTS-BNB LP",
+    "provider": "ApeSwap",
+    "tokenAddress": "0xaa3FCBA2cf7c5f8c8f785A7180F5063144fE53c6",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketApePOTS-BNB",
+    "rewardAddress": "0x2f4a26A1B540255B5AA2c2e4A2d142ae2765b186",
+    "contractAddress": "0xA9638f46b23FcfEEc9E000344D9b6ea7160b23Eb",
+    "prizePoolAddress": "0x1b0fFBC3EFb9eE673b6748b7FF90261A3cEc188b",
+    "prizeStrategyAddress": "0x00E47dA7bf0d18cdE025037380A5Fd0FC3FA1736",
+    "oracleId": "banana-pots-bnb",
+    "apyId": "banana-pots-bnb",
+    "vaultType": "lp",
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "isZap": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xbFa24f7C2376c28407504Fb8512797dD8D316aBf",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "POTS-BNB LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "bifi",
+    "name": "BIFI",
+    "token": "BIFI",
+    "tokenAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBIFI",
+    "rewardAddress": "0xD763A0377bb40F7b79839ea50aAC75fF67CB9eae",
+    "contractAddress": "0xb4651e8A3E70d0BE1B1D1241C3679F1572c23e48",
+    "prizePoolAddress": "0x9B2f5221EA000fD1A46f347f27Eb10Ca6e79D3a8",
+    "prizeStrategyAddress": "0xa7aa57f301b8C65c455326fAD0eACB2Fe5791b57",
+    "oracleId": "BIFI",
+    "apyId": "bifi-maxi-v2",
+    "vaultType": "main",
+    "type": "single",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xeffFD962696ac768c3C9C84e2D4CC1bC9C54983d",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "BIFI",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "cake-bnb",
+    "name": "CAKE-BNB LP",
+    "token": "CAKE-BNB LP",
+    "provider": "PancakeSwap",
+    "tokenAddress": "0x0eD7e52944161450477ee417DE9Cd3a859b14fD0",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketCakeV2CAKE-BNB",
+    "rewardAddress": "0xea98B05Ce70254141803DCcf7772dEB347c0c692",
+    "contractAddress": "0x51Ab463D9275d0688593aa3fbDdad6FF5eC4deA6",
+    "prizePoolAddress": "0x23EeBA30ceF310A8B9a53FE08e1BAc8E0769d2F2",
+    "prizeStrategyAddress": "0x446FA1E0e5394A919217F0d8a6b982b581B17663",
+    "oracleId": "cakev2-cake-bnb",
+    "apyId": "cakev2-cake-bnb",
+    "vaultType": "lp",
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "isZap": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xb26642B6690E4c4c9A6dAd6115ac149c700C7dfE",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "CAKE-BNB LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "bifi-bnb",
+    "name": "BIFI-BNB LP",
+    "token": "BIFI-BNB LP",
+    "provider": "ApeSwap",
+    "tokenAddress": "0xDDd3f9d5Bd347c55D18752c0C2075698EC657750",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketApeBIFI-BNB",
+    "rewardAddress": "0xCf3Eae892282657b85327230462749037cfA9D00",
+    "contractAddress": "0x1CC0ba529104a6450444627A9802B3376C7173F7",
+    "prizePoolAddress": "0xD1df83dB6Cd8432e6C796dB3d13311aCf552c76F",
+    "prizeStrategyAddress": "0xDF62Ee78908261bB9e401b23F571C1C68b3A227f",
+    "oracleId": "banana-bifi-bnb",
+    "apyId": "banana-bifi-bnb",
+    "vaultType": "lp",
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "isZap": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x1417633bF9Fed6753e7504DF036c30F205D30e7E",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "BIFI-BNB LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "pots-v2",
+    "icon": "pots",
     "name": "Ziggy's",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
@@ -302,648 +1098,9 @@
     ]
   },
   {
-    "id": "cake",
-    "name": "CAKE",
-    "token": "CAKE",
-    "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketCakeV4",
-    "rewardAddress": "0x6B9c7C3aE69852De54A7b7b1F0C99851271Af9a1",
-    "contractAddress": "0xa5fEBEB2FfAEC64D3cEE5e24829934f8DC3BDC28",
-    "prizePoolAddress": "0xC4aeCF2ab2Bd5a9bE154618f4Cb035a73feA40a5",
-    "prizeStrategyAddress": "0x6cC56668E864278e210d78896Edb14a27Fd0F4f7",
-    "oracleId": "Cake",
-    "apyId": "cake-cakev2",
-    "vaultType": "main",
-    "duration": 7,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 5
-    },
-    "status": "active",
-    "supportsClaimAllBonuses": true,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "CAKE",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
-    "id": "beltbnb",
-    "name": "BNB",
-    "token": "beltBNB",
-    "tokenAddress": "0xa8Bb71facdd46445644C277F9499Dd22f6F0A30C",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketBeltBNB",
-    "rewardAddress": "0xfF4226328b92470691E5D1De4D2a974D132ef28E",
-    "contractAddress": "0x183Df4bBB21e6c9B0F23c91BA5b4A1A7D5FdC374",
-    "prizePoolAddress": "0xD0dcC357774a304e9EC4297EE6cCb286e6C987CD",
-    "prizeStrategyAddress": "0x9462206716850d44f6eC1FEaD08818d170Bde3F8",
-    "oracleId": "belt-beltbnb",
-    "apyId": "belt-beltbnb",
-    "vaultType": "main",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 5
-    },
-    "status": "active",
-    "isZap": true,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0xC34Ae91312A3c3F9420691922040a5DEe1698E52",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "beltBNB",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
-    "id": "side-cake",
-    "name": "CAKE Side",
-    "token": "CAKE",
-    "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketSideCake",
-    "rewardAddress": "0xd1E54daB9Be66ad630adB84d83475EdEcF2d1D97",
-    "contractAddress": "0x73c37A4b64CD0Fcb612147F188912a5082151D68",
-    "prizePoolAddress": "0x154D571f9C8214a04531F80AcD7902d9ed4B98D8",
-    "prizeStrategyAddress": "0xA54eB6e78ee185a1c577874Bcc5288FAb2feC3E5",
-    "oracleId": "Cake",
-    "apyId": "cake-cakev2",
-    "vaultType": "side",
-    "duration": 1,
-    "fairplayDuration": 3,
-    "fairplayTicketFee": 0.025,
-    "interestBreakdown": {
-      "prize": 80,
-      "buyback": 20
-    },
-    "status": "active",
-    "withdrawFee": 0,
-    "infoCardStrategy": "side",
-    "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
-    "sponsors": [
-      {
-        "sponsorToken": "CAKE",
-        "sponsorOracleId": "Cake",
-        "sponsorAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": []
-  },
-  {
-    "id": "4belt",
-    "name": "4Belt USD",
-    "token": "4Belt USD LP",
-    "provider": "Belt",
-    "tokenAddress": "0x9cb73F20164e399958261c289Eb5F9846f4D1404",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketBelt4LP",
-    "rewardAddress": "0x49d46111DDD93C526486b88E17C4f8b1Ea0F682e",
-    "contractAddress": "0xAc02606cAD10FB8FaC90C201Ee9072f4912Aa5c1",
-    "prizePoolAddress": "0x8243B29f44c895f5141FA5DB43Cf15D8f1A9eB21",
-    "prizeStrategyAddress": "0x063221c7743eF6AA49b32Ca249F1AFF2266f0e2A",
-    "oracleId": "belt-4belt",
-    "apyId": "beltv2-4belt",
-    "vaultType": "stable",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 5
-    },
-    "status": "active",
-    "supportsClaimAllBonuses": true,
-    "isZap": true,
-    "withdrawFee": 0,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0x1bBBf8910E5A074c7B62D891Dbab9f4af82C14D4",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "Belt LP",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
-    "id": "baby",
-    "name": "BABY",
-    "token": "BABY",
-    "tokenAddress": "0x53E562b9B7E5E94b81f10e96Ee70Ad06df3D2657",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketBabySwap",
-    "rewardAddress": "0x7E22d782811Bd5CF60BC9a513139B1354ff8b120",
-    "contractAddress": "0xe70D2F4719EEACcbCdFb5494CE19FAFceEe0d3b8",
-    "prizePoolAddress": "0x167DDF000AD0680BD62e2c4B17D38731cea70D08",
-    "prizeStrategyAddress": "0x625359D1217FDDf8455420140BE250147d89645b",
-    "oracleId": "BABY",
-    "apyId": "baby-baby",
-    "vaultType": "community",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 3,
-      "treasury": 2
-    },
-    "status": "active",
-    "supportsClaimAllBonuses": false,
-    "withdrawFee": 0,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0x87F9A89B51dA28CE8653A700d362CDa9b9bA7d88",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "BABY",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
-    "id": "pacoca",
-    "name": "PACOCA",
-    "token": "PACOCA",
-    "tokenAddress": "0x55671114d774ee99D653D6C12460c780a67f1D18",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketPacoca",
-    "rewardAddress": "0x76b0Fbdf8437126C3aA16995F2d2c2b0DdAbEDD8",
-    "contractAddress": "0xB9208616368c362c531aFE3b813a5cef181399b7",
-    "prizePoolAddress": "0xC95382A725df5c037D51330eD14F48035240fD1d",
-    "prizeStrategyAddress": "0x0DbD64Ce578a67b915b7558a928d15A1A580b69e",
-    "oracleId": "PACOCA",
-    "apyId": "pacoca-pacoca",
-    "vaultType": "community",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 3,
-      "treasury": 2
-    },
-    "status": "active",
-    "supportsClaimAllBonuses": true,
-    "withdrawFee": 0,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0x21403739A1Dc0e3ceC70CBD5ceaE78fF25F102a4",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "PACOCA",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
-    "id": "banana",
-    "name": "BANANA",
-    "token": "BANANA",
-    "tokenAddress": "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketBanana",
-    "rewardAddress": "0x87f697905732c6FAa5Def3bfE23AaDA5eAC33Ee8",
-    "contractAddress": "0x2c85A6aA1974230d3e91bA32956271E5A11b0392",
-    "prizePoolAddress": "0xB721fCd19489141d58ccF5A8Bb9FD3d1E030A02b",
-    "prizeStrategyAddress": "0x04F3fd08504a7Fc9d4A01985c15EbC3a0F342013",
-    "oracleId": "BANANA",
-    "apyId": "banana-bananav2",
-    "vaultType": "community",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 3,
-      "treasury": 2
-    },
-    "status": "active",
-    "supportsClaimAllBonuses": true,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0xED4ea41Daf652964789b16e3Ff76eC07d99d2340",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "BANANA",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
-    "id": "pots-busd",
-    "name": "POTS-BUSD LP",
-    "token": "POTS-BUSD LP",
-    "provider": "PancakeSwap",
-    "tokenAddress": "0xF90BAA331Cfd40F094476E752Bf272892170d399",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketCakeV2POTS-BUSD",
-    "rewardAddress": "0xB0177Aa9d7BDcBc4841993C3153c987A74462198",
-    "contractAddress": "0xDEb80263181735c907b6b5e9cA4bAcBB2d34FC07",
-    "prizePoolAddress": "0x5eB0fFc97e728DE8A605a14bb1c497AA4501B439",
-    "prizeStrategyAddress": "0x252eCEe8F7C40f2A3Ee8C1aB3Cc23F7EB136DC41",
-    "oracleId": "cakev2-pots-busd",
-    "apyId": "cakev2-pots-busd",
-    "vaultType": "lp",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 3,
-      "treasury": 2
-    },
-    "status": "active",
-    "supportsClaimAllBonuses": true,
-    "isZap": true,
-    "withdrawFee": 0,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0x3106d9B3d5e04ff5D575212140FAb1Cf17C8933F",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "POTS-BUSD LP",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
-    "id": "xblzd",
-    "name": "xBLZD",
-    "token": "xBLZD",
-    "tokenAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketxBLZD",
-    "rewardAddress": "0xf6A91F8d3EC0b1922433c4E929Ea61C85633E918",
-    "contractAddress": "0x55A50FE2372c0B8A4491d4CeC517258D69940547",
-    "prizePoolAddress": "0x861d4d8310006E6Ef115dF4A5D64A83e361aa29E",
-    "prizeStrategyAddress": "0x3442aB28A4de27f00eE6Aa960e0b9Ce9a9DBa976",
-    "oracleId": "xBLZD",
-    "apyId": "blizzard-xblzd",
-    "vaultType": "community",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 3,
-      "treasury": 2
-    },
-    "status": "active",
-    "supportsClaimAllBonuses": true,
-    "withdrawFee": 0,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0x47a27220Db5458DB4b238fefCBb8178232cBFa5D",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "xBLZD",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
-    "id": "pots-bnb",
-    "name": "POTS-BNB LP",
-    "token": "POTS-BNB LP",
-    "provider": "ApeSwap",
-    "tokenAddress": "0xaa3FCBA2cf7c5f8c8f785A7180F5063144fE53c6",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketApePOTS-BNB",
-    "rewardAddress": "0x2f4a26A1B540255B5AA2c2e4A2d142ae2765b186",
-    "contractAddress": "0xA9638f46b23FcfEEc9E000344D9b6ea7160b23Eb",
-    "prizePoolAddress": "0x1b0fFBC3EFb9eE673b6748b7FF90261A3cEc188b",
-    "prizeStrategyAddress": "0x00E47dA7bf0d18cdE025037380A5Fd0FC3FA1736",
-    "oracleId": "banana-pots-bnb",
-    "apyId": "banana-pots-bnb",
-    "vaultType": "lp",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 3,
-      "treasury": 2
-    },
-    "status": "active",
-    "supportsClaimAllBonuses": true,
-    "isZap": true,
-    "withdrawFee": 0,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0xbFa24f7C2376c28407504Fb8512797dD8D316aBf",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "POTS-BNB LP",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
-    "id": "bifi",
-    "name": "BIFI",
-    "token": "BIFI",
-    "tokenAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketBIFI",
-    "rewardAddress": "0xD763A0377bb40F7b79839ea50aAC75fF67CB9eae",
-    "contractAddress": "0xb4651e8A3E70d0BE1B1D1241C3679F1572c23e48",
-    "prizePoolAddress": "0x9B2f5221EA000fD1A46f347f27Eb10Ca6e79D3a8",
-    "prizeStrategyAddress": "0xa7aa57f301b8C65c455326fAD0eACB2Fe5791b57",
-    "oracleId": "BIFI",
-    "apyId": "bifi-maxi-v2",
-    "vaultType": "main",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 5
-    },
-    "status": "active",
-    "supportsClaimAllBonuses": true,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0xeffFD962696ac768c3C9C84e2D4CC1bC9C54983d",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "BIFI",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
-    "id": "cake-bnb",
-    "name": "CAKE-BNB LP",
-    "token": "CAKE-BNB LP",
-    "provider": "PancakeSwap",
-    "tokenAddress": "0x0eD7e52944161450477ee417DE9Cd3a859b14fD0",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketCakeV2CAKE-BNB",
-    "rewardAddress": "0xea98B05Ce70254141803DCcf7772dEB347c0c692",
-    "contractAddress": "0x51Ab463D9275d0688593aa3fbDdad6FF5eC4deA6",
-    "prizePoolAddress": "0x23EeBA30ceF310A8B9a53FE08e1BAc8E0769d2F2",
-    "prizeStrategyAddress": "0x446FA1E0e5394A919217F0d8a6b982b581B17663",
-    "oracleId": "cakev2-cake-bnb",
-    "apyId": "cakev2-cake-bnb",
-    "vaultType": "lp",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 3,
-      "treasury": 2
-    },
-    "status": "active",
-    "supportsClaimAllBonuses": true,
-    "isZap": true,
-    "withdrawFee": 0,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0xb26642B6690E4c4c9A6dAd6115ac149c700C7dfE",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "CAKE-BNB LP",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
-    "id": "bifi-bnb",
-    "name": "BIFI-BNB LP",
-    "token": "BIFI-BNB LP",
-    "provider": "ApeSwap",
-    "tokenAddress": "0xDDd3f9d5Bd347c55D18752c0C2075698EC657750",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketApeBIFI-BNB",
-    "rewardAddress": "0xCf3Eae892282657b85327230462749037cfA9D00",
-    "contractAddress": "0x1CC0ba529104a6450444627A9802B3376C7173F7",
-    "prizePoolAddress": "0xD1df83dB6Cd8432e6C796dB3d13311aCf552c76F",
-    "prizeStrategyAddress": "0xDF62Ee78908261bB9e401b23F571C1C68b3A227f",
-    "oracleId": "banana-bifi-bnb",
-    "apyId": "banana-bifi-bnb",
-    "vaultType": "lp",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 3,
-      "treasury": 2
-    },
-    "status": "active",
-    "supportsClaimAllBonuses": true,
-    "isZap": true,
-    "withdrawFee": 0,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0x1417633bF9Fed6753e7504DF036c30F205D30e7E",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "BIFI-BNB LP",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
     "id": "pots-v1",
     "name": "Ziggy's",
+    "icon": "pots",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
@@ -998,6 +1155,7 @@
   {
     "id": "cake-v3",
     "name": "CAKE",
+    "icon": "cake",
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
     "tokenDecimals": 18,
@@ -1057,6 +1215,7 @@
   {
     "id": "cake-v2",
     "name": "CAKE",
+    "icon": "cake",
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
     "tokenDecimals": 18,
@@ -1116,6 +1275,7 @@
   {
     "id": "cake-v1",
     "name": "CAKE",
+    "icon": "cake",
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
     "tokenDecimals": 18,
@@ -1158,5 +1318,123 @@
     "migrationRewardAddress": "0x6B9c7C3aE69852De54A7b7b1F0C99851271Af9a1",
     "migrationLearnMoreUrl": "https://moonpot.com/alpha/learn/how-to-move-cake-from-the-retired-cake-moonpot/",
     "winnersTransaction": "0x770ddd1d57b19437a0cf563923cb3799d31a5ca3e20a3080e4286d4fede54109"
+  },
+  {
+    "id": "xmas-pots",
+    "name": "Ziggy's Xmas",
+    "theme": "xmas",
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketPOTSChristmas",
+    "rewardAddress": "0xe7f07A75A0E1E138bA9B1E1a3Ef241c33450b43B",
+    "contractAddress": "0xfda459b09Bd39460A4640210a9a49fBACCbb3AB2",
+    "prizePoolAddress": "0xD3e7B4Da5938EC2E598Be0b7a87a93196a836a4C",
+    "prizeStrategyAddress": "0x9bE0FF9709c3dE78b9608215Dee2DaEE60E31903",
+    "oracleId": "POTS",
+    "vaultType": "xmas",
+    "duration": 1,
+    "fairplayDuration": 0,
+    "fairplayTicketFee": 0,
+    "status": "eol",
+    "eolDrawNumber": 7,
+    "supportsClaimAllBonuses": false,
+    "infoCards": ["xmas-strategy"],
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "T-Shirt NFT",
+        "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
+        "type": "erc721"
+      }
+    ],
+    "bonuses": []
+  },
+  {
+    "id": "xmas-moobifi",
+    "name": "mooBIFI Xmas",
+    "theme": "xmas",
+    "token": "mooBIFI",
+    "tokenAddress": "0xf7069e41C57EcC5F122093811d8c75bdB5f7c14e",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketmooBIFIChristmas",
+    "rewardAddress": "0x5B76F59D1A9Eb70B3961bc70b28Ea5e7e9400E49",
+    "contractAddress": "0x65b3F4780fd12f7acf3b060C0e8a4C975bebfC00",
+    "prizePoolAddress": "0x80f34481Caae2518A0f2d8ec7ecEc356E30200c2",
+    "prizeStrategyAddress": "0x06bfc4f035141F120580f2b3fAAd10A87e10c66e",
+    "vaultType": "xmas",
+    "duration": "once",
+    "fairplayDuration": 0,
+    "fairplayTicketFee": 0,
+    "status": "eol",
+    "eolDrawNumber": 1,
+    "supportsClaimAllBonuses": false,
+    "infoCards": ["xmas-strategy"],
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BIFI",
+        "sponsorOracleId": "BIFI",
+        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "nfts": [
+      {
+        "name": "Hoodie NFT",
+        "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
+        "type": "erc721"
+      }
+    ],
+    "bonuses": []
+  },
+  {
+    "id": "xmas-moochristmasbeefy",
+    "name": "mooChristmasBeefy Xmas",
+    "theme": "xmas",
+    "token": "mooChristmasBeefy",
+    "tokenAddress": "0xA1448795fc2489EadAF5e90d8c7d4cbdc8EF5D19",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketmooChristmasBeefyChristmas",
+    "rewardAddress": "0x73Ad14BE0eDC8E3979B5b5C351acB697616846fD",
+    "contractAddress": "0x5a5cca50711E2548f230E0CfbF8275fF02b69F4A",
+    "prizePoolAddress": "0x7a504f1dda61Cbc3D5E4AaEA7Ca8c857d6303D8C",
+    "prizeStrategyAddress": "0x903bF786CaBB83A7c7DD4afa14E4Fc2569b0A908",
+    "vaultType": "xmas",
+    "duration": "once",
+    "fairplayDuration": 0,
+    "fairplayTicketFee": 0,
+    "status": "eol",
+    "eolDrawNumber": 1,
+    "supportsClaimAllBonuses": false,
+    "infoCards": ["xmas-strategy"],
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "BIFI",
+        "sponsorOracleId": "BIFI",
+        "sponsorAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "nfts": [
+      {
+        "name": "Hoodie NFT",
+        "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
+        "type": "erc721"
+      }
+    ],
+    "bonuses": []
   }
 ]

@@ -12,6 +12,7 @@ import Footer from './components/footer';
 import ModalPopup from './components/Modal/modal.js';
 import { useLocation } from 'react-router';
 import { useImpersonate } from './helpers/hooks';
+import { GoogleAnalytics } from './googleAnalytics';
 
 require('dotenv').config();
 
@@ -27,7 +28,7 @@ function Pages() {
         <Route
           exact
           path={[
-            '/:bottom(all|main|lp|stable|community|side|nft)?',
+            '/:bottom(all|xmas|main|lp|stable|community|side|nft)?',
             '/:top(my-moonpots)/:bottom(eol)?',
           ]}
         >
@@ -93,6 +94,7 @@ export default function App() {
       <ModalPopup />
       <HashRouter>
         <ScrollToTop />
+        <GoogleAnalytics />
         <Header />
         <Pages />
       </HashRouter>

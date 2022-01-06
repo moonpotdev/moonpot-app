@@ -8,6 +8,8 @@ export const potsByNetwork = Object.fromEntries(
   ])
 );
 
+export const potsAll = Object.values(potsByNetwork).flat();
+
 export const potsByNetworkPrizePoolAddress = Object.fromEntries(
   Object.entries(potsByNetwork).map(([network, pots]) => [
     network,

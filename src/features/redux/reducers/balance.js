@@ -10,6 +10,7 @@ import {
   tokensByNetworkAddress,
   tokensByNetworkSymbol,
 } from '../../../config/tokens';
+import { createReducer } from '@reduxjs/toolkit';
 
 const MAX_UINT256 = '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
 
@@ -101,26 +102,22 @@ const initialState = {
   isBalancesFirstTime: true,
 };
 
-const balanceReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case BALANCE_FETCH_BALANCES_BEGIN:
-      return {
-        ...state,
-        isBalancesLoading: state.isBalancesFirstTime,
-      };
-    case BALANCE_FETCH_BALANCES_DONE:
-      return {
-        ...state,
-        tokens: action.payload.tokens,
-        lastUpdated: action.payload.lastUpdated,
-        isBalancesLoading: false,
-        isBalancesFirstTime: false,
-      };
-    case BALANCE_RESET:
-      return { ...initialState };
-    default:
-      return state;
-  }
-};
+const balanceReducer = createReducer(initialState, builder => {
+  builder
+    .addCase(BALANCE_FETCH_BALANCES_BEGIN, (state, action) => {
+      state.isBalancesLoading = state.isBalancesFirstTime;
+    })
+    .addCase(BALANCE_FETCH_BALANCES_DONE, (state, action) => {
+      state.tokens = action.payload.tokens;
+      state.lastUpdated = action.payload.lastUpdated;
+      state.isBalancesLoading = false;
+      state.isBalancesFirstTime = false;
+    })
+    .addCase(BALANCE_RESET, (state, action) => {
+      for (const key in initialState) {
+        state[key] = initialState[key];
+      }
+    });
+});
 
 export default balanceReducer;

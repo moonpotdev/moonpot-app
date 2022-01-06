@@ -1,3 +1,5 @@
+import backgroundSnow from '../../images/backgrounds/snow.svg';
+
 const styles = () => ({
   cards: {
     width: `${500 * 3 + 24 * 3}px`,
@@ -426,6 +428,48 @@ const styles = () => ({
     borderColor: '#F3F2F8',
     '& $title': {
       color: '#6753DB',
+    },
+  },
+  variantPurpleXmas: {
+    color: '#ECEAFB',
+    backgroundColor: '#625CA2',
+    backgroundImage: `url('${backgroundSnow}')`,
+    borderColor: '#827DB5',
+    '& $title': {
+      color: '#FFFFFF',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#827DB5',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#827DB5',
+    },
+    '& $accordionItemTitle': {
+      color: '#FFFFFF',
+    },
+    '& $accordionItemInner': {
+      color: '#ECEAFB',
+    },
+  },
+  variantPurpleXmasAlt: {
+    color: '#ECEAFB',
+    backgroundColor: '#625CA2',
+    backgroundImage: `url('${backgroundSnow}')`,
+    borderColor: '#827DB5',
+    '& $title': {
+      color: '#FFFFFF',
+    },
+    '& $accordionGroup': {
+      borderBottomColor: '#827DB5',
+    },
+    '& $accordionItem': {
+      borderTopColor: '#827DB5',
+    },
+    '& $accordionItemTitle': {
+      color: '#FFFFFF',
+    },
+    '& $accordionItemInner': {
+      color: '#ECEAFB',
     },
   },
 });

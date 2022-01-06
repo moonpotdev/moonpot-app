@@ -96,6 +96,9 @@ const styles = theme => ({
     lineHeight: '20px',
     color: '#FFFFFF',
   },
+  themeXmas: {
+    borderColor: 'red',
+  },
 });
 
 export default styles;
