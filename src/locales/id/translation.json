@@ -7,6 +7,7 @@
     "myPastPots": "Pots Tidak Aktif",
     "allPots": "Semua Pots",
     "mainPots": "Utama",
+    "xmasPots": "Xmas",
     "communityPots": "Komunitas",
     "lpPots": "LP",
     "stablePots": "Stable",
@@ -40,7 +41,7 @@
   "homeJoinCommunityTitle": "Bergabung dengan komunitas",
   "homeJoinCommunityBody": "Anda dapat menyarankan pot baru di salah satu saluran kami, atau bergabung dengan pengembang kami untuk membangun salah satu project favorit anda.",
   "vaultTitle": "Depositkan <span>{{token}}</span>, Hasilkan <span>{{apy}}% APY</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>{{prizes}}</span>",
-  "vaultTitlePrizeOnly": "Depositkan <span>{{token}}</span>, Dan dapatkan sebuah kesempatan untuk memenangkan <span>{{prizes}}</span>",
+  "vaultTitlePrizeOnly": "Deposit <span>{{token}}</span>, dan dapatkan sebuah kesempatan memenangkan <span>{{prizes}}</span>",
   "playWithMoonpot": "Bermain dengan Moonpot",
   "youHaventEnteredMoonpots": "Anda belum masuk ke Moonpots manapun.",
   "youHaventEnteredRetiredMoonpots": "Anda belum masuk ke Moonpots yang tidak aktif.",
@@ -69,6 +70,7 @@
     "winTotalTokensIn": "di ",
     "stakeToken": "Stake <span>{{token}}</span>",
     "statNextDraw": "Pengundian Berikutnya",
+    "statNextDrawOnce": "Pengundian Satu Kali",
     "statNextDrawDaily": "Pengundian Harian Berikutnya",
     "statNextDrawWeekly": "Pengundian Mingguan Berikutnya",
     "statNextDrawBiWeekly": "Pengundian Dua-Minggu Berikutnya",
@@ -186,6 +188,40 @@
           }
         }
       },
+      "xmas-strategy": {
+        "title": "{{name}} Pot",
+        "xmas-pots": {
+          "body": [
+            "Menjadi bagian dari cowmoonity tidak hanya terasa keren, tapi juga terlihat keren.",
+            "Dengan berpartisipasi di Christmas Pot ini kamu berkesempatan memenangkan t-shirt edisi terbatas dari Beefy Store.",
+            "Pot ini berisi 70 NFT yang dapat ditukarkan dengan kode promo untuk memesan kaos gratis dari Beefy Store. Stake POTS untuk berpartisipasi, undian akan dilakukan setiap hari, hingga tanggal 31 Desember."
+          ],
+          "merch": {
+            "beefy-moonpot-tshirt-front.png": { "title": "T-Shirt - Front" },
+            "beefy-moonpot-tshirt-back.png": { "title": "T-Shirt - Back" }
+          }
+        },
+        "xmas-moobifi": {
+          "body": [
+            "Menjadi bagian dari cowmoonity tidak hanya terasa keren, tapi juga terlihat keren.",
+            "Dengan berpartisipasi dalam Pot Natal ini, Anda berkesempatan memenangkan hoodie edisi terbatas dari Beefy Store, POTS, dan token BIFI. Tiga hadiah untuk setiap tiket bagi pemenang.",
+            "Pot ini berisi 125 NFT yang dapat ditukarkan dengan kode promo untuk memesan hoodie gratis dari Beefy Store, beserta hadiah BIFI dan POTS. Stake mooBIFI untuk berpartisipasi, undian akan dilakukan pada tanggal 31 Desember."
+          ],
+          "merch": {
+            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+          }
+        },
+        "xmas-moochristmasbeefy": {
+          "body": [
+            "Menjadi bagian dari cowmoonity tidak hanya terasa keren, tapi juga terlihat keren.",
+            "Dengan berpartisipasi dalam Pot Natal ini, Anda berkesempatan memenangkan hoodie edisi terbatas dari Beefy Store, POTS, dan token BIFI. Tiga hadiah untuk setiap tiket bagi pemenang.",
+            "Pot ini berisi 15 NFT yang dapat ditukarkan dengan kode promo untuk memesan hoodie gratis dari Beefy Store, beserta hadiah BIFI dan POTS. Stake mooChristmasBeefy untuk berpartisipasi, undian akan dilakukan pada tanggal 31 Des."
+          ],
+          "merch": {
+            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+          }
+        }
+      },
       "earnings": {
         "title": "Rincian Strategi",
         "tokenInterest": "Keuntungan {{token}} Anda",
@@ -228,6 +264,7 @@
     "allToken": "Deposit Semua {{token}}",
     "amountToken": "Deposit {{amount}} {{token}}",
     "fairplayNotice": "Ada TimeLock Fairplay selama {{duration}} hari. Jika Anda ingin menarik lebih awal, Anda akan membayar Biaya Fairness {{fee}}%, atau kurang. Biaya akan berkurang setiap detik.",
+    "maximumDepositNotice": "Maksimal total deposit: {{amount}} {{token}}",
     "eolNotice": {
       "title": "Pot Tidak Aktif",
       "message": "Anda tidak dapat lagi Deposit ke pot ini."
