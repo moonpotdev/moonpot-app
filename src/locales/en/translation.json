@@ -186,6 +186,22 @@
               "rarity": "110 / 150"
             }
           }
+        },
+        "nft-collections": {
+          "body": [
+            "This is your chance to win every day from the best NFT Collections on Binance Smart Chain. Stake POTS, win a different NFT every day."
+          ],
+          "examples": {
+            "bull-society/tbs1": {
+              "name": "Example 1"
+            },
+            "bull-society/tbs2": {
+              "name": "Example 2"
+            },
+            "bull-society/tbs3": {
+              "name": "Example 3"
+            }
+          }
         }
       },
       "xmas-strategy": {

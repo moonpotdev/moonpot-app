@@ -83,6 +83,13 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
       })
     : null;
 
+  const examplesKey = `pot.infocards.nft-strategy.${pot.id}.examples`;
+  const examples = i18n.exists(examplesKey)
+    ? t(examplesKey, {
+        returnObjects: true,
+      })
+    : null;
+
   return (
     <>
       <Card variant="purpleInfo" className={classes.strategy}>
@@ -101,6 +108,20 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
                 />
                 <div className={classes.nftShowcaseItemName}>{item.name}</div>
                 <div className={classes.nftShowcaseItemRarity}>{item.rarity}</div>
+              </Grid>
+            ))}
+          </Grid>
+        ) : null}
+        {examples ? (
+          <Grid container spacing={1} className={classes.nftShowcase}>
+            {Object.entries(examples).map(([key, item]) => (
+              <Grid item xs={4} className={classes.nftShowcaseItem} key={key}>
+                <img
+                  src={require(`../../../../images/nfts/${pot.id}/${key}.png`).default}
+                  className={classes.nftShowcaseImg}
+                  alt={item.name}
+                />
+                {item.name ? <div className={classes.nftShowcaseItemName}>{item.name}</div> : null}
               </Grid>
             ))}
           </Grid>

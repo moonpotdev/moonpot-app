@@ -563,7 +563,7 @@ function getApyBreakdown(id, apys) {
     tradingApr: 0,
   };
 
-  if (id in apys && 'totalApy' in apys[id]) {
+  if (id && id in apys && 'totalApy' in apys[id]) {
     const apy = apys[id];
 
     out.totalApy = apy.totalApy;
