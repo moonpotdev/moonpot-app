@@ -2,6 +2,8 @@ import { FETCH_BUYBACKS_BEGIN, FETCH_BUYBACKS_SUCCESS, FETCH_BUYBACKS_FAILURE } 
 
 const initialState = {
   lastWeekBuyback: 0,
+  lastMonthBuyback: 0,
+  allTimeBuyback: 0,
   loading: false,
   error: null,
 };
@@ -19,6 +21,8 @@ const buybacksReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         lastWeekBuyback: action.payload.lastWeekBuyback,
+        lastMonthBuyback: action.payload.lastMonthBuyback,
+        allTimeBuyback: action.payload.allTimeBuyback,
       };
     case FETCH_BUYBACKS_FAILURE:
       return {
