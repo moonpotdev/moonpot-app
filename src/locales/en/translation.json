@@ -187,6 +187,25 @@
             }
           }
         },
+        "ziggyverse-strength-nft": {
+          "body": [
+            "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling."
+          ],
+          "rarities": {
+            "gold": {
+              "name": "Strength - Gold",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "Strength - Moonstone",
+              "rarity": "40 / 100"
+            },
+            "jade": {
+              "name": "Strength - Jade",
+              "rarity": "110 / 150"
+            }
+          }
+        },
         "nft-collections": {
           "body": [
             "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
