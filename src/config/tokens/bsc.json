@@ -530,5 +530,13 @@
     "type": "nft",
     "subtype": "erc721",
     "decimals": 0
+  },
+  {
+    "symbol": "moonTicketZiggyVerseStrength",
+    "address": "0x8044Cfc4Fb5b5577575f83E9A2C657aa25eDc8F2",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
   }
 ]
