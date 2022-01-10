@@ -15,6 +15,9 @@ const SORT_COMPARE_FUNCTIONS = {
   defaultOrder: compareNumber,
   totalStakedUsd: compareBigNumber,
   name: compareStringCaseInsensitive,
+  expiresAt: compareNumber,
+  projectedAwardBalanceUsd: compareBigNumber,
+  apyBreakdown: compareApy,
 };
 
 function filterIncludePot(pot, vaultType, config) {
@@ -26,7 +29,11 @@ function filterIncludePot(pot, vaultType, config) {
     return false;
   }
 
-  if (vaultType !== 'all' && vaultType !== pot.vaultType) {
+  if (vaultType !== 'all' && vaultType !== pot.vaultType && vaultType !== 'featured') {
+    return false;
+  }
+
+  if (vaultType === 'featured' && pot.featured !== true) {
     return false;
   }
 
@@ -47,6 +54,14 @@ function compareBigNumber(a, b) {
   if (a.lt(b)) return -1;
   if (a.gt(b)) return 1;
   return 0;
+}
+
+function compareApy(a, b) {
+  try {
+    return b.totalApy - a.totalApy;
+  } catch {
+    return 0;
+  }
 }
 
 function sortPots(pots, key, dir) {

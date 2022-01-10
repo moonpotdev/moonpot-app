@@ -13,22 +13,22 @@ const SectionSelect = ({ selected, className }) => {
 
   return (
     <Grid container className={clsx(classes.buttonsContainer, className)}>
-      <Grid item xs={6}>
+      <div>
         <RoutedButton
           className={clsx(classes.button, { [classes.buttonSelected]: selected === 'moonpots' })}
           to={{ pathname: '/', state: { tabbed: true } }}
         >
           {t('buttons.moonpots')}
         </RoutedButton>
-      </Grid>
-      <Grid item xs={6}>
+      </div>
+      <div>
         <RoutedButton
           className={clsx(classes.button, { [classes.buttonSelected]: selected === 'my-moonpots' })}
           to={{ pathname: '/my-moonpots', state: { tabbed: true } }}
         >
           {t('buttons.myPots')}
         </RoutedButton>
-      </Grid>
+      </div>
     </Grid>
   );
 };

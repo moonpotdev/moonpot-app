@@ -3,9 +3,9 @@
     "ziggyMoonpotGuide": "Ziggy's Guide to Moonpot",
     "moonpotAlpha": "Moonpot Alpha Articles",
     "deposit": "Deposit",
-    "myActivePots": "Active Pots",
-    "myPastPots": "Retired Pots",
-    "allPots": "All Pots",
+    "myActivePots": "Active",
+    "myPastPots": "Retired",
+    "allPots": "All",
     "mainPots": "Main",
     "xmasPots": "Xmas",
     "communityPots": "Community",
@@ -15,8 +15,13 @@
     "learnMore": "Learn More",
     "moonpots": "Moonpots",
     "myPots": "My Pots",
-    "sidePots": "side",
-    "nftPots": "NFT"
+    "sidePots": "Side",
+    "nftPots": "NFT",
+    "nextDraw": "Next Draw",
+    "prize": "Prize",
+    "apy": "APY",
+    "default": "Default",
+    "featured": "Featured"
   },
   "modals": {
     "unsupportedNetworkDetected": "Unsupported Network Detected",
@@ -34,7 +39,15 @@
     "vote": "Vote",
     "winners": "Winners",
     "potsPrice": "POTS Price",
-    "buyPots": "Buy POTS"
+    "buyPots": "Buy POTS",
+    "audit": "Audit",
+    "articles": "Articles"
+  },
+  "footer": {
+    "cadets": "CADETS",
+    "prizes": "PRIZES",
+    "tvl": "TVL",
+    "buybacks": "BUYBACKS"
   },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><wbr /> and a chance to win <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposits (TVL)",
@@ -47,7 +60,7 @@
   "youHaventEnteredRetiredMoonpots": "You are not entered in any retired Moonpots.",
   "connectToJoin": "Connect your wallet to join a Moonpot.",
   "poweredByBeefy": "Powered by <BeefyLink>Beefy</BeefyLink>",
-  "auditedByCertik": "Audited by <CertikLink>Certik</CertikLink>",
+  "auditedByCertik": "Audited by <CertikLink>CertiK</CertikLink>",
   "sidePotExplainer": "Side Pots give you the chance to win daily prizes without earning interest. If you want to earn interest and join bigger weekly and monthly draws, Ziggy recommends you join a <MainPotLink>Main Pot</MainPotLink> instead.",
   "learnMore": "Learn more",
   "telegramSocialBlockBody": "Learn about Moonpot and get direct support from the community",
@@ -56,6 +69,9 @@
   "telegramSocialBlockButton": "Join our Telegram",
   "discordSocialBlockButton": "Join our Discord",
   "twitterSocialBlockButton": "Follow our Twitter",
+  "potType": "Pot Type:",
+  "sortBy": "Sort by:",
+  "potStatus": "Pot Status:",
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",

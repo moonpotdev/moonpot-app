@@ -3,9 +3,7 @@ const styles = theme => ({
     marginBottom: '24px',
   },
   potsContainer: {
-    background: '#393960',
-    paddingTop: '32px',
-    borderTop: '2px solid #4C4C80',
+    paddingBottom: '40px',
   },
   communityJoin: {
     margin: '0 auto',

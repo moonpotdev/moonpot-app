@@ -32,6 +32,18 @@ export const formatTvl = (tvl, oraclePrice) => {
   return prefix + num.toFixed(2) + units[order];
 };
 
+export const formatCadets = cadets => {
+  const order = Math.floor(Math.log10(cadets) / 3);
+  if (order < 0) {
+    return '$0.00';
+  }
+
+  const units = ['', 'k', 'M', 'B', 'T'];
+  const num = cadets / 1000 ** order;
+
+  return num.toFixed(2) + units[order];
+};
+
 export const formatGlobalTvl = tvl => formatTvl(tvl, 1);
 
 export const calcDaily = apy => {

@@ -47,7 +47,7 @@
   "youHaventEnteredRetiredMoonpots": "您未参与任何已退役的月盒。",
   "connectToJoin": "连接您的钱包以加入月盒。",
   "poweredByBeefy": "由 <BeefyLink>Beefy</BeefyLink> 提供技术支持",
-  "auditedByCertik": "由 <CertikLink>Certik</CertikLink> 审计",
+  "auditedByCertik": "由 <CertikLink>CertiK</CertikLink> 审计",
   "sidePotExplainer": "附属月盒让您有机会在不赚取利息的情况下赢得每日奖金。 如果您想赚取利息并参与更大的每周和每月抽奖活动，Ziggy 建议您改为参与<MainPotLink>核心月盒</MainPotLink>。",
   "learnMore": "了解更多",
   "telegramSocialBlockBody": "了解更多关于Moonpot的资讯，并获得来自官方社群的帮助",
@@ -275,9 +275,7 @@
         "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
         "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
       ],
-      "4belt": [
-        "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
-      ],
+      "4belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"],
       "beltbnb": ["ZAP 可让您创建 beltBNB 代币并只通过一笔交易进行存款。"],
       "ibalpaca": ["ZAP 可让您创建 ibALPACA 代币并只通过一笔交易进行存款。"]
     },

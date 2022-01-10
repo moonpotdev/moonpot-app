@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
-import Filter from './components/Filter';
 import reduxActions from '../../redux/actions';
 import { MigrationNotices } from './components/MigrationNotices/MigrationNotices';
 import ZiggyMaintenance from '../../../images/ziggy/maintenance.svg';
@@ -15,33 +14,28 @@ import SidePotExplainer from '../../../components/SidePotExplainer/SidePotExplai
 
 const useStyles = makeStyles(styles);
 
-function handleVariant(vaultType) {
-  if (vaultType === 'community') {
-    return 'blueCommunity';
-  } else if (vaultType === 'lp') {
-    return 'green';
-  } else if (vaultType === 'stable') {
-    return 'greenStable';
-  } else if (vaultType === 'side') {
-    return 'greySide';
-  } else if (vaultType === 'nft') {
-    return 'purpleNft';
-  } else if (vaultType === 'xmas') {
-    return 'purpleXmas';
+function getKey(sort) {
+  if (sort === 'next-draw') {
+    return ['expiresAt', 'asc'];
+  } else if (sort === 'prize') {
+    return ['projectedAwardBalanceUsd', 'desc'];
+  } else if (sort === 'apy') {
+    return ['apyBreakdown', 'asc'];
+  } else {
+    return ['defaultOrder', 'asc'];
   }
-
-  // default/main
-  return 'tealLight';
 }
 
-const Moonpots = ({ selected }) => {
+const Moonpots = ({ selected, sort }) => {
   const dispatch = useDispatch();
   const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
   const address = useSelector(state => state.walletReducer.address);
-  const pots = useSelector(state => state.vaultReducer.pools, shallowEqual);
+  //cannot use shallowEqual as we need the page to reevaluate the sort once the apy/prize/draw data loads
+  const pots = useSelector(state => state.vaultReducer.pools);
   const classes = useStyles();
-  const [filterConfig] = useFilterConfig();
+  const [filterConfig, setFilterConfig] = useFilterConfig();
   const filtered = useFilteredPots(pots, selected, filterConfig);
+  const [sortKey, sortDir] = getKey(sort);
 
   useEffect(() => {
     if (pricesLastUpdated > 0) {
@@ -55,16 +49,21 @@ const Moonpots = ({ selected }) => {
     }
   }, [dispatch, address]);
 
+  useEffect(() => {
+    if (sortKey !== filterConfig.sortKey || sortDir !== filterConfig.sortDir) {
+      setFilterConfig({ ...filterConfig, sortKey, sortDir });
+    }
+  }, [filterConfig, setFilterConfig, sortKey, sortDir, pots]);
+
   return (
     <React.Fragment>
-      <Filter selected={selected} />
       <div className={classes.potsContainer}>
         <div className={classes.spacer}>
           <MigrationNotices potType={selected} className={classes.potsMigrationNotice} />
           {selected === 'side' ? <SidePotExplainer /> : null}
           <Cards>
             {filtered.map(pot => (
-              <Pot key={pot.id} variant={handleVariant(pot.vaultType)} id={pot.id} />
+              <Pot key={pot.id} variant={'tealLight'} id={pot.id} />
             ))}
           </Cards>
           {selected === 'community' ? (
