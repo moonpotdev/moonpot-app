@@ -1,5 +1,6 @@
 import { Container, Grid, Link, makeStyles, Typography } from '@material-ui/core';
 import * as React from 'react';
+import { formatCadets } from '../../helpers/format';
 import styles from './styles';
 import StatButton from './components/StatButton';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +15,7 @@ const Footer = ({ variant }) => {
 
   //Holders Data
   const cadets = useSelector(state => state.holdersReducer.totalHolders || 0);
+  const cadetsFormatted = formatCadets(cadets);
 
   //Buybacks Data
   const lastWeekBuybacks = useSelector(state => state.buybacksReducer.lastWeekBuyback || 0);
@@ -38,62 +40,70 @@ const Footer = ({ variant }) => {
       <Container maxWidth="xl" className={variant === 'light' ? classes.light : ''}>
         <Grid container spacing={2} className={classes.footer}>
           <Grid item xs={12} className={classes.footerLinks}>
-            <Link href={'https://docs.moonpot.com/'}>
+            <Link href={'https://docs.moonpot.com/'} target="_blank" rel="noopener">
               <Typography className={classes.textButton}>{t('header.docs')}</Typography>
             </Link>
-            <Link href={'https://moonpot.com/alpha'}>
+            <Link href={'https://moonpot.com/alpha'} target="_blank" rel="noopener">
               <Typography className={classes.textButton}>{t('header.articles')}</Typography>
             </Link>
-            <Link href={'https://vote.moonpot.com/#/'}>
+            <Link href={'https://vote.moonpot.com/#/'} target="_blank" rel="noopener">
               <Typography className={classes.textButton}>{t('header.vote')}</Typography>
             </Link>
-            <Link href={'https://www.certik.com/projects/moonpot'}>
+            <Link href={'https://www.certik.com/projects/moonpot'} target="_blank" rel="noopener">
               <Typography className={classes.textButton}>{t('header.audit')}</Typography>
             </Link>
           </Grid>
           <Grid item xs={12} className={classes.footerStats}>
-            <StatButton label={t('footer.cadets')} value={cadets} />
+            <StatButton label={t('footer.cadets')} value={cadetsFormatted} />
             <StatButton label={t('footer.prizes')} value={'$' + totalFormatted} />
             <StatButton label={t('footer.tvl')} value={'$' + tvl} />
             <StatButton label={t('footer.buybacks')} value={'$' + lastWeekBuybackUSD} />
           </Grid>
           <Grid className={classes.footerIcons} item xs={12}>
-            <Link href={'https://github.com/moonpotdev'}>
+            <Link href={'https://github.com/moonpotdev'} target="_blank" rel="noopener">
               <img
                 alt="Github"
                 src={require('../../images/footer/github.svg').default}
                 className={classes.footerImage}
               />
             </Link>
-            <Link href={'https://t.me/moonpotdotcom'}>
+            <Link href={'https://t.me/moonpotdotcom'} target="_blank" rel="noopener">
               <img
                 alt="Telegram"
                 src={require('../../images/footer/telegram.svg').default}
                 className={classes.footerImage}
               />
             </Link>
-            <Link href={'https://discord.gg/8YquFwfw3N'}>
+            <Link href={'https://discord.gg/8YquFwfw3N'} target="_blank" rel="noopener">
               <img
                 alt="Discord"
                 src={require('../../images/footer/discord.svg').default}
                 className={classes.footerImage}
               />
             </Link>
-            <Link href={'https://www.youtube.com/channel/UCCwZh5FBKusmzmT5Q3Yisdg'}>
+            <Link
+              href={'https://www.youtube.com/channel/UCCwZh5FBKusmzmT5Q3Yisdg'}
+              target="_blank"
+              rel="noopener"
+            >
               <img
                 alt="Youtube"
                 src={require('../../images/footer/youtube.svg').default}
                 className={classes.footerImage}
               />
             </Link>
-            <Link href={'https://twitter.com/moonpotdotcom'}>
+            <Link href={'https://twitter.com/moonpotdotcom'} target="_blank" rel="noopener">
               <img
                 alt="Twitter"
                 src={require('../../images/footer/twitter.svg').default}
                 className={classes.footerImage}
               />
             </Link>
-            <Link href={'https://www.facebook.com/Moonpot-111024264744176/'}>
+            <Link
+              href={'https://www.facebook.com/Moonpot-111024264744176/'}
+              target="_blank"
+              rel="noopener"
+            >
               <img
                 alt="Facebook"
                 src={require('../../images/footer/facebook.svg').default}

@@ -7,13 +7,15 @@ import Moonpots from './Moonpots/Moonpots';
 import MyPots from './MyPots/MyPots';
 import { Title } from './components/Title';
 import { useParams } from 'react-router';
+import { useSelector } from 'react-redux';
 import { PoweredByBeefy } from '../../components/PoweredByBeefy';
 import Filter from './components/Filter';
 
 const useStyles = makeStyles(styles);
 
 function useSelectedParams() {
-  let { top, bottom, filter } = useParams();
+  let { top, bottom } = useParams();
+  let filter = useSelector(state => state.filterReducer.sort);
   if (!top) {
     top = 'moonpots';
   }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Grid, makeStyles, Select, MenuItem, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import reduxActions from '../../../redux/actions';
 import styles from './styles';
 import clsx from 'clsx';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -35,14 +37,14 @@ const PotTypes = [
     label: 'buttons.nftPots',
   },
   {
-    key: 'lp',
-    path: 'lp',
-    label: 'buttons.lpPots',
-  },
-  {
     key: 'community',
     path: 'community',
     label: 'buttons.communityPots',
+  },
+  {
+    key: 'lp',
+    path: 'lp',
+    label: 'buttons.lpPots',
   },
   {
     key: 'side',
@@ -100,6 +102,7 @@ const Filter = ({ className, selected, sort }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   //Get params from route
   let { filter, bottom, top } = useParams();
@@ -123,13 +126,15 @@ const Filter = ({ className, selected, sort }) => {
     if (top === 'my-moonpots') {
       //Check for valid filter selection, if not set to default for my pots
       if (currentSort === 'active' || currentSort === 'eol') {
+        dispatch(reduxActions.filter.updateFilterSort(currentSort));
         history.push({
-          pathname: '/my-moonpots/' + currentPath + '/' + currentSort,
+          pathname: '/my-moonpots/' + currentPath,
           state: { tabbed: true },
         });
       } else {
         setCurrentPath('all');
         setCurrentSort('active');
+        dispatch(reduxActions.filter.updateFilterSort('active'));
         history.push({
           pathname: '/my-moonpots/all/active',
           state: { tabbed: true },
@@ -138,19 +143,21 @@ const Filter = ({ className, selected, sort }) => {
     } else {
       //Check for valid filter selection, if not set to default for moonpots
       if (currentSort !== 'active' && currentSort !== 'eol') {
+        dispatch(reduxActions.filter.updateFilterSort(currentSort));
         history.push({
-          pathname: '/' + currentPath + '/' + currentSort,
+          pathname: '/' + currentPath,
           state: { tabbed: true },
         });
       } else {
         setCurrentSort('default');
+        dispatch(reduxActions.filter.updateFilterSort('default'));
         history.push({
-          pathname: '/' + currentPath + '/default',
+          pathname: '/' + currentPath,
           state: { tabbed: true },
         });
       }
     }
-  }, [currentPath, currentSort, history, top]);
+  }, [currentPath, currentSort, history, top, dispatch]);
 
   return (
     <div className={classes.buttonsOuterContainer}>
