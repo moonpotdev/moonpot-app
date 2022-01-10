@@ -12,6 +12,7 @@ import Footer from './components/footer';
 import ModalPopup from './components/Modal/modal.js';
 import { useLocation } from 'react-router';
 import { useImpersonate } from './helpers/hooks';
+import { GoogleAnalytics } from './googleAnalytics';
 
 require('dotenv').config();
 
@@ -101,6 +102,7 @@ export default function App() {
       <ModalPopup />
       <HashRouter>
         <ScrollToTop />
+        <GoogleAnalytics />
         <Header />
         <Pages />
       </HashRouter>

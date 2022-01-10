@@ -45,6 +45,70 @@
     ]
   },
   {
+    "id": "ziggyverse-strength-nft",
+    "name": "Ziggyverse NFT",
+    "icon": "ziggyverse",
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketZiggyVerseStrength",
+    "rewardAddress": "0x8044Cfc4Fb5b5577575f83E9A2C657aa25eDc8F2",
+    "contractAddress": "0xa9caBed79237D45E467DF62e9B521aa3DAbebe9A",
+    "prizePoolAddress": "0x270F3028f55227a08993d1Aa970e239e7598184f",
+    "prizeStrategyAddress": "0x9101296C5F4F3852f999E1594AD8eFcF1BB73817",
+    "oracleId": "POTS",
+    "apyId": "pots-pots",
+    "vaultType": "nft",
+    "duration": 1,
+    "fairplayDuration": 3,
+    "fairplayTicketFee": 0.05,
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "withdrawFee": 0,
+    "infoCards": ["nft-strategy", "nft-fairplay"],
+    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "Ziggyverse Strength NFT",
+        "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
+        "type": "erc1155"
+      }
+    ],
+    "bonuses": []
+  },
+  {
+    "id": "nft-collections",
+    "name": "NFT Collections",
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBscNftCollections",
+    "rewardAddress": "0x43309a83b094461409F1C6A33089Df8D61fcD753",
+    "contractAddress": "0x14eEc9E9F59E9884f1D04491d6195A2Aa32a3DB7",
+    "prizePoolAddress": "0x1396B69Ce6ba3bE0a4c665363f3Bf71dCBcb2C41",
+    "prizeStrategyAddress": "0x23eDb386637c8aBC980D76aea5c24F3DD83019F1",
+    "oracleId": "POTS",
+    "vaultType": "nft",
+    "duration": 1,
+    "fairplayDuration": 3,
+    "fairplayTicketFee": 0.05,
+    "status": "active",
+    "infoCards": ["nft-strategy", "nft-fairplay"],
+    "infoCardNftStrategyCollection": "https://www.rareboard.com/thebullsoc",
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "The Bull Society NFT",
+        "address": "0xA46A4920B40f134420b472B16b3328d74D7B6B70",
+        "type": "erc721"
+      }
+    ],
+    "bonuses": []
+  },
+  {
     "id": "ziggyverse-agility-nft",
     "name": "Ziggyverse NFT",
     "icon": "ziggyverse",
@@ -61,7 +125,7 @@
     "vaultType": "nft",
     "duration": 1,
     "fairplayDuration": 3,
-    "fairplayTicketFee": 0.025,
+    "fairplayTicketFee": 0.05,
     "status": "active",
     "supportsClaimAllBonuses": false,
     "withdrawFee": 0,
@@ -96,7 +160,7 @@
     "vaultType": "nft",
     "duration": 1,
     "fairplayDuration": 3,
-    "fairplayTicketFee": 0.025,
+    "fairplayTicketFee": 0.05,
     "status": "active",
     "supportsClaimAllBonuses": false,
     "withdrawFee": 0,
@@ -167,6 +231,11 @@
       {
         "id": 2,
         "symbol": "MILK",
+        "display": "superBoost"
+      },
+      {
+        "id": 3,
+        "symbol": "AOT",
         "display": "superBoost"
       }
     ]

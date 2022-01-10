@@ -463,6 +463,13 @@
     "decimals": 18
   },
   {
+    "symbol": "AOT",
+    "address": "0x9589014F7a8547B89A6331eEEe32b7fBd5852af9",
+    "type": "single",
+    "oracleId": "AOT",
+    "decimals": 6
+  },
+  {
     "symbol": "mooBIFI",
     "address": "0xf7069e41C57EcC5F122093811d8c75bdB5f7c14e",
     "type": "moo",
@@ -508,5 +515,28 @@
     "type": "nft",
     "subtype": "erc721",
     "decimals": 0
+  },
+  {
+    "symbol": "moonTicketBscNftCollections",
+    "address": "0x43309a83b094461409F1C6A33089Df8D61fcD753",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "The Bull Society NFT",
+    "address": "0xA46A4920B40f134420b472B16b3328d74D7B6B70",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
+  },
+  {
+    "symbol": "moonTicketZiggyVerseStrength",
+    "address": "0x8044Cfc4Fb5b5577575f83E9A2C657aa25eDc8F2",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
   }
 ]

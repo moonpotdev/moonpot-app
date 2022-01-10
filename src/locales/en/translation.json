@@ -202,6 +202,50 @@
               "rarity": "110 / 150"
             }
           }
+        },
+        "ziggyverse-strength-nft": {
+          "body": [
+            "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling."
+          ],
+          "rarities": {
+            "gold": {
+              "name": "Strength - Gold",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "Strength - Moonstone",
+              "rarity": "40 / 100"
+            },
+            "jade": {
+              "name": "Strength - Jade",
+              "rarity": "110 / 150"
+            }
+          }
+        },
+        "nft-collections": {
+          "body": [
+            "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
+            "Each draw will pick one winner to receive a single NFT from the current collection.",
+            "A new collection will be added to the pot once all NFTs from the current collection have been distributed. You do not have to restake to enter the new collection's draw.",
+            "The current collection is from The Bull Society"
+          ],
+          "nfts": {
+            "bull-society/2745": {
+              "name": "Bull 2745"
+            },
+            "bull-society/2779": {
+              "name": "Bull 2779"
+            },
+            "bull-society/2820": {
+              "name": "Bull 2820"
+            },
+            "bull-society/2952": {
+              "name": "Bull 2952"
+            },
+            "bull-society/3136": {
+              "name": "Bull 3136"
+            }
+          }
         }
       },
       "xmas-strategy": {
