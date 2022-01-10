@@ -102,7 +102,6 @@ const Moonpots = ({ selected, sort }) => {
               </Grid>
             </Grid>
           ) : null}
-          {/*<PoweredByBeefy className={classes.poweredBy} />*/}
         </div>
       </div>
     </React.Fragment>

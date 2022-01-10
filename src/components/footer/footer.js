@@ -1,6 +1,5 @@
 import { Container, Grid, Link, makeStyles, Typography } from '@material-ui/core';
 import * as React from 'react';
-import { formatCadets } from '../../helpers/format';
 import styles from './styles';
 import StatButton from './components/StatButton';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +14,9 @@ const Footer = ({ variant }) => {
 
   //Holders Data
   const cadets = useSelector(state => state.holdersReducer.totalHolders || 0);
-  const cadetsFormatted = formatCadets(cadets);
+  const cadetsFormatted = cadets.toLocaleString(undefined, {
+    maximumFractionDigits: 0,
+  });
 
   //Buybacks Data
   const lastWeekBuybacks = useSelector(state => state.buybacksReducer.lastWeekBuyback || 0);
@@ -36,7 +37,7 @@ const Footer = ({ variant }) => {
   });
 
   return (
-    <React.Fragment>
+    <>
       <Container maxWidth="xl" className={variant === 'light' ? classes.light : ''}>
         <Grid container spacing={2} className={classes.footer}>
           <Grid item xs={12} className={classes.footerLinks}>
@@ -113,7 +114,7 @@ const Footer = ({ variant }) => {
           </Grid>
         </Grid>
       </Container>
-    </React.Fragment>
+    </>
   );
 };
 

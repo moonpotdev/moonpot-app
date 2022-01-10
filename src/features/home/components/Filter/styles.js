@@ -1,24 +1,15 @@
+const responsiveBreakpoint = 1073;
+
 const styles = theme => ({
   buttonContainer: {
     width: 'max-content',
     marginRight: 0,
     marginLeft: 'auto',
-    [theme.breakpoints.down('1073')]: {
+    [theme.breakpoints.down(responsiveBreakpoint)]: {
       maxWidth: '532px',
       width: 'auto',
       margin: '0 auto',
       padding: '0 16px',
-    },
-    '& .Mui-focused': {
-      '& .MuiSelect-root': {
-        backgroundColor: '#303050 !important',
-        borderRadius: '8px',
-      },
-    },
-    '& .MuiInput-root': {
-      '& .MuiSvgIcon-root': {
-        marginRight: 12,
-      },
     },
   },
   button: {
@@ -41,7 +32,8 @@ const styles = theme => ({
     border: '2px solid #555590',
     borderRadius: '8px',
     width: '220px',
-    [theme.breakpoints.down('1073')]: {
+    marginLeft: '16px',
+    [theme.breakpoints.down(responsiveBreakpoint)]: {
       width: '100%',
       margin: '0 0 16px 0',
     },
@@ -50,7 +42,9 @@ const styles = theme => ({
       height: '24px',
       background: 'none',
     },
-    marginLeft: '16px',
+    '& .MuiSvgIcon-root': {
+      marginRight: 12,
+    },
     '& .MuiSelect-root': {
       '& div': {
         '& .MuiTypography-root': {
@@ -61,9 +55,7 @@ const styles = theme => ({
         },
       },
     },
-  },
-  selectRoot: {
-    '&$selected': {
+    '&.Mui-focused': {
       backgroundColor: '#303050',
     },
   },
@@ -86,20 +78,17 @@ const styles = theme => ({
     color: '#8F8FBC',
     fontWeight: '500',
   },
-  selectLableSelected: {
-    color: 'red !important',
-  },
   menuStyle: {
     width: '220px',
-    [theme.breakpoints.down('1073')]: {
-      width: '500px',
-      maxWidth: '90%',
-    },
     marginLeft: '-2px',
     marginTop: '4px',
     border: '2px solid #555590',
     borderRadius: '8px',
     backgroundColor: '#303050',
+    [theme.breakpoints.down(responsiveBreakpoint)]: {
+      width: '500px',
+      maxWidth: '90%',
+    },
     '& .MuiList-root': {
       padding: '4px 8px',
       '& .Mui-selected': {

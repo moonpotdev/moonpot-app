@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Grid, makeStyles, Select, MenuItem, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { Grid, makeStyles, MenuItem, Select, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -76,7 +76,7 @@ const sortByTypes = [
   },
 ];
 
-const mySortByTypes = [
+const potStatusTypes = [
   {
     key: 'active',
     path: 'active',
@@ -90,12 +90,7 @@ const mySortByTypes = [
 ];
 
 const iconComponent = props => {
-  return (
-    <ExpandMoreIcon
-      style={{ color: '#8F8FBC' }}
-      className={props.className + ' ' + useStyles.icon}
-    />
-  );
+  return <ExpandMoreIcon style={{ color: '#8F8FBC' }} className={props.className} />;
 };
 
 const Filter = ({ className, selected, sort }) => {
@@ -108,7 +103,7 @@ const Filter = ({ className, selected, sort }) => {
   let { filter, bottom, top } = useParams();
   //Current pot type
   const [currentPath, setCurrentPath] = useState(
-    bottom || top === 'my-moonpots' ? 'all' : 'featured'
+    bottom || (top === 'my-moonpots' ? 'all' : 'featured')
   );
   //Current filter type
   const [currentSort, setCurrentSort] = useState(filter || 'default');
@@ -121,7 +116,7 @@ const Filter = ({ className, selected, sort }) => {
     setCurrentSort(event.target.value);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     //Push path for my pots page
     if (top === 'my-moonpots') {
       //Check for valid filter selection, if not set to default for my pots
@@ -172,7 +167,6 @@ const Filter = ({ className, selected, sort }) => {
           MenuProps={{
             classes: {
               paper: classes.menuStyle,
-              root: classes.selectRoot,
             },
             anchorOrigin: {
               vertical: 'bottom',
@@ -235,7 +229,7 @@ const Filter = ({ className, selected, sort }) => {
                   </div>
                 </MenuItem>
               ))
-            : mySortByTypes.map(type => (
+            : potStatusTypes.map(type => (
                 <MenuItem key={type.key} value={type.path}>
                   <div style={{ display: 'flex' }}>
                     <Typography className={classes.selectLabel}>{t('potStatus')}&nbsp;</Typography>
