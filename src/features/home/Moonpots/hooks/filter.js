@@ -16,8 +16,8 @@ const SORT_COMPARE_FUNCTIONS = {
   totalStakedUsd: compareBigNumber,
   name: compareStringCaseInsensitive,
   expiresAt: compareNumber,
-  totalProjectedAwardBalanceUsd: compareBigNumber,
-  apy: compareNumber,
+  projectedTotalPrizeUsd: compareBigNumber,
+  totalApy: compareNumber,
 };
 
 function filterIncludePot(pot, vaultType, config) {
@@ -73,9 +73,9 @@ export function useSortKey(sort) {
   if (sort === 'next-draw') {
     return ['expiresAt', 'asc'];
   } else if (sort === 'prize') {
-    return ['totalProjectedAwardBalanceUsd', 'desc'];
+    return ['projectedTotalPrizeUsd', 'desc'];
   } else if (sort === 'apy') {
-    return ['apy', 'desc'];
+    return ['totalApy', 'desc'];
   } else {
     return ['defaultOrder', 'asc'];
   }
