@@ -16,6 +16,7 @@ const useStyles = makeStyles(styles);
 function useSelectedParams() {
   let { top, bottom } = useParams();
   let filter = useSelector(state => state.filterReducer.sort);
+  let status = useSelector(state => state.filterReducer.status);
   if (!top) {
     top = 'moonpots';
   }
@@ -25,14 +26,15 @@ function useSelectedParams() {
   }
 
   if (!filter) {
-    filter = top === 'moonpots' ? 'all' : 'active';
+    filter = 'default';
   }
-  return { top, bottom, filter };
+
+  return { top, bottom, filter, status };
 }
 
 const Home = () => {
   const classes = useStyles();
-  const { top, bottom, filter } = useSelectedParams();
+  const { top, bottom, filter, status } = useSelectedParams();
 
   return (
     <Container maxWidth={false} style={{ padding: '0', overflow: 'hidden' }}>
@@ -48,13 +50,13 @@ const Home = () => {
           </Grid>
           <div className={classes.placeholder} />
           <Grid item className={classes.filterContainerRight}>
-            <Filter selected={bottom} sort={filter} />
+            <Filter selected={top} potType={bottom} sort={filter} />
           </Grid>
         </Grid>
         {top === 'moonpots' ? (
-          <Moonpots selected={bottom} sort={filter} />
+          <Moonpots potType={bottom} potStatus={status} sort={filter} />
         ) : (
-          <MyPots selected={filter} bottom={bottom} />
+          <MyPots potStatus={status} sort={filter} />
         )}
       </div>
     </Container>

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, makeStyles } from '@material-ui/core';
 import reduxActions from '../../redux/actions';
@@ -11,30 +11,26 @@ import { Cards } from '../../../components/Cards';
 import styles from './styles';
 import { ClaimableBonusNotification } from '../../../components/ClaimableBonusNotification';
 import { MigrationNotices } from '../Moonpots/components/MigrationNotices/MigrationNotices';
+import { useSortKey, sortPots } from '../Moonpots/hooks/filter';
 
 const useStyles = makeStyles(styles);
 
-const MyPots = ({ selected, bottom }) => {
+const MyPots = ({ potStatus, sort }) => {
   const classes = useStyles();
   const { vault, prices } = useSelector(state => ({
     vault: state.vaultReducer,
     prices: state.pricesReducer,
   }));
+  const [sortKey, sortDir] = useSortKey(sort);
   const walletAddress = useSelector(state => state.walletReducer.address);
   const tokenBalances = useSelector(state => state.balanceReducer.tokens);
   const dispatch = useDispatch();
 
+  //Since filtered itself is not in the state we need to use a stateful variable to know when to update the page
+  const [filteredUpdated, setFilteredUpdated] = useState(false);
   const filtered = useMemo(() => {
     const check = item => {
-      if (item.status !== selected) {
-        return false;
-      }
-
-      if (item.vaultType !== bottom && bottom !== 'all' && bottom !== 'featured') {
-        return false;
-      }
-
-      if (bottom === 'featured' && item.featured !== true) {
+      if (item.status !== potStatus) {
         return false;
       }
 
@@ -59,7 +55,18 @@ const MyPots = ({ selected, bottom }) => {
         }
         return item;
       });
-  }, [selected, vault.pools, tokenBalances, walletAddress, bottom]);
+  }, [potStatus, vault.pools, tokenBalances, walletAddress]);
+
+  useEffect(() => {
+    sortPots(filtered, sortKey, sortDir);
+    setFilteredUpdated(true);
+  }, [filtered, sortKey, sortDir]);
+
+  useEffect(() => {
+    if (filteredUpdated === true) {
+      setFilteredUpdated(false);
+    }
+  }, [filteredUpdated]);
 
   useEffect(() => {
     if (prices.lastUpdated > 0) {
@@ -79,7 +86,7 @@ const MyPots = ({ selected, bottom }) => {
       <Container maxWidth={false} style={{ padding: '0' }}>
         <div className={classes.potsContainer}>
           <div className={classes.spacer}>
-            {selected === 'active' ? (
+            {potStatus === 'active' ? (
               <>
                 <MigrationNotices potType="all" />
                 <ClaimableBonusNotification className={classes.claimableBonuses} />
@@ -87,7 +94,7 @@ const MyPots = ({ selected, bottom }) => {
             ) : null}
             <Cards sameHeight={false}>
               {filtered.length === 0 ? (
-                <NoPotsCard selected={selected} />
+                <NoPotsCard selected={potStatus} />
               ) : (
                 filtered.map(item => <Pot key={item.id} item={item} />)
               )}

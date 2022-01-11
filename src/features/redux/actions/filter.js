@@ -1,4 +1,4 @@
-import { UPDATE_FILTER_SORT } from '../constants';
+import { UPDATE_FILTER_SORT, UPDATE_FILTER_STATUS } from '../constants';
 
 const updateFilterSort = sort => ({
   type: UPDATE_FILTER_SORT,
@@ -7,8 +7,16 @@ const updateFilterSort = sort => ({
   },
 });
 
+const updateFilterStatus = status => ({
+  type: UPDATE_FILTER_STATUS,
+  payload: {
+    status: status,
+  },
+});
+
 const obj = {
   updateFilterSort,
+  updateFilterStatus,
 };
 
 export default obj;

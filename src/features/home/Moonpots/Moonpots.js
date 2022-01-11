@@ -6,7 +6,7 @@ import reduxActions from '../../redux/actions';
 import { MigrationNotices } from './components/MigrationNotices/MigrationNotices';
 import ZiggyMaintenance from '../../../images/ziggy/maintenance.svg';
 import SocialMediaBlock from './components/SocialMediaBlock/SocialMediaBlock';
-import { useFilterConfig, useFilteredPots } from './hooks/filter';
+import { useFilterConfig, useFilteredPots, useSortKey } from './hooks/filter';
 import { Pot } from './components/Pot';
 import { Cards } from '../../../components/Cards';
 import { Translate } from '../../../components/Translate';
@@ -14,19 +14,7 @@ import SidePotExplainer from '../../../components/SidePotExplainer/SidePotExplai
 
 const useStyles = makeStyles(styles);
 
-function getKey(sort) {
-  if (sort === 'next-draw') {
-    return ['expiresAt', 'asc'];
-  } else if (sort === 'prize') {
-    return ['projectedAwardBalanceUsd', 'desc'];
-  } else if (sort === 'apy') {
-    return ['apyBreakdown', 'asc'];
-  } else {
-    return ['defaultOrder', 'asc'];
-  }
-}
-
-const Moonpots = ({ selected, sort }) => {
+const Moonpots = ({ potType, sort }) => {
   const dispatch = useDispatch();
   const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
   const address = useSelector(state => state.walletReducer.address);
@@ -34,8 +22,8 @@ const Moonpots = ({ selected, sort }) => {
   const pots = useSelector(state => state.vaultReducer.pools);
   const classes = useStyles();
   const [filterConfig, setFilterConfig] = useFilterConfig();
-  const filtered = useFilteredPots(pots, selected, filterConfig);
-  const [sortKey, sortDir] = getKey(sort);
+  const filtered = useFilteredPots(pots, potType, filterConfig);
+  const [sortKey, sortDir] = useSortKey(sort);
 
   useEffect(() => {
     if (pricesLastUpdated > 0) {
@@ -59,14 +47,14 @@ const Moonpots = ({ selected, sort }) => {
     <React.Fragment>
       <div className={classes.potsContainer}>
         <div className={classes.spacer}>
-          <MigrationNotices potType={selected} className={classes.potsMigrationNotice} />
-          {selected === 'side' ? <SidePotExplainer /> : null}
+          <MigrationNotices potType={potType} className={classes.potsMigrationNotice} />
+          {potType === 'side' ? <SidePotExplainer /> : null}
           <Cards>
             {filtered.map(pot => (
               <Pot key={pot.id} variant={'tealLight'} id={pot.id} />
             ))}
           </Cards>
-          {selected === 'community' ? (
+          {potType === 'community' ? (
             <Grid item xs={12} style={{ marginTop: '32px' }}>
               <Grid container className={classes.communityJoin}>
                 <Grid item xs={12}>
