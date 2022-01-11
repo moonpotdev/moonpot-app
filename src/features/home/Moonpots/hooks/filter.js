@@ -16,8 +16,8 @@ const SORT_COMPARE_FUNCTIONS = {
   totalStakedUsd: compareBigNumber,
   name: compareStringCaseInsensitive,
   expiresAt: compareNumber,
-  projectedAwardBalanceUsd: compareBigNumber,
-  apyBreakdown: compareApy,
+  totalProjectedAwardBalanceUsd: compareBigNumber,
+  apy: compareNumber,
 };
 
 function filterIncludePot(pot, vaultType, config) {
@@ -56,15 +56,7 @@ function compareBigNumber(a, b) {
   return 0;
 }
 
-function compareApy(a, b) {
-  try {
-    return b.totalApy - a.totalApy;
-  } catch {
-    return 0;
-  }
-}
-
-function sortPots(pots, key, dir) {
+export function sortPots(pots, key, dir) {
   if (key in SORT_COMPARE_FUNCTIONS) {
     return pots.sort((a, b) => {
       const valueA = dir === 'asc' ? a[key] : b[key];
@@ -75,6 +67,18 @@ function sortPots(pots, key, dir) {
   }
 
   return pots;
+}
+
+export function useSortKey(sort) {
+  if (sort === 'next-draw') {
+    return ['expiresAt', 'asc'];
+  } else if (sort === 'prize') {
+    return ['totalProjectedAwardBalanceUsd', 'desc'];
+  } else if (sort === 'apy') {
+    return ['apy', 'desc'];
+  } else {
+    return ['defaultOrder', 'asc'];
+  }
 }
 
 export function useFilteredPots(pots, vaultType, config) {

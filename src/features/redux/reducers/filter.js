@@ -1,7 +1,8 @@
-import { UPDATE_FILTER_SORT } from '../constants';
+import { UPDATE_FILTER_SORT, UPDATE_FILTER_STATUS } from '../constants';
 
 const initialState = {
   sort: '',
+  status: '',
 };
 
 const filterReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const filterReducer = (state = initialState, action) => {
       return {
         ...state,
         sort: action.payload.sort,
+      };
+    case UPDATE_FILTER_STATUS:
+      return {
+        ...state,
+        status: action.payload.status,
       };
     default:
       return state;

@@ -28,8 +28,8 @@ function Pages() {
         <Route
           exact
           path={[
-            '/:bottom(featured|all|xmas|main|lp|stable|community|side|nft)?/:filter(default|next-draw|prize|apy)?',
-            '/:top(my-moonpots)/:bottom(featured|all|xmas|main|lp|stable|community|side|nft)?/:filter(active|eol)?',
+            '/:bottom(featured|all|xmas|main|lp|stable|community|side|nft)?',
+            '/:top(my-moonpots)',
           ]}
         >
           <Home />
