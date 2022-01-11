@@ -445,7 +445,54 @@
     "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
     "type": "nft",
     "subtype": "erc1155",
-    "decimals": 0
+    "decimals": 0,
+    "nfts": [
+      {
+        "name": "Ziggyverse Armour NFT",
+        "min": 41,
+        "max": 150
+      },
+      {
+        "name": "Ziggyverse Armour NFT",
+        "min": 175,
+        "max": 250
+      },
+      {
+        "name": "Ziggyverse Armour NFT",
+        "min": 286,
+        "max": 300
+      },
+      {
+        "name": "Ziggyverse Agility NFT",
+        "min": 1221,
+        "max": 1330
+      },
+      {
+        "name": "Ziggyverse Agility NFT",
+        "min": 1391,
+        "max": 1430
+      },
+      {
+        "name": "Ziggyverse Agility NFT",
+        "min": 1466,
+        "max": 1480
+      },
+      {
+        "name": "Ziggyverse Strength NFT",
+        "min": 12765,
+        "max": 12779
+      },
+      {
+        "name": "Ziggyverse Strength NFT",
+        "min": 12820,
+        "max": 12859
+      },
+      {
+        "name": "Ziggyverse Strength NFT",
+        "min": 12925,
+        "max": 13034
+      }
+    ]
   },
   {
     "symbol": "moonTicketPotsZiggyVerseAgility",
@@ -538,5 +585,12 @@
     "decimals": 18,
     "underlyingToken": "POTS",
     "stakedMultiplier": 1
+  },
+  {
+    "symbol": "Born Bad Boys NFT",
+    "address": "0x44d85770aEa263F9463418708125Cd95e308299B",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
   }
 ]
