@@ -22,7 +22,7 @@ function useSelectedParams() {
   }
 
   if (!bottom) {
-    bottom = 'all';
+    bottom = 'featured';
   }
 
   if (!filter) {

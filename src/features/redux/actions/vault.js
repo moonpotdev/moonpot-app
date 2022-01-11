@@ -219,37 +219,55 @@ function calculateProjections(pots, pricesByNetworkAddress) {
 
   // All active pots but ziggy
   for (const pot of activePots) {
-    // Only make projections for pots drawing in the future/that have a prize component
-    if (pot.interestBreakdown && pot.interestBreakdown.prize && pot.expiresAt > nowSeconds) {
-      // How much of prize pool interest goes to prize
-      const prizePoolInterestMultiplier = calculatePrizePoolInterestMultiplier(pot);
-      // How much of the award balance goes to prize
-      const awardBalancePrizeMultiplier = calculateAwardBalancePrizeMultiplier(pot);
+    if (!pot.nftPrizeOnly) {
+      // Only make projections for pots drawing in the future/that have a prize component
+      if (pot.interestBreakdown && pot.interestBreakdown.prize && pot.expiresAt > nowSeconds) {
+        // How much of prize pool interest goes to prize
+        const prizePoolInterestMultiplier = calculatePrizePoolInterestMultiplier(pot);
+        // How much of the award balance goes to prize
+        const awardBalancePrizeMultiplier = calculateAwardBalancePrizeMultiplier(pot);
 
-      // Calculate interest up until draw
-      const projectedAward = calculateProjectedPotAward(
-        pot,
-        pot.expiresAt,
-        awardBalancePrizeMultiplier,
-        prizePoolInterestMultiplier
-      );
+        // Calculate interest up until draw
+        const projectedAward = calculateProjectedPotAward(
+          pot,
+          pot.expiresAt,
+          awardBalancePrizeMultiplier,
+          prizePoolInterestMultiplier
+        );
 
-      // Projections...
-      pot.projectedAwardBalance = projectedAward.tokens;
-      pot.projectedAwardBalanceUsd = projectedAward.usd;
+        // Projections...
+        pot.projectedAwardBalance = projectedAward.tokens;
+        pot.projectedAwardBalanceUsd = projectedAward.usd;
+      } else {
+        console.warn(`Missing interestBreakdown.prize for ${pot.id}`);
+        pot.projectedAwardBalance = pot.awardBalance;
+        pot.projectedAwardBalanceUsd = pot.awardBalanceUsd;
+      }
     } else {
-      console.warn(`Missing interestBreakdown.prize for ${pot.id}`);
-      pot.projectedAwardBalance = pot.awardBalance;
-      pot.projectedAwardBalanceUsd = pot.awardBalanceUsd;
+      // Projections set to 0 if nft only
+      pot.projectedAwardBalance = BigNumber(0);
+      pot.projectedAwardBalanceUsd = BigNumber(0);
     }
 
     // Sponsors don't get projected
     pot.projectedTotalSponsorBalanceUsd = pot.totalSponsorBalanceUsd;
     pot.projectedSponsors = pot.sponsors;
+
+    //Calculate total combine projected award
+    if (!pot.nftPrizeOnly) {
+      pot.totalProjectedAwardBalanceUsd = pot.projectedAwardBalanceUsd.plus(
+        pot.projectedTotalSponsorBalanceUsd
+      );
+    } else {
+      pot.totalProjectedAwardBalanceUsd = BigNumber(0);
+    }
   }
 
   // Ziggy's Pot
   pots['pots'] = calculateZiggyPrediction(pots['pots'], activePots, pricesByNetworkAddress);
+  pots['pots'].totalProjectedAwardBalanceUsd = pots['pots'].projectedAwardBalanceUsd.plus(
+    pots['pots'].projectedTotalSponsorBalanceUsd
+  );
 
   return pots;
 }
