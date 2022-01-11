@@ -388,13 +388,13 @@
     "fairplayTicketFee": 0.05,
     "status": "active",
     "infoCards": ["nft-strategy", "nft-fairplay"],
-    "infoCardNftStrategyCollection": "https://www.rareboard.com/thebullsoc",
+    "infoCardNftStrategyCollection": "https://www.rareboard.com/bornbadboys",
     "sponsors": [],
     "nftPrizeOnly": true,
     "nfts": [
       {
-        "name": "The Bull Society NFT",
-        "address": "0xA46A4920B40f134420b472B16b3328d74D7B6B70",
+        "name": "Born Bad Boys NFT",
+        "address": "0x44d85770aEa263F9463418708125Cd95e308299B",
         "type": "erc721"
       }
     ],

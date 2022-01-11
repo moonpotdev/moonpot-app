@@ -227,23 +227,23 @@
             "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
             "Each draw will pick one winner to receive a single NFT from the current collection.",
             "A new collection will be added to the pot once all NFTs from the current collection have been distributed. You do not have to restake to enter the new collection's draw.",
-            "The current collection is from The Bull Society"
+            "The current collection is Born Bad Boys"
           ],
           "nfts": {
-            "bull-society/2745": {
-              "name": "Bull 2745"
+            "born-bad-boys/7114": {
+              "name": "BBB 7114"
             },
-            "bull-society/2779": {
-              "name": "Bull 2779"
+            "born-bad-boys/7115": {
+              "name": "BBB 7115"
             },
-            "bull-society/2820": {
-              "name": "Bull 2820"
+            "born-bad-boys/7116": {
+              "name": "BBB 7116"
             },
-            "bull-society/2952": {
-              "name": "Bull 2952"
+            "born-bad-boys/7117": {
+              "name": "BBB 7117"
             },
-            "bull-society/3136": {
-              "name": "Bull 3136"
+            "born-bad-boys/7118": {
+              "name": "BBB 7118"
             }
           }
         }
@@ -257,8 +257,12 @@
             "This Pot contains 70 NFTs which can be exchanged for a promo code to order a free t-shirt from Beefy Store. Stake POTS to participate, draw every day, until 31st Dec."
           ],
           "merch": {
-            "beefy-moonpot-tshirt-front.png": { "title": "T-Shirt - Front" },
-            "beefy-moonpot-tshirt-back.png": { "title": "T-Shirt - Back" }
+            "beefy-moonpot-tshirt-front.png": {
+              "title": "T-Shirt - Front"
+            },
+            "beefy-moonpot-tshirt-back.png": {
+              "title": "T-Shirt - Back"
+            }
           }
         },
         "xmas-moobifi": {
@@ -268,7 +272,9 @@
             "This Pot contains 125 NFTs which can be exchanged for a promo code to order a free hoodie from Beefy Store, along with a prize of BIFI and POTS. Stake mooBIFI to participate, draw on 31st Dec."
           ],
           "merch": {
-            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+            "beefy-moonpot-hoodie.png": {
+              "title": "Beefy x Moonpot Hoodie"
+            }
           }
         },
         "xmas-moochristmasbeefy": {
@@ -278,7 +284,9 @@
             "This Pot contains 15 NFTs which can be exchanged for a promo code to order a free hoodie from Beefy Store, along with a prize of BIFI and POTS. Stake mooChristmasBeefy to participate, draw on 31st Dec."
           ],
           "merch": {
-            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+            "beefy-moonpot-hoodie.png": {
+              "title": "Beefy x Moonpot Hoodie"
+            }
           }
         }
       },
