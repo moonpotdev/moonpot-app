@@ -6,6 +6,7 @@ import earnedReducer from './earned';
 import modalReducer from './modal';
 import zapReducer from './zap';
 import winnersReducer from '../../winners/redux/reducer';
+import promoCodesReducer from '../../promo/reducer';
 
 const reducers = {
   walletReducer,
@@ -16,6 +17,7 @@ const reducers = {
   modalReducer,
   zapReducer,
   winners: winnersReducer,
+  promo: promoCodesReducer,
 };
 
 export default reducers;

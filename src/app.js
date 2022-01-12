@@ -20,6 +20,7 @@ const Home = React.lazy(() => import(`./features/home`));
 const Vault = React.lazy(() => import(`./features/vault`));
 const Winners = React.lazy(() => import(`./features/winners`));
 const Dao = React.lazy(() => import(`./features/dao`));
+const Promo = React.lazy(() => import(`./features/promo`));
 
 function Pages() {
   return (
@@ -45,6 +46,10 @@ function Pages() {
         </Route>
         <Route strict sensitive exact path="/ido">
           <Dao />
+          <Footer variant="dark" />
+        </Route>
+        <Route strict sensitive exact path="/promo/:name">
+          <Promo />
           <Footer variant="dark" />
         </Route>
         <Route>

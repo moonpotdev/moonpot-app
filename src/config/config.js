@@ -11,6 +11,7 @@ export const config = {
     multicallAddress: '0xB94858b0bB5437498F5453A16039337e5Fdc269C',
     converterAddress: '0xC0d9f24c325113b7d21494032B40D1c0a49A24d9',
     claimAllBonusesAddress: '0xD6F847959f00818BeB8FeC4F8866A7369695A488',
+    nftPromoClaimAddress: '0x305e1c2356758bD4c1A85C9DF9a618a14783dA29',
     supportedWallets: [
       'injected',
       'walletconnect',
