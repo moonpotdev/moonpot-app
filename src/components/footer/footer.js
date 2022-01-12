@@ -13,7 +13,7 @@ const Footer = ({ variant }) => {
   const classes = useStyles();
 
   //Holders Data
-  const cadets = useSelector(state => state.holdersReducer.totalHolders || 0);
+  const cadets = useSelector(state => state.holders.cadets || 0);
   const cadetsFormatted = cadets.toLocaleString(undefined, {
     maximumFractionDigits: 0,
   });
