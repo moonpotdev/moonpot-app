@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { useLocalStorage } from '../../../../helpers/hooks';
 
 const FILTER_DEFAULT = {
-  version: 2, // Bump+1 if changes are made to force reset on end user
+  version: 3, // Bump+1 if changes are made to force reset on end user
   sortKey: 'defaultOrder', // Must have matching entry in SORT_COMPARE_FUNCTIONS
   sortDir: 'asc',
   deposited: false,
@@ -15,6 +15,9 @@ const SORT_COMPARE_FUNCTIONS = {
   defaultOrder: compareNumber,
   totalStakedUsd: compareBigNumber,
   name: compareStringCaseInsensitive,
+  expiresAt: compareNumber,
+  projectedTotalPrizeUsd: compareBigNumber,
+  totalApy: compareNumber,
 };
 
 function filterIncludePot(pot, vaultType, config) {
@@ -26,7 +29,11 @@ function filterIncludePot(pot, vaultType, config) {
     return false;
   }
 
-  if (vaultType !== 'all' && vaultType !== pot.vaultType) {
+  if (vaultType !== 'all' && vaultType !== pot.vaultType && vaultType !== 'featured') {
+    return false;
+  }
+
+  if (vaultType === 'featured' && pot.featured !== true) {
     return false;
   }
 
@@ -49,7 +56,7 @@ function compareBigNumber(a, b) {
   return 0;
 }
 
-function sortPots(pots, key, dir) {
+export function sortPots(pots, key, dir) {
   if (key in SORT_COMPARE_FUNCTIONS) {
     return pots.sort((a, b) => {
       const valueA = dir === 'asc' ? a[key] : b[key];
@@ -60,6 +67,18 @@ function sortPots(pots, key, dir) {
   }
 
   return pots;
+}
+
+export function useSortKey(sort) {
+  if (sort === 'next-draw') {
+    return ['expiresAt', 'asc'];
+  } else if (sort === 'prize') {
+    return ['projectedTotalPrizeUsd', 'desc'];
+  } else if (sort === 'apy') {
+    return ['totalApy', 'desc'];
+  } else {
+    return ['defaultOrder', 'asc'];
+  }
 }
 
 export function useFilteredPots(pots, vaultType, config) {

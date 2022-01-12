@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
-import Filter from './components/Filter';
 import reduxActions from '../../redux/actions';
 import { MigrationNotices } from './components/MigrationNotices/MigrationNotices';
 import ZiggyMaintenance from '../../../images/ziggy/maintenance.svg';
 import SocialMediaBlock from './components/SocialMediaBlock/SocialMediaBlock';
-import { useFilterConfig, useFilteredPots } from './hooks/filter';
+import { useFilterConfig, useFilteredPots, useSortKey } from './hooks/filter';
 import { Pot } from './components/Pot';
 import { Cards } from '../../../components/Cards';
 import { Translate } from '../../../components/Translate';
@@ -15,33 +14,16 @@ import SidePotExplainer from '../../../components/SidePotExplainer/SidePotExplai
 
 const useStyles = makeStyles(styles);
 
-function handleVariant(vaultType) {
-  if (vaultType === 'community') {
-    return 'blueCommunity';
-  } else if (vaultType === 'lp') {
-    return 'green';
-  } else if (vaultType === 'stable') {
-    return 'greenStable';
-  } else if (vaultType === 'side') {
-    return 'greySide';
-  } else if (vaultType === 'nft') {
-    return 'purpleNft';
-  } else if (vaultType === 'xmas') {
-    return 'purpleXmas';
-  }
-
-  // default/main
-  return 'tealLight';
-}
-
-const Moonpots = ({ selected }) => {
+const Moonpots = ({ potType, sort }) => {
   const dispatch = useDispatch();
   const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
   const address = useSelector(state => state.walletReducer.address);
-  const pots = useSelector(state => state.vaultReducer.pools, shallowEqual);
+  //cannot use shallowEqual as we need the page to reevaluate the sort once the apy/prize/draw data loads
+  const pots = useSelector(state => state.vaultReducer.pools);
   const classes = useStyles();
-  const [filterConfig] = useFilterConfig();
-  const filtered = useFilteredPots(pots, selected, filterConfig);
+  const [filterConfig, setFilterConfig] = useFilterConfig();
+  const filtered = useFilteredPots(pots, potType, filterConfig);
+  const [sortKey, sortDir] = useSortKey(sort);
 
   useEffect(() => {
     if (pricesLastUpdated > 0) {
@@ -55,19 +37,24 @@ const Moonpots = ({ selected }) => {
     }
   }, [dispatch, address]);
 
+  useEffect(() => {
+    if (sortKey !== filterConfig.sortKey || sortDir !== filterConfig.sortDir) {
+      setFilterConfig({ ...filterConfig, sortKey, sortDir });
+    }
+  }, [filterConfig, setFilterConfig, sortKey, sortDir, pots]);
+
   return (
     <React.Fragment>
-      <Filter selected={selected} />
       <div className={classes.potsContainer}>
         <div className={classes.spacer}>
-          <MigrationNotices potType={selected} className={classes.potsMigrationNotice} />
-          {selected === 'side' ? <SidePotExplainer /> : null}
+          <MigrationNotices potType={potType} className={classes.potsMigrationNotice} />
+          {potType === 'side' ? <SidePotExplainer /> : null}
           <Cards>
             {filtered.map(pot => (
-              <Pot key={pot.id} variant={handleVariant(pot.vaultType)} id={pot.id} />
+              <Pot key={pot.id} variant={'tealLight'} id={pot.id} />
             ))}
           </Cards>
-          {selected === 'community' ? (
+          {potType === 'community' ? (
             <Grid item xs={12} style={{ marginTop: '32px' }}>
               <Grid container className={classes.communityJoin}>
                 <Grid item xs={12}>
@@ -103,7 +90,6 @@ const Moonpots = ({ selected }) => {
               </Grid>
             </Grid>
           ) : null}
-          {/*<PoweredByBeefy className={classes.poweredBy} />*/}
         </div>
       </div>
     </React.Fragment>

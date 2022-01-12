@@ -146,9 +146,11 @@ function calculateZiggyPrediction(ziggy, others, pricesByNetworkAddress) {
     // Sum total of all sponsors USD
     ziggy.projectedTotalSponsorBalanceUsd =
       ziggy.totalSponsorBalanceUsd.plus(extraSponsorBalanceUsd);
+    ziggy.projectedTotalPrizeUsd = ziggy.totalPrizeUsd.plus(ziggy.projectedTotalSponsorBalanceUsd);
   } else {
     ziggy.projectedTotalSponsorBalanceUsd = ziggy.totalSponsorBalanceUsd;
     ziggy.projectedSponsors = ziggy.sponsors;
+    ziggy.projectedTotalPrizeUsd = ziggy.totalPrizeUsd;
   }
 
   return ziggy;
@@ -237,10 +239,12 @@ function calculateProjections(pots, pricesByNetworkAddress) {
       // Projections...
       pot.projectedAwardBalance = projectedAward.tokens;
       pot.projectedAwardBalanceUsd = projectedAward.usd;
+      pot.projectedTotalPrizeUsd = pot.projectedAwardBalanceUsd.plus(pot.totalSponsorBalanceUsd);
     } else {
       console.warn(`Missing interestBreakdown.prize for ${pot.id}`);
       pot.projectedAwardBalance = pot.awardBalance;
       pot.projectedAwardBalanceUsd = pot.awardBalanceUsd;
+      pot.projectedTotalPrizeUsd = pot.totalPrizeUsd;
     }
 
     // Sponsors don't get projected
@@ -521,6 +525,10 @@ const getPools = async (items, state, dispatch) => {
     pool.sponsors.forEach(sponsor => {
       pool.totalSponsorBalanceUsd = pool.totalSponsorBalanceUsd.plus(sponsor.sponsorBalanceUsd);
     });
+    pool.totalPrizeUsd = pool.awardBalanceUsd.plus(pool.totalSponsorBalanceUsd);
+
+    // === Total APY
+    pool.totalApy = pool.isPrizeOnly ? 0 : (pool.apy || 0) + (pool.bonusApy || 0);
 
     // === Sum total USD prizes available across all pools
     if (pool.status === 'active') {
@@ -563,7 +571,7 @@ function getApyBreakdown(id, apys) {
     tradingApr: 0,
   };
 
-  if (id in apys && 'totalApy' in apys[id]) {
+  if (id && id in apys && 'totalApy' in apys[id]) {
     const apy = apys[id];
 
     out.totalApy = apy.totalApy;
@@ -619,6 +627,11 @@ function calculateAwardBalancePrizeMultiplier(pot, prizeKey = 'prize') {
 
     // Prize balance is % going to prize / % going to awardBalance
     return prizePercent / awardBalancePercent;
+  }
+
+  // Only awards nfts, no tokens, nothing in awardBalance is awarded
+  if (pot.nftPrizeOnly) {
+    return 0;
   }
 
   // No interest; everything in awardBalance must be fairness fees

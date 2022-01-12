@@ -29,8 +29,8 @@ function Pages() {
         <Route
           exact
           path={[
-            '/:bottom(all|xmas|main|lp|stable|community|side|nft)?',
-            '/:top(my-moonpots)/:bottom(eol)?',
+            '/:bottom(featured|all|xmas|main|lp|stable|community|side|nft)?',
+            '/:top(my-moonpots)',
           ]}
         >
           <Home />
@@ -90,7 +90,15 @@ export default function App() {
   }, [dispatch]);
 
   React.useEffect(() => {
+    dispatch(reduxActions.buybacks.fetchBuybacks());
+  }, [dispatch]);
+
+  React.useEffect(() => {
     dispatch(reduxActions.wallet.createWeb3Modal());
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    dispatch(reduxActions.holders.fetchHolders());
   }, [dispatch]);
 
   return (

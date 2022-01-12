@@ -3,9 +3,9 @@
     "ziggyMoonpotGuide": "Ziggy's Guide to Moonpot",
     "moonpotAlpha": "Moonpot Alpha Articles",
     "deposit": "Deposit",
-    "myActivePots": "Active Pots",
-    "myPastPots": "Retired Pots",
-    "allPots": "All Pots",
+    "myActivePots": "Active",
+    "myPastPots": "Retired",
+    "allPots": "All",
     "mainPots": "Main",
     "xmasPots": "Xmas",
     "communityPots": "Community",
@@ -15,8 +15,13 @@
     "learnMore": "Learn More",
     "moonpots": "Moonpots",
     "myPots": "My Pots",
-    "sidePots": "side",
-    "nftPots": "NFT"
+    "sidePots": "Side",
+    "nftPots": "NFT",
+    "nextDraw": "Next Draw",
+    "prize": "Prize",
+    "apy": "APY",
+    "default": "Default",
+    "featured": "Featured"
   },
   "modals": {
     "unsupportedNetworkDetected": "Unsupported Network Detected",
@@ -34,7 +39,15 @@
     "vote": "Vote",
     "winners": "Winners",
     "potsPrice": "POTS Price",
-    "buyPots": "Buy POTS"
+    "buyPots": "Buy POTS",
+    "audit": "Audit",
+    "articles": "Articles"
+  },
+  "footer": {
+    "cadets": "CADETS",
+    "prizes": "PRIZES",
+    "tvl": "TVL",
+    "buybacks": "BUYBACKS"
   },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><wbr /> and a chance to win <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposits (TVL)",
@@ -47,7 +60,7 @@
   "youHaventEnteredRetiredMoonpots": "You are not entered in any retired Moonpots.",
   "connectToJoin": "Connect your wallet to join a Moonpot.",
   "poweredByBeefy": "Powered by <BeefyLink>Beefy</BeefyLink>",
-  "auditedByCertik": "Audited by <CertikLink>Certik</CertikLink>",
+  "auditedByCertik": "Audited by <CertikLink>CertiK</CertikLink>",
   "sidePotExplainer": "Side Pots give you the chance to win daily prizes without earning interest. If you want to earn interest and join bigger weekly and monthly draws, Ziggy recommends you join a <MainPotLink>Main Pot</MainPotLink> instead.",
   "learnMore": "Learn more",
   "telegramSocialBlockBody": "Learn about Moonpot and get direct support from the community",
@@ -56,6 +69,9 @@
   "telegramSocialBlockButton": "Join our Telegram",
   "discordSocialBlockButton": "Join our Discord",
   "twitterSocialBlockButton": "Follow our Twitter",
+  "potType": "Pot Type:",
+  "sortBy": "Sort by:",
+  "potStatus": "Pot Status:",
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",
@@ -186,6 +202,50 @@
               "rarity": "110 / 150"
             }
           }
+        },
+        "ziggyverse-strength-nft": {
+          "body": [
+            "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling."
+          ],
+          "rarities": {
+            "gold": {
+              "name": "Strength - Gold",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "Strength - Moonstone",
+              "rarity": "40 / 100"
+            },
+            "jade": {
+              "name": "Strength - Jade",
+              "rarity": "110 / 150"
+            }
+          }
+        },
+        "nft-collections": {
+          "body": [
+            "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
+            "Each draw will pick one winner to receive a single NFT from the current collection.",
+            "A new collection will be added to the pot once all NFTs from the current collection have been distributed. You do not have to restake to enter the new collection's draw.",
+            "The current collection is Born Bad Boys"
+          ],
+          "nfts": {
+            "born-bad-boys/7114": {
+              "name": "BBB 7114"
+            },
+            "born-bad-boys/7115": {
+              "name": "BBB 7115"
+            },
+            "born-bad-boys/7116": {
+              "name": "BBB 7116"
+            },
+            "born-bad-boys/7117": {
+              "name": "BBB 7117"
+            },
+            "born-bad-boys/7118": {
+              "name": "BBB 7118"
+            }
+          }
         }
       },
       "xmas-strategy": {
@@ -197,8 +257,12 @@
             "This Pot contains 70 NFTs which can be exchanged for a promo code to order a free t-shirt from Beefy Store. Stake POTS to participate, draw every day, until 31st Dec."
           ],
           "merch": {
-            "beefy-moonpot-tshirt-front.png": { "title": "T-Shirt - Front" },
-            "beefy-moonpot-tshirt-back.png": { "title": "T-Shirt - Back" }
+            "beefy-moonpot-tshirt-front.png": {
+              "title": "T-Shirt - Front"
+            },
+            "beefy-moonpot-tshirt-back.png": {
+              "title": "T-Shirt - Back"
+            }
           }
         },
         "xmas-moobifi": {
@@ -208,7 +272,9 @@
             "This Pot contains 125 NFTs which can be exchanged for a promo code to order a free hoodie from Beefy Store, along with a prize of BIFI and POTS. Stake mooBIFI to participate, draw on 31st Dec."
           ],
           "merch": {
-            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+            "beefy-moonpot-hoodie.png": {
+              "title": "Beefy x Moonpot Hoodie"
+            }
           }
         },
         "xmas-moochristmasbeefy": {
@@ -218,7 +284,9 @@
             "This Pot contains 15 NFTs which can be exchanged for a promo code to order a free hoodie from Beefy Store, along with a prize of BIFI and POTS. Stake mooChristmasBeefy to participate, draw on 31st Dec."
           ],
           "merch": {
-            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+            "beefy-moonpot-hoodie.png": {
+              "title": "Beefy x Moonpot Hoodie"
+            }
           }
         }
       },
