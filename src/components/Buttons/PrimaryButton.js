@@ -15,6 +15,7 @@ export const PrimaryButton = withStyles({
       greySide: '#47566B',
       purpleNft: '#501B4E',
       purpleXmas: '#625CA2',
+      purpleHeader: '#424270',
     }),
     '&:hover': {
       backgroundColor: '#E6E6E6',
@@ -27,6 +28,7 @@ export const PrimaryButton = withStyles({
         greySide: '#47566B',
         purpleNft: '#501B4E',
         purpleXmas: '#625CA2',
+        purpleHeader: '#424270',
       }),
     },
     '&:focus': {
@@ -40,6 +42,7 @@ export const PrimaryButton = withStyles({
         greySide: '#47566B',
         purpleNft: '#501B4E',
         purpleXmas: '#625CA2',
+        purpleHeader: '#424270',
       }),
     },
     '& .MuiTouchRipple-child': {
@@ -52,6 +55,7 @@ export const PrimaryButton = withStyles({
         greySide: '#47566B',
         purpleNft: '#ab63a6',
         purpleXmas: '#D0CEE3',
+        purpleHeader: '#424270',
       }),
     },
   },
