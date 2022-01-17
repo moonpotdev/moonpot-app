@@ -159,6 +159,61 @@
     ]
   },
   {
+    "id": "4belt",
+    "name": "4Belt USD",
+    "token": "4Belt USD LP",
+    "provider": "Belt",
+    "tokenAddress": "0x9cb73F20164e399958261c289Eb5F9846f4D1404",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBelt4LP",
+    "rewardAddress": "0x49d46111DDD93C526486b88E17C4f8b1Ea0F682e",
+    "contractAddress": "0xAc02606cAD10FB8FaC90C201Ee9072f4912Aa5c1",
+    "prizePoolAddress": "0x8243B29f44c895f5141FA5DB43Cf15D8f1A9eB21",
+    "prizeStrategyAddress": "0x063221c7743eF6AA49b32Ca249F1AFF2266f0e2A",
+    "oracleId": "belt-4belt",
+    "apyId": "beltv2-4belt",
+    "vaultType": "main",
+    "featured": true,
+    "type": "belt",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 5
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": true,
+    "isZap": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x1bBBf8910E5A074c7B62D891Dbab9f4af82C14D4",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "POTS",
+        "sponsorOracleId": "POTS",
+        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "Belt LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "beltbnb",
     "name": "BNB",
     "token": "beltBNB",
@@ -201,61 +256,6 @@
       {
         "id": 0,
         "symbol": "beltBNB",
-        "display": "bonus"
-      },
-      {
-        "id": 1,
-        "symbol": "POTS",
-        "display": "bonus"
-      }
-    ]
-  },
-  {
-    "id": "4belt",
-    "name": "4Belt USD",
-    "token": "4Belt USD LP",
-    "provider": "Belt",
-    "tokenAddress": "0x9cb73F20164e399958261c289Eb5F9846f4D1404",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketBelt4LP",
-    "rewardAddress": "0x49d46111DDD93C526486b88E17C4f8b1Ea0F682e",
-    "contractAddress": "0xAc02606cAD10FB8FaC90C201Ee9072f4912Aa5c1",
-    "prizePoolAddress": "0x8243B29f44c895f5141FA5DB43Cf15D8f1A9eB21",
-    "prizeStrategyAddress": "0x063221c7743eF6AA49b32Ca249F1AFF2266f0e2A",
-    "oracleId": "belt-4belt",
-    "apyId": "beltv2-4belt",
-    "vaultType": "stable",
-    "featured": true,
-    "type": "belt",
-    "duration": 14,
-    "fairplayDuration": 10,
-    "fairplayTicketFee": 0.05,
-    "interestBreakdown": {
-      "interest": 50,
-      "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 5
-    },
-    "status": "active",
-    "supportsClaimAllBonuses": true,
-    "isZap": true,
-    "withdrawFee": 0,
-    "infoCardStrategy": "beefy",
-    "infoCardBeefyVaultAddress": "0x1bBBf8910E5A074c7B62D891Dbab9f4af82C14D4",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
-    "bonuses": [
-      {
-        "id": 0,
-        "symbol": "Belt LP",
         "display": "bonus"
       },
       {
