@@ -4,18 +4,24 @@
     "name": "test",
     "desc": "Test Claim",
     "message": "Get my Hoodie",
-    "disabled": true
+    "disabled": true,
+    "link": "https://moonpot.com/",
+    "linkTextKey": "promo.beefyGear"
   },
   {
     "id": 1,
     "name": "hoodie",
     "desc": "Hoodie NFT",
-    "message": "Get my Hoodie"
+    "message": "Get my Hoodie",
+    "link": "https://gear.beefy.finance/collections/beefyxmoonpot-hoodie?ls=VMScU0b_QjejcC-dZ7suHQ",
+    "linkTextKey": "promo.beefyGear"
   },
   {
     "id": 2,
     "name": "tshirt",
     "desc": "T-shirt NFT",
-    "message": "Get my T-shirt"
+    "message": "Get my T-shirt",
+    "link": "https://gear.beefy.finance/collections/beefyxmoonpot-tee?ls=O1rIGGo1Qw6WiX5gMboG6A",
+    "linkTextKey": "promo.beefyGear"
   }
 ]

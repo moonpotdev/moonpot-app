@@ -13,6 +13,7 @@ import { promosAll } from '../../config/promo';
 import { WalletConnectButton } from '../../components/Buttons/WalletConnectButton';
 import { isEmpty } from '../../helpers/utils';
 import { Translate } from '../../components/Translate';
+import { OpenInNew } from '@material-ui/icons';
 
 const useStyles = makeStyles(styles);
 
@@ -80,6 +81,13 @@ const Promo = () => {
                     <Typography className={classes.title}>{code}</Typography>
                   </Card>
                 ))}
+
+                <p style={{ textAlign: 'center' }}>
+                  <a href={promo.link} rel="noreferrer" target="_blank" className={classes.link}>
+                    <Translate i18nKey={promo.linkTextKey} />
+                    <OpenInNew fontSize="inherit" />
+                  </a>
+                </p>
               </>
             ) : (
               ''

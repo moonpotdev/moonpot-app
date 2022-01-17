@@ -407,7 +407,8 @@
     "myPromocodes": "My promocodes",
     "claimed": "{{count}} promocodes claimed",
     "reveal": "Reveal",
-    "noNfts": "No NFTs to claim"
+    "noNfts": "No NFTs to claim",
+    "beefyGear": "Place the order on the Beefy Gear Store. Promo code will cover both merchandise and shipping costs."
   },
   "migration": {
     "viewRetiredPot": "View Retired Pot",
