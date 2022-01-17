@@ -2,16 +2,20 @@
   {
     "id": 0,
     "name": "test",
-    "message": "Get my Hoodie"
+    "desc": "Test Claim",
+    "message": "Get my Hoodie",
+    "disabled": true
   },
   {
     "id": 1,
     "name": "hoodie",
+    "desc": "Hoodie NFT",
     "message": "Get my Hoodie"
   },
   {
     "id": 2,
     "name": "tshirt",
+    "desc": "T-shirt NFT",
     "message": "Get my T-shirt"
   }
 ]
