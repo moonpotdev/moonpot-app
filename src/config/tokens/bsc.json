@@ -592,5 +592,12 @@
     "type": "nft",
     "subtype": "erc721",
     "decimals": 0
+  },
+  {
+    "symbol": "Liquid Monsters NFT",
+    "address": "0x0D464bDde2301C30871bB4C29bB7DD935f5a985C",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
   }
 ]
