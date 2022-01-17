@@ -13,15 +13,15 @@ const Footer = ({ variant }) => {
   const classes = useStyles();
 
   //Holders Data
-  const cadets = useSelector(state => state.holdersReducer.totalHolders || 0);
+  const cadets = useSelector(state => state.holders.cadets || 0);
   const cadetsFormatted = cadets.toLocaleString(undefined, {
     maximumFractionDigits: 0,
   });
 
   //Buybacks Data
-  const lastWeekBuybacks = useSelector(state => state.buybacksReducer.lastWeekBuyback || 0);
+  const buybacksInPots = useSelector(state => state.buybacksReducer.allTimeBuyback || 0);
   const potsPrice = useSelector(state => state.pricesReducer.prices['POTS'] || 0);
-  const lastWeekBuybackUSD = (lastWeekBuybacks * potsPrice).toLocaleString(undefined, {
+  const buybacksInUsd = (buybacksInPots * potsPrice).toLocaleString(undefined, {
     maximumFractionDigits: 0,
   });
 
@@ -58,7 +58,7 @@ const Footer = ({ variant }) => {
             <StatButton label={t('footer.cadets')} value={cadetsFormatted} />
             <StatButton label={t('footer.prizes')} value={'$' + totalFormatted} />
             <StatButton label={t('footer.tvl')} value={'$' + tvl} />
-            <StatButton label={t('footer.buybacks')} value={'$' + lastWeekBuybackUSD} />
+            <StatButton label={t('footer.buybacks')} value={'$' + buybacksInUsd} />
           </Grid>
           <Grid className={classes.footerIcons} item xs={12}>
             <Link href={'https://github.com/moonpotdev'} target="_blank" rel="noopener">

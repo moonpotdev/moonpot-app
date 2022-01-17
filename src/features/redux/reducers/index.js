@@ -20,7 +20,7 @@ const reducers = {
   modalReducer,
   zapReducer,
   buybacksReducer,
-  holdersReducer,
+  holders: holdersReducer,
   winners: winnersReducer,
   filterReducer,
   promo: promoCodesReducer,
