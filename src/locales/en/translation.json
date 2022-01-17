@@ -400,6 +400,16 @@
     ],
     "claimAll": "Claim all earned & bonus POTS"
   },
+  "promo": {
+    "canClaim": "You can claim {{count}} promocode",
+    "canClaim_plural": "You can claim {{count}} promocodes",
+    "claim": "Claim my promocode",
+    "myPromocodes": "My promocodes",
+    "claimed": "{{count}} promocodes claimed",
+    "reveal": "Reveal",
+    "noNfts": "No NFTs to claim",
+    "beefyGear": "Place the order on the Beefy Gear Store. Promo code will cover both merchandise and shipping costs."
+  },
   "migration": {
     "viewRetiredPot": "View Retired Pot",
     "learnMore": "Learn more.",
