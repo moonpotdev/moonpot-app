@@ -47,6 +47,7 @@ const Promo = () => {
   return (
     <React.Fragment>
       <Container maxWidth="xs">
+        <Typography className={classes.mainTitle}>{promo.desc}</Typography>
         {!address ? (
           <WalletConnectButton variant="purple" fullWidth={true} />
         ) : data.pending ? (
