@@ -227,23 +227,23 @@
             "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
             "Each draw will pick one winner to receive a single NFT from the current collection.",
             "A new collection will be added to the pot once all NFTs from the current collection have been distributed. You do not have to restake to enter the new collection's draw.",
-            "The current collection is Born Bad Boys"
+            "The current collection is Liquid Monsters"
           ],
           "nfts": {
-            "born-bad-boys/7114": {
-              "name": "BBB 7114"
+            "liquid-monsters/1320": {
+              "name": "#1320"
             },
-            "born-bad-boys/7115": {
-              "name": "BBB 7115"
+            "liquid-monsters/3058": {
+              "name": "#3058"
             },
-            "born-bad-boys/7116": {
-              "name": "BBB 7116"
+            "liquid-monsters/3279": {
+              "name": "#3279"
             },
-            "born-bad-boys/7117": {
-              "name": "BBB 7117"
+            "liquid-monsters/3515": {
+              "name": "#3515"
             },
-            "born-bad-boys/7118": {
-              "name": "BBB 7118"
+            "liquid-monsters/3750": {
+              "name": "#3750"
             }
           }
         }
