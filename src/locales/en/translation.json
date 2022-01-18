@@ -43,6 +43,8 @@
     "audit": "Audit",
     "articles": "Articles",
     "winPrizeInToken": "Win <span>{{prize}}</span> in {{token}}",
+    "winNFT": "Win <span>{{nft}}</span>",
+    "winNFTandPrizeInToken": "Win <span>{{nft}}</span> and <span>{{prize}}</span> in {{token}}",
     "hours": "HOURS",
     "mins": "MINS",
     "secs": "SECS",
