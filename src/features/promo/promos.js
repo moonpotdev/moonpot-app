@@ -15,6 +15,7 @@ const Promos = () => {
               variant="purple"
               fullWidth={true}
               style={{ marginTop: '16px' }}
+              key={promo.name}
             >
               {promo.desc}
             </SecondaryButton>
