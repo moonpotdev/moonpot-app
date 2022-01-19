@@ -1,10 +1,7 @@
 import React, { memo, Suspense, useEffect } from 'react';
-import { load } from 'fathom-client';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import appTheme from './appTheme.js';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
-import reduxActions from './features/redux/actions';
 import { RouteLoading } from './components/RouteLoading';
 import { PageNotFound } from './PageNotFound';
 import { Header } from './components/Header';
@@ -13,6 +10,7 @@ import ModalPopup from './components/Modal/modal.js';
 import { useLocation } from 'react-router';
 import { useImpersonate } from './helpers/hooks';
 import { GoogleAnalytics } from './googleAnalytics';
+import { GlobalDataLoader } from './components/GlobalDataLoader/GlobalDataLoader';
 
 require('dotenv').config();
 
@@ -79,36 +77,13 @@ const ScrollToTop = memo(function () {
 });
 
 export default function App() {
-  const dispatch = useDispatch();
   const theme = appTheme();
   useImpersonate();
-
-  React.useEffect(() => {
-    load(process.env.REACT_APP_FATHOM_SITE_ID, {
-      url: process.env.REACT_APP_FATHOM_SITE_URL,
-      spa: 'hash',
-    });
-  });
-
-  React.useEffect(() => {
-    dispatch(reduxActions.prices.fetchPrices());
-  }, [dispatch]);
-
-  React.useEffect(() => {
-    dispatch(reduxActions.buybacks.fetchBuybacks());
-  }, [dispatch]);
-
-  React.useEffect(() => {
-    dispatch(reduxActions.wallet.createWeb3Modal());
-  }, [dispatch]);
-
-  React.useEffect(() => {
-    dispatch(reduxActions.holders.fetchHolders());
-  }, [dispatch]);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <GlobalDataLoader />
       <ModalPopup />
       <HashRouter>
         <ScrollToTop />
