@@ -29,17 +29,17 @@ const Promo = () => {
   useEffect(() => {
     if (!promo || !address) return;
     dispatch(fetchEligibleInfo(promo.id));
-  }, [promo, address]);
+  }, [dispatch, promo, address]);
 
   const handleClaim = useCallback(async () => {
     if (!promo || !address) return;
     dispatch(claimTokenId(promo.id, data.tokenIds[0]));
-  }, [promo, data, address]);
+  }, [dispatch, promo, data, address]);
 
   const handleReveal = useCallback(async () => {
     if (!promo || !address) return;
     dispatch(fetchPromoCodes(promo));
-  }, [promo, address]);
+  }, [dispatch, promo, address]);
 
   if (!promo) {
     return <Redirect to="/" />;
