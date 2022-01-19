@@ -35,8 +35,6 @@ const initialPools = () => {
       pool['totalPrizeUsd'] = ZERO;
       pool['projectedTotalPrizeUsd'] = ZERO;
       pool['totalStakedUsd'] = ZERO;
-      pool['rewardPoolRate'] = ZERO;
-      pool['rewardPoolTotalSupply'] = ZERO;
       pool['numberOfWinners'] = new BigNumber(5);
       pool['totalTickets'] = '0';
       pool['stakeMax'] = '0';
