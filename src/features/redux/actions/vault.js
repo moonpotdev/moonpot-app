@@ -10,7 +10,6 @@ const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 const ecr20Abi = require('../../../config/abi/erc20.json');
 const prizeStrategyAbi = require('../../../config/abi/prizestrategy.json');
 const prizePoolAbi = require('../../../config/abi/prizepool.json');
-const rewardPoolAbi = require('../../../config/abi/rewardPool.json');
 
 function timeLastDrawBefore(nextDraw, durationDays, beforeWhen) {
   const duration = durationDays * 24 * 60 * 60;
@@ -163,28 +162,8 @@ function getTokenInterestUntil(pot, untilWhen, prizePoolInterestMultiplier) {
   const amountEarning = byDecimals(pot.prizePoolBalance, pot.tokenDecimals);
   // Days until draw (floating point)
   const secondsUntilDraw = untilWhen - nowSeconds;
-
-  // Special reward pool handling
-  if (pot.rewardPool) {
-    // Avoid divided by zero
-    if (pot.rewardPoolRate.isZero() || pot.rewardPoolTotalSupply.isZero()) {
-      return ZERO;
-    }
-
-    // How much will be rewarded between now and draw
-    // Note: assumes reward pool won't finish before draw date
-    const rewardsLeft = pot.rewardPoolRate.multipliedBy(secondsUntilDraw);
-    // How much of that prize pool will get
-    const earnedUntilDraw = rewardsLeft
-      .multipliedBy(amountEarning)
-      .dividedBy(pot.rewardPoolTotalSupply);
-
-    // After fees
-    return earnedUntilDraw.multipliedBy(prizePoolInterestMultiplier);
-  }
-
   // Days until draw (floating point)
-  const daysUntilDraw = (untilWhen - nowSeconds) / 86400;
+  const daysUntilDraw = secondsUntilDraw / 86400;
   // Daily interest from vault (not trading)
   const dpy = pot.apyBreakdown.vaultApr / 365;
   // Recompound to get interest until draw
@@ -285,7 +264,6 @@ const getPools = async (items, state, dispatch) => {
   const strategy = [];
   const ticket = [];
   const mooToken = [];
-  const rewardPool = [];
 
   for (let key in web3) {
     multicall[key] = new MultiCall(web3[key], config[key].multicallAddress);
@@ -295,7 +273,6 @@ const getPools = async (items, state, dispatch) => {
     prizePool[key] = [];
     ticket[key] = [];
     mooToken[key] = [];
-    rewardPool[key] = [];
   }
 
   for (let key in items) {
@@ -357,24 +334,10 @@ const getPools = async (items, state, dispatch) => {
       id: pool.id,
       prizePoolBalance: prizePoolContract.methods.balance(),
     });
-
-    // Rewardpool
-    if ('rewardPool' in pool && pool.rewardPool) {
-      const rewardPoolContract = new web3[pool.network].eth.Contract(
-        rewardPoolAbi,
-        pool.rewardPool
-      );
-      rewardPool[pool.network].push({
-        id: pool.id,
-        rewardPoolRate: rewardPoolContract.methods.rewardRate(),
-        rewardPoolPeriodFinish: rewardPoolContract.methods.periodFinish(),
-        rewardPoolTotalSupply: rewardPoolContract.methods.totalSupply(),
-      });
-    }
   }
 
   const promises = [];
-  const groups = [calls, strategy, sponsors, ticket, prizePool, mooToken, rewardPool];
+  const groups = [calls, strategy, sponsors, ticket, prizePool, mooToken];
   for (const network in multicall) {
     for (const group of groups) {
       if (group[network] && group[network].length) {
@@ -496,22 +459,6 @@ const getPools = async (items, state, dispatch) => {
     // === PrizePool
     if (!isEmpty(item.prizePoolBalance)) {
       pool.prizePoolBalance = item.prizePoolBalance;
-    }
-
-    // == rewardPool
-    if (!isEmpty(item.rewardPoolRate)) {
-      const nowSeconds = Date.now() / 1000;
-      if (
-        isEmpty(item.rewardPoolPeriodFinish) ||
-        item.rewardPoolPeriodFinish === '0' ||
-        item.rewardPoolPeriodFinish < nowSeconds
-      ) {
-        pool.rewardPoolRate = ZERO;
-        pool.rewardPoolTotalSupply = ZERO;
-      } else {
-        pool.rewardPoolRate = byDecimals(item.rewardPoolRate, pool.tokenDecimals);
-        pool.rewardPoolTotalSupply = byDecimals(item.rewardPoolTotalSupply, pool.tokenDecimals);
-      }
     }
 
     // Update

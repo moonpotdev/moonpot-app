@@ -401,6 +401,46 @@
     "bonuses": []
   },
   {
+    "id": "binopoly",
+    "name": "BINOPOLY",
+    "token": "BINO",
+    "tokenAddress": "0xA2dF7a11baF8bB555E93b99684A2DE0f105eB592",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBINO",
+    "rewardAddress": "0xcEEC332c0261715CF374DB4221d9F7aaC3e730A4",
+    "contractAddress": "0x7E10a966b1Fe98C0A2E109B33Ea92110Ef3BD34B",
+    "prizePoolAddress": "0xdf123e496f9C5A385Ee4BA7e1e4aD3b40Dce4C35",
+    "prizeStrategyAddress": "0x5c529eBb75c2cFB63b509D3EA1388a05Ac4787aB",
+    "mooTokenAddress": "0xD0B0771C4240BcCf4Bd5ABeaC8204Ba8CACa45F7",
+    "oracleId": "BINO",
+    "apyId": "pots-bino",
+    "vaultType": "nft",
+    "type": "single",
+    "duration": 7,
+    "fairplayDuration": 28,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 100
+    },
+    "displayInterestBreakdown": {
+      "interest": 90,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "infoCardStrategy": "binopoly",
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "Building Permit NFT",
+        "address": "0xeDEe132Fcf90FE3157C389706b30c6A1c7A6C88D",
+        "type": "erc1155"
+      }
+    ]
+  },
+  {
     "id": "pacoca",
     "name": "PACOCA",
     "token": "PACOCA",
@@ -510,7 +550,6 @@
     "contractAddress": "0x33F83bD5C8180Ae1a9A01983b327bD7d95B39560",
     "prizePoolAddress": "0x429E0A5713Ba489849efb94505cc351B5b905416",
     "prizeStrategyAddress": "0x69C7c5beCb6e47f1bE6a21e5040cE402D35962cb",
-    "rewardPool": "0xE3C50fe260B7a258C8B16C36a98FB6D2DEeDD90E",
     "oracleId": "WATCH",
     "apyId": "pots-watch",
     "vaultType": "community",

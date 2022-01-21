@@ -156,6 +156,10 @@
           "watch": [
             "This strategy deposits your {{token}} tokens in a Moonpot {{token}} vault, which autocompounds your {{token}} tokens from a fixed supply of {{token}} provided by the Yieldwatch team.",
             "All of the {{token}} provided by Yieldwatch goes to Moonpot players. Half is used to give you interest. The other half is used for Prize Draws and Ziggy's Pot rewards."
+          ],
+          "binopoly": [
+            "The very first Play-to-Earn capital operation game built on BSC. Anyone can purchase and hold virtual land and cities to build a world of their own. Players may earn BINO tokens from purchasing or renting land plots and properties within various in-game scenarios.",
+            "This strategy deposits your {{token}} tokens in a Moonpot {{token}} vault, which autocompounds your {{token}} tokens from a fixed supply of {{token}} provided by the Binopoly team."
           ]
         },
         "beefyVaultAddress": "Beefy.Finance Vault Address",

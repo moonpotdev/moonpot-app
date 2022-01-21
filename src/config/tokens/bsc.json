@@ -599,5 +599,34 @@
     "type": "nft",
     "subtype": "erc721",
     "decimals": 0
+  },
+  {
+    "symbol": "BINO",
+    "address": "0xA2dF7a11baF8bB555E93b99684A2DE0f105eB592",
+    "type": "single",
+    "oracleId": "BINO",
+    "decimals": 18
+  },
+  {
+    "symbol": "mooPotsBINO",
+    "address": "0xD0B0771C4240BcCf4Bd5ABeaC8204Ba8CACa45F7",
+    "type": "moo",
+    "decimals": 18,
+    "underlyingToken": "BINO"
+  },
+  {
+    "symbol": "moonTicketBINO",
+    "address": "0xcEEC332c0261715CF374DB4221d9F7aaC3e730A4",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "mooPotsBINO",
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "Building Permit NFT",
+    "address": "0xeDEe132Fcf90FE3157C389706b30c6A1c7A6C88D",
+    "type": "nft",
+    "subtype": "erc1155",
+    "decimals": 0
   }
 ]
