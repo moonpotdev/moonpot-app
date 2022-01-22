@@ -231,23 +231,23 @@
             "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
             "Each draw will pick one winner to receive a single NFT from the current collection.",
             "A new collection will be added to the pot once all NFTs from the current collection have been distributed. You do not have to restake to enter the new collection's draw.",
-            "The current collection is Liquid Monsters"
+            "The current collection is Crazy Chipmunks"
           ],
           "nfts": {
-            "liquid-monsters/1320": {
-              "name": "#1320"
+            "crazy-chipmonks/517": {
+              "name": "#517"
             },
-            "liquid-monsters/3058": {
-              "name": "#3058"
+            "crazy-chipmonks/520": {
+              "name": "#520"
             },
-            "liquid-monsters/3279": {
-              "name": "#3279"
+            "crazy-chipmonks/579": {
+              "name": "#579"
             },
-            "liquid-monsters/3515": {
-              "name": "#3515"
+            "crazy-chipmonks/583": {
+              "name": "#583"
             },
-            "liquid-monsters/3750": {
-              "name": "#3750"
+            "crazy-chipmonks/656": {
+              "name": "#656"
             }
           }
         }
