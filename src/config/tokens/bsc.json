@@ -628,5 +628,12 @@
     "type": "nft",
     "subtype": "erc1155",
     "decimals": 0
+  },
+  {
+    "symbol": "Crazy Chipmunk NFT",
+    "address": "0x9C1E0223159516b431e487DB5BDba0858940398E",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
   }
 ]
