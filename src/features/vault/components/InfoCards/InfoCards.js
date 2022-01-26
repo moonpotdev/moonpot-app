@@ -3,9 +3,8 @@ import { usePot } from '../../../../helpers/hooks';
 import { Box, Grid, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { OpenInNew } from '@material-ui/icons';
-import { Card, Cards, CardTitle } from '../../../../components/Cards';
+import { Card, CardTitle } from '../../../../components/Cards';
 import styles from './styles';
-import clsx from 'clsx';
 import ziggyPlay1x from '../../../../images/ziggy/play@1x.png';
 import ziggyPlay2x from '../../../../images/ziggy/play@2x.png';
 import ziggyPlay3x from '../../../../images/ziggy/play@3x.png';
@@ -336,7 +335,7 @@ export const InfoCards = memo(function ({ id, className, fairplayRef }) {
 
   if (infoCards.length) {
     return (
-      <Cards className={clsx(className)} oneUp={true}>
+      <>
         {infoCards.map(key => {
           const InfoCard = cardComponentMap[key];
           return InfoCard ? (
@@ -360,7 +359,7 @@ export const InfoCards = memo(function ({ id, className, fairplayRef }) {
             srcSet={`${ziggyPlay1x} 240w, ${ziggyPlay2x} 480w, ${ziggyPlay3x} 720w, ${ziggyPlay4x} 960w`}
           />
         </Box>
-      </Cards>
+      </>
     );
   }
 

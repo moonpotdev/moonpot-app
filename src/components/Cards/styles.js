@@ -1,45 +1,22 @@
 import backgroundSnow from '../../images/backgrounds/snow.svg';
 
 const styles = () => ({
-  cards: {
-    width: `${500 * 3 + 24 * 3}px`,
-    maxWidth: '100%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+  cardGrid: {
+    maxWidth: '1240px',
+    margin: '0 auto',
   },
-  cardsInner: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginLeft: '-12px',
-    marginRight: '-12px',
-    marginBottom: '-24px',
-    '& > *, & > $card': {
-      marginBottom: '24px',
-      marginLeft: '12px',
-      marginRight: '12px',
-    },
+  cardGridInner: {
+    padding: '10px',
+    margin: '0 auto',
   },
   card: {
-    width: '500px',
-    maxWidth: '100%',
     borderRadius: '16px',
     boxSizing: 'border-box',
-    marginLeft: 'auto',
-    marginRight: 'auto',
     padding: '24px',
     borderWidth: '2px',
     borderStyle: 'solid',
     display: 'flex',
     flexDirection: 'column',
-  },
-  cardsOne: {
-    width: `${500 + 24}px`,
-  },
-  cardsNormalHeight: {
-    '& $cardsInner': {
-      alignItems: 'flex-start',
-    },
   },
   title: {
     fontWeight: 500,

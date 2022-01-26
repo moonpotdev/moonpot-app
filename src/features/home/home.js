@@ -50,7 +50,6 @@ const Home = () => {
           <Grid item className={classes.filterContainerLeft}>
             <SectionSelect selected={top} />
           </Grid>
-          <div className={classes.placeholder} />
           <Grid item className={classes.filterContainerRight}>
             <Filter selected={top} potType={bottom} sort={filter} />
           </Grid>

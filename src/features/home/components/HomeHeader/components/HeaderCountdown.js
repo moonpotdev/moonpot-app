@@ -39,7 +39,7 @@ const HeaderCountdown = ({ pot }) => {
         <div>
           <div className={classes.nextDrawPrizeText}>
             {/* TODO: Add multiple token support and support for pots with both token and NFT prizes */}
-            {potData.nftPrizeOnly && !potData.nfts ? (
+            {!potData.nftPrizeOnly && !potData.nfts ? (
               //Token Only Prize
               <Translate
                 i18nKey="header.winPrizeInToken"

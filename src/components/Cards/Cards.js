@@ -1,6 +1,6 @@
 import React, { forwardRef, useCallback, useState } from 'react';
 import clsx from 'clsx';
-import { Collapse, makeStyles, Typography } from '@material-ui/core';
+import { Collapse, makeStyles, Typography, Grid } from '@material-ui/core';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import styles from './styles';
 import { Translate } from '../Translate';
@@ -12,15 +12,9 @@ export function Cards({ className, children, sameHeight = true, oneUp = false, .
   const classes = useStyles();
 
   return (
-    <div
-      className={clsx(classes.cards, className, {
-        [classes.cardsOne]: oneUp,
-        [classes.cardsNormalHeight]: sameHeight !== true,
-      })}
-      {...rest}
-    >
-      <div className={classes.cardsInner}>{children}</div>
-    </div>
+    <Grid container className={classes.cardGrid}>
+      {children}
+    </Grid>
   );
 }
 
@@ -31,13 +25,15 @@ export const Card = forwardRef(function (
   const classes = useStyles();
 
   return (
-    <div
-      className={clsx(classes.card, variantClass(classes, 'variant', variant), className)}
-      ref={ref}
-      {...rest}
-    >
-      {children}
-    </div>
+    <Grid item lg={4} md={6} sm={6} xs={12} className={classes.cardGridInner}>
+      <div
+        className={clsx(classes.card, variantClass(classes, 'variant', variant), className)}
+        ref={ref}
+        {...rest}
+      >
+        {children}
+      </div>
+    </Grid>
   );
 });
 
