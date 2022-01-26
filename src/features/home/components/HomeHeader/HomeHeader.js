@@ -18,7 +18,7 @@ const HomeHeader = () => {
   const pots = usePots();
   //convert to array and sort out filtered pots
   const featuredPots = Object.entries(pots).filter(pot => {
-    return pot[1].featured === true;
+    return pot[1].featured === true && pot[1].vaultType !== 'nft';
   });
   //get the pot with the soonest draw
   const nextFeaturedPot = featuredPots.reduce(function (prev, current) {
@@ -49,46 +49,55 @@ const HomeHeader = () => {
   });
 
   return (
-    <div className={classes.container}>
+    <Grid container className={classes.container}>
       <HeaderCountdown pot={nextFeaturedPot} />
-      <div className={classes.statsCard}>
-        <Grid container style={{ height: '100%' }}>
-          <Grid item xs={6} className={classes.statsVertCenterOuter}>
-            <div className={classes.statsVertCenterInner}>
-              <div className={classes.statsCardLabel}>
-                <Translate i18nKey="header.totalWon" />
+      <Grid item lg={7} md={5} sm={6} xs={12} className={classes.statsCardBuffer}>
+        <div className={classes.statsCard}>
+          <Grid container style={{ height: '100%' }}>
+            <Grid item xs={6} className={classes.statsVertCenterOuter}>
+              <div className={classes.statsVertCenterInner}>
+                <div className={classes.statsCardLabel}>
+                  <Translate i18nKey="header.totalWon" />
+                </div>
+                <div className={classes.statsCardValue}>${totalFormatted}</div>
               </div>
-              <div className={classes.statsCardValue}>${totalFormatted}</div>
-            </div>
-          </Grid>
-          <Grid item xs={6} className={classes.statsVertCenterOuter}>
-            <div className={classes.statsVertCenterInner}>
-              <div className={classes.statsCardLabel}>
-                <Translate i18nKey="header.uniqueWinners" />
+            </Grid>
+            <Grid item xs={6} className={classes.statsVertCenterOuter}>
+              <div className={classes.statsVertCenterInner}>
+                <div className={classes.statsCardLabel}>
+                  <Translate i18nKey="header.uniqueWinners" />
+                </div>
+                <div className={classes.statsCardValue}>23</div>
               </div>
-              <div className={classes.statsCardValue}>23</div>
-            </div>
-          </Grid>
-          <Grid item xs={6} className={classes.statsVertCenterOuter}>
-            <div className={classes.statsVertCenterInner}>
-              <div className={classes.statsCardLabel}>
-                <Translate i18nKey="header.currentPrizes" />
+            </Grid>
+            <Grid item xs={6} className={classes.statsVertCenterOuter}>
+              <div className={classes.statsVertCenterInner}>
+                <div className={classes.statsCardLabel}>
+                  <Translate i18nKey="header.currentPrizes" />
+                </div>
+                <div className={classes.statsCardValue}>${totalPrizesAvailableFormatted}</div>
               </div>
-              <div className={classes.statsCardValue}>${totalPrizesAvailableFormatted}</div>
-            </div>
-          </Grid>
-          <Grid item xs={6} className={classes.statsVertCenterOuter}>
-            <div className={classes.statsVertCenterInner}>
-              <div className={classes.statsCardLabel}>
-                <Translate i18nKey="header.cadets" />
+            </Grid>
+            <Grid item xs={6} className={classes.statsVertCenterOuter}>
+              <div className={classes.statsVertCenterInner}>
+                <div className={classes.statsCardLabel}>
+                  <Translate i18nKey="header.cadets" />
+                </div>
+                <div className={classes.statsCardValue}>{cadetsFormatted}</div>
               </div>
-              <div className={classes.statsCardValue}>{cadetsFormatted}</div>
-            </div>
+            </Grid>
           </Grid>
-        </Grid>
-        <img alt="" width="170" height="170" sizes="170px" src={coins} />
-      </div>
-    </div>
+          <img
+            alt=""
+            width="170"
+            height="170"
+            sizes="170px"
+            src={coins}
+            className={classes.ziggyImage}
+          />
+        </div>
+      </Grid>
+    </Grid>
   );
 };
 

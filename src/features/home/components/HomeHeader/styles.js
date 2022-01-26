@@ -1,10 +1,9 @@
 const styles = theme => ({
   container: {
-    width: `${500 * 3 + 24 * 3}px`,
+    width: `1276px`,
     maxWidth: '100%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    padding: '8px 12px 40px',
+    margin: '0 auto',
+    padding: '0 26px 40px',
     display: 'flex',
   },
   nextDrawCard: {
@@ -14,6 +13,11 @@ const styles = theme => ({
     width: '500px',
     padding: '24px',
     maxWidth: '100%',
+    [theme.breakpoints.down('725')]: {
+      marginTop: '24px',
+      flex: '100%',
+      width: '100%',
+    },
   },
   nextDrawInner: {
     display: 'flex',
@@ -66,17 +70,28 @@ const styles = theme => ({
     marginRight: '0',
     marginLeft: 'auto',
   },
+  statsCardBuffer: {
+    paddingLeft: '20px',
+    marginRight: '0px',
+    marginLeft: 'auto',
+    [theme.breakpoints.down('725')]: {
+      paddingLeft: '0px',
+      marginTop: '24px',
+      flex: '100%',
+      width: '100%',
+      maxWidth: '100%',
+    },
+  },
   statsCard: {
     background: '#303050',
     border: '1px solid #4C4C80',
     borderRadius: '10px',
     width: '800px',
+    minHeight: '180px',
     padding: '24px',
     maxWidth: '100%',
-    height: 'inherit',
-    marginRight: '0px',
-    marginLeft: 'auto',
     display: 'flex',
+    height: '100%',
   },
   statsCardLabel: {
     fontWeight: 700,
@@ -84,12 +99,14 @@ const styles = theme => ({
     lineHeight: '14px',
     color: '#8585A6',
     marginBottom: '8px',
+    height: '14px',
   },
   statsCardValue: {
     fontWeight: 700,
     fontSize: '24px',
     lineHeight: '28px',
     color: '#FFFFFF',
+    height: '28px',
   },
   statsVertCenterOuter: {
     position: 'relative',
@@ -98,6 +115,11 @@ const styles = theme => ({
     position: 'absolute',
     top: '50%',
     transform: 'translate(0,-50%)',
+  },
+  ziggyImage: {
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
   },
 });
 

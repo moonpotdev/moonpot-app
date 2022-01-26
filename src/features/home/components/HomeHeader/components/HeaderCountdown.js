@@ -4,6 +4,7 @@ import { Logo } from '../../../../../components/Pot/Pot';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 import { makeStyles } from '@material-ui/core';
 import { formatTimeLeft } from '../../../../../helpers/format';
+import { Grid } from '@material-ui/core';
 import styles from '../styles';
 
 const useStyles = makeStyles(styles);
@@ -31,24 +32,26 @@ const HeaderCountdown = ({ pot }) => {
     true
   );
 
+  //Format prize
+  const prize = potData.totalPrizeUsd.toFixed(0);
+  const prizeFormatted = prize.toLocaleString(undefined, {
+    maximumFractionDigits: 0,
+  });
+
+  console.log(prizeFormatted);
+
   return (
-    <div className={classes.nextDrawCard}>
+    <Grid item lg={4} md={6} sm={6} xs={12} className={classes.nextDrawCard}>
       {/* Top of card */}
       <div className={classes.nextDrawInner}>
         {/* Prize + Countdown */}
         <div>
           <div className={classes.nextDrawPrizeText}>
-            {/* TODO: Add multiple token support and support for pots with both token and NFT prizes */}
-            {!potData.nftPrizeOnly && !potData.nfts ? (
-              //Token Only Prize
-              <Translate
-                i18nKey="header.winPrizeInToken"
-                values={{ prize: potData.totalPrizeUSD, token: potData.token }}
-              />
-            ) : potData.nftPrizeOnly ? (
-              //NFT Only Prize
-              <Translate i18nKey="header.winNFT" values={{ nft: potData.nfts[0].name }} />
-            ) : null}
+            {/* All featured non daily pots are token only prize (for now)*/}
+            <Translate
+              i18nKey="header.winPrizeInToken"
+              values={{ prize: '$' + prizeFormatted, token: potData.token }}
+            />
           </div>
           <div className={classes.nextDrawTimeContainer}>
             <div>
@@ -87,7 +90,7 @@ const HeaderCountdown = ({ pot }) => {
       <PrimaryButton to={`/pot/` + potData.id} variant={'purpleHeader'} fullWidth={true}>
         <Translate i18nKey={'pot.playWith'} values={{ token: potData.token }} />
       </PrimaryButton>
-    </div>
+    </Grid>
   );
 };
 
