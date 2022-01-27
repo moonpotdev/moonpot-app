@@ -22,7 +22,7 @@ const StrategyInfoCard = memo(function ({ pot, classes, t }) {
   }
 
   return (
-    <Card variant="purpleInfo" className={classes.strategy}>
+    <Card variant="purpleInfo" className={classes.strategy} oneColumn={true}>
       <CardTitle>{t('pot.infocards.strategy.title', { name: pot.name })}</CardTitle>
       {t('pot.infocards.strategy.body.' + pot.infoCardStrategy, {
         returnObjects: true,
@@ -91,7 +91,7 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
 
   return (
     <>
-      <Card variant="purpleInfo" className={classes.strategy}>
+      <Card variant="purpleInfo" className={classes.strategy} oneColumn={true}>
         <CardTitle>{t('pot.infocards.nft-strategy.title', { name: pot.name })}</CardTitle>
         {body ? body.map((text, i) => <p key={i}>{text}</p>) : null}
         {rarities ? (
@@ -173,7 +173,7 @@ const XmasStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
 
   return (
     <>
-      <Card variant="purpleInfo" className={classes.strategy}>
+      <Card variant="purpleInfo" className={classes.strategy} oneColumn={true}>
         <CardTitle>{t('pot.infocards.xmas-strategy.title', { name: pot.name })}</CardTitle>
         {body ? body.map((text, i) => <p key={i}>{text}</p>) : null}
         {merch ? (
@@ -213,7 +213,7 @@ const InterestBreakdownInfoCard = memo(function ({ pot, classes, t }) {
   }
 
   return (
-    <Card variant="purpleInfo">
+    <Card variant="purpleInfo" oneColumn={true}>
       <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
       {pot.interestBreakdown.interest ? (
         <div className={classes.earningItem}>
@@ -265,7 +265,7 @@ const InterestBreakdownInfoCard = memo(function ({ pot, classes, t }) {
 
 const FairplayInfoCard = memo(function ({ pot, classes, t, fairplayRef }) {
   return (
-    <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules}>
+    <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules} oneColumn={true}>
       <div className={classes.ziggyTimelock}>
         <img
           alt=""
@@ -292,7 +292,7 @@ const FairplayInfoCard = memo(function ({ pot, classes, t, fairplayRef }) {
 
 const NFTFairplayInfoCard = memo(function ({ pot, classes, t, fairplayRef }) {
   return (
-    <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules}>
+    <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules} oneColumn={true}>
       <div className={classes.ziggyTimelock}>
         <img
           alt=""

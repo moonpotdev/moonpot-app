@@ -8,7 +8,7 @@ import { variantClass } from '../../helpers/utils';
 
 const useStyles = makeStyles(styles);
 
-export function Cards({ className, children, sameHeight = true, oneUp = false, ...rest }) {
+export function Cards({ className, children, sameHeight = true, ...rest }) {
   const classes = useStyles();
 
   return (
@@ -19,13 +19,20 @@ export function Cards({ className, children, sameHeight = true, oneUp = false, .
 }
 
 export const Card = forwardRef(function (
-  { variant = 'tealLight', className, children, ...rest },
+  { variant = 'tealLight', className, children, oneColumn = false, ...rest },
   ref
 ) {
   const classes = useStyles();
 
   return (
-    <Grid item lg={4} md={6} sm={6} xs={12} className={classes.cardGridInner}>
+    <Grid
+      item
+      lg={4}
+      md={6}
+      sm={6}
+      xs={12}
+      className={oneColumn ? classes.cardGridInnerCentered : classes.cardGridInner}
+    >
       <div
         className={clsx(classes.card, variantClass(classes, 'variant', variant), className)}
         ref={ref}

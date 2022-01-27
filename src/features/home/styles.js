@@ -38,6 +38,9 @@ const styles = theme => ({
     maxWidth: '1264px',
     margin: '0 auto',
     padding: '0 24px',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0 16px',
+    },
   },
   filterContainerLeft: {
     width: 'max-content',

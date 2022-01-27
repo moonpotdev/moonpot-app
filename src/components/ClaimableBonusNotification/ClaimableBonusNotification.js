@@ -108,7 +108,12 @@ export const ClaimableBonusNotification = memo(function ClaimableBonusNotificati
 
   if (pots) {
     return (
-      <Card variant="purpleDark" className={clsx(classes.claimable, className)} {...rest}>
+      <Card
+        variant="purpleDark"
+        className={clsx(classes.claimable, className)}
+        oneColumn={true}
+        {...rest}
+      >
         <div className={classes.total}>
           <img src={Pots} width={24} height={24} aria-hidden={true} alt="" />
           <div className={classes.totalText}>{formatDecimals(pots.earned, 8, 8)} POTS</div>

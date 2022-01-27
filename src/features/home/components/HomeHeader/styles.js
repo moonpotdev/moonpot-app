@@ -1,10 +1,15 @@
+const responsiveBreakpoint = 725;
+
 const styles = theme => ({
   container: {
     width: `1276px`,
     maxWidth: '100%',
     margin: '0 auto',
-    padding: '0 26px 40px',
+    padding: '0 24px 40px',
     display: 'flex',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0 16px 40px',
+    },
   },
   nextDrawCard: {
     background: '#393960',
@@ -13,8 +18,7 @@ const styles = theme => ({
     width: '500px',
     padding: '24px',
     maxWidth: '100%',
-    [theme.breakpoints.down('725')]: {
-      marginTop: '24px',
+    [theme.breakpoints.down(responsiveBreakpoint)]: {
       flex: '100%',
       width: '100%',
     },
@@ -74,7 +78,7 @@ const styles = theme => ({
     paddingLeft: '20px',
     marginRight: '0px',
     marginLeft: 'auto',
-    [theme.breakpoints.down('725')]: {
+    [theme.breakpoints.down(responsiveBreakpoint)]: {
       paddingLeft: '0px',
       marginTop: '24px',
       flex: '100%',
@@ -87,11 +91,14 @@ const styles = theme => ({
     border: '1px solid #4C4C80',
     borderRadius: '10px',
     width: '800px',
-    minHeight: '180px',
+    minHeight: '165px',
     padding: '24px',
     maxWidth: '100%',
     display: 'flex',
     height: '100%',
+    [theme.breakpoints.down(responsiveBreakpoint)]: {
+      padding: '16px 24px',
+    },
   },
   statsCardLabel: {
     fontWeight: 700,
@@ -100,6 +107,7 @@ const styles = theme => ({
     color: '#8585A6',
     marginBottom: '8px',
     height: '14px',
+    textTransform: 'uppercase',
   },
   statsCardValue: {
     fontWeight: 700,
