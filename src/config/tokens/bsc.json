@@ -635,5 +635,12 @@
     "type": "nft",
     "subtype": "erc721",
     "decimals": 0
+  },
+  {
+    "symbol": "Cross Bosses NFT",
+    "address": "0x9ddc83be1e5254669bdb366941C746A86194D61b",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
   }
 ]

@@ -231,23 +231,23 @@
             "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
             "Each draw will pick one winner to receive a single NFT from the current collection.",
             "A new collection will be added to the pot once all NFTs from the current collection have been distributed. You do not have to restake to enter the new collection's draw.",
-            "The current collection is Crazy Chipmunks"
+            "The current collection is Hot Cross Bosses"
           ],
           "nfts": {
-            "crazy-chipmonks/517": {
-              "name": "#517"
+            "cross-bosses/69": {
+              "name": "Gen0 #5762"
             },
-            "crazy-chipmonks/520": {
-              "name": "#520"
+            "cross-bosses/70": {
+              "name": "Gen0 #3954"
             },
-            "crazy-chipmonks/579": {
-              "name": "#579"
+            "cross-bosses/71": {
+              "name": "Gen0 #811"
             },
-            "crazy-chipmonks/583": {
-              "name": "#583"
+            "cross-bosses/72": {
+              "name": "Gen0 #4370"
             },
-            "crazy-chipmonks/656": {
-              "name": "#656"
+            "cross-bosses/73": {
+              "name": "Gen0 #856"
             }
           }
         }
