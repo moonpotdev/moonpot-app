@@ -157,7 +157,7 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(state => state.wallet.address);
   const network = pot.network;
   const lpAddress = pot.tokenAddress;
   const potAddress = pot.contractAddress;
@@ -179,9 +179,7 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
   const userTotalBalance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);
   const selectedNeedsZap = selectedToken.address.toLowerCase() !== pot.tokenAddress.toLowerCase();
   const [zapRequestId, setZapRequestId] = useState(null);
-  const zapEstimate = useSelector(state =>
-    zapRequestId ? state.zapReducer[zapRequestId] ?? null : null
-  );
+  const zapEstimate = useSelector(state => (zapRequestId ? state.zap[zapRequestId] ?? null : null));
   const canWithdraw = useMemo(() => {
     if (!address || !userTotalBalance.gt(0)) {
       return false;

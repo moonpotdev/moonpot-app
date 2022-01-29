@@ -6,9 +6,9 @@ const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 
 const getEarned = async (pots, state, dispatch) => {
   console.log('redux getEarned() processing...');
-  const address = state.walletReducer.address;
-  const web3 = state.walletReducer.rpc;
-  const earned = { ...state.earnedReducer.earned };
+  const address = state.wallet.address;
+  const web3 = state.wallet.rpc;
+  const earned = { ...state.earned.earned };
 
   const multicall = [];
   const calls = [];
@@ -66,8 +66,8 @@ const getEarnedSingle = async (item, state, dispatch) => {
   console.log('redux getEarnedSingle() processing...');
 
   // Allow calling by id
-  if (typeof item === 'string' && item in state.vaultReducer.pools) {
-    item = state.vaultReducer.pools[item];
+  if (typeof item === 'string' && item in state.vault.pools) {
+    item = state.vault.pools[item];
   }
 
   return await getEarned({ [item.id]: item }, state, dispatch);
@@ -75,14 +75,14 @@ const getEarnedSingle = async (item, state, dispatch) => {
 
 const getEarnedAll = async (state, dispatch) => {
   console.log('redux getEarnedAll() processing...');
-  const pools = state.vaultReducer.pools;
+  const pools = state.vault.pools;
   return getEarned(pools, state, dispatch);
 };
 
 const fetchEarned = (item = false) => {
   return async (dispatch, getState) => {
     const state = getState();
-    if (state.walletReducer.address) {
+    if (state.wallet.address) {
       dispatch({ type: EARNED_FETCH_EARNED_BEGIN });
       return item
         ? await getEarnedSingle(item, state, dispatch)

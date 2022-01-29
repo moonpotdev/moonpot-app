@@ -57,9 +57,9 @@ function MigrationNotice({ pot }) {
 
 export function MigrationNotices({ potType }) {
   const classes = useStyles();
-  const currentNetwork = useSelector(state => state.walletReducer.network);
-  const currentAddress = useSelector(state => state.walletReducer.address);
-  const allPots = useSelector(state => state.vaultReducer.pools);
+  const currentNetwork = useSelector(state => state.wallet.network);
+  const currentAddress = useSelector(state => state.wallet.address);
+  const allPots = useSelector(state => state.vault.pools);
 
   const potsNeedingMigration = useMemo(() => {
     return Object.values(allPots).filter(

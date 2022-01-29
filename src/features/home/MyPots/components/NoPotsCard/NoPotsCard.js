@@ -13,7 +13,7 @@ export default function NoPotsCard({ selected }) {
   const { t } = useTranslation();
   const history = useHistory();
   const dispatch = useDispatch();
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(state => state.wallet.address);
 
   const handleWalletConnect = () => {
     if (!address) {

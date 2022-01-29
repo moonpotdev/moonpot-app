@@ -21,7 +21,7 @@ const useStyles = makeStyles(styles);
 
 const Steps = ({ item, steps, handleClose }) => {
   const classes = useStyles();
-  const wallet = useSelector(state => state.walletReducer);
+  const wallet = useSelector(state => state.wallet);
   const renderContent = steps.modal && item;
 
   return (
@@ -185,7 +185,7 @@ const Steps = ({ item, steps, handleClose }) => {
 };
 
 export const StepsProgress = memo(function StepsProgress({ steps, setSteps }) {
-  const action = useSelector(state => state.walletReducer.action);
+  const action = useSelector(state => state.wallet.action);
 
   useEffect(() => {
     const index = steps.currentStep;

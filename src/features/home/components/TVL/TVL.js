@@ -5,7 +5,7 @@ import { TotalStat } from '../../../../components/TotalStat';
 
 export const TVL = memo(function ({ className }) {
   const { t } = useTranslation();
-  const tvl = useSelector(state => state.vaultReducer.totalTvl || 0).toLocaleString(undefined, {
+  const tvl = useSelector(state => state.vault.totalTvl || 0).toLocaleString(undefined, {
     maximumFractionDigits: 0,
   });
 

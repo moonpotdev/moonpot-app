@@ -11,7 +11,7 @@ export const WalletConnectButton = function ({
   ...rest
 }) {
   const dispatch = useDispatch();
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(state => state.wallet.address);
   const connected = !!address;
 
   const handleConnect = useCallback(() => {

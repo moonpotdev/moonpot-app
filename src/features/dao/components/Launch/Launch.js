@@ -350,7 +350,7 @@ function NotConnected() {
 }
 
 export function Launch() {
-  const currentAddress = useSelector(state => state.walletReducer.address?.toLowerCase());
+  const currentAddress = useSelector(state => state.wallet.address?.toLowerCase());
 
   const airdropSafepalAmount = useMemo(() => {
     if (currentAddress && currentAddress in whitelistSafepal) {

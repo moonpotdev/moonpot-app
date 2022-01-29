@@ -22,7 +22,7 @@ const Promo = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(state => state.wallet.address);
   const promo = promosAll.find(p => p.name === name);
   const data = useSelector(state => state.promo);
 

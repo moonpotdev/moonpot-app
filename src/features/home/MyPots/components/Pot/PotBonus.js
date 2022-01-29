@@ -24,8 +24,8 @@ const PotBonus = function ({ item, buttonVariant = 'purple' }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const wallet = useSelector(state => state.walletReducer);
-  const balance = useSelector(state => state.balanceReducer);
+  const wallet = useSelector(state => state.wallet);
+  const balance = useSelector(state => state.balance);
   const [steps, setSteps] = useState({
     modal: false,
     currentStep: -1,

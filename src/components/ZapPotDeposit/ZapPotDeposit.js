@@ -22,7 +22,7 @@ const useStyles = makeStyles(styles);
 // TODO DRY, move to one global steps component; use state/actions
 const DepositSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
   const dispatch = useDispatch();
-  const action = useSelector(state => state.walletReducer.action);
+  const action = useSelector(state => state.wallet.action);
 
   const handleClose = useCallback(() => {
     dispatch(reduxActions.balance.fetchBalances(pot));
@@ -159,7 +159,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(state => state.wallet.address);
   const network = pot.network;
   const lpAddress = pot.tokenAddress;
   const potAddress = pot.contractAddress;
@@ -193,9 +193,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
   }));
   const selectedNeedsZap = selectedToken.address.toLowerCase() !== pot.tokenAddress.toLowerCase();
   const [zapRequestId, setZapRequestId] = useState(null);
-  const zapEstimate = useSelector(state =>
-    zapRequestId ? state.zapReducer[zapRequestId] ?? null : null
-  );
+  const zapEstimate = useSelector(state => (zapRequestId ? state.zap[zapRequestId] ?? null : null));
   const canDeposit = useMemo(() => {
     const hasBalance = address && balance.gt(0) && depositAmount.gt(0);
 

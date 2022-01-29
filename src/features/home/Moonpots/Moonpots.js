@@ -16,10 +16,10 @@ const useStyles = makeStyles(styles);
 
 const Moonpots = ({ potType, sort }) => {
   const dispatch = useDispatch();
-  const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
-  const address = useSelector(state => state.walletReducer.address);
+  const pricesLastUpdated = useSelector(state => state.prices.lastUpdated);
+  const address = useSelector(state => state.wallet.address);
   //cannot use shallowEqual as we need the page to reevaluate the sort once the apy/prize/draw data loads
-  const pots = useSelector(state => state.vaultReducer.pools);
+  const pots = useSelector(state => state.vault.pools);
   const classes = useStyles();
   const [filterConfig, setFilterConfig] = useFilterConfig();
   const filtered = useFilteredPots(pots, potType, filterConfig);

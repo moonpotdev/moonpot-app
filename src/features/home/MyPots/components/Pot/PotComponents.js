@@ -94,7 +94,7 @@ const DepositedOdds = memo(function ({ ticketTotalSupply, winners, ticketToken, 
 export const PotInfoBlock = function ({ item, active = true }) {
   const classes = useStyles();
   const depositTokenPrice = useSelector(
-    state => state.pricesReducer.byNetworkAddress[item.network][item.tokenAddress]
+    state => state.prices.byNetworkAddress[item.network][item.tokenAddress]
   );
   const { t } = useTranslation();
   const pot = item;

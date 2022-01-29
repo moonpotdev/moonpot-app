@@ -230,7 +230,7 @@ const TVL = memo(function ({ totalStakedUsd }) {
 });
 
 function useDepositOdds(ticketTotalSupply, winners, ticketToken, tokenDecimals) {
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(state => state.wallet.address);
   const depositedTickets = useTokenBalance(ticketToken, tokenDecimals);
 
   return useMemo(() => {

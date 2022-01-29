@@ -17,8 +17,8 @@ function renderSwitch(type) {
 }
 
 const ModalPopup = () => {
-  let isOpen = useSelector(state => state.modalReducer.isOpen);
-  let modalType = useSelector(state => state.modalReducer.modalType);
+  let isOpen = useSelector(state => state.modal.isOpen);
+  let modalType = useSelector(state => state.modal.modalType);
 
   return <Modal open={isOpen}>{renderSwitch(modalType)}</Modal>;
 };

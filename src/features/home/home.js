@@ -15,8 +15,8 @@ const useStyles = makeStyles(styles);
 
 function useSelectedParams() {
   let { top, bottom } = useParams();
-  let filter = useSelector(state => state.filterReducer.sort);
-  let status = useSelector(state => state.filterReducer.status);
+  let filter = useSelector(state => state.filters.sort);
+  let status = useSelector(state => state.filters.status);
   if (!top) {
     top = 'moonpots';
   }

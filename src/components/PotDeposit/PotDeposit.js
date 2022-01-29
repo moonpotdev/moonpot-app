@@ -19,7 +19,7 @@ const useStyles = makeStyles(styles);
 // TODO DRY, move to one global steps component; use state/actions
 const DepositSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
   const dispatch = useDispatch();
-  const action = useSelector(state => state.walletReducer.action);
+  const action = useSelector(state => state.wallet.action);
 
   const handleClose = useCallback(() => {
     dispatch(reduxActions.balance.fetchBalances(pot));
@@ -69,7 +69,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(state => state.wallet.address);
   const balance = useTokenBalance(pot.token, pot.tokenDecimals);
   const stakeMax = useMemo(
     () => byDecimals(pot.stakeMax, pot.tokenDecimals),

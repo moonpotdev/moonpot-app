@@ -9,7 +9,7 @@ import { ZapPotDeposit } from '../../../../../components/ZapPotDeposit/ZapPotDep
 import { useSelector } from 'react-redux';
 
 const ActiveLayout = function ({ item }) {
-  const wallet = useSelector(state => state.walletReducer);
+  const wallet = useSelector(state => state.wallet);
   const [steps, setSteps] = React.useState({
     modal: false,
     currentStep: -1,

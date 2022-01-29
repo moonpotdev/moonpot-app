@@ -252,10 +252,10 @@ function calculateProjectedTotalPrizesAvailable(pots) {
 
 const getPools = async (items, state, dispatch) => {
   console.log('redux getPools processing...');
-  const web3 = state.walletReducer.rpc;
-  const pools = { ...state.vaultReducer.pools }; // need new object ref so filters can re-run when any pool changes
-  const pricesByNetworkAddress = state.pricesReducer.byNetworkAddress;
-  const apy = state.pricesReducer.apy;
+  const web3 = state.wallet.rpc;
+  const pools = { ...state.vault.pools }; // need new object ref so filters can re-run when any pool changes
+  const pricesByNetworkAddress = state.prices.byNetworkAddress;
+  const apy = state.prices.apy;
 
   const multicall = [];
   const calls = [];
@@ -668,7 +668,7 @@ const fetchPools = (item = false) => {
 
   return async (dispatch, getState) => {
     const state = getState();
-    const pools = state.vaultReducer.pools;
+    const pools = state.vault.pools;
     dispatch({ type: HOME_FETCH_POOLS_BEGIN });
     return await getPools(pools, state, dispatch);
   };

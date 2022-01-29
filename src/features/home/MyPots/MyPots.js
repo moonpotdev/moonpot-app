@@ -18,12 +18,12 @@ const useStyles = makeStyles(styles);
 const MyPots = ({ potStatus, sort }) => {
   const classes = useStyles();
   const { vault, prices } = useSelector(state => ({
-    vault: state.vaultReducer,
-    prices: state.pricesReducer,
+    vault: state.vault,
+    prices: state.prices,
   }));
   const [sortKey, sortDir] = useSortKey(sort);
-  const walletAddress = useSelector(state => state.walletReducer.address);
-  const tokenBalances = useSelector(state => state.balanceReducer.tokens);
+  const walletAddress = useSelector(state => state.wallet.address);
+  const tokenBalances = useSelector(state => state.balance.tokens);
   const dispatch = useDispatch();
 
   //Since filtered itself is not in the state we need to use a stateful variable to know when to update the page

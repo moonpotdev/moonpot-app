@@ -58,11 +58,9 @@ const StatEarned = memo(function ({ bonus }) {
 
 const StatTimelock = memo(function ({ contractAddress }) {
   const { t } = useTranslation();
-  const timeleft = useSelector(
-    state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleft
-  );
+  const timeleft = useSelector(state => state.balance.tokens[contractAddress + ':fee'].timeleft);
   const timeleftUpdatedAt = useSelector(
-    state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleftUpdated
+    state => state.balance.tokens[contractAddress + ':fee'].timeleftUpdated
   );
   const endsAt = (timeleftUpdatedAt + timeleft) * 1000;
   const timeLeft = Math.max(0, endsAt - Date.now());
@@ -79,16 +77,14 @@ const StatFee = memo(function ({
   fairplayTicketFee,
 }) {
   const { t } = useTranslation();
-  const address = useSelector(state => state.walletReducer.address);
-  const timeleft = useSelector(
-    state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleft
-  );
+  const address = useSelector(state => state.wallet.address);
+  const timeleft = useSelector(state => state.balance.tokens[contractAddress + ':fee'].timeleft);
   const timeleftUpdatedAt = useSelector(
-    state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleftUpdated
+    state => state.balance.tokens[contractAddress + ':fee'].timeleftUpdated
   );
   const ticket = tokensByNetworkAddress[network][ticketAddress.toLowerCase()];
   const underlying = tokensByNetworkSymbol[network][ticket.underlyingToken];
-  const ppfs = useSelector(state => state.pricesReducer.ppfs[network]?.[underlying.address] || 1);
+  const ppfs = useSelector(state => state.prices.ppfs[network]?.[underlying.address] || 1);
   const endsAt = (timeleftUpdatedAt + timeleft) * 1000;
   const ticketBalance = useTokenBalance(ticket.symbol, tokenDecimals);
 
@@ -154,7 +150,7 @@ export const Stats = function ({ id }) {
 // TODO DRY, move to one global steps component; use state/actions
 export const WithdrawSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
   const dispatch = useDispatch();
-  const action = useSelector(state => state.walletReducer.action);
+  const action = useSelector(state => state.wallet.action);
 
   const handleClose = useCallback(() => {
     dispatch(reduxActions.balance.fetchBalances(pot));
@@ -231,7 +227,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
   const [isPartialWithdrawAll, setIsPartialWithdrawAll] = useState(false);
   const [partialWithdrawAmount, setPartialWithdrawAmount] = useState(() => ZERO);
   const [canWithdrawPartial, setCanWithdrawPartial] = useState(false);
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(state => state.wallet.address);
   const totalBalance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);
   const ticketBalance = useTokenBalance(pot.rewardToken, pot.tokenDecimals);
   const ticketAllowance = useTokenAllowance(

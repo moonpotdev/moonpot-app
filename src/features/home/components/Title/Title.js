@@ -4,8 +4,7 @@ import { Translate } from '../../../../components/Translate';
 
 export const Title = memo(function ({ className }) {
   const totalPrizesAvailable = useSelector(
-    state =>
-      state.vaultReducer.projectedTotalPrizesAvailable || state.vaultReducer.totalPrizesAvailable
+    state => state.vault.projectedTotalPrizesAvailable || state.vault.totalPrizesAvailable
   );
   const totalPrizesAvailableFormatted = useMemo(() => {
     return totalPrizesAvailable.toNumber().toLocaleString(undefined, {

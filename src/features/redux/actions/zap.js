@@ -30,7 +30,7 @@ function fakeZapInEstimate(potId, depositAddress, depositAmount) {
       });
 
       const state = getState();
-      const pot = state.vaultReducer.pools[potId];
+      const pot = state.vault.pools[potId];
       const network = pot.network;
       const wrappedNative = config[network].nativeCurrency.wrappedAddress;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
@@ -79,9 +79,9 @@ export function createZapInEstimate(potId, depositAddress, depositAmount) {
       });
 
       const state = getState();
-      const pot = state.vaultReducer.pools[potId];
+      const pot = state.vault.pools[potId];
       const network = pot.network;
-      const web3 = state.walletReducer.rpc[network];
+      const web3 = state.wallet.rpc[network];
       const wrappedNative = config[network].nativeCurrency.wrappedAddress;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
       const isNative = !depositAddress;
@@ -135,12 +135,12 @@ function fakeZapOutEstimate(potId, wantTokenAddress) {
       });
 
       const state = getState();
-      const pot = state.vaultReducer.pools[potId];
+      const pot = state.vault.pools[potId];
       const withdrawFee = 'withdrawFee' in pot ? pot.withdrawFee : 0;
       const network = pot.network;
-      const web3 = state.walletReducer.rpc[network];
+      const web3 = state.wallet.rpc[network];
       const multicall = new MultiCall(web3, config[network].multicallAddress);
-      const address = state.walletReducer.address;
+      const address = state.wallet.address;
       const isRemoveOnly = potId === 'beltbnb' || potId === 'ibalpaca';
       const fairplayDuration = pot.fairplayDuration;
       const fairplayTicketFee = pot.fairplayTicketFee;
@@ -232,12 +232,12 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
       });
 
       const state = getState();
-      const pot = state.vaultReducer.pools[potId];
+      const pot = state.vault.pools[potId];
       const withdrawFee = 'withdrawFee' in pot ? pot.withdrawFee : 0;
       const network = pot.network;
-      const web3 = state.walletReducer.rpc[network];
+      const web3 = state.wallet.rpc[network];
       const multicall = new MultiCall(web3, config[network].multicallAddress);
-      const address = state.walletReducer.address;
+      const address = state.wallet.address;
       const isRemoveOnly = !wantTokenAddress;
       const fairplayDuration = pot.fairplayDuration;
       const fairplayTicketFee = pot.fairplayTicketFee;

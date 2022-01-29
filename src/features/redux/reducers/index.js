@@ -12,17 +12,17 @@ import filterReducer from './filter';
 import promoCodesReducer from '../../promo/reducer';
 
 const reducers = {
-  walletReducer,
-  vaultReducer,
-  balanceReducer,
-  pricesReducer,
-  earnedReducer,
-  modalReducer,
-  zapReducer,
-  buybacksReducer,
+  wallet: walletReducer,
+  vault: vaultReducer,
+  balance: balanceReducer,
+  prices: pricesReducer,
+  earned: earnedReducer,
+  modal: modalReducer,
+  zap: zapReducer,
+  buybacks: buybacksReducer,
   holders: holdersReducer,
   winners: winnersReducer,
-  filterReducer,
+  filters: filterReducer,
   promo: promoCodesReducer,
 };
 

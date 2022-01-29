@@ -165,18 +165,14 @@ const fetchPrices = () => {
         updatePrices(),
         updateLPPrices(),
         updateApy(),
-        updatePPFS(state.walletReducer.rpc, state.pricesReducer.ppfs),
+        updatePPFS(state.wallet.rpc, state.prices.ppfs),
       ]);
       const allPrices = {
-        ...state.pricesReducer.prices,
+        ...state.prices.prices,
         ...prices,
         ...lpPrices,
       };
-      const derivedPrices = await derivePrices(
-        state.pricesReducer.byNetworkAddress,
-        allPrices,
-        ppfs
-      );
+      const derivedPrices = await derivePrices(state.prices.byNetworkAddress, allPrices, ppfs);
 
       dispatch({
         type: 'FETCH_PRICES',

@@ -129,7 +129,7 @@ function normalizeStaked(stakedAmount, ticketAddress, ticketPPFS, prices) {
 }
 
 const useNormalizedWinners = function (winners, drawToken, ticketAddress, ticketPPFS) {
-  const prices = useSelector(state => state.pricesReducer.prices);
+  const prices = useSelector(state => state.prices.prices);
 
   return useMemo(() => {
     return winners.map(winner => ({
@@ -265,7 +265,7 @@ const Winners = memo(function ({ network, tokenAddress, winners }) {
 
 const UserWonDraw = memo(function ({ winners }) {
   const classes = useStyles();
-  const address = useSelector(state => state.walletReducer.address)?.toLowerCase();
+  const address = useSelector(state => state.wallet.address)?.toLowerCase();
 
   if (address && winners.find(winner => winner.address.toLowerCase() === address)) {
     return (

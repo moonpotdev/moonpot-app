@@ -13,8 +13,8 @@ const useStyles = makeStyles(styles);
 const WalletConnector = ({ variant, onConnect, onDisconnect, className, ...rest }) => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const address = useSelector(state => state.walletReducer.address);
-  const pending = useSelector(state => state.walletReducer.pending);
+  const address = useSelector(state => state.wallet.address);
+  const pending = useSelector(state => state.wallet.pending);
   const dispatch = useDispatch();
 
   const handleWalletConnect = useCallback(() => {

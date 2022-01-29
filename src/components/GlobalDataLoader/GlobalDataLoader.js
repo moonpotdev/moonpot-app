@@ -4,11 +4,11 @@ import { load } from 'fathom-client';
 import reduxActions from '../../features/redux/actions';
 
 function selectPricesLastUpdated(state) {
-  return state.pricesReducer.lastUpdated;
+  return state.prices.lastUpdated;
 }
 
 function selectPotsLastUpdated(state) {
-  return state.vaultReducer.lastUpdated;
+  return state.vault.lastUpdated;
 }
 
 export const GlobalDataLoader = memo(function GlobalDataLoader() {

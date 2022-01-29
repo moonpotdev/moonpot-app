@@ -59,7 +59,7 @@ const setNetwork = net => {
 
   return async (dispatch, getState) => {
     const state = getState();
-    if (state.walletReducer.network !== net) {
+    if (state.wallet.network !== net) {
       const clients = await getClientsForNetwork(net);
       localStorage.setItem('network', net);
 
@@ -96,7 +96,7 @@ const connect = () => {
     const state = getState();
 
     const close = async () => {
-      await state.walletReducer.web3modal.clearCachedProvider();
+      await state.wallet.web3modal.clearCachedProvider();
       dispatch({ type: WALLET_CONNECT_DONE, payload: { address: null } });
       dispatch({ type: EARNED_RESET });
       dispatch({ type: BALANCE_RESET });
@@ -130,7 +130,7 @@ const connect = () => {
       });
     };
     try {
-      const provider = await state.walletReducer.web3modal.connect();
+      const provider = await state.wallet.web3modal.connect();
       const web3 = await new Web3(provider);
       web3.eth.extend({
         methods: [
@@ -150,7 +150,7 @@ const connect = () => {
         networkId = 56;
       }
 
-      if (networkId === config[state.walletReducer.network].chainId) {
+      if (networkId === config[state.wallet.network].chainId) {
         const accounts = await web3.eth.getAccounts();
         //dispatch({type: WALLET_RPC, payload: {rpc: web3}}); => TODO: set same rpc as connected wallet to rpc[network] for consistency
         dispatch({ type: WALLET_CONNECT_DONE, payload: { address: accounts[0] } });
@@ -159,7 +159,7 @@ const connect = () => {
         if (checkNetworkSupport(networkId) && provider) {
           await provider.request({
             method: 'wallet_addEthereumChain',
-            params: [config[state.walletReducer.network].walletSettings],
+            params: [config[state.wallet.network].walletSettings],
           });
           dispatch(connect());
         } else {
@@ -182,7 +182,7 @@ const disconnect = () => {
     dispatch({ type: WALLET_CONNECT_BEGIN });
     const state = getState();
 
-    await state.walletReducer.web3modal.clearCachedProvider();
+    await state.wallet.web3modal.clearCachedProvider();
     dispatch({ type: WALLET_CONNECT_DONE, payload: { address: null } });
     dispatch({ type: EARNED_RESET });
     dispatch({ type: BALANCE_RESET });
@@ -193,8 +193,8 @@ const approval = (network, tokenAddr, spendingContractAddress) => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
-    const address = state.walletReducer.address;
-    const provider = await state.walletReducer.web3modal.connect();
+    const address = state.wallet.address;
+    const provider = await state.wallet.web3modal.connect();
 
     if (address && provider) {
       const web3 = await new Web3(provider);
@@ -254,8 +254,8 @@ const deposit = (network, contractAddr, amount, max) => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
-    const address = state.walletReducer.address;
-    const provider = await state.walletReducer.web3modal.connect();
+    const address = state.wallet.address;
+    const provider = await state.wallet.web3modal.connect();
 
     if (address && provider) {
       const web3 = await new Web3(provider);
@@ -355,8 +355,8 @@ const withdraw = (network, contractAddr, amount, max) => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
-    const address = state.walletReducer.address;
-    const provider = await state.walletReducer.web3modal.connect();
+    const address = state.wallet.address;
+    const provider = await state.wallet.web3modal.connect();
 
     if (address && provider) {
       const web3 = await new Web3(provider);
@@ -453,8 +453,8 @@ const getReward = (network, contractAddr) => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
-    const address = state.walletReducer.address;
-    const provider = await state.walletReducer.web3modal.connect();
+    const address = state.wallet.address;
+    const provider = await state.wallet.web3modal.connect();
 
     if (address && provider) {
       const web3 = await new Web3(provider);
@@ -501,8 +501,8 @@ const compound = (network, contractAddr) => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
-    const address = state.walletReducer.address;
-    const provider = await state.walletReducer.web3modal.connect();
+    const address = state.wallet.address;
+    const provider = await state.wallet.web3modal.connect();
 
     if (address && provider) {
       const web3 = await new Web3(provider);
@@ -548,8 +548,8 @@ const compound = (network, contractAddr) => {
 const createWeb3Modal = () => {
   return async (dispatch, getState) => {
     const state = getState();
-    const clients = await getClientsForNetwork(state.walletReducer.network);
-    const web3Modal = new Web3Modal(generateProviderOptions(state.walletReducer, clients));
+    const clients = await getClientsForNetwork(state.wallet.network);
+    const web3Modal = new Web3Modal(generateProviderOptions(state.wallet, clients));
 
     dispatch({ type: WALLET_CREATE_MODAL, payload: { data: web3Modal } });
 
@@ -650,8 +650,8 @@ const zapIn = (
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
-    const address = state.walletReducer.address;
-    const provider = await state.walletReducer.web3modal.connect();
+    const address = state.wallet.address;
+    const provider = await state.wallet.web3modal.connect();
 
     if (address && provider) {
       const web3 = await new Web3(provider);
@@ -767,8 +767,8 @@ const zapOut = (
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
-    const address = state.walletReducer.address;
-    const provider = await state.walletReducer.web3modal.connect();
+    const address = state.wallet.address;
+    const provider = await state.wallet.web3modal.connect();
 
     if (address && provider) {
       const web3 = await new Web3(provider);
@@ -892,8 +892,8 @@ const claimAllBonuses = alsoClaimOtherTokens => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
-    const { address, network } = state.walletReducer;
-    const provider = await state.walletReducer.web3modal.connect();
+    const { address, network } = state.wallet;
+    const provider = await state.wallet.web3modal.connect();
     const contractAddress = config[network].claimAllBonusesAddress;
 
     if (address && contractAddress && provider) {

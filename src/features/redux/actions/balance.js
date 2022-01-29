@@ -8,8 +8,8 @@ import gateManagerAbi from '../../../config/abi/gatemanager.json';
 import beefyVaultAbi from '../../../config/abi/beefyvault.json';
 
 const getBalances = async (pools, state, dispatch) => {
-  const address = state.walletReducer.address;
-  const web3 = state.walletReducer.rpc;
+  const address = state.wallet.address;
+  const web3 = state.wallet.rpc;
 
   const multicall = [];
   const calls = [];
@@ -144,7 +144,7 @@ const getBalances = async (pools, state, dispatch) => {
   }
 
   // New array for new state
-  const tokens = { ...state.balanceReducer.tokens };
+  const tokens = { ...state.balance.tokens };
 
   // Native balances
   for (const network in needsNativeBalance) {
@@ -202,8 +202,8 @@ const getBalancesSingle = async (item, state, dispatch) => {
   console.log('redux getBalancesSingle() processing...');
 
   // Allow calling by id
-  if (typeof item === 'string' && item in state.vaultReducer.pools) {
-    item = state.vaultReducer.pools[item];
+  if (typeof item === 'string' && item in state.vault.pools) {
+    item = state.vault.pools[item];
   }
 
   return await getBalances({ [item.id]: item }, state, dispatch);
@@ -211,14 +211,14 @@ const getBalancesSingle = async (item, state, dispatch) => {
 
 const getBalancesAll = async (state, dispatch) => {
   console.log('redux getBalancesAll() processing...');
-  const pools = state.vaultReducer.pools;
+  const pools = state.vault.pools;
   return await getBalances(pools, state, dispatch);
 };
 
 const fetchBalances = (item = false) => {
   return async (dispatch, getState) => {
     const state = getState();
-    if (state.walletReducer.address) {
+    if (state.wallet.address) {
       dispatch({ type: BALANCE_FETCH_BALANCES_BEGIN });
       return item
         ? await getBalancesSingle(item, state, dispatch)

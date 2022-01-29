@@ -11,8 +11,8 @@ export const fetchEligibleInfo = createAsyncThunk(
   'promo/fetchEligibleInfo',
   async (promoId, { getState }) => {
     const state = getState();
-    const { address, network } = state.walletReducer;
-    const provider = await state.walletReducer.web3modal.connect();
+    const { address, network } = state.wallet;
+    const provider = await state.wallet.web3modal.connect();
     const contractAddress = config[network].nftPromoClaimAddress;
 
     if (address && provider) {
@@ -27,8 +27,8 @@ export const fetchPromoCodes = createAsyncThunk(
   'promo/fetchPromoCodes',
   async (promo, { getState }) => {
     const state = getState();
-    const { address } = state.walletReducer;
-    const provider = await state.walletReducer.web3modal.connect();
+    const { address } = state.wallet;
+    const provider = await state.wallet.web3modal.connect();
 
     if (address && provider) {
       const web3 = new Web3(provider);
@@ -48,8 +48,8 @@ export const fetchPromoCodes = createAsyncThunk(
 export function claimTokenId(promoId, tokenId) {
   return async (dispatch, getState) => {
     const state = getState();
-    const { address, network } = state.walletReducer;
-    const provider = await state.walletReducer.web3modal.connect();
+    const { address, network } = state.wallet;
+    const provider = await state.wallet.web3modal.connect();
     const contractAddress = config[network].nftPromoClaimAddress;
 
     if (address && provider) {

@@ -15,10 +15,8 @@ import { tokensByNetworkAddress } from '../../../../../config/tokens';
 const useStyles = makeStyles(styles);
 
 const Play = memo(function ({ id, token, contractAddress, variant }) {
-  const address = useSelector(state => state.walletReducer.address);
-  const balance = useSelector(
-    state => state.balanceReducer.tokens[contractAddress + ':total']?.balance
-  );
+  const address = useSelector(state => state.wallet.address);
+  const balance = useSelector(state => state.balance.tokens[contractAddress + ':total']?.balance);
   const hasStaked = address && balance > 0;
   const translatedToken = useTranslatedToken(token);
 

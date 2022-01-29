@@ -37,7 +37,7 @@ export const useTotalPrizeValue = function () {
   });
 
   const prizePools = !loading && !error ? data?.prizePools : null;
-  const prices = useSelector(state => state.pricesReducer.byNetworkAddress[network]);
+  const prices = useSelector(state => state.prices.byNetworkAddress[network]);
 
   const total = useMemo(() => {
     let sum = ZERO;

@@ -193,7 +193,7 @@ function Sidebar() {
 }
 
 function PotsPrice() {
-  const price = useSelector(state => state.pricesReducer.prices['POTS'] || 0);
+  const price = useSelector(state => state.prices.prices['POTS'] || 0);
   return (
     '$' +
     price.toLocaleString(undefined, {

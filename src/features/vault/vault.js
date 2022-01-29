@@ -75,8 +75,8 @@ function isInvalidPot(pot) {
 
 const VaultDataLoader = memo(function VaultDataLoader({ id }) {
   const dispatch = useDispatch();
-  const address = useSelector(state => state.walletReducer.address);
-  const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
+  const address = useSelector(state => state.wallet.address);
+  const pricesLastUpdated = useSelector(state => state.prices.lastUpdated);
 
   useEffect(() => {
     if (id && pricesLastUpdated > 0) {
