@@ -16,7 +16,7 @@
     "moonpots": "Moonpots",
     "myPots": "我的月盒",
     "sidePots": "附属",
-    "nftPots": "NFT"
+    "nftPots": "NFT",
     "nextDraw": "下一次抽奖",
     "prize": "奖金",
     "apy": "APY",
@@ -231,25 +231,8 @@
             "质押最多 100 $POTS，就有机会每天从币安智能链上最好的 NFT 收藏中赢取 NFT。",
             "每次抽奖将选出一名获胜者，以从当前收藏中获得一个 NFT。",
             "一旦当前系列的所有NFT被分发完毕，一个新的系列将被添加到月盒中。您无需重新质押以参与新系列的抽奖。",
-            "目前的系列是《疯狂花栗鼠》。"
-          ],
-          "nfts": {
-            "crazy-chipmonks/517": {
-              "name": "#517"
-            },
-            "crazy-chipmonks/520": {
-              "name": "#520"
-            },
-            "crazy-chipmonks/579": {
-              "name": "#579"
-            },
-            "crazy-chipmonks/583": {
-              "name": "#583"
-            },
-            "crazy-chipmonks/656": {
-              "name": "#656"
-            }
-          }
+            "目前的系列是《Hot Cross Bosses》。"
+          ]
         }
       },
       "xmas-strategy": {
@@ -261,11 +244,11 @@
             "此月盒包含 70 个 NFT，可将其兑换为促销代码以从 Beefy 商店免费订购一件T恤。质押 POTS 参与，每天将进行抽奖，直到 12 月 31 日。"
           ],
           "merch": {
-            "beefy-moonpot-tshirt-front.png": { 
-              "title": "T-Shirt - Front" 
+            "beefy-moonpot-tshirt-front.png": {
+              "title": "T-Shirt - Front"
             },
-            "beefy-moonpot-tshirt-back.png": { 
-              "title": "T-Shirt - Back" 
+            "beefy-moonpot-tshirt-back.png": {
+              "title": "T-Shirt - Back"
             }
           }
         },
@@ -276,8 +259,8 @@
             "此月盒包含 125 个 NFT，可将其兑换为促销代码以从 Beefy 商店免费订购一件连帽衫，以及 BIFI 和 POTS 奖品. 质押 mooBIFI 参与，抽奖日期为 12 月 31 日。"
           ],
           "merch": {
-            "beefy-moonpot-hoodie.png": { 
-              "title": "Beefy x Moonpot Hoodie" 
+            "beefy-moonpot-hoodie.png": {
+              "title": "Beefy x Moonpot Hoodie"
             }
           }
         },
@@ -288,8 +271,8 @@
             "此月盒包含 15 个 NFT，可将其兑换为促销代码以从 Beefy 商店免费订购一件连帽衫，以及 BIFI 和 POTS 奖品. 质押 mooChristmasBeefy 参与，抽奖日期为 12 月 31 日。."
           ],
           "merch": {
-            "beefy-moonpot-hoodie.png": { 
-              "title": "Beefy x Moonpot Hoodie" 
+            "beefy-moonpot-hoodie.png": {
+              "title": "Beefy x Moonpot Hoodie"
             }
           }
         }
@@ -347,9 +330,7 @@
         "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。",
         "您的一半代币将被出售以平衡流动性对，之后用以提供流动性并将 LP 代币存入此月盒。"
       ],
-      "4belt": [
-        "ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"
-      ],
+      "4belt": ["ZAP 可让您创建流动性池代币并只通过一笔交易进行存款。"],
       "beltbnb": ["ZAP 可让您创建 beltBNB 代币并只通过一笔交易进行存款。"],
       "ibalpaca": ["ZAP 可让您创建 ibALPACA 代币并只通过一笔交易进行存款。"]
     },
