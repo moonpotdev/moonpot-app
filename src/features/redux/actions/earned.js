@@ -1,6 +1,6 @@
 import { MultiCall } from 'eth-multicall';
 import { EARNED_FETCH_EARNED_BEGIN, EARNED_FETCH_EARNED_DONE } from '../constants';
-import { config } from '../../../config/config';
+import { networkByKey } from '../../../config/networks';
 
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 
@@ -14,7 +14,7 @@ const getEarned = async (pots, state, dispatch) => {
   const calls = [];
 
   for (const network in web3) {
-    multicall[network] = new MultiCall(web3[network], config[network].multicallAddress);
+    multicall[network] = new MultiCall(web3[network], networkByKey[network].multicallAddress);
     calls[network] = [];
   }
 

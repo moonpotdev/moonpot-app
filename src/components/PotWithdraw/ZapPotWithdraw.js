@@ -10,12 +10,12 @@ import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { Translate } from '../Translate/Translate';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
-import { config } from '../../config/config';
 import { TokenIcon } from '../TokenIcon/TokenIcon';
 import { createZapOutEstimate } from '../../features/redux/actions/zap';
 import { MigrationNotice, Stats, WithdrawSteps } from './PotWithdraw';
 import styles from './styles';
 import { formatDecimals } from '../../helpers/format';
+import { networkByKey } from '../../config/networks';
 
 const useStyles = makeStyles(styles);
 
@@ -26,7 +26,7 @@ function useWithdrawTokens(network, lpAddress) {
     const tokens = [{ ...lpToken, isNative: false, isRemove: false }];
 
     if (supportsZap) {
-      const nativeCurrency = config[network].nativeCurrency;
+      const nativeCurrency = networkByKey[network].nativeCurrency;
       const nativeSymbol = nativeCurrency.symbol;
       const nativeWrappedToken =
         tokensByNetworkAddress[network][nativeCurrency.wrappedAddress.toLowerCase()];
@@ -139,7 +139,7 @@ function DropdownIcon(props) {
 
 function useUnwrappedTokensSymbols(network, tokens) {
   return useMemo(() => {
-    const nativeCurrency = config[network].nativeCurrency;
+    const nativeCurrency = networkByKey[network].nativeCurrency;
     const nativeSymbol = nativeCurrency.symbol;
     const nativeWrappedSymbol = nativeCurrency.wrappedSymbol;
 

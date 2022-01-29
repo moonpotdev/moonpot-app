@@ -1,4 +1,3 @@
-import { config } from '../../../config/config';
 import {
   BALANCE_RESET,
   EARNED_RESET,
@@ -14,6 +13,13 @@ import reduxActions from '../actions';
 import zapAbi from '../../../config/abi/zap.json';
 import { convertAmountToRawNumber } from '../../../helpers/format';
 import BigNumber from 'bignumber.js';
+import {
+  networkByKey,
+  networkIdSupported,
+  networkIdToKey,
+  networkKeyToId,
+  networkSetup,
+} from '../../../config/networks';
 
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
@@ -21,38 +27,9 @@ const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 const ziggyManagerMultiRewardsAbi = require('../../../config/abi/ziggyManagerMultiRewards.json');
 const potsClaimerAbi = require('../../../config/abi/potsClaimer.json');
 
-const getClientsForNetwork = async net => {
-  return config[net].rpc;
-};
-
-const setCurrency = value => {
-  return async dispatch => {
-    localStorage.setItem('moon_site_currency', value);
-    dispatch({ type: 'SET_CURRENCY', payload: { currency: value } });
-  };
-};
-
-const getAvailableNetworks = () => {
-  const names = [];
-  const ids = [];
-
-  for (const net in config) {
-    names.push(net);
-    ids.push(config[net].chainId);
-  }
-
-  return [names, ids];
-};
-
-const checkNetworkSupport = networkId => {
-  const [, ids] = getAvailableNetworks();
-  return ids.includes(networkId);
-};
-
-const getNetworkAbbr = networkId => {
-  const [names, ids] = getAvailableNetworks();
-  return ids.includes(networkId) ? names[ids.indexOf(networkId)] : null;
-};
+function getRpcUrlsForNetworkKey(networkKey) {
+  return networkByKey[networkKey].rpc;
+}
 
 const setNetwork = net => {
   console.log('redux setNetwork called.');
@@ -60,7 +37,7 @@ const setNetwork = net => {
   return async (dispatch, getState) => {
     const state = getState();
     if (state.wallet.network !== net) {
-      const clients = await getClientsForNetwork(net);
+      const clients = await getRpcUrlsForNetworkKey(net);
       localStorage.setItem('network', net);
 
       dispatch({ type: 'SET_NETWORK', payload: { network: net, clients: clients } });
@@ -120,8 +97,8 @@ const connect = () => {
       provider.on('chainChanged', async chainId => {
         console.log('chainChanged');
         const networkId = web3.utils.isHex(chainId) ? web3.utils.hexToNumber(chainId) : chainId;
-        if (checkNetworkSupport(networkId)) {
-          const net = getNetworkAbbr(networkId);
+        if (networkIdSupported(networkId)) {
+          const net = networkIdToKey(networkId);
           dispatch(setNetwork(net));
         } else {
           await close();
@@ -150,17 +127,14 @@ const connect = () => {
         networkId = 56;
       }
 
-      if (networkId === config[state.wallet.network].chainId) {
+      if (networkId === networkKeyToId(state.wallet.network)) {
         const accounts = await web3.eth.getAccounts();
         //dispatch({type: WALLET_RPC, payload: {rpc: web3}}); => TODO: set same rpc as connected wallet to rpc[network] for consistency
         dispatch({ type: WALLET_CONNECT_DONE, payload: { address: accounts[0] } });
       } else {
         await close();
-        if (checkNetworkSupport(networkId) && provider) {
-          await provider.request({
-            method: 'wallet_addEthereumChain',
-            params: [config[state.wallet.network].walletSettings],
-          });
+        if (networkIdSupported(networkId) && provider) {
+          await networkSetup(state.wallet.network, provider);
           dispatch(connect());
         } else {
           //show error to user for unsupported network
@@ -548,7 +522,7 @@ const compound = (network, contractAddr) => {
 const createWeb3Modal = () => {
   return async (dispatch, getState) => {
     const state = getState();
-    const clients = await getClientsForNetwork(state.wallet.network);
+    const clients = await getRpcUrlsForNetworkKey(state.wallet.network);
     const web3Modal = new Web3Modal(generateProviderOptions(state.wallet, clients));
 
     dispatch({ type: WALLET_CREATE_MODAL, payload: { data: web3Modal } });
@@ -563,8 +537,8 @@ const createWeb3Modal = () => {
 };
 
 const generateProviderOptions = (wallet, clients) => {
-  const networkId = config[wallet.network].chainId;
-  const supported = config[wallet.network].supportedWallets;
+  const networkId = networkKeyToId(wallet.network);
+  const supported = networkByKey[wallet.network].supportedWallets;
 
   const generateCustomConnectors = () => {
     const list = {
@@ -635,7 +609,7 @@ const generateProviderOptions = (wallet, clients) => {
   };
 
   return {
-    network: config[wallet.network].providerName,
+    network: networkByKey[wallet.network].providerName,
     cacheProvider: true,
     providerOptions: generateCustomConnectors(),
   };
@@ -894,7 +868,7 @@ const claimAllBonuses = alsoClaimOtherTokens => {
     const state = getState();
     const { address, network } = state.wallet;
     const provider = await state.wallet.web3modal.connect();
-    const contractAddress = config[network].claimAllBonusesAddress;
+    const contractAddress = networkByKey[network].claimAllBonusesAddress;
 
     if (address && contractAddress && provider) {
       const web3 = await new Web3(provider);
@@ -951,7 +925,6 @@ const obj = {
   createWeb3Modal,
   connect,
   disconnect,
-  setCurrency,
   approval,
   deposit,
   withdraw,

@@ -1,10 +1,10 @@
 import { HOME_FETCH_POOLS_BEGIN, HOME_FETCH_POOLS_DONE } from '../constants';
 import BigNumber from 'bignumber.js';
 import { MultiCall } from 'eth-multicall';
-import { config } from '../../../config/config';
 import { compound, isEmpty, ZERO } from '../../../helpers/utils';
 import { byDecimals, formatTvl } from '../../../helpers/format';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
+import { networkByKey } from '../../../config/networks';
 
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 const ecr20Abi = require('../../../config/abi/erc20.json');
@@ -266,7 +266,7 @@ const getPools = async (items, state, dispatch) => {
   const mooToken = [];
 
   for (let key in web3) {
-    multicall[key] = new MultiCall(web3[key], config[key].multicallAddress);
+    multicall[key] = new MultiCall(web3[key], networkByKey[key].multicallAddress);
     calls[key] = [];
     sponsors[key] = [];
     strategy[key] = [];

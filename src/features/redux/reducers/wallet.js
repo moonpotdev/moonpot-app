@@ -1,11 +1,6 @@
-import { config } from '../../../config/config';
 import Web3 from 'web3';
 import { createReducer } from '@reduxjs/toolkit';
-
-const initialCurrency = () => {
-  const storage = localStorage.getItem('moon_site_currency');
-  return storage === null ? 'usd' : storage;
-};
+import { networks } from '../../../config/networks';
 
 const initialNetwork = () => {
   const storage = localStorage.getItem('moon_networks');
@@ -13,38 +8,24 @@ const initialNetwork = () => {
 };
 
 const initialRpc = () => {
-  const rpc = [];
-
-  for (let network in config) {
-    const c = config[network].rpc;
-    rpc[network] = new Web3(c[~~(c.length * Math.random())]);
-  }
-
-  return rpc;
+  return Object.fromEntries(
+    networks.map(network => {
+      const rpcs = network.rpc;
+      return [network.key, new Web3(rpcs[~~(rpcs.length * Math.random())])];
+    })
+  );
 };
 
 const initialAction = () => {
   return { result: null, data: null };
 };
 
-const initialExplorer = () => {
-  const explorers = [];
-
-  for (let key in config) {
-    explorers[key] = config[key].explorerUrl;
-  }
-
-  return explorers;
-};
-
 const initialState = {
   network: initialNetwork(),
-  currency: initialCurrency(),
   rpc: initialRpc(),
   web3modal: null,
   address: null,
   pending: false,
-  explorer: initialExplorer(),
   action: initialAction(),
 };
 
@@ -67,9 +48,6 @@ const walletReducer = createReducer(initialState, builder => {
       state.network = action.payload.network;
       state.clients = action.payload.clients;
       state.rpc = false;
-    })
-    .addCase('SET_CURRENCY', (state, action) => {
-      state.currency = action.payload.currency;
     })
     .addCase('WALLET_ACTION', (state, action) => {
       state.action.result = action.payload.result;

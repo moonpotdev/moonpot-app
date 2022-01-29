@@ -1,6 +1,4 @@
-import { config } from '../config/config';
 import BigNumber from 'bignumber.js';
-import { tokensByNetworkSymbol } from '../config/tokens';
 
 let trimReg = /(^\s*)|(\s*$)/g;
 
@@ -25,10 +23,6 @@ export function isEmpty(key) {
     return false;
   }
 }
-
-export const getStablesForNetwork = () => {
-  return config.stableCoins;
-};
 
 export const toBigNumber = maybeBigNumber => {
   return BigNumber.isBigNumber(maybeBigNumber) ? maybeBigNumber : new BigNumber(maybeBigNumber);
@@ -120,14 +114,6 @@ export function getFairplayFeePercent(secondsRemaining, days = 10, fee = 0.05) {
 
 export function getApiCacheBuster() {
   return Math.trunc(Date.now() / (1000 * 60));
-}
-
-export function getUnderylingToken(token) {
-  while (token.underlyingToken) {
-    token = tokensByNetworkSymbol[token.network][token.underlyingToken];
-  }
-
-  return token;
 }
 
 export function listJoin(list, emptyValue = '', sep = ', ', final = ' & ') {

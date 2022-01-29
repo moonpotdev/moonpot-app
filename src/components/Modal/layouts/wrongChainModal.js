@@ -5,7 +5,7 @@ import { BaseButton } from '../../Buttons/BaseButton';
 import { Typography, makeStyles } from '@material-ui/core';
 import reduxActions from '../../../features/redux/actions';
 import { useDispatch } from 'react-redux';
-import { networkSetup } from '../../../config/config';
+import { networkSetup } from '../../../config/networks';
 import { useTranslation } from 'react-i18next';
 import styles from './styles';
 

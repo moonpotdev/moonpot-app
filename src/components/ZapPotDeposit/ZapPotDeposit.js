@@ -13,9 +13,9 @@ import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { usePot, useSymbolOrList, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
 import { Translate } from '../Translate';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
-import { config } from '../../config/config';
 import { createZapInEstimate } from '../../features/redux/actions/zap';
 import { useTranslation } from 'react-i18next';
+import { networkByKey } from '../../config/networks';
 
 const useStyles = makeStyles(styles);
 
@@ -75,7 +75,7 @@ function useDepositTokens(network, lpAddress) {
     const tokens = [{ ...lpToken, isNative: false }];
 
     if (supportsZap) {
-      const nativeCurrency = config[network].nativeCurrency;
+      const nativeCurrency = networkByKey[network].nativeCurrency;
       const nativeSymbol = nativeCurrency.symbol;
       const nativeDecimals = nativeCurrency.decimals;
       const nativeWrappedToken =

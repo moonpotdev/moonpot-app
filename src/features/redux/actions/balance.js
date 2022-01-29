@@ -1,11 +1,11 @@
 import { MultiCall } from 'eth-multicall';
 import { BALANCE_FETCH_BALANCES_BEGIN, BALANCE_FETCH_BALANCES_DONE } from '../constants';
-import { config } from '../../../config/config';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
 import prizePoolAbi from '../../../config/abi/prizepool.json';
 import erc20Abi from '../../../config/abi/erc20.json';
 import gateManagerAbi from '../../../config/abi/gatemanager.json';
 import beefyVaultAbi from '../../../config/abi/beefyvault.json';
+import { networkByKey } from '../../../config/networks';
 
 const getBalances = async (pools, state, dispatch) => {
   const address = state.wallet.address;
@@ -16,7 +16,7 @@ const getBalances = async (pools, state, dispatch) => {
   const needsNativeBalance = {};
 
   for (const network in web3) {
-    multicall[network] = new MultiCall(web3[network], config[network].multicallAddress);
+    multicall[network] = new MultiCall(web3[network], networkByKey[network].multicallAddress);
     calls[network] = [];
     needsNativeBalance[network] = false;
   }
@@ -90,7 +90,7 @@ const getBalances = async (pools, state, dispatch) => {
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
 
       if (pairToken.zap) {
-        const nativeWrappedTokenSymbol = config[network].nativeCurrency.wrappedSymbol;
+        const nativeWrappedTokenSymbol = networkByKey[network].nativeCurrency.wrappedSymbol;
 
         // Allowance of zap to spend tickets
         calls[network].push({
@@ -150,7 +150,7 @@ const getBalances = async (pools, state, dispatch) => {
   for (const network in needsNativeBalance) {
     if (needsNativeBalance[network]) {
       const balance = await web3[network].eth.getBalance(address);
-      const symbol = config[network].nativeCurrency.symbol;
+      const symbol = networkByKey[network].nativeCurrency.symbol;
       tokens[symbol] = {
         ...tokens[symbol],
         balance: balance,

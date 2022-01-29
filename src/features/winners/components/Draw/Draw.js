@@ -4,16 +4,11 @@ import { Grid, Link, makeStyles } from '@material-ui/core';
 import { Logo } from '../../../../components/Pot';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { tokensByNetworkAddress } from '../../../../config/tokens';
+import { getUnderylingToken, tokensByNetworkAddress } from '../../../../config/tokens';
 import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
-import {
-  arrayUnique,
-  formatAddressShort,
-  getUnderylingToken,
-  listJoin,
-} from '../../../../helpers/utils';
+import { arrayUnique, formatAddressShort, listJoin } from '../../../../helpers/utils';
 import { ErrorOutline } from '@material-ui/icons';
 import BigNumber from 'bignumber.js';
 import clsx from 'clsx';

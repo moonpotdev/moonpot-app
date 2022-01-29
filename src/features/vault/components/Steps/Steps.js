@@ -16,6 +16,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import Loader from '../../../../components/loader';
 import styles from '../../styles';
 import { useSelector } from 'react-redux';
+import { networkByKey } from '../../../../config/networks';
 
 const useStyles = makeStyles(styles);
 
@@ -99,7 +100,7 @@ const Steps = ({ item, steps, handleClose }) => {
                   <Link
                     className={classes.blockExplorerLink}
                     href={
-                      wallet.explorer[item.network] +
+                      networkByKey[item.network].explorerUrl +
                       '/tx/' +
                       wallet.action.data.receipt.transactionHash
                     }
@@ -159,7 +160,11 @@ const Steps = ({ item, steps, handleClose }) => {
                       <Box textAlign={'center'} mt={2}>
                         <Link
                           className={classes.blockExplorerLink}
-                          href={wallet.explorer[item.network] + '/tx/' + wallet.action.data.hash}
+                          href={
+                            networkByKey[item.network].explorerUrl +
+                            '/tx/' +
+                            wallet.action.data.hash
+                          }
                           target="_blank"
                         >
                           See transaction on Block Explorer <OpenInNew />

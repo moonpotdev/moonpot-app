@@ -1,8 +1,8 @@
 import axios from 'axios';
 import Web3 from 'web3';
 import nftPromoClaimAbi from '../../config/abi/nftPromoClaim.json';
-import { config } from '../../config/config';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { networkByKey } from '../../config/networks';
 
 export const NFT_PROMO_CLAIM_PENDING = 'NFT_PROMO_CLAIM_PENDING';
 export const NFT_PROMO_CLAIM_COMPLETE = 'NFT_PROMO_CLAIM_COMPLETE';
@@ -13,7 +13,7 @@ export const fetchEligibleInfo = createAsyncThunk(
     const state = getState();
     const { address, network } = state.wallet;
     const provider = await state.wallet.web3modal.connect();
-    const contractAddress = config[network].nftPromoClaimAddress;
+    const contractAddress = networkByKey[network].nftPromoClaimAddress;
 
     if (address && provider) {
       const web3 = new Web3(provider);
@@ -50,7 +50,7 @@ export function claimTokenId(promoId, tokenId) {
     const state = getState();
     const { address, network } = state.wallet;
     const provider = await state.wallet.web3modal.connect();
-    const contractAddress = config[network].nftPromoClaimAddress;
+    const contractAddress = networkByKey[network].nftPromoClaimAddress;
 
     if (address && provider) {
       const web3 = new Web3(provider);

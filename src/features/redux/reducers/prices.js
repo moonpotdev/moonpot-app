@@ -1,11 +1,11 @@
-import { config } from '../../../config/config';
 import { createReducer } from '@reduxjs/toolkit';
+import { networkKeys } from '../../../config/networks';
 
 const initialState = {
   prices: [],
   apy: [],
-  ppfs: Object.fromEntries(Object.keys(config).map(network => [network, {}])),
-  byNetworkAddress: Object.fromEntries(Object.keys(config).map(network => [network, {}])),
+  ppfs: Object.fromEntries(networkKeys.map(network => [network, {}])),
+  byNetworkAddress: Object.fromEntries(networkKeys.map(network => [network, {}])),
   lastUpdated: 0,
 };
 

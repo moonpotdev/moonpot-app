@@ -3,7 +3,6 @@ import {
   BALANCE_FETCH_BALANCES_DONE,
   BALANCE_RESET,
 } from '../constants';
-import { config } from '../../../config/config';
 import { potsByNetwork } from '../../../config/vault';
 import {
   tokensByNetwork,
@@ -11,21 +10,24 @@ import {
   tokensByNetworkSymbol,
 } from '../../../config/tokens';
 import { createReducer } from '@reduxjs/toolkit';
+import { networkByKey, networkKeys } from '../../../config/networks';
 
 const MAX_UINT256 = '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
 
 const initialTokens = (() => {
   const tokens = [];
-  for (const net in config) {
-    const networkPools = potsByNetwork[net];
-    const nativeCurrency = config[net].nativeCurrency;
+  for (const networkKey of networkKeys) {
+    const networkPools = potsByNetwork[networkKey];
+    const nativeCurrency = networkByKey[networkKey].nativeCurrency;
     const nativeTokenSymbol = nativeCurrency.symbol;
     const nativeWrappedTokenSymbol = nativeCurrency.wrappedSymbol;
     const zapAllowances = Object.fromEntries(
-      tokensByNetwork[net].filter(token => !!token.zap).map(token => [token.zap, 0])
+      tokensByNetwork[networkKey].filter(token => !!token.zap).map(token => [token.zap, 0])
     );
     const zapAllowancesInfinity = Object.fromEntries(
-      tokensByNetwork[net].filter(token => !!token.zap).map(token => [token.zap, MAX_UINT256])
+      tokensByNetwork[networkKey]
+        .filter(token => !!token.zap)
+        .map(token => [token.zap, MAX_UINT256])
     );
 
     for (const key in networkPools) {
