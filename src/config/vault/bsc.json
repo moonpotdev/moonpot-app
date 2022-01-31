@@ -336,41 +336,6 @@
     "bonuses": []
   },
   {
-    "id": "ziggyverse-armour-nft",
-    "name": "Ziggyverse NFT",
-    "icon": "ziggyverse",
-    "token": "POTS",
-    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketPotsZiggyVerse",
-    "rewardAddress": "0x7eA00eD5843276E90b07Dfc01a484ad862C08aEE",
-    "contractAddress": "0x33bD1Abce7A4862b6f69fb83160e031d4b52f539",
-    "prizePoolAddress": "0x58e338F27D5574B16e3e61062a31ADe00a816558",
-    "prizeStrategyAddress": "0xC0ecc09E561E114AEa20612EA4f6eb457935b58d",
-    "oracleId": "POTS",
-    "apyId": "pots-pots",
-    "vaultType": "nft",
-    "duration": 1,
-    "fairplayDuration": 3,
-    "fairplayTicketFee": 0.05,
-    "status": "active",
-    "supportsClaimAllBonuses": false,
-    "withdrawFee": 0,
-    "infoCards": ["nft-strategy", "nft-fairplay"],
-    "infoCardStrategy": "ziggyverse-armour",
-    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
-    "sponsors": [],
-    "nftPrizeOnly": true,
-    "nfts": [
-      {
-        "name": "Ziggyverse Armour NFT",
-        "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
-        "type": "erc1155"
-      }
-    ],
-    "bonuses": []
-  },
-  {
     "id": "nft-collections",
     "name": "NFT Collections",
     "token": "POTS",
@@ -1546,6 +1511,42 @@
         "name": "Hoodie NFT",
         "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
         "type": "erc721"
+      }
+    ],
+    "bonuses": []
+  },
+  {
+    "id": "ziggyverse-armour-nft",
+    "name": "Ziggyverse NFT",
+    "icon": "ziggyverse",
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketPotsZiggyVerse",
+    "rewardAddress": "0x7eA00eD5843276E90b07Dfc01a484ad862C08aEE",
+    "contractAddress": "0x33bD1Abce7A4862b6f69fb83160e031d4b52f539",
+    "prizePoolAddress": "0x58e338F27D5574B16e3e61062a31ADe00a816558",
+    "prizeStrategyAddress": "0xC0ecc09E561E114AEa20612EA4f6eb457935b58d",
+    "oracleId": "POTS",
+    "apyId": "pots-pots",
+    "vaultType": "nft",
+    "duration": 1,
+    "fairplayDuration": 3,
+    "fairplayTicketFee": 0.05,
+    "status": "eol",
+    "eolDrawNumber": 68,
+    "supportsClaimAllBonuses": false,
+    "withdrawFee": 0,
+    "infoCards": ["nft-strategy", "nft-fairplay"],
+    "infoCardStrategy": "ziggyverse-armour",
+    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "Ziggyverse Armour NFT",
+        "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
+        "type": "erc1155"
       }
     ],
     "bonuses": []
