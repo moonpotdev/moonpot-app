@@ -16,11 +16,11 @@ export function networkIdSupported(chainId) {
 }
 
 export function networkIdToKey(chainId) {
-  return networkById[chainId].key;
+  return chainId in networkById ? networkById[chainId].key : null;
 }
 
 export function networkKeyToId(key) {
-  return networkByKey[key].chainId;
+  return key in networkByKey ? networkByKey[key].chainId[key].chainId : null;
 }
 
 export function networkSetup(key, provider = null) {

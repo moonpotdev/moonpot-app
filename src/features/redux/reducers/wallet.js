@@ -1,6 +1,10 @@
 import Web3 from 'web3';
 import { createReducer } from '@reduxjs/toolkit';
-import { networks } from '../../../config/networks';
+import { networkKeys, networks } from '../../../config/networks';
+
+function initialModals() {
+  return Object.fromEntries(networkKeys.map(key => [key, null]));
+}
 
 const initialNetwork = () => {
   const storage = localStorage.getItem('moon_networks');
@@ -21,6 +25,7 @@ const initialAction = () => {
 };
 
 const initialState = {
+  modals: initialModals(),
   network: initialNetwork(),
   rpc: initialRpc(),
   web3modal: null,
