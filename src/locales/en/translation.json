@@ -45,6 +45,7 @@
     "winPrizeInToken": "Win <span>{{prize}}</span> in {{token}}",
     "winNFT": "Win <span>{{nft}}</span>",
     "winNFTandPrizeInToken": "Win <span>{{nft}}</span> and <span>{{prize}}</span> in {{token}}",
+    "days": "DAYS",
     "hours": "HOURS",
     "mins": "MINS",
     "secs": "SECS",

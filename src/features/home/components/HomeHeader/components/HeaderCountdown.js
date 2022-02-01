@@ -5,6 +5,7 @@ import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 import { makeStyles } from '@material-ui/core';
 import { formatTimeLeft } from '../../../../../helpers/format';
 import { Grid } from '@material-ui/core';
+import { useTotalPrize } from '../../../../../helpers/hooks';
 import styles from '../styles';
 
 const useStyles = makeStyles(styles);
@@ -32,13 +33,13 @@ const HeaderCountdown = ({ pot }) => {
     true
   );
 
-  //Format prize
-  const prize = potData.totalPrizeUsd.toFixed(0);
-  const prizeFormatted = prize.toLocaleString(undefined, {
-    maximumFractionDigits: 0,
-  });
+  const [moreThanOneDay] = useState(timeToDraw[0] !== '00');
 
-  console.log(prizeFormatted);
+  //Formated prize
+  const prize = useTotalPrize(
+    potData.projectedAwardBalanceUsd || potData.awardBalanceUsd,
+    potData.projectedTotalSponsorBalanceUsd || potData.totalSponsorBalanceUsd
+  );
 
   return (
     <Grid item lg={4} md={6} sm={6} xs={12} className={classes.nextDrawCard}>
@@ -50,36 +51,69 @@ const HeaderCountdown = ({ pot }) => {
             {/* All featured non daily pots are token only prize (for now)*/}
             <Translate
               i18nKey="header.winPrizeInToken"
-              values={{ prize: '$' + prizeFormatted, token: potData.token }}
+              values={{ prize: '$' + prize, token: potData.token }}
             />
           </div>
           <div className={classes.nextDrawTimeContainer}>
-            <div>
-              <div className={classes.nextDrawTimeValue}>
-                {timeToDraw[1] === 'NaN' ? '00' : timeToDraw[1]}
-              </div>
-              <div className={classes.nextDrawTimeLabel}>
-                <Translate i18nKey="header.hours" />
-              </div>
-            </div>
-            <div className={classes.nextDrawTimeSeparator}>:</div>
-            <div>
-              <div className={classes.nextDrawTimeValue}>
-                {timeToDraw[2] === 'NaN' ? '00' : timeToDraw[2]}
-              </div>
-              <div className={classes.nextDrawTimeLabel}>
-                <Translate i18nKey="header.mins" />
-              </div>
-            </div>
-            <div className={classes.nextDrawTimeSeparator}>:</div>
-            <div>
-              <div className={classes.nextDrawTimeValue}>
-                {timeToDraw[3] === 'NaN' ? '00' : timeToDraw[3]}
-              </div>
-              <div className={classes.nextDrawTimeLabel}>
-                <Translate i18nKey="header.secs" />
-              </div>
-            </div>
+            {moreThanOneDay ? (
+              <>
+                <div>
+                  <div className={classes.nextDrawTimeValue}>
+                    {timeToDraw[1] === 'NaN' ? '00' : timeToDraw[0]}
+                  </div>
+                  <div className={classes.nextDrawTimeLabel}>
+                    <Translate i18nKey="header.days" />
+                  </div>
+                </div>
+                <div className={classes.nextDrawTimeSeparator}>:</div>
+                <div>
+                  <div className={classes.nextDrawTimeValue}>
+                    {timeToDraw[2] === 'NaN' ? '00' : timeToDraw[1]}
+                  </div>
+                  <div className={classes.nextDrawTimeLabel}>
+                    <Translate i18nKey="header.hours" />
+                  </div>
+                </div>
+                <div className={classes.nextDrawTimeSeparator}>:</div>
+                <div>
+                  <div className={classes.nextDrawTimeValue}>
+                    {timeToDraw[3] === 'NaN' ? '00' : timeToDraw[2]}
+                  </div>
+                  <div className={classes.nextDrawTimeLabel}>
+                    <Translate i18nKey="header.mins" />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  <div className={classes.nextDrawTimeValue}>
+                    {timeToDraw[1] === 'NaN' ? '00' : timeToDraw[1]}
+                  </div>
+                  <div className={classes.nextDrawTimeLabel}>
+                    <Translate i18nKey="header.hours" />
+                  </div>
+                </div>
+                <div className={classes.nextDrawTimeSeparator}>:</div>
+                <div>
+                  <div className={classes.nextDrawTimeValue}>
+                    {timeToDraw[2] === 'NaN' ? '00' : timeToDraw[2]}
+                  </div>
+                  <div className={classes.nextDrawTimeLabel}>
+                    <Translate i18nKey="header.mins" />
+                  </div>
+                </div>
+                <div className={classes.nextDrawTimeSeparator}>:</div>
+                <div>
+                  <div className={classes.nextDrawTimeValue}>
+                    {timeToDraw[3] === 'NaN' ? '00' : timeToDraw[3]}
+                  </div>
+                  <div className={classes.nextDrawTimeLabel}>
+                    <Translate i18nKey="header.secs" />
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
         {/* Pot Logo */}

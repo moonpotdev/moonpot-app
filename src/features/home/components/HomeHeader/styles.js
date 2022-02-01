@@ -12,8 +12,7 @@ const styles = theme => ({
     },
   },
   nextDrawCard: {
-    background: '#393960',
-    border: '1px solid #4C4C80',
+    background: 'linear-gradient(105.09deg, #4139AC 0.63%, #615DA9 100%, #615DA9 100%);',
     borderRadius: '10px',
     width: '500px',
     padding: '24px',
