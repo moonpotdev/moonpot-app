@@ -14,7 +14,7 @@ import SidePotExplainer from '../../../components/SidePotExplainer/SidePotExplai
 
 const useStyles = makeStyles(styles);
 
-const Moonpots = ({ potType, sort }) => {
+const Moonpots = ({ selectedCategory, sort }) => {
   const dispatch = useDispatch();
   const pricesLastUpdated = useSelector(state => state.pricesReducer.lastUpdated);
   const address = useSelector(state => state.walletReducer.address);
@@ -22,7 +22,7 @@ const Moonpots = ({ potType, sort }) => {
   const pots = useSelector(state => state.vaultReducer.pools);
   const classes = useStyles();
   const [filterConfig, setFilterConfig] = useFilterConfig();
-  const filtered = useFilteredPots(pots, potType, filterConfig);
+  const filtered = useFilteredPots(pots, selectedCategory, filterConfig);
   const [sortKey, sortDir] = useSortKey(sort);
 
   useEffect(() => {
@@ -47,14 +47,17 @@ const Moonpots = ({ potType, sort }) => {
     <React.Fragment>
       <div className={classes.potsContainer}>
         <div className={classes.spacer}>
-          <MigrationNotices potType={potType} className={classes.potsMigrationNotice} />
-          {potType === 'side' ? <SidePotExplainer /> : null}
+          <MigrationNotices
+            selectedCategory={selectedCategory}
+            className={classes.potsMigrationNotice}
+          />
+          {selectedCategory === 'side' ? <SidePotExplainer /> : null}
           <Cards>
             {filtered.map(pot => (
               <Pot key={pot.id} variant={'tealLight'} id={pot.id} />
             ))}
           </Cards>
-          {potType === 'community' ? (
+          {selectedCategory === 'community' ? (
             <Grid item xs={12} style={{ marginTop: '32px' }}>
               <Grid container className={classes.communityJoin}>
                 <Grid item xs={12}>
