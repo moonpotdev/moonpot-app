@@ -231,25 +231,8 @@
             "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
             "Each draw will pick one winner to receive a single NFT from the current collection.",
             "A new collection will be added to the pot once all NFTs from the current collection have been distributed. You do not have to restake to enter the new collection's draw.",
-            "The current collection is Crazy Chipmunks"
-          ],
-          "nfts": {
-            "crazy-chipmonks/517": {
-              "name": "#517"
-            },
-            "crazy-chipmonks/520": {
-              "name": "#520"
-            },
-            "crazy-chipmonks/579": {
-              "name": "#579"
-            },
-            "crazy-chipmonks/583": {
-              "name": "#583"
-            },
-            "crazy-chipmonks/656": {
-              "name": "#656"
-            }
-          }
+            "The current collection is {{collection}}"
+          ]
         }
       },
       "xmas-strategy": {
@@ -278,7 +261,7 @@
           "merch": {
             "beefy-moonpot-hoodie.png": {
               "title": "Beefy x Moonpot Hoodie"
-            }  
+            }
           }
         },
         "xmas-moochristmasbeefy": {
@@ -352,7 +335,7 @@
       ],
       "beltbnb": ["ZAP lets you create beltBNB tokens and deposit with just one transaction."],
       "ibalpaca": ["ZAP lets you create ibALPACA tokens and deposit with just one transaction."]
-    },  
+    },
     "inYourWallet": "Di dompet Anda",
     "provider": "Penyedia likuiditas"
   },
