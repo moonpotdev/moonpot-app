@@ -144,7 +144,7 @@ const Vault = () => {
           awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
         />
         <PoweredByBeefy className={classes.poweredBy} />
-        {pot.vaultType === 'side' ? <SidePotExplainer /> : null}
+        {pot.categories.includes('side') ? <SidePotExplainer /> : null}
         <Pot
           id={id}
           onFairplayLearnMore={handleFairplayLearnMore}

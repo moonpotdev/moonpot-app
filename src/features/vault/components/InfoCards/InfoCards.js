@@ -73,6 +73,7 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
         returnObjects: true,
         token: pot.token,
         name: pot.name,
+        collection: pot.infoCardNftCollectionName,
       })
     : null;
 
@@ -112,18 +113,26 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
             ))}
           </Grid>
         ) : null}
-        {nfts ? (
+        {pot.nfts ? (
           <Grid container spacing={1} className={classes.nftShowcase}>
-            {Object.entries(nfts).map(([key, item]) => (
-              <Grid item xs={4} className={classes.nftShowcaseItem} key={key}>
-                <img
-                  src={require(`../../../../images/nfts/${pot.id}/${key}.png`).default}
-                  className={classes.nftShowcaseImg}
-                  alt={item.name}
-                />
-                {item.name ? <div className={classes.nftShowcaseItemName}>{item.name}</div> : null}
-              </Grid>
-            ))}
+            {pot.nfts
+              .map(nft =>
+                (nft.ids || []).map(id => (
+                  <Grid item xs={4} className={classes.nftShowcaseItem} key={`${nft.slug}/${id}`}>
+                    <img
+                      src={
+                        require(`../../../../images/nfts/${pot.id}/${nft.slug}/${id}.png`).default
+                      }
+                      className={classes.nftShowcaseImg}
+                      alt={nfts?.[`${nft.slug}/${id}`] ?? ''}
+                    />
+                    <div className={classes.nftShowcaseItemName}>
+                      {nfts?.[`${nft.slug}/${id}`] ?? '#' + id}
+                    </div>
+                  </Grid>
+                ))
+              )
+              .flat()}
           </Grid>
         ) : null}
         {pot.infoCardNftStrategyCollection ? (

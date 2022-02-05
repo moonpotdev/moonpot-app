@@ -31,16 +31,6 @@ const PotTypes = [
     path: 'nft',
     label: 'buttons.nftPots',
   },
-  {
-    key: 'community',
-    path: 'community',
-    label: 'buttons.communityPots',
-  },
-  {
-    key: 'lp',
-    path: 'lp',
-    label: 'buttons.lpPots',
-  },
 ];
 
 const sortByTypes = [

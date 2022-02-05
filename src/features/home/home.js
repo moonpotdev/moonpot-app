@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, makeStyles, Grid } from '@material-ui/core';
+import { Container, Grid, makeStyles } from '@material-ui/core';
 import styles from './styles';
 import { TVL } from './components/TVL';
 import SectionSelect from './components/SectionSelect/SectionSelect';
@@ -54,7 +54,7 @@ const Home = () => {
           </Grid>
         </Grid>
         {top === 'moonpots' ? (
-          <Moonpots potType={bottom} potStatus={status} sort={filter} />
+          <Moonpots selectedCategory={bottom} potStatus={status} sort={filter} />
         ) : (
           <MyPots potStatus={status} sort={filter} />
         )}

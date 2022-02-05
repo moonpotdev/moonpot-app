@@ -55,7 +55,7 @@ function MigrationNotice({ pot }) {
   return null;
 }
 
-export function MigrationNotices({ potType }) {
+export function MigrationNotices({ selectedCategory }) {
   const classes = useStyles();
   const currentNetwork = useSelector(state => state.wallet.network);
   const currentAddress = useSelector(state => state.wallet.address);
@@ -65,11 +65,11 @@ export function MigrationNotices({ potType }) {
     return Object.values(allPots).filter(
       pot =>
         pot.status === 'eol' &&
-        (potType === 'all' || pot.vaultType === potType) &&
+        (selectedCategory === 'all' || pot.categories.includes(selectedCategory)) &&
         pot.network === currentNetwork &&
         pot.migrationNeeded
     );
-  }, [potType, allPots, currentNetwork]);
+  }, [selectedCategory, allPots, currentNetwork]);
   const hasPotsNeedingMigration = potsNeedingMigration.length > 0;
 
   if (currentAddress && hasPotsNeedingMigration) {

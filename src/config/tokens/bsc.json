@@ -642,5 +642,12 @@
     "type": "nft",
     "subtype": "erc721",
     "decimals": 0
+  },
+  {
+    "symbol": "Sluggish Sloths NFT",
+    "address": "0x74a1a77B627714BF7200464a16C51701Abb7cc38",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
   }
 ]
