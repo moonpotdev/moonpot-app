@@ -9,6 +9,7 @@ import buybacksReducer from './buybacks';
 import holdersReducer from './holders';
 import winnersReducer from '../../winners/redux/reducer';
 import filterReducer from './filter';
+import promoCodesReducer from '../../promo/reducer';
 
 const reducers = {
   walletReducer,
@@ -19,9 +20,10 @@ const reducers = {
   modalReducer,
   zapReducer,
   buybacksReducer,
-  holdersReducer,
+  holders: holdersReducer,
   winners: winnersReducer,
   filterReducer,
+  promo: promoCodesReducer,
 };
 
 export default reducers;

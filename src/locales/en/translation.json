@@ -167,6 +167,10 @@
           "watch": [
             "This strategy deposits your {{token}} tokens in a Moonpot {{token}} vault, which autocompounds your {{token}} tokens from a fixed supply of {{token}} provided by the Yieldwatch team.",
             "All of the {{token}} provided by Yieldwatch goes to Moonpot players. Half is used to give you interest. The other half is used for Prize Draws and Ziggy's Pot rewards."
+          ],
+          "binopoly": [
+            "The very first Play-to-Earn capital operation game built on BSC. Anyone can purchase and hold virtual land and cities to build a world of their own. Players may earn BINO tokens from purchasing or renting land plots and properties within various in-game scenarios.",
+            "This strategy deposits your {{token}} tokens in a Moonpot {{token}} vault, which autocompounds your {{token}} tokens from a fixed supply of {{token}} provided by the Binopoly team."
           ]
         },
         "beefyVaultAddress": "Beefy.Finance Vault Address",
@@ -238,25 +242,8 @@
             "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
             "Each draw will pick one winner to receive a single NFT from the current collection.",
             "A new collection will be added to the pot once all NFTs from the current collection have been distributed. You do not have to restake to enter the new collection's draw.",
-            "The current collection is Born Bad Boys"
-          ],
-          "nfts": {
-            "born-bad-boys/7114": {
-              "name": "BBB 7114"
-            },
-            "born-bad-boys/7115": {
-              "name": "BBB 7115"
-            },
-            "born-bad-boys/7116": {
-              "name": "BBB 7116"
-            },
-            "born-bad-boys/7117": {
-              "name": "BBB 7117"
-            },
-            "born-bad-boys/7118": {
-              "name": "BBB 7118"
-            }
-          }
+            "The current collection is {{collection}}"
+          ]
         }
       },
       "xmas-strategy": {
@@ -410,6 +397,16 @@
       "You can then deposit all your earned and bonus POTS from your wallet into Ziggy’s Pot in a single transaction."
     ],
     "claimAll": "Claim all earned & bonus POTS"
+  },
+  "promo": {
+    "canClaim": "You can claim {{count}} promocode",
+    "canClaim_plural": "You can claim {{count}} promocodes",
+    "claim": "Claim my promocode",
+    "myPromocodes": "My promocodes",
+    "claimed": "{{count}} promocodes claimed",
+    "reveal": "Reveal",
+    "noNfts": "No NFTs to claim",
+    "beefyGear": "Place the order on the Beefy Gear Store. Promo code will cover both merchandise and shipping costs."
   },
   "migration": {
     "viewRetiredPot": "View Retired Pot",

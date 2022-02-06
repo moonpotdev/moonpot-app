@@ -72,6 +72,7 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
         returnObjects: true,
         token: pot.token,
         name: pot.name,
+        collection: pot.infoCardNftCollectionName,
       })
     : null;
 
@@ -111,18 +112,26 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
             ))}
           </Grid>
         ) : null}
-        {nfts ? (
+        {pot.nfts ? (
           <Grid container spacing={1} className={classes.nftShowcase}>
-            {Object.entries(nfts).map(([key, item]) => (
-              <Grid item xs={4} className={classes.nftShowcaseItem} key={key}>
-                <img
-                  src={require(`../../../../images/nfts/${pot.id}/${key}.png`).default}
-                  className={classes.nftShowcaseImg}
-                  alt={item.name}
-                />
-                {item.name ? <div className={classes.nftShowcaseItemName}>{item.name}</div> : null}
-              </Grid>
-            ))}
+            {pot.nfts
+              .map(nft =>
+                (nft.ids || []).map(id => (
+                  <Grid item xs={4} className={classes.nftShowcaseItem} key={`${nft.slug}/${id}`}>
+                    <img
+                      src={
+                        require(`../../../../images/nfts/${pot.id}/${nft.slug}/${id}.png`).default
+                      }
+                      className={classes.nftShowcaseImg}
+                      alt={nfts?.[`${nft.slug}/${id}`] ?? ''}
+                    />
+                    <div className={classes.nftShowcaseItemName}>
+                      {nfts?.[`${nft.slug}/${id}`] ?? '#' + id}
+                    </div>
+                  </Grid>
+                ))
+              )
+              .flat()}
           </Grid>
         ) : null}
         {pot.infoCardNftStrategyCollection ? (
@@ -208,55 +217,57 @@ const XmasStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
 });
 
 const InterestBreakdownInfoCard = memo(function ({ pot, classes, t }) {
-  if (!pot.interestBreakdown) {
+  // If fees are handled manually, displayed breakdown might differ from calculation breakdown
+  const interestBreakdown = pot.displayInterestBreakdown || pot.interestBreakdown || null;
+  if (!interestBreakdown) {
     return null;
   }
 
   return (
     <Card variant="purpleInfo" oneColumn={true}>
       <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
-      {pot.interestBreakdown.interest ? (
+      {interestBreakdown.interest ? (
         <div className={classes.earningItem}>
           <div className={classes.earningLabel}>
             {t('pot.infocards.earnings.tokenInterest', { token: pot.token })}
           </div>
-          <div className={classes.earningValue}>{pot.interestBreakdown.interest}%</div>
+          <div className={classes.earningValue}>{interestBreakdown.interest}%</div>
         </div>
       ) : null}
-      {pot.interestBreakdown.prize ? (
+      {interestBreakdown.prize ? (
         <div className={classes.earningItem}>
           <div className={classes.earningLabel}>
             {t('pot.infocards.earnings.nameMoonpotPrizeDraw', { name: pot.name })}
           </div>
-          <div className={classes.earningValue}>{pot.interestBreakdown.prize}%</div>
+          <div className={classes.earningValue}>{interestBreakdown.prize}%</div>
         </div>
       ) : null}
-      {pot.interestBreakdown.buyback ? (
+      {interestBreakdown.buyback ? (
         <div className={classes.earningItem}>
           <div className={classes.earningLabel}>
             {t('pot.infocards.earnings.buyback', { token: pot.token })}
           </div>
-          <div className={classes.earningValue}>{pot.interestBreakdown.buyback}%</div>
+          <div className={classes.earningValue}>{interestBreakdown.buyback}%</div>
         </div>
       ) : null}
-      {pot.interestBreakdown.ziggyInterest ? (
+      {interestBreakdown.ziggyInterest ? (
         <div className={classes.earningItem}>
           <div className={classes.earningLabel}>
             {t('pot.infocards.earnings.ziggysPotInterest')}
           </div>
-          <div className={classes.earningValue}>{pot.interestBreakdown.ziggyInterest}%</div>
+          <div className={classes.earningValue}>{interestBreakdown.ziggyInterest}%</div>
         </div>
       ) : null}
-      {pot.interestBreakdown.ziggyPrize ? (
+      {interestBreakdown.ziggyPrize ? (
         <div className={classes.earningItem}>
           <div className={classes.earningLabel}>{t('pot.infocards.earnings.ziggysPrizeDraw')}</div>
-          <div className={classes.earningValue}>{pot.interestBreakdown.ziggyPrize}%</div>
+          <div className={classes.earningValue}>{interestBreakdown.ziggyPrize}%</div>
         </div>
       ) : null}
-      {pot.interestBreakdown.treasury ? (
+      {interestBreakdown.treasury ? (
         <div className={classes.earningItem}>
           <div className={classes.earningLabel}>{t('pot.infocards.earnings.treasury')}</div>
-          <div className={classes.earningValue}>{pot.interestBreakdown.treasury}%</div>
+          <div className={classes.earningValue}>{interestBreakdown.treasury}%</div>
         </div>
       ) : null}
     </Card>

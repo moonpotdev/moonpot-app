@@ -318,9 +318,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
         </Grid>
         <Grid item xs={6}>
           <div className={classes.label} style={{ textAlign: 'right' }}>
-            {pot.vaultType === 'lp' || pot.vaultType === 'stable' ? (
-              <Translate i18nKey="deposit.provider" />
-            ) : null}
+            {pot.provider ? <Translate i18nKey="deposit.provider" /> : null}
           </div>
         </Grid>
         <Grid item xs={6}>
@@ -329,9 +327,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
           </div>
         </Grid>
         <Grid item xs={6} style={{ textAlign: 'right' }}>
-          {pot.vaultType === 'lp' || pot.vaultType === 'stable' ? (
-            <div className={classes.value}>{pot.provider}</div>
-          ) : null}
+          {pot.provider ? <div className={classes.value}>{pot.provider}</div> : null}
         </Grid>
       </Grid>
       {/*<div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>*/}

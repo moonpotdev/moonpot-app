@@ -16,7 +16,12 @@
     "moonpots": "Moonpots",
     "myPots": "Pots Saya",
     "sidePots": "side",
-    "nftPots": "NFT"
+    "nftPots": "NFT",
+    "nextDraw": "Next Draw",
+    "prize": "Prize",
+    "apy": "APY",
+    "default": "Default",
+    "featured": "Featured"
   },
   "modals": {
     "unsupportedNetworkDetected": "Jaringan terdeteksi tidak didukung ",
@@ -34,7 +39,15 @@
     "vote": "Pilih",
     "winners": "Pemenang",
     "potsPrice": "Harga POTS",
-    "buyPots": "Beli POTS"
+    "buyPots": "Beli POTS",
+    "audit": "Audit",
+    "articles": "Articles"
+  },
+  "footer": {
+    "cadets": "CADETS",
+    "prizes": "PRIZES",
+    "tvl": "TVL",
+    "buybacks": "BUYBACKS"
   },
   "homeTitle": "Depositkan <span>crypto</span>, Hasilkan <span>keuntungan</span><wbr /> dan dapatkan kesempatan untuk memenangkan <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposit (TVL)",
@@ -56,6 +69,9 @@
   "telegramSocialBlockButton": "Bergabunglah dengan Telegram kami",
   "discordSocialBlockButton": "Bergabunglah dengan Discord kami",
   "twitterSocialBlockButton": "Ikuti twitter kami",
+  "potType": "Pot Type:",
+  "sortBy": "Sort by:",
+  "potStatus": "Pot Status:",
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",
@@ -140,6 +156,10 @@
           "watch": [
             "Strategi ini menyimpan token {{token}} Anda di brankas Moonpot {{token}}, yang secara otomatis menggabungkan token {{token}} Anda dari pasokan tetap {{token}} yang disediakan oleh tim Yieldwatch.",
             "Semua {{token}} yang disediakan oleh Yieldwatch diberikan kepada pemain Moonpot. Setengah akan digunakan untuk memberikan Anda keuntungan. Setengahnya lagi akan digunakan untuk Hadiah Undian dan hadiah Ziggy Pot."
+          ],
+          "binopoly": [
+            "The very first Play-to-Earn capital operation game built on BSC. Anyone can purchase and hold virtual land and cities to build a world of their own. Players may earn BINO tokens from purchasing or renting land plots and properties within various in-game scenarios.",
+            "This strategy deposits your {{token}} tokens in a Moonpot {{token}} vault, which autocompounds your {{token}} tokens from a fixed supply of {{token}} provided by the Binopoly team."
           ]
         },
         "beefyVaultAddress": "Alamat Brankas Beefy.Finance",
@@ -186,6 +206,33 @@
               "rarity": "110 / 150"
             }
           }
+        },
+        "ziggyverse-strength-nft": {
+          "body": [
+            "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling."
+          ],
+          "rarities": {
+            "gold": {
+              "name": "Strength - Gold",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "Strength - Moonstone",
+              "rarity": "40 / 100"
+            },
+            "jade": {
+              "name": "Strength - Jade",
+              "rarity": "110 / 150"
+            }
+          }
+        },
+        "nft-collections": {
+          "body": [
+            "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
+            "Each draw will pick one winner to receive a single NFT from the current collection.",
+            "A new collection will be added to the pot once all NFTs from the current collection have been distributed. You do not have to restake to enter the new collection's draw.",
+            "The current collection is {{collection}}"
+          ]
         }
       },
       "xmas-strategy": {
@@ -197,8 +244,12 @@
             "Pot ini berisi 70 NFT yang dapat ditukarkan dengan kode promo untuk memesan kaos gratis dari Beefy Store. Stake POTS untuk berpartisipasi, undian akan dilakukan setiap hari, hingga tanggal 31 Desember."
           ],
           "merch": {
-            "beefy-moonpot-tshirt-front.png": { "title": "T-Shirt - Front" },
-            "beefy-moonpot-tshirt-back.png": { "title": "T-Shirt - Back" }
+            "beefy-moonpot-tshirt-front.png": {
+              "title": "T-Shirt - Front"
+            },
+            "beefy-moonpot-tshirt-back.png": {
+              "title": "T-Shirt - Back"
+            }
           }
         },
         "xmas-moobifi": {
@@ -208,7 +259,9 @@
             "Pot ini berisi 125 NFT yang dapat ditukarkan dengan kode promo untuk memesan hoodie gratis dari Beefy Store, beserta hadiah BIFI dan POTS. Stake mooBIFI untuk berpartisipasi, undian akan dilakukan pada tanggal 31 Desember."
           ],
           "merch": {
-            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+            "beefy-moonpot-hoodie.png": {
+              "title": "Beefy x Moonpot Hoodie"
+            }
           }
         },
         "xmas-moochristmasbeefy": {
@@ -218,7 +271,9 @@
             "Pot ini berisi 15 NFT yang dapat ditukarkan dengan kode promo untuk memesan hoodie gratis dari Beefy Store, beserta hadiah BIFI dan POTS. Stake mooChristmasBeefy untuk berpartisipasi, undian akan dilakukan pada tanggal 31 Des."
           ],
           "merch": {
-            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+            "beefy-moonpot-hoodie.png": {
+              "title": "Beefy x Moonpot Hoodie"
+            }
           }
         }
       },
@@ -278,12 +333,8 @@
       "4belt": [
         "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi."
       ],
-      "beltbnb": [
-        "ZAP memungkinkan Anda membuat token beltBNB dan Deposit hanya dengan satu transaksi."
-      ],
-      "ibalpaca": [
-        "ZAP memungkinkan Anda membuat token ibALPACA dan Deposit hanya dengan satu transaksi."
-      ]
+      "beltbnb": ["ZAP lets you create beltBNB tokens and deposit with just one transaction."],
+      "ibalpaca": ["ZAP lets you create ibALPACA tokens and deposit with just one transaction."]
     },
     "inYourWallet": "Di dompet Anda",
     "provider": "Penyedia likuiditas"
@@ -335,6 +386,16 @@
       "Anda kemudian dapat menyetor semua bonus POTS yang anda peroleh dari dompet anda ke dalam Ziggy's Pot dalam satu transaksi."
     ],
     "claimAll": "Klaim semua bonus POTS yang diperoleh"
+  },
+  "promo": {
+    "canClaim": "You can claim {{count}} promocode",
+    "canClaim_plural": "You can claim {{count}} promocodes",
+    "claim": "Claim my promocode",
+    "myPromocodes": "My promocodes",
+    "claimed": "{{count}} promocodes claimed",
+    "reveal": "Reveal",
+    "noNfts": "No NFTs to claim",
+    "beefyGear": "Place the order on the Beefy Gear Store. Promo code will cover both merchandise and shipping costs."
   },
   "migration": {
     "viewRetiredPot": "Lihat Pot Tidak Aktif",

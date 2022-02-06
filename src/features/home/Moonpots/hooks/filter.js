@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { useLocalStorage } from '../../../../helpers/hooks';
 
 const FILTER_DEFAULT = {
-  version: 3, // Bump+1 if changes are made to force reset on end user
+  version: 4, // Bump+1 if changes are made to force reset on end user
   sortKey: 'defaultOrder', // Must have matching entry in SORT_COMPARE_FUNCTIONS
   sortDir: 'asc',
   deposited: false,
@@ -20,7 +20,7 @@ const SORT_COMPARE_FUNCTIONS = {
   totalApy: compareNumber,
 };
 
-function filterIncludePot(pot, vaultType, config) {
+function filterIncludePot(pot, selectedCategory, config) {
   if (pot.status !== (config.retired ? 'eol' : 'active')) {
     return false;
   }
@@ -29,11 +29,15 @@ function filterIncludePot(pot, vaultType, config) {
     return false;
   }
 
-  if (vaultType !== 'all' && vaultType !== pot.vaultType && vaultType !== 'featured') {
+  if (
+    selectedCategory !== 'all' &&
+    !pot.categories.includes(selectedCategory) &&
+    selectedCategory !== 'featured'
+  ) {
     return false;
   }
 
-  if (vaultType === 'featured' && pot.featured !== true) {
+  if (selectedCategory === 'featured' && pot.featured !== true) {
     return false;
   }
 
@@ -81,12 +85,14 @@ export function useSortKey(sort) {
   }
 }
 
-export function useFilteredPots(pots, vaultType, config) {
+export function useFilteredPots(pots, selectedCategory, config) {
   return useMemo(() => {
-    const filtered = Object.values(pots).filter(pot => filterIncludePot(pot, vaultType, config));
+    const filtered = Object.values(pots).filter(pot =>
+      filterIncludePot(pot, selectedCategory, config)
+    );
 
     return sortPots(filtered, config.sortKey, config.sortDir);
-  }, [pots, vaultType, config]);
+  }, [pots, selectedCategory, config]);
 }
 
 function configNeedsReset(config) {

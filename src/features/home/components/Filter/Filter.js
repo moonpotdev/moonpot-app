@@ -27,29 +27,9 @@ const PotTypes = [
     label: 'buttons.mainPots',
   },
   {
-    key: 'stable',
-    path: 'stable',
-    label: 'buttons.stablePots',
-  },
-  {
     key: 'nft',
     path: 'nft',
     label: 'buttons.nftPots',
-  },
-  {
-    key: 'community',
-    path: 'community',
-    label: 'buttons.communityPots',
-  },
-  {
-    key: 'lp',
-    path: 'lp',
-    label: 'buttons.lpPots',
-  },
-  {
-    key: 'side',
-    path: 'side',
-    label: 'buttons.sidePots',
   },
 ];
 
