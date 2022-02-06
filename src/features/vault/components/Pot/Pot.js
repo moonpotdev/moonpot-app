@@ -12,6 +12,7 @@ import PotBonus from '../../../home/MyPots/components/Pot/PotBonus';
 import { useSelector } from 'react-redux';
 import { ZapPotWithdraw } from '../../../../components/PotWithdraw/ZapPotWithdraw';
 import { TooltipWithIcon } from '../../../../components/Tooltip/tooltip';
+import { WalletRequired } from '../../../../components/WalletRequired/WalletRequired';
 
 const useStyles = makeStyles(styles);
 
@@ -132,27 +133,29 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
           numberOfWinners={pot.numberOfWinners}
         />
       </CardAccordionItem>
-      <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
-        {pot.status === 'active' ? (
-          <>
-            {pot.isZap ? (
-              <ZapPotDeposit
-                id={id}
-                onLearnMore={onFairplayLearnMore}
-                variant={handleVariant(pot.vaultType)}
-              />
-            ) : (
-              <PotDeposit
-                id={id}
-                onLearnMore={onFairplayLearnMore}
-                variant={handleVariant(pot.vaultType)}
-              />
-            )}
-          </>
-        ) : null}
-      </CardAccordionItem>
-      <BonusAccordionItem pot={pot} />
-      <WithdrawAccordionItem pot={pot} onFairplayLearnMore={onFairplayLearnMore} />
+      <WalletRequired network={pot.network}>
+        <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
+          {pot.status === 'active' ? (
+            <>
+              {pot.isZap ? (
+                <ZapPotDeposit
+                  id={id}
+                  onLearnMore={onFairplayLearnMore}
+                  variant={handleVariant(pot.vaultType)}
+                />
+              ) : (
+                <PotDeposit
+                  id={id}
+                  onLearnMore={onFairplayLearnMore}
+                  variant={handleVariant(pot.vaultType)}
+                />
+              )}
+            </>
+          ) : null}
+        </CardAccordionItem>
+        <BonusAccordionItem pot={pot} />
+        <WithdrawAccordionItem pot={pot} onFairplayLearnMore={onFairplayLearnMore} />
+      </WalletRequired>
     </CardAccordionGroup>
   );
 };

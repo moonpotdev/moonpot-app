@@ -22,7 +22,7 @@ const useStyles = makeStyles(styles);
 
 const Steps = ({ item, steps, handleClose }) => {
   const classes = useStyles();
-  const wallet = useSelector(state => state.wallet);
+  const action = useSelector(state => state.wallet.action);
   const renderContent = steps.modal && item;
 
   return (
@@ -102,7 +102,7 @@ const Steps = ({ item, steps, handleClose }) => {
                     href={
                       networkByKey[item.network].explorerUrl +
                       '/tx/' +
-                      wallet.action.data.receipt.transactionHash
+                      action.data.receipt.transactionHash
                     }
                     target="_blank"
                   >
@@ -140,15 +140,15 @@ const Steps = ({ item, steps, handleClose }) => {
                       : ''}
                   </Typography>
 
-                  {wallet.action && wallet.action.result === 'error' ? (
+                  {action && action.result === 'error' ? (
                     <Alert severity={'error'}>
                       <AlertTitle>Error</AlertTitle>
-                      <Typography>{wallet.action.data.error}</Typography>
+                      <Typography>{action.data.error}</Typography>
                     </Alert>
                   ) : (
                     ''
                   )}
-                  {wallet.action && wallet.action.result === 'success_pending' ? (
+                  {action && action.result === 'success_pending' ? (
                     <Alert severity={'info'}>
                       <AlertTitle className={classes.pendingText}>Confirmation Pending</AlertTitle>
                       <Typography className={classes.pendingText}>
@@ -160,11 +160,7 @@ const Steps = ({ item, steps, handleClose }) => {
                       <Box textAlign={'center'} mt={2}>
                         <Link
                           className={classes.blockExplorerLink}
-                          href={
-                            networkByKey[item.network].explorerUrl +
-                            '/tx/' +
-                            wallet.action.data.hash
-                          }
+                          href={networkByKey[item.network].explorerUrl + '/tx/' + action.data.hash}
                           target="_blank"
                         >
                           See transaction on Block Explorer <OpenInNew />

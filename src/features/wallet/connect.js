@@ -5,23 +5,56 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { walletDisconnect } from './disconnect';
 import { walletAccountsChanged } from './accountsChanged';
 import { BALANCE_RESET, EARNED_RESET } from '../redux/constants';
+import { walletChainChanged } from './chainChanged';
 
-function subscribeToProvider(provider, networkKey, dispatch) {
+function createEventHandler(handler) {
+  const func = function (...args) {
+    if (func.active) {
+      handler(...args);
+    }
+  };
+
+  func.active = true;
+  func.off = function () {
+    func.active = false;
+  };
+
+  return func;
+}
+
+function subscribeToProvider(provider, dispatch) {
   if (!provider.on || typeof provider.on !== 'function') {
-    return;
+    console.log('no provider events');
+    return null;
   }
 
-  provider.on('close', () => {});
-
-  provider.on('disconnect', () => {
+  const closeHandler = createEventHandler(() => {
     dispatch(walletDisconnect());
   });
 
-  provider.on('accountsChanged', accounts => {
-    dispatch(walletAccountsChanged({ accounts, networkKey }));
+  const accountsChangedHandler = createEventHandler(accounts => {
+    dispatch(walletAccountsChanged({ accounts }));
   });
 
-  provider.on('chainChanged', id => {});
+  const chainChangedHandler = createEventHandler(id => {
+    const chainId = Web3.utils.isHexStrict(id) ? Web3.utils.hexToNumber(id) : id;
+    dispatch(walletChainChanged({ chainId }));
+  });
+
+  provider.on('close', closeHandler);
+  provider.on('disconnect', closeHandler);
+  provider.on('accountsChanged', accountsChangedHandler);
+  provider.on('chainChanged', chainChangedHandler);
+
+  try {
+    provider.__unsubscribe = () => {
+      closeHandler.off();
+      accountsChangedHandler.off();
+      chainChangedHandler.off();
+    };
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 function extendWeb3Functions(web3) {
@@ -55,23 +88,33 @@ export const walletConnect = createAsyncThunk(
   async (networkKey, { getState, dispatch }) => {
     const modal = getModal(networkKey);
 
-    modal.clearCachedProvider();
+    console.log('wait connect');
     const provider = await modal.connect();
+
+    console.log('create web3');
     const web3 = createWeb3(provider);
 
     // get network id
+    console.log('get network id');
     const networkId = await getNetworkId(web3);
 
     // get accounts
+    console.log('get accounts');
     const accounts = await web3.eth.getAccounts();
 
     // watch disconnect/account/chain changed events
-    subscribeToProvider(provider);
+    console.log('subscribe provider');
+    subscribeToProvider(provider, dispatch);
 
     // reset earned/balances to zero
+    console.log('reset state');
     dispatch({ type: EARNED_RESET });
     dispatch({ type: BALANCE_RESET });
 
+    console.log('return', networkKey, networkId, networkIdToKey(networkId));
+    // TODO check network
+    // show unsupported modal if connected to unsupported network
+    // show wrong network modal if connected to network other than what was connected
     return {
       network: networkIdToKey(networkId),
       address: accounts && accounts.length ? accounts[0] : null,

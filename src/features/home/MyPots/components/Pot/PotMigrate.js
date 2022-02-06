@@ -12,6 +12,7 @@ import { convertAmountToRawNumber } from '../../../../../helpers/format';
 import { useTranslation } from 'react-i18next';
 import { Alert, AlertText } from '../../../../../components/Alert';
 import { InfoOutlined } from '@material-ui/icons';
+import { WalletRequired } from '../../../../../components/WalletRequired/WalletRequired';
 
 const useStyles = makeStyles(styles);
 
@@ -178,18 +179,20 @@ export const PotMigrate = function ({ item }) {
               ) : null}
             </AlertText>
           </Alert>
-          <PrimaryButton
-            onClick={() => handleMigrator(item)}
-            className={classes.eolMoveBtn}
-            variant="purple"
-            fullWidth={true}
-            disabled={item.userBalance.lte(0)}
-          >
-            <Translate
-              i18nKey={bonusTokens ? 'migration.migrateTokenAndClaim' : 'migration.migrateToken'}
-              values={{ token: item.token, bonus: bonusTokens }}
-            />
-          </PrimaryButton>
+          <WalletRequired network={item.network}>
+            <PrimaryButton
+              onClick={() => handleMigrator(item)}
+              className={classes.eolMoveBtn}
+              variant="purple"
+              fullWidth={true}
+              disabled={item.userBalance.lte(0)}
+            >
+              <Translate
+                i18nKey={bonusTokens ? 'migration.migrateTokenAndClaim' : 'migration.migrateToken'}
+                values={{ token: item.token, bonus: bonusTokens }}
+              />
+            </PrimaryButton>
+          </WalletRequired>
         </Grid>
         <Grid item xs={6} align={'left'}>
           <Typography className={classes.potsItemText} style={{ marginTop: '12px' }}>

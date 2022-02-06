@@ -4,7 +4,7 @@ import { walletDisconnect } from './disconnect';
 
 export const walletAccountsChanged = createAsyncThunk(
   'wallet/accounts-changed',
-  async ({ accounts, networkKey }, { dispatch }) => {
+  async ({ accounts }, { dispatch }) => {
     // new account
     if (accounts && accounts.length) {
       // reset earned/balances to zero
@@ -12,7 +12,7 @@ export const walletAccountsChanged = createAsyncThunk(
       dispatch({ type: BALANCE_RESET });
 
       return {
-        account: accounts[0],
+        address: accounts[0],
       };
     }
 
@@ -20,7 +20,7 @@ export const walletAccountsChanged = createAsyncThunk(
     dispatch(walletDisconnect());
 
     return {
-      account: null,
+      address: null,
     };
   }
 );

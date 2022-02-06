@@ -7,6 +7,7 @@ import PotBonus from './PotBonus';
 import { ZapPotWithdraw } from '../../../../../components/PotWithdraw/ZapPotWithdraw';
 import { ZapPotDeposit } from '../../../../../components/ZapPotDeposit/ZapPotDeposit';
 import { useSelector } from 'react-redux';
+import { WalletRequired } from '../../../../../components/WalletRequired/WalletRequired';
 
 const ActiveLayout = function ({ item }) {
   const wallet = useSelector(state => state.wallet);
@@ -46,23 +47,25 @@ const ActiveLayout = function ({ item }) {
           <PotBonus item={item} />
         </CardAccordionItem>
       ) : null}
-      {/*Deposit*/}
-      <CardAccordionItem titleKey="pot.depositMore">
-        {item.isZap ? (
-          <ZapPotDeposit id={item.id} onLearnMore={null} variant="purple" />
-        ) : (
-          <PotDeposit id={item.id} onLearnMore={null} variant="purple" />
-        )}
-        <div style={{ height: '12px' }} />
-      </CardAccordionItem>
-      {/*Withdraw*/}
-      <CardAccordionItem titleKey="pot.withdraw">
-        {item.isZap ? (
-          <ZapPotWithdraw id={item.id} onLearnMore={null} variant="purple" />
-        ) : (
-          <PotWithdraw id={item.id} onLearnMore={null} variant="purple" />
-        )}
-      </CardAccordionItem>
+      <WalletRequired network={item.network}>
+        {/*Deposit*/}
+        <CardAccordionItem titleKey="pot.depositMore">
+          {item.isZap ? (
+            <ZapPotDeposit id={item.id} onLearnMore={null} variant="purple" />
+          ) : (
+            <PotDeposit id={item.id} onLearnMore={null} variant="purple" />
+          )}
+          <div style={{ height: '12px' }} />
+        </CardAccordionItem>
+        {/*Withdraw*/}
+        <CardAccordionItem titleKey="pot.withdraw">
+          {item.isZap ? (
+            <ZapPotWithdraw id={item.id} onLearnMore={null} variant="purple" />
+          ) : (
+            <PotWithdraw id={item.id} onLearnMore={null} variant="purple" />
+          )}
+        </CardAccordionItem>
+      </WalletRequired>
     </>
   );
 };

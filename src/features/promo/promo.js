@@ -45,12 +45,13 @@ const Promo = () => {
     return <Redirect to="/" />;
   }
 
+  // TODO use new wallet connect checks
   return (
     <React.Fragment>
       <Container maxWidth="xs">
         <Typography className={classes.mainTitle}>{promo.desc}</Typography>
         {!address ? (
-          <WalletConnectButton variant="purple" fullWidth={true} />
+          <WalletConnectButton variant="purple" fullWidth={true} network={data.network} />
         ) : data.pending ? (
           <RouteLoading />
         ) : (

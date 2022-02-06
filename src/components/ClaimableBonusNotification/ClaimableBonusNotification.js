@@ -12,12 +12,13 @@ import { PrimaryButton } from '../Buttons/PrimaryButton';
 import Pots from '../../images/tokens/pots.svg';
 import reduxActions from '../../features/redux/actions';
 import Steps, { StepsProgress } from '../../features/vault/components/Steps';
+import { selectWalletAddress, selectWalletNetwork } from '../../features/wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
 function useClaimableBonuses() {
-  const address = useSelector(state => state.wallet.address);
-  const network = useSelector(state => state.wallet.network);
+  const address = useSelector(selectWalletAddress);
+  const network = useSelector(selectWalletNetwork);
   const earnedByPotBonus = useSelector(state => state.earned.earned, shallowEqual);
 
   const unclaimedBonuses = useMemo(() => {
@@ -66,7 +67,7 @@ export const ClaimableBonusNotification = memo(function ClaimableBonusNotificati
   const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const network = useSelector(state => state.wallet.network);
+  const network = useSelector(selectWalletNetwork);
   const { pots, others } = useClaimableBonuses() || {};
   const haveOthers = pots && others && others.length > 0;
   const stepsItem = useMemo(

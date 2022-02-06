@@ -3,7 +3,7 @@ import { indexBy } from '../../helpers/utils';
 
 export const networks = Object.values(networksConfig);
 export const networkByKey = networksConfig;
-export const networkById = indexBy(networks, 'id');
+export const networkById = indexBy(networks, 'chainId');
 export const networkKeys = Object.keys(networksConfig);
 export const networkIds = Object.keys(networkById);
 
@@ -20,7 +20,7 @@ export function networkIdToKey(chainId) {
 }
 
 export function networkKeyToId(key) {
-  return key in networkByKey ? networkByKey[key].chainId[key].chainId : null;
+  return key in networkByKey ? networkByKey[key].chainId : null;
 }
 
 export function networkSetup(key, provider = null) {

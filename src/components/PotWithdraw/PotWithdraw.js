@@ -330,7 +330,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
                 />
               </SecondaryButton>
             ) : (
-              <WalletConnectButton variant={variant} fullWidth={true} />
+              <WalletConnectButton variant={variant} fullWidth={true} network={pot.network} />
             )}
           </div>
         </>
@@ -346,7 +346,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
               <Translate i18nKey="withdraw.allToken" values={{ token: pot.token }} />
             </PrimaryButton>
           ) : (
-            <WalletConnectButton variant={variant} fullWidth={true} />
+            <WalletConnectButton variant={variant} fullWidth={true} network={pot.network} />
           )}
         </div>
       )}

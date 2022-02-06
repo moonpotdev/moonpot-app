@@ -220,7 +220,7 @@ function NavbarPotsPrice() {
   const classes = useStyles();
 
   return (
-    <div className={classes.navbarPotsPrice}>
+    <a href={buyPotsUrl} target="_blank" rel="noopener" className={classes.navbarPotsPrice}>
       <img
         src={Pots}
         width={24}
@@ -232,16 +232,7 @@ function NavbarPotsPrice() {
       <div className={classes.navbarPotsValue}>
         <PotsPrice />
       </div>
-      <PrimaryButton
-        variant="purple"
-        className={clsx(classes.buyButton, classes.navbarBuyButton)}
-        href={buyPotsUrl}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <Translate i18nKey="header.buyPots" />
-      </PrimaryButton>
-    </div>
+    </a>
   );
 }
 

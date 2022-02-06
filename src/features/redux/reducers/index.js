@@ -1,4 +1,4 @@
-import walletReducer from './wallet';
+// import walletReducer from './wallet';
 import vaultReducer from './vault';
 import balanceReducer from './balance';
 import pricesReducer from './prices';
@@ -10,6 +10,7 @@ import holdersReducer from './holders';
 import winnersReducer from '../../winners/redux/reducer';
 import filterReducer from './filter';
 import promoCodesReducer from '../../promo/reducer';
+import { walletReducer } from '../../wallet/slice';
 
 const reducers = {
   wallet: walletReducer,

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './styles';
-import { Box, Button, Grid, Typography, makeStyles } from '@material-ui/core';
+import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import reduxActions from '../../../../redux/actions';
+import { WalletRequired } from '../../../../../components/WalletRequired/WalletRequired';
+import { useWalletConnected } from '../../../../wallet/hooks';
 
 const useStyles = makeStyles(styles);
 
@@ -12,15 +12,9 @@ export default function NoPotsCard({ selected }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const history = useHistory();
-  const dispatch = useDispatch();
-  const address = useSelector(state => state.wallet.address);
+  const connected = useWalletConnected();
 
-  const handleWalletConnect = () => {
-    if (!address) {
-      dispatch(reduxActions.wallet.connect());
-    }
-  };
-
+  // TODO make proper use of WalletRequired
   return (
     <Box className={classes.noActivePots}>
       <Grid container>
@@ -33,20 +27,20 @@ export default function NoPotsCard({ selected }) {
         </Grid>
         <Grid item xs={8}>
           <Typography className={classes.noActivePotsTitle}>
-            {address ? t('playWithMoonpot') : t('wallet.connect')}
+            {connected ? t('playWithMoonpot') : t('wallet.connect')}
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography className={classes.noActivePotsText}>
             {selected === 'active' ? (
-              <>{address ? t('youHaventEnteredMoonpots') : t('connectToJoin')}</>
+              <>{connected ? t('youHaventEnteredMoonpots') : t('connectToJoin')}</>
             ) : (
-              <>{address ? t('youHaventEnteredRetiredMoonpots') : t('connectToJoin')}</>
+              <>{connected ? t('youHaventEnteredRetiredMoonpots') : t('connectToJoin')}</>
             )}
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          {address ? (
+          <WalletRequired>
             <Button
               className={classes.noActivePotsPlayButton}
               onClick={() => {
@@ -55,11 +49,7 @@ export default function NoPotsCard({ selected }) {
             >
               {t('buttons.play')}
             </Button>
-          ) : (
-            <Button className={classes.noActivePotsPlayButton} onClick={handleWalletConnect}>
-              {t('wallet.connect')}
-            </Button>
-          )}
+          </WalletRequired>
         </Grid>
       </Grid>
     </Box>

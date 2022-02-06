@@ -1,50 +1,14 @@
-import {
-  BALANCE_RESET,
-  EARNED_RESET,
-  WALLET_ACTION,
-  WALLET_ACTION_RESET,
-  WALLET_CONNECT_BEGIN,
-  WALLET_CONNECT_DONE,
-  WALLET_CREATE_MODAL,
-} from '../constants';
-import WalletConnectProvider from '@walletconnect/web3-provider';
-import Web3Modal, { connectors } from 'web3modal';
-import reduxActions from '../actions';
+import { WALLET_ACTION, WALLET_ACTION_RESET } from '../constants';
 import zapAbi from '../../../config/abi/zap.json';
 import { convertAmountToRawNumber } from '../../../helpers/format';
 import BigNumber from 'bignumber.js';
-import {
-  networkByKey,
-  networkIdSupported,
-  networkIdToKey,
-  networkKeyToId,
-  networkSetup,
-} from '../../../config/networks';
+import { networkByKey } from '../../../config/networks';
 
 const Web3 = require('web3');
 const erc20Abi = require('../../../config/abi/erc20.json');
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 const ziggyManagerMultiRewardsAbi = require('../../../config/abi/ziggyManagerMultiRewards.json');
 const potsClaimerAbi = require('../../../config/abi/potsClaimer.json');
-
-function getRpcUrlsForNetworkKey(networkKey) {
-  return networkByKey[networkKey].rpc;
-}
-
-const setNetwork = net => {
-  console.log('redux setNetwork called.');
-
-  return async (dispatch, getState) => {
-    const state = getState();
-    if (state.wallet.network !== net) {
-      const clients = await getRpcUrlsForNetworkKey(net);
-      localStorage.setItem('network', net);
-
-      dispatch({ type: 'SET_NETWORK', payload: { network: net, clients: clients } });
-      dispatch(createWeb3Modal());
-    }
-  };
-};
 
 async function estimateGas(network, method, options) {
   let estimatedGasLimit = '0';
@@ -67,111 +31,14 @@ async function estimateGas(network, method, options) {
   return [null, { ...options, gas: limitWithMargin }];
 }
 
-const connect = () => {
-  return async (dispatch, getState) => {
-    dispatch({ type: WALLET_CONNECT_BEGIN });
-    const state = getState();
-
-    const close = async () => {
-      await state.wallet.web3modal.clearCachedProvider();
-      dispatch({ type: WALLET_CONNECT_DONE, payload: { address: null } });
-      dispatch({ type: EARNED_RESET });
-      dispatch({ type: BALANCE_RESET });
-    };
-
-    const subscribeProvider = (provider, web3) => {
-      if (!provider.on) {
-        return;
-      }
-      provider.on('close', async () => {
-        await close();
-      });
-      provider.on('disconnect', async () => {
-        await close();
-      });
-      provider.on('accountsChanged', async accounts => {
-        return accounts[0] !== undefined
-          ? dispatch({ type: WALLET_CONNECT_DONE, payload: { address: accounts[0] } })
-          : await close();
-      });
-      provider.on('chainChanged', async chainId => {
-        console.log('chainChanged');
-        const networkId = web3.utils.isHex(chainId) ? web3.utils.hexToNumber(chainId) : chainId;
-        if (networkIdSupported(networkId)) {
-          const net = networkIdToKey(networkId);
-          dispatch(setNetwork(net));
-        } else {
-          await close();
-          console.log('show nice modal: Wallet network not supported: ' + networkId);
-        }
-      });
-    };
-    try {
-      const provider = await state.wallet.web3modal.connect();
-      const web3 = await new Web3(provider);
-      web3.eth.extend({
-        methods: [
-          {
-            name: 'chainId',
-            call: 'eth_chainId',
-            outputFormatter: web3.utils.hexToNumber,
-          },
-        ],
-      });
-
-      subscribeProvider(provider, web3);
-
-      let networkId = await web3.eth.getChainId();
-      if (networkId === 86) {
-        // Trust provider returns an incorrect chainId for BSC.
-        networkId = 56;
-      }
-
-      if (networkId === networkKeyToId(state.wallet.network)) {
-        const accounts = await web3.eth.getAccounts();
-        //dispatch({type: WALLET_RPC, payload: {rpc: web3}}); => TODO: set same rpc as connected wallet to rpc[network] for consistency
-        dispatch({ type: WALLET_CONNECT_DONE, payload: { address: accounts[0] } });
-      } else {
-        await close();
-        if (networkIdSupported(networkId) && provider) {
-          await networkSetup(state.wallet.network, provider);
-          dispatch(connect());
-        } else {
-          //show error to user for unsupported network
-          dispatch(reduxActions.modal.showModal('WRONG_CHAIN_MODAL'));
-          //alert('show nice modal: Wallet network not supported: ' + networkId);
-          throw Error('Network not supported, check chainId.');
-        }
-      }
-    } catch (err) {
-      console.log('connect error', err);
-      // todo: show modal error to user
-      dispatch({ type: WALLET_CONNECT_DONE, payload: { address: null } });
-    }
-  };
-};
-
-const disconnect = () => {
-  return async (dispatch, getState) => {
-    dispatch({ type: WALLET_CONNECT_BEGIN });
-    const state = getState();
-
-    await state.wallet.web3modal.clearCachedProvider();
-    dispatch({ type: WALLET_CONNECT_DONE, payload: { address: null } });
-    dispatch({ type: EARNED_RESET });
-    dispatch({ type: BALANCE_RESET });
-  };
-};
-
 const approval = (network, tokenAddr, spendingContractAddress) => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
     const address = state.wallet.address;
-    const provider = await state.wallet.web3modal.connect();
+    const web3 = state.wallet.web3;
 
-    if (address && provider) {
-      const web3 = await new Web3(provider);
+    if (address && web3) {
       const contract = new web3.eth.Contract(erc20Abi, tokenAddr);
       const maxAmount = Web3.utils.toWei('8000000000', 'ether');
       const method = contract.methods.approve(spendingContractAddress, maxAmount);
@@ -229,10 +96,9 @@ const deposit = (network, contractAddr, amount, max) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
     const address = state.wallet.address;
-    const provider = await state.wallet.web3modal.connect();
+    const web3 = state.wallet.web3;
 
-    if (address && provider) {
-      const web3 = await new Web3(provider);
+    if (address && web3) {
       const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);
 
       if (max) {
@@ -330,10 +196,9 @@ const withdraw = (network, contractAddr, amount, max) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
     const address = state.wallet.address;
-    const provider = await state.wallet.web3modal.connect();
+    const web3 = state.wallet.web3;
 
-    if (address && provider) {
-      const web3 = await new Web3(provider);
+    if (address && web3) {
       const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);
 
       if (max) {
@@ -428,10 +293,9 @@ const getReward = (network, contractAddr) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
     const address = state.wallet.address;
-    const provider = await state.wallet.web3modal.connect();
+    const web3 = state.wallet.web3;
 
-    if (address && provider) {
-      const web3 = await new Web3(provider);
+    if (address && web3) {
       const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);
       const method = contract.methods.getReward();
       const [estimateError, options] = await estimateGas(network, method, { from: address });
@@ -476,10 +340,9 @@ const compound = (network, contractAddr) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
     const address = state.wallet.address;
-    const provider = await state.wallet.web3modal.connect();
+    const web3 = state.wallet.web3;
 
-    if (address && provider) {
-      const web3 = await new Web3(provider);
+    if (address && web3) {
       const contract = new web3.eth.Contract(ziggyManagerMultiRewardsAbi, contractAddr);
       const method = contract.methods.compound();
       const [estimateError, options] = await estimateGas(network, method, { from: address });
@@ -519,102 +382,6 @@ const compound = (network, contractAddr) => {
   };
 };
 
-const createWeb3Modal = () => {
-  return async (dispatch, getState) => {
-    const state = getState();
-    const clients = await getRpcUrlsForNetworkKey(state.wallet.network);
-    const web3Modal = new Web3Modal(generateProviderOptions(state.wallet, clients));
-
-    dispatch({ type: WALLET_CREATE_MODAL, payload: { data: web3Modal } });
-
-    if (web3Modal.cachedProvider && web3Modal.cachedProvider === 'injected') {
-      dispatch(connect());
-    } else {
-      await web3Modal.clearCachedProvider();
-      dispatch({ type: WALLET_CONNECT_DONE, payload: { address: null } });
-    }
-  };
-};
-
-const generateProviderOptions = (wallet, clients) => {
-  const networkId = networkKeyToId(wallet.network);
-  const supported = networkByKey[wallet.network].supportedWallets;
-
-  const generateCustomConnectors = () => {
-    const list = {
-      injected: {
-        display: {
-          name: 'Injected',
-          description: 'Home-BrowserWallet',
-        },
-      },
-      walletconnect: {
-        package: WalletConnectProvider,
-        options: {
-          rpc: {
-            [networkId]: clients[~~(clients.length * Math.random())],
-          },
-        },
-      },
-      'custom-twt': {
-        display: {
-          name: 'Trust',
-          description: 'Trust Wallet',
-          logo: require('../../../images/wallets/trust-wallet.svg').default,
-        },
-        package: 'twt',
-        connector: connectors.injected,
-      },
-      'custom-safepal': {
-        display: {
-          name: 'SafePal',
-          description: 'SafePal App',
-          logo: require('../../../images/wallets/safepal-wallet.svg').default,
-        },
-        package: 'safepal',
-        connector: connectors.injected,
-      },
-      'custom-math': {
-        display: {
-          name: 'Math',
-          description: 'Math Wallet',
-          logo: require('../../../images/wallets/math-wallet.svg').default,
-        },
-        package: 'math',
-        connector: connectors.injected,
-      },
-      'custom-binance': {
-        display: {
-          name: 'Binance',
-          description: 'Binance Chain Wallet',
-          logo: require('../../../images/wallets/binance-wallet.png').default,
-        },
-        package: 'binance',
-        connector: async (ProviderPackage, options) => {
-          const provider = window.BinanceChain;
-          await provider.enable();
-          return provider;
-        },
-      },
-    };
-
-    const newlist = [];
-    for (const key in list) {
-      if (supported.includes(key)) {
-        newlist[key] = list[key];
-      }
-    }
-
-    return newlist;
-  };
-
-  return {
-    network: networkByKey[wallet.network].providerName,
-    cacheProvider: true,
-    providerOptions: generateCustomConnectors(),
-  };
-};
-
 const zapIn = (
   network,
   potAddress,
@@ -625,10 +392,9 @@ const zapIn = (
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
     const address = state.wallet.address;
-    const provider = await state.wallet.web3modal.connect();
+    const web3 = state.wallet.web3;
 
-    if (address && provider) {
-      const web3 = await new Web3(provider);
+    if (address && web3) {
       const contract = new web3.eth.Contract(zapAbi, zapAddress);
       const depositAmountRaw = convertAmountToRawNumber(depositAmount, swapInToken.decimals);
       const tokenAmountOutMinRaw = convertAmountToRawNumber(
@@ -742,10 +508,9 @@ const zapOut = (
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
     const address = state.wallet.address;
-    const provider = await state.wallet.web3modal.connect();
+    const web3 = state.wallet.web3;
 
-    if (address && provider) {
-      const web3 = await new Web3(provider);
+    if (address && web3) {
       const contract = new web3.eth.Contract(zapAbi, zapAddress);
 
       // console.log(potAddress);
@@ -866,12 +631,10 @@ const claimAllBonuses = alsoClaimOtherTokens => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
-    const { address, network } = state.wallet;
-    const provider = await state.wallet.web3modal.connect();
+    const { address, network, web3 } = state.wallet;
     const contractAddress = networkByKey[network].claimAllBonusesAddress;
 
-    if (address && contractAddress && provider) {
-      const web3 = await new Web3(provider);
+    if (network && address && contractAddress && web3) {
       const contract = new web3.eth.Contract(potsClaimerAbi, contractAddress);
 
       const method = alsoClaimOtherTokens
@@ -921,10 +684,6 @@ const claimAllBonuses = alsoClaimOtherTokens => {
 };
 
 const obj = {
-  setNetwork,
-  createWeb3Modal,
-  connect,
-  disconnect,
   approval,
   deposit,
   withdraw,

@@ -24,10 +24,6 @@ export const GlobalDataLoader = memo(function GlobalDataLoader() {
   });
 
   useEffect(() => {
-    dispatch(reduxActions.wallet.createWeb3Modal());
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(reduxActions.prices.fetchPrices());
   }, [dispatch]);
 

@@ -4,8 +4,8 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { byDecimals, formatDecimals } from './format';
 import { tokensByNetworkAddress } from '../config/tokens';
 import { useTranslation } from 'react-i18next';
-import { WALLET_CONNECT_DONE } from '../features/redux/constants';
 import { ZERO } from './utils';
+import { walletAccountsChanged } from '../features/wallet/accountsChanged';
 
 export function usePrevious(value) {
   const ref = useRef();
@@ -190,7 +190,7 @@ export function useImpersonate() {
 
   window.impersonate = useCallback(
     address => {
-      dispatch({ type: WALLET_CONNECT_DONE, payload: { address } });
+      dispatch(walletAccountsChanged({ accounts: [address] }));
     },
     [dispatch]
   );

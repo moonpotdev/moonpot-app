@@ -1,6 +1,7 @@
 import Web3 from 'web3';
 import { createReducer } from '@reduxjs/toolkit';
 import { networkKeys, networks } from '../../../config/networks';
+import { WALLET_ACTION, WALLET_ACTION_RESET } from '../constants';
 
 function initialModals() {
   return Object.fromEntries(networkKeys.map(key => [key, null]));
@@ -54,11 +55,11 @@ const walletReducer = createReducer(initialState, builder => {
       state.clients = action.payload.clients;
       state.rpc = false;
     })
-    .addCase('WALLET_ACTION', (state, action) => {
+    .addCase(WALLET_ACTION, (state, action) => {
       state.action.result = action.payload.result;
       state.action.data = action.payload.data;
     })
-    .addCase('WALLET_ACTION_RESET', (state, action) => {
+    .addCase(WALLET_ACTION_RESET, (state, action) => {
       state.action.result = null;
       state.action.data = null;
     });

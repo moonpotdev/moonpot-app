@@ -2,12 +2,14 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from './PrimaryButton';
 import { Translate } from '../Translate';
-import reduxActions from '../../features/redux/actions';
+import { walletConnect } from '../../features/wallet/connect';
 
+// TODO pass network from component
 export const WalletConnectButton = function ({
   ButtonComponent = PrimaryButton,
   onClick,
   variant,
+  network,
   ...rest
 }) {
   const dispatch = useDispatch();
@@ -15,11 +17,11 @@ export const WalletConnectButton = function ({
   const connected = !!address;
 
   const handleConnect = useCallback(() => {
-    dispatch(reduxActions.wallet.connect());
+    dispatch(walletConnect(network));
     if (onClick) {
       onClick();
     }
-  }, [dispatch, onClick]);
+  }, [dispatch, onClick, network]);
 
   return (
     <ButtonComponent onClick={handleConnect} variant={variant} disabled={connected} {...rest}>

@@ -2,6 +2,23 @@ import { createSlice } from '@reduxjs/toolkit';
 import { walletAccountsChanged } from './accountsChanged';
 import { walletConnect } from './connect';
 import { walletDisconnect } from './disconnect';
+import { networks } from '../../config/networks';
+import Web3 from 'web3';
+import { walletChainChanged } from './chainChanged';
+import { WALLET_ACTION, WALLET_ACTION_RESET } from '../redux/constants';
+
+function initialRpc() {
+  return Object.fromEntries(
+    networks.map(network => {
+      const rpcs = network.rpc;
+      return [network.key, new Web3(rpcs[~~(rpcs.length * Math.random())])];
+    })
+  );
+}
+
+function initialAction() {
+  return { result: null, data: null };
+}
 
 const initialState = {
   network: null,
@@ -9,6 +26,8 @@ const initialState = {
   web3: null,
   provider: null,
   status: 'disconnected',
+  rpc: initialRpc(),
+  action: initialAction(),
 };
 
 const walletSlice = createSlice({
@@ -52,13 +71,39 @@ const walletSlice = createSlice({
         state.web3 = null;
         state.provider = null;
       })
+      .addCase(walletAccountsChanged.pending, state => {
+        state.status = 'connecting';
+      })
       .addCase(walletAccountsChanged.fulfilled, (state, action) => {
         state.address = action.payload.address;
+        state.status = 'connected';
       })
       .addCase(walletAccountsChanged.rejected, state => {
         state.network = null;
         state.address = null;
         state.status = 'disconnected';
+      })
+      .addCase(walletChainChanged.pending, state => {
+        state.status = 'connecting';
+      })
+      .addCase(walletChainChanged.fulfilled, (state, action) => {
+        state.network = action.payload.network;
+        state.status = 'connected';
+      })
+      .addCase(walletChainChanged.rejected, state => {
+        state.network = null;
+        state.address = null;
+        state.status = 'disconnected';
+      })
+      .addCase(WALLET_ACTION, (state, action) => {
+        state.action.result = action.payload.result;
+        state.action.data = action.payload.data;
+      })
+      .addCase(WALLET_ACTION_RESET, (state, action) => {
+        state.action.result = null;
+        state.action.data = null;
       });
   },
 });
+
+export const walletReducer = walletSlice.reducer;

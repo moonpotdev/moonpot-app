@@ -7,5 +7,8 @@ export const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
+      immutableCheck: {
+        ignoredPaths: ['wallet.web3', 'wallet.provider', 'wallet.rpc'],
+      },
     }),
 });

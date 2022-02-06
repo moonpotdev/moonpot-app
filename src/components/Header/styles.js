@@ -102,6 +102,7 @@ export const styles = () => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    textDecoration: 'none',
   },
   navbarPotsLogo: {
     marginRight: '8px',

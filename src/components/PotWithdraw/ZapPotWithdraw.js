@@ -355,7 +355,7 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
                 />
               </PrimaryButton>
             ) : (
-              <WalletConnectButton variant={variant} fullWidth={true} />
+              <WalletConnectButton variant={variant} fullWidth={true} network={pot.network} />
             )}
           </div>
         </div>

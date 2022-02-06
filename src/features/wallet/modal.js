@@ -3,7 +3,8 @@ import Web3Modal, { connectors } from 'web3modal';
 import { networkByKey } from '../../config/networks';
 
 const modalOptions = {};
-const modals = {};
+let modal = null;
+let modalNetworkKey = null;
 
 function createModalOptions(network) {
   const allConnectors = {
@@ -70,6 +71,7 @@ function createModalOptions(network) {
 
 function getModalOptions(networkKey) {
   if (!(networkKey in modalOptions)) {
+    console.log(`creating modal options for ${networkKey}`);
     modalOptions[networkKey] = createModalOptions(networkByKey[networkKey]);
   }
 
@@ -77,9 +79,22 @@ function getModalOptions(networkKey) {
 }
 
 export function getModal(networkKey) {
-  if (!(networkKey in modals)) {
-    modals[networkKey] = new Web3Modal(getModalOptions(networkKey));
+  if (modalNetworkKey !== networkKey) {
+    // Clean up previous modal
+    if (modal !== null) {
+      modal = null;
+      const element = document.getElementById('WEB3_CONNECT_MODAL_ID');
+      if (element) {
+        element.remove();
+      }
+    }
+
+    // Create new modal
+    console.log(`creating modal for ${networkKey}`);
+    modalNetworkKey = networkKey;
+    modal = new Web3Modal(getModalOptions(networkKey));
   }
 
-  return modals[networkKey];
+  console.log(`returning modal for ${networkKey}`);
+  return modal;
 }
