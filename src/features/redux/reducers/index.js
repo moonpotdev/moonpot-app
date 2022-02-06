@@ -10,6 +10,7 @@ import holdersReducer from './holders';
 import winnersReducer from '../../winners/redux/reducer';
 import filterReducer from './filter';
 import promoCodesReducer from '../../promo/reducer';
+import uniqueWinnersReducer from './winners';
 
 const reducers = {
   walletReducer,
@@ -24,6 +25,7 @@ const reducers = {
   winners: winnersReducer,
   filterReducer,
   promo: promoCodesReducer,
+  uniqueWinnersReducer,
 };
 
 export default reducers;

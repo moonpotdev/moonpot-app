@@ -26,7 +26,7 @@ const HomeHeader = () => {
   });
 
   //Holders Data
-  const cadets = useSelector(state => state.holdersReducer.totalHolders || 0);
+  const cadets = useSelector(state => state.holders.cadets || 0);
   const cadetsFormatted = cadets.toLocaleString(undefined, {
     maximumFractionDigits: 0,
   });
@@ -48,6 +48,9 @@ const HomeHeader = () => {
     maximumFractionDigits: 0,
   });
 
+  //Unique winenrs value
+  const uniqueWinners = useSelector(state => state.uniqueWinnersReducer.uniqueWinners);
+
   return (
     <Grid container className={classes.container}>
       <HeaderCountdown pot={nextFeaturedPot} />
@@ -67,7 +70,7 @@ const HomeHeader = () => {
                 <div className={classes.statsCardLabel}>
                   <Translate i18nKey="header.uniqueWinners" />
                 </div>
-                <div className={classes.statsCardValue}>23</div>
+                <div className={classes.statsCardValue}>{uniqueWinners}</div>
               </div>
             </Grid>
             <Grid item xs={6} className={classes.statsVertCenterOuter}>
