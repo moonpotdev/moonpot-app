@@ -87,7 +87,9 @@ const styles = theme => ({
     paddingLeft: '20px',
     marginRight: '0px',
     marginLeft: 'auto',
+    paddingRight: '10px',
     [theme.breakpoints.down(responsiveBreakpoint)]: {
+      paddingRight: '0px',
       paddingLeft: '0px',
       marginTop: '24px',
       flex: '100%',
