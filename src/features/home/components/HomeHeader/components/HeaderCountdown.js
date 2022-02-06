@@ -16,6 +16,7 @@ const HeaderCountdown = ({ pot }) => {
 
   //Set time for countdown calculation
   const [time, setTime] = useState(Date.now());
+  const [moreThanOneDay, setMoreThanOneDay] = useState(true);
   useEffect(() => {
     const id = setInterval(() => setTime(Date.now()), 1000);
     return () => clearInterval(id);
@@ -33,7 +34,18 @@ const HeaderCountdown = ({ pot }) => {
     true
   );
 
-  const [moreThanOneDay] = useState(timeToDraw[0] !== '00');
+  useEffect(() => {
+    const days = Number(timeToDraw[0]);
+    if (days === 0) {
+      if (moreThanOneDay === true) {
+        setMoreThanOneDay(false);
+      }
+    } else {
+      if (moreThanOneDay === false) {
+        setMoreThanOneDay(true);
+      }
+    }
+  }, [moreThanOneDay, timeToDraw]);
 
   //Formated prize
   const prize = useTotalPrize(
@@ -42,88 +54,90 @@ const HeaderCountdown = ({ pot }) => {
   );
 
   return (
-    <Grid item lg={4} md={6} sm={6} xs={12} className={classes.nextDrawCard}>
-      {/* Top of card */}
-      <div className={classes.nextDrawInner}>
-        {/* Prize + Countdown */}
-        <div>
-          <div className={classes.nextDrawPrizeText}>
-            {/* All featured non daily pots are token only prize (for now)*/}
-            <Translate
-              i18nKey="header.winPrizeInToken"
-              values={{ prize: '$' + prize, token: potData.token }}
-            />
+    <Grid item lg={4} md={6} sm={6} xs={12} className={classes.nextDrawCardWrapper}>
+      <div className={classes.nextDrawCard}>
+        {/* Top of card */}
+        <div className={classes.nextDrawInner}>
+          {/* Prize + Countdown */}
+          <div>
+            <div className={classes.nextDrawPrizeText}>
+              {/* All featured non daily pots are token only prize (for now)*/}
+              <Translate
+                i18nKey="header.winPrizeInToken"
+                values={{ prize: '$' + prize, token: potData.token }}
+              />
+            </div>
+            <div className={classes.nextDrawTimeContainer}>
+              {moreThanOneDay ? (
+                <>
+                  <div>
+                    <div className={classes.nextDrawTimeValue}>
+                      {timeToDraw[1] === 'NaN' ? '00' : timeToDraw[0]}
+                    </div>
+                    <div className={classes.nextDrawTimeLabel}>
+                      <Translate i18nKey="header.days" />
+                    </div>
+                  </div>
+                  <div className={classes.nextDrawTimeSeparator}>:</div>
+                  <div>
+                    <div className={classes.nextDrawTimeValue}>
+                      {timeToDraw[2] === 'NaN' ? '00' : timeToDraw[1]}
+                    </div>
+                    <div className={classes.nextDrawTimeLabel}>
+                      <Translate i18nKey="header.hours" />
+                    </div>
+                  </div>
+                  <div className={classes.nextDrawTimeSeparator}>:</div>
+                  <div>
+                    <div className={classes.nextDrawTimeValue}>
+                      {timeToDraw[3] === 'NaN' ? '00' : timeToDraw[2]}
+                    </div>
+                    <div className={classes.nextDrawTimeLabel}>
+                      <Translate i18nKey="header.mins" />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <div className={classes.nextDrawTimeValue}>
+                      {timeToDraw[1] === 'NaN' ? '00' : timeToDraw[1]}
+                    </div>
+                    <div className={classes.nextDrawTimeLabel}>
+                      <Translate i18nKey="header.hours" />
+                    </div>
+                  </div>
+                  <div className={classes.nextDrawTimeSeparator}>:</div>
+                  <div>
+                    <div className={classes.nextDrawTimeValue}>
+                      {timeToDraw[2] === 'NaN' ? '00' : timeToDraw[2]}
+                    </div>
+                    <div className={classes.nextDrawTimeLabel}>
+                      <Translate i18nKey="header.mins" />
+                    </div>
+                  </div>
+                  <div className={classes.nextDrawTimeSeparator}>:</div>
+                  <div>
+                    <div className={classes.nextDrawTimeValue}>
+                      {timeToDraw[3] === 'NaN' ? '00' : timeToDraw[3]}
+                    </div>
+                    <div className={classes.nextDrawTimeLabel}>
+                      <Translate i18nKey="header.secs" />
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
-          <div className={classes.nextDrawTimeContainer}>
-            {moreThanOneDay ? (
-              <>
-                <div>
-                  <div className={classes.nextDrawTimeValue}>
-                    {timeToDraw[1] === 'NaN' ? '00' : timeToDraw[0]}
-                  </div>
-                  <div className={classes.nextDrawTimeLabel}>
-                    <Translate i18nKey="header.days" />
-                  </div>
-                </div>
-                <div className={classes.nextDrawTimeSeparator}>:</div>
-                <div>
-                  <div className={classes.nextDrawTimeValue}>
-                    {timeToDraw[2] === 'NaN' ? '00' : timeToDraw[1]}
-                  </div>
-                  <div className={classes.nextDrawTimeLabel}>
-                    <Translate i18nKey="header.hours" />
-                  </div>
-                </div>
-                <div className={classes.nextDrawTimeSeparator}>:</div>
-                <div>
-                  <div className={classes.nextDrawTimeValue}>
-                    {timeToDraw[3] === 'NaN' ? '00' : timeToDraw[2]}
-                  </div>
-                  <div className={classes.nextDrawTimeLabel}>
-                    <Translate i18nKey="header.mins" />
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                <div>
-                  <div className={classes.nextDrawTimeValue}>
-                    {timeToDraw[1] === 'NaN' ? '00' : timeToDraw[1]}
-                  </div>
-                  <div className={classes.nextDrawTimeLabel}>
-                    <Translate i18nKey="header.hours" />
-                  </div>
-                </div>
-                <div className={classes.nextDrawTimeSeparator}>:</div>
-                <div>
-                  <div className={classes.nextDrawTimeValue}>
-                    {timeToDraw[2] === 'NaN' ? '00' : timeToDraw[2]}
-                  </div>
-                  <div className={classes.nextDrawTimeLabel}>
-                    <Translate i18nKey="header.mins" />
-                  </div>
-                </div>
-                <div className={classes.nextDrawTimeSeparator}>:</div>
-                <div>
-                  <div className={classes.nextDrawTimeValue}>
-                    {timeToDraw[3] === 'NaN' ? '00' : timeToDraw[3]}
-                  </div>
-                  <div className={classes.nextDrawTimeLabel}>
-                    <Translate i18nKey="header.secs" />
-                  </div>
-                </div>
-              </>
-            )}
+          {/* Pot Logo */}
+          <div className={classes.nextDrawLogoContainer}>
+            <Logo icon={potData.icon || potData.id} sponsorToken={potData.sponsorToken} />
           </div>
         </div>
-        {/* Pot Logo */}
-        <div className={classes.nextDrawLogoContainer}>
-          <Logo icon={potData.icon || potData.id} sponsorToken={potData.sponsorToken} />
-        </div>
+        <PrimaryButton to={`/pot/` + potData.id} variant={'purpleHeader'} fullWidth={true}>
+          <Translate i18nKey={'pot.playWith'} values={{ token: potData.token }} />
+        </PrimaryButton>
       </div>
-      <PrimaryButton to={`/pot/` + potData.id} variant={'purpleHeader'} fullWidth={true}>
-        <Translate i18nKey={'pot.playWith'} values={{ token: potData.token }} />
-      </PrimaryButton>
     </Grid>
   );
 };

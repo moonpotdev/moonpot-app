@@ -2,25 +2,35 @@ const responsiveBreakpoint = 725;
 
 const styles = theme => ({
   container: {
-    width: `1276px`,
+    width: `1240px`,
     maxWidth: '100%',
     margin: '0 auto',
-    padding: '0 24px 40px',
+    padding: '0 0 40px',
     display: 'flex',
+    [theme.breakpoints.down('md')]: {
+      width: 'calc(100% - 28px)',
+    },
     [theme.breakpoints.down('sm')]: {
-      padding: '0 16px 40px',
+      padding: '0 0 40px',
+    },
+  },
+  nextDrawCardWrapper: {
+    padding: '0 10px',
+    maxWidth: '100%',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0 10px 0 0',
+    },
+    [theme.breakpoints.down(responsiveBreakpoint)]: {
+      flex: '100%',
+      width: '100%',
+      padding: '0',
     },
   },
   nextDrawCard: {
     background: 'linear-gradient(105.09deg, #4139AC 0.63%, #615DA9 100%, #615DA9 100%);',
     borderRadius: '10px',
-    width: '500px',
     padding: '24px',
-    maxWidth: '100%',
-    [theme.breakpoints.down(responsiveBreakpoint)]: {
-      flex: '100%',
-      width: '100%',
-    },
+    width: '100%',
   },
   nextDrawInner: {
     display: 'flex',
