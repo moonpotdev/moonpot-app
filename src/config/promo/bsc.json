@@ -23,5 +23,13 @@
     "message": "Get my T-shirt",
     "link": "https://gear.beefy.finance/collections/beefyxmoonpot-tee?ls=O1rIGGo1Qw6WiX5gMboG6A",
     "linkTextKey": "promo.beefyGear"
+  },
+  {
+    "id": 3,
+    "name": "safepal",
+    "desc": "Safepal NFT",
+    "message": "Get my Safepal",
+    "link": "https://shop.safepal.io/products/strong-moonpot-br-safepal-s1-br-hardware-wallet-strong",
+    "linkTextKey": "promo.safepal"
   }
 ]

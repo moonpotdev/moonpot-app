@@ -395,7 +395,8 @@
     "claimed": "{{count}} promocodes claimed",
     "reveal": "Reveal",
     "noNfts": "No NFTs to claim",
-    "beefyGear": "Place the order on the Beefy Gear Store. Promo code will cover both merchandise and shipping costs."
+    "beefyGear": "Place the order on the Beefy Gear Store. Promo code will cover both merchandise and shipping costs.",
+    "safepal": "Place the order on the SafePal Store using this link. Promo code will cover limited edition SafePal × Moonpot S1 hardware wallet and shipping costs."
   },
   "migration": {
     "viewRetiredPot": "View Retired Pot",
