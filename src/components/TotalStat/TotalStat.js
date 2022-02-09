@@ -10,7 +10,7 @@ export const TotalStat = memo(function ({ label, value, className }) {
   const classes = useStyles();
 
   return (
-    <Card variant="purpleDark" className={clsx(classes.card, className)}>
+    <Card variant="purpleDark" className={clsx(classes.card, className)} oneColumn={true}>
       <div className={classes.label}>{label}</div>
       <div className={classes.value}>{value}</div>
     </Card>
