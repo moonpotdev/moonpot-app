@@ -307,42 +307,6 @@
     "bonuses": []
   },
   {
-    "id": "ziggyverse-agility-nft",
-    "name": "Ziggyverse NFT",
-    "icon": "ziggyverse",
-    "token": "POTS",
-    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-    "tokenDecimals": 18,
-    "rewardToken": "moonTicketPotsZiggyVerseAgility",
-    "rewardAddress": "0x075570d24c67EC8F87c5d8458BFFe01A729c3B40",
-    "contractAddress": "0xce6f016bCfD2EE7da66F33Ff5E66eF3fB1D7316B",
-    "prizePoolAddress": "0xBF28F3320fE54085f5a5A2E93B64858C5d995d43",
-    "prizeStrategyAddress": "0x4a905E141F19c53f3588a9d12A94f579e66631d4",
-    "oracleId": "POTS",
-    "apyId": "pots-pots",
-    "vaultType": "nft",
-    "categories": ["nft"],
-    "duration": 1,
-    "fairplayDuration": 3,
-    "fairplayTicketFee": 0.05,
-    "status": "active",
-    "supportsClaimAllBonuses": false,
-    "withdrawFee": 0,
-    "infoCards": ["nft-strategy", "nft-fairplay"],
-    "infoCardStrategy": "ziggyverse-agility",
-    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
-    "sponsors": [],
-    "nftPrizeOnly": true,
-    "nfts": [
-      {
-        "name": "Ziggyverse Agility NFT",
-        "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
-        "type": "erc1155"
-      }
-    ],
-    "bonuses": []
-  },
-  {
     "id": "nft-collections",
     "name": "NFT Collections",
     "token": "POTS",
@@ -1591,5 +1555,42 @@
         "display": "bonus"
       }
     ]
+  },
+  {
+    "id": "ziggyverse-agility-nft",
+    "name": "Ziggyverse NFT",
+    "icon": "ziggyverse",
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketPotsZiggyVerseAgility",
+    "rewardAddress": "0x075570d24c67EC8F87c5d8458BFFe01A729c3B40",
+    "contractAddress": "0xce6f016bCfD2EE7da66F33Ff5E66eF3fB1D7316B",
+    "prizePoolAddress": "0xBF28F3320fE54085f5a5A2E93B64858C5d995d43",
+    "prizeStrategyAddress": "0x4a905E141F19c53f3588a9d12A94f579e66631d4",
+    "oracleId": "POTS",
+    "apyId": "pots-pots",
+    "vaultType": "nft",
+    "categories": ["nft"],
+    "duration": 1,
+    "fairplayDuration": 3,
+    "fairplayTicketFee": 0.05,
+    "status": "eol",
+    "eolDrawNumber": "55",
+    "supportsClaimAllBonuses": false,
+    "withdrawFee": 0,
+    "infoCards": ["nft-strategy", "nft-fairplay"],
+    "infoCardStrategy": "ziggyverse-agility",
+    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "Ziggyverse Agility NFT",
+        "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
+        "type": "erc1155"
+      }
+    ],
+    "bonuses": []
   }
 ]
