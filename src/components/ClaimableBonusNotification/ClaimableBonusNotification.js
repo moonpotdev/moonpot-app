@@ -5,7 +5,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { potsByNetworkSupportingClaimAllBonuses } from '../../config/vault';
 import { byDecimals, formatDecimals } from '../../helpers/format';
 import { sortObjectsDesc } from '../../helpers/utils';
-import { Card } from '../Cards';
+import { Card, Cards } from '../Cards';
 import styles from './styles';
 import { useTranslation } from 'react-i18next';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
@@ -108,31 +108,33 @@ export const ClaimableBonusNotification = memo(function ClaimableBonusNotificati
 
   if (pots) {
     return (
-      <Card
-        variant="purpleDark"
-        className={clsx(classes.claimable, className)}
-        oneColumn={true}
-        {...rest}
-      >
-        <div className={classes.total}>
-          <img src={Pots} width={24} height={24} aria-hidden={true} alt="" />
-          <div className={classes.totalText}>{formatDecimals(pots.earned, 8, 8)} POTS</div>
-        </div>
-        <div className={classes.description}>
-          {t('claimableBonuses.explainer', {
-            returnObjects: true,
-          }).map((text, i) => (
-            <p key={i}>{text}</p>
-          ))}
-        </div>
-        <div className={classes.buttons}>
-          <PrimaryButton variant="purple" fullWidth={true} onClick={handleClaim}>
-            {t('claimableBonuses.claimAll')}
-          </PrimaryButton>
-        </div>
-        <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
-        <StepsProgress steps={steps} setSteps={setSteps} />
-      </Card>
+      <Cards>
+        <Card
+          variant="purpleDark"
+          className={clsx(classes.claimable, className)}
+          oneColumn={true}
+          {...rest}
+        >
+          <div className={classes.total}>
+            <img src={Pots} width={24} height={24} aria-hidden={true} alt="" />
+            <div className={classes.totalText}>{formatDecimals(pots.earned, 8, 8)} POTS</div>
+          </div>
+          <div className={classes.description}>
+            {t('claimableBonuses.explainer', {
+              returnObjects: true,
+            }).map((text, i) => (
+              <p key={i}>{text}</p>
+            ))}
+          </div>
+          <div className={classes.buttons}>
+            <PrimaryButton variant="purple" fullWidth={true} onClick={handleClaim}>
+              {t('claimableBonuses.claimAll')}
+            </PrimaryButton>
+          </div>
+          <Steps item={stepsItem} steps={steps} handleClose={handleClose} />
+          <StepsProgress steps={steps} setSteps={setSteps} />
+        </Card>
+      </Cards>
     );
   }
 
