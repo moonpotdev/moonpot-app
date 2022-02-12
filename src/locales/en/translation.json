@@ -320,6 +320,7 @@
     "amountToken": "Deposit {{amount}} {{token}}",
     "fairplayNotice": "There's a {{duration}} day Fairplay Timelock. If you want to withdraw earlier you’ll pay a {{fee}}%, or less, Fairness Fee. The fee reduces every second.",
     "maximumDepositNotice": "Maximum total deposit: {{amount}} {{token}}",
+    "depositFeeNotice": "Deposit fee of {{percent}}% applies.",
     "eolNotice": {
       "title": "Pot Retired",
       "message": "You can no longer deposit in to this pot."

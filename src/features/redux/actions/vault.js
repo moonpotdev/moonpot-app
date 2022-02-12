@@ -44,6 +44,11 @@ function calculateZiggyPrediction(ziggy, others, pricesByNetworkAddress) {
     }));
 
     for (const pot of others) {
+      // Skip non-matching network
+      if (pot.network !== ziggy.network) {
+        continue;
+      }
+
       // If pot contributes to Ziggy's prize and will be drawn at least once before ziggy
       if (pot.interestBreakdown && pot.interestBreakdown.ziggyPrize) {
         if (pot.expiresAt < ziggyDrawCutoff) {

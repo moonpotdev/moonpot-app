@@ -76,6 +76,7 @@ function useDepositTokens(network, lpAddress) {
 
     if (supportsZap) {
       const nativeCurrency = networkByKey[network].nativeCurrency;
+      console.log(network, nativeCurrency);
       const nativeSymbol = nativeCurrency.symbol;
       const nativeDecimals = nativeCurrency.decimals;
       const nativeWrappedToken =
@@ -372,6 +373,14 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
         ) : (
           <WalletConnectButton variant={variant} fullWidth={true} network={pot.network} />
         )}
+        {pot.depositFee ? (
+          <div className={classes.fairplayNotice}>
+            <Translate
+              i18nKey="deposit.depositFeeNotice"
+              values={{ percent: formatDecimals(pot.depositFee * 100, 2) }}
+            />
+          </div>
+        ) : null}
         <DepositSteps
           pot={pot}
           steps={steps}

@@ -109,6 +109,7 @@ const Bottom = function ({ id }) {
           ticketTotalSupply={pot.totalTickets}
           depositAmountUsd={1000}
           winners={pot.numberOfWinners}
+          network={pot.network}
         />
         <br />
         <Translate i18nKey="pot.noMinimumDeposit" />

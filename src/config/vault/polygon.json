@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "id": "mai-usdc-mimatic",
+    "name": "MAI-USDC LP",
+    "token": "MAI-USDC QLP",
+    "provider": "QuickSwap",
+    "tokenAddress": "0x160532D2536175d65C03B97b0630A9802c274daD",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketQuickMAI-USDC",
+    "rewardAddress": "0x708d5656a2F84aA82cdbc078342b04d4887E72bb",
+    "contractAddress": "0x4F44b32Be113e56f279554eFa4e70128Dc57C7eC",
+    "prizePoolAddress": "0xe23630d4F581A7457eC703053613739992c387E1",
+    "prizeStrategyAddress": "0x6B10d002d29949eED31ceA4AcEF33c028a89Fc1d",
+    "oracleId": "mai-usdc-mimatic",
+    "apyId": "mai-usdc-mimatic",
+    "vaultType": "lp",
+    "categories": ["main"],
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "isZap": true,
+    "depositFee": 0.005,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xebe0c8d842AA5A57D7BEf8e524dEabA676F91cD1",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 0,
+        "symbol": "POTS-BNB LP",
+        "display": "bonus"
+      },
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  }
+]

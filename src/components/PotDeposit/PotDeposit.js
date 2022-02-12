@@ -2,7 +2,12 @@ import { Link, makeStyles } from '@material-ui/core';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles';
-import { bigNumberTruncate, byDecimals, convertAmountToRawNumber } from '../../helpers/format';
+import {
+  bigNumberTruncate,
+  byDecimals,
+  convertAmountToRawNumber,
+  formatDecimals,
+} from '../../helpers/format';
 import reduxActions from '../../features/redux/actions';
 import Steps from '../../features/vault/components/Steps';
 import { isEmpty, ZERO } from '../../helpers/utils';
@@ -187,6 +192,14 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
         ) : (
           <WalletConnectButton variant={variant} fullWidth={true} network={pot.network} />
         )}
+        {pot.depositFee ? (
+          <div className={classes.fairplayNotice}>
+            <Translate
+              i18nKey="deposit.depositFeeNotice"
+              values={{ percent: formatDecimals(pot.depositFee * 100, 2) }}
+            />
+          </div>
+        ) : null}
         <DepositSteps
           pot={pot}
           steps={steps}
