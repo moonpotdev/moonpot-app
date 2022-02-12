@@ -1,4 +1,4 @@
-const responsiveBreakpoint = 725;
+const responsiveBreakpoint = 'xs';
 
 const styles = theme => ({
   container: {
