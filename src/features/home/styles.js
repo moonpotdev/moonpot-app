@@ -1,3 +1,5 @@
+const responsiveBreakpoint = 764;
+
 const styles = theme => ({
   mainTitle: {
     fontWeight: '500',
@@ -33,29 +35,25 @@ const styles = theme => ({
   },
   filters: {
     width: 'auto',
-    maxWidth: '1572px',
+    maxWidth: '1264px',
     margin: '0 auto',
-  },
-  filterContainerLeft: {
-    margin: '0 12px',
-    width: '500px',
-    [theme.breakpoints.down('1073')]: {
-      margin: '0 auto',
-      width: '532px',
+    padding: '0 24px',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0 16px',
     },
   },
-  placeholder: {
-    width: '500px',
-    margin: '0 12px',
-    [theme.breakpoints.down('1597')]: {
-      width: 0,
-      margin: 0,
+  filterContainerLeft: {
+    width: 'max-content',
+    [theme.breakpoints.down(responsiveBreakpoint)]: {
+      marginLeft: 0,
+      marginRight: 'auto',
     },
   },
   filterContainerRight: {
-    margin: '0 12px',
-    width: '500px',
-    [theme.breakpoints.down('1073')]: {
+    width: 'max-content',
+    marginRight: 0,
+    marginLeft: 'auto',
+    [theme.breakpoints.down(responsiveBreakpoint)]: {
       width: '100%',
       margin: 0,
     },

@@ -41,7 +41,18 @@
     "potsPrice": "POTS Price",
     "buyPots": "Buy POTS",
     "audit": "Audit",
-    "articles": "Articles"
+    "articles": "Articles",
+    "winPrizeInToken": "Win <span>{{prize}}</span> in {{token}}",
+    "winNFT": "Win <span>{{nft}}</span>",
+    "winNFTandPrizeInToken": "Win <span>{{nft}}</span> and <span>{{prize}}</span> in {{token}}",
+    "days": "DAYS",
+    "hours": "HOURS",
+    "mins": "MINS",
+    "secs": "SECS",
+    "totalWon": "Total Won",
+    "uniqueWinners": "Unique Winners",
+    "currentPrizes": "Current Prizes",
+    "cadets": "Cadets"
   },
   "footer": {
     "cadets": "CADETS",

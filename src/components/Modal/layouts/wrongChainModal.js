@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardTitle } from '../../Cards/Cards';
+import { Card, CardTitle, Cards } from '../../Cards/Cards';
 import { PrimaryButton } from '../../Buttons/PrimaryButton';
 import { BaseButton } from '../../Buttons/BaseButton';
 import { Typography, makeStyles } from '@material-ui/core';
@@ -31,13 +31,15 @@ const WrongChainModal = () => {
 
   return (
     <React.Fragment>
-      <Card variant="white" className={classes.card}>
-        <CardTitle className={classes.title}>{t('modals.unsupportedNetworkDetected')}</CardTitle>
-        <Typography className={classes.text}>{t('modals.switchToBSCNetwork')}</Typography>
-        <PrimaryButton onClick={() => switchToNetwork('bsc')} className={classes.switchButton}>
-          {t('modals.switchToBSC')}
-        </PrimaryButton>
-      </Card>
+      <Cards>
+        <Card variant="white" className={classes.card} oneColumn={true}>
+          <CardTitle className={classes.title}>{t('modals.unsupportedNetworkDetected')}</CardTitle>
+          <Typography className={classes.text}>{t('modals.switchToBSCNetwork')}</Typography>
+          <PrimaryButton onClick={() => switchToNetwork('bsc')} className={classes.switchButton}>
+            {t('modals.switchToBSC')}
+          </PrimaryButton>
+        </Card>
+      </Cards>
       <BaseButton onClick={() => closeModal()} className={classes.dismissButton}>
         {t('modals.cancel')}
       </BaseButton>

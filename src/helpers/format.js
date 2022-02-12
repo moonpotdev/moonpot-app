@@ -81,7 +81,7 @@ const formatTimeLeftDefaultOptions = {
   labels: { days: 'd', hours: 'h', minutes: 'm', seconds: 's' },
 };
 
-export const formatTimeLeft = (milliseconds, options) => {
+export const formatTimeLeft = (milliseconds, options, outputRaw = false) => {
   const { resolution, dropZero, fixedWidth, labels } = {
     ...formatTimeLeftDefaultOptions,
     ...options,
@@ -106,9 +106,15 @@ export const formatTimeLeft = (milliseconds, options) => {
       if (fixedWidth) {
         value = value.padStart(2, '0');
       }
-      output.push(value + labels[key]);
+      if (outputRaw) {
+        output.push(value);
+      } else {
+        output.push(value + labels[key]);
+      }
     }
   }
+
+  if (outputRaw) return output;
 
   if (output.length === 0) {
     return (fixedWidth ? '00' : '0') + labels[resolution];

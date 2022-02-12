@@ -47,7 +47,7 @@ const Promo = () => {
 
   return (
     <React.Fragment>
-      <Container maxWidth="xs">
+      <Container maxWidth="xs" style={{ minWidth: 'fit-content' }}>
         <Typography className={classes.mainTitle}>{promo.desc}</Typography>
         {!address ? (
           <WalletConnectButton variant="purple" fullWidth={true} />
@@ -77,7 +77,12 @@ const Promo = () => {
               <>
                 <Typography className={classes.title}>{t('promo.myPromocodes')}</Typography>
                 {data.promoCodes?.map((code, i) => (
-                  <Card variant="purpleDark" style={{ marginTop: '10px' }} key={i}>
+                  <Card
+                    variant="purpleDark"
+                    style={{ marginTop: '10px', minWidth: 'fit-content', marginLeft: '-10px' }}
+                    key={i}
+                    oneColumn={true}
+                  >
                     <Typography className={classes.title}>{code}</Typography>
                   </Card>
                 ))}

@@ -8,6 +8,7 @@ import zap from './zap';
 import buybacks from './buybacks';
 import holders from './holders';
 import filter from './filter';
+import winners from './winners';
 
 const reduxActions = {
   wallet,
@@ -20,6 +21,7 @@ const reduxActions = {
   buybacks,
   holders,
   filter,
+  winners,
 };
 
 export default reduxActions;

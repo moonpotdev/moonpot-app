@@ -38,8 +38,10 @@ const styles = theme => ({
     paddingTop: '12px',
   },
   spacer: {
-    paddingLeft: '16px',
-    paddingRight: '16px',
+    padding: '0 14px',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0 6px',
+    },
     margin: '0 auto',
   },
 });

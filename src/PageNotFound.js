@@ -20,7 +20,7 @@ export const PageNotFound = () => {
   return (
     <Container maxWidth="xl">
       <Cards>
-        <Card variant="purpleDark">
+        <Card variant="purpleDark" oneColumn={true}>
           <img
             src={ZiggyMaintenance}
             width={104}

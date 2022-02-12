@@ -149,6 +149,7 @@ const Vault = () => {
           id={id}
           onFairplayLearnMore={handleFairplayLearnMore}
           variant={handleVariant(pot.vaultType)}
+          oneColumn={true}
         />
         <InfoCards id={id} fairplayRef={fairplayRef} className={classes.infoCards} />
       </Container>

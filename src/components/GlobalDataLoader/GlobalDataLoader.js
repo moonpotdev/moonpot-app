@@ -40,6 +40,10 @@ export const GlobalDataLoader = memo(function GlobalDataLoader() {
   }, [dispatch]);
 
   useEffect(() => {
+    dispatch(reduxActions.winners.fetchWinners());
+  }, [dispatch]);
+
+  useEffect(() => {
     // Only initial pots load, after prices have loaded
     if (potsLastUpdated === 0 && pricesLastUpdated > 0) {
       dispatch(reduxActions.vault.fetchPools());
