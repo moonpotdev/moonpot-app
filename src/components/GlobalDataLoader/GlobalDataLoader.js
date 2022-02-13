@@ -2,6 +2,7 @@ import { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { load } from 'fathom-client';
 import reduxActions from '../../features/redux/actions';
+import { fetchUniqueWinners } from '../../features/winners/redux/unique';
 
 function selectPricesLastUpdated(state) {
   return state.prices.lastUpdated;
@@ -33,6 +34,10 @@ export const GlobalDataLoader = memo(function GlobalDataLoader() {
 
   useEffect(() => {
     dispatch(reduxActions.holders.fetchHolders());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchUniqueWinners());
   }, [dispatch]);
 
   useEffect(() => {

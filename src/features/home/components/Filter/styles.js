@@ -1,4 +1,4 @@
-const responsiveBreakpoint = 1073;
+const responsiveBreakpoint = 764;
 
 const styles = theme => ({
   buttonContainer: {
@@ -6,10 +6,9 @@ const styles = theme => ({
     marginRight: 0,
     marginLeft: 'auto',
     [theme.breakpoints.down(responsiveBreakpoint)]: {
-      maxWidth: '532px',
       width: 'auto',
       margin: '0 auto',
-      padding: '0 16px',
+      padding: '0 0 16px',
     },
   },
   button: {

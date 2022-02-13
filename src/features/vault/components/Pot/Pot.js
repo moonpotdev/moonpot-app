@@ -160,11 +160,12 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
   );
 };
 
-export const Pot = function ({ id, onFairplayLearnMore, variant }) {
+export const Pot = function ({ id, onFairplayLearnMore, variant, oneColumn }) {
   return (
     <BasePot
       id={id}
       variant={variant}
+      oneColumn={oneColumn}
       bottom={<Bottom id={id} onFairplayLearnMore={onFairplayLearnMore} variant={variant} />}
     />
   );

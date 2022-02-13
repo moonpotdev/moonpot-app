@@ -6,8 +6,8 @@ const styles = theme => ({
     height: '42px',
     width: 'fit-content',
     marginBottom: '32px',
-    [theme.breakpoints.down('1073')]: {
-      margin: '0 16px 16px',
+    [theme.breakpoints.down('764')]: {
+      margin: '0 0 16px',
     },
   },
   button: {

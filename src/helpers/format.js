@@ -78,11 +78,12 @@ const formatTimeLeftDefaultOptions = {
   resolution: 'minutes',
   dropZero: false,
   fixedWidth: true,
+  returnNumbers: false,
   labels: { days: 'd', hours: 'h', minutes: 'm', seconds: 's' },
 };
 
 export const formatTimeLeft = (milliseconds, options) => {
-  const { resolution, dropZero, fixedWidth, labels } = {
+  const { resolution, dropZero, fixedWidth, labels, returnNumbers } = {
     ...formatTimeLeftDefaultOptions,
     ...options,
   };
@@ -95,6 +96,10 @@ export const formatTimeLeft = (milliseconds, options) => {
     minutes: Math.floor((milliseconds / (1000 * 60)) % 60),
     seconds: Math.floor((milliseconds / 1000) % 60),
   };
+
+  if (returnNumbers) {
+    return numbers;
+  }
 
   const output = [];
 

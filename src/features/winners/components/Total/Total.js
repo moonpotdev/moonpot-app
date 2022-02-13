@@ -14,7 +14,11 @@ export const Total = memo(function ({ className }) {
   }
 
   if (error) {
-    return <Card variant="purpleDark">{JSON.stringify(error)}</Card>;
+    return (
+      <Card variant="purpleDark" oneColumn={true}>
+        {JSON.stringify(error)}
+      </Card>
+    );
   }
 
   const totalFormatted = total.toLocaleString(undefined, {

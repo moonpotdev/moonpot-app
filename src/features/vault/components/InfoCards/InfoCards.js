@@ -3,9 +3,8 @@ import { usePot } from '../../../../helpers/hooks';
 import { Box, Grid, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { OpenInNew } from '@material-ui/icons';
-import { Card, Cards, CardTitle } from '../../../../components/Cards';
+import { Card, CardTitle } from '../../../../components/Cards';
 import styles from './styles';
-import clsx from 'clsx';
 import ziggyPlay1x from '../../../../images/ziggy/play@1x.png';
 import ziggyPlay2x from '../../../../images/ziggy/play@2x.png';
 import ziggyPlay3x from '../../../../images/ziggy/play@3x.png';
@@ -23,7 +22,7 @@ const StrategyInfoCard = memo(function ({ pot, classes, t }) {
   }
 
   return (
-    <Card variant="purpleInfo" className={classes.strategy}>
+    <Card variant="purpleInfo" className={classes.strategy} oneColumn={true}>
       <CardTitle>{t('pot.infocards.strategy.title', { name: pot.name })}</CardTitle>
       {t('pot.infocards.strategy.body.' + pot.infoCardStrategy, {
         returnObjects: true,
@@ -93,7 +92,7 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
 
   return (
     <>
-      <Card variant="purpleInfo" className={classes.strategy}>
+      <Card variant="purpleInfo" className={classes.strategy} oneColumn={true}>
         <CardTitle>{t('pot.infocards.nft-strategy.title', { name: pot.name })}</CardTitle>
         {body ? body.map((text, i) => <p key={i}>{text}</p>) : null}
         {rarities ? (
@@ -183,7 +182,7 @@ const XmasStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
 
   return (
     <>
-      <Card variant="purpleInfo" className={classes.strategy}>
+      <Card variant="purpleInfo" className={classes.strategy} oneColumn={true}>
         <CardTitle>{t('pot.infocards.xmas-strategy.title', { name: pot.name })}</CardTitle>
         {body ? body.map((text, i) => <p key={i}>{text}</p>) : null}
         {merch ? (
@@ -225,7 +224,7 @@ const InterestBreakdownInfoCard = memo(function ({ pot, classes, t }) {
   }
 
   return (
-    <Card variant="purpleInfo">
+    <Card variant="purpleInfo" oneColumn={true}>
       <CardTitle>{t('pot.infocards.earnings.title')}</CardTitle>
       {interestBreakdown.interest ? (
         <div className={classes.earningItem}>
@@ -277,7 +276,7 @@ const InterestBreakdownInfoCard = memo(function ({ pot, classes, t }) {
 
 const FairplayInfoCard = memo(function ({ pot, classes, t, fairplayRef }) {
   return (
-    <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules}>
+    <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules} oneColumn={true}>
       <div className={classes.ziggyTimelock}>
         <img
           alt=""
@@ -304,7 +303,7 @@ const FairplayInfoCard = memo(function ({ pot, classes, t, fairplayRef }) {
 
 const NFTFairplayInfoCard = memo(function ({ pot, classes, t, fairplayRef }) {
   return (
-    <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules}>
+    <Card variant="purpleInfo" ref={fairplayRef} className={classes.fairplayRules} oneColumn={true}>
       <div className={classes.ziggyTimelock}>
         <img
           alt=""
@@ -347,7 +346,7 @@ export const InfoCards = memo(function ({ id, className, fairplayRef }) {
 
   if (infoCards.length) {
     return (
-      <Cards className={clsx(className)} oneUp={true}>
+      <>
         {infoCards.map(key => {
           const InfoCard = cardComponentMap[key];
           return InfoCard ? (
@@ -371,7 +370,7 @@ export const InfoCards = memo(function ({ id, className, fairplayRef }) {
             srcSet={`${ziggyPlay1x} 240w, ${ziggyPlay2x} 480w, ${ziggyPlay3x} 720w, ${ziggyPlay4x} 960w`}
           />
         </Box>
-      </Cards>
+      </>
     );
   }
 

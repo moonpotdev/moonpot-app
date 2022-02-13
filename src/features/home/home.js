@@ -1,15 +1,13 @@
 import React from 'react';
 import { Container, Grid, makeStyles } from '@material-ui/core';
 import styles from './styles';
-import { TVL } from './components/TVL';
 import SectionSelect from './components/SectionSelect/SectionSelect';
 import Moonpots from './Moonpots/Moonpots';
 import MyPots from './MyPots/MyPots';
-import { Title } from './components/Title';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
-import { PoweredByBeefy } from '../../components/PoweredByBeefy';
 import Filter from './components/Filter';
+import HomeHeader from './components/HomeHeader/HomeHeader';
 
 const useStyles = makeStyles(styles);
 
@@ -38,17 +36,12 @@ const Home = () => {
 
   return (
     <Container maxWidth={false} style={{ padding: '0', overflow: 'hidden' }}>
-      <Title className={classes.mainTitle} />
-      <PoweredByBeefy />
-      <div className={classes.tvlSpacer}>
-        <TVL className={classes.totalTVL} />
-      </div>
+      <HomeHeader />
       <div className={classes.backgroundWrapper}>
         <Grid container className={classes.filters}>
           <Grid item className={classes.filterContainerLeft}>
             <SectionSelect selected={top} />
           </Grid>
-          <div className={classes.placeholder} />
           <Grid item className={classes.filterContainerRight}>
             <Filter selected={top} potType={bottom} sort={filter} />
           </Grid>

@@ -14,7 +14,7 @@ export const styles = () => ({
     },
   },
   barSizer: {
-    width: '1110px',
+    width: '1220px',
     maxWidth: '100%',
     margin: '0 auto',
   },

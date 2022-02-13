@@ -24,7 +24,7 @@ function MigrationNotice({ pot }) {
       : 'migration.notice.all.content';
 
     return (
-      <Card variant="purpleDark" className={classes.notice}>
+      <Card variant="purpleDark" className={classes.notice} oneColumn={true}>
         <CardTitle>{t(title, { token: pot.token, name: pot.name })}</CardTitle>
         <div className={classes.text}>
           {t(content, { returnObjects: true, token: pot.token, name: pot.name }).map(
@@ -74,7 +74,7 @@ export function MigrationNotices({ selectedCategory }) {
 
   if (currentAddress && hasPotsNeedingMigration) {
     return (
-      <Cards className={classes.notices} oneUp={true}>
+      <Cards className={classes.notices}>
         {potsNeedingMigration.map(pot => (
           <MigrationNotice key={pot.id} pot={pot} />
         ))}

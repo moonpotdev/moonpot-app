@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, CardTitle } from '../../Cards/Cards';
+import { Card, Cards, CardTitle } from '../../Cards/Cards';
 import { BaseButton } from '../../Buttons/BaseButton';
-import { Typography, makeStyles } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import reduxActions from '../../../features/redux/actions';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -20,10 +20,12 @@ const UnableToSwitchChainModal = () => {
 
   return (
     <React.Fragment>
-      <Card variant="white" className={classes.card}>
-        <CardTitle className={classes.title}>{t('modals.unableToAutoSwitch')}</CardTitle>
-        <Typography className={classes.text}>{t('modals.manuallySetNetwork')}</Typography>
-      </Card>
+      <Cards>
+        <Card variant="white" className={classes.card}>
+          <CardTitle className={classes.title}>{t('modals.unableToAutoSwitch')}</CardTitle>
+          <Typography className={classes.text}>{t('modals.manuallySetNetwork')}</Typography>
+        </Card>
+      </Cards>
       <BaseButton className={classes.dismissButton} onClick={() => closeModal()}>
         {t('modals.close')}
       </BaseButton>

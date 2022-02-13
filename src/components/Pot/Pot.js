@@ -270,13 +270,13 @@ const DepositWithOdds = memo(function ({
   );
 });
 
-export function Pot({ id, variant, bottom, simple }) {
+export function Pot({ id, variant, bottom, simple, oneColumn }) {
   const classes = useStyles();
   const pot = usePot(id);
   const history = useHistory();
 
   return (
-    <Card variant={variant} style={{ height: 'fit-content' }}>
+    <Card variant={variant} style={{ height: 'fit-content' }} oneColumn={oneColumn}>
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>
         <Grid item xs="auto" onClick={() => history.push(`/pot/${pot.id}`)}>
           <Logo icon={pot.icon || pot.id} sponsorToken={pot.sponsorToken} />
