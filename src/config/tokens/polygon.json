@@ -31,7 +31,7 @@
   },
   {
     "symbol": "moonTicketQuickMAI-USDC",
-    "address": "0x708d5656a2F84aA82cdbc078342b04d4887E72bb",
+    "address": "0xFbC31886ADb13F1F74f8c94939B2eF55617A8532",
     "type": "ticket",
     "oracleId": "mai-usdc-mimatic",
     "decimals": 18,
