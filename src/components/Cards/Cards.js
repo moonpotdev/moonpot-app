@@ -1,6 +1,6 @@
 import React, { forwardRef, useCallback, useState } from 'react';
 import clsx from 'clsx';
-import { Collapse, makeStyles, Typography, Grid } from '@material-ui/core';
+import { Collapse, Grid, makeStyles, Typography } from '@material-ui/core';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import styles from './styles';
 import { Translate } from '../Translate';
@@ -8,11 +8,22 @@ import { variantClass } from '../../helpers/utils';
 
 const useStyles = makeStyles(styles);
 
-export function Cards({ className, children, sameHeight = true, ...rest }) {
+export function Cards({
+  className,
+  children,
+  sameHeight = true,
+  justifyContent = 'center',
+  ...rest
+}) {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.cardGrid}>
+    <Grid
+      container
+      className={classes.cardGrid}
+      justifyContent={justifyContent || 'center'}
+      {...rest}
+    >
       {children}
     </Grid>
   );

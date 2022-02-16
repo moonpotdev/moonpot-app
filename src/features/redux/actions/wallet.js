@@ -183,9 +183,9 @@ const disconnect = () => {
     const state = getState();
 
     await state.walletReducer.web3modal.clearCachedProvider();
-    dispatch({ type: WALLET_CONNECT_DONE, payload: { address: null } });
     dispatch({ type: EARNED_RESET });
     dispatch({ type: BALANCE_RESET });
+    dispatch({ type: WALLET_CONNECT_DONE, payload: { address: null } });
   };
 };
 
