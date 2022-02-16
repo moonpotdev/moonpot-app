@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, makeStyles } from '@material-ui/core';
 import reduxActions from '../../redux/actions';
@@ -11,7 +11,7 @@ import { Cards } from '../../../components/Cards';
 import styles from './styles';
 import { ClaimableBonusNotification } from '../../../components/ClaimableBonusNotification';
 import { MigrationNotices } from '../Moonpots/components/MigrationNotices/MigrationNotices';
-import { useSortKey, sortPots } from '../Moonpots/hooks/filter';
+import { sortPots, useSortKey } from '../Moonpots/hooks/filter';
 
 const useStyles = makeStyles(styles);
 
@@ -92,7 +92,7 @@ const MyPots = ({ potStatus, sort }) => {
                 <ClaimableBonusNotification className={classes.claimableBonuses} />
               </>
             ) : null}
-            <Cards sameHeight={false}>
+            <Cards sameHeight={false} justifyContent="flex-start">
               {filtered.length === 0 ? (
                 <NoPotsCard selected={potStatus} />
               ) : (

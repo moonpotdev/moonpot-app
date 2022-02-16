@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './styles';
-import { Box, Button, Grid, Typography, makeStyles } from '@material-ui/core';
+import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import reduxActions from '../../../../redux/actions';
@@ -23,7 +23,7 @@ export default function NoPotsCard({ selected }) {
 
   return (
     <Box className={classes.noActivePots}>
-      <Grid container>
+      <Grid container justifyContent="center">
         <Grid item xs={5}>
           <img
             className={classes.noActivePotsImage}
