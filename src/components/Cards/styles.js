@@ -7,6 +7,8 @@ const styles = () => ({
   },
   cardGridInner: {
     padding: '10px',
+    marginLeft: 0,
+    marginRight: 'auto',
   },
   cardGridInnerCentered: {
     padding: '10px',
