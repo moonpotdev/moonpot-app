@@ -17,8 +17,8 @@
     "myPots": "Pots Saya",
     "sidePots": "side",
     "nftPots": "NFT",
-    "nextDraw": "Next Draw",
-    "prize": "Prize",
+    "nextDraw": "Undian Berikutnya",
+    "prize": "Hadiah",
     "apy": "APY",
     "default": "Default",
     "featured": "Featured"
@@ -41,11 +41,11 @@
     "potsPrice": "Harga POTS",
     "buyPots": "Beli POTS",
     "audit": "Audit",
-    "articles": "Articles"
+    "articles": "Artikel"
   },
   "footer": {
     "cadets": "CADETS",
-    "prizes": "PRIZES",
+    "prizes": "HADIAH",
     "tvl": "TVL",
     "buybacks": "BUYBACKS"
   },
@@ -69,9 +69,9 @@
   "telegramSocialBlockButton": "Bergabunglah dengan Telegram kami",
   "discordSocialBlockButton": "Bergabunglah dengan Discord kami",
   "twitterSocialBlockButton": "Ikuti twitter kami",
-  "potType": "Pot Type:",
+  "potType": "Tipe Pot:",
   "sortBy": "Sort by:",
-  "potStatus": "Pot Status:",
+  "potStatus": "Status Pot:",
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",
@@ -158,8 +158,8 @@
             "Semua {{token}} yang disediakan oleh Yieldwatch diberikan kepada pemain Moonpot. Setengah akan digunakan untuk memberikan Anda keuntungan. Setengahnya lagi akan digunakan untuk Hadiah Undian dan hadiah Ziggy Pot."
           ],
           "binopoly": [
-            "The very first Play-to-Earn capital operation game built on BSC. Anyone can purchase and hold virtual land and cities to build a world of their own. Players may earn BINO tokens from purchasing or renting land plots and properties within various in-game scenarios.",
-            "This strategy deposits your {{token}} tokens in a Moonpot {{token}} vault, which autocompounds your {{token}} tokens from a fixed supply of {{token}} provided by the Binopoly team."
+            "Game operasi modal Play-to-Earn pertama yang dibangun di atas BSC. Siapa pun dapat membeli dan memegang tanah dan kota virtual untuk membangun dunia mereka sendiri. Pemain dapat memperoleh token BINO dari membeli atau menyewa sebidang tanah dan properti dalam berbagai skenario dalam game.",
+            "Strategi ini menyimpan token {{token}} Anda di brankas Moonpot {{token}}, yang secara otomatis menggabungkan token {{token}} Anda dari pasokan tetap {{token}} yang disediakan oleh tim Binopoly."
           ]
         },
         "beefyVaultAddress": "Alamat Brankas Beefy.Finance",
@@ -209,7 +209,7 @@
         },
         "ziggyverse-strength-nft": {
           "body": [
-            "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling."
+            "Ini adalah awal dari perjalanan baru bagi Cadet Moonpot. Kumpulkan dan tempa ubin misterius yang ditemukan oleh Ziggy dalam perjalanan mereka. Gunakan mereka di masa depan untuk mencetak makhluk eksotis untuk bertani dan bertarung."
           ],
           "rarities": {
             "gold": {
@@ -228,10 +228,10 @@
         },
         "nft-collections": {
           "body": [
-            "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
-            "Each draw will pick one winner to receive a single NFT from the current collection.",
-            "A new collection will be added to the pot once all NFTs from the current collection have been distributed. You do not have to restake to enter the new collection's draw.",
-            "The current collection is Crazy Chipmunks"
+            "Stake hingga 100 $POTS untuk kesempatan memenangkan NFT setiap hari dari Koleksi NFT terbaik di Binance Smart Chain.",
+            "Setiap undian akan memilih satu pemenang untuk menerima satu NFT dari koleksi saat ini.",
+            "Koleksi baru akan ditambahkan ke pot setelah semua NFT dari koleksi saat ini telah didistribusikan. Anda tidak perlu mengulang untuk mengikuti undian koleksi baru.",
+            "Koleksi saat ini adalah Crazy Chipmunks"
           ],
           "nfts": {
             "crazy-chipmonks/517": {
@@ -262,10 +262,10 @@
           ],
           "merch": {
             "beefy-moonpot-tshirt-front.png": {
-              "title": "T-Shirt - Front"
+              "title": "T-Shirt - Depan"
             },
             "beefy-moonpot-tshirt-back.png": {
-              "title": "T-Shirt - Back"
+              "title": "T-Shirt - Belakang"
             }
           }
         },
@@ -350,8 +350,8 @@
       "4belt": [
         "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi."
       ],
-      "beltbnb": ["ZAP lets you create beltBNB tokens and deposit with just one transaction."],
-      "ibalpaca": ["ZAP lets you create ibALPACA tokens and deposit with just one transaction."]
+      "beltbnb": ["ZAP memungkinkan Anda membuat token beltBNB dan menyetor hanya dengan satu transaksi."],
+      "ibalpaca": ["ZAP memungkinkan Anda membuat token ibALPACA dan menyetor hanya dengan satu transaksi."]
     },  
     "inYourWallet": "Di dompet Anda",
     "provider": "Penyedia likuiditas"
@@ -405,14 +405,14 @@
     "claimAll": "Klaim semua bonus POTS yang diperoleh"
   },
   "promo": {
-    "canClaim": "You can claim {{count}} promocode",
-    "canClaim_plural": "You can claim {{count}} promocodes",
-    "claim": "Claim my promocode",
-    "myPromocodes": "My promocodes",
-    "claimed": "{{count}} promocodes claimed",
+    "canClaim": "Anda dapat mengklaim {{count}} kode promo",
+    "canClaim_plural": "Anda dapat mengklaim {{count}} kode promo",
+    "claim": "Klaim kode promo saya",
+    "myPromocodes": "Kode promo saya",
+    "claimed": "{{count}} kode promo diklaim",
     "reveal": "Reveal",
-    "noNfts": "No NFTs to claim",
-    "beefyGear": "Place the order on the Beefy Gear Store. Promo code will cover both merchandise and shipping costs."
+    "noNfts": "Tidak ada NFT untuk diklaim",
+    "beefyGear": "Tempatkan pesanan di Beefy Gear Store. Kode promo akan mengcover biaya barang dagangan dan pengiriman."
   },
   "migration": {
     "viewRetiredPot": "Lihat Pot Tidak Aktif",
