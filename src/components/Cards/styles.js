@@ -22,6 +22,7 @@ const styles = () => ({
     borderStyle: 'solid',
     display: 'flex',
     flexDirection: 'column',
+    position: 'relative',
   },
   title: {
     fontWeight: 500,

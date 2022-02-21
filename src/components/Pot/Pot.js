@@ -14,13 +14,14 @@ import {
 } from '../../helpers/hooks';
 import { DrawStat, DrawStatNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
-import { investmentOdds, listJoin, ZERO } from '../../helpers/utils';
+import { investmentOdds, listJoin, variantClass, ZERO } from '../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import styles from './styles';
 import { getPotIconSrc } from '../../helpers/getPotIconSrc';
 import { useHistory } from 'react-router';
 import { TransListJoin } from '../TransListJoin';
 import BigNumber from 'bignumber.js';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
@@ -270,6 +271,21 @@ const DepositWithOdds = memo(function ({
   );
 });
 
+const PotNetwork = memo(function PotNetwork({ network }) {
+  const classes = useStyles();
+
+  return (
+    <div className={clsx(classes.network, variantClass(classes, 'network', network))}>
+      <img
+        src={require(`../../images/networks/${network}.svg`).default}
+        width="24"
+        height="24"
+        alt={network}
+      />
+    </div>
+  );
+});
+
 export function Pot({ id, variant, bottom, simple, oneColumn }) {
   const classes = useStyles();
   const pot = usePot(id);
@@ -277,6 +293,7 @@ export function Pot({ id, variant, bottom, simple, oneColumn }) {
 
   return (
     <Card variant={variant} style={{ height: 'fit-content' }} oneColumn={oneColumn}>
+      <PotNetwork network={pot.network} />
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>
         <Grid item xs="auto" onClick={() => history.push(`/pot/${pot.id}`)}>
           <Logo icon={pot.icon || pot.id} sponsorToken={pot.sponsorToken} />

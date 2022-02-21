@@ -6,6 +6,32 @@ const styles = theme => ({
   columnTitleWinTotal: {
     flexGrow: '1',
   },
+  network: {
+    position: 'absolute',
+    top: -2,
+    left: -2,
+    width: 34,
+    height: 34,
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderColor: 'inherit',
+    borderBottomRightRadius: '16px',
+    borderTopLeftRadius: '16px',
+    '& img': {
+      position: 'relative',
+      zIndex: 1,
+      width: 24,
+      height: 24,
+      marginLeft: (30 - 24) / 2,
+      marginTop: (30 - 24) / 2,
+    },
+  },
+  networkBsc: {
+    backgroundColor: '#efb90c',
+  },
+  networkPolygon: {
+    backgroundColor: '#8247e4',
+  },
   title: {
     color: '#EBF3F9',
     fontSize: '15px',
