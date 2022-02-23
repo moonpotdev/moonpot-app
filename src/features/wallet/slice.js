@@ -3,9 +3,10 @@ import { walletAccountsChanged } from './accountsChanged';
 import { walletConnect } from './connect';
 import { walletDisconnect } from './disconnect';
 import { networks } from '../../config/networks';
-import Web3 from 'web3';
+import { Web3 } from '../../helpers/web3';
 import { walletChainChanged } from './chainChanged';
 import { WALLET_ACTION, WALLET_ACTION_RESET } from '../redux/constants';
+import { walletSwitch } from './switch';
 
 function initialRpc() {
   return Object.fromEntries(
@@ -57,6 +58,12 @@ const walletSlice = createSlice({
         state.web3 = null;
         state.provider = null;
       })
+      .addCase(walletSwitch.pending, (state, action) => {})
+      .addCase(walletSwitch.fulfilled, (state, action) => {
+        state.network = action.payload.network;
+        state.address = action.payload.address;
+      })
+      .addCase(walletSwitch.rejected, (state, action) => {})
       .addCase(walletDisconnect.fulfilled, (state, action) => {
         state.status = 'disconnected';
         state.network = null;
@@ -76,7 +83,6 @@ const walletSlice = createSlice({
       })
       .addCase(walletAccountsChanged.fulfilled, (state, action) => {
         state.address = action.payload.address;
-        state.status = 'connected';
       })
       .addCase(walletAccountsChanged.rejected, state => {
         state.network = null;

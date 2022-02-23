@@ -13,7 +13,6 @@ import {
 import reduxActions from '../../features/redux/actions';
 import { getFairplayFeePercent, isEmpty, ZERO } from '../../helpers/utils';
 import Steps from '../../features/vault/components/Steps';
-import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { Translate } from '../Translate';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { TokenInput } from '../TokenInput';
@@ -21,6 +20,7 @@ import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { Alert, AlertText } from '../Alert';
 import { InfoOutlined } from '@material-ui/icons';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
+import { WalletRequired } from '../WalletRequired/WalletRequired';
 
 const useStyles = makeStyles(styles);
 
@@ -317,7 +317,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
             />
           </div>
           <div className={classes.buttonHolder}>
-            {address ? (
+            <WalletRequired network={pot.network} networkRequired={true}>
               <SecondaryButton
                 variant={variant}
                 onClick={handleWithdraw}
@@ -329,14 +329,12 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
                   values={{ token: pot.token }}
                 />
               </SecondaryButton>
-            ) : (
-              <WalletConnectButton variant={variant} fullWidth={true} network={pot.network} />
-            )}
+            </WalletRequired>
           </div>
         </>
       ) : (
         <div className={classes.buttonHolder}>
-          {address ? (
+          <WalletRequired network={pot.network} networkRequired={true}>
             <PrimaryButton
               variant={variant}
               onClick={handleWithdraw}
@@ -345,9 +343,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
             >
               <Translate i18nKey="withdraw.allToken" values={{ token: pot.token }} />
             </PrimaryButton>
-          ) : (
-            <WalletConnectButton variant={variant} fullWidth={true} network={pot.network} />
-          )}
+          </WalletRequired>
         </div>
       )}
       <WithdrawSteps pot={pot} steps={steps} setSteps={setSteps} />

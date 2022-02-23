@@ -7,7 +7,6 @@ import { usePot, useSymbolOrList, useTokenAllowance, useTokenBalance } from '../
 import reduxActions from '../../features/redux/actions';
 import { indexBy, variantClass } from '../../helpers/utils';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { Translate } from '../Translate/Translate';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
 import { TokenIcon } from '../TokenIcon/TokenIcon';
@@ -16,6 +15,7 @@ import { MigrationNotice, Stats, WithdrawSteps } from './PotWithdraw';
 import styles from './styles';
 import { formatDecimals } from '../../helpers/format';
 import { networkByKey } from '../../config/networks';
+import { WalletRequired } from '../WalletRequired/WalletRequired';
 
 const useStyles = makeStyles(styles);
 
@@ -308,41 +308,41 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
         {/*    pairToken={pairToken}*/}
         {/*  />*/}
         {/*</div>*/}
-        <div className={classes.fieldsHolder}>
-          {address ? (
-            <div className={classes.selectField}>
-              <Select
-                className={clsx(
-                  classes.tokenSelect,
-                  variantClass(classes, 'inputVariant', variant)
-                )}
-                disableUnderline
-                IconComponent={DropdownIcon}
-                value={selectedTokenSymbol}
-                onChange={handleSelect}
-                MenuProps={{
-                  classes: {
-                    paper: clsx(
-                      classes.tokenDropdown,
-                      variantClass(classes, 'tokenDropdownVariant', variant)
-                    ),
-                  },
-                  anchorOrigin: { horizontal: 'left', vertical: 'bottom' },
-                  transformOrigin: { horizontal: 'left', vertical: 'top' },
-                  getContentAnchorEl: null,
-                }}
-              >
-                {withdrawTokens.map(token => (
-                  <MenuItem key={token.symbol} value={token.symbol} className={classes.tokenItem}>
-                    <TokenIcon token={token} />
-                    <span className={classes.tokenItemSymbol}>{token.symbol}</span>
-                  </MenuItem>
-                ))}
-              </Select>
-            </div>
-          ) : null}
-          <div className={classes.inputField}>
+        <WalletRequired network={pot.network} networkRequired={true}>
+          <div className={classes.fieldsHolder}>
             {address ? (
+              <div className={classes.selectField}>
+                <Select
+                  className={clsx(
+                    classes.tokenSelect,
+                    variantClass(classes, 'inputVariant', variant)
+                  )}
+                  disableUnderline
+                  IconComponent={DropdownIcon}
+                  value={selectedTokenSymbol}
+                  onChange={handleSelect}
+                  MenuProps={{
+                    classes: {
+                      paper: clsx(
+                        classes.tokenDropdown,
+                        variantClass(classes, 'tokenDropdownVariant', variant)
+                      ),
+                    },
+                    anchorOrigin: { horizontal: 'left', vertical: 'bottom' },
+                    transformOrigin: { horizontal: 'left', vertical: 'top' },
+                    getContentAnchorEl: null,
+                  }}
+                >
+                  {withdrawTokens.map(token => (
+                    <MenuItem key={token.symbol} value={token.symbol} className={classes.tokenItem}>
+                      <TokenIcon token={token} />
+                      <span className={classes.tokenItemSymbol}>{token.symbol}</span>
+                    </MenuItem>
+                  ))}
+                </Select>
+              </div>
+            ) : null}
+            <div className={classes.inputField}>
               <PrimaryButton
                 variant={variant}
                 onClick={handleWithdraw}
@@ -354,11 +354,9 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
                   values={{ token: selectedTokenSymbol }}
                 />
               </PrimaryButton>
-            ) : (
-              <WalletConnectButton variant={variant} fullWidth={true} network={pot.network} />
-            )}
+            </div>
           </div>
-        </div>
+        </WalletRequired>
         <WithdrawSteps pot={pot} steps={steps} setSteps={setSteps} />
       </div>
       {pot.withdrawFee ? (

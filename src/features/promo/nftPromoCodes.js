@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Web3 from 'web3';
+import { Web3 } from '../../helpers/web3';
 import nftPromoClaimAbi from '../../config/abi/nftPromoClaim.json';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { networkByKey } from '../../config/networks';

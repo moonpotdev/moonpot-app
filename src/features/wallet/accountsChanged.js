@@ -17,6 +17,7 @@ export const walletAccountsChanged = createAsyncThunk(
     }
 
     // no accounts, disconnect
+    console.log('walletAccountsChanged->walletDisconnect');
     dispatch(walletDisconnect());
 
     return {

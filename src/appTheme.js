@@ -47,7 +47,6 @@ const appTheme = () => {
       },
       MuiButton: {
         root: {
-          width: '163px',
           height: '34px',
           borderRadius: 20,
           borderWidth: '2px',

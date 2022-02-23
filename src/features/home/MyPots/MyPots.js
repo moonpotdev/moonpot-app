@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, makeStyles } from '@material-ui/core';
 import reduxActions from '../../redux/actions';
 import BigNumber from 'bignumber.js';
-import { isEmpty } from '../../../helpers/utils';
+import { isEmpty, ZERO } from '../../../helpers/utils';
 import { byDecimals } from '../../../helpers/format';
 import NoPotsCard from './components/NoPotsCard/NoPotsCard';
 import Pot from './components/Pot/Pot';
@@ -11,7 +11,7 @@ import { Cards } from '../../../components/Cards';
 import styles from './styles';
 import { ClaimableBonusNotification } from '../../../components/ClaimableBonusNotification';
 import { MigrationNotices } from '../Moonpots/components/MigrationNotices/MigrationNotices';
-import { useSortKey, sortPots } from '../Moonpots/hooks/filter';
+import { sortPots, useSortKey } from '../Moonpots/hooks/filter';
 
 const useStyles = makeStyles(styles);
 
@@ -30,6 +30,10 @@ const MyPots = ({ potStatus, sort }) => {
   const [filteredUpdated, setFilteredUpdated] = useState(false);
   const filtered = useMemo(() => {
     const check = item => {
+      if (!walletAddress) {
+        return false;
+      }
+
       if (item.status !== potStatus) {
         return false;
       }
@@ -53,7 +57,7 @@ const MyPots = ({ potStatus, sort }) => {
             ),
           };
         }
-        return item;
+        return { ...item, userBalance: ZERO };
       });
   }, [potStatus, vault.pools, tokenBalances, walletAddress]);
 

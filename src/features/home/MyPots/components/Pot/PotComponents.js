@@ -91,13 +91,12 @@ const DepositedOdds = memo(function ({ ticketTotalSupply, winners, ticketToken, 
   return <Translate i18nKey="pot.odds" values={{ odds }} />;
 });
 
-export const PotInfoBlock = function ({ item, active = true }) {
+export const PotInfoBlock = function ({ pot, active = true }) {
   const classes = useStyles();
   const depositTokenPrice = useSelector(
-    state => state.prices.byNetworkAddress[item.network][item.tokenAddress]
+    state => state.prices.byNetworkAddress[pot.network][pot.tokenAddress]
   );
   const { t } = useTranslation();
-  const pot = item;
 
   return (
     <Grid item xs={12}>
@@ -105,13 +104,13 @@ export const PotInfoBlock = function ({ item, active = true }) {
         {/*Balance*/}
         <Grid item xs={6}>
           <Typography className={classes.myDetailsText} align={'left'}>
-            <Translate i18nKey="pot.myToken" values={{ token: item.token }} />
+            <Translate i18nKey="pot.myToken" values={{ token: pot.token }} />
           </Typography>
         </Grid>
         <Grid item xs={6}>
           <Typography className={classes.myDetailsValue} align={'right'}>
-            {formatDecimals(item.userBalance)} {item.token} ($
-            {formatDecimals(item.userBalance.multipliedBy(depositTokenPrice), 2)})
+            {formatDecimals(pot.userBalance)} {pot.token} ($
+            {formatDecimals(pot.userBalance.multipliedBy(depositTokenPrice), 2)})
           </Typography>
         </Grid>
         {/*Interest*/}
@@ -120,11 +119,11 @@ export const PotInfoBlock = function ({ item, active = true }) {
             <Grid item xs={6}>
               <Typography className={classes.myDetailsText} align={'left'}>
                 {t('pot.myInterestRate')}
-                {item.isPrizeOnly ? null : <InterestTooltip pot={pot} />}
+                {pot.isPrizeOnly ? null : <InterestTooltip pot={pot} />}
               </Typography>
             </Grid>
             <Grid item xs={6}>
-              <Interest baseApy={item.apy} bonusApy={item.bonusApy} prizeOnly={item.isPrizeOnly} />
+              <Interest baseApy={pot.apy} bonusApy={pot.bonusApy} prizeOnly={pot.isPrizeOnly} />
             </Grid>
           </>
         ) : null}
@@ -139,10 +138,10 @@ export const PotInfoBlock = function ({ item, active = true }) {
             <Grid item xs={6}>
               <Typography className={classes.myDetailsValue} align={'right'}>
                 <DepositedOdds
-                  ticketTotalSupply={item.totalTickets}
-                  winners={item.numberOfWinners}
-                  ticketToken={item.rewardToken}
-                  tokenDecimals={item.tokenDecimals}
+                  ticketTotalSupply={pot.totalTickets}
+                  winners={pot.numberOfWinners}
+                  ticketToken={pot.rewardToken}
+                  tokenDecimals={pot.tokenDecimals}
                 />
               </Typography>
             </Grid>

@@ -73,6 +73,7 @@ function getModalOptions(networkKey) {
   if (!(networkKey in modalOptions)) {
     console.log(`creating modal options for ${networkKey}`);
     modalOptions[networkKey] = createModalOptions(networkByKey[networkKey]);
+    console.log(modalOptions[networkKey]);
   }
 
   return modalOptions[networkKey];

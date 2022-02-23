@@ -36,7 +36,7 @@ const Pot = function ({ item }) {
           <Typography className={classes.dividerText}>{t('pot.myDetails')} </Typography>
         </Grid>
         {/*Info Block*/}
-        <PotInfoBlock item={item} active={item.status !== 'eol'} />
+        <PotInfoBlock pot={item} active={item.status !== 'eol'} />
       </Grid>
       {/*Bottom*/}
       {item.status === 'active' ? <ActiveLayout item={item} /> : <EOLLayout item={item} />}

@@ -374,7 +374,13 @@
     "withdrawBonusTokens": "Withdraw Bonus {{tokens}}"
   },
   "wallet": {
-    "connect": "Connect Wallet"
+    "connect": "Connect Wallet",
+    "connectRequired": "Wallet connection required",
+    "connectRequiredNetwork": "Wallet connection to {{network}} required",
+    "connectedToUnsupported": "Wallet connected to unsupported network",
+    "connectedToOther": "Wallet connected to {{network}}",
+    "switchToNetworkText": "Please switch to {{network}}",
+    "switchToNetworkButton": "Switch to {{network}}"
   },
   "winners": {
     "totalPrizesWon": "Our cadets have won",

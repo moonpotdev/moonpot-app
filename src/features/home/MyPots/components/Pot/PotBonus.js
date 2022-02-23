@@ -11,6 +11,7 @@ import { useBonusesEarned } from '../../../../../helpers/hooks';
 import { SecondaryButton } from '../../../../../components/Buttons/SecondaryButton';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 import clsx from 'clsx';
+import { WalletRequired } from '../../../../../components/WalletRequired/WalletRequired';
 
 const useStyles = makeStyles(styles);
 
@@ -20,7 +21,7 @@ const bonusStatLabels = {
   earned: 'bonus.myEarnings',
 };
 
-const PotBonus = function ({ item, buttonVariant = 'purple' }) {
+const PotBonus = function ({ pot, buttonVariant = 'purple' }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const PotBonus = function ({ item, buttonVariant = 'purple' }) {
   });
   const [stepsItem, setStepsItem] = useState(null);
 
-  const bonuses = useBonusesEarned(item.id);
+  const bonuses = useBonusesEarned(pot.id);
   const canWithdrawBonus = useMemo(
     () => bonuses.find(bonus => bonus.earned > 0) !== undefined,
     [bonuses]
@@ -150,7 +151,7 @@ const PotBonus = function ({ item, buttonVariant = 'purple' }) {
             .map(bonus => (
               <Grid
                 item
-                key={`${item.id}-${bonus.id}`}
+                key={`${pot.id}-${bonus.id}`}
                 xs={12}
                 container
                 className={clsx(classes.bonusRow, {
@@ -173,36 +174,38 @@ const PotBonus = function ({ item, buttonVariant = 'purple' }) {
         : null}
       <Grid item xs={12} className={classes.bonusExplainerRow}>
         <Typography className={classes.explainerText}>
-          {item.id === 'pots'
+          {pot.id === 'pots'
             ? t('bonus.potsExplainer', { tokens: activeTokens })
             : t('bonus.bonusExplainer', { tokens: activeTokens })}
         </Typography>
       </Grid>
-      {canCompound ? (
-        <Grid item xs={12} className={classes.bonusCompoundRow}>
-          <PrimaryButton
-            onClick={() => handleCompoundBonus(item)}
+      <WalletRequired network={pot.network} networkRequired={true}>
+        {canCompound ? (
+          <Grid item xs={12} className={classes.bonusCompoundRow}>
+            <PrimaryButton
+              onClick={() => handleCompoundBonus(pot)}
+              variant={buttonVariant}
+              fullWidth={true}
+              disabled={!canCompound}
+            >
+              {t('bonus.compoundBonusToken', { token: pot.token })}
+            </PrimaryButton>
+            <Typography className={clsx(classes.explainerText, classes.compoundExplainerText)}>
+              {t('bonus.compoundExplainer', { token: pot.token })}
+            </Typography>
+          </Grid>
+        ) : null}
+        <Grid item xs={12}>
+          <SecondaryButton
+            onClick={() => handleWithdrawBonus(pot)}
             variant={buttonVariant}
             fullWidth={true}
-            disabled={!canCompound}
+            disabled={!canWithdrawBonus}
           >
-            {t('bonus.compoundBonusToken', { token: item.token })}
-          </PrimaryButton>
-          <Typography className={clsx(classes.explainerText, classes.compoundExplainerText)}>
-            {t('bonus.compoundExplainer', { token: item.token })}
-          </Typography>
+            {t('bonus.withdrawBonusTokens', { tokens: earnedTokens })}
+          </SecondaryButton>
         </Grid>
-      ) : null}
-      <Grid item xs={12}>
-        <SecondaryButton
-          onClick={() => handleWithdrawBonus(item)}
-          variant={buttonVariant}
-          fullWidth={true}
-          disabled={!canWithdrawBonus}
-        >
-          {t('bonus.withdrawBonusTokens', { tokens: earnedTokens })}
-        </SecondaryButton>
-      </Grid>
+      </WalletRequired>
     </Grid>
   );
 };

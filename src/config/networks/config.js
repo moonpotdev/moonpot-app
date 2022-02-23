@@ -67,7 +67,7 @@ const networksConfig = {
     explorerUrl: 'https://polygonscan.com',
     multicallAddress: '0xC3821F0b56FA4F4794d5d760f94B812DE261361B',
     supportedWallets: ['injected', 'custom-clover', 'walletconnect', 'custom-coinbase'],
-    providerName: 'polygon',
+    providerName: 'matic',
     walletSettings: {
       chainId: `0x${parseInt('137', 10).toString(16)}`,
       chainName: 'Polygon Mainnet',

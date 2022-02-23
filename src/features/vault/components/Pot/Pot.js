@@ -66,7 +66,7 @@ const BonusAccordionItem = memo(function ({ pot }) {
       titleKey={pot.id === 'pots' ? 'pot.earnings' : 'pot.bonusEarnings'}
       startOpen={true}
     >
-      <PotBonus item={pot} buttonVariant={handleButtonVariant(pot.vaultType)} />
+      <PotBonus pot={pot} buttonVariant={handleButtonVariant(pot.vaultType)} />
     </CardAccordionItem>
   ) : null;
 });
@@ -133,8 +133,8 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
           numberOfWinners={pot.numberOfWinners}
         />
       </CardAccordionItem>
-      <WalletRequired network={pot.network}>
-        <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
+      <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
+        <WalletRequired network={pot.network} networkRequired={true}>
           {pot.status === 'active' ? (
             <>
               {pot.isZap ? (
@@ -152,10 +152,10 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
               )}
             </>
           ) : null}
-        </CardAccordionItem>
-        <BonusAccordionItem pot={pot} />
-        <WithdrawAccordionItem pot={pot} onFairplayLearnMore={onFairplayLearnMore} />
-      </WalletRequired>
+        </WalletRequired>
+      </CardAccordionItem>
+      <BonusAccordionItem pot={pot} />
+      <WithdrawAccordionItem pot={pot} onFairplayLearnMore={onFairplayLearnMore} />
     </CardAccordionGroup>
   );
 };

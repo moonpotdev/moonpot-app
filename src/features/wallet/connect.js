@@ -1,6 +1,6 @@
 import { networkIdToKey } from '../../config/networks';
 import { getModal } from './modal';
-import Web3 from 'web3';
+import { Web3 } from '../../helpers/web3';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { walletDisconnect } from './disconnect';
 import { walletAccountsChanged } from './accountsChanged';
@@ -29,6 +29,7 @@ function subscribeToProvider(provider, dispatch) {
   }
 
   const closeHandler = createEventHandler(() => {
+    console.log('closeHandler->walletDisconnect');
     dispatch(walletDisconnect());
   });
 
@@ -77,7 +78,7 @@ function createWeb3(provider) {
   return web3;
 }
 
-async function getNetworkId(web3) {
+export async function getNetworkId(web3) {
   const networkId = await web3.eth.getChainId();
   // Trust provider returns an incorrect chainId for BSC. (Is this still true?)
   return networkId === 86 ? 56 : networkId;
@@ -111,10 +112,8 @@ export const walletConnect = createAsyncThunk(
     dispatch({ type: EARNED_RESET });
     dispatch({ type: BALANCE_RESET });
 
+    // return
     console.log('return', networkKey, networkId, networkIdToKey(networkId));
-    // TODO check network
-    // show unsupported modal if connected to unsupported network
-    // show wrong network modal if connected to network other than what was connected
     return {
       network: networkIdToKey(networkId),
       address: accounts && accounts.length ? accounts[0] : null,

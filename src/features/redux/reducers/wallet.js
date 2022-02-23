@@ -1,4 +1,4 @@
-import Web3 from 'web3';
+import { Web3 } from '../../../helpers/web3';
 import { createReducer } from '@reduxjs/toolkit';
 import { networkKeys, networks } from '../../../config/networks';
 import { WALLET_ACTION, WALLET_ACTION_RESET } from '../constants';

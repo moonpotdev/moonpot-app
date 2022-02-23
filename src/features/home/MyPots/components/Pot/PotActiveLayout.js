@@ -44,7 +44,7 @@ const ActiveLayout = function ({ item }) {
       {/*Bonus*/}
       {'bonuses' in item && item.bonuses.length ? (
         <CardAccordionItem titleKey={item.id === 'pots' ? 'pot.earnings' : 'pot.bonusEarnings'}>
-          <PotBonus item={item} />
+          <PotBonus pot={item} />
         </CardAccordionItem>
       ) : null}
       <WalletRequired network={item.network}>

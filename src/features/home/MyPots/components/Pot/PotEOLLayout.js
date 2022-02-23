@@ -13,7 +13,7 @@ const EOLLayout = function ({ item }) {
         {/*Bonus*/}
         {item.migrationContractAddress || !('bonuses' in item) || !item.bonuses.length ? null : (
           <CardAccordionItem titleKey="pot.bonusEarnings">
-            <PotBonus item={item} />
+            <PotBonus pot={item} />
           </CardAccordionItem>
         )}
         {/*Withdraw*/}

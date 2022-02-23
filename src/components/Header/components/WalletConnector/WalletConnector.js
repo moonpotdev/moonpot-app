@@ -67,6 +67,7 @@ const WalletConnector = ({ variant, onConnect, onDisconnect, className, ...rest 
   const handleButtonClick = useCallback(() => {
     if (isConnected) {
       setMenuOpen(false);
+      console.log('handleButtonClick->walletDisconnect');
       dispatch(walletDisconnect());
       if (onDisconnect) {
         onDisconnect();
