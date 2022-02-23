@@ -271,6 +271,42 @@
     ]
   },
   {
+    "id": "ziggyverse-intelligence-nft",
+    "name": "Ziggyverse NFT",
+    "icon": "ziggyverse",
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketZiggyVerseIntelligence",
+    "rewardAddress": "0xB37893DecC099c279f460ecb686D4fa8Dc3fc811",
+    "contractAddress": "0x2Fe146281a81F147247CCa76D086b6fd6Cc2eB30",
+    "prizePoolAddress": "0x3A3E68334058aFbFcb1B806470481C4f65D368D6",
+    "prizeStrategyAddress": "0x91F24eBbd4c2f8ee04Bdb8D764edb7f95ae75D4d",
+    "oracleId": "POTS",
+    "apyId": "pots-pots",
+    "vaultType": "nft",
+    "categories": ["nft"],
+    "featured": true,
+    "duration": 1,
+    "fairplayDuration": 3,
+    "fairplayTicketFee": 0.05,
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "withdrawFee": 0,
+    "infoCards": ["nft-strategy", "nft-fairplay"],
+    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "address": "0xd41748641B5B9aF4110513bA5aEEECDF3318304A",
+        "type": "erc721"
+      }
+    ],
+    "bonuses": []
+  },
+  {
     "id": "ziggyverse-strength-nft",
     "name": "Ziggyverse NFT",
     "icon": "ziggyverse",

@@ -237,6 +237,25 @@
             }
           }
         },
+        "ziggyverse-intelligence-nft": {
+          "body": [
+            "This is the beginning of a new journey for the Moonpot Cadets. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling."
+          ],
+          "rarities": {
+            "gold": {
+              "name": "Intelligence - Gold",
+              "rarity": "25 / 50"
+            },
+            "moonstone": {
+              "name": "Intelligence - Moonstone",
+              "rarity": "76 / 100"
+            },
+            "jade": {
+              "name": "Intelligence - Jade",
+              "rarity": "100 / 150"
+            }
+          }
+        },
         "nft-collections": {
           "body": [
             "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",

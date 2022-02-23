@@ -495,6 +495,35 @@
     ]
   },
   {
+    "symbol": "Ziggyverse NFT",
+    "address": "0xd41748641B5B9aF4110513bA5aEEECDF3318304A",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0,
+    "nfts": [
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 1,
+        "max": 25
+      },
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 51,
+        "max": 116
+      },
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 291,
+        "max": 300
+      },
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 191,
+        "max": 290
+      }
+    ]
+  },
+  {
     "symbol": "moonTicketPotsZiggyVerseAgility",
     "address": "0x075570d24c67EC8F87c5d8458BFFe01A729c3B40",
     "type": "ticket",
@@ -581,6 +610,14 @@
   {
     "symbol": "moonTicketZiggyVerseStrength",
     "address": "0x8044Cfc4Fb5b5577575f83E9A2C657aa25eDc8F2",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "moonTicketZiggyVerseIntelligence",
+    "address": "0xB37893DecC099c279f460ecb686D4fa8Dc3fc811",
     "type": "ticket",
     "decimals": 18,
     "underlyingToken": "POTS",
