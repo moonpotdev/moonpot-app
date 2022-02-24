@@ -361,20 +361,17 @@
     "fairplayTicketFee": 0.05,
     "status": "active",
     "infoCards": ["nft-strategy", "nft-fairplay"],
-    "infoCardNftStrategyCollection": "https://nftkey.app/collections/sluggishsloths/",
-    "infoCardNftCollectionName": "Sluggish Sloths",
+    "infoCardNftStrategyCollection": "https://app.lacucina.io/public-marketplace",
+    "infoCardNftCollectionName": "LaCucina Secret Ingredients",
     "sponsors": [],
     "nftPrizeOnly": true,
     "nfts": [
       {
-        "name": "Sluggish Sloths NFT",
-        "address": "0x74a1a77B627714BF7200464a16C51701Abb7cc38",
-        "type": "erc721",
-        "slug": "sluggish-sloths",
-        "ids": [
-          18, 22, 32, 46, 66, 498, 977, 1858, 3310, 3336, 3341, 3349, 3351, 3353, 3356, 3359, 3360,
-          3367, 3369, 3375
-        ]
+        "name": "LaCucina Secret Ingredients NFT",
+        "address": "0x2c3f816fB680Bbe745D085dC244CCf0737FcfB9A",
+        "type": "erc1155",
+        "slug": "lacucina-secret-ingredients",
+        "ids": [60]
       }
     ],
     "bonuses": []
