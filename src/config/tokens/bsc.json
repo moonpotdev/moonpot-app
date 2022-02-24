@@ -686,5 +686,12 @@
     "type": "nft",
     "subtype": "erc721",
     "decimals": 0
+  },
+  {
+    "symbol": "LaCucina Secret Ingredients NFT",
+    "address": "0x2c3f816fB680Bbe745D085dC244CCf0737FcfB9A",
+    "type": "nft",
+    "subtype": "erc1155",
+    "decimals": 0
   }
 ]
