@@ -83,6 +83,7 @@
   "potType": "Pot Type:",
   "sortBy": "Sort by:",
   "potStatus": "Pot Status:",
+  "potName": "Pot:",
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",

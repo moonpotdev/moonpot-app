@@ -1,8 +1,15 @@
-import { UPDATE_FILTER_SORT, UPDATE_FILTER_STATUS } from '../constants';
+import {
+  UPDATE_FILTER_SORT,
+  UPDATE_FILTER_STATUS,
+  UPDATE_WINNER_POTS,
+  UPDATE_WINNER_SORT,
+} from '../constants';
 
 const initialState = {
   sort: '',
   status: '',
+  winnerSort: 'featured',
+  winnerPots: [],
 };
 
 const filterReducer = (state = initialState, action) => {
@@ -16,6 +23,16 @@ const filterReducer = (state = initialState, action) => {
       return {
         ...state,
         status: action.payload.status,
+      };
+    case UPDATE_WINNER_SORT:
+      return {
+        ...state,
+        winnerSort: action.payload.sort,
+      };
+    case UPDATE_WINNER_POTS:
+      return {
+        ...state,
+        winnerPots: action.payload.pots,
       };
     default:
       return state;

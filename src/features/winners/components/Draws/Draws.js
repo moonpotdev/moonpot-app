@@ -12,8 +12,36 @@ function useDraws() {
   const draws = useSelector(state => state.winners.draws);
   const pending = useSelector(state => state.winners.pending);
   const firstLoad = useSelector(state => state.winners.firstLoad);
+  const sortFilter = useSelector(state => state.filterReducer.winnerSort);
+  const potsFilter = useSelector(state => state.filterReducer.winnerPots);
   const drawsCount = draws.length;
   const oldestDraw = draws.length ? draws[draws.length - 1] : null;
+
+  const potIsInFilter = potId => {
+    for (var i = 0; i < potsFilter.length; i++) {
+      if (potsFilter[i].key === potId) return true;
+    }
+    return false;
+  };
+
+  const filterDraws = draws => {
+    if (potsFilter.length === 0) {
+      //If single pots filter is not set use type filter
+      if (sortFilter === 'all') {
+        return draws;
+      } else if (sortFilter === 'featured') {
+        const filteredDraws = draws.filter(draw => draw.pot.featured === true);
+        return filteredDraws;
+      } else {
+        const filteredDraws = draws.filter(draw => draw.pot.vaultType === sortFilter);
+        return filteredDraws;
+      }
+    } else {
+      //Filter by pot name/id
+      const filteredDraws = draws.filter(draw => potIsInFilter(draw.pot.id));
+      return filteredDraws;
+    }
+  };
 
   const nextPage = useCallback(() => {
     if (!pending && hasMore && oldestDraw) {
@@ -27,7 +55,9 @@ function useDraws() {
     }
   }, [dispatch, firstLoad]);
 
-  return [draws, drawsCount, nextPage, hasMore, firstLoad];
+  const filteredDraws = filterDraws(draws);
+
+  return [filteredDraws, drawsCount, nextPage, hasMore, firstLoad];
 }
 
 export const Draws = function () {
