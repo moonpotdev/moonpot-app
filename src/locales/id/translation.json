@@ -232,7 +232,7 @@
             "Setiap undian akan memilih satu pemenang untuk menerima satu NFT dari koleksi saat ini.",
             "Koleksi baru akan ditambahkan ke pot setelah semua NFT dari koleksi saat ini telah didistribusikan. Anda tidak perlu mengulang untuk mengikuti undian koleksi baru.",
             "Koleksi saat ini adalah {{collection}}"
-          ],
+          ]
         }
       },
       "xmas-strategy": {
@@ -333,9 +333,13 @@
       "4belt": [
         "ZAP memungkinkan Anda untuk membuat kumpulan liquiditas token dan melakukan deposit hanya dengan satu transaksi."
       ],
-      "beltbnb": ["ZAP memungkinkan Anda membuat token beltBNB dan menyetor hanya dengan satu transaksi."],
-      "ibalpaca": ["ZAP memungkinkan Anda membuat token ibALPACA dan menyetor hanya dengan satu transaksi."]
-    },  
+      "beltbnb": [
+        "ZAP memungkinkan Anda membuat token beltBNB dan menyetor hanya dengan satu transaksi."
+      ],
+      "ibalpaca": [
+        "ZAP memungkinkan Anda membuat token ibALPACA dan menyetor hanya dengan satu transaksi."
+      ]
+    },
     "inYourWallet": "Di dompet Anda",
     "provider": "Penyedia likuiditas"
   },
