@@ -16,7 +16,12 @@
     "moonpots": "Moonpots",
     "myPots": "我的月盒",
     "sidePots": "附属",
-    "nftPots": "NFT"
+    "nftPots": "NFT",
+    "nextDraw": "下一次抽奖",
+    "prize": "奖金",
+    "apy": "APY",
+    "default": "默认",
+    "featured": "精选"
   },
   "modals": {
     "unsupportedNetworkDetected": "检测到不支持的网络",
@@ -34,7 +39,26 @@
     "vote": "投票",
     "winners": "全部中奖者",
     "potsPrice": "POTS 的价格",
-    "buyPots": "购买 POTS"
+    "buyPots": "购买 POTS",
+    "audit": "审计",
+    "articles": "文章"
+    "winPrizeInToken": "赢取 <span>{{prize}}</span> 的 {{token}}",
+    "winNFT": "赢取 <span>{{nft}}</span>",
+    "winNFTandPrizeInToken": "赢取 <span>{{nft}}</span> 和 <span>{{prize}}</span> 的 {{token}}",
+    "days": "天",
+    "hours": "小时",
+    "mins": "分钟",
+    "secs": "秒",
+    "totalWon": "奖金总额",
+    "uniqueWinners": "独特的赢家",
+    "currentPrizes": "当前奖金",
+    "cadets": "学员"
+  },
+  "footer": {
+    "cadets": "学员",
+    "prizes": "奖金",
+    "tvl": "总锁仓量",
+    "buybacks": "回购"
   },
   "homeTitle": "存入 <span>加密资产</span>, 赚取<span>利息收入</span><br /> 还有机会抱走奖金<span>${{amount}}</span>",
   "homeTotalDeposits": "存款总额 (总锁仓量)",
@@ -47,7 +71,7 @@
   "youHaventEnteredRetiredMoonpots": "您未参与任何已退役的月盒。",
   "connectToJoin": "连接您的钱包以加入月盒。",
   "poweredByBeefy": "由 <BeefyLink>Beefy</BeefyLink> 提供技术支持",
-  "auditedByCertik": "由 <CertikLink>Certik</CertikLink> 审计",
+  "auditedByCertik": "由 <CertikLink>CertiK</CertikLink> 审计",
   "sidePotExplainer": "附属月盒让您有机会在不赚取利息的情况下赢得每日奖金。 如果您想赚取利息并参与更大的每周和每月抽奖活动，Ziggy 建议您改为参与<MainPotLink>核心月盒</MainPotLink>。",
   "learnMore": "了解更多",
   "telegramSocialBlockBody": "了解更多关于Moonpot的资讯，并获得来自官方社群的帮助",
@@ -56,6 +80,9 @@
   "telegramSocialBlockButton": "加入我们的电报群",
   "discordSocialBlockButton": "加入我们的Discord社群",
   "twitterSocialBlockButton": "关注我们的Twitter账号",
+  "potType": "月盒类型:",
+  "sortBy": "排序方式:",
+  "potStatus": "月盒状态:",
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",
@@ -140,6 +167,10 @@
           "watch": [
             "此策略将您的 {{token}} 代币存放在 Moonpot {{token}} 金库中，该金库从 Yieldwatch 团队提供的固定 {{token}} 供应中自动复投您的 {{token}} 代币。",
             "Yieldwatch 提供的所有 {{token}} 都归于 Moonpot 玩家。一半将用来给您分发收益。另一半则用于抽奖和 Ziggy 的月盒奖励。"
+          ],
+          "binopoly": [
+            "第一个基于币安智能链的边玩边赚（Play-to-Earn）资本运营游戏。任何人都可以购买并持有虚拟土地和城市来建立自己的世界。玩家可以通过在各种游戏场景中购买或租用地块和房产来赚取 BINO 代币。",
+            "此策略将您的 {{token}} 代币存放于 Moonpot {{token}} 金库中，该金库会从 Binopoly 团队提供的固定 {{token}} 供应中自动复投您的 {{token}} 代币。"
           ]
         },
         "beefyVaultAddress": "Beefy 金库地址",
@@ -186,6 +217,33 @@
               "rarity": "110 / 150"
             }
           }
+        },
+        "ziggyverse-strength-nft": {
+          "body": [
+            "这是 Moonpot 学员们新旅程的开始。收集和铸造 Ziggy 在旅途中发现的神秘瓦片，并在未来使用它们来铸造异国的生物以用于耕种和战斗。"
+          ],
+          "rarities": {
+            "gold": {
+              "name": "力气 - 金色",
+              "rarity": "15 / 50"
+            },
+            "moonstone": {
+              "name": "力气 - 月光石",
+              "rarity": "40 / 100"
+            },
+            "jade": {
+              "name": "力气 - 玉",
+              "rarity": "110 / 150"
+            }
+          }
+        },
+        "nft-collections": {
+          "body": [
+            "质押最多 100 $POTS，就有机会每天从币安智能链上最好的 NFT 收藏中赢取 NFT。",
+            "每次抽奖将选出一名获胜者，以从当前收藏中获得一个 NFT。",
+            "一旦当前系列的所有NFT被分发完毕，一个新的系列将被添加到月盒中。您无需重新质押以参与新系列的抽奖。",
+            "目前的系列是《{{collection}}》。"
+          ]
         }
       },
       "xmas-strategy": {
@@ -197,8 +255,12 @@
             "此月盒包含 70 个 NFT，可将其兑换为促销代码以从 Beefy 商店免费订购一件T恤。质押 POTS 参与，每天将进行抽奖，直到 12 月 31 日。"
           ],
           "merch": {
-            "beefy-moonpot-tshirt-front.png": { "title": "T-Shirt - Front" },
-            "beefy-moonpot-tshirt-back.png": { "title": "T-Shirt - Back" }
+            "beefy-moonpot-tshirt-front.png": {
+              "title": "T-Shirt - Front"
+            },
+            "beefy-moonpot-tshirt-back.png": {
+              "title": "T-Shirt - Back"
+            }
           }
         },
         "xmas-moobifi": {
@@ -208,7 +270,9 @@
             "此月盒包含 125 个 NFT，可将其兑换为促销代码以从 Beefy 商店免费订购一件连帽衫，以及 BIFI 和 POTS 奖品. 质押 mooBIFI 参与，抽奖日期为 12 月 31 日。"
           ],
           "merch": {
-            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+            "beefy-moonpot-hoodie.png": {
+              "title": "Beefy x Moonpot Hoodie"
+            }
           }
         },
         "xmas-moochristmasbeefy": {
@@ -218,7 +282,9 @@
             "此月盒包含 15 个 NFT，可将其兑换为促销代码以从 Beefy 商店免费订购一件连帽衫，以及 BIFI 和 POTS 奖品. 质押 mooChristmasBeefy 参与，抽奖日期为 12 月 31 日。."
           ],
           "merch": {
-            "beefy-moonpot-hoodie.png": { "title": "Beefy x Moonpot Hoodie" }
+            "beefy-moonpot-hoodie.png": {
+              "title": "Beefy x Moonpot Hoodie"
+            }
           }
         }
       },
@@ -331,6 +397,17 @@
       "随后，您可以将赚取的所有额外 POTS 奖励从钱包存入 Ziggy 月盒，这将是一次性的交易。"
     ],
     "claimAll": "领取赚取的所有额外 POTS 奖励"
+  },
+  "promo": {
+    "canClaim": "您可以领取 {{count}} 个促销代码",
+    "canClaim_plural": "您可以领取 {{count}} 个促销代码",
+    "claim": "领取我的促销代码",
+    "myPromocodes": "我的促销代码",
+    "claimed": "{{count}} 个促销代码已领取",
+    "reveal": "揭示",
+    "noNfts": "没有NFT可供领取",
+    "beefyGear": "在Beefy Gear商店下订单。促销代码将涵盖商品和运输费用。"
+    "safepal": "使用此链接在 SafePal 商店下订单。促销代码将涵盖限量版 SafePal × Moonpot S1 硬体钱包和运费。"
   },
   "migration": {
     "viewRetiredPot": "查看已退役月盒",

@@ -60,7 +60,7 @@
   "youHaventEnteredRetiredMoonpots": "Anda belum masuk ke Moonpots yang tidak aktif.",
   "connectToJoin": "Hubungkan dompet Anda untuk bergabung dengan Moonpot.",
   "poweredByBeefy": "Didukung oleh <BeefyLink>Beefy</BeefyLink>",
-  "auditedByCertik": "Diaudit oleh <CertikLink>Certik</CertikLink>",
+  "auditedByCertik": "Diaudit oleh <Link>CertiK</CertikLink>",
   "sidePotExplainer": "Side Pots memberi Anda kesempatan untuk memenangkan hadiah harian tanpa mendapatkan bunga/keuntungan. Jika Anda ingin mendapatkan bunga/keuntungan dan bergabung dengan undian mingguan dan bulanan yang lebih besar, Ziggy merekomendasikan Anda untuk bergabung ke <MainPotLink>Pot Utama</MainPotLink> sebagai gantinya.",
   "learnMore": "Pelajari lebih lanjut",
   "telegramSocialBlockBody": "Pelajari tentang Moonpot dan dapatkan dukungan langsung dari komunitas",
@@ -231,25 +231,8 @@
             "Stake hingga 100 $POTS untuk kesempatan memenangkan NFT setiap hari dari Koleksi NFT terbaik di Binance Smart Chain.",
             "Setiap undian akan memilih satu pemenang untuk menerima satu NFT dari koleksi saat ini.",
             "Koleksi baru akan ditambahkan ke pot setelah semua NFT dari koleksi saat ini telah didistribusikan. Anda tidak perlu mengulang untuk mengikuti undian koleksi baru.",
-            "Koleksi saat ini adalah Crazy Chipmunks"
+            "Koleksi saat ini adalah {{collection}}"
           ],
-          "nfts": {
-            "crazy-chipmonks/517": {
-              "name": "#517"
-            },
-            "crazy-chipmonks/520": {
-              "name": "#520"
-            },
-            "crazy-chipmonks/579": {
-              "name": "#579"
-            },
-            "crazy-chipmonks/583": {
-              "name": "#583"
-            },
-            "crazy-chipmonks/656": {
-              "name": "#656"
-            }
-          }
         }
       },
       "xmas-strategy": {
@@ -278,7 +261,7 @@
           "merch": {
             "beefy-moonpot-hoodie.png": {
               "title": "Beefy x Moonpot Hoodie"
-            }  
+            }
           }
         },
         "xmas-moochristmasbeefy": {

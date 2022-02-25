@@ -1,16 +1,17 @@
 const styles = theme => ({
   footer: {
     minHeight: '100%',
-    padding: '8px 40px',
+    padding: '8px 0',
     textAlign: 'center',
     flex: 1,
     justifyContent: 'flex-end',
     // backgroundColor: 'red',
   },
   light: {
-    backgroundColor: '#393960',
+    backgroundColor: '#262640',
     maxWidth: 'none',
-    paddingBottom: '32px',
+    marginTop: 8,
+    paddingBottom: 32,
   },
   footerBtn: {
     width: '100%',
@@ -26,6 +27,29 @@ const styles = theme => ({
       marginRight: '10px',
       padding: '0',
     },
+  },
+  footerLinks: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: 24,
+    '& .MuiLink-root': {
+      textDecoration: 'none',
+      '&:hover': {
+        textDecoration: 'none',
+      },
+    },
+  },
+  footerStats: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    padding: '4px 8px !important',
+  },
+  textButton: {
+    color: '#CDCDE4',
+    fontSize: '15px',
+    paddingLeft: 12,
+    paddingRight: 12,
   },
   footerIcons: {
     flex: 1,

@@ -17,6 +17,7 @@ const initialPools = () => {
       pool['network'] = net;
       pool['daily'] = 0;
       pool['apy'] = 0;
+      pool['totalApy'] = 0;
       pool['tvl'] = 0;
       pool['tokenPrice'] = 0;
       pool['fairplayFee'] =
@@ -31,9 +32,9 @@ const initialPools = () => {
       pool['sponsorBalance'] = ZERO;
       pool['totalSponsorBalanceUsd'] = ZERO;
       pool['projectedTotalSponsorBalanceUsd'] = ZERO;
+      pool['totalPrizeUsd'] = ZERO;
+      pool['projectedTotalPrizeUsd'] = ZERO;
       pool['totalStakedUsd'] = ZERO;
-      pool['rewardPoolRate'] = ZERO;
-      pool['rewardPoolTotalSupply'] = ZERO;
       pool['numberOfWinners'] = new BigNumber(5);
       pool['totalTickets'] = '0';
       pool['stakeMax'] = '0';

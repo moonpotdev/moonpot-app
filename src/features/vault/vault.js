@@ -144,11 +144,12 @@ const Vault = () => {
           awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
         />
         <PoweredByBeefy className={classes.poweredBy} />
-        {pot.vaultType === 'side' ? <SidePotExplainer /> : null}
+        {pot.categories.includes('side') ? <SidePotExplainer /> : null}
         <Pot
           id={id}
           onFairplayLearnMore={handleFairplayLearnMore}
           variant={handleVariant(pot.vaultType)}
+          oneColumn={true}
         />
         <InfoCards id={id} fairplayRef={fairplayRef} className={classes.infoCards} />
       </Container>

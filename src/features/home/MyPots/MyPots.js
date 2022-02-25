@@ -1,7 +1,6 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Grid, makeStyles } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
+import { Container, makeStyles } from '@material-ui/core';
 import reduxActions from '../../redux/actions';
 import BigNumber from 'bignumber.js';
 import { isEmpty } from '../../../helpers/utils';
@@ -10,27 +9,28 @@ import NoPotsCard from './components/NoPotsCard/NoPotsCard';
 import Pot from './components/Pot/Pot';
 import { Cards } from '../../../components/Cards';
 import styles from './styles';
-import { RoutedButton } from '../../../components/Buttons/BaseButton';
-import clsx from 'clsx';
 import { ClaimableBonusNotification } from '../../../components/ClaimableBonusNotification';
 import { MigrationNotices } from '../Moonpots/components/MigrationNotices/MigrationNotices';
+import { sortPots, useSortKey } from '../Moonpots/hooks/filter';
 
 const useStyles = makeStyles(styles);
 
-const MyPots = ({ selected }) => {
-  const { t } = useTranslation();
+const MyPots = ({ potStatus, sort }) => {
   const classes = useStyles();
   const { vault, prices } = useSelector(state => ({
     vault: state.vaultReducer,
     prices: state.pricesReducer,
   }));
+  const [sortKey, sortDir] = useSortKey(sort);
   const walletAddress = useSelector(state => state.walletReducer.address);
   const tokenBalances = useSelector(state => state.balanceReducer.tokens);
   const dispatch = useDispatch();
 
+  //Since filtered itself is not in the state we need to use a stateful variable to know when to update the page
+  const [filteredUpdated, setFilteredUpdated] = useState(false);
   const filtered = useMemo(() => {
     const check = item => {
-      if (item.status !== selected) {
+      if (item.status !== potStatus) {
         return false;
       }
 
@@ -53,10 +53,20 @@ const MyPots = ({ selected }) => {
             ),
           };
         }
-
         return item;
       });
-  }, [selected, vault.pools, tokenBalances, walletAddress]);
+  }, [potStatus, vault.pools, tokenBalances, walletAddress]);
+
+  useEffect(() => {
+    sortPots(filtered, sortKey, sortDir);
+    setFilteredUpdated(true);
+  }, [filtered, sortKey, sortDir]);
+
+  useEffect(() => {
+    if (filteredUpdated === true) {
+      setFilteredUpdated(false);
+    }
+  }, [filteredUpdated]);
 
   useEffect(() => {
     if (prices.lastUpdated > 0) {
@@ -74,35 +84,17 @@ const MyPots = ({ selected }) => {
   return (
     <React.Fragment>
       <Container maxWidth={false} style={{ padding: '0' }}>
-        <Grid container spacing={2}>
-          <Grid item>
-            <RoutedButton
-              className={clsx(classes.button, { [classes.buttonActive]: selected === 'active' })}
-              to={{ pathname: '/my-moonpots', state: { tabbed: true } }}
-            >
-              {t('buttons.myActivePots')}
-            </RoutedButton>
-          </Grid>
-          <Grid item>
-            <RoutedButton
-              className={clsx(classes.button, { [classes.buttonActive]: selected === 'eol' })}
-              to={{ pathname: '/my-moonpots/eol', state: { tabbed: true } }}
-            >
-              {t('buttons.myPastPots')}
-            </RoutedButton>
-          </Grid>
-        </Grid>
         <div className={classes.potsContainer}>
           <div className={classes.spacer}>
-            {selected === 'active' ? (
+            {potStatus === 'active' ? (
               <>
                 <MigrationNotices potType="all" />
                 <ClaimableBonusNotification className={classes.claimableBonuses} />
               </>
             ) : null}
-            <Cards sameHeight={false}>
+            <Cards sameHeight={false} justifyContent="flex-start">
               {filtered.length === 0 ? (
-                <NoPotsCard selected={selected} />
+                <NoPotsCard selected={potStatus} />
               ) : (
                 filtered.map(item => <Pot key={item.id} item={item} />)
               )}

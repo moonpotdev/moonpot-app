@@ -24,7 +24,7 @@ function MigrationNotice({ pot }) {
       : 'migration.notice.all.content';
 
     return (
-      <Card variant="purpleDark" className={classes.notice}>
+      <Card variant="purpleDark" className={classes.notice} oneColumn={true}>
         <CardTitle>{t(title, { token: pot.token, name: pot.name })}</CardTitle>
         <div className={classes.text}>
           {t(content, { returnObjects: true, token: pot.token, name: pot.name }).map(
@@ -55,7 +55,7 @@ function MigrationNotice({ pot }) {
   return null;
 }
 
-export function MigrationNotices({ potType }) {
+export function MigrationNotices({ selectedCategory }) {
   const classes = useStyles();
   const currentNetwork = useSelector(state => state.walletReducer.network);
   const currentAddress = useSelector(state => state.walletReducer.address);
@@ -65,16 +65,16 @@ export function MigrationNotices({ potType }) {
     return Object.values(allPots).filter(
       pot =>
         pot.status === 'eol' &&
-        (potType === 'all' || pot.vaultType === potType) &&
+        (selectedCategory === 'all' || pot.categories.includes(selectedCategory)) &&
         pot.network === currentNetwork &&
         pot.migrationNeeded
     );
-  }, [potType, allPots, currentNetwork]);
+  }, [selectedCategory, allPots, currentNetwork]);
   const hasPotsNeedingMigration = potsNeedingMigration.length > 0;
 
   if (currentAddress && hasPotsNeedingMigration) {
     return (
-      <Cards className={classes.notices} oneUp={true}>
+      <Cards className={classes.notices}>
         {potsNeedingMigration.map(pot => (
           <MigrationNotice key={pot.id} pot={pot} />
         ))}

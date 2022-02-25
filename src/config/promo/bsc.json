@@ -1,0 +1,35 @@
+[
+  {
+    "id": 0,
+    "name": "test",
+    "desc": "Test Claim",
+    "message": "Get my Hoodie",
+    "disabled": true,
+    "link": "https://moonpot.com/",
+    "linkTextKey": "promo.beefyGear"
+  },
+  {
+    "id": 1,
+    "name": "hoodie",
+    "desc": "Hoodie NFT",
+    "message": "Get my Hoodie",
+    "link": "https://gear.beefy.finance/collections/beefyxmoonpot-hoodie?ls=VMScU0b_QjejcC-dZ7suHQ",
+    "linkTextKey": "promo.beefyGear"
+  },
+  {
+    "id": 2,
+    "name": "tshirt",
+    "desc": "T-shirt NFT",
+    "message": "Get my T-shirt",
+    "link": "https://gear.beefy.finance/collections/beefyxmoonpot-tee?ls=O1rIGGo1Qw6WiX5gMboG6A",
+    "linkTextKey": "promo.beefyGear"
+  },
+  {
+    "id": 3,
+    "name": "safepal",
+    "desc": "Safepal NFT",
+    "message": "Get my Safepal",
+    "link": "https://shop.safepal.io/products/strong-moonpot-br-safepal-s1-br-hardware-wallet-strong",
+    "linkTextKey": "promo.safepal"
+  }
+]

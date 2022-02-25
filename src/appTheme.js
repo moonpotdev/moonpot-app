@@ -2,6 +2,15 @@ import { createTheme } from '@material-ui/core/styles';
 
 const appTheme = () => {
   return createTheme({
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 720,
+        md: 960,
+        lg: 1280,
+        xl: 1920,
+      },
+    },
     palette: {
       primary: {
         main: '#F3BA2E',
@@ -33,7 +42,6 @@ const appTheme = () => {
           display: 'flex',
           flexWrap: 'wrap',
           boxSizing: 'border-box',
-          justifyContent: 'center',
         },
       },
       MuiButton: {

@@ -8,7 +8,12 @@ import { tokensByNetworkAddress } from '../../../../config/tokens';
 import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
-import { formatAddressShort, getUnderylingToken, listJoin } from '../../../../helpers/utils';
+import {
+  arrayUnique,
+  formatAddressShort,
+  getUnderylingToken,
+  listJoin,
+} from '../../../../helpers/utils';
 import { ErrorOutline } from '@material-ui/icons';
 import BigNumber from 'bignumber.js';
 import clsx from 'clsx';
@@ -324,20 +329,36 @@ const WonPrizeBoth = memo(function ({ nfts, totalPrizeValue, winners }) {
   );
 });
 
-const WonPrize = memo(function ({ nfts, totalPrizeValue, winners }) {
-  const nftsWon = (nfts || [])
-    .filter(nft => {
-      for (const winner of winners) {
-        for (const award of winner.awards) {
-          if (award.isNFT && award.address.toLowerCase() === nft.address.toLowerCase()) {
-            return true;
-          }
+function getNftName(network, address, id) {
+  const token = tokensByNetworkAddress[network]?.[address.toLowerCase()];
+  if (token) {
+    if (token.type === 'nft' && token.nfts) {
+      for (const range of token.nfts) {
+        if (id >= range.min && id <= range.max) {
+          return range.name;
         }
       }
+    }
 
-      return false;
-    })
-    .map(nft => nft.name);
+    return token.symbol;
+  }
+
+  return address + '#' + id;
+}
+
+const WonPrize = memo(function ({ network, totalPrizeValue, winners }) {
+  const nftsWon = arrayUnique(
+    winners
+      .map(winner =>
+        winner.awards
+          .filter(
+            award => award.isNFT && award.address.toLowerCase() in tokensByNetworkAddress[network]
+          )
+          .map(award => award.nftIds.map(id => getNftName(network, award.address, id)))
+          .flat()
+      )
+      .flat()
+  );
   const prizeNfts = totalPrizeValue <= 0 && nftsWon.length;
   const prizeBoth = totalPrizeValue > 0 && nftsWon.length;
 
@@ -374,7 +395,11 @@ export const Draw = function ({ draw }) {
         </Grid>
         <Grid item xs="auto" className={classes.columnTitleValueWon}>
           <Title name={draw.pot.name} />
-          <WonPrize nfts={draw.pot.nfts} winners={winners} totalPrizeValue={totalPrizeValue} />
+          <WonPrize
+            network={draw.pot.network}
+            winners={winners}
+            totalPrizeValue={totalPrizeValue}
+          />
         </Grid>
       </Grid>
       <UserWonDraw winners={draw.winners} />

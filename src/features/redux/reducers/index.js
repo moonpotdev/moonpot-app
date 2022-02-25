@@ -5,7 +5,12 @@ import pricesReducer from './prices';
 import earnedReducer from './earned';
 import modalReducer from './modal';
 import zapReducer from './zap';
+import buybacksReducer from './buybacks';
+import holdersReducer from './holders';
 import winnersReducer from '../../winners/redux/reducer';
+import filterReducer from './filter';
+import promoCodesReducer from '../../promo/reducer';
+import uniqueWinnersReducer from './winners';
 
 const reducers = {
   walletReducer,
@@ -15,7 +20,12 @@ const reducers = {
   earnedReducer,
   modalReducer,
   zapReducer,
+  buybacksReducer,
+  holders: holdersReducer,
   winners: winnersReducer,
+  filterReducer,
+  promo: promoCodesReducer,
+  uniqueWinnersReducer,
 };
 
 export default reducers;

@@ -10,9 +10,10 @@ const styles = theme => ({
   },
   nftShowcase: {
     marginBottom: '1em',
+    justifyContent: 'flex-start',
   },
   nftShowcaseItem: {
-    textAlign: 'center',
+    textAlign: 'left',
   },
   nftShowcaseImg: {
     display: 'block',

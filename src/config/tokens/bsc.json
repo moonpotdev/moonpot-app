@@ -445,7 +445,83 @@
     "address": "0x6798f4E7dA4Fc196678d75e289A9d4801C3C849E",
     "type": "nft",
     "subtype": "erc1155",
-    "decimals": 0
+    "decimals": 0,
+    "nfts": [
+      {
+        "name": "Ziggyverse Armour NFT",
+        "min": 41,
+        "max": 150
+      },
+      {
+        "name": "Ziggyverse Armour NFT",
+        "min": 175,
+        "max": 250
+      },
+      {
+        "name": "Ziggyverse Armour NFT",
+        "min": 286,
+        "max": 300
+      },
+      {
+        "name": "Ziggyverse Agility NFT",
+        "min": 1221,
+        "max": 1330
+      },
+      {
+        "name": "Ziggyverse Agility NFT",
+        "min": 1391,
+        "max": 1430
+      },
+      {
+        "name": "Ziggyverse Agility NFT",
+        "min": 1466,
+        "max": 1480
+      },
+      {
+        "name": "Ziggyverse Strength NFT",
+        "min": 12765,
+        "max": 12779
+      },
+      {
+        "name": "Ziggyverse Strength NFT",
+        "min": 12820,
+        "max": 12859
+      },
+      {
+        "name": "Ziggyverse Strength NFT",
+        "min": 12925,
+        "max": 13034
+      }
+    ]
+  },
+  {
+    "symbol": "Ziggyverse NFT",
+    "address": "0xd41748641B5B9aF4110513bA5aEEECDF3318304A",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0,
+    "nfts": [
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 1,
+        "max": 25
+      },
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 51,
+        "max": 116
+      },
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 291,
+        "max": 300
+      },
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 191,
+        "max": 290
+      }
+    ]
   },
   {
     "symbol": "moonTicketPotsZiggyVerseAgility",
@@ -514,6 +590,108 @@
     "address": "0x71EDee6A10AD50987779795fBdC4cD5b40Eb262c",
     "type": "nft",
     "subtype": "erc721",
+    "decimals": 0
+  },
+  {
+    "symbol": "moonTicketBscNftCollections",
+    "address": "0x43309a83b094461409F1C6A33089Df8D61fcD753",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "The Bull Society NFT",
+    "address": "0xA46A4920B40f134420b472B16b3328d74D7B6B70",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
+  },
+  {
+    "symbol": "moonTicketZiggyVerseStrength",
+    "address": "0x8044Cfc4Fb5b5577575f83E9A2C657aa25eDc8F2",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "moonTicketZiggyVerseIntelligence",
+    "address": "0xB37893DecC099c279f460ecb686D4fa8Dc3fc811",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "Born Bad Boys NFT",
+    "address": "0x44d85770aEa263F9463418708125Cd95e308299B",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
+  },
+  {
+    "symbol": "Liquid Monsters NFT",
+    "address": "0x0D464bDde2301C30871bB4C29bB7DD935f5a985C",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
+  },
+  {
+    "symbol": "BINO",
+    "address": "0xA2dF7a11baF8bB555E93b99684A2DE0f105eB592",
+    "type": "single",
+    "oracleId": "BINO",
+    "decimals": 18
+  },
+  {
+    "symbol": "mooPotsBINO",
+    "address": "0xD0B0771C4240BcCf4Bd5ABeaC8204Ba8CACa45F7",
+    "type": "moo",
+    "decimals": 18,
+    "underlyingToken": "BINO"
+  },
+  {
+    "symbol": "moonTicketBINO",
+    "address": "0xcEEC332c0261715CF374DB4221d9F7aaC3e730A4",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "mooPotsBINO",
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "Building Permit NFT",
+    "address": "0xeDEe132Fcf90FE3157C389706b30c6A1c7A6C88D",
+    "type": "nft",
+    "subtype": "erc1155",
+    "decimals": 0
+  },
+  {
+    "symbol": "Crazy Chipmunk NFT",
+    "address": "0x9C1E0223159516b431e487DB5BDba0858940398E",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
+  },
+  {
+    "symbol": "Cross Bosses NFT",
+    "address": "0x9ddc83be1e5254669bdb366941C746A86194D61b",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
+  },
+  {
+    "symbol": "Sluggish Sloths NFT",
+    "address": "0x74a1a77B627714BF7200464a16C51701Abb7cc38",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
+  },
+  {
+    "symbol": "LaCucina Secret Ingredients NFT",
+    "address": "0x2c3f816fB680Bbe745D085dC244CCf0737FcfB9A",
+    "type": "nft",
+    "subtype": "erc1155",
     "decimals": 0
   }
 ]
