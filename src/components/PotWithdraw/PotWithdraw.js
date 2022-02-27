@@ -21,6 +21,7 @@ import { Alert, AlertText } from '../Alert';
 import { InfoOutlined } from '@material-ui/icons';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
 import { WalletRequired } from '../WalletRequired/WalletRequired';
+import { selectWalletAddress } from '../../features/wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
@@ -77,7 +78,7 @@ const StatFee = memo(function ({
   fairplayTicketFee,
 }) {
   const { t } = useTranslation();
-  const address = useSelector(state => state.wallet.address);
+  const address = useSelector(selectWalletAddress);
   const timeleft = useSelector(state => state.balance.tokens[contractAddress + ':fee'].timeleft);
   const timeleftUpdatedAt = useSelector(
     state => state.balance.tokens[contractAddress + ':fee'].timeleftUpdated
@@ -227,7 +228,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
   const [isPartialWithdrawAll, setIsPartialWithdrawAll] = useState(false);
   const [partialWithdrawAmount, setPartialWithdrawAmount] = useState(() => ZERO);
   const [canWithdrawPartial, setCanWithdrawPartial] = useState(false);
-  const address = useSelector(state => state.wallet.address);
+  const address = useSelector(selectWalletAddress);
   const totalBalance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);
   const ticketBalance = useTokenBalance(pot.rewardToken, pot.tokenDecimals);
   const ticketAllowance = useTokenAllowance(

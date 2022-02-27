@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useTokenBalance } from '../../../../../helpers/hooks';
 import { Card, Cards, CardTitle } from '../../../../../components/Cards';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
+import { selectWalletAddress, selectWalletNetwork } from '../../../../wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
@@ -57,8 +58,8 @@ function MigrationNotice({ pot }) {
 
 export function MigrationNotices({ selectedCategory }) {
   const classes = useStyles();
-  const currentNetwork = useSelector(state => state.wallet.network);
-  const currentAddress = useSelector(state => state.wallet.address);
+  const currentNetwork = useSelector(selectWalletNetwork);
+  const currentAddress = useSelector(selectWalletAddress);
   const allPots = useSelector(state => state.vault.pools);
 
   const potsNeedingMigration = useMemo(() => {

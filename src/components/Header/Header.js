@@ -12,7 +12,7 @@ import Pots from '../../images/tokens/pots.svg';
 import clsx from 'clsx';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { useSelector } from 'react-redux';
-import CustomDropdown from '../customDropdown';
+import CustomDropdown from '../CustomDropdown';
 import { supportedLanguages } from '../../i18n';
 import { Translate } from '../Translate';
 
@@ -276,7 +276,7 @@ export function Header() {
             </>
           ) : null}
           <div className={clsx(classes.barItem, { [classes.pushRight]: !showFullNav })}>
-            <WalletConnector variant="small" />
+            <WalletConnector />
           </div>
           {showFullNav ? null : (
             <div className={clsx(classes.barItem)}>

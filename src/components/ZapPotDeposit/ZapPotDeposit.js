@@ -9,13 +9,14 @@ import { indexBy, isEmpty, ZERO } from '../../helpers/utils';
 import { ZapTokenInput } from '../ZapTokenInput/ZapTokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
-import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { usePot, useSymbolOrList, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
 import { Translate } from '../Translate';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
 import { createZapInEstimate } from '../../features/redux/actions/zap';
 import { useTranslation } from 'react-i18next';
 import { networkByKey } from '../../config/networks';
+import { WalletRequired } from '../WalletRequired/WalletRequired';
+import { selectWalletAddress } from '../../features/wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
@@ -76,7 +77,6 @@ function useDepositTokens(network, lpAddress) {
 
     if (supportsZap) {
       const nativeCurrency = networkByKey[network].nativeCurrency;
-      console.log(network, nativeCurrency);
       const nativeSymbol = nativeCurrency.symbol;
       const nativeDecimals = nativeCurrency.decimals;
       const nativeWrappedToken =
@@ -160,7 +160,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
-  const address = useSelector(state => state.wallet.address);
+  const address = useSelector(selectWalletAddress);
   const network = pot.network;
   const lpAddress = pot.tokenAddress;
   const potAddress = pot.contractAddress;
@@ -352,7 +352,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
         />
       </div>
       <div className={classes.buttonHolder}>
-        {address ? (
+        <WalletRequired network={pot.network} networkRequired={true}>
           <PrimaryButton
             variant={variant}
             onClick={handleDeposit}
@@ -370,9 +370,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
               values={{ token: selectedTokenSymbol, amount: depositAmount.toString() }}
             />
           </PrimaryButton>
-        ) : (
-          <WalletConnectButton variant={variant} fullWidth={true} network={pot.network} />
-        )}
+        </WalletRequired>
         {pot.depositFee ? (
           <div className={classes.fairplayNotice}>
             <Translate

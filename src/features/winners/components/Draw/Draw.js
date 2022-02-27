@@ -14,6 +14,7 @@ import BigNumber from 'bignumber.js';
 import clsx from 'clsx';
 import styles from './styles';
 import { Translate } from '../../../../components/Translate';
+import { selectWalletAddress } from '../../../wallet/selectors';
 
 const useStyles = makeStyles(styles);
 const network = 'bsc';
@@ -260,7 +261,7 @@ const Winners = memo(function ({ network, tokenAddress, winners }) {
 
 const UserWonDraw = memo(function ({ winners }) {
   const classes = useStyles();
-  const address = useSelector(state => state.wallet.address)?.toLowerCase();
+  const address = useSelector(selectWalletAddress)?.toLowerCase();
 
   if (address && winners.find(winner => winner.address.toLowerCase() === address)) {
     return (

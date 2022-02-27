@@ -13,11 +13,11 @@ import Steps from '../../features/vault/components/Steps';
 import { isEmpty, ZERO } from '../../helpers/utils';
 import { TokenInput } from '../TokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-
-import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { useDeposit, usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
 import { Translate } from '../Translate';
 import BigNumber from 'bignumber.js';
+import { WalletRequired } from '../WalletRequired/WalletRequired';
+import { selectWalletAddress } from '../../features/wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
@@ -74,7 +74,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
-  const address = useSelector(state => state.wallet.address);
+  const address = useSelector(selectWalletAddress);
   const balance = useTokenBalance(pot.token, pot.tokenDecimals);
   const stakeMax = useMemo(
     () => byDecimals(pot.stakeMax, pot.tokenDecimals),
@@ -171,7 +171,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
         />
       </div>
       <div className={classes.buttonHolder}>
-        {address ? (
+        <WalletRequired network={pot.network} networkRequired={true}>
           <PrimaryButton
             variant={variant}
             onClick={handleDeposit}
@@ -189,9 +189,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
               values={{ token: pot.token, amount: depositAmount.toString() }}
             />
           </PrimaryButton>
-        ) : (
-          <WalletConnectButton variant={variant} fullWidth={true} network={pot.network} />
-        )}
+        </WalletRequired>
         {pot.depositFee ? (
           <div className={classes.fairplayNotice}>
             <Translate

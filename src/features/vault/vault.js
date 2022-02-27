@@ -13,6 +13,7 @@ import clsx from 'clsx';
 import { Translate } from '../../components/Translate';
 import SidePotExplainer from '../../components/SidePotExplainer/SidePotExplainer';
 import { listJoin } from '../../helpers/utils';
+import { selectWalletAddress } from '../wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
@@ -75,7 +76,7 @@ function isInvalidPot(pot) {
 
 const VaultDataLoader = memo(function VaultDataLoader({ id }) {
   const dispatch = useDispatch();
-  const address = useSelector(state => state.wallet.address);
+  const address = useSelector(selectWalletAddress);
   const pricesLastUpdated = useSelector(state => state.prices.lastUpdated);
 
   useEffect(() => {

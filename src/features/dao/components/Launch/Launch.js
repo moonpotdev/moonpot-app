@@ -14,6 +14,7 @@ import ZiggyRocket104 from '../../../../images/ziggy/rocket_104w.png';
 import ZiggyRocket208 from '../../../../images/ziggy/rocket_208w.png';
 import Countdown from '../../../../components/Countdown';
 import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
+import { selectWalletAddress } from '../../../wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
@@ -350,11 +351,14 @@ function NotConnected() {
 }
 
 export function Launch() {
-  const currentAddress = useSelector(state => state.wallet.address?.toLowerCase());
+  const currentAddress = useSelector(selectWalletAddress);
 
   const airdropSafepalAmount = useMemo(() => {
-    if (currentAddress && currentAddress in whitelistSafepal) {
-      return whitelistSafepal[currentAddress] || 0;
+    if (currentAddress) {
+      const lowerAddress = currentAddress.toLowerCase();
+      if (lowerAddress in whitelistSafepal) {
+        return whitelistSafepal[lowerAddress] || 0;
+      }
     }
 
     return 0;

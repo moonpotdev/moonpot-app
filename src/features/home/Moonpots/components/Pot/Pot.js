@@ -11,11 +11,12 @@ import { byDecimals } from '../../../../../helpers/format';
 import { TooltipWithIcon } from '../../../../../components/Tooltip/tooltip';
 import styles from './styles';
 import { tokensByNetworkAddress } from '../../../../../config/tokens';
+import { selectWalletAddress } from '../../../../wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
 const Play = memo(function ({ id, token, contractAddress, variant }) {
-  const address = useSelector(state => state.wallet.address);
+  const address = useSelector(selectWalletAddress);
   const balance = useSelector(state => state.balance.tokens[contractAddress + ':total']?.balance);
   const hasStaked = address && balance > 0;
   const translatedToken = useTranslatedToken(token);

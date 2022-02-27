@@ -13,8 +13,8 @@ const styles = theme => ({
     lineHeight: '24px',
     color: '#F3BA2E',
     border: '2px solid #F3BA2E',
-    borderRadius: '38px',
-    padding: '10px',
+    borderRadius: '32px',
+    padding: '2px 24px',
     height: 'auto',
     textTransform: 'none',
     display: 'flex',
@@ -23,23 +23,25 @@ const styles = theme => ({
     alignItems: 'center',
     width: 'auto',
     whiteSpace: 'nowrap',
+    position: 'relative',
+  },
+  withIcon: {
+    paddingLeft: '38px',
+    '& img': {
+      position: 'absolute',
+      top: '50%',
+      left: '4px',
+      transform: 'translate(0, -50%)',
+    },
   },
   loading: {
-    paddingTop: '16px',
-    paddingBottom: '16px',
+    paddingTop: '8px',
+    paddingBottom: '8px',
   },
   connected: {
     borderColor: '#4D4D80',
   },
   disconnected: {},
-  small: {
-    padding: '2px 24px',
-    borderRadius: '32px',
-    '&$loading': {
-      paddingTop: '8px',
-      paddingBottom: '8px',
-    },
-  },
 });
 
 export default styles;

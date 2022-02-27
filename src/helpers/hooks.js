@@ -6,6 +6,7 @@ import { tokensByNetworkAddress } from '../config/tokens';
 import { useTranslation } from 'react-i18next';
 import { ZERO } from './utils';
 import { walletAccountsChanged } from '../features/wallet/accountsChanged';
+import { selectWalletAddress } from '../features/wallet/selectors';
 
 export function usePrevious(value) {
   const ref = useRef();
@@ -107,7 +108,7 @@ export function usePots() {
 }
 
 export function useRewardEarned(potId, rewardToken, rewardTokenDecimals) {
-  const address = useSelector(state => state.wallet.address);
+  const address = useSelector(selectWalletAddress);
   const earned = useSelector(state => state.earned.earned[potId]?.[rewardToken] ?? 0);
 
   return useMemo(() => {
@@ -197,7 +198,7 @@ export function useImpersonate() {
 }
 
 export function useDeposit(contractAddress, decimals, format = true) {
-  const address = useSelector(state => state.wallet.address);
+  const address = useSelector(selectWalletAddress);
   const balance256 = useSelector(
     state => state.balance.tokens[contractAddress + ':total']?.balance
   );

@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { ZapPotWithdraw } from '../../../../components/PotWithdraw/ZapPotWithdraw';
 import { TooltipWithIcon } from '../../../../components/Tooltip/tooltip';
 import { WalletRequired } from '../../../../components/WalletRequired/WalletRequired';
+import { selectWalletAddress } from '../../../wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
@@ -72,7 +73,7 @@ const BonusAccordionItem = memo(function ({ pot }) {
 });
 
 const WithdrawAccordionItem = memo(function ({ pot, onFairplayLearnMore }) {
-  const address = useSelector(state => state.wallet.address);
+  const address = useSelector(selectWalletAddress);
   const depositBalance = useTokenBalance(pot.contractAddress + ':total', 18);
   const hasDeposit = address && depositBalance.gt(0);
 
@@ -134,7 +135,7 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
         />
       </CardAccordionItem>
       <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
-        <WalletRequired network={pot.network} networkRequired={true}>
+        <WalletRequired network={pot.network}>
           {pot.status === 'active' ? (
             <>
               {pot.isZap ? (

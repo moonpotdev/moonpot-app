@@ -27,6 +27,7 @@ const initialState = {
   web3: null,
   provider: null,
   status: 'disconnected',
+  networkSelectOpen: false,
   rpc: initialRpc(),
   action: initialAction(),
 };
@@ -34,7 +35,14 @@ const initialState = {
 const walletSlice = createSlice({
   name: 'wallet',
   initialState,
-  reducers: {},
+  reducers: {
+    openNetworkSelect: state => {
+      state.networkSelectOpen = true;
+    },
+    closeNetworkSelect: state => {
+      state.networkSelectOpen = false;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(walletConnect.pending, (state, action) => {
@@ -113,3 +121,5 @@ const walletSlice = createSlice({
 });
 
 export const walletReducer = walletSlice.reducer;
+export const walletNetworkSelectOpen = walletSlice.actions.openNetworkSelect;
+export const walletNetworkSelectClose = walletSlice.actions.closeNetworkSelect;

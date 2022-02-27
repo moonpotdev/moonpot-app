@@ -12,18 +12,6 @@ import Web3Original from 'web3';
  * - web3.eth.ens has custom toJSON method added to play nice with redux devtools
  */
 class Web3Trimmed {
-  version = Web3Original.version;
-
-  utils = utils;
-
-  modules = {
-    Eth: Eth,
-    Net: Net,
-    Personal: Personal,
-    // Shh: Shh,
-    // Bzz: Bzz
-  };
-
   constructor() {
     const _this = this;
 
@@ -51,6 +39,16 @@ class Web3Trimmed {
     };
   }
 }
+
+Web3Trimmed.version = Web3Original.version;
+Web3Trimmed.utils = utils;
+Web3Trimmed.modules = {
+  Eth: Eth,
+  Net: Net,
+  Personal: Personal,
+  // Shh: Shh,
+  // Bzz: Bzz
+};
 
 core.addProviders(Web3Trimmed);
 

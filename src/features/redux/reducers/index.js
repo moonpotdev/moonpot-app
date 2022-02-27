@@ -3,7 +3,6 @@ import vaultReducer from './vault';
 import balanceReducer from './balance';
 import pricesReducer from './prices';
 import earnedReducer from './earned';
-import modalReducer from './modal';
 import zapReducer from './zap';
 import buybacksReducer from './buybacks';
 import holdersReducer from './holders';
@@ -18,7 +17,6 @@ const reducers = {
   balance: balanceReducer,
   prices: pricesReducer,
   earned: earnedReducer,
-  modal: modalReducer,
   zap: zapReducer,
   buybacks: buybacksReducer,
   holders: holdersReducer,

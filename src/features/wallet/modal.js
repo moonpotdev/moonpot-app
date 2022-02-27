@@ -60,7 +60,13 @@ function createModalOptions(network) {
   };
 
   return {
-    theme: 'dark',
+    theme: {
+      background: '#303050',
+      main: '#ffffff',
+      secondary: '#D9D9D9',
+      border: '#4C4C80',
+      hover: '#262640',
+    },
     network: network.providerName,
     cacheProvider: false,
     providerOptions: Object.fromEntries(

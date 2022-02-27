@@ -12,6 +12,7 @@ import styles from './styles';
 import { ClaimableBonusNotification } from '../../../components/ClaimableBonusNotification';
 import { MigrationNotices } from '../Moonpots/components/MigrationNotices/MigrationNotices';
 import { sortPots, useSortKey } from '../Moonpots/hooks/filter';
+import { selectWalletAddress } from '../../wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
@@ -22,7 +23,7 @@ const MyPots = ({ potStatus, sort }) => {
     prices: state.prices,
   }));
   const [sortKey, sortDir] = useSortKey(sort);
-  const walletAddress = useSelector(state => state.wallet.address);
+  const walletAddress = useSelector(selectWalletAddress);
   const tokenBalances = useSelector(state => state.balance.tokens);
   const dispatch = useDispatch();
 

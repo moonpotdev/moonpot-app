@@ -6,11 +6,11 @@ import { RouteLoading } from './components/RouteLoading';
 import { PageNotFound } from './PageNotFound';
 import { Header } from './components/Header';
 import Footer from './components/footer';
-import ModalPopup from './components/Modal/modal.js';
 import { useLocation } from 'react-router';
 import { useImpersonate } from './helpers/hooks';
 import { GoogleAnalytics } from './googleAnalytics';
 import { GlobalDataLoader } from './components/GlobalDataLoader/GlobalDataLoader';
+import { NetworkSelectModal } from './components/NetworkSelectModal/NetworkSelectModal';
 
 require('dotenv').config();
 
@@ -84,13 +84,13 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <GlobalDataLoader />
-      <ModalPopup />
       <HashRouter>
         <ScrollToTop />
         <GoogleAnalytics />
         <Header />
         <Pages />
       </HashRouter>
+      <NetworkSelectModal />
     </ThemeProvider>
   );
 }

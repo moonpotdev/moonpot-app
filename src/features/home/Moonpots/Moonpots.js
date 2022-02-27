@@ -11,13 +11,14 @@ import { Pot } from './components/Pot';
 import { Cards } from '../../../components/Cards';
 import { Translate } from '../../../components/Translate';
 import SidePotExplainer from '../../../components/SidePotExplainer/SidePotExplainer';
+import { selectWalletAddress } from '../../wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
 const Moonpots = ({ selectedCategory, sort }) => {
   const dispatch = useDispatch();
   const pricesLastUpdated = useSelector(state => state.prices.lastUpdated);
-  const address = useSelector(state => state.wallet.address);
+  const address = useSelector(selectWalletAddress);
   //cannot use shallowEqual as we need the page to reevaluate the sort once the apy/prize/draw data loads
   const pots = useSelector(state => state.vault.pools);
   const classes = useStyles();

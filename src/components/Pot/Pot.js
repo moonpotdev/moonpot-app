@@ -22,6 +22,7 @@ import { useHistory } from 'react-router';
 import { TransListJoin } from '../TransListJoin';
 import BigNumber from 'bignumber.js';
 import clsx from 'clsx';
+import { selectWalletAddress } from '../../features/wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
@@ -231,7 +232,7 @@ const TVL = memo(function ({ totalStakedUsd }) {
 });
 
 function useDepositOdds(ticketTotalSupply, winners, ticketToken, tokenDecimals) {
-  const address = useSelector(state => state.wallet.address);
+  const address = useSelector(selectWalletAddress);
   const depositedTickets = useTokenBalance(ticketToken, tokenDecimals);
 
   return useMemo(() => {

@@ -16,6 +16,7 @@ import styles from './styles';
 import { formatDecimals } from '../../helpers/format';
 import { networkByKey } from '../../config/networks';
 import { WalletRequired } from '../WalletRequired/WalletRequired';
+import { selectWalletAddress } from '../../features/wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
@@ -157,7 +158,7 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
-  const address = useSelector(state => state.wallet.address);
+  const address = useSelector(selectWalletAddress);
   const network = pot.network;
   const lpAddress = pot.tokenAddress;
   const potAddress = pot.contractAddress;

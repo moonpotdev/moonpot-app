@@ -1,23 +1,23 @@
-import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
+import React, { memo, useCallback, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectWalletNetwork, selectWalletStatus } from '../../features/wallet/selectors';
-import { networkByKey, networks } from '../../config/networks';
+import { selectWalletStatus } from '../../features/wallet/selectors';
+import { networkByKey } from '../../config/networks';
 import { useWalletConnected } from '../../features/wallet/hooks';
 import { Translate } from '../Translate';
-import { makeStyles, Menu, MenuItem } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import styles from './styles';
 import { walletConnect } from '../../features/wallet/connect';
 import Loader from '../loader';
 import clsx from 'clsx';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { walletSwitch } from '../../features/wallet/switch';
+import { walletNetworkSelectOpen } from '../../features/wallet/slice';
 
 const useStyles = makeStyles(styles);
 
 const WalletConnectButton = memo(function WalletConnectButton({ children }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [menuOpen, setMenuOpen] = useState(false);
   const buttonRef = useRef();
   const status = useSelector(selectWalletStatus);
   const isPending = useMemo(() => {
@@ -26,25 +26,12 @@ const WalletConnectButton = memo(function WalletConnectButton({ children }) {
   const isDisconnected = useMemo(() => {
     return status === 'disconnected';
   }, [status]);
-  const handleMenuClose = useCallback(() => {
-    setMenuOpen(false);
-  }, [setMenuOpen]);
 
   const handleButtonClick = useCallback(() => {
     if (isDisconnected) {
-      setMenuOpen(true);
+      dispatch(walletNetworkSelectOpen());
     }
-  }, [isDisconnected, setMenuOpen]);
-
-  const handleConnect = useCallback(
-    networkKey => {
-      setMenuOpen(false);
-      if (isDisconnected) {
-        dispatch(walletConnect(networkKey));
-      }
-    },
-    [dispatch, isDisconnected, setMenuOpen]
-  );
+  }, [dispatch, isDisconnected]);
 
   const buttonClasses = clsx(classes.connectButton, {
     [classes.connectButtonPending]: isPending,
@@ -60,21 +47,6 @@ const WalletConnectButton = memo(function WalletConnectButton({ children }) {
       >
         {isPending ? <Loader line={true} /> : children}
       </SecondaryButton>
-      <Menu
-        open={menuOpen}
-        onClose={handleMenuClose}
-        anchorEl={buttonRef.current}
-        anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-        transformOrigin={{ horizontal: 'left', vertical: 'top' }}
-        disableScrollLock={true}
-        getContentAnchorEl={null}
-      >
-        {networks.map(network => (
-          <MenuItem key={network.key} onClick={() => handleConnect(network.key)}>
-            {network.name}
-          </MenuItem>
-        ))}
-      </Menu>
     </>
   );
 });
@@ -167,20 +139,19 @@ export const WalletRequired = memo(function WalletRequired({
   NotConnectedComponent = NotConnected,
   WrongNetworkComponent = WrongNetwork,
 }) {
-  const connected = useWalletConnected();
-  const currentNetwork = useSelector(selectWalletNetwork);
+  const [address, currentNetwork] = useWalletConnected();
   const correctNetwork = useMemo(() => {
     return network === null || currentNetwork === network || networkRequired === false;
   }, [network, currentNetwork, networkRequired]);
   const connectedCorrectNetwork = useMemo(() => {
-    return connected && correctNetwork;
-  }, [connected, correctNetwork]);
+    return address && correctNetwork;
+  }, [address, correctNetwork]);
 
   if (connectedCorrectNetwork) {
     return children;
   }
 
-  if (connected) {
+  if (address) {
     return <WrongNetworkComponent target={network} current={currentNetwork} />;
   }
 

@@ -12,7 +12,7 @@ export default function NoPotsCard({ selected }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const history = useHistory();
-  const connected = useWalletConnected();
+  const [address] = useWalletConnected();
 
   // TODO make proper use of WalletRequired
   return (
@@ -27,15 +27,15 @@ export default function NoPotsCard({ selected }) {
         </Grid>
         <Grid item xs={8}>
           <Typography className={classes.noActivePotsTitle}>
-            {connected ? t('playWithMoonpot') : t('wallet.connect')}
+            {address ? t('playWithMoonpot') : t('wallet.connect')}
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography className={classes.noActivePotsText}>
             {selected === 'active' ? (
-              <>{connected ? t('youHaventEnteredMoonpots') : t('connectToJoin')}</>
+              <>{address ? t('youHaventEnteredMoonpots') : t('connectToJoin')}</>
             ) : (
-              <>{connected ? t('youHaventEnteredRetiredMoonpots') : t('connectToJoin')}</>
+              <>{address ? t('youHaventEnteredRetiredMoonpots') : t('connectToJoin')}</>
             )}
           </Typography>
         </Grid>
