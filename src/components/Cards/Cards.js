@@ -8,11 +8,22 @@ import { variantClass } from '../../helpers/utils';
 
 const useStyles = makeStyles(styles);
 
-export function Cards({ className, children, sameHeight = true, ...rest }) {
+export function Cards({
+  className,
+  children,
+  sameHeight = true,
+  justifyContent = 'center',
+  ...rest
+}) {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.cardGrid}>
+    <Grid
+      container
+      className={classes.cardGrid}
+      justifyContent={justifyContent || 'center'}
+      {...rest}
+    >
       {children}
     </Grid>
   );

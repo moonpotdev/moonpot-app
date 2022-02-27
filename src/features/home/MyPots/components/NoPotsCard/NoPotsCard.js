@@ -17,7 +17,7 @@ export default function NoPotsCard({ selected }) {
   // TODO make proper use of WalletRequired
   return (
     <Box className={classes.noActivePots}>
-      <Grid container>
+      <Grid container justifyContent="center">
         <Grid item xs={5}>
           <img
             className={classes.noActivePotsImage}

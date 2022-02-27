@@ -52,7 +52,7 @@ const Moonpots = ({ selectedCategory, sort }) => {
             className={classes.potsMigrationNotice}
           />
           {selectedCategory === 'side' ? <SidePotExplainer /> : null}
-          <Cards>
+          <Cards justifyContent="flex-start">
             {filtered.map(pot => (
               <Pot key={pot.id} variant={'tealLight'} id={pot.id} />
             ))}

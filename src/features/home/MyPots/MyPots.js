@@ -96,7 +96,7 @@ const MyPots = ({ potStatus, sort }) => {
                 <ClaimableBonusNotification className={classes.claimableBonuses} />
               </>
             ) : null}
-            <Cards sameHeight={false}>
+            <Cards sameHeight={false} justifyContent="flex-start">
               {filtered.length === 0 ? (
                 <NoPotsCard selected={potStatus} />
               ) : (

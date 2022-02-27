@@ -41,7 +41,18 @@
     "potsPrice": "POTS 的价格",
     "buyPots": "购买 POTS",
     "audit": "审计",
-    "articles": "文档"
+    "articles": "文章",
+    "winPrizeInToken": "赢取 <span>{{prize}}</span> 的 {{token}}",
+    "winNFT": "赢取 <span>{{nft}}</span>",
+    "winNFTandPrizeInToken": "赢取 <span>{{nft}}</span> 和 <span>{{prize}}</span> 的 {{token}}",
+    "days": "天",
+    "hours": "小时",
+    "mins": "分钟",
+    "secs": "秒",
+    "totalWon": "奖金总额",
+    "uniqueWinners": "独特的赢家",
+    "currentPrizes": "当前奖金",
+    "cadets": "学员"
   },
   "footer": {
     "cadets": "学员",
@@ -393,7 +404,8 @@
     "claimed": "{{count}} 个促销代码已领取",
     "reveal": "揭示",
     "noNfts": "没有NFT可供领取",
-    "beefyGear": "在Beefy Gear商店下订单。促销代码将涵盖商品和运输费用。"
+    "beefyGear": "在Beefy Gear商店下订单。促销代码将涵盖商品和运输费用。",
+    "safepal": "使用此链接在 SafePal 商店下订单。促销代码将涵盖限量版 SafePal × Moonpot S1 硬体钱包和运费。"
   },
   "migration": {
     "viewRetiredPot": "查看已退役月盒",

@@ -42,7 +42,6 @@ const appTheme = () => {
           display: 'flex',
           flexWrap: 'wrap',
           boxSizing: 'border-box',
-          justifyContent: 'center',
         },
       },
       MuiButton: {

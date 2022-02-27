@@ -495,6 +495,35 @@
     ]
   },
   {
+    "symbol": "Ziggyverse NFT",
+    "address": "0xd41748641B5B9aF4110513bA5aEEECDF3318304A",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0,
+    "nfts": [
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 1,
+        "max": 25
+      },
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 51,
+        "max": 116
+      },
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 291,
+        "max": 300
+      },
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 191,
+        "max": 290
+      }
+    ]
+  },
+  {
     "symbol": "moonTicketPotsZiggyVerseAgility",
     "address": "0x075570d24c67EC8F87c5d8458BFFe01A729c3B40",
     "type": "ticket",
@@ -587,6 +616,14 @@
     "stakedMultiplier": 1
   },
   {
+    "symbol": "moonTicketZiggyVerseIntelligence",
+    "address": "0xB37893DecC099c279f460ecb686D4fa8Dc3fc811",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
+  },
+  {
     "symbol": "Born Bad Boys NFT",
     "address": "0x44d85770aEa263F9463418708125Cd95e308299B",
     "type": "nft",
@@ -648,6 +685,13 @@
     "address": "0x74a1a77B627714BF7200464a16C51701Abb7cc38",
     "type": "nft",
     "subtype": "erc721",
+    "decimals": 0
+  },
+  {
+    "symbol": "LaCucina Secret Ingredients NFT",
+    "address": "0x2c3f816fB680Bbe745D085dC244CCf0737FcfB9A",
+    "type": "nft",
+    "subtype": "erc1155",
     "decimals": 0
   }
 ]
