@@ -5,7 +5,6 @@ import earned from './earned';
 import zap from './zap';
 import buybacks from './buybacks';
 import holders from './holders';
-import filter from './filter';
 
 const reduxActions = {
   vault,
@@ -15,7 +14,6 @@ const reduxActions = {
   zap,
   buybacks,
   holders,
-  filter,
 };
 
 export default reduxActions;

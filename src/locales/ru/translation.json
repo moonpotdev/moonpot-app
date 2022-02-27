@@ -80,9 +80,11 @@
   "telegramSocialBlockButton": "Присоединяйтесь к нашему каналу Telegram",
   "discordSocialBlockButton": "Присоединяйтесь к нашему серверу в Discord",
   "twitterSocialBlockButton": "Подписывайтесь на наш Twitter",
-  "potType": "Вид пула:",
-  "sortBy": "Отсортировать по:",
-  "potStatus": "Статус пула",
+  "filters": {
+    "potType": "Вид пула:",
+    "sortBy": "Отсортировать по:",
+    "potStatus": "Статус пула"
+  },
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",

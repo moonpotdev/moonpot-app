@@ -96,6 +96,7 @@ export const PotInfoBlock = function ({ pot, active = true }) {
   const depositTokenPrice = useSelector(
     state => state.prices.byNetworkAddress[pot.network][pot.tokenAddress]
   );
+  const userBalance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);
   const { t } = useTranslation();
 
   return (
@@ -109,8 +110,8 @@ export const PotInfoBlock = function ({ pot, active = true }) {
         </Grid>
         <Grid item xs={6}>
           <Typography className={classes.myDetailsValue} align={'right'}>
-            {formatDecimals(pot.userBalance)} {pot.token} ($
-            {formatDecimals(pot.userBalance.multipliedBy(depositTokenPrice), 2)})
+            {formatDecimals(userBalance)} {pot.token} ($
+            {formatDecimals(userBalance.multipliedBy(depositTokenPrice), 2)})
           </Typography>
         </Grid>
         {/*Interest*/}

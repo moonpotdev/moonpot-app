@@ -34,7 +34,7 @@ const initialTokens = (() => {
       const pot = networkPools[key];
 
       tokens[pot.token] = {
-        balance: 0,
+        balance: '0',
         allowance: { ...zapAllowances, [pot.contractAddress]: 0 },
         address: pot.tokenAddress,
       };
@@ -49,14 +49,14 @@ const initialTokens = (() => {
             const token = tokensByNetworkSymbol[pot.network][symbol];
 
             tokens[token.symbol] = {
-              balance: 0,
+              balance: '0',
               allowance: { ...zapAllowances, [pot.contractAddress]: 0 },
               address: token.address,
             };
 
             if (isNative) {
               tokens[nativeTokenSymbol] = {
-                balance: 0,
+                balance: '0',
                 allowance: { ...zapAllowancesInfinity, [pot.contractAddress]: MAX_UINT256 },
                 address: false,
                 isNative: true,
@@ -68,26 +68,26 @@ const initialTokens = (() => {
 
       // ticket
       tokens[pot.rewardToken] = {
-        balance: 0,
+        balance: '0',
         allowance: { ...zapAllowances, [pot.contractAddress]: 0 },
         address: pot.rewardAddress,
       };
 
       // gate.userTotalBalance TODO: move, its not a token balance
       tokens[pot.contractAddress + ':total'] = {
-        balance: 0,
+        balance: '0',
         address: pot.contractAddress,
       };
 
       // gate.balances TODO: move, its not a token balance
       tokens[pot.contractAddress + ':balance'] = {
-        balance: 0,
+        balance: '0',
         address: pot.contractAddress,
       };
 
       // fairplay time left TODO: move, its not a token balance
       tokens[pot.contractAddress + ':fee'] = {
-        timeleft: 0,
+        timeleft: '0',
         timeleftUpdated: Date.now() / 1000,
         address: pot.contractAddress,
       };

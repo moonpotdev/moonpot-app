@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { Grid, makeStyles, MenuItem, Select, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import reduxActions from '../../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles';
 import clsx from 'clsx';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { networkByKey, networkKeys } from '../../../../config/networks';
+import { selectFilterConfig } from '../../../filter/select';
+import { filterUpdate } from '../../../filter/update';
 
 const useStyles = makeStyles(styles);
 
-const PotTypes = [
+const categoryOptions = [
   {
     key: 'featured',
     path: 'featured',
@@ -33,7 +35,7 @@ const PotTypes = [
   },
 ];
 
-const sortByTypes = [
+const sortOptions = [
   {
     key: 'default',
     path: 'default',
@@ -56,7 +58,7 @@ const sortByTypes = [
   },
 ];
 
-const potStatusTypes = [
+const statusOptions = [
   {
     key: 'active',
     path: 'active',
@@ -69,163 +71,217 @@ const potStatusTypes = [
   },
 ];
 
-const iconComponent = props => {
+const IconComponent = props => {
   return <ExpandMoreIcon style={{ color: '#8F8FBC' }} className={props.className} />;
 };
 
-const Filter = ({ className, selected, potType, potStatus, sort }) => {
+const Dropdown = memo(function Dropdown({ children, ...rest }) {
+  const classes = useStyles();
+
+  return (
+    <Select
+      className={classes.select}
+      disableUnderline
+      IconComponent={IconComponent}
+      MenuProps={{
+        classes: { paper: classes.menuStyle },
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'left',
+        },
+        transformOrigin: {
+          vertical: 'top',
+          horizontal: 'left',
+        },
+        getContentAnchorEl: null,
+        disableScrollLock: true,
+      }}
+      {...rest}
+    >
+      {children}
+    </Select>
+  );
+});
+
+const Filter = ({ className, selected, categoryFromUrl }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
+  const [readCategoryFromUrl, setReadCategoryFromUrl] = useState(false);
+  const { deposited, category, network, status, sort } = useSelector(selectFilterConfig);
 
-  const [currentType, setCurrentType] = useState(potType || 'featured');
-  const [currentStatus, setCurrentStatus] = useState(potStatus || 'active');
-  const [currentSort, setCurrentSort] = useState(sort || 'default');
+  const handleCategoryChange = useCallback(
+    event => {
+      dispatch(filterUpdate({ category: event.target.value }));
+    },
+    [dispatch]
+  );
 
-  const handleTypeChange = event => {
-    setCurrentType(event.target.value);
-  };
-  const handleStatusChange = event => {
-    setCurrentStatus(event.target.value);
-  };
-  const handleSortChange = event => {
-    setCurrentSort(event.target.value);
-  };
+  const handleStatusChange = useCallback(
+    event => {
+      dispatch(filterUpdate({ status: event.target.value }));
+    },
+    [dispatch]
+  );
 
+  const handleSortChange = useCallback(
+    event => {
+      dispatch(filterUpdate({ sort: event.target.value }));
+    },
+    [dispatch]
+  );
+
+  const handleNetworkChange = useCallback(
+    event => {
+      dispatch(filterUpdate({ network: event.target.value }));
+    },
+    [dispatch]
+  );
+
+  // Keep deposited filter correct
   useEffect(() => {
-    //Update filters globally when they are changed
-    if (selected === 'my-moonpots') {
-      //For my pots set status and sort with redux
-      dispatch(reduxActions.filter.updateFilterStatus(currentStatus));
-      dispatch(reduxActions.filter.updateFilterSort(currentSort));
-      history.push({
-        pathname: '/my-moonpots/',
-        state: { tabbed: true },
-      });
-    } else {
-      //For moonpots page set pot type with path and sort with redux
-      dispatch(reduxActions.filter.updateFilterSort(currentSort));
-      history.push({
-        pathname: '/' + currentType,
-        state: { tabbed: true },
-      });
+    const wanted = selected === 'my-moonpots';
+    if (deposited !== wanted) {
+      dispatch(filterUpdate({ deposited: wanted }));
     }
-  }, [currentType, currentStatus, currentSort, history, selected, dispatch]);
+  }, [dispatch, selected, deposited]);
+
+  // Reset status to active on Moonpots
+  useEffect(() => {
+    if (selected === 'moonpots' && status !== 'active') {
+      dispatch(filterUpdate({ status: 'active' }));
+    }
+  }, [dispatch, selected, status]);
+
+  // Reset category to all on My Moonpots
+  useEffect(() => {
+    if (selected === 'my-moonpots' && category !== 'active') {
+      dispatch(filterUpdate({ category: 'all' }));
+    }
+  }, [dispatch, selected, category]);
+
+  // Set category based on url
+  useEffect(() => {
+    if (selected === 'moonpots') {
+      console.log({ categoryFromUrl, category, readCategoryFromUrl });
+      if (categoryFromUrl && !readCategoryFromUrl) {
+        setReadCategoryFromUrl(true);
+        if (category !== categoryFromUrl) {
+          dispatch(filterUpdate({ category: categoryFromUrl }));
+        }
+      } else {
+        history.push({
+          pathname: '/' + category,
+          state: { tabbed: true },
+        });
+      }
+    } else if (readCategoryFromUrl) {
+      setReadCategoryFromUrl(false);
+    }
+  }, [
+    dispatch,
+    history,
+    selected,
+    category,
+    categoryFromUrl,
+    readCategoryFromUrl,
+    setReadCategoryFromUrl,
+  ]);
 
   return (
     <div className={classes.buttonsOuterContainer}>
       <Grid container className={clsx(classes.buttonContainer, className)}>
-        {/* First dropdown: moonpots -> type, my-pots -> status */}
-        {selected === 'my-moonpots' ? (
-          <Select
-            className={classes.select}
-            id="pot-type-select"
-            onChange={handleStatusChange}
-            value={currentStatus}
-            disableUnderline
-            IconComponent={iconComponent}
-            MenuProps={{
-              classes: { paper: classes.menuStyle },
-              anchorOrigin: {
-                vertical: 'bottom',
-                horizontal: 'left',
-              },
-              transformOrigin: {
-                vertical: 'top',
-                horizontal: 'left',
-              },
-              getContentAnchorEl: null,
-            }}
-          >
-            {potStatusTypes.map(type => (
-              <MenuItem key={type.key} value={type.path}>
-                <div style={{ display: 'flex' }}>
-                  <Typography className={classes.selectLabel}>{t('potStatus')}&nbsp;</Typography>
-                  <Typography
-                    className={
-                      currentStatus === type.key ? classes.selectValueSelected : classes.selectValue
-                    }
-                  >
-                    {t(type.label)}
-                  </Typography>
-                </div>
-              </MenuItem>
-            ))}
-          </Select>
-        ) : (
-          <Select
-            className={classes.select}
-            id="pot-type-select"
-            onChange={handleTypeChange}
-            value={currentType}
-            disableUnderline
-            IconComponent={iconComponent}
-            MenuProps={{
-              classes: {
-                paper: classes.menuStyle,
-              },
-              anchorOrigin: {
-                vertical: 'bottom',
-                horizontal: 'left',
-              },
-              transformOrigin: {
-                vertical: 'top',
-                horizontal: 'left',
-              },
-              getContentAnchorEl: null,
-            }}
-          >
-            {PotTypes.map(type => (
-              <MenuItem key={type.key} value={type.path}>
-                <div style={{ display: 'flex' }}>
-                  <Typography className={classes.selectLabel}>{t('potType')}&nbsp;</Typography>
-                  <Typography
-                    className={
-                      potType === type.key ? classes.selectValueSelected : classes.selectValue
-                    }
-                  >
-                    {t(type.label)}
-                  </Typography>
-                </div>
-              </MenuItem>
-            ))}
-          </Select>
-        )}
-        {/* Second dropdown: sort */}
-        <Select
-          className={classes.select}
-          id="pot-type-select"
-          onChange={handleSortChange}
-          value={currentSort}
-          disableUnderline
-          IconComponent={iconComponent}
-          MenuProps={{
-            classes: { paper: classes.menuStyle },
-            anchorOrigin: {
-              vertical: 'bottom',
-              horizontal: 'left',
-            },
-            transformOrigin: {
-              vertical: 'top',
-              horizontal: 'left',
-            },
-            getContentAnchorEl: null,
-          }}
-        >
-          {sortByTypes.map(type => (
-            <MenuItem key={type.key} value={type.path}>
+        {/* network */}
+        <Dropdown id="pot-network-select" onChange={handleNetworkChange} value={network}>
+          <MenuItem key="all" value="all">
+            <div style={{ display: 'flex' }}>
+              <Typography className={classes.selectLabel}>{t('filters.network')}&nbsp;</Typography>
+              <Typography
+                className={network === 'all' ? classes.selectValueSelected : classes.selectValue}
+              >
+                {t('filters.all')}
+              </Typography>
+            </div>
+          </MenuItem>
+          {networkKeys.map(networkKey => (
+            <MenuItem key={networkKey} value={networkKey}>
               <div style={{ display: 'flex' }}>
-                <Typography className={classes.selectLabel}>{t('sortBy')}&nbsp;</Typography>
+                <Typography className={classes.selectLabel}>
+                  {t('filters.network')}&nbsp;
+                </Typography>
                 <Typography
-                  className={sort === type.key ? classes.selectValueSelected : classes.selectValue}
+                  className={
+                    network === networkKey ? classes.selectValueSelected : classes.selectValue
+                  }
                 >
-                  {t(type.label)}
+                  {networkByKey[networkKey].shortName || networkByKey[networkKey].name}
                 </Typography>
               </div>
             </MenuItem>
           ))}
-        </Select>
+        </Dropdown>
+        {/* moonpots -> type, my-pots -> status */}
+        {selected === 'my-moonpots' ? (
+          <Dropdown id="pot-type-select" onChange={handleStatusChange} value={status}>
+            {statusOptions.map(statusOption => (
+              <MenuItem key={statusOption.key} value={statusOption.path}>
+                <div style={{ display: 'flex' }}>
+                  <Typography className={classes.selectLabel}>
+                    {t('filters.potStatus')}&nbsp;
+                  </Typography>
+                  <Typography
+                    className={
+                      status === statusOption.key
+                        ? classes.selectValueSelected
+                        : classes.selectValue
+                    }
+                  >
+                    {t(statusOption.label)}
+                  </Typography>
+                </div>
+              </MenuItem>
+            ))}
+          </Dropdown>
+        ) : (
+          <Dropdown id="pot-type-select" onChange={handleCategoryChange} value={category}>
+            {categoryOptions.map(categoryOption => (
+              <MenuItem key={categoryOption.key} value={categoryOption.path}>
+                <div style={{ display: 'flex' }}>
+                  <Typography className={classes.selectLabel}>
+                    {t('filters.potType')}&nbsp;
+                  </Typography>
+                  <Typography
+                    className={
+                      category === categoryOption.key
+                        ? classes.selectValueSelected
+                        : classes.selectValue
+                    }
+                  >
+                    {t(categoryOption.label)}
+                  </Typography>
+                </div>
+              </MenuItem>
+            ))}
+          </Dropdown>
+        )}
+        {/* sort */}
+        <Dropdown id="pot-sort-select" onChange={handleSortChange} value={sort}>
+          {sortOptions.map(sortOption => (
+            <MenuItem key={sortOption.key} value={sortOption.path}>
+              <div style={{ display: 'flex' }}>
+                <Typography className={classes.selectLabel}>{t('filters.sortBy')}&nbsp;</Typography>
+                <Typography
+                  className={
+                    sort === sortOption.key ? classes.selectValueSelected : classes.selectValue
+                  }
+                >
+                  {t(sortOption.label)}
+                </Typography>
+              </div>
+            </MenuItem>
+          ))}
+        </Dropdown>
       </Grid>
     </div>
   );

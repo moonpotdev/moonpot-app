@@ -8,16 +8,18 @@ import { useTranslation } from 'react-i18next';
 import { PotInfoBlock, PotTitle } from './PotComponents';
 import { Logo } from '../../../../../components/Pot';
 import { useHistory } from 'react-router';
+import { usePot } from '../../../../../helpers/hooks';
 
 const useStyles = makeStyles(styles);
 
-const Pot = function ({ item }) {
+const Pot = function ({ id }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const history = useHistory();
+  const pot = usePot(id);
 
   return (
-    <Card variant={item.status === 'active' ? 'purpleLight' : 'purpleDarkAlt'}>
+    <Card variant={pot.status === 'active' ? 'purpleLight' : 'purpleDarkAlt'}>
       <Grid container spacing={0}>
         {/*Pot Image*/}
         <Grid
@@ -25,21 +27,21 @@ const Pot = function ({ item }) {
           xs={4}
           align={'left'}
           style={{ marginBottom: '24px' }}
-          onClick={() => history.push(`/pot/${item.id}`)}
+          onClick={() => history.push(`/pot/${pot.id}`)}
         >
-          <Logo icon={item.icon || item.id} sponsorToken={item.sponsorToken} />
+          <Logo icon={pot.icon || pot.id} sponsorToken={pot.sponsorToken} />
         </Grid>
         {/*Pot Title*/}
-        <PotTitle item={item} />
+        <PotTitle item={pot} />
         {/*Divider Text*/}
         <Grid item xs={12} align={'left'} style={{ paddingBottom: 0 }}>
           <Typography className={classes.dividerText}>{t('pot.myDetails')} </Typography>
         </Grid>
         {/*Info Block*/}
-        <PotInfoBlock pot={item} active={item.status !== 'eol'} />
+        <PotInfoBlock pot={pot} active={pot.status !== 'eol'} />
       </Grid>
       {/*Bottom*/}
-      {item.status === 'active' ? <ActiveLayout item={item} /> : <EOLLayout item={item} />}
+      {pot.status === 'active' ? <ActiveLayout item={pot} /> : <EOLLayout item={pot} />}
     </Card>
   );
 };

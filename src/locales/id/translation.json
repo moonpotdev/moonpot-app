@@ -69,9 +69,11 @@
   "telegramSocialBlockButton": "Bergabunglah dengan Telegram kami",
   "discordSocialBlockButton": "Bergabunglah dengan Discord kami",
   "twitterSocialBlockButton": "Ikuti twitter kami",
-  "potType": "Tipe Pot:",
-  "sortBy": "Sort by:",
-  "potStatus": "Status Pot:",
+  "filters": {
+    "potType": "Tipe Pot:",
+    "sortBy": "Sort by:",
+    "potStatus": "Status Pot:"
+  },
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",

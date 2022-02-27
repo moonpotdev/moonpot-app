@@ -80,9 +80,13 @@
   "telegramSocialBlockButton": "Join our Telegram",
   "discordSocialBlockButton": "Join our Discord",
   "twitterSocialBlockButton": "Follow our Twitter",
-  "potType": "Pot Type:",
-  "sortBy": "Sort by:",
-  "potStatus": "Pot Status:",
+  "filters": {
+    "potType": "Pot Type:",
+    "sortBy": "Sort by:",
+    "potStatus": "Pot Status:",
+    "network": "Network:",
+    "all": "All"
+  },
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",

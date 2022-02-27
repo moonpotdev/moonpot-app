@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { load } from 'fathom-client';
 import reduxActions from '../../features/redux/actions';
 import { fetchUniqueWinners } from '../../features/winners/redux/unique';
+import { filterLoad } from '../../features/filter/load';
+import { selectFilterConfigLoaded } from '../../features/filter/select';
 
 function selectPricesLastUpdated(state) {
   return state.prices.lastUpdated;
@@ -16,6 +18,7 @@ export const GlobalDataLoader = memo(function GlobalDataLoader() {
   const dispatch = useDispatch();
   const pricesLastUpdated = useSelector(selectPricesLastUpdated);
   const potsLastUpdated = useSelector(selectPotsLastUpdated);
+  const filterConfigLoaded = useSelector(selectFilterConfigLoaded);
 
   useEffect(() => {
     load(process.env.REACT_APP_FATHOM_SITE_ID, {
@@ -39,6 +42,13 @@ export const GlobalDataLoader = memo(function GlobalDataLoader() {
   useEffect(() => {
     dispatch(fetchUniqueWinners());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!filterConfigLoaded) {
+      console.log('GDL dispatch filterLoad');
+      dispatch(filterLoad());
+    }
+  }, [dispatch, filterConfigLoaded]);
 
   useEffect(() => {
     // Only initial pots load, after prices have loaded

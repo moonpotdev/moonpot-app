@@ -6,25 +6,22 @@ import reduxActions from '../../redux/actions';
 import { MigrationNotices } from './components/MigrationNotices/MigrationNotices';
 import ZiggyMaintenance from '../../../images/ziggy/maintenance.svg';
 import SocialMediaBlock from './components/SocialMediaBlock/SocialMediaBlock';
-import { useFilterConfig, useFilteredPots, useSortKey } from './hooks/filter';
 import { Pot } from './components/Pot';
 import { Cards } from '../../../components/Cards';
 import { Translate } from '../../../components/Translate';
 import SidePotExplainer from '../../../components/SidePotExplainer/SidePotExplainer';
 import { selectWalletAddress } from '../../wallet/selectors';
+import { useFilterConfig, useFilteredPots } from '../../filter/hooks';
 
 const useStyles = makeStyles(styles);
 
-const Moonpots = ({ selectedCategory, sort }) => {
+const Moonpots = () => {
   const dispatch = useDispatch();
   const pricesLastUpdated = useSelector(state => state.prices.lastUpdated);
   const address = useSelector(selectWalletAddress);
-  //cannot use shallowEqual as we need the page to reevaluate the sort once the apy/prize/draw data loads
-  const pots = useSelector(state => state.vault.pools);
   const classes = useStyles();
-  const [filterConfig, setFilterConfig] = useFilterConfig();
-  const filtered = useFilteredPots(pots, selectedCategory, filterConfig);
-  const [sortKey, sortDir] = useSortKey(sort);
+  const filterConfig = useFilterConfig();
+  const filteredIds = useFilteredPots();
 
   useEffect(() => {
     if (pricesLastUpdated > 0) {
@@ -38,27 +35,21 @@ const Moonpots = ({ selectedCategory, sort }) => {
     }
   }, [dispatch, address]);
 
-  useEffect(() => {
-    if (sortKey !== filterConfig.sortKey || sortDir !== filterConfig.sortDir) {
-      setFilterConfig({ ...filterConfig, sortKey, sortDir });
-    }
-  }, [filterConfig, setFilterConfig, sortKey, sortDir, pots]);
-
   return (
     <React.Fragment>
       <div className={classes.potsContainer}>
         <div className={classes.spacer}>
           <MigrationNotices
-            selectedCategory={selectedCategory}
+            selectedCategory={filterConfig.category}
             className={classes.potsMigrationNotice}
           />
-          {selectedCategory === 'side' ? <SidePotExplainer /> : null}
+          {filterConfig.category === 'side' ? <SidePotExplainer /> : null}
           <Cards justifyContent="flex-start">
-            {filtered.map(pot => (
-              <Pot key={pot.id} variant={'tealLight'} id={pot.id} />
+            {filteredIds.map(id => (
+              <Pot key={id} variant={'tealLight'} id={id} />
             ))}
           </Cards>
-          {selectedCategory === 'community' ? (
+          {filterConfig.category === 'community' ? (
             <Grid item xs={12} style={{ marginTop: '32px' }}>
               <Grid container className={classes.communityJoin}>
                 <Grid item xs={12}>

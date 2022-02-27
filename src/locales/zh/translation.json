@@ -80,9 +80,11 @@
   "telegramSocialBlockButton": "加入我们的电报群",
   "discordSocialBlockButton": "加入我们的Discord社群",
   "twitterSocialBlockButton": "关注我们的Twitter账号",
-  "potType": "月盒类型:",
-  "sortBy": "排序方式:",
-  "potStatus": "月盒状态:",
+  "filters": {
+    "potType": "月盒类型:",
+    "sortBy": "排序方式:",
+    "potStatus": "月盒状态:"
+  },
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",

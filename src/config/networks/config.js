@@ -2,6 +2,7 @@ const networksConfig = {
   bsc: {
     key: 'bsc',
     name: 'Binance Smart Chain',
+    shortName: 'BSC',
     chainId: 56,
     rpc: [
       'https://bsc-dataseed.binance.org',
