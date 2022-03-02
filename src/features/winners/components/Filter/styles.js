@@ -8,6 +8,9 @@ const styles = theme => ({
     [theme.breakpoints.down(1300)]: {
       padding: '0 12px',
     },
+    [theme.breakpoints.down(responsiveBreakpoint)]: {
+      margin: '0 auto',
+    },
   },
   buttonContainer: {
     width: 'max-content',
@@ -16,7 +19,7 @@ const styles = theme => ({
     [theme.breakpoints.down(responsiveBreakpoint)]: {
       width: 'auto',
       margin: '0 auto',
-      padding: '0 0 16px',
+      padding: '0 0 8px',
     },
   },
   select: {
@@ -80,14 +83,14 @@ const styles = theme => ({
     fontWeight: '500',
   },
   menuStyle: {
-    width: '220px',
+    width: '320px',
     marginLeft: '-2px',
     marginTop: '4px',
     border: '2px solid #555590',
     borderRadius: '8px',
     backgroundColor: '#303050',
     [theme.breakpoints.down(responsiveBreakpoint)]: {
-      width: '500px',
+      //width: '500px',
       maxWidth: '90%',
     },
     '& .MuiList-root': {

@@ -207,7 +207,7 @@ const Filter = function () {
           {currentPots.map(type => (
             <MenuItem key={type.key} value={type}>
               <div style={{ display: 'flex' }}>
-                <ListItemIcon>
+                <ListItemIcon style={{ minWidth: '0px', paddingRight: '8px' }}>
                   <Checkbox checked={selectedPots.indexOf(type) > -1} />
                 </ListItemIcon>
                 <Typography className={classes.selectValue}>{t(type.label)}</Typography>
