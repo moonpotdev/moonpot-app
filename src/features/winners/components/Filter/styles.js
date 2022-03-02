@@ -22,7 +22,7 @@ const styles = theme => ({
   select: {
     border: '2px solid #555590',
     borderRadius: '8px',
-    width: '220px',
+    width: '320px',
     marginLeft: '16px',
     [theme.breakpoints.down(responsiveBreakpoint)]: {
       width: '100%',
@@ -56,6 +56,12 @@ const styles = theme => ({
   },
   selectLabel: {
     display: 'none',
+    fontSize: '15px',
+    lineHeight: '24px',
+    color: '#8F8FBC',
+    fontWeight: '500',
+  },
+  potSelectLabel: {
     fontSize: '15px',
     lineHeight: '24px',
     color: '#8F8FBC',

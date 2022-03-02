@@ -162,12 +162,34 @@ const Filter = function () {
           value={selectedPots}
           disableUnderline
           IconComponent={iconComponent}
+          displayEmpty={true}
           renderValue={selectedPots => {
             let potNames = [];
             for (let i = 0; i < selectedPots.length; i++) {
               potNames.push(selectedPots[i].label);
             }
-            return potNames.join(', ');
+            if (potNames.length === 1) {
+              return (
+                <>
+                  <span className={classes.potSelectLabel}>Pot:&nbsp;</span>
+                  <span className={classes.selectValue}>{potNames[0]}</span>
+                </>
+              );
+            } else if (potNames.length > 1) {
+              return (
+                <>
+                  <span className={classes.potSelectLabel}>Pot:&nbsp;</span>
+                  <span className={classes.selectValue}>Multiple selected</span>
+                </>
+              );
+            } else {
+              return (
+                <>
+                  <span className={classes.potSelectLabel}>Pot:&nbsp;</span>
+                  <span className={classes.selectValue}>None selected</span>
+                </>
+              );
+            }
           }}
           MenuProps={{
             classes: { paper: classes.menuStyle },
