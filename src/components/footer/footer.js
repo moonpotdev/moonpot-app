@@ -38,7 +38,7 @@ const Footer = ({ variant }) => {
 
   return (
     <>
-      <Container maxWidth="xl" className={variant === 'light' ? classes.light : ''}>
+      <div className={classes.footerOuter}>
         <Grid container spacing={2} className={classes.footer}>
           <Grid item xs={12} className={classes.footerLinks}>
             <Link href={'https://docs.moonpot.com/'} target="_blank" rel="noopener">
@@ -113,7 +113,7 @@ const Footer = ({ variant }) => {
             </Link>
           </Grid>
         </Grid>
-      </Container>
+      </div>
     </>
   );
 };

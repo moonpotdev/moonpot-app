@@ -1,4 +1,7 @@
 const styles = theme => ({
+  footerOuter: {
+    backgroundColor: '#262640',
+  },
   footer: {
     minHeight: '100%',
     padding: '8px 0',
