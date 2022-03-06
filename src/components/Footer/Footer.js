@@ -22,7 +22,7 @@ const navLinks = [
   },
   {
     title: 'header.articles',
-    path: 'https://blog.beefy.finance/articles/',
+    path: 'https://www.moonpot.com/alpha',
   },
   {
     title: 'header.vote',
