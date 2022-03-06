@@ -1,6 +1,9 @@
 const responsiveBreakpoint = 764;
 
 const styles = theme => ({
+  homeContainer: {
+    marginBottom: '-40px', // remove footer margin since bg is different
+  },
   mainTitle: {
     fontWeight: '500',
     fontSize: '24px',
