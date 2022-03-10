@@ -407,7 +407,8 @@
       "ziggyPrize": 3,
       "treasury": 2
     },
-    "status": "active",
+    "status": "eol",
+    "eolDrawNumber": 3,
     "infoCardStrategy": "binopoly",
     "sponsors": [],
     "nftPrizeOnly": true,
