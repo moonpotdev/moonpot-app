@@ -9,6 +9,7 @@ const styles = theme => ({
     flexDirection: 'row',
     flexWrap: 'nowrap',
     height: '100%',
+    width: 'max-content',
   },
   tickerItemWrapper: {
     display: 'flex',
