@@ -8,6 +8,7 @@ import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import Filter from './components/Filter';
 import HomeHeader from './components/HomeHeader/HomeHeader';
+import Shrimp from './components/Shrimp/Shrimp';
 
 const useStyles = makeStyles(styles);
 
@@ -37,6 +38,7 @@ const Home = () => {
   return (
     <div className={classes.homeContainer}>
       <HomeHeader />
+      <Shrimp />
       <div className={classes.backgroundWrapper}>
         <Grid container className={classes.filters}>
           <Grid item className={classes.filterContainerLeft}>

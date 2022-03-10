@@ -495,5 +495,8 @@
         "Withdrawing your {{token}} will stop you earning interest on your {{token}}. This will make you ineligible for the next prize draw. You will need to manually deposit to be eligible again."
       ]
     }
+  },
+  "shrimp": {
+    "content": "{{address}}... won {{won}} with {{deposited}} deposited"
   }
 }
