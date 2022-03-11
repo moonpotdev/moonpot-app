@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 import { networkByKey } from '../../config/networks';
 import { WalletRequired } from '../WalletRequired/WalletRequired';
 import { selectWalletAddress } from '../../features/wallet/selectors';
+import { approval, deposit, zapIn } from '../../features/wallet/actions';
 
 const useStyles = makeStyles(styles);
 
@@ -238,8 +239,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
           steps.push({
             step: 'approve',
             message: 'Approval transactions happen once per pot.',
-            action: () =>
-              dispatch(reduxActions.wallet.approval(pot.network, swapInToken.address, zapAddress)),
+            action: () => dispatch(approval(pot.network, swapInToken.address, zapAddress)),
             pending: false,
           });
         }
@@ -249,9 +249,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
           step: 'deposit',
           message: 'Confirm deposit transaction on wallet to complete.',
           action: () =>
-            dispatch(
-              reduxActions.wallet.zapIn(pot.network, pot.contractAddress, zapEstimate, isDepositAll)
-            ),
+            dispatch(zapIn(pot.network, pot.contractAddress, zapEstimate, isDepositAll)),
           pending: false,
         });
       } else {
@@ -259,10 +257,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
           steps.push({
             step: 'approve',
             message: 'Approval transactions happen once per pot.',
-            action: () =>
-              dispatch(
-                reduxActions.wallet.approval(pot.network, pot.tokenAddress, pot.contractAddress)
-              ),
+            action: () => dispatch(approval(pot.network, pot.tokenAddress, pot.contractAddress)),
             pending: false,
           });
         }
@@ -272,7 +267,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
           message: 'Confirm deposit transaction on wallet to complete.',
           action: () =>
             dispatch(
-              reduxActions.wallet.deposit(
+              deposit(
                 pot.network,
                 pot.contractAddress,
                 convertAmountToRawNumber(depositAmount, pot.tokenDecimals),

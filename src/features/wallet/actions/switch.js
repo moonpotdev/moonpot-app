@@ -1,6 +1,6 @@
-import { networkIdToKey, networkSetup } from '../../config/networks';
+import { networkIdToKey, networkSetup } from '../../../config/networks';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { selectWalletProvider, selectWalletWeb3 } from './selectors';
+import { selectWalletProvider, selectWalletWeb3 } from '../selectors';
 import { getNetworkId } from './connect';
 
 export const walletSwitch = createAsyncThunk(

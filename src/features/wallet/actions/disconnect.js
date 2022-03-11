@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getModal } from './modal';
-import { selectWalletNetwork, selectWalletProvider } from './selectors';
-import { BALANCE_RESET, EARNED_RESET } from '../redux/constants';
+import { getModal } from '../modal';
+import { selectWalletNetwork, selectWalletProvider } from '../selectors';
+import { BALANCE_RESET, EARNED_RESET } from '../../redux/constants';
 
 function unsubscribeFromProvider(provider) {
   if (provider.off && typeof provider.off === 'function') {

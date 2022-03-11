@@ -1,0 +1,32 @@
+[
+  {
+    "symbol": "WFTM",
+    "address": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+    "type": "single",
+    "oracleId": "WFTM",
+    "decimals": 18
+  },
+  {
+    "symbol": "USDC",
+    "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
+    "type": "single",
+    "oracleId": "USDC",
+    "decimals": 6
+  },
+  {
+    "symbol": "beFTM",
+    "address": "0x7381eD41F6dE418DdE5e84B55590422a57917886",
+    "type": "single",
+    "oracleId": "beFTM",
+    "decimals": 18
+  },
+  {
+    "symbol": "moonTicketbeFTM",
+    "address": "0xF99e55719DF0b7927922A15d134a2eDf2Fc0f5FC",
+    "type": "ticket",
+    "oracleId": "beFTM",
+    "decimals": 18,
+    "underlyingToken": "beFTM",
+    "stakedMultiplier": 2
+  }
+]

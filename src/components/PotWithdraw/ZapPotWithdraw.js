@@ -4,12 +4,11 @@ import clsx from 'clsx';
 import { Link, makeStyles, MenuItem, Select } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { usePot, useSymbolOrList, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
-import reduxActions from '../../features/redux/actions';
 import { indexBy, variantClass } from '../../helpers/utils';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-import { Translate } from '../Translate/Translate';
+import { Translate } from '../Translate';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
-import { TokenIcon } from '../TokenIcon/TokenIcon';
+import { TokenIcon } from '../TokenIcon';
 import { createZapOutEstimate } from '../../features/redux/actions/zap';
 import { MigrationNotice, Stats, WithdrawSteps } from './PotWithdraw';
 import styles from './styles';
@@ -17,6 +16,7 @@ import { formatDecimals } from '../../helpers/format';
 import { networkByKey } from '../../config/networks';
 import { WalletRequired } from '../WalletRequired/WalletRequired';
 import { selectWalletAddress } from '../../features/wallet/selectors';
+import { approval, withdraw, zapOut } from '../../features/wallet/actions';
 
 const useStyles = makeStyles(styles);
 
@@ -240,8 +240,7 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
           steps.push({
             step: 'approve',
             message: 'Approval transactions happen once per pot.',
-            action: () =>
-              dispatch(reduxActions.wallet.approval(pot.network, pot.rewardAddress, pairToken.zap)),
+            action: () => dispatch(approval(pot.network, pot.rewardAddress, pairToken.zap)),
             pending: false,
           });
         }
@@ -251,8 +250,7 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
           steps.push({
             step: 'approve',
             message: 'Approval transactions happen once per pot.',
-            action: () =>
-              dispatch(reduxActions.wallet.approval(pot.network, pot.tokenAddress, pairToken.zap)),
+            action: () => dispatch(approval(pot.network, pot.tokenAddress, pairToken.zap)),
             pending: false,
           });
         }
@@ -260,8 +258,7 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
         steps.push({
           step: 'withdraw',
           message: 'Confirm withdraw transaction on wallet to complete.',
-          action: () =>
-            dispatch(reduxActions.wallet.zapOut(pot.network, pot.contractAddress, zapEstimate)),
+          action: () => dispatch(zapOut(pot.network, pot.contractAddress, zapEstimate)),
           pending: false,
         });
       } else {
@@ -269,8 +266,7 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
           steps.push({
             step: 'approve',
             message: 'Approval transactions happen once per pot',
-            action: () =>
-              dispatch(reduxActions.wallet.approval(pot.network, pot.rewardAddress, potAddress)),
+            action: () => dispatch(approval(pot.network, pot.rewardAddress, potAddress)),
             pending: false,
           });
         }
@@ -278,7 +274,7 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
         steps.push({
           step: 'withdraw',
           message: 'Confirm withdraw transaction on wallet to complete.',
-          action: () => dispatch(reduxActions.wallet.withdraw(pot.network, potAddress, 0, true)),
+          action: () => dispatch(withdraw(pot.network, potAddress, 0, true)),
           pending: false,
         });
       }

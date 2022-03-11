@@ -6,11 +6,10 @@ import { useWalletConnected } from '../../features/wallet/hooks';
 import { Translate } from '../Translate';
 import { makeStyles } from '@material-ui/core';
 import styles from './styles';
-import { walletConnect } from '../../features/wallet/connect';
+import { walletConnect, walletSwitch } from '../../features/wallet/actions';
 import Loader from '../loader';
 import clsx from 'clsx';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
-import { walletSwitch } from '../../features/wallet/switch';
 import { walletNetworkSelectOpen } from '../../features/wallet/slice';
 
 const useStyles = makeStyles(styles);

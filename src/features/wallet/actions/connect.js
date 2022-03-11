@@ -1,10 +1,10 @@
-import { networkIdToKey } from '../../config/networks';
-import { getModal } from './modal';
-import { Web3 } from '../../helpers/web3';
+import { networkIdToKey } from '../../../config/networks';
+import { getModal } from '../modal';
+import { Web3 } from '../../../helpers/web3';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { walletDisconnect } from './disconnect';
 import { walletAccountsChanged } from './accountsChanged';
-import { BALANCE_RESET, EARNED_RESET } from '../redux/constants';
+import { BALANCE_RESET, EARNED_RESET } from '../../redux/constants';
 import { walletChainChanged } from './chainChanged';
 
 function createEventHandler(handler) {

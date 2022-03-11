@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../../loader';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
-import { walletDisconnect } from '../../../../features/wallet/disconnect';
+import { walletDisconnect } from '../../../../features/wallet/actions';
 import { networkByKey } from '../../../../config/networks';
 import {
   selectWalletAddress,

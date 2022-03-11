@@ -32,6 +32,9 @@ const styles = theme => ({
   networkPolygon: {
     backgroundColor: '#8247e4',
   },
+  networkFantom: {
+    backgroundColor: '#07a4fe',
+  },
   title: {
     color: '#EBF3F9',
     fontSize: '15px',

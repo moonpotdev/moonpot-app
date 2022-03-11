@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { walletAccountsChanged } from './accountsChanged';
-import { walletConnect } from './connect';
-import { walletDisconnect } from './disconnect';
+import { walletAccountsChanged } from './actions/accountsChanged';
+import { walletConnect } from './actions/connect';
+import { walletDisconnect } from './actions/disconnect';
 import { networks } from '../../config/networks';
 import { Web3 } from '../../helpers/web3';
-import { walletChainChanged } from './chainChanged';
+import { walletChainChanged } from './actions/chainChanged';
 import { WALLET_ACTION, WALLET_ACTION_RESET } from '../redux/constants';
-import { walletSwitch } from './switch';
+import { walletSwitch } from './actions/switch';
 
 function initialRpc() {
   return Object.fromEntries(

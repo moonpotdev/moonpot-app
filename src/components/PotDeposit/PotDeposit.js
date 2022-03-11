@@ -18,6 +18,7 @@ import { Translate } from '../Translate';
 import BigNumber from 'bignumber.js';
 import { WalletRequired } from '../WalletRequired/WalletRequired';
 import { selectWalletAddress } from '../../features/wallet/selectors';
+import { approval, deposit } from '../../features/wallet/actions';
 
 const useStyles = makeStyles(styles);
 
@@ -119,10 +120,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
         steps.push({
           step: 'approve',
           message: 'Approval transactions happen once per pot.',
-          action: () =>
-            dispatch(
-              reduxActions.wallet.approval(pot.network, pot.tokenAddress, pot.contractAddress)
-            ),
+          action: () => dispatch(approval(pot.network, pot.tokenAddress, pot.contractAddress)),
           pending: false,
         });
       }
@@ -132,7 +130,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
         message: 'Confirm deposit transaction on wallet to complete.',
         action: () =>
           dispatch(
-            reduxActions.wallet.deposit(
+            deposit(
               pot.network,
               pot.contractAddress,
               convertAmountToRawNumber(depositAmount, pot.tokenDecimals),

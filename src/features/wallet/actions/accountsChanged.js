@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { BALANCE_RESET, EARNED_RESET } from '../redux/constants';
+import { BALANCE_RESET, EARNED_RESET } from '../../redux/constants';
 import { walletDisconnect } from './disconnect';
 
 export const walletAccountsChanged = createAsyncThunk(

@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { Alert, AlertText } from '../../../../../components/Alert';
 import { InfoOutlined } from '@material-ui/icons';
 import { WalletRequired } from '../../../../../components/WalletRequired/WalletRequired';
+import { approval, deposit, withdraw } from '../../../../wallet/actions';
 
 const useStyles = makeStyles(styles);
 
@@ -74,10 +75,7 @@ export const PotMigrate = function ({ item }) {
         steps.push({
           step: 'approve',
           message: 'Approval transactions happen once per pot.',
-          action: () =>
-            dispatch(
-              reduxActions.wallet.approval(item.network, item.rewardAddress, item.contractAddress)
-            ),
+          action: () => dispatch(approval(item.network, item.rewardAddress, item.contractAddress)),
           pending: false,
         });
       }
@@ -85,8 +83,7 @@ export const PotMigrate = function ({ item }) {
       steps.push({
         step: 'withdraw',
         message: 'Confirm withdraw transaction on wallet to complete.',
-        action: () =>
-          dispatch(reduxActions.wallet.withdraw(item.network, item.contractAddress, 0, true)),
+        action: () => dispatch(withdraw(item.network, item.contractAddress, 0, true)),
         pending: false,
       });
 
@@ -95,13 +92,7 @@ export const PotMigrate = function ({ item }) {
           step: 'approve',
           message: 'Approval transactions happen once per pot.',
           action: () =>
-            dispatch(
-              reduxActions.wallet.approval(
-                item.network,
-                item.tokenAddress,
-                item.migrationContractAddress
-              )
-            ),
+            dispatch(approval(item.network, item.tokenAddress, item.migrationContractAddress)),
           pending: false,
         });
       }
@@ -111,7 +102,7 @@ export const PotMigrate = function ({ item }) {
         message: 'Confirm deposit transaction on wallet to complete.',
         action: () =>
           dispatch(
-            reduxActions.wallet.deposit(
+            deposit(
               item.network,
               item.migrationContractAddress,
               convertAmountToRawNumber(userTotalBalance, item.tokenDecimals),

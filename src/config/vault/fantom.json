@@ -1,0 +1,38 @@
+[
+  {
+    "id": "beFTM",
+    "name": "beFTM",
+    "token": "beFTM",
+    "tokenAddress": "0x7381eD41F6dE418DdE5e84B55590422a57917886",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketbeFTM",
+    "rewardAddress": "0xF99e55719DF0b7927922A15d134a2eDf2Fc0f5FC",
+    "contractAddress": "0x69bEc7bE308405F52EEC020E3E6eC311Da189a1d",
+    "prizePoolAddress": "0xF1B93b7E4f1120453C6E0F8C91539D118DB5c779",
+    "prizeStrategyAddress": "0x0608d8f384D2137B8F5B720cB8685efB7f9378E5",
+    "oracleId": "beFTM",
+    "apyId": "beefy-beFTM",
+    "vaultType": "main",
+    "categories": ["main"],
+    "type": "single",
+    "duration": 14,
+    "fairplayDuration": 10,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 5,
+      "ziggyPrize": 3,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "isZap": false,
+    "depositFee": 0,
+    "withdrawFee": 0.0001,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x185647c55633A5706aAA3278132537565c925078",
+    "sponsors": [],
+    "bonuses": []
+  }
+]

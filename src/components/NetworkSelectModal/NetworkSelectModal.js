@@ -2,7 +2,7 @@ import React, { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectWalletNetworkSelectOpen } from '../../features/wallet/selectors';
 import { walletNetworkSelectClose } from '../../features/wallet/slice';
-import { walletConnect } from '../../features/wallet/connect';
+import { walletConnect } from '../../features/wallet/actions';
 import { networkByKey, networkKeys } from '../../config/networks';
 import { StyledDialog, StyledDialogContent, StyledDialogTitle } from '../StyledDialog/StyledDialog';
 import { makeStyles } from '@material-ui/core';

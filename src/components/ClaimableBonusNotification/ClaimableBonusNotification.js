@@ -13,6 +13,7 @@ import Pots from '../../images/tokens/pots.svg';
 import reduxActions from '../../features/redux/actions';
 import Steps, { StepsProgress } from '../../features/vault/components/Steps';
 import { selectWalletAddress, selectWalletNetwork } from '../../features/wallet/selectors';
+import { claimAllBonuses } from '../../features/wallet/actions';
 
 const useStyles = makeStyles(styles);
 
@@ -86,7 +87,7 @@ export const ClaimableBonusNotification = memo(function ClaimableBonusNotificati
         {
           step: 'claimAll',
           message: 'Confirm claim all transaction on wallet to complete.',
-          action: () => dispatch(reduxActions.wallet.claimAllBonuses(haveOthers)),
+          action: () => dispatch(claimAllBonuses(haveOthers)),
           pending: false,
         },
       ],

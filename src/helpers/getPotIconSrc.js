@@ -1,4 +1,4 @@
-const potIconRequire = require.context('../images/vault', true, /\.svg$/);
+const potIconRequire = require.context('../images/pots', true, /\.svg$/);
 const potIcons = Object.fromEntries(
   potIconRequire.keys().map(path => [path.substring(2, path.lastIndexOf('.')), path])
 );

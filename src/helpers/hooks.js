@@ -5,7 +5,7 @@ import { byDecimals, formatDecimals } from './format';
 import { tokensByNetworkAddress } from '../config/tokens';
 import { useTranslation } from 'react-i18next';
 import { ZERO } from './utils';
-import { walletAccountsChanged } from '../features/wallet/accountsChanged';
+import { walletAccountsChanged } from '../features/wallet/actions';
 import { selectWalletAddress } from '../features/wallet/selectors';
 
 export function usePrevious(value) {

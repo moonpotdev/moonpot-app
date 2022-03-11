@@ -22,6 +22,7 @@ import { InfoOutlined } from '@material-ui/icons';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
 import { WalletRequired } from '../WalletRequired/WalletRequired';
 import { selectWalletAddress } from '../../features/wallet/selectors';
+import { approval, withdraw } from '../../features/wallet/actions';
 
 const useStyles = makeStyles(styles);
 
@@ -257,10 +258,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
         steps.push({
           step: 'approve',
           message: 'Approval transactions happen once per pot.',
-          action: () =>
-            dispatch(
-              reduxActions.wallet.approval(pot.network, pot.rewardAddress, pot.contractAddress)
-            ),
+          action: () => dispatch(approval(pot.network, pot.rewardAddress, pot.contractAddress)),
           pending: false,
         });
       }
@@ -270,10 +268,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
         steps.push({
           step: 'approve',
           message: 'Approval transactions happen once per pot.',
-          action: () =>
-            dispatch(
-              reduxActions.wallet.approval(pot.network, pot.mooTokenAddress, pot.contractAddress)
-            ),
+          action: () => dispatch(approval(pot.network, pot.mooTokenAddress, pot.contractAddress)),
           pending: false,
         });
       }
@@ -285,8 +280,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
       steps.push({
         step: 'withdraw',
         message: 'Confirm withdraw transaction on wallet to complete.',
-        action: () =>
-          dispatch(reduxActions.wallet.withdraw(pot.network, pot.contractAddress, amount, isMax)),
+        action: () => dispatch(withdraw(pot.network, pot.contractAddress, amount, isMax)),
         pending: false,
       });
 

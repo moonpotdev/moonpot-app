@@ -6,12 +6,13 @@ import { useTranslation } from 'react-i18next';
 import reduxActions from '../../../../redux/actions';
 import { formatDecimals } from '../../../../../helpers/format';
 import Steps from '../../../../vault/components/Steps/Steps';
-import { isEmpty } from '../../../../../helpers/utils';
+import { compound, isEmpty } from '../../../../../helpers/utils';
 import { useBonusesEarned } from '../../../../../helpers/hooks';
 import { SecondaryButton } from '../../../../../components/Buttons/SecondaryButton';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
 import clsx from 'clsx';
 import { WalletRequired } from '../../../../../components/WalletRequired/WalletRequired';
+import { approval, getReward } from '../../../../wallet/actions';
 
 const useStyles = makeStyles(styles);
 
@@ -83,7 +84,7 @@ const PotBonus = function ({ pot, buttonVariant = 'purple' }) {
       steps.push({
         step: 'reward',
         message: 'Confirm withdraw transaction on wallet to complete.',
-        action: () => dispatch(reduxActions.wallet.getReward(item.network, item.contractAddress)),
+        action: () => dispatch(getReward(item.network, item.contractAddress)),
         pending: false,
       });
 
@@ -101,10 +102,7 @@ const PotBonus = function ({ pot, buttonVariant = 'purple' }) {
         steps.push({
           step: 'approve',
           message: 'Approval transaction happens once per pot.',
-          action: () =>
-            dispatch(
-              reduxActions.wallet.approval(item.network, item.tokenAddress, item.contractAddress)
-            ),
+          action: () => dispatch(approval(item.network, item.tokenAddress, item.contractAddress)),
           pending: false,
         });
       }
@@ -112,7 +110,7 @@ const PotBonus = function ({ pot, buttonVariant = 'purple' }) {
       steps.push({
         step: 'compound',
         message: 'Confirm compound transaction on wallet to complete.',
-        action: () => dispatch(reduxActions.wallet.compound(item.network, item.contractAddress)),
+        action: () => dispatch(compound(item.network, item.contractAddress)),
         pending: false,
       });
 
