@@ -1,14 +1,86 @@
-import { Container, Grid, Link, makeStyles, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import * as React from 'react';
-import styles from './styles';
-import StatButton from './components/StatButton';
+import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useTotalPrizeValue } from '../../features/winners/apollo/total';
+import { ReactComponent as IconGithub } from '../../images/socials/github.svg';
+import { ReactComponent as IconTelegram } from '../../images/socials/telegram.svg';
+import { ReactComponent as IconDiscord } from '../../images/socials/discord.svg';
+import { ReactComponent as IconTwitter } from '../../images/socials/twitter.svg';
+import { ReactComponent as IconYoutube } from '../../images/socials/youtube.svg';
+import { ReactComponent as IconFacebook } from '../../images/socials/facebook.svg';
+import styles from './styles';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
-const Footer = ({ variant }) => {
+const navLinks = [
+  {
+    title: 'header.docs',
+    path: 'https://docs.moonpot.com/',
+  },
+  {
+    title: 'header.articles',
+    path: 'https://www.moonpot.com/alpha',
+  },
+  {
+    title: 'header.vote',
+    path: 'https://vote.moonpot.com/',
+  },
+  {
+    title: 'header.audit',
+    path: 'https://www.certik.com/projects/moonpot',
+  },
+];
+
+const socialLinks = [
+  {
+    title: 'GitHub',
+    path: 'https://github.com/moonpotdev',
+    Icon: IconGithub,
+  },
+  {
+    title: 'Telegram',
+    path: 'https://t.me/moonpotdotcom',
+    Icon: IconTelegram,
+  },
+  {
+    title: 'Discord',
+    path: 'https://discord.gg/8YquFwfw3N',
+    Icon: IconDiscord,
+  },
+  {
+    title: 'YouTube',
+    path: 'https://www.youtube.com/channel/UCCwZh5FBKusmzmT5Q3Yisdg',
+    Icon: IconYoutube,
+  },
+  {
+    title: 'Twitter',
+    path: 'https://twitter.com/moonpotdotcom',
+    Icon: IconTwitter,
+  },
+  {
+    title: 'Facebook',
+    path: 'https://www.facebook.com/Moonpot-111024264744176/',
+    Icon: IconFacebook,
+  },
+];
+
+// This wraps the top half of the page so that on short pages, the footer is pushed to the bottom
+export const WrappedFooter = memo(function WrappedFooter({ children }) {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.wrapper}>
+      <div className={classes.wrapperTop}>{children}</div>
+      <Footer />
+    </div>
+  );
+});
+
+// Stats are more likely to need a re-render
+const FooterStats = memo(function FooterStats() {
   const { t } = useTranslation();
   const classes = useStyles();
 
@@ -36,86 +108,60 @@ const Footer = ({ variant }) => {
     maximumFractionDigits: 0,
   });
 
-  return (
-    <>
-      <Container maxWidth="xl" className={variant === 'light' ? classes.light : ''}>
-        <Grid container spacing={2} className={classes.footer}>
-          <Grid item xs={12} className={classes.footerLinks}>
-            <Link href={'https://docs.moonpot.com/'} target="_blank" rel="noopener">
-              <Typography className={classes.textButton}>{t('header.docs')}</Typography>
-            </Link>
-            <Link href={'https://moonpot.com/alpha'} target="_blank" rel="noopener">
-              <Typography className={classes.textButton}>{t('header.articles')}</Typography>
-            </Link>
-            <Link href={'https://vote.moonpot.com/#/'} target="_blank" rel="noopener">
-              <Typography className={classes.textButton}>{t('header.vote')}</Typography>
-            </Link>
-            <Link href={'https://www.certik.com/projects/moonpot'} target="_blank" rel="noopener">
-              <Typography className={classes.textButton}>{t('header.audit')}</Typography>
-            </Link>
-          </Grid>
-          <Grid item xs={12} className={classes.footerStats}>
-            <StatButton label={t('footer.cadets')} value={cadetsFormatted} />
-            <StatButton label={t('footer.prizes')} value={'$' + totalFormatted} />
-            <StatButton label={t('footer.tvl')} value={'$' + tvl} />
-            <StatButton label={t('footer.buybacks')} value={'$' + buybacksInUsd} />
-          </Grid>
-          <Grid className={classes.footerIcons} item xs={12}>
-            <Link href={'https://github.com/moonpotdev'} target="_blank" rel="noopener">
-              <img
-                alt="Github"
-                src={require('../../images/footer/github.svg').default}
-                className={classes.footerImage}
-              />
-            </Link>
-            <Link href={'https://t.me/moonpotdotcom'} target="_blank" rel="noopener">
-              <img
-                alt="Telegram"
-                src={require('../../images/footer/telegram.svg').default}
-                className={classes.footerImage}
-              />
-            </Link>
-            <Link href={'https://discord.gg/8YquFwfw3N'} target="_blank" rel="noopener">
-              <img
-                alt="Discord"
-                src={require('../../images/footer/discord.svg').default}
-                className={classes.footerImage}
-              />
-            </Link>
-            <Link
-              href={'https://www.youtube.com/channel/UCCwZh5FBKusmzmT5Q3Yisdg'}
-              target="_blank"
-              rel="noopener"
-            >
-              <img
-                alt="Youtube"
-                src={require('../../images/footer/youtube.svg').default}
-                className={classes.footerImage}
-              />
-            </Link>
-            <Link href={'https://twitter.com/moonpotdotcom'} target="_blank" rel="noopener">
-              <img
-                alt="Twitter"
-                src={require('../../images/footer/twitter.svg').default}
-                className={classes.footerImage}
-              />
-            </Link>
-            <Link
-              href={'https://www.facebook.com/Moonpot-111024264744176/'}
-              target="_blank"
-              rel="noopener"
-            >
-              <img
-                alt="Facebook"
-                src={require('../../images/footer/facebook.svg').default}
-                className={classes.footerImage}
-              />
-            </Link>
-          </Grid>
-        </Grid>
-      </Container>
-    </>
-  );
-};
+  const stats = useMemo(() => {
+    return [
+      { label: t('footer.cadets'), value: cadetsFormatted },
+      { label: t('footer.prizes'), value: '$' + totalFormatted },
+      { label: t('footer.tvl'), value: '$' + tvl },
+      { label: t('footer.buybacks'), value: '$' + buybacksInUsd },
+    ];
+  }, [t, cadetsFormatted, totalFormatted, tvl, buybacksInUsd]);
 
-export default Footer;
+  return (
+    <ul className={clsx(classes.stats)}>
+      {stats.map(({ label, value }) => (
+        <li key={label} className={classes.statsItem}>
+          <div className={classes.stat}>
+            <div className={classes.statLabel}>{label}</div>
+            <div className={classes.statValue}>{value}</div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+});
+
+const Footer = memo(function Footer() {
+  const { t } = useTranslation();
+  const classes = useStyles();
+
+  return (
+    <div className={classes.footer}>
+      <ul className={classes.nav}>
+        {navLinks.map(({ title, path }) => (
+          <li key={path} className={classes.navItem}>
+            <a href={path} target="_blank" rel="noopener" className={classes.navLink}>
+              {t(title)}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <FooterStats />
+      <ul className={clsx(classes.nav, classes.socials)}>
+        {socialLinks.map(({ title, path, Icon }) => (
+          <li key={path} className={classes.navItem}>
+            <a
+              href={path}
+              target="_blank"
+              rel="noopener"
+              className={clsx(classes.navLink, classes.navLinkIcon)}
+              title={t(title)}
+            >
+              <Icon />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+});

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Container, Grid, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import styles from './styles';
 import SectionSelect from './components/SectionSelect/SectionSelect';
 import Moonpots from './Moonpots/Moonpots';
@@ -29,7 +29,7 @@ const Home = () => {
   const { top, bottom } = useSelectedParams();
 
   return (
-    <Container maxWidth={false} style={{ padding: '0', overflow: 'hidden' }}>
+    <div className={classes.homeContainer}>
       <HomeHeader />
       <div className={classes.backgroundWrapper}>
         <Grid container className={classes.filters}>
@@ -42,7 +42,7 @@ const Home = () => {
         </Grid>
         {top === 'moonpots' ? <Moonpots /> : <MyPots />}
       </div>
-    </Container>
+    </div>
   );
 };
 

@@ -5,7 +5,7 @@ import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import { RouteLoading } from './components/RouteLoading';
 import { PageNotFound } from './PageNotFound';
 import { Header } from './components/Header';
-import Footer from './components/footer';
+import { WrappedFooter } from './components/Footer';
 import { useLocation } from 'react-router';
 import { useImpersonate } from './helpers/hooks';
 import { GoogleAnalytics } from './googleAnalytics';
@@ -33,31 +33,24 @@ function Pages() {
           ]}
         >
           <Home />
-          <Footer variant="light" />
         </Route>
         <Route strict sensitive exact path="/pot/:id">
           <Vault />
-          <Footer variant="dark" />
         </Route>
         <Route strict sensitive exact path="/winners">
           <Winners />
-          <Footer variant="dark" />
         </Route>
         <Route strict sensitive exact path="/ido">
           <Dao />
-          <Footer variant="dark" />
         </Route>
         <Route strict sensitive exact path="/promos">
           <Promos />
-          <Footer variant="dark" />
         </Route>
         <Route strict sensitive exact path="/promo/:name">
           <Promo />
-          <Footer variant="dark" />
         </Route>
         <Route>
           <PageNotFound />
-          <Footer variant="dark" />
         </Route>
       </Switch>
     </Suspense>
@@ -87,8 +80,10 @@ export default function App() {
       <HashRouter>
         <ScrollToTop />
         <GoogleAnalytics />
-        <Header />
-        <Pages />
+        <WrappedFooter>
+          <Header />
+          <Pages />
+        </WrappedFooter>
       </HashRouter>
       <NetworkSelectModal />
     </ThemeProvider>
