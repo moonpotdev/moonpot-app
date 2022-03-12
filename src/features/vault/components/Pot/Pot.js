@@ -8,7 +8,7 @@ import { PotDeposit } from '../../../../components/PotDeposit';
 import { PotWithdraw } from '../../../../components/PotWithdraw';
 import { useBonusesEarned, usePot, useTokenBalance } from '../../../../helpers/hooks';
 import { Translate } from '../../../../components/Translate';
-import PotBonus from '../../../home/MyPots/components/Pot/PotBonus';
+import PotBonus from '../../../pots/MyPots/components/Pot/PotBonus';
 import { useSelector } from 'react-redux';
 import { ZapPotWithdraw } from '../../../../components/PotWithdraw/ZapPotWithdraw';
 import { TooltipWithIcon } from '../../../../components/Tooltip/tooltip';

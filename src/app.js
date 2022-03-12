@@ -15,6 +15,7 @@ import { NetworkSelectModal } from './components/NetworkSelectModal/NetworkSelec
 require('dotenv').config();
 
 const Home = React.lazy(() => import(`./features/home`));
+const Pots = React.lazy(() => import(`./features/pots`));
 const Vault = React.lazy(() => import(`./features/vault`));
 const Winners = React.lazy(() => import(`./features/winners`));
 const Dao = React.lazy(() => import(`./features/dao`));
@@ -25,14 +26,17 @@ function Pages() {
   return (
     <Suspense fallback={<RouteLoading />}>
       <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
         <Route
           exact
           path={[
-            '/:bottom(featured|all|xmas|main|lp|stable|community|side|nft)?',
+            '/:top(moonpots)/:bottom(featured|all|xmas|main|lp|stable|community|side|nft)?',
             '/:top(my-moonpots)',
           ]}
         >
-          <Home />
+          <Pots />
         </Route>
         <Route strict sensitive exact path="/pot/:id">
           <Vault />

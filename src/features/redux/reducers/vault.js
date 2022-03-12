@@ -20,6 +20,7 @@ const initialPools = () => {
       pool['totalApy'] = 0;
       pool['tvl'] = 0;
       pool['tokenPrice'] = 0;
+      pool['expiresAt'] = 0;
       pool['fairplayFee'] =
         pool.fairplayTicketFee /
         (tokensByNetworkAddress[pool.network][pool.rewardAddress.toLowerCase()].stakedMultiplier ||

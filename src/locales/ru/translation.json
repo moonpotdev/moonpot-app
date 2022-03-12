@@ -23,15 +23,6 @@
     "default": "По умолчанию",
     "featured": "Избранные"
   },
-  "modals": {
-    "unsupportedNetworkDetected": "Обнаружена неподдерживаемая сеть",
-    "switchToBSCNetwork": "Пожалуйста, переключитесь на сеть BSC",
-    "switchToBSC": "Переключиться на BSC",
-    "cancel": "Отменить",
-    "unableToAutoSwitch": "Ошибка при автопереключении сети",
-    "manuallySetNetwork": "Пожалуйста, переключитесь на BSC вручную",
-    "close": "Закрыть"
-  },
   "header": {
     "moonpots": "Moonpots",
     "myPots": "Мои пулы",

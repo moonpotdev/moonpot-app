@@ -23,15 +23,6 @@
     "default": "Default",
     "featured": "Featured"
   },
-  "modals": {
-    "unsupportedNetworkDetected": "Jaringan terdeteksi tidak didukung ",
-    "switchToBSCNetwork": "Silahkan beralih ke jaringan BSC",
-    "switchToBSC": "Beralih ke BSC",
-    "cancel": "Batal",
-    "unableToAutoSwitch": "Tidak dapat mengganti jaringan secara otomatis",
-    "manuallySetNetwork": "Silahkan atur jaringan Anda secara manual ke BSC",
-    "close": "Tutup"
-  },
   "header": {
     "moonpots": "Moonpots",
     "myPots": "Pots Saya",

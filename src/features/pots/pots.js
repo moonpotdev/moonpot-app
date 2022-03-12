@@ -2,11 +2,12 @@ import React, { useMemo } from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import styles from './styles';
 import SectionSelect from './components/SectionSelect/SectionSelect';
-import Moonpots from './Moonpots/Moonpots';
-import MyPots from './MyPots/MyPots';
 import { useParams } from 'react-router';
 import Filter from './components/Filter';
 import HomeHeader from './components/HomeHeader/HomeHeader';
+
+const Moonpots = React.lazy(() => import('./Moonpots/Moonpots'));
+const MyPots = React.lazy(() => import('./MyPots/MyPots'));
 
 const useStyles = makeStyles(styles);
 
@@ -18,13 +19,13 @@ function useSelectedParams() {
   }
 
   if (!bottom) {
-    bottom = 'featured';
+    bottom = 'all';
   }
 
   return useMemo(() => ({ top, bottom }), [top, bottom]);
 }
 
-const Home = () => {
+export const Pots = () => {
   const classes = useStyles();
   const { top, bottom } = useSelectedParams();
 
@@ -45,5 +46,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;

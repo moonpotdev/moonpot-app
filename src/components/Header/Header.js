@@ -21,7 +21,7 @@ const useStyles = makeStyles(styles);
 const links = [
   {
     label: 'header.moonpots',
-    href: '/',
+    href: '/moonpots',
     match: { exact: true },
   },
   {
@@ -239,6 +239,7 @@ function NavbarPotsPrice() {
 export function Header() {
   const classes = useStyles();
   const history = useHistory();
+  const showOnTop = useRouteMatch({ path: '/', exact: true });
   const showFullNav = useMediaQuery(`(min-width:${HEADER_FULL_NAV_WIDTH}px)`);
   const showFullLogo = useMediaQuery(`(min-width: ${HEADER_FULL_LOGO_WIDTH}px)`);
 
@@ -251,7 +252,7 @@ export function Header() {
   );
 
   return (
-    <div className={classes.bar}>
+    <div className={clsx({ [classes.bar]: true, [classes.showOnTop]: showOnTop })}>
       <div className={classes.barSizer}>
         <div className={classes.barInner}>
           <div className={classes.barItem}>

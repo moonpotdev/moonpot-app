@@ -21,16 +21,9 @@
     "prize": "Prize",
     "apy": "APY",
     "default": "Default",
-    "featured": "Featured"
-  },
-  "modals": {
-    "unsupportedNetworkDetected": "Unsupported Network Detected",
-    "switchToBSCNetwork": "Please switch to BSC network",
-    "switchToBSC": "Switch to BSC",
-    "cancel": "Cancel",
-    "unableToAutoSwitch": "Unable to automatically switch chains",
-    "manuallySetNetwork": "Please manually set your network to BSC",
-    "close": "Close"
+    "featured": "Featured",
+    "exploreMoonpots": "Explore Moonpots",
+    "joinOurDiscord": "Join our Discord"
   },
   "header": {
     "moonpots": "Moonpots",
@@ -59,6 +52,51 @@
     "prizes": "PRIZES",
     "tvl": "TVL",
     "buybacks": "BUYBACKS"
+  },
+  "home": {
+    "hero": {
+      "title": "Stake Crypto, Earn Interest and Win Prizes",
+      "text": [
+        "The greatest win-win savings game this side of the galaxy, where even the smallest of stakes wins the biggest prizes."
+      ]
+    },
+    "howToPlay": {
+      "title": "How To Play",
+      "cards": {
+        "deposit": {
+          "title": "Deposit Crypto",
+          "text": [
+            "Deposit your assets across multiple blockchains into one of our win-win Moonpots powered by Beefy."
+          ]
+        },
+        "earn": {
+          "title": "Earn Interest",
+          "text": [
+            "Start earning intergalactic interest on your deposits while Beefy Finance’s investment strategies optimise your yield across multiple Blockchains."
+          ]
+        },
+        "win": {
+          "title": "Win Prizes",
+          "text": [
+            "Win Crypto, NFTs & Merch with Moonpot. Millions of dollars have been won so far and there are chances to win weekly."
+          ]
+        }
+      }
+    },
+    "featuredPots": {
+      "title": "Featured Moonpots",
+      "countdown": {
+        "days": "Days",
+        "hours": "Hours",
+        "mins": "Mins",
+        "secs": "Secs"
+      }
+    }
+  },
+  "featuredPot": {
+    "winPrizeInToken": "Win <span>{{prize}}</span> in {{token}}",
+    "winPrize": "Win <span>{{prize}}</span>",
+    "winNFTandPrizeInToken": "Win <span>{{nft}}</span> and <span>{{prize}}</span> in {{token}}"
   },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><wbr /> and a chance to win <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposits (TVL)",

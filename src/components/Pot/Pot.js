@@ -42,16 +42,7 @@ export const Logo = memo(function ({ icon, sponsorToken }) {
   for (const key of possibilities) {
     const src = getPotIconSrc(key, false);
     if (src) {
-      return (
-        <img
-          src={src}
-          alt=""
-          width="90"
-          height="90"
-          aria-hidden={true}
-          style={{ cursor: 'pointer' }}
-        />
-      );
+      return <img src={src} alt="" width="90" height="90" aria-hidden={true} />;
     }
   }
 

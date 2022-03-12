@@ -14,11 +14,6 @@ const useStyles = makeStyles(styles);
 
 const categoryOptions = [
   {
-    key: 'featured',
-    path: 'featured',
-    label: 'buttons.featured',
-  },
-  {
     key: 'all',
     path: 'all',
     label: 'buttons.allPots',
@@ -172,7 +167,7 @@ const Filter = ({ className, selected, categoryFromUrl }) => {
         }
       } else {
         history.push({
-          pathname: '/' + category,
+          pathname: '/moonpots/' + category,
           state: { tabbed: true },
         });
       }
