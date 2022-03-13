@@ -10,18 +10,22 @@ const styles = theme => ({
     outline: 'none',
     border: 'none',
     background: 'transparent',
-    lineHeight: '1',
     cursor: 'pointer',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     color: '#ffffff',
+    fontSize: '18px',
+    lineHeight: '32px',
     '& + $network': {
-      marginTop: '8px',
+      marginTop: '12px',
     },
   },
   icon: {
-    marginRight: '12px',
+    marginRight: '16px',
+    '& img': {
+      display: 'block',
+    },
   },
 });
 

@@ -24,8 +24,8 @@ const NetworkSelectIcon = memo(function NetworkSelectIcon({ network }) {
       <div className={classes.icon}>
         <img
           src={require(`../../images/networks/${network}.svg`).default}
-          width="24"
-          height="24"
+          width="32"
+          height="32"
           alt=""
         />
       </div>

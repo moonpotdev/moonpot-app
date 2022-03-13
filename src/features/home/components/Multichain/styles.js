@@ -1,6 +1,6 @@
 const styles = theme => ({
-  howToPlay: {
-    background: '#E5E5E5',
+  multichain: {
+    background: '#FFFFFF',
     textAlign: 'center',
     '&::after': {
       content: '""',
@@ -9,7 +9,7 @@ const styles = theme => ({
       height: '0',
       borderStyle: 'solid',
       borderWidth: '0 0 3vw 100vw',
-      borderColor: 'transparent transparent #D0D0E1 transparent',
+      borderColor: 'transparent transparent #E5E5E5 transparent',
     },
   },
   container: {
@@ -38,33 +38,32 @@ const styles = theme => ({
     flexBasis: '100%',
     flexShrink: '0',
     flexGrow: '1',
+    [theme.breakpoints.up('sm')]: {
+      width: '50%',
+      flexBasis: '50%',
+    },
     [theme.breakpoints.up('md')]: {
-      width: '33.3333%',
-      flexBasis: '33.3333%',
+      width: '25%',
+      flexBasis: '25%',
     },
   },
   card: {
-    padding: '24px',
+    padding: '32px',
     borderRadius: '12px',
     height: '100%',
-    background: '#5952B4',
+    background: '#EFEFF5',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  cardImage: {},
-  cardTitle: {
-    fontSize: '24px',
-    lineHeight: '21px',
-    fontWeight: '700',
-    letterSpacing: '0.6px',
-    color: '#ffffff',
-    margin: '30px 0 16px 0',
+  chain: {
+    width: '100%',
+    height: '44px',
+    maxHeight: '100%',
   },
-  cardText: {
-    fontSize: '15px',
-    lineHeight: '24px',
-    opacity: '0.75',
-    color: '#ffffff',
-    '& p:last-child': {
-      marginBottom: 0,
+  chainInactive: {
+    '& path:not(.nochange)': {
+      fill: '#C0C0D8',
     },
   },
 });

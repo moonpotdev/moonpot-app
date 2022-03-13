@@ -5,10 +5,10 @@ import styles from './styles';
 import coins from '../../../../images/ziggy/coins.png';
 import { useSelector } from 'react-redux';
 import { usePots } from '../../../../helpers/hooks';
-import HeaderCountdown from './components/HeaderCountdown';
 import { useTotalPrizeValue } from '../../../winners/apollo/total';
-import { RouteLoading } from '../../../../components/RouteLoading';
 import { ZERO } from '../../../../helpers/utils';
+import { FeaturedPotCard } from '../../../../components/FeaturedPotCard/FeaturedPotCard';
+import { FeaturedPotPlaceholderCard } from '../../../../components/FeaturedPotCard/FeaturedPotPlaceholderCard';
 
 const useStyles = makeStyles(styles);
 
@@ -24,10 +24,10 @@ const NextFeaturedPotCountdown = memo(function NextFeaturedPotCountdown() {
   }, [pots]);
 
   if (nextFeaturedPot) {
-    return <HeaderCountdown pot={nextFeaturedPot} />;
+    return <FeaturedPotCard pot={nextFeaturedPot} />;
   }
 
-  return <RouteLoading />;
+  return <FeaturedPotPlaceholderCard />;
 });
 
 const StatsCard = memo(function StatsCards() {

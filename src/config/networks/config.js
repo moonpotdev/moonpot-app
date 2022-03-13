@@ -1,7 +1,7 @@
 const networksConfig = {
   bsc: {
     key: 'bsc',
-    name: 'Binance Smart Chain',
+    name: 'BNB Chain',
     shortName: 'BSC',
     chainId: 56,
     rpc: [

@@ -60,8 +60,11 @@
         "The greatest win-win savings game this side of the galaxy, where even the smallest of stakes wins the biggest prizes."
       ]
     },
+    "multichain": {
+      "title": "Multichain Prize Pots on"
+    },
     "howToPlay": {
-      "title": "How To Play",
+      "title": "How to Play",
       "cards": {
         "deposit": {
           "title": "Deposit Crypto",
@@ -84,7 +87,7 @@
       }
     },
     "featuredPots": {
-      "title": "Featured Moonpots",
+      "title": "Featured Pots",
       "countdown": {
         "days": "Days",
         "hours": "Hours",
@@ -96,7 +99,8 @@
   "featuredPot": {
     "winPrizeInToken": "Win <span>{{prize}}</span> in {{token}}",
     "winPrize": "Win <span>{{prize}}</span>",
-    "winNFTandPrizeInToken": "Win <span>{{nft}}</span> and <span>{{prize}}</span> in {{token}}"
+    "winNFTandPrizeInToken": "Win <span>{{nft}}</span> and <span>{{prize}}</span> in {{token}}",
+    "winPrizePlaceholder": "Win <span>Prizes</span>"
   },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><wbr /> and a chance to win <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposits (TVL)",

@@ -1,12 +1,13 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 import { makeStyles } from '@material-ui/core';
-import styles from './styles';
 import { useTranslation } from 'react-i18next';
 import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
 import { SecondaryButton } from '../../../../components/Buttons/SecondaryButton';
 import { ReactComponent as IconDiscord } from '../../../../images/socials/discord.svg';
+import styles from './styles';
 
 const useStyles = makeStyles(styles);
+const Background = React.lazy(() => import(`./Background`));
 
 export const Hero = memo(function Hero() {
   const classes = useStyles();
@@ -14,6 +15,7 @@ export const Hero = memo(function Hero() {
 
   return (
     <div className={classes.hero}>
+      <Background />
       <div className={classes.foreground}>
         <div className={classes.foregroundSizer}>
           <h1 className={classes.title}>{t('home.hero.title')}</h1>

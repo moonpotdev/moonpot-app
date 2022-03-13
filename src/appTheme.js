@@ -25,7 +25,7 @@ const appTheme = () => {
       },
     },
     typography: {
-      fontFamily: `"Ubuntu", "Roboto", sans-serif`,
+      fontFamily: `"Ubuntu", sans-serif`,
     },
     overrides: {
       MuiCssBaseline: {
