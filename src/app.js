@@ -22,7 +22,7 @@ const Dao = React.lazy(() => import(`./features/dao`));
 const Promo = React.lazy(() => import(`./features/promo`));
 const Promos = React.lazy(() => import(`./features/promo/promos`));
 
-function Pages() {
+const Pages = memo(function Pages() {
   return (
     <Suspense fallback={<RouteLoading />}>
       <Switch>
@@ -32,8 +32,9 @@ function Pages() {
         <Route
           exact
           path={[
-            '/:top(moonpots)/:bottom(featured|all|xmas|main|lp|stable|community|side|nft)?',
-            '/:top(my-moonpots)',
+            '/:tab(moonpots)/:category(all|main|nft)?',
+            '/:tab(moonpots)/:network(bsc|fantom)?/:category(all|main|nft)?',
+            '/:tab(my-moonpots)',
           ]}
         >
           <Pots />
@@ -59,7 +60,7 @@ function Pages() {
       </Switch>
     </Suspense>
   );
-}
+});
 
 const ScrollToTop = memo(function () {
   const { pathname, state } = useLocation();

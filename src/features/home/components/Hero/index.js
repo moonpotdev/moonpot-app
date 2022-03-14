@@ -29,7 +29,7 @@ export const Hero = memo(function Hero() {
               {t('buttons.exploreMoonpots')}
             </PrimaryButton>
             <SecondaryButton
-              to="https://discord.gg/8YquFwfw3N"
+              href="https://discord.gg/8YquFwfw3N"
               target="_blank"
               rel="noopener"
               variant="purple"

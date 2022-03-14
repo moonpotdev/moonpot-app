@@ -1,6 +1,6 @@
 const styles = theme => ({
   howToPlay: {
-    background: '#E5E5E5',
+    background: '#ECECF8',
     textAlign: 'center',
     '&::after': {
       content: '""',
@@ -9,7 +9,7 @@ const styles = theme => ({
       height: '0',
       borderStyle: 'solid',
       borderWidth: '0 0 3vw 100vw',
-      borderColor: 'transparent transparent #D0D0E1 transparent',
+      borderColor: 'transparent transparent #CDCDE4 transparent',
     },
   },
   container: {
@@ -56,7 +56,7 @@ const styles = theme => ({
     fontWeight: '700',
     letterSpacing: '0.6px',
     color: '#ffffff',
-    margin: '30px 0 16px 0',
+    margin: '16px 0 16px 0',
   },
   cardText: {
     fontSize: '15px',

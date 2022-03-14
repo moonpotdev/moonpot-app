@@ -87,7 +87,7 @@ export const styles = () => ({
     lineHeight: '24px',
     textDecoration: 'none',
     letterSpacing: '0.6px',
-    '&:hover, &:focus, &:active, &[data-active]': {
+    '&:hover, &:focus, &:active, &[data-active=true]': {
       color: '#ffffff',
       textDecoration: 'none',
     },

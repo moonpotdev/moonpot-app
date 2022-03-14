@@ -1,33 +1,46 @@
-import React, { useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import styles from './styles';
 import SectionSelect from './components/SectionSelect/SectionSelect';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import Filter from './components/Filter';
 import HomeHeader from './components/HomeHeader/HomeHeader';
+import { useDispatch } from 'react-redux';
+import { filterSetConfig } from '../filter/slice';
 
 const Moonpots = React.lazy(() => import('./Moonpots/Moonpots'));
 const MyPots = React.lazy(() => import('./MyPots/MyPots'));
 
 const useStyles = makeStyles(styles);
 
-function useSelectedParams() {
-  let { top, bottom } = useParams();
+function useMaybeRedirect() {
+  const { push } = useHistory();
+  const dispatch = useDispatch();
+  const { tab, category, network } = useParams();
 
-  if (!top) {
-    top = 'moonpots';
-  }
+  useEffect(() => {
+    if (tab === 'moonpots' && (category || network)) {
+      const changes = {};
+      if (category) {
+        changes['category'] = category;
+      }
+      if (network) {
+        changes['network'] = network;
+      }
 
-  if (!bottom) {
-    bottom = 'all';
-  }
+      // Change filter config
+      dispatch(filterSetConfig(changes));
+      // Drop filter params from url
+      push('/moonpots');
+    }
+  }, [tab, category, network, push, dispatch]);
 
-  return useMemo(() => ({ top, bottom }), [top, bottom]);
+  return tab;
 }
 
 export const Pots = () => {
   const classes = useStyles();
-  const { top, bottom } = useSelectedParams();
+  const tab = useMaybeRedirect();
 
   return (
     <div className={classes.homeContainer}>
@@ -35,13 +48,13 @@ export const Pots = () => {
       <div className={classes.backgroundWrapper}>
         <Grid container className={classes.filters}>
           <Grid item className={classes.filterContainerLeft}>
-            <SectionSelect selected={top} />
+            <SectionSelect selected={tab} />
           </Grid>
           <Grid item className={classes.filterContainerRight}>
-            <Filter selected={top} categoryFromUrl={bottom} />
+            <Filter selected={tab} />
           </Grid>
         </Grid>
-        {top === 'moonpots' ? <Moonpots /> : <MyPots />}
+        {tab === 'moonpots' ? <Moonpots /> : <MyPots />}
       </div>
     </div>
   );

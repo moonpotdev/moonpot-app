@@ -1,6 +1,6 @@
 const styles = theme => ({
   featuredPots: {
-    background: '#D0D0E1',
+    background: '#CDCDE4',
     textAlign: 'center',
   },
   container: {

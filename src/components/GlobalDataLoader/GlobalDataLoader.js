@@ -4,7 +4,7 @@ import { load } from 'fathom-client';
 import reduxActions from '../../features/redux/actions';
 import { fetchUniqueWinners } from '../../features/winners/redux/unique';
 import { filterLoad } from '../../features/filter/load';
-import { selectFilterConfigLoaded } from '../../features/filter/select';
+import { selectFilterConfigLoaded } from '../../features/filter/selectors';
 
 function selectPricesLastUpdated(state) {
   return state.prices.lastUpdated;

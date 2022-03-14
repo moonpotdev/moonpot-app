@@ -1,5 +1,5 @@
 import { HOME_FETCH_POOLS_BEGIN, HOME_FETCH_POOLS_DONE } from '../constants';
-import BigNumber from 'bignumber.js';
+import { BigNumber } from 'bignumber.js';
 import { MultiCall } from 'eth-multicall';
 import { compound, isEmpty, ZERO } from '../../../helpers/utils';
 import { byDecimals, formatTvl } from '../../../helpers/format';

@@ -9,7 +9,7 @@ const styles = theme => ({
       height: '0',
       borderStyle: 'solid',
       borderWidth: '0 0 3vw 100vw',
-      borderColor: 'transparent transparent #E5E5E5 transparent',
+      borderColor: 'transparent transparent #ECECF8 transparent',
     },
   },
   container: {
@@ -51,7 +51,7 @@ const styles = theme => ({
     padding: '32px',
     borderRadius: '12px',
     height: '100%',
-    background: '#EFEFF5',
+    background: '#ECECF8',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -63,7 +63,7 @@ const styles = theme => ({
   },
   chainInactive: {
     '& path:not(.nochange)': {
-      fill: '#C0C0D8',
+      fill: '#C6C6EC',
     },
   },
 });

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterApply } from './apply';
-import { selectFilterConfig, selectFilterIds } from './select';
+import { selectFilterConfig, selectFilterIds } from './selectors';
 import { usePots } from '../../helpers/hooks';
 
 export function useFilteredPots() {

@@ -1,14 +1,13 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { Grid, makeStyles, MenuItem, Select, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles';
 import clsx from 'clsx';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { networkByKey, networkKeys } from '../../../../config/networks';
-import { selectFilterConfig } from '../../../filter/select';
-import { filterUpdate } from '../../../filter/update';
+import { selectFilterConfig, selectFilterMode } from '../../../filter/selectors';
+import { filterSetConfig, filterSetMode } from '../../../filter/slice';
 
 const useStyles = makeStyles(styles);
 
@@ -98,91 +97,47 @@ const Dropdown = memo(function Dropdown({ children, ...rest }) {
   );
 });
 
-const Filter = ({ className, selected, categoryFromUrl }) => {
+const Filter = ({ className, selected }) => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const history = useHistory();
   const dispatch = useDispatch();
-  const [readCategoryFromUrl, setReadCategoryFromUrl] = useState(false);
-  const { deposited, category, network, status, sort } = useSelector(selectFilterConfig);
+  const { category, network, status, sort } = useSelector(selectFilterConfig);
+  const mode = useSelector(selectFilterMode);
 
   const handleCategoryChange = useCallback(
     event => {
-      dispatch(filterUpdate({ category: event.target.value }));
+      dispatch(filterSetConfig({ category: event.target.value }));
     },
     [dispatch]
   );
 
   const handleStatusChange = useCallback(
     event => {
-      dispatch(filterUpdate({ status: event.target.value }));
+      dispatch(filterSetConfig({ status: event.target.value }));
     },
     [dispatch]
   );
 
   const handleSortChange = useCallback(
     event => {
-      dispatch(filterUpdate({ sort: event.target.value }));
+      dispatch(filterSetConfig({ sort: event.target.value }));
     },
     [dispatch]
   );
 
   const handleNetworkChange = useCallback(
     event => {
-      dispatch(filterUpdate({ network: event.target.value }));
+      dispatch(filterSetConfig({ network: event.target.value }));
     },
     [dispatch]
   );
 
-  // Keep deposited filter correct
+  // Mode for filters
   useEffect(() => {
-    const wanted = selected === 'my-moonpots';
-    if (deposited !== wanted) {
-      dispatch(filterUpdate({ deposited: wanted }));
+    if (mode !== selected) {
+      dispatch(filterSetMode(selected));
     }
-  }, [dispatch, selected, deposited]);
-
-  // Reset status to active on Moonpots
-  useEffect(() => {
-    if (selected === 'moonpots' && status !== 'active') {
-      dispatch(filterUpdate({ status: 'active' }));
-    }
-  }, [dispatch, selected, status]);
-
-  // Reset category to all on My Moonpots
-  useEffect(() => {
-    if (selected === 'my-moonpots' && category !== 'active') {
-      dispatch(filterUpdate({ category: 'all' }));
-    }
-  }, [dispatch, selected, category]);
-
-  // Set category based on url
-  useEffect(() => {
-    if (selected === 'moonpots') {
-      console.log({ categoryFromUrl, category, readCategoryFromUrl });
-      if (categoryFromUrl && !readCategoryFromUrl) {
-        setReadCategoryFromUrl(true);
-        if (category !== categoryFromUrl) {
-          dispatch(filterUpdate({ category: categoryFromUrl }));
-        }
-      } else {
-        history.push({
-          pathname: '/moonpots/' + category,
-          state: { tabbed: true },
-        });
-      }
-    } else if (readCategoryFromUrl) {
-      setReadCategoryFromUrl(false);
-    }
-  }, [
-    dispatch,
-    history,
-    selected,
-    category,
-    categoryFromUrl,
-    readCategoryFromUrl,
-    setReadCategoryFromUrl,
-  ]);
+  }, [dispatch, selected, mode]);
 
   return (
     <div className={classes.buttonsOuterContainer}>

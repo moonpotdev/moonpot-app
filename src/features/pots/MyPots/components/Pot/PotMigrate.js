@@ -176,7 +176,7 @@ export const PotMigrate = function ({ item }) {
               className={classes.eolMoveBtn}
               variant="purple"
               fullWidth={true}
-              disabled={item.userBalance.lte(0)}
+              disabled={userTotalBalance.lte(0)}
             >
               <Translate
                 i18nKey={bonusTokens ? 'migration.migrateTokenAndClaim' : 'migration.migrateToken'}

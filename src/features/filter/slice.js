@@ -3,10 +3,13 @@ import { potsAll } from '../../config/vault';
 import { filterApply } from './apply';
 import { filterLoad } from './load';
 import { FILTER_DEFAULT } from './constants';
+import { addAfterListener } from '../redux/middleware/events';
+import { filterSave } from './save';
 
 const initialState = {
   config: { ...FILTER_DEFAULT },
   configLoaded: false,
+  mode: 'moonpots',
   ids: Object.keys(potsAll),
 };
 
@@ -15,10 +18,14 @@ const filterSlice = createSlice({
   initialState,
   reducers: {
     setConfig: (state, action) => {
-      console.log('Saving config...', action.payload);
+      console.log('Setting config...', action.payload);
       for (const key in action.payload) {
         state.config[key] = action.payload[key];
       }
+    },
+    setMode: (state, action) => {
+      console.log('Setting mode...', action.payload);
+      state.mode = action.payload;
     },
   },
   extraReducers: builder => {
@@ -32,5 +39,19 @@ const filterSlice = createSlice({
   },
 });
 
+addAfterListener(filterSlice.actions.setMode.type, (_, dispatch) => {
+  console.log('applying filter after mode set');
+  dispatch(filterApply());
+});
+
+addAfterListener(filterSlice.actions.setConfig.type, (_, dispatch) => {
+  console.log('saving config after config set');
+  dispatch(filterSave());
+
+  console.log('applying filter after config set');
+  dispatch(filterApply());
+});
+
 export const filterReducer = filterSlice.reducer;
 export const filterSetConfig = filterSlice.actions.setConfig;
+export const filterSetMode = filterSlice.actions.setMode;

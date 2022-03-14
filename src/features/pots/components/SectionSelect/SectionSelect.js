@@ -16,7 +16,7 @@ const SectionSelect = ({ selected, className }) => {
       <div>
         <RoutedButton
           className={clsx(classes.button, { [classes.buttonSelected]: selected === 'moonpots' })}
-          to={{ pathname: '/moonpots/all', state: { tabbed: true } }}
+          to={{ pathname: '/moonpots', state: { tabbed: true } }}
         >
           {t('buttons.moonpots')}
         </RoutedButton>

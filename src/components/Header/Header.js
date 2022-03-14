@@ -22,7 +22,7 @@ const links = [
   {
     label: 'header.moonpots',
     href: '/moonpots',
-    match: { exact: true },
+    match: { exact: false, path: ['/moonpots', '/my-moonpots'] },
   },
   {
     label: 'header.winners',
@@ -74,7 +74,7 @@ function MenuLink({ external, href, label, match, onClick, ...rest }) {
   }
 
   return (
-    <a {...rest} {...props} onClick={handleClick} data-active={active}>
+    <a {...rest} {...props} onClick={handleClick} data-active={active !== null}>
       {t(label)}
     </a>
   );

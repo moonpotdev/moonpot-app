@@ -1,7 +1,6 @@
 export const FILTER_DEFAULT = {
-  version: 8, // Bump+1 if changes are made to force reset on end user
+  version: 9, // Bump+1 if changes are made to force reset on end user
   sort: 'default', // Must have matching entry in FILTER_NAMED_SORTS
-  deposited: false,
   category: 'all',
   network: 'all',
   status: 'active',

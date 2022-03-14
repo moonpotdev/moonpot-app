@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { selectFilterConfig } from './select';
+import { selectFilterConfig } from './selectors';
 import { FILTER_STORAGE_KEY } from './constants';
 
 export const filterSave = createAsyncThunk('filter/save', async (_, { getState }) => {

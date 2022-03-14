@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { selectFilterConfig } from './select';
+import { selectFilterConfig, selectFilterMode } from './selectors';
 import { FILTER_NAMED_SORTS } from './constants';
 
 const SORT_COMPARE_FUNCTIONS = {
@@ -11,20 +11,29 @@ const SORT_COMPARE_FUNCTIONS = {
   totalApy: compareNumber,
 };
 
-function filterIncludePot(pot, deposited, config) {
-  if (pot.status !== config.status) {
+function filterIncludePot(pot, deposited, config, mode) {
+  const isMyMoonpots = mode === 'my-moonpots';
+  const isMoonpots = !isMyMoonpots;
+
+  // Can only switch to EOL on my moonpots
+  const wantedPotStatus = isMyMoonpots ? config.status : 'active';
+  if (pot.status !== wantedPotStatus) {
     return false;
   }
 
+  // Network available in both modes
   if (config.network !== 'all' && pot.network !== config.network) {
     return false;
   }
 
-  if (config.deposited === true && deposited === false) {
+  // Force apply deposited in my moonpots mode
+  if (isMyMoonpots && deposited !== true) {
     return false;
   }
 
+  // Only apply category in moonpots mode
   if (
+    isMoonpots &&
     config.category !== 'all' &&
     config.category !== 'featured' &&
     !pot.categories.includes(config.category)
@@ -32,7 +41,7 @@ function filterIncludePot(pot, deposited, config) {
     return false;
   }
 
-  if (config.category === 'featured' && pot.featured !== true) {
+  if (isMoonpots && config.category === 'featured' && pot.featured !== true) {
     return false;
   }
 
@@ -77,11 +86,12 @@ function getDeposited(pots, balances) {
 export const filterApply = createAsyncThunk('filter/apply', async (_, { getState }) => {
   const state = getState();
   const config = selectFilterConfig(state);
+  const mode = selectFilterMode(state);
   console.log('Applying filter...', config);
   const pots = Object.values(state.vault.pools);
   const deposited = getDeposited(pots, state.balance.tokens);
 
-  const filtered = pots.filter(pot => filterIncludePot(pot, deposited[pot.id], config));
+  const filtered = pots.filter(pot => filterIncludePot(pot, deposited[pot.id], config, mode));
   const sorted = sortPots(
     filtered,
     FILTER_NAMED_SORTS[config.sort][0],

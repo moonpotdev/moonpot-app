@@ -12,6 +12,7 @@ import { Translate } from '../../../components/Translate';
 import SidePotExplainer from '../../../components/SidePotExplainer/SidePotExplainer';
 import { selectWalletAddress } from '../../wallet/selectors';
 import { useFilterConfig, useFilteredPots } from '../../filter/hooks';
+import { NoPotsCard } from './components/NoPotsCard';
 
 const useStyles = makeStyles(styles);
 
@@ -48,6 +49,7 @@ const Moonpots = () => {
             {filteredIds.map(id => (
               <Pot key={id} variant={'tealLight'} id={id} />
             ))}
+            {filteredIds.length === 0 ? <NoPotsCard /> : null}
           </Cards>
           {filterConfig.category === 'community' ? (
             <Grid item xs={12} style={{ marginTop: '32px' }}>

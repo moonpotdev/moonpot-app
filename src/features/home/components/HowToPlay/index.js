@@ -23,7 +23,7 @@ const Card = memo(function Card({ type }) {
   return (
     <div className={clsx(classes.card, variantClass(classes, 'card', type))}>
       <div>
-        <img src={typeToZiggyUrl[type]} height="120" alt="" />
+        <img src={typeToZiggyUrl[type]} width="150" height="120" alt="" />
       </div>
       <h3 className={classes.cardTitle}>{t(`home.howToPlay.cards.${type}.title`)}</h3>
       <div className={classes.cardText}>

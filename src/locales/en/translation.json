@@ -61,7 +61,7 @@
       ]
     },
     "multichain": {
-      "title": "Multichain Prize Pots on"
+      "title": "Multi-Chain Prize Pots on"
     },
     "howToPlay": {
       "title": "How to Play",
@@ -122,6 +122,11 @@
   "telegramSocialBlockButton": "Join our Telegram",
   "discordSocialBlockButton": "Join our Discord",
   "twitterSocialBlockButton": "Follow our Twitter",
+  "noPotsCard": {
+    "title": "No Pots Found",
+    "text": ["No pots match the selected filters."],
+    "reset": "Reset Filters"
+  },
   "filters": {
     "potType": "Pot Type:",
     "sortBy": "Sort by:",
