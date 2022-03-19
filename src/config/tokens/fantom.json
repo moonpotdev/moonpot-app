@@ -22,7 +22,7 @@
   },
   {
     "symbol": "moonTicketbeFTM",
-    "address": "0xC069B431a7A213B24259808eBb2b4368b8177FE2",
+    "address": "0x708d5656a2F84aA82cdbc078342b04d4887E72bb",
     "type": "ticket",
     "oracleId": "beFTM",
     "decimals": 18,
