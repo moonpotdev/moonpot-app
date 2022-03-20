@@ -33,7 +33,7 @@ const styles = theme => ({
     backgroundColor: '#8247e4',
   },
   networkFantom: {
-    backgroundColor: '#07a4fe',
+    backgroundColor: '#1969FF',
   },
   title: {
     color: '#EBF3F9',

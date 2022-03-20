@@ -34,6 +34,10 @@ const appTheme = () => {
             backgroundColor: '#303050',
             overflowX: 'hidden',
           },
+          '#WEB3_CONNECT_MODAL_ID': {
+            position: 'relative',
+            zIndex: '100',
+          },
         },
       },
       MuiGrid: {

@@ -2,13 +2,14 @@ import { WALLET_ACTION, WALLET_ACTION_RESET } from '../../redux/constants';
 import { Web3 } from '../../../helpers/web3';
 import { estimateGas } from './helpers';
 import erc20Abi from '../../../config/abi/erc20.json';
+import { getWalletWeb3 } from '../instances';
 
 export const approval = (network, tokenAddr, spendingContractAddress) => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
     const address = state.wallet.address;
-    const web3 = state.wallet.web3;
+    const web3 = getWalletWeb3();
 
     if (address && web3) {
       const contract = new web3.eth.Contract(erc20Abi, tokenAddr);

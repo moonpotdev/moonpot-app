@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { walletAccountsChanged } from './actions/accountsChanged';
-import { walletConnect } from './actions/connect';
-import { walletDisconnect } from './actions/disconnect';
+import { walletConnect } from './actions';
 import { networks } from '../../config/networks';
 import { Web3 } from '../../helpers/web3';
-import { walletChainChanged } from './actions/chainChanged';
-import { WALLET_ACTION, WALLET_ACTION_RESET } from '../redux/constants';
-import { walletSwitch } from './actions/switch';
+import {
+  BALANCE_RESET,
+  EARNED_RESET,
+  WALLET_ACTION,
+  WALLET_ACTION_RESET,
+} from '../redux/constants';
+import { addAfterListener } from '../redux/middleware/events';
 
 function initialRpc() {
   return Object.fromEntries(
@@ -24,10 +26,7 @@ function initialAction() {
 const initialState = {
   network: null,
   address: null,
-  web3: null,
-  provider: null,
   status: 'disconnected',
-  networkSelectOpen: false,
   rpc: initialRpc(),
   action: initialAction(),
 };
@@ -36,11 +35,21 @@ const walletSlice = createSlice({
   name: 'wallet',
   initialState,
   reducers: {
-    openNetworkSelect: state => {
-      state.networkSelectOpen = true;
+    connected: (state, action) => {
+      state.status = 'connected';
+      state.network = action.payload.network;
+      state.address = action.payload.address;
     },
-    closeNetworkSelect: state => {
-      state.networkSelectOpen = false;
+    disconnected: state => {
+      state.status = 'disconnected';
+      state.network = null;
+      state.address = null;
+    },
+    networkChanged: (state, action) => {
+      state.network = action.payload.network;
+    },
+    addressChanged: (state, action) => {
+      state.address = action.payload.address;
     },
   },
   extraReducers: builder => {
@@ -49,65 +58,6 @@ const walletSlice = createSlice({
         state.status = 'connecting';
         state.network = null;
         state.address = null;
-        state.web3 = null;
-        state.provider = null;
-      })
-      .addCase(walletConnect.fulfilled, (state, action) => {
-        state.status = 'connected';
-        state.network = action.payload.network;
-        state.address = action.payload.address;
-        state.web3 = action.payload.web3;
-        state.provider = action.payload.provider;
-      })
-      .addCase(walletConnect.rejected, (state, action) => {
-        state.status = 'disconnected';
-        state.network = null;
-        state.address = null;
-        state.web3 = null;
-        state.provider = null;
-      })
-      .addCase(walletSwitch.pending, (state, action) => {})
-      .addCase(walletSwitch.fulfilled, (state, action) => {
-        state.network = action.payload.network;
-        state.address = action.payload.address;
-      })
-      .addCase(walletSwitch.rejected, (state, action) => {})
-      .addCase(walletDisconnect.fulfilled, (state, action) => {
-        state.status = 'disconnected';
-        state.network = null;
-        state.address = null;
-        state.web3 = null;
-        state.provider = null;
-      })
-      .addCase(walletDisconnect.rejected, (state, action) => {
-        state.status = 'disconnected';
-        state.network = null;
-        state.address = null;
-        state.web3 = null;
-        state.provider = null;
-      })
-      .addCase(walletAccountsChanged.pending, state => {
-        state.status = 'connecting';
-      })
-      .addCase(walletAccountsChanged.fulfilled, (state, action) => {
-        state.address = action.payload.address;
-      })
-      .addCase(walletAccountsChanged.rejected, state => {
-        state.network = null;
-        state.address = null;
-        state.status = 'disconnected';
-      })
-      .addCase(walletChainChanged.pending, state => {
-        state.status = 'connecting';
-      })
-      .addCase(walletChainChanged.fulfilled, (state, action) => {
-        state.network = action.payload.network;
-        state.status = 'connected';
-      })
-      .addCase(walletChainChanged.rejected, state => {
-        state.network = null;
-        state.address = null;
-        state.status = 'disconnected';
       })
       .addCase(WALLET_ACTION, (state, action) => {
         state.action.result = action.payload.result;
@@ -120,6 +70,22 @@ const walletSlice = createSlice({
   },
 });
 
+addAfterListener(walletSlice.actions.disconnected.type, ({ dispatch }) => {
+  // Reset earned/balances on disconnect
+  console.log('after disconnect: reset earned/balances');
+  dispatch({ type: EARNED_RESET });
+  dispatch({ type: BALANCE_RESET });
+});
+
+addAfterListener(walletSlice.actions.addressChanged.type, ({ dispatch }) => {
+  // Reset earned/balances after address change
+  console.log('after address changed: reset earned/balances');
+  dispatch({ type: EARNED_RESET });
+  dispatch({ type: BALANCE_RESET });
+});
+
 export const walletReducer = walletSlice.reducer;
-export const walletNetworkSelectOpen = walletSlice.actions.openNetworkSelect;
-export const walletNetworkSelectClose = walletSlice.actions.closeNetworkSelect;
+export const walletConnected = walletSlice.actions.connected;
+export const walletDisconnected = walletSlice.actions.disconnected;
+export const walletAddressChanged = walletSlice.actions.addressChanged;
+export const walletNetworkChanged = walletSlice.actions.networkChanged;

@@ -14,6 +14,7 @@ import reduxActions from '../../features/redux/actions';
 import Steps, { StepsProgress } from '../../features/vault/components/Steps';
 import { selectWalletAddress, selectWalletNetwork } from '../../features/wallet/selectors';
 import { claimAllBonuses } from '../../features/wallet/actions';
+import { useWalletConnected } from '../../features/wallet/hooks';
 
 const useStyles = makeStyles(styles);
 
@@ -68,7 +69,7 @@ export const ClaimableBonusNotification = memo(function ClaimableBonusNotificati
   const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const network = useSelector(selectWalletNetwork);
+  const [, network] = useWalletConnected();
   const { pots, others } = useClaimableBonuses() || {};
   const haveOthers = pots && others && others.length > 0;
   const stepsItem = useMemo(

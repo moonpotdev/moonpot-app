@@ -69,19 +69,19 @@
         "deposit": {
           "title": "Deposit Crypto",
           "text": [
-            "Deposit your assets across multiple blockchains into one of our win-win Moonpots powered by Beefy."
+            "Deposit your tokens across multiple blockchains into one of our win-win Pots powered by Beefy."
           ]
         },
         "earn": {
           "title": "Earn Interest",
           "text": [
-            "Start earning intergalactic interest on your deposits while Beefy Finance’s investment strategies optimise your yield across multiple Blockchains."
+            "All deposits are combined to generate intergalactic yields and prizes for our users. Half of the earnings are returned to Moonpot users as interest, and half goes to the prize pool."
           ]
         },
         "win": {
           "title": "Win Prizes",
           "text": [
-            "Win Crypto, NFTs & Merch with Moonpot. Millions of dollars have been won so far and there are chances to win weekly."
+            "Every draw smart contracts randomly pick lucky players to share last week's generated prize pool. Millions of dollars have already been won and there are chances to win daily.."
           ]
         }
       }
@@ -122,10 +122,14 @@
   "telegramSocialBlockButton": "Join our Telegram",
   "discordSocialBlockButton": "Join our Discord",
   "twitterSocialBlockButton": "Follow our Twitter",
-  "noPotsCard": {
-    "title": "No Pots Found",
-    "text": ["No pots match the selected filters."],
+  "noPotsMatchFilter": {
+    "title": "No results found",
+    "text": ["Try changing your filters"],
     "reset": "Reset Filters"
+  },
+  "noPotsNotConnected": {
+    "title": "Oh snap!",
+    "text": ["You haven’t connected your wallet"]
   },
   "filters": {
     "potType": "Pot Type:",

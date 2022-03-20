@@ -39,12 +39,12 @@ const filterSlice = createSlice({
   },
 });
 
-addAfterListener(filterSlice.actions.setMode.type, (_, dispatch) => {
+addAfterListener(filterSlice.actions.setMode.type, ({ dispatch }) => {
   console.log('applying filter after mode set');
   dispatch(filterApply());
 });
 
-addAfterListener(filterSlice.actions.setConfig.type, (_, dispatch) => {
+addAfterListener(filterSlice.actions.setConfig.type, ({ dispatch }) => {
   console.log('saving config after config set');
   dispatch(filterSave());
 

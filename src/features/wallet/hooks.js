@@ -1,19 +1,15 @@
 import { useSelector } from 'react-redux';
-import {
-  selectWalletAddress,
-  selectWalletNetwork,
-  selectWalletStatus,
-  selectWalletWeb3,
-} from './selectors';
+import { selectWalletAddress, selectWalletNetwork, selectWalletStatus } from './selectors';
 import { useMemo } from 'react';
+import { getWalletWeb3 } from './instances';
 
 /**
  * network may be null even if wallet connected (if connect to unsupported network)
  * @returns {string[]} [address, network] if wallet connected, otherwise [null, null]
  */
 export function useWalletConnected() {
+  const web3 = getWalletWeb3();
   const status = useSelector(selectWalletStatus);
-  const web3 = useSelector(selectWalletWeb3);
   const address = useSelector(selectWalletAddress);
   const network = useSelector(selectWalletNetwork);
   return useMemo(() => {

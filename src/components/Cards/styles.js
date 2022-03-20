@@ -3,7 +3,7 @@ import backgroundSnow from '../../images/backgrounds/snow.svg';
 const styles = () => ({
   cardGrid: {
     maxWidth: '1240px',
-    margin: '0 auto',
+    margin: '-8px auto',
   },
   cardGridInner: {
     padding: '10px',

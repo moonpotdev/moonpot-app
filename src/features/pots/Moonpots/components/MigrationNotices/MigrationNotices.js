@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useTokenBalance } from '../../../../../helpers/hooks';
 import { Card, Cards, CardTitle } from '../../../../../components/Cards';
 import { PrimaryButton } from '../../../../../components/Buttons/PrimaryButton';
-import { selectWalletAddress, selectWalletNetwork } from '../../../../wallet/selectors';
+import { useWalletConnected } from '../../../../wallet/hooks';
 
 const useStyles = makeStyles(styles);
 
@@ -56,21 +56,14 @@ function MigrationNotice({ pot }) {
   return null;
 }
 
-export function MigrationNotices({ selectedCategory }) {
+export function MigrationNotices() {
   const classes = useStyles();
-  const currentNetwork = useSelector(selectWalletNetwork);
-  const currentAddress = useSelector(selectWalletAddress);
+  const [currentAddress] = useWalletConnected();
   const allPots = useSelector(state => state.vault.pools);
 
   const potsNeedingMigration = useMemo(() => {
-    return Object.values(allPots).filter(
-      pot =>
-        pot.status === 'eol' &&
-        (selectedCategory === 'all' || pot.categories.includes(selectedCategory)) &&
-        pot.network === currentNetwork &&
-        pot.migrationNeeded
-    );
-  }, [selectedCategory, allPots, currentNetwork]);
+    return Object.values(allPots).filter(pot => pot.status === 'eol' && pot.migrationNeeded);
+  }, [allPots]);
   const hasPotsNeedingMigration = potsNeedingMigration.length > 0;
 
   if (currentAddress && hasPotsNeedingMigration) {

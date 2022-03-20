@@ -1,11 +1,11 @@
-import React, { memo, useCallback, useRef } from 'react';
+import React, { memo, useCallback, useEffect, useRef } from 'react';
 import { Button, makeStyles } from '@material-ui/core';
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../../loader';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
-import { walletDisconnect } from '../../../../features/wallet/actions';
+import { walletConnect, walletDisconnect, walletInit } from '../../../../features/wallet/actions';
 import { networkByKey } from '../../../../config/networks';
 import {
   selectWalletAddress,
@@ -13,7 +13,6 @@ import {
   selectWalletStatus,
 } from '../../../../features/wallet/selectors';
 import { formatAddressShort } from '../../../../helpers/utils';
-import { walletNetworkSelectOpen } from '../../../../features/wallet/slice';
 
 const useStyles = makeStyles(styles);
 
@@ -40,7 +39,7 @@ const InnerConnected = memo(function InnerConnected({ networkKey, address }) {
   );
 });
 
-const WalletConnector = ({ onConnect, onDisconnect, className, ...rest }) => {
+const WalletConnector = memo(function WalletConnector({ className, ...rest }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const classes = useStyles();
@@ -55,13 +54,10 @@ const WalletConnector = ({ onConnect, onDisconnect, className, ...rest }) => {
   const handleButtonClick = useCallback(() => {
     if (isConnected) {
       dispatch(walletDisconnect());
-      if (onDisconnect) {
-        onDisconnect();
-      }
     } else if (isDisconnected) {
-      dispatch(walletNetworkSelectOpen());
+      dispatch(walletConnect());
     }
-  }, [dispatch, isConnected, isDisconnected, onDisconnect]);
+  }, [dispatch, isConnected, isDisconnected]);
 
   const buttonClasses = clsx(classes.wallet, className, {
     [classes.loading]: isPending,
@@ -70,15 +66,17 @@ const WalletConnector = ({ onConnect, onDisconnect, className, ...rest }) => {
     [classes.withIcon]: isConnected && network && address,
   });
 
+  useEffect(() => {
+    dispatch(walletInit());
+  }, [dispatch]);
+
   return (
-    <>
-      <Button className={buttonClasses} onClick={handleButtonClick} ref={buttonRef} {...rest}>
-        {isPending ? <Loader line={true} /> : null}
-        {isDisconnected ? t('wallet.connect') : null}
-        {isConnected ? <InnerConnected networkKey={network} address={address} /> : null}
-      </Button>
-    </>
+    <Button className={buttonClasses} onClick={handleButtonClick} ref={buttonRef} {...rest}>
+      {isPending ? <Loader line={true} /> : null}
+      {isDisconnected ? t('wallet.connect') : null}
+      {isConnected ? <InnerConnected networkKey={network} address={address} /> : null}
+    </Button>
   );
-};
+});
 
 export default WalletConnector;

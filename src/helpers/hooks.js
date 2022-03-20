@@ -5,8 +5,8 @@ import { byDecimals, formatDecimals } from './format';
 import { tokensByNetworkAddress } from '../config/tokens';
 import { useTranslation } from 'react-i18next';
 import { ZERO } from './utils';
-import { walletAccountsChanged } from '../features/wallet/actions';
 import { selectWalletAddress } from '../features/wallet/selectors';
+import { walletAddressChanged } from '../features/wallet/slice';
 
 export function usePrevious(value) {
   const ref = useRef();
@@ -191,7 +191,7 @@ export function useImpersonate() {
 
   window.impersonate = useCallback(
     address => {
-      dispatch(walletAccountsChanged({ accounts: [address] }));
+      dispatch(walletAddressChanged({ address }));
     },
     [dispatch]
   );

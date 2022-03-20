@@ -2,12 +2,14 @@ import { WALLET_ACTION, WALLET_ACTION_RESET } from '../../redux/constants';
 import { estimateGas } from './helpers';
 import potsClaimerAbi from '../../../config/abi/potsClaimer.json';
 import { networkByKey } from '../../../config/networks';
+import { getWalletWeb3 } from '../instances';
 
 export const claimAllBonuses = alsoClaimOtherTokens => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
-    const { address, network, web3 } = state.wallet;
+    const { address, network } = state.wallet;
+    const web3 = getWalletWeb3();
     const contractAddress = networkByKey[network].claimAllBonusesAddress;
 
     if (network && address && contractAddress && web3) {

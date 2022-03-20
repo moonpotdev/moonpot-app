@@ -22,7 +22,7 @@ function filterIncludePot(pot, deposited, config, mode) {
   }
 
   // Network available in both modes
-  if (config.network !== 'all' && pot.network !== config.network) {
+  if (config.networks[pot.network] !== true) {
     return false;
   }
 

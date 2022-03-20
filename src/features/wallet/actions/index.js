@@ -1,6 +1,5 @@
-export * from './accountsChanged';
+export * from './init';
 export * from './approval';
-export * from './chainChanged';
 export * from './claimAllBonuses';
 export * from './compound';
 export * from './connect';

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo, useRef } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectWalletStatus } from '../../features/wallet/selectors';
 import { networkByKey } from '../../config/networks';
@@ -10,14 +10,16 @@ import { walletConnect, walletSwitch } from '../../features/wallet/actions';
 import Loader from '../loader';
 import clsx from 'clsx';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
-import { walletNetworkSelectOpen } from '../../features/wallet/slice';
 
 const useStyles = makeStyles(styles);
 
-const WalletConnectButton = memo(function WalletConnectButton({ children }) {
-  const classes = useStyles();
+export const WalletConnectButton = memo(function WalletConnectButton({
+  children,
+  className,
+  ButtonComponent,
+  buttonProps,
+}) {
   const dispatch = useDispatch();
-  const buttonRef = useRef();
   const status = useSelector(selectWalletStatus);
   const isPending = useMemo(() => {
     return status === 'connecting';
@@ -28,46 +30,30 @@ const WalletConnectButton = memo(function WalletConnectButton({ children }) {
 
   const handleButtonClick = useCallback(() => {
     if (isDisconnected) {
-      dispatch(walletNetworkSelectOpen());
+      dispatch(walletConnect());
     }
   }, [dispatch, isDisconnected]);
 
-  const buttonClasses = clsx(classes.connectButton, {
-    [classes.connectButtonPending]: isPending,
-  });
-
   return (
-    <>
-      <SecondaryButton
-        className={buttonClasses}
-        onClick={handleButtonClick}
-        ref={buttonRef}
-        variant="purple"
-      >
-        {isPending ? <Loader line={true} /> : children}
-      </SecondaryButton>
-    </>
+    <ButtonComponent className={className} onClick={handleButtonClick} {...buttonProps}>
+      {isPending ? <Loader line={true} /> : children}
+    </ButtonComponent>
   );
 });
 
-const WalletConnectNetworkButton = memo(function WalletConnectNetworkButton({ network, children }) {
-  const dispatch = useDispatch();
+const StyledWalletConnectButton = memo(function StyledWalletConnectButton({ children }) {
   const classes = useStyles();
-  const status = useSelector(selectWalletStatus);
-  const isPending = useMemo(() => {
-    return status === 'connecting';
-  }, [status]);
-  const handleConnect = useCallback(() => {
-    dispatch(walletConnect(network));
-  }, [dispatch, network]);
-  const buttonClasses = clsx(classes.connectButton, {
-    [classes.connectButtonPending]: isPending,
-  });
 
   return (
-    <SecondaryButton onClick={handleConnect} variant="purple" className={buttonClasses}>
-      {isPending ? <Loader line={true} /> : children}
-    </SecondaryButton>
+    <WalletConnectButton
+      className={classes.connectButton}
+      ButtonComponent={SecondaryButton}
+      buttonProps={{
+        variant: 'purple',
+      }}
+    >
+      {children}
+    </WalletConnectButton>
   );
 });
 
@@ -96,14 +82,13 @@ const NotConnected = memo(function NotConnected({ target }) {
   const classes = useStyles();
   const targetNetworkName = networkByKey?.[target]?.name;
   const key = targetNetworkName ? 'wallet.connectRequiredNetwork' : 'wallet.connectRequired';
-  const ConnectButton = targetNetworkName ? WalletConnectNetworkButton : WalletConnectButton;
 
   return (
     <div className={classes.notice}>
       <Translate i18nKey={key} values={{ network: targetNetworkName }} />
-      <ConnectButton network={target}>
+      <StyledWalletConnectButton network={target}>
         <Translate i18nKey="wallet.connect" />
-      </ConnectButton>
+      </StyledWalletConnectButton>
     </div>
   );
 });

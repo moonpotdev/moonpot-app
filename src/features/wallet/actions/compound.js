@@ -1,13 +1,14 @@
 import { WALLET_ACTION, WALLET_ACTION_RESET } from '../../redux/constants';
 import { estimateGas } from './helpers';
 import ziggyManagerMultiRewardsAbi from '../../../config/abi/ziggyManagerMultiRewards.json';
+import { getWalletWeb3 } from '../instances';
 
 export const compound = (network, contractAddr) => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
     const address = state.wallet.address;
-    const web3 = state.wallet.web3;
+    const web3 = getWalletWeb3();
 
     if (address && web3) {
       const contract = new web3.eth.Contract(ziggyManagerMultiRewardsAbi, contractAddr);

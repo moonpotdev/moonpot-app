@@ -10,7 +10,6 @@ const styles = theme => ({
   connectButton: {
     margin: '16px auto 0 auto',
   },
-  connectButtonPending: {},
 });
 
 export default styles;

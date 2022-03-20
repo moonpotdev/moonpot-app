@@ -1,13 +1,14 @@
 import { WALLET_ACTION, WALLET_ACTION_RESET } from '../../redux/constants';
 import { estimateGas } from './helpers';
 import gateManagerAbi from '../../../config/abi/gatemanager.json';
+import { getWalletWeb3 } from '../instances';
 
 export const deposit = (network, contractAddr, amount, max) => {
   return async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
     const state = getState();
     const address = state.wallet.address;
-    const web3 = state.wallet.web3;
+    const web3 = getWalletWeb3();
 
     if (address && web3) {
       const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);

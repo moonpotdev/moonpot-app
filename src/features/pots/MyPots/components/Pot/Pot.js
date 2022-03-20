@@ -6,7 +6,7 @@ import EOLLayout from './PotEOLLayout';
 import { Card } from '../../../../../components/Cards';
 import { useTranslation } from 'react-i18next';
 import { PotInfoBlock, PotTitle } from './PotComponents';
-import { Logo } from '../../../../../components/Pot';
+import { Logo, PotNetwork } from '../../../../../components/Pot';
 import { useHistory } from 'react-router';
 import { usePot } from '../../../../../helpers/hooks';
 
@@ -20,6 +20,7 @@ const Pot = function ({ id }) {
 
   return (
     <Card variant={pot.status === 'active' ? 'purpleLight' : 'purpleDarkAlt'}>
+      <PotNetwork network={pot.network} />
       <Grid container spacing={0}>
         {/*Pot Image*/}
         <Grid

@@ -7,7 +7,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { networkKeys } from '../../../config/networks';
 
 const initialPools = () => {
-  const pools = [];
+  const pools = {};
 
   for (const networkKey of networkKeys) {
     const networkPools = potsByNetwork[networkKey];

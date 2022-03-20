@@ -1,20 +1,33 @@
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import Web3Modal, { connectors } from 'web3modal';
-import { networkByKey } from '../../config/networks';
+import { networks } from '../../config/networks';
+import { sample } from 'lodash';
 
-const modalOptions = {};
 let modal = null;
-let modalNetworkKey = null;
 
-function createModalOptions(network) {
+function createModalOptions() {
+  const allNetworkRpcs = Object.fromEntries(
+    networks.map(network => [network.chainId, sample(network.rpc)])
+  );
+
   const allConnectors = {
     injected: {},
-    walletconnect: {
-      package: WalletConnectProvider,
+    'custom-wallet-connect': {
+      display: {
+        logo: require('../../images/wallets/wallet-connect.svg').default,
+        name: 'Wallet Connect',
+        description: 'Scan your WalletConnect to Connect',
+      },
       options: {
-        rpc: {
-          [network.chainId]: network.rpc[~~(network.rpc.length * Math.random())],
-        },
+        rpc: allNetworkRpcs,
+      },
+      package: WalletConnectProvider,
+      connector: async (ProviderPackage, options) => {
+        const provider = new ProviderPackage(options);
+
+        await provider.enable();
+
+        return provider;
       },
     },
     'custom-binance': {
@@ -67,41 +80,15 @@ function createModalOptions(network) {
       border: '#4C4C80',
       hover: '#262640',
     },
-    network: network.providerName,
-    cacheProvider: false,
-    providerOptions: Object.fromEntries(
-      Object.entries(allConnectors).filter(([key]) => network.supportedWallets.includes(key))
-    ),
+    cacheProvider: true,
+    providerOptions: allConnectors,
   };
 }
 
-function getModalOptions(networkKey) {
-  if (!(networkKey in modalOptions)) {
-    console.log(`creating modal options for ${networkKey}`);
-    modalOptions[networkKey] = createModalOptions(networkByKey[networkKey]);
-    console.log(modalOptions[networkKey]);
+export function getModal() {
+  if (!modal) {
+    modal = new Web3Modal(createModalOptions());
   }
 
-  return modalOptions[networkKey];
-}
-
-export function getModal(networkKey) {
-  if (modalNetworkKey !== networkKey) {
-    // Clean up previous modal
-    if (modal !== null) {
-      modal = null;
-      const element = document.getElementById('WEB3_CONNECT_MODAL_ID');
-      if (element) {
-        element.remove();
-      }
-    }
-
-    // Create new modal
-    console.log(`creating modal for ${networkKey}`);
-    modalNetworkKey = networkKey;
-    modal = new Web3Modal(getModalOptions(networkKey));
-  }
-
-  console.log(`returning modal for ${networkKey}`);
   return modal;
 }

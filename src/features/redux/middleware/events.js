@@ -16,7 +16,7 @@ export function eventsMiddleware(store) {
 function invokeListeners(location, action, dispatch, state, previousSate = null) {
   if (action.type in listeners[location]) {
     for (const listener of Object.values(listeners[location][action.type])) {
-      listener(action, dispatch, state, previousSate);
+      listener({ action, dispatch, state, previousSate });
     }
   }
 }

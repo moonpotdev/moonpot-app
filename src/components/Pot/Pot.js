@@ -263,7 +263,7 @@ const DepositWithOdds = memo(function ({
   );
 });
 
-const PotNetwork = memo(function PotNetwork({ network }) {
+export const PotNetwork = memo(function PotNetwork({ network }) {
   const classes = useStyles();
 
   return (

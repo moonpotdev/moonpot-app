@@ -10,7 +10,6 @@ import { useLocation } from 'react-router';
 import { useImpersonate } from './helpers/hooks';
 import { GoogleAnalytics } from './googleAnalytics';
 import { GlobalDataLoader } from './components/GlobalDataLoader/GlobalDataLoader';
-import { NetworkSelectModal } from './components/NetworkSelectModal/NetworkSelectModal';
 
 require('dotenv').config();
 
@@ -34,7 +33,7 @@ const Pages = memo(function Pages() {
           path={[
             '/:tab(moonpots)/:category(all|main|nft)?',
             '/:tab(moonpots)/:network(bsc|fantom)?/:category(all|main|nft)?',
-            '/:tab(my-moonpots)',
+            '/:tab(my-moonpots)/:status(active|eol)?',
           ]}
         >
           <Pots />
@@ -90,7 +89,6 @@ export default function App() {
           <Pages />
         </WrappedFooter>
       </HashRouter>
-      <NetworkSelectModal />
     </ThemeProvider>
   );
 }

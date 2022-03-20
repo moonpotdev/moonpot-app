@@ -110,7 +110,7 @@ const StatsCard = memo(function StatsCards() {
   );
 });
 
-const HomeHeader = memo(function HomeHeader() {
+const MoonpotsHero = memo(function MoonpotsHero() {
   const classes = useStyles();
 
   return (
@@ -125,4 +125,4 @@ const HomeHeader = memo(function HomeHeader() {
   );
 });
 
-export default HomeHeader;
+export default MoonpotsHero;
