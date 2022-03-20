@@ -32,9 +32,12 @@ const styles = theme => ({
   },
   filterDropdown: {
     width: '100%',
+    '&.Mui-focused $dropdownSelect': {
+      backgroundColor: '#303050',
+    },
   },
   dropdownSelect: {
-    backgroundColor: '#303050',
+    backgroundColor: 'transparent',
     border: 'solid 2px #555590',
     borderRadius: '8px',
     fontSize: '15px',
@@ -43,7 +46,6 @@ const styles = theme => ({
     color: '#fff',
     boxSizing: 'border-box',
     display: 'flex',
-    justifyContent: 'space-between',
     '&.MuiSelect-select': {
       padding: `${12 - 2}px ${24 + 24 - 2}px ${12 - 2}px ${24 - 2}px`,
     },
@@ -53,7 +55,7 @@ const styles = theme => ({
       marginRight: '0.5em',
     },
     '&:focus': {
-      backgroundColor: '#303050',
+      backgroundColor: 'transparent',
       borderRadius: '8px',
     },
   },
@@ -65,7 +67,7 @@ const styles = theme => ({
     border: '2px solid #555590',
     borderRadius: '8px',
     backgroundColor: '#303050',
-    padding: `${16 - 2}px ${24 - 2}px`,
+    padding: `${8 - 2}px 0`,
   },
   dropdownList: {
     padding: '0',
@@ -74,15 +76,20 @@ const styles = theme => ({
       fontSize: '15px',
       fontWeight: '500',
       lineHeight: '24px',
+      padding: `8px ${24 - 2}px`,
       '& .MuiListItem-root + .MuiListItem-root': {
         marginTop: '16px',
       },
       '& .MuiTouchRipple-root': {
         display: 'none',
       },
-      '&.Mui-selected, &:hover': {
+      '&.Mui-selected': {
         background: 'transparent',
         color: '#8F8FBC',
+      },
+      '&:hover': {
+        background: '#434370',
+        color: '#FFF',
       },
     },
   },

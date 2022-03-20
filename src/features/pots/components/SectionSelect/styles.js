@@ -24,6 +24,7 @@ const styles = theme => ({
   buttonSelected: {
     border: '2px solid #F3BA2E',
     color: '#F3BA2E',
+    background: '#303050',
   },
 });
 
