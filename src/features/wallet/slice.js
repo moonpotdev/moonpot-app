@@ -59,6 +59,11 @@ const walletSlice = createSlice({
         state.network = null;
         state.address = null;
       })
+      .addCase(walletConnect.rejected, (state, action) => {
+        state.status = 'disconnected';
+        state.network = null;
+        state.address = null;
+      })
       .addCase(WALLET_ACTION, (state, action) => {
         state.action.result = action.payload.result;
         state.action.data = action.payload.data;
