@@ -495,8 +495,37 @@
     ]
   },
   {
-    "symbol": "Ziggyverse NFT",
+    "symbol": "Ziggyverse  NFT",
     "address": "0xd41748641B5B9aF4110513bA5aEEECDF3318304A",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0,
+    "nfts": [
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 1,
+        "max": 25
+      },
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 51,
+        "max": 116
+      },
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 291,
+        "max": 300
+      },
+      {
+        "name": "Ziggyverse Intelligence NFT",
+        "min": 191,
+        "max": 290
+      }
+    ]
+  },
+  {
+    "symbol": "Ziggyverse NFT",
+    "address": "0xb69743Ba5Ecb4bb47c2a7BF514cBFeB05dc14a4f",
     "type": "nft",
     "subtype": "erc721",
     "decimals": 0,
