@@ -15,6 +15,7 @@ export const config = {
     supportedWallets: [
       'injected',
       'walletconnect',
+      'custom-coinbase',
       'custom-binance',
       'custom-math',
       'custom-twt',

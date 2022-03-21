@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card, CardTitle, Cards } from '../../Cards/Cards';
+import { Card, Cards, CardTitle } from '../../Cards/Cards';
 import { PrimaryButton } from '../../Buttons/PrimaryButton';
 import { BaseButton } from '../../Buttons/BaseButton';
-import { Typography, makeStyles } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import reduxActions from '../../../features/redux/actions';
 import { useDispatch } from 'react-redux';
 import { networkSetup } from '../../../config/config';
@@ -24,7 +24,7 @@ const WrongChainModal = () => {
     networkSetup(networdIdentifier)
       .catch(e => {
         console.error(e);
-        dispatch(reduxActions.modal.showUnableToSwitchChainModal());
+        dispatch(reduxActions.modal.showModal('UNABLE_TO_SWITCH_CHAIN_MODAL'));
       })
       .then(dispatch(reduxActions.modal.hideModal()));
   }

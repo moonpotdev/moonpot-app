@@ -8,8 +8,9 @@ import {
   WALLET_CONNECT_DONE,
   WALLET_CREATE_MODAL,
 } from '../constants';
-import WalletConnectProvider from '@walletconnect/web3-provider';
 import Web3Modal, { connectors } from 'web3modal';
+import WalletConnectProvider from '@walletconnect/web3-provider';
+import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 import reduxActions from '../actions';
 import zapAbi from '../../../config/abi/zap.json';
 import { convertAmountToRawNumber } from '../../../helpers/format';
@@ -568,18 +569,35 @@ const generateProviderOptions = (wallet, clients) => {
 
   const generateCustomConnectors = () => {
     const list = {
-      injected: {
-        display: {
-          name: 'Injected',
-          description: 'Home-BrowserWallet',
-        },
-      },
+      injected: {},
       walletconnect: {
         package: WalletConnectProvider,
         options: {
           rpc: {
             [networkId]: clients[~~(clients.length * Math.random())],
           },
+        },
+      },
+      'custom-coinbase': {
+        display: {
+          logo: require('../../../images/wallets/coinbase.png').default,
+          name: 'Coinbase Wallet',
+          description: 'Connect to your Coinbase Wallet',
+        },
+        options: {
+          appName: 'Moonpot',
+          appLogoUrl: 'https://play.moonpot.com/images/favicon/apple-icon-180x180.png',
+          darkMode: true,
+        },
+        package: CoinbaseWalletSDK,
+        connector: async (ProviderPackage, options) => {
+          const walletLink = new ProviderPackage(options);
+          const provider = walletLink.makeWeb3Provider(
+            clients[~~(clients.length * Math.random())],
+            networkId
+          );
+          await provider.enable();
+          return provider;
         },
       },
       'custom-twt': {
