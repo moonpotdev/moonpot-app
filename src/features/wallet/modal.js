@@ -1,4 +1,5 @@
 import WalletConnectProvider from '@walletconnect/web3-provider';
+import { CoinbaseWalletSDK } from '@coinbase/wallet-sdk';
 import Web3Modal, { connectors } from 'web3modal';
 import { networks } from '../../config/networks';
 import { sample } from 'lodash';
@@ -9,6 +10,7 @@ function createModalOptions() {
   const allNetworkRpcs = Object.fromEntries(
     networks.map(network => [network.chainId, sample(network.rpc)])
   );
+  const firstNetwork = networks[0];
 
   const allConnectors = {
     injected: {},
@@ -30,15 +32,24 @@ function createModalOptions() {
         return provider;
       },
     },
-    'custom-binance': {
+    'custom-coinbase': {
       display: {
-        name: 'Binance',
-        description: 'Binance Chain Wallet',
-        logo: require('../../images/wallets/binance-wallet.png').default,
+        logo: require('../../images/wallets/coinbase.png').default,
+        name: 'Coinbase Wallet',
+        description: 'Connect to your Coinbase Wallet',
       },
-      package: 'binance',
-      connector: async () => {
-        const provider = window.BinanceChain;
+      options: {
+        appName: 'Moonpot',
+        appLogoUrl: 'https://play.moonpot.com/images/favicon/apple-icon-180x180.png',
+        darkMode: true,
+      },
+      package: CoinbaseWalletSDK,
+      connector: async (ProviderPackage, options) => {
+        const walletLink = new ProviderPackage(options);
+        const provider = walletLink.makeWeb3Provider(
+          sample(firstNetwork.rpc),
+          firstNetwork.chainId
+        );
         await provider.enable();
         return provider;
       },
@@ -69,6 +80,19 @@ function createModalOptions() {
       },
       package: 'safepal',
       connector: connectors.injected,
+    },
+    'custom-binance': {
+      display: {
+        name: 'Binance',
+        description: 'Binance Chain Wallet',
+        logo: require('../../images/wallets/binance-wallet.png').default,
+      },
+      package: 'binance',
+      connector: async () => {
+        const provider = window.BinanceChain;
+        await provider.enable();
+        return provider;
+      },
     },
   };
 
