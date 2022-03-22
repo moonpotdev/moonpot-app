@@ -50,7 +50,7 @@ const ActiveLayout = function ({ item }) {
       <WalletRequired network={item.network}>
         {/*Deposit*/}
         <CardAccordionItem titleKey="pot.depositMore">
-          {item.isZap ? (
+          {item.hasZapIn ? (
             <ZapPotDeposit id={item.id} onLearnMore={null} variant="purple" />
           ) : (
             <PotDeposit id={item.id} onLearnMore={null} variant="purple" />
@@ -59,7 +59,7 @@ const ActiveLayout = function ({ item }) {
         </CardAccordionItem>
         {/*Withdraw*/}
         <CardAccordionItem titleKey="pot.withdraw">
-          {item.isZap ? (
+          {item.hasZapOut ? (
             <ZapPotWithdraw id={item.id} onLearnMore={null} variant="purple" />
           ) : (
             <PotWithdraw id={item.id} onLearnMore={null} variant="purple" />

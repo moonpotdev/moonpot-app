@@ -39,7 +39,7 @@ const initialTokens = (() => {
         address: pot.tokenAddress,
       };
 
-      if (pot.isZap) {
+      if (pot.hasZapIn || pot.hasZapOut) {
         const pairToken = tokensByNetworkAddress[pot.network][pot.tokenAddress.toLowerCase()];
 
         if (pairToken.zap) {

@@ -106,35 +106,48 @@ export class WalletConnector {
   }
 
   unsubscribeFromProvider() {
-    // Stop listening to events
+    // Stop listening to all events
     if (
       this.provider.removeAllListeners &&
       typeof this.provider.removeAllListeners === 'function'
     ) {
-      this.provider.removeAllListeners();
+      try {
+        this.provider.removeAllListeners();
+      } catch (e) {
+        console.warn('unsubscribeFromProvider', e);
+      }
     }
 
+    // Stop listening to individual events
     if (this.provider.off && typeof this.provider.off === 'function') {
-      this.provider.off('close');
-      this.provider.off('disconnect');
-      this.provider.off('accountsChanged');
-      this.provider.off('chainChanged');
+      try {
+        this.provider.off('close', this.closeHandler);
+        this.provider.off('disconnect', this.closeHandler);
+        this.provider.off('accountsChanged', this.accountsChangedHandler);
+        this.provider.off('chainChanged', this.chainChangedHandler);
+      } catch (e) {
+        console.warn('unsubscribeFromProvider', e);
+      }
     }
 
     // At least stop dispatching actions if we can't stop listening to events
-    if (this.closeHandler) {
-      this.closeHandler.off();
-      this.closeHandler = null;
-    }
+    try {
+      if (this.closeHandler) {
+        this.closeHandler.off();
+        this.closeHandler = null;
+      }
 
-    if (this.accountsChangedHandler) {
-      this.accountsChangedHandler.off();
-      this.accountsChangedHandler = null;
-    }
+      if (this.accountsChangedHandler) {
+        this.accountsChangedHandler.off();
+        this.accountsChangedHandler = null;
+      }
 
-    if (this.chainChangedHandler) {
-      this.chainChangedHandler.off();
-      this.chainChangedHandler = null;
+      if (this.chainChangedHandler) {
+        this.chainChangedHandler.off();
+        this.chainChangedHandler = null;
+      }
+    } catch (e) {
+      console.warn('unsubscribeFromProvider', e);
     }
   }
 

@@ -1,6 +1,6 @@
 [
   {
-    "id": "beFTM",
+    "id": "beftm",
     "name": "beFTM",
     "token": "beFTM",
     "tokenAddress": "0x7381eD41F6dE418DdE5e84B55590422a57917886",
@@ -16,23 +16,31 @@
     "categories": ["main"],
     "type": "single",
     "duration": 14,
-    "fairplayDuration": 10,
+    "fairplayDuration": 14,
     "fairplayTicketFee": 0.05,
     "interestBreakdown": {
       "interest": 50,
       "prize": 40,
-      "ziggyInterest": 5,
-      "ziggyPrize": 3,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
       "treasury": 2
     },
     "status": "active",
     "supportsClaimAllBonuses": false,
-    "isZap": false,
+    "hasZapIn": true,
     "depositFee": 0,
     "withdrawFee": 0.0001,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x185647c55633A5706aAA3278132537565c925078",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
     "sponsors": [],
-    "bonuses": []
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
   }
 ]

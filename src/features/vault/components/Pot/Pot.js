@@ -79,7 +79,7 @@ const WithdrawAccordionItem = memo(function ({ pot, onFairplayLearnMore }) {
 
   return hasDeposit ? (
     <CardAccordionItem titleKey="pot.withdraw">
-      {pot.isZap ? (
+      {pot.hasZapOut ? (
         <ZapPotWithdraw
           id={pot.id}
           onLearnMore={onFairplayLearnMore}
@@ -138,7 +138,7 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
         <WalletRequired network={pot.network}>
           {pot.status === 'active' ? (
             <>
-              {pot.isZap ? (
+              {pot.hasZapIn ? (
                 <ZapPotDeposit
                   id={id}
                   onLearnMore={onFairplayLearnMore}

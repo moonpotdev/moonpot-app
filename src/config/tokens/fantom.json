@@ -1,5 +1,12 @@
 [
   {
+    "symbol": "POTS",
+    "address": "0xF7554D17d1c3F09899dCc8B404beCAE6dFA584Fa",
+    "type": "single",
+    "oracleId": "POTS",
+    "decimals": 18
+  },
+  {
     "symbol": "WFTM",
     "address": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
     "type": "single",
@@ -18,7 +25,9 @@
     "address": "0x7381eD41F6dE418DdE5e84B55590422a57917886",
     "type": "single",
     "oracleId": "beFTM",
-    "decimals": 18
+    "decimals": 18,
+    "zap": "0x411db598CB666CDE415F1cc762204ef45C099215",
+    "lp": ["WFTM"]
   },
   {
     "symbol": "moonTicketbeFTM",
