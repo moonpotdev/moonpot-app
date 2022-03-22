@@ -17,10 +17,11 @@ const networksConfig = {
     supportedWallets: [
       'injected',
       'walletconnect',
-      'custom-binance',
+      'custom-coinbase',
       'custom-math',
       'custom-twt',
       'custom-safepal',
+      'custom-binance',
     ],
     providerName: 'binance',
     walletSettings: {
@@ -69,7 +70,7 @@ const networksConfig = {
     multicallAddress: '0xC9F6b1B53E056fd04bE5a197ce4B2423d456B982',
     fetchContractDataAddress: '0x37FF9b4612b9e80E4082e3aC3f5149adDA2d2f21',
     fetchBalancesAddress: '0x6cA0E431678979cB9Ffa317310D5db7131345058',
-    supportedWallets: ['injected', 'custom-clover', 'walletconnect', 'custom-coinbase'],
+    supportedWallets: ['injected', 'walletconnect', 'custom-coinbase', 'custom-clover'],
     providerName: 'fantom',
     walletSettings: {
       chainId: `0x${parseInt('250', 10).toString(16)}`,

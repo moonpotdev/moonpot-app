@@ -454,16 +454,7 @@
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x21403739A1Dc0e3ceC70CBD5ceaE78fF25F102a4",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
-    "sponsors": [
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
-        "sponsorTokenDecimals": 18
-      }
-    ],
+    "sponsors": [],
     "bonuses": [
       {
         "id": 0,
@@ -508,8 +499,6 @@
     "supportsClaimAllBonuses": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xED4ea41Daf652964789b16e3Ff76eC07d99d2340",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
     "sponsors": [],
     "bonuses": [
       {
@@ -554,19 +543,11 @@
     "status": "active",
     "supportsAutocompound": true,
     "infoCardStrategy": "watch",
-    "sponsorProjectName": "Moonpot",
-    "sponsorToken": "POTS",
     "sponsors": [
       {
         "sponsorToken": "WATCH",
         "sponsorOracleId": "WATCH",
         "sponsorAddress": "0x7A9f28EB62C791422Aa23CeAE1dA9C847cBeC9b0",
-        "sponsorTokenDecimals": 18
-      },
-      {
-        "sponsorToken": "POTS",
-        "sponsorOracleId": "POTS",
-        "sponsorAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
         "sponsorTokenDecimals": 18
       }
     ]
