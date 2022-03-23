@@ -56,7 +56,7 @@
   },
   {
     "symbol": "moonTicketTOMB-FTM",
-    "address": "0x36e9277FA50CC8ea077C255Ac0D40C1A40e57851",
+    "address": "0xFbC31886ADb13F1F74f8c94939B2eF55617A8532",
     "type": "ticket",
     "oracleId": "tomb-tomb-ftm",
     "decimals": 18,
