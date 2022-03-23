@@ -156,8 +156,7 @@ function ZapDepositTooltip({ id }) {
   return <TooltipWithIcon i18nKey={key} />;
 }
 
-ZapDepositTooltip.propTypes = {};
-export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
+export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);

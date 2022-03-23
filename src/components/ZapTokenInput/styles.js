@@ -129,7 +129,7 @@ const styles = theme => ({
     },
   },
   tokenDropdownVariantTeal: {
-    background: '#3C6259',
+    background: '#3F688D',
     border: '2px solid #6B96BD',
   },
   tokenDropdownVariantPurple: {

@@ -13,6 +13,7 @@ import ziggyTimelock1x from '../../../../images/ziggy/timelock@1x.png';
 import ziggyTimelock2x from '../../../../images/ziggy/timelock@2x.png';
 import ziggyTimelock3x from '../../../../images/ziggy/timelock@3x.png';
 import ziggyTimelock4x from '../../../../images/ziggy/timelock@4x.png';
+import { getNetworkExplorerUrl } from '../../../../helpers/utils';
 
 const useStyles = makeStyles(styles);
 
@@ -41,7 +42,7 @@ const StrategyInfoCard = memo(function ({ pot, classes, t }) {
       {pot.infoCardStrategy === 'beefy' && pot.infoCardBeefyVaultAddress ? (
         <p>
           <a
-            href={`https://bscscan.com/address/${pot.infoCardBeefyVaultAddress}`}
+            href={getNetworkExplorerUrl(pot.network, `/address/${pot.infoCardBeefyVaultAddress}`)}
             rel="noreferrer"
             target="_blank"
             className={classes.link}
@@ -52,7 +53,7 @@ const StrategyInfoCard = memo(function ({ pot, classes, t }) {
       ) : null}
       <p>
         <a
-          href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
+          href={getNetworkExplorerUrl(pot.network, `/address/${pot.prizeStrategyAddress}`)}
           rel="noreferrer"
           target="_blank"
           className={classes.link}
@@ -149,7 +150,7 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
         ) : null}
         <p>
           <a
-            href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
+            href={getNetworkExplorerUrl(pot.network, `/address/${pot.prizeStrategyAddress}`)}
             rel="noreferrer"
             target="_blank"
             className={classes.link}
@@ -202,7 +203,7 @@ const XmasStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
         ) : null}
         <p>
           <a
-            href={`https://bscscan.com/address/${pot.prizeStrategyAddress}`}
+            href={getNetworkExplorerUrl(pot.network, `/address/${pot.prizeStrategyAddress}`)}
             rel="noreferrer"
             target="_blank"
             className={classes.link}

@@ -23,7 +23,7 @@ function DropdownIcon(props) {
 }
 
 export const ZapTokenInput = function ({
-  variant = 'green',
+  variant = 'teal',
   selected,
   tokens,
   max,
