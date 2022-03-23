@@ -1,25 +1,26 @@
 import { HOME_FETCH_POOLS_BEGIN, HOME_FETCH_POOLS_DONE } from '../constants';
-import { config } from '../../../config/config';
 import BigNumber from 'bignumber.js';
 import { potsByNetwork } from '../../../config/vault';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
 import { ZERO } from '../../../helpers/utils';
 import { createReducer } from '@reduxjs/toolkit';
+import { networkKeys } from '../../../config/networks';
 
 const initialPools = () => {
-  const pools = [];
+  const pools = {};
 
-  for (let net in config) {
-    const networkPools = potsByNetwork[net];
+  for (const networkKey of networkKeys) {
+    const networkPools = potsByNetwork[networkKey];
     let defaultOrder = 0;
 
     for (const pool of networkPools) {
-      pool['network'] = net;
+      pool['network'] = networkKey;
       pool['daily'] = 0;
       pool['apy'] = 0;
       pool['totalApy'] = 0;
       pool['tvl'] = 0;
       pool['tokenPrice'] = 0;
+      pool['expiresAt'] = 0;
       pool['fairplayFee'] =
         pool.fairplayTicketFee /
         (tokensByNetworkAddress[pool.network][pool.rewardAddress.toLowerCase()].stakedMultiplier ||

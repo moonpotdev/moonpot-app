@@ -1,0 +1,46 @@
+[
+  {
+    "id": "beftm",
+    "name": "beFTM",
+    "token": "beFTM",
+    "tokenAddress": "0x7381eD41F6dE418DdE5e84B55590422a57917886",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketbeFTM",
+    "rewardAddress": "0x708d5656a2F84aA82cdbc078342b04d4887E72bb",
+    "contractAddress": "0x00957197874Ee40211Fe15b205754124834da532",
+    "prizePoolAddress": "0xe23630d4F581A7457eC703053613739992c387E1",
+    "prizeStrategyAddress": "0x6B10d002d29949eED31ceA4AcEF33c028a89Fc1d",
+    "oracleId": "beFTM",
+    "apyId": "beefy-beFTM",
+    "vaultType": "main",
+    "categories": ["main"],
+    "type": "single",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": true,
+    "depositFee": 0,
+    "withdrawFee": 0.0001,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x185647c55633A5706aAA3278132537565c925078",
+    "sponsorProjectName": "Moonpot",
+    "sponsorToken": "POTS",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  }
+]

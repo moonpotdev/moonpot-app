@@ -21,16 +21,9 @@
     "prize": "Prize",
     "apy": "APY",
     "default": "Default",
-    "featured": "Featured"
-  },
-  "modals": {
-    "unsupportedNetworkDetected": "Unsupported Network Detected",
-    "switchToBSCNetwork": "Please switch to BSC network",
-    "switchToBSC": "Switch to BSC",
-    "cancel": "Cancel",
-    "unableToAutoSwitch": "Unable to automatically switch chains",
-    "manuallySetNetwork": "Please manually set your network to BSC",
-    "close": "Close"
+    "featured": "Featured",
+    "exploreMoonpots": "Explore Moonpots",
+    "joinOurDiscord": "Join our Discord"
   },
   "header": {
     "moonpots": "Moonpots",
@@ -60,6 +53,55 @@
     "tvl": "TVL",
     "buybacks": "BUYBACKS"
   },
+  "home": {
+    "hero": {
+      "title": "Stake Crypto, Earn Interest and Win Prizes",
+      "text": [
+        "The greatest win-win savings game this side of the galaxy, where even the smallest of stakes wins the biggest prizes."
+      ]
+    },
+    "multichain": {
+      "title": "Multi-Chain Prize Pots on"
+    },
+    "howToPlay": {
+      "title": "How to Play",
+      "cards": {
+        "deposit": {
+          "title": "Deposit Crypto",
+          "text": [
+            "Deposit your tokens across multiple blockchains into one of our win-win Pots powered by Beefy."
+          ]
+        },
+        "earn": {
+          "title": "Earn Interest",
+          "text": [
+            "All deposits are combined to generate intergalactic yields and prizes for our users. Half of the earnings are returned to Moonpot users as interest, and half goes to the prize pool."
+          ]
+        },
+        "win": {
+          "title": "Win Prizes",
+          "text": [
+            "Every draw smart contracts randomly pick lucky players to share last week's generated prize pool. Millions of dollars have already been won and there are chances to win daily.."
+          ]
+        }
+      }
+    },
+    "featuredPots": {
+      "title": "Featured Pots",
+      "countdown": {
+        "days": "Days",
+        "hours": "Hours",
+        "mins": "Mins",
+        "secs": "Secs"
+      }
+    }
+  },
+  "featuredPot": {
+    "winPrizeInToken": "Win <span>{{prize}}</span> in {{token}}",
+    "winPrize": "Win <span>{{prize}}</span>",
+    "winNFTandPrizeInToken": "Win <span>{{nft}}</span> and <span>{{prize}}</span> in {{token}}",
+    "winPrizePlaceholder": "Win <span>Prizes</span>"
+  },
   "homeTitle": "Deposit <span>crypto</span>, earn <span>interest</span><wbr /> and a chance to win <span>${{amount}}</span>",
   "homeTotalDeposits": "Total Deposits (TVL)",
   "homeJoinCommunityTitle": "Join the Community",
@@ -80,9 +122,22 @@
   "telegramSocialBlockButton": "Join our Telegram",
   "discordSocialBlockButton": "Join our Discord",
   "twitterSocialBlockButton": "Follow our Twitter",
-  "potType": "Pot Type:",
-  "sortBy": "Sort by:",
-  "potStatus": "Pot Status:",
+  "noPotsMatchFilter": {
+    "title": "No results found",
+    "text": ["Try changing your filters"],
+    "reset": "Reset Filters"
+  },
+  "noPotsNotConnected": {
+    "title": "Oh snap!",
+    "text": ["You haven’t connected your wallet"]
+  },
+  "filters": {
+    "potType": "Pot Type:",
+    "sortBy": "Sort by:",
+    "potStatus": "Pot Status:",
+    "network": "Network:",
+    "all": "All"
+  },
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",
@@ -350,6 +405,7 @@
     "amountToken": "Deposit {{amount}} {{token}}",
     "fairplayNotice": "There's a {{duration}} day Fairplay Timelock. If you want to withdraw earlier you’ll pay a {{fee}}%, or less, Fairness Fee. The fee reduces every second.",
     "maximumDepositNotice": "Maximum total deposit: {{amount}} {{token}}",
+    "depositFeeNotice": "Deposit fee of {{percent}}% applies.",
     "eolNotice": {
       "title": "Pot Retired",
       "message": "You can no longer deposit in to this pot."
@@ -364,7 +420,11 @@
         "ZAP lets you create liquidity pool tokens and make deposits with just one transaction."
       ],
       "beltbnb": ["ZAP lets you create beltBNB tokens and deposit with just one transaction."],
-      "ibalpaca": ["ZAP lets you create ibALPACA tokens and deposit with just one transaction."]
+      "ibalpaca": ["ZAP lets you create ibALPACA tokens and deposit with just one transaction."],
+      "beftm": [
+        "beFTM is FTM perpetually locked in Beefy's Validator Node.",
+        "ZAP lets you mint beFTM and deposit with just one transaction. beFTM will be bought from the market if under peg."
+      ]
     },
     "inYourWallet": "In your wallet",
     "provider": "Liquidity provider"
@@ -392,7 +452,13 @@
     "withdrawBonusTokens": "Withdraw Bonus {{tokens}}"
   },
   "wallet": {
-    "connect": "Connect Wallet"
+    "connect": "Connect Wallet",
+    "connectRequired": "Wallet connection required",
+    "connectRequiredNetwork": "Wallet connection to {{network}} required",
+    "connectedToUnsupported": "Wallet connected to unsupported network",
+    "connectedToOther": "Wallet connected to {{network}}",
+    "switchToNetworkText": "Please switch to {{network}}",
+    "switchToNetworkButton": "Switch to {{network}}"
   },
   "winners": {
     "totalPrizesWon": "Our cadets have won",

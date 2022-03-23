@@ -9,20 +9,22 @@ import { indexBy, isEmpty, ZERO } from '../../helpers/utils';
 import { ZapTokenInput } from '../ZapTokenInput/ZapTokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { TooltipWithIcon } from '../Tooltip/tooltip';
-import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { usePot, useSymbolOrList, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
 import { Translate } from '../Translate';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
-import { config } from '../../config/config';
 import { createZapInEstimate } from '../../features/redux/actions/zap';
 import { useTranslation } from 'react-i18next';
+import { networkByKey } from '../../config/networks';
+import { WalletRequired } from '../WalletRequired/WalletRequired';
+import { selectWalletAddress } from '../../features/wallet/selectors';
+import { approval, deposit, zapIn } from '../../features/wallet/actions';
 
 const useStyles = makeStyles(styles);
 
 // TODO DRY, move to one global steps component; use state/actions
 const DepositSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
   const dispatch = useDispatch();
-  const action = useSelector(state => state.walletReducer.action);
+  const action = useSelector(state => state.wallet.action);
 
   const handleClose = useCallback(() => {
     dispatch(reduxActions.balance.fetchBalances(pot));
@@ -75,7 +77,7 @@ function useDepositTokens(network, lpAddress) {
     const tokens = [{ ...lpToken, isNative: false }];
 
     if (supportsZap) {
-      const nativeCurrency = config[network].nativeCurrency;
+      const nativeCurrency = networkByKey[network].nativeCurrency;
       const nativeSymbol = nativeCurrency.symbol;
       const nativeDecimals = nativeCurrency.decimals;
       const nativeWrappedToken =
@@ -159,7 +161,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(selectWalletAddress);
   const network = pot.network;
   const lpAddress = pot.tokenAddress;
   const potAddress = pot.contractAddress;
@@ -193,9 +195,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
   }));
   const selectedNeedsZap = selectedToken.address.toLowerCase() !== pot.tokenAddress.toLowerCase();
   const [zapRequestId, setZapRequestId] = useState(null);
-  const zapEstimate = useSelector(state =>
-    zapRequestId ? state.zapReducer[zapRequestId] ?? null : null
-  );
+  const zapEstimate = useSelector(state => (zapRequestId ? state.zap[zapRequestId] ?? null : null));
   const canDeposit = useMemo(() => {
     const hasBalance = address && balance.gt(0) && depositAmount.gt(0);
 
@@ -239,8 +239,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
           steps.push({
             step: 'approve',
             message: 'Approval transactions happen once per pot.',
-            action: () =>
-              dispatch(reduxActions.wallet.approval(pot.network, swapInToken.address, zapAddress)),
+            action: () => dispatch(approval(pot.network, swapInToken.address, zapAddress)),
             pending: false,
           });
         }
@@ -250,9 +249,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
           step: 'deposit',
           message: 'Confirm deposit transaction on wallet to complete.',
           action: () =>
-            dispatch(
-              reduxActions.wallet.zapIn(pot.network, pot.contractAddress, zapEstimate, isDepositAll)
-            ),
+            dispatch(zapIn(pot.network, pot.contractAddress, zapEstimate, isDepositAll)),
           pending: false,
         });
       } else {
@@ -260,10 +257,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
           steps.push({
             step: 'approve',
             message: 'Approval transactions happen once per pot.',
-            action: () =>
-              dispatch(
-                reduxActions.wallet.approval(pot.network, pot.tokenAddress, pot.contractAddress)
-              ),
+            action: () => dispatch(approval(pot.network, pot.tokenAddress, pot.contractAddress)),
             pending: false,
           });
         }
@@ -273,7 +267,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
           message: 'Confirm deposit transaction on wallet to complete.',
           action: () =>
             dispatch(
-              reduxActions.wallet.deposit(
+              deposit(
                 pot.network,
                 pot.contractAddress,
                 convertAmountToRawNumber(depositAmount, pot.tokenDecimals),
@@ -353,7 +347,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
         />
       </div>
       <div className={classes.buttonHolder}>
-        {address ? (
+        <WalletRequired network={pot.network} networkRequired={true}>
           <PrimaryButton
             variant={variant}
             onClick={handleDeposit}
@@ -371,9 +365,15 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'green' }) {
               values={{ token: selectedTokenSymbol, amount: depositAmount.toString() }}
             />
           </PrimaryButton>
-        ) : (
-          <WalletConnectButton variant={variant} fullWidth={true} />
-        )}
+        </WalletRequired>
+        {pot.depositFee ? (
+          <div className={classes.fairplayNotice}>
+            <Translate
+              i18nKey="deposit.depositFeeNotice"
+              values={{ percent: formatDecimals(pot.depositFee * 100, 2) }}
+            />
+          </div>
+        ) : null}
         <DepositSteps
           pot={pot}
           steps={steps}

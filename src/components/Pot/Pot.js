@@ -14,13 +14,15 @@ import {
 } from '../../helpers/hooks';
 import { DrawStat, DrawStatNextDraw } from '../DrawStat';
 import { Translate } from '../Translate';
-import { investmentOdds, listJoin, ZERO } from '../../helpers/utils';
+import { investmentOdds, listJoin, variantClass, ZERO } from '../../helpers/utils';
 import { useTranslation } from 'react-i18next';
 import styles from './styles';
 import { getPotIconSrc } from '../../helpers/getPotIconSrc';
 import { useHistory } from 'react-router';
 import { TransListJoin } from '../TransListJoin';
 import BigNumber from 'bignumber.js';
+import clsx from 'clsx';
+import { selectWalletAddress } from '../../features/wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
@@ -40,16 +42,7 @@ export const Logo = memo(function ({ icon, sponsorToken }) {
   for (const key of possibilities) {
     const src = getPotIconSrc(key, false);
     if (src) {
-      return (
-        <img
-          src={src}
-          alt=""
-          width="90"
-          height="90"
-          aria-hidden={true}
-          style={{ cursor: 'pointer' }}
-        />
-      );
+      return <img src={src} alt="" width="90" height="90" aria-hidden={true} />;
     }
   }
 
@@ -230,7 +223,7 @@ const TVL = memo(function ({ totalStakedUsd }) {
 });
 
 function useDepositOdds(ticketTotalSupply, winners, ticketToken, tokenDecimals) {
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(selectWalletAddress);
   const depositedTickets = useTokenBalance(ticketToken, tokenDecimals);
 
   return useMemo(() => {
@@ -270,6 +263,21 @@ const DepositWithOdds = memo(function ({
   );
 });
 
+export const PotNetwork = memo(function PotNetwork({ network }) {
+  const classes = useStyles();
+
+  return (
+    <div className={clsx(classes.network, variantClass(classes, 'network', network))}>
+      <img
+        src={require(`../../images/networks/${network}.svg`).default}
+        width="24"
+        height="24"
+        alt={network}
+      />
+    </div>
+  );
+});
+
 export function Pot({ id, variant, bottom, simple, oneColumn }) {
   const classes = useStyles();
   const pot = usePot(id);
@@ -277,6 +285,7 @@ export function Pot({ id, variant, bottom, simple, oneColumn }) {
 
   return (
     <Card variant={variant} style={{ height: 'fit-content' }} oneColumn={oneColumn}>
+      <PotNetwork network={pot.network} />
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>
         <Grid item xs="auto" onClick={() => history.push(`/pot/${pot.id}`)}>
           <Logo icon={pot.icon || pot.id} sponsorToken={pot.sponsorToken} />

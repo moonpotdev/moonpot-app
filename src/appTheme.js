@@ -25,7 +25,7 @@ const appTheme = () => {
       },
     },
     typography: {
-      fontFamily: `"Ubuntu", "Roboto", sans-serif`,
+      fontFamily: `"Ubuntu", sans-serif`,
     },
     overrides: {
       MuiCssBaseline: {
@@ -33,6 +33,10 @@ const appTheme = () => {
           body: {
             backgroundColor: '#303050',
             overflowX: 'hidden',
+          },
+          '#WEB3_CONNECT_MODAL_ID': {
+            position: 'relative',
+            zIndex: '100',
           },
         },
       },
@@ -46,7 +50,6 @@ const appTheme = () => {
       },
       MuiButton: {
         root: {
-          width: '163px',
           height: '34px',
           borderRadius: 20,
           borderWidth: '2px',

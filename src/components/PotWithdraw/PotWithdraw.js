@@ -13,7 +13,6 @@ import {
 import reduxActions from '../../features/redux/actions';
 import { getFairplayFeePercent, isEmpty, ZERO } from '../../helpers/utils';
 import Steps from '../../features/vault/components/Steps';
-import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { Translate } from '../Translate';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { TokenInput } from '../TokenInput';
@@ -21,6 +20,9 @@ import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { Alert, AlertText } from '../Alert';
 import { InfoOutlined } from '@material-ui/icons';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
+import { WalletRequired } from '../WalletRequired/WalletRequired';
+import { selectWalletAddress } from '../../features/wallet/selectors';
+import { approval, withdraw } from '../../features/wallet/actions';
 
 const useStyles = makeStyles(styles);
 
@@ -58,11 +60,9 @@ const StatEarned = memo(function ({ bonus }) {
 
 const StatTimelock = memo(function ({ contractAddress }) {
   const { t } = useTranslation();
-  const timeleft = useSelector(
-    state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleft
-  );
+  const timeleft = useSelector(state => state.balance.tokens[contractAddress + ':fee'].timeleft);
   const timeleftUpdatedAt = useSelector(
-    state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleftUpdated
+    state => state.balance.tokens[contractAddress + ':fee'].timeleftUpdated
   );
   const endsAt = (timeleftUpdatedAt + timeleft) * 1000;
   const timeLeft = Math.max(0, endsAt - Date.now());
@@ -79,16 +79,14 @@ const StatFee = memo(function ({
   fairplayTicketFee,
 }) {
   const { t } = useTranslation();
-  const address = useSelector(state => state.walletReducer.address);
-  const timeleft = useSelector(
-    state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleft
-  );
+  const address = useSelector(selectWalletAddress);
+  const timeleft = useSelector(state => state.balance.tokens[contractAddress + ':fee'].timeleft);
   const timeleftUpdatedAt = useSelector(
-    state => state.balanceReducer.tokens[contractAddress + ':fee'].timeleftUpdated
+    state => state.balance.tokens[contractAddress + ':fee'].timeleftUpdated
   );
   const ticket = tokensByNetworkAddress[network][ticketAddress.toLowerCase()];
   const underlying = tokensByNetworkSymbol[network][ticket.underlyingToken];
-  const ppfs = useSelector(state => state.pricesReducer.ppfs[network]?.[underlying.address] || 1);
+  const ppfs = useSelector(state => state.prices.ppfs[network]?.[underlying.address] || 1);
   const endsAt = (timeleftUpdatedAt + timeleft) * 1000;
   const ticketBalance = useTokenBalance(ticket.symbol, tokenDecimals);
 
@@ -154,7 +152,7 @@ export const Stats = function ({ id }) {
 // TODO DRY, move to one global steps component; use state/actions
 export const WithdrawSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
   const dispatch = useDispatch();
-  const action = useSelector(state => state.walletReducer.action);
+  const action = useSelector(state => state.wallet.action);
 
   const handleClose = useCallback(() => {
     dispatch(reduxActions.balance.fetchBalances(pot));
@@ -231,7 +229,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
   const [isPartialWithdrawAll, setIsPartialWithdrawAll] = useState(false);
   const [partialWithdrawAmount, setPartialWithdrawAmount] = useState(() => ZERO);
   const [canWithdrawPartial, setCanWithdrawPartial] = useState(false);
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(selectWalletAddress);
   const totalBalance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);
   const ticketBalance = useTokenBalance(pot.rewardToken, pot.tokenDecimals);
   const ticketAllowance = useTokenAllowance(
@@ -260,10 +258,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
         steps.push({
           step: 'approve',
           message: 'Approval transactions happen once per pot.',
-          action: () =>
-            dispatch(
-              reduxActions.wallet.approval(pot.network, pot.rewardAddress, pot.contractAddress)
-            ),
+          action: () => dispatch(approval(pot.network, pot.rewardAddress, pot.contractAddress)),
           pending: false,
         });
       }
@@ -273,10 +268,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
         steps.push({
           step: 'approve',
           message: 'Approval transactions happen once per pot.',
-          action: () =>
-            dispatch(
-              reduxActions.wallet.approval(pot.network, pot.mooTokenAddress, pot.contractAddress)
-            ),
+          action: () => dispatch(approval(pot.network, pot.mooTokenAddress, pot.contractAddress)),
           pending: false,
         });
       }
@@ -288,8 +280,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
       steps.push({
         step: 'withdraw',
         message: 'Confirm withdraw transaction on wallet to complete.',
-        action: () =>
-          dispatch(reduxActions.wallet.withdraw(pot.network, pot.contractAddress, amount, isMax)),
+        action: () => dispatch(withdraw(pot.network, pot.contractAddress, amount, isMax)),
         pending: false,
       });
 
@@ -321,7 +312,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
             />
           </div>
           <div className={classes.buttonHolder}>
-            {address ? (
+            <WalletRequired network={pot.network} networkRequired={true}>
               <SecondaryButton
                 variant={variant}
                 onClick={handleWithdraw}
@@ -333,14 +324,12 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
                   values={{ token: pot.token }}
                 />
               </SecondaryButton>
-            ) : (
-              <WalletConnectButton variant={variant} fullWidth={true} />
-            )}
+            </WalletRequired>
           </div>
         </>
       ) : (
         <div className={classes.buttonHolder}>
-          {address ? (
+          <WalletRequired network={pot.network} networkRequired={true}>
             <PrimaryButton
               variant={variant}
               onClick={handleWithdraw}
@@ -349,9 +338,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
             >
               <Translate i18nKey="withdraw.allToken" values={{ token: pot.token }} />
             </PrimaryButton>
-          ) : (
-            <WalletConnectButton variant={variant} fullWidth={true} />
-          )}
+          </WalletRequired>
         </div>
       )}
       <WithdrawSteps pot={pot} steps={steps} setSteps={setSteps} />

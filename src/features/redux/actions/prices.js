@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { getApiCacheBuster, sleep } from '../../../helpers/utils';
 import { MultiCall } from 'eth-multicall';
-import { config } from '../../../config/config';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
 import beefyVaultAbi from '../../../config/abi/beefyvault.json';
 import { byDecimals } from '../../../helpers/format';
+import { networkByKey } from '../../../config/networks';
 
 function derivePrice(token, tokens, prices, ppfs) {
   if (token.underlyingToken) {
@@ -68,7 +68,7 @@ async function updatePPFS(web3, existing) {
   const output = {};
 
   for (const network in web3) {
-    multicall[network] = new MultiCall(web3[network], config[network].multicallAddress);
+    multicall[network] = new MultiCall(web3[network], networkByKey[network].multicallAddress);
     calls[network] = [];
     output[network] = { ...existing[network] };
 
@@ -165,18 +165,14 @@ const fetchPrices = () => {
         updatePrices(),
         updateLPPrices(),
         updateApy(),
-        updatePPFS(state.walletReducer.rpc, state.pricesReducer.ppfs),
+        updatePPFS(state.wallet.rpc, state.prices.ppfs),
       ]);
       const allPrices = {
-        ...state.pricesReducer.prices,
+        ...state.prices.prices,
         ...prices,
         ...lpPrices,
       };
-      const derivedPrices = await derivePrices(
-        state.pricesReducer.byNetworkAddress,
-        allPrices,
-        ppfs
-      );
+      const derivedPrices = await derivePrices(state.prices.byNetworkAddress, allPrices, ppfs);
 
       dispatch({
         type: 'FETCH_PRICES',

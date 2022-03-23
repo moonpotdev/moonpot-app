@@ -12,7 +12,7 @@ import Pots from '../../images/tokens/pots.svg';
 import clsx from 'clsx';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { useSelector } from 'react-redux';
-import CustomDropdown from '../customDropdown';
+import CustomDropdown from '../CustomDropdown';
 import { supportedLanguages } from '../../i18n';
 import { Translate } from '../Translate';
 
@@ -21,8 +21,8 @@ const useStyles = makeStyles(styles);
 const links = [
   {
     label: 'header.moonpots',
-    href: '/',
-    match: { exact: true },
+    href: '/moonpots',
+    match: { exact: false, path: ['/moonpots', '/my-moonpots'] },
   },
   {
     label: 'header.winners',
@@ -74,7 +74,7 @@ function MenuLink({ external, href, label, match, onClick, ...rest }) {
   }
 
   return (
-    <a {...rest} {...props} onClick={handleClick} data-active={active}>
+    <a {...rest} {...props} onClick={handleClick} data-active={active !== null}>
       {t(label)}
     </a>
   );
@@ -193,7 +193,7 @@ function Sidebar() {
 }
 
 function PotsPrice() {
-  const price = useSelector(state => state.pricesReducer.prices['POTS'] || 0);
+  const price = useSelector(state => state.prices.prices['POTS'] || 0);
   return (
     '$' +
     price.toLocaleString(undefined, {
@@ -220,7 +220,7 @@ function NavbarPotsPrice() {
   const classes = useStyles();
 
   return (
-    <div className={classes.navbarPotsPrice}>
+    <a href={buyPotsUrl} target="_blank" rel="noopener" className={classes.navbarPotsPrice}>
       <img
         src={Pots}
         width={24}
@@ -232,22 +232,14 @@ function NavbarPotsPrice() {
       <div className={classes.navbarPotsValue}>
         <PotsPrice />
       </div>
-      <PrimaryButton
-        variant="purple"
-        className={clsx(classes.buyButton, classes.navbarBuyButton)}
-        href={buyPotsUrl}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <Translate i18nKey="header.buyPots" />
-      </PrimaryButton>
-    </div>
+    </a>
   );
 }
 
 export function Header() {
   const classes = useStyles();
   const history = useHistory();
+  const showOnTop = useRouteMatch({ path: '/', exact: true });
   const showFullNav = useMediaQuery(`(min-width:${HEADER_FULL_NAV_WIDTH}px)`);
   const showFullLogo = useMediaQuery(`(min-width: ${HEADER_FULL_LOGO_WIDTH}px)`);
 
@@ -260,7 +252,7 @@ export function Header() {
   );
 
   return (
-    <div className={classes.bar}>
+    <div className={clsx({ [classes.bar]: true, [classes.showOnTop]: showOnTop })}>
       <div className={classes.barSizer}>
         <div className={classes.barInner}>
           <div className={classes.barItem}>
@@ -285,7 +277,7 @@ export function Header() {
             </>
           ) : null}
           <div className={clsx(classes.barItem, { [classes.pushRight]: !showFullNav })}>
-            <WalletConnector variant="small" />
+            <WalletConnector />
           </div>
           {showFullNav ? null : (
             <div className={clsx(classes.barItem)}>

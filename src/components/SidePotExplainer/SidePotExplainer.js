@@ -1,8 +1,7 @@
 import { Card, Cards } from '../Cards';
 import { OpenInNew } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import styles from './styles';
-import { Typography } from '@material-ui/core';
 import { Translate } from '../Translate';
 import { memo } from 'react';
 

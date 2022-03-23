@@ -8,6 +8,7 @@ export const styles = () => ({
     backgroundColor: '#262640',
     maxWidth: '100%',
     margin: '0 auto 32px auto',
+    transition: 'background-color 0.4s ease',
     [`@media (min-width: ${HEADER_FULL_LOGO_WIDTH}px)`]: {
       paddingLeft: '24px',
       paddingRight: '24px',
@@ -86,7 +87,7 @@ export const styles = () => ({
     lineHeight: '24px',
     textDecoration: 'none',
     letterSpacing: '0.6px',
-    '&:hover, &:focus, &:active, &[data-active]': {
+    '&:hover, &:focus, &:active, &[data-active=true]': {
       color: '#ffffff',
       textDecoration: 'none',
     },
@@ -102,6 +103,7 @@ export const styles = () => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    textDecoration: 'none',
   },
   navbarPotsLogo: {
     marginRight: '8px',
@@ -204,5 +206,16 @@ export const styles = () => ({
   sidebarPotsLogo: {},
   pushRight: {
     marginLeft: 'auto',
+  },
+  showOnTop: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    backgroundColor: 'transparent',
+    zIndex: '10',
+    '& $barItem': {
+      borderColor: 'transparent',
+    },
   },
 });

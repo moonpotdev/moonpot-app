@@ -1,0 +1,41 @@
+[
+  {
+    "symbol": "WMATIC",
+    "address": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+    "type": "single",
+    "oracleId": "WMATIC",
+    "decimals": 18
+  },
+  {
+    "symbol": "USDC",
+    "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+    "type": "single",
+    "oracleId": "USDC",
+    "decimals": 6
+  },
+  {
+    "symbol": "MAI",
+    "address": "0xa3Fa99A148fA48D14Ed51d610c367C61876997F1",
+    "type": "single",
+    "oracleId": "MAI",
+    "decimals": 18
+  },
+  {
+    "symbol": "MAI-USDC QLP",
+    "address": "0x160532D2536175d65C03B97b0630A9802c274daD",
+    "type": "lp",
+    "oracleId": "mai-usdc-mimatic",
+    "decimals": 18,
+    "zap": "0xFAdE4899Bac38C0666De44D13d708C845DA497d8",
+    "lp": ["USDC", "MAI"]
+  },
+  {
+    "symbol": "moonTicketQuickMAI-USDC",
+    "address": "0xFbC31886ADb13F1F74f8c94939B2eF55617A8532",
+    "type": "ticket",
+    "oracleId": "mai-usdc-mimatic",
+    "decimals": 18,
+    "underlyingToken": "MAI-USDC QLP",
+    "stakedMultiplier": 2
+  }
+]

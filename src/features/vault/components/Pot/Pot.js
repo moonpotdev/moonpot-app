@@ -8,10 +8,12 @@ import { PotDeposit } from '../../../../components/PotDeposit';
 import { PotWithdraw } from '../../../../components/PotWithdraw';
 import { useBonusesEarned, usePot, useTokenBalance } from '../../../../helpers/hooks';
 import { Translate } from '../../../../components/Translate';
-import PotBonus from '../../../home/MyPots/components/Pot/PotBonus';
+import PotBonus from '../../../pots/MyPots/components/Pot/PotBonus';
 import { useSelector } from 'react-redux';
 import { ZapPotWithdraw } from '../../../../components/PotWithdraw/ZapPotWithdraw';
 import { TooltipWithIcon } from '../../../../components/Tooltip/tooltip';
+import { WalletRequired } from '../../../../components/WalletRequired/WalletRequired';
+import { selectWalletAddress } from '../../../wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
@@ -65,19 +67,19 @@ const BonusAccordionItem = memo(function ({ pot }) {
       titleKey={pot.id === 'pots' ? 'pot.earnings' : 'pot.bonusEarnings'}
       startOpen={true}
     >
-      <PotBonus item={pot} buttonVariant={handleButtonVariant(pot.vaultType)} />
+      <PotBonus pot={pot} buttonVariant={handleButtonVariant(pot.vaultType)} />
     </CardAccordionItem>
   ) : null;
 });
 
 const WithdrawAccordionItem = memo(function ({ pot, onFairplayLearnMore }) {
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(selectWalletAddress);
   const depositBalance = useTokenBalance(pot.contractAddress + ':total', 18);
   const hasDeposit = address && depositBalance.gt(0);
 
   return hasDeposit ? (
     <CardAccordionItem titleKey="pot.withdraw">
-      {pot.isZap ? (
+      {pot.hasZapOut ? (
         <ZapPotWithdraw
           id={pot.id}
           onLearnMore={onFairplayLearnMore}
@@ -133,23 +135,25 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
         />
       </CardAccordionItem>
       <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
-        {pot.status === 'active' ? (
-          <>
-            {pot.isZap ? (
-              <ZapPotDeposit
-                id={id}
-                onLearnMore={onFairplayLearnMore}
-                variant={handleVariant(pot.vaultType)}
-              />
-            ) : (
-              <PotDeposit
-                id={id}
-                onLearnMore={onFairplayLearnMore}
-                variant={handleVariant(pot.vaultType)}
-              />
-            )}
-          </>
-        ) : null}
+        <WalletRequired network={pot.network}>
+          {pot.status === 'active' ? (
+            <>
+              {pot.hasZapIn ? (
+                <ZapPotDeposit
+                  id={id}
+                  onLearnMore={onFairplayLearnMore}
+                  variant={handleVariant(pot.vaultType)}
+                />
+              ) : (
+                <PotDeposit
+                  id={id}
+                  onLearnMore={onFairplayLearnMore}
+                  variant={handleVariant(pot.vaultType)}
+                />
+              )}
+            </>
+          ) : null}
+        </WalletRequired>
       </CardAccordionItem>
       <BonusAccordionItem pot={pot} />
       <WithdrawAccordionItem pot={pot} onFairplayLearnMore={onFairplayLearnMore} />

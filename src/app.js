@@ -6,7 +6,6 @@ import { RouteLoading } from './components/RouteLoading';
 import { PageNotFound } from './PageNotFound';
 import { Header } from './components/Header';
 import { WrappedFooter } from './components/Footer';
-import ModalPopup from './components/Modal/modal.js';
 import { useLocation } from 'react-router';
 import { useImpersonate } from './helpers/hooks';
 import { GoogleAnalytics } from './googleAnalytics';
@@ -15,24 +14,29 @@ import { GlobalDataLoader } from './components/GlobalDataLoader/GlobalDataLoader
 require('dotenv').config();
 
 const Home = React.lazy(() => import(`./features/home`));
+const Pots = React.lazy(() => import(`./features/pots`));
 const Vault = React.lazy(() => import(`./features/vault`));
 const Winners = React.lazy(() => import(`./features/winners`));
 const Dao = React.lazy(() => import(`./features/dao`));
 const Promo = React.lazy(() => import(`./features/promo`));
 const Promos = React.lazy(() => import(`./features/promo/promos`));
 
-function Pages() {
+const Pages = memo(function Pages() {
   return (
     <Suspense fallback={<RouteLoading />}>
       <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
         <Route
           exact
           path={[
-            '/:bottom(featured|all|xmas|main|lp|stable|community|side|nft)?',
-            '/:top(my-moonpots)',
+            '/:tab(moonpots)/:category(all|main|nft)?',
+            '/:tab(moonpots)/:network(bsc|fantom)?/:category(all|main|nft)?',
+            '/:tab(my-moonpots)/:status(active|eol)?',
           ]}
         >
-          <Home />
+          <Pots />
         </Route>
         <Route strict sensitive exact path="/pot/:id">
           <Vault />
@@ -55,7 +59,7 @@ function Pages() {
       </Switch>
     </Suspense>
   );
-}
+});
 
 const ScrollToTop = memo(function () {
   const { pathname, state } = useLocation();
@@ -77,7 +81,6 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <GlobalDataLoader />
-      <ModalPopup />
       <HashRouter>
         <ScrollToTop />
         <GoogleAnalytics />

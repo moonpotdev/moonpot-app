@@ -4,21 +4,17 @@ import { Grid, Link, makeStyles } from '@material-ui/core';
 import { Logo } from '../../../../components/Pot';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { tokensByNetworkAddress } from '../../../../config/tokens';
+import { getUnderylingToken, tokensByNetworkAddress } from '../../../../config/tokens';
 import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
-import {
-  arrayUnique,
-  formatAddressShort,
-  getUnderylingToken,
-  listJoin,
-} from '../../../../helpers/utils';
+import { arrayUnique, formatAddressShort, listJoin } from '../../../../helpers/utils';
 import { ErrorOutline } from '@material-ui/icons';
 import BigNumber from 'bignumber.js';
 import clsx from 'clsx';
 import styles from './styles';
 import { Translate } from '../../../../components/Translate';
+import { selectWalletAddress } from '../../../wallet/selectors';
 
 const useStyles = makeStyles(styles);
 const network = 'bsc';
@@ -129,7 +125,7 @@ function normalizeStaked(stakedAmount, ticketAddress, ticketPPFS, prices) {
 }
 
 const useNormalizedWinners = function (winners, drawToken, ticketAddress, ticketPPFS) {
-  const prices = useSelector(state => state.pricesReducer.prices);
+  const prices = useSelector(state => state.prices.prices);
 
   return useMemo(() => {
     return winners.map(winner => ({
@@ -265,7 +261,7 @@ const Winners = memo(function ({ network, tokenAddress, winners }) {
 
 const UserWonDraw = memo(function ({ winners }) {
   const classes = useStyles();
-  const address = useSelector(state => state.walletReducer.address)?.toLowerCase();
+  const address = useSelector(selectWalletAddress)?.toLowerCase();
 
   if (address && winners.find(winner => winner.address.toLowerCase() === address)) {
     return (

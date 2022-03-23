@@ -23,15 +23,6 @@
     "default": "Default",
     "featured": "Featured"
   },
-  "modals": {
-    "unsupportedNetworkDetected": "Jaringan terdeteksi tidak didukung ",
-    "switchToBSCNetwork": "Silahkan beralih ke jaringan BSC",
-    "switchToBSC": "Beralih ke BSC",
-    "cancel": "Batal",
-    "unableToAutoSwitch": "Tidak dapat mengganti jaringan secara otomatis",
-    "manuallySetNetwork": "Silahkan atur jaringan Anda secara manual ke BSC",
-    "close": "Tutup"
-  },
   "header": {
     "moonpots": "Moonpots",
     "myPots": "Pots Saya",
@@ -69,9 +60,11 @@
   "telegramSocialBlockButton": "Bergabunglah dengan Telegram kami",
   "discordSocialBlockButton": "Bergabunglah dengan Discord kami",
   "twitterSocialBlockButton": "Ikuti twitter kami",
-  "potType": "Tipe Pot:",
-  "sortBy": "Sort by:",
-  "potStatus": "Status Pot:",
+  "filters": {
+    "potType": "Tipe Pot:",
+    "sortBy": "Sort by:",
+    "potStatus": "Status Pot:"
+  },
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",

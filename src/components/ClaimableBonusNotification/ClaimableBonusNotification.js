@@ -12,13 +12,16 @@ import { PrimaryButton } from '../Buttons/PrimaryButton';
 import Pots from '../../images/tokens/pots.svg';
 import reduxActions from '../../features/redux/actions';
 import Steps, { StepsProgress } from '../../features/vault/components/Steps';
+import { selectWalletAddress, selectWalletNetwork } from '../../features/wallet/selectors';
+import { claimAllBonuses } from '../../features/wallet/actions';
+import { useWalletConnected } from '../../features/wallet/hooks';
 
 const useStyles = makeStyles(styles);
 
 function useClaimableBonuses() {
-  const address = useSelector(state => state.walletReducer.address);
-  const network = useSelector(state => state.walletReducer.network);
-  const earnedByPotBonus = useSelector(state => state.earnedReducer.earned, shallowEqual);
+  const address = useSelector(selectWalletAddress);
+  const network = useSelector(selectWalletNetwork);
+  const earnedByPotBonus = useSelector(state => state.earned.earned, shallowEqual);
 
   const unclaimedBonuses = useMemo(() => {
     if (network && address) {
@@ -66,7 +69,7 @@ export const ClaimableBonusNotification = memo(function ClaimableBonusNotificati
   const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const network = useSelector(state => state.walletReducer.network);
+  const [, network] = useWalletConnected();
   const { pots, others } = useClaimableBonuses() || {};
   const haveOthers = pots && others && others.length > 0;
   const stepsItem = useMemo(
@@ -85,7 +88,7 @@ export const ClaimableBonusNotification = memo(function ClaimableBonusNotificati
         {
           step: 'claimAll',
           message: 'Confirm claim all transaction on wallet to complete.',
-          action: () => dispatch(reduxActions.wallet.claimAllBonuses(haveOthers)),
+          action: () => dispatch(claimAllBonuses(haveOthers)),
           pending: false,
         },
       ],

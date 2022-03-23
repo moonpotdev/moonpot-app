@@ -1,12 +1,18 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { fetchDraws } from './draws';
 import { indexBy } from '../../../helpers/utils';
+import { fetchUniqueWinners } from './unique';
 
 const initialState = {
   draws: [],
   firstLoad: true,
   pending: false,
   hasMore: false,
+  unique: {
+    count: 0,
+    pending: false,
+    error: false,
+  },
 };
 
 const winnersReducer = createReducer(initialState, builder => {
@@ -36,6 +42,17 @@ const winnersReducer = createReducer(initialState, builder => {
       console.log('error', action);
       state.pending = false;
       state.firstLoad = false;
+    })
+    .addCase(fetchUniqueWinners.pending, (state, action) => {
+      state.unique.pending = true;
+    })
+    .addCase(fetchUniqueWinners.fulfilled, (state, action) => {
+      state.unique.pending = false;
+      state.unique.count = action.payload.uniqueWinners;
+    })
+    .addCase(fetchUniqueWinners.rejected, (state, action) => {
+      state.unique.pending = false;
+      state.unique.error = action.error;
     });
 });
 

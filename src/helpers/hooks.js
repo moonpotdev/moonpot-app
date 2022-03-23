@@ -4,8 +4,9 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { byDecimals, formatDecimals } from './format';
 import { tokensByNetworkAddress } from '../config/tokens';
 import { useTranslation } from 'react-i18next';
-import { WALLET_CONNECT_DONE } from '../features/redux/constants';
 import { ZERO } from './utils';
+import { selectWalletAddress } from '../features/wallet/selectors';
+import { walletAddressChanged } from '../features/wallet/slice';
 
 export function usePrevious(value) {
   const ref = useRef();
@@ -54,7 +55,7 @@ export function useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd) {
 }
 
 export function useTokenBalance(tokenSymbol, tokenDecimals) {
-  const balance = useSelector(state => state.balanceReducer.tokens[tokenSymbol]?.balance || 0);
+  const balance = useSelector(state => state.balance.tokens[tokenSymbol]?.balance || '0');
 
   return useMemo(() => {
     const bn = new BigNumber(balance);
@@ -65,7 +66,7 @@ export function useTokenBalance(tokenSymbol, tokenDecimals) {
 
 export function useTokenAllowance(spender, tokenSymbol, tokenDecimals) {
   const allowance = useSelector(
-    state => state.balanceReducer.tokens[tokenSymbol]?.allowance?.[spender] || 0
+    state => state.balance.tokens[tokenSymbol]?.allowance?.[spender] || 0
   );
 
   return useMemo(() => {
@@ -80,7 +81,7 @@ export function useTokenAllowance(spender, tokenSymbol, tokenDecimals) {
 }
 
 export function useTokenEarned(id, token, tokenDecimals) {
-  const earned = useSelector(state => state.earnedReducer.earned[id]?.[token] || 0);
+  const earned = useSelector(state => state.earned.earned[id]?.[token] || 0);
 
   return useMemo(() => {
     const bn = new BigNumber(earned);
@@ -92,23 +93,23 @@ export function useTokenEarned(id, token, tokenDecimals) {
 export function useTokenAddressPrice(address, network = 'bsc') {
   const tokenData = tokensByNetworkAddress[network]?.[address.toLowerCase()];
   return useSelector(state =>
-    tokenData ? state.pricesReducer.byNetworkAddress[tokenData.network][tokenData.address] || 0 : 0
+    tokenData ? state.prices.byNetworkAddress[tokenData.network][tokenData.address] || 0 : 0
   );
 }
 
 export function usePot(id) {
   // TODO: replace state instead of update existing objects so we don't have to do this
-  return useSelector(state => state.vaultReducer.pools[id]);
+  return useSelector(state => state.vault.pools[id]);
 }
 
 export function usePots() {
-  const pots = useSelector(state => state.vaultReducer.pools);
+  const pots = useSelector(state => state.vault.pools);
   return pots;
 }
 
 export function useRewardEarned(potId, rewardToken, rewardTokenDecimals) {
-  const address = useSelector(state => state.walletReducer.address);
-  const earned = useSelector(state => state.earnedReducer.earned[potId]?.[rewardToken] ?? 0);
+  const address = useSelector(selectWalletAddress);
+  const earned = useSelector(state => state.earned.earned[potId]?.[rewardToken] ?? 0);
 
   return useMemo(() => {
     if (address && earned && rewardToken && rewardTokenDecimals) {
@@ -120,12 +121,12 @@ export function useRewardEarned(potId, rewardToken, rewardTokenDecimals) {
 }
 
 export function useBonusesEarned(id) {
-  const earned = useSelector(state => state.earnedReducer.earned[id], shallowEqual);
-  const bonuses = useSelector(state => state.vaultReducer.pools[id]?.bonuses, shallowEqual);
+  const earned = useSelector(state => state.earned.earned[id], shallowEqual);
+  const bonuses = useSelector(state => state.vault.pools[id]?.bonuses, shallowEqual);
   const prices = useSelector(
     state =>
       Object.fromEntries(
-        bonuses.map(bonus => [bonus.id, state.pricesReducer.prices[bonus.oracleId] || 0])
+        bonuses.map(bonus => [bonus.id, state.prices.prices[bonus.oracleId] || 0])
       ),
     shallowEqual
   );
@@ -190,16 +191,16 @@ export function useImpersonate() {
 
   window.impersonate = useCallback(
     address => {
-      dispatch({ type: WALLET_CONNECT_DONE, payload: { address } });
+      dispatch(walletAddressChanged({ address }));
     },
     [dispatch]
   );
 }
 
 export function useDeposit(contractAddress, decimals, format = true) {
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(selectWalletAddress);
   const balance256 = useSelector(
-    state => state.balanceReducer.tokens[contractAddress + ':total']?.balance
+    state => state.balance.tokens[contractAddress + ':total']?.balance
   );
 
   return useMemo(() => {

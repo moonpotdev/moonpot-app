@@ -91,14 +91,14 @@ const FooterStats = memo(function FooterStats() {
   });
 
   //Buybacks Data
-  const buybacksInPots = useSelector(state => state.buybacksReducer.allTimeBuyback || 0);
-  const potsPrice = useSelector(state => state.pricesReducer.prices['POTS'] || 0);
+  const buybacksInPots = useSelector(state => state.buybacks.allTimeBuyback || 0);
+  const potsPrice = useSelector(state => state.prices.prices['POTS'] || 0);
   const buybacksInUsd = (buybacksInPots * potsPrice).toLocaleString(undefined, {
     maximumFractionDigits: 0,
   });
 
   //TVL Data
-  const tvl = useSelector(state => state.vaultReducer.totalTvl || 0).toLocaleString(undefined, {
+  const tvl = useSelector(state => state.vault.totalTvl || 0).toLocaleString(undefined, {
     maximumFractionDigits: 0,
   });
 

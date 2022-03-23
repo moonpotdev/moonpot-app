@@ -23,15 +23,6 @@
     "default": "默认",
     "featured": "精选"
   },
-  "modals": {
-    "unsupportedNetworkDetected": "检测到不支持的网络",
-    "switchToBSCNetwork": "请切换到BSC网络",
-    "switchToBSC": "切换到 BSC",
-    "cancel": "取消",
-    "unableToAutoSwitch": "无法自动切换网络",
-    "manuallySetNetwork": "请将您的网络手动设置为BSC",
-    "close": "关闭"
-  },
   "header": {
     "moonpots": "Moonpots",
     "myPots": "我的月盒",
@@ -80,9 +71,11 @@
   "telegramSocialBlockButton": "加入我们的电报群",
   "discordSocialBlockButton": "加入我们的Discord社群",
   "twitterSocialBlockButton": "关注我们的Twitter账号",
-  "potType": "月盒类型:",
-  "sortBy": "排序方式:",
-  "potStatus": "月盒状态:",
+  "filters": {
+    "potType": "月盒类型:",
+    "sortBy": "排序方式:",
+    "potStatus": "月盒状态:"
+  },
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",

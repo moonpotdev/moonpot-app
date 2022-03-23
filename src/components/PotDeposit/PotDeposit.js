@@ -2,24 +2,30 @@ import { Link, makeStyles } from '@material-ui/core';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles';
-import { bigNumberTruncate, byDecimals, convertAmountToRawNumber } from '../../helpers/format';
+import {
+  bigNumberTruncate,
+  byDecimals,
+  convertAmountToRawNumber,
+  formatDecimals,
+} from '../../helpers/format';
 import reduxActions from '../../features/redux/actions';
 import Steps from '../../features/vault/components/Steps';
 import { isEmpty, ZERO } from '../../helpers/utils';
 import { TokenInput } from '../TokenInput';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-
-import { WalletConnectButton } from '../Buttons/WalletConnectButton';
 import { useDeposit, usePot, useTokenAllowance, useTokenBalance } from '../../helpers/hooks';
 import { Translate } from '../Translate';
 import BigNumber from 'bignumber.js';
+import { WalletRequired } from '../WalletRequired/WalletRequired';
+import { selectWalletAddress } from '../../features/wallet/selectors';
+import { approval, deposit } from '../../features/wallet/actions';
 
 const useStyles = makeStyles(styles);
 
 // TODO DRY, move to one global steps component; use state/actions
 const DepositSteps = function ({ pot, steps, setSteps, onClose, onFinish }) {
   const dispatch = useDispatch();
-  const action = useSelector(state => state.walletReducer.action);
+  const action = useSelector(state => state.wallet.action);
 
   const handleClose = useCallback(() => {
     dispatch(reduxActions.balance.fetchBalances(pot));
@@ -69,7 +75,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
-  const address = useSelector(state => state.walletReducer.address);
+  const address = useSelector(selectWalletAddress);
   const balance = useTokenBalance(pot.token, pot.tokenDecimals);
   const stakeMax = useMemo(
     () => byDecimals(pot.stakeMax, pot.tokenDecimals),
@@ -114,10 +120,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
         steps.push({
           step: 'approve',
           message: 'Approval transactions happen once per pot.',
-          action: () =>
-            dispatch(
-              reduxActions.wallet.approval(pot.network, pot.tokenAddress, pot.contractAddress)
-            ),
+          action: () => dispatch(approval(pot.network, pot.tokenAddress, pot.contractAddress)),
           pending: false,
         });
       }
@@ -127,7 +130,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
         message: 'Confirm deposit transaction on wallet to complete.',
         action: () =>
           dispatch(
-            reduxActions.wallet.deposit(
+            deposit(
               pot.network,
               pot.contractAddress,
               convertAmountToRawNumber(depositAmount, pot.tokenDecimals),
@@ -166,7 +169,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
         />
       </div>
       <div className={classes.buttonHolder}>
-        {address ? (
+        <WalletRequired network={pot.network} networkRequired={true}>
           <PrimaryButton
             variant={variant}
             onClick={handleDeposit}
@@ -184,9 +187,15 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
               values={{ token: pot.token, amount: depositAmount.toString() }}
             />
           </PrimaryButton>
-        ) : (
-          <WalletConnectButton variant={variant} fullWidth={true} />
-        )}
+        </WalletRequired>
+        {pot.depositFee ? (
+          <div className={classes.fairplayNotice}>
+            <Translate
+              i18nKey="deposit.depositFeeNotice"
+              values={{ percent: formatDecimals(pot.depositFee * 100, 2) }}
+            />
+          </div>
+        ) : null}
         <DepositSteps
           pot={pot}
           steps={steps}

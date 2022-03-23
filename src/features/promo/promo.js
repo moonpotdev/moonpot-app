@@ -10,10 +10,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router';
 import { claimTokenId, fetchEligibleInfo, fetchPromoCodes } from './nftPromoCodes';
 import { promosAll } from '../../config/promo';
-import { WalletConnectButton } from '../../components/Buttons/WalletConnectButton';
 import { isEmpty } from '../../helpers/utils';
 import { Translate } from '../../components/Translate';
 import { OpenInNew } from '@material-ui/icons';
+import { WalletRequired } from '../../components/WalletRequired/WalletRequired';
+import { useWalletConnected } from '../wallet/hooks';
 
 const useStyles = makeStyles(styles);
 
@@ -22,7 +23,7 @@ const Promo = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const address = useSelector(state => state.walletReducer.address);
+  const [address] = useWalletConnected();
   const promo = promosAll.find(p => p.name === name);
   const data = useSelector(state => state.promo);
 
@@ -49,80 +50,80 @@ const Promo = () => {
     <React.Fragment>
       <Container maxWidth="xs" style={{ minWidth: 'fit-content' }}>
         <Typography className={classes.mainTitle}>{promo.desc}</Typography>
-        {!address ? (
-          <WalletConnectButton variant="purple" fullWidth={true} />
-        ) : data.pending ? (
-          <RouteLoading />
-        ) : (
-          <>
-            {data.tokenIds.length > 0 ? (
-              <>
-                <Typography className={classes.title}>
-                  <Translate i18nKey="promo.canClaim" values={{ count: data.tokenIds.length }} />
-                </Typography>
-                <PrimaryButton
-                  variant="purple"
-                  fullWidth={true}
-                  onClick={handleClaim}
-                  style={{ marginBottom: '16px' }}
-                >
-                  {t('promo.claim')}
-                </PrimaryButton>
-              </>
-            ) : (
-              ''
-            )}
-
-            {!isEmpty(data.promoCodes) ? (
-              <>
-                <Typography className={classes.title}>{t('promo.myPromocodes')}</Typography>
-                {data.promoCodes?.map((code, i) => (
-                  <Card
-                    variant="purpleDark"
-                    style={{ marginTop: '10px', minWidth: 'fit-content', marginLeft: '-10px' }}
-                    key={i}
-                    oneColumn={true}
+        <WalletRequired networkRequired={true} network={promo.network}>
+          {data.pending ? (
+            <RouteLoading />
+          ) : (
+            <>
+              {data.tokenIds.length > 0 ? (
+                <>
+                  <Typography className={classes.title}>
+                    <Translate i18nKey="promo.canClaim" values={{ count: data.tokenIds.length }} />
+                  </Typography>
+                  <PrimaryButton
+                    variant="purple"
+                    fullWidth={true}
+                    onClick={handleClaim}
+                    style={{ marginBottom: '16px' }}
                   >
-                    <Typography className={classes.title}>{code}</Typography>
-                  </Card>
-                ))}
+                    {t('promo.claim')}
+                  </PrimaryButton>
+                </>
+              ) : (
+                ''
+              )}
 
-                <p style={{ textAlign: 'center' }}>
-                  <a href={promo.link} rel="noreferrer" target="_blank" className={classes.link}>
-                    <Translate i18nKey={promo.linkTextKey} />
-                    <OpenInNew fontSize="inherit" />
-                  </a>
-                </p>
-              </>
-            ) : (
-              ''
-            )}
+              {!isEmpty(data.promoCodes) ? (
+                <>
+                  <Typography className={classes.title}>{t('promo.myPromocodes')}</Typography>
+                  {data.promoCodes?.map((code, i) => (
+                    <Card
+                      variant="purpleDark"
+                      style={{ marginTop: '10px', minWidth: 'fit-content', marginLeft: '-10px' }}
+                      key={i}
+                      oneColumn={true}
+                    >
+                      <Typography className={classes.title}>{code}</Typography>
+                    </Card>
+                  ))}
 
-            {isEmpty(data.promoCodes) && !isEmpty(data.codeIds) ? (
-              <>
-                <Typography className={classes.title}>
-                  <Translate i18nKey="promo.claimed" values={{ count: data.codeIds.length }} />
-                </Typography>
-                <PrimaryButton
-                  variant="purple"
-                  fullWidth={true}
-                  onClick={handleReveal}
-                  style={{ marginBottom: '16px' }}
-                >
-                  {t('Reveal')}
-                </PrimaryButton>
-              </>
-            ) : (
-              ''
-            )}
+                  <p style={{ textAlign: 'center' }}>
+                    <a href={promo.link} rel="noreferrer" target="_blank" className={classes.link}>
+                      <Translate i18nKey={promo.linkTextKey} />
+                      <OpenInNew fontSize="inherit" />
+                    </a>
+                  </p>
+                </>
+              ) : (
+                ''
+              )}
 
-            {isEmpty(data.tokenIds) && isEmpty(data.codeIds) ? (
-              <Typography className={classes.title}>{t('promo.noNfts')}</Typography>
-            ) : (
-              ''
-            )}
-          </>
-        )}
+              {isEmpty(data.promoCodes) && !isEmpty(data.codeIds) ? (
+                <>
+                  <Typography className={classes.title}>
+                    <Translate i18nKey="promo.claimed" values={{ count: data.codeIds.length }} />
+                  </Typography>
+                  <PrimaryButton
+                    variant="purple"
+                    fullWidth={true}
+                    onClick={handleReveal}
+                    style={{ marginBottom: '16px' }}
+                  >
+                    {t('Reveal')}
+                  </PrimaryButton>
+                </>
+              ) : (
+                ''
+              )}
+
+              {isEmpty(data.tokenIds) && isEmpty(data.codeIds) ? (
+                <Typography className={classes.title}>{t('promo.noNfts')}</Typography>
+              ) : (
+                ''
+              )}
+            </>
+          )}
+        </WalletRequired>
       </Container>
     </React.Fragment>
   );

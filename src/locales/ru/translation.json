@@ -23,15 +23,6 @@
     "default": "Умолчанию",
     "featured": "Избранные"
   },
-  "modals": {
-    "unsupportedNetworkDetected": "Обнаружена неподдерживаемая сеть",
-    "switchToBSCNetwork": "Пожалуйста, переключитесь на сеть BSC",
-    "switchToBSC": "Переключиться на BSC",
-    "cancel": "Отменить",
-    "unableToAutoSwitch": "Ошибка при автопереключении сети",
-    "manuallySetNetwork": "Пожалуйста, переключитесь на BSC вручную",
-    "close": "Закрыть"
-  },
   "header": {
     "moonpots": "Moonpots",
     "myPots": "Мои Горшки",
@@ -80,9 +71,11 @@
   "telegramSocialBlockButton": "Присоединяйтесь к нашему каналу Telegram",
   "discordSocialBlockButton": "Присоединяйтесь к нашему серверу в Discord",
   "twitterSocialBlockButton": "Подписывайтесь на наш Twitter",
-  "potType": "Вид горшка:",
-  "sortBy": "Сортировать по:",
-  "potStatus": "Статус горшка",
+  "filters": {
+    "potType": "Вид горшка:",
+    "sortBy": "Сортировать по:",
+    "potStatus": "Статус горшка"
+  },
   "list": {
     "one": "<span>{{item}}</span>",
     "two": "<span>{{first}}</span> & <span>{{last}}</span>",
