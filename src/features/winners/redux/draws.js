@@ -38,7 +38,7 @@ const client = new ApolloClient({
 });
 
 function decorateDraw(draw, network) {
-  const obj = { ...draw };
+  const obj = { ...draw, network };
   const pots = potsByNetworkPrizePoolAddress[network][draw.prizePool.address.toLowerCase()];
 
   // add static pot info

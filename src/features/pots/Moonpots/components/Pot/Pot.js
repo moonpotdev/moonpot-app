@@ -97,12 +97,7 @@ const Bottom = function ({ id }) {
         </CardAccordionItem>
       </CardAccordionGroup>
       <div className={classes.rowPlay}>
-        <Play
-          id={pot.id}
-          token={pot.token}
-          contractAddress={pot.contractAddress}
-          variant={'teal'}
-        />
+        <Play id={pot.id} token={pot.token} contractAddress={pot.contractAddress} variant="teal" />
       </div>
       <div className={classes.rowOdds}>
         <NewDepositOdds

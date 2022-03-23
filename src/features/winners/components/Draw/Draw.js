@@ -8,7 +8,12 @@ import { getUnderylingToken, tokensByNetworkAddress } from '../../../../config/t
 import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
-import { arrayUnique, formatAddressShort, listJoin } from '../../../../helpers/utils';
+import {
+  arrayUnique,
+  formatAddressShort,
+  getNetworkExplorerUrl,
+  listJoin,
+} from '../../../../helpers/utils';
 import { ErrorOutline } from '@material-ui/icons';
 import BigNumber from 'bignumber.js';
 import clsx from 'clsx';
@@ -424,7 +429,7 @@ export const Draw = function ({ draw }) {
             winners={winners}
           />
           <Link
-            href={`https://bscscan.com/tx/${draw.txHash}`}
+            href={getNetworkExplorerUrl(draw.network, `/tx/${draw.txHash}`)}
             target="_blank"
             rel="noreferrer"
             className={classes.txLink}

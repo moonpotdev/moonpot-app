@@ -111,24 +111,6 @@ const Vault = () => {
     return <Redirect to="/" />;
   }
 
-  function handleVariant(vaultType) {
-    if (vaultType === 'main') {
-      return 'tealDark';
-    } else if (vaultType === 'community') {
-      return 'blueCommunity';
-    } else if (vaultType === 'lp') {
-      return 'greenDark';
-    } else if (vaultType === 'stable') {
-      return 'greenStableAlt';
-    } else if (vaultType === 'side') {
-      return 'greySideAlt';
-    } else if (vaultType === 'nft') {
-      return 'purpleNftAlt';
-    } else if (vaultType === 'xmas') {
-      return 'purpleXmasAlt';
-    }
-  }
-
   return (
     <div className="App">
       <VaultDataLoader id={id} />
@@ -149,7 +131,7 @@ const Vault = () => {
         <Pot
           id={id}
           onFairplayLearnMore={handleFairplayLearnMore}
-          variant={handleVariant(pot.vaultType)}
+          variant={'tealDark'}
           oneColumn={true}
         />
         <InfoCards id={id} fairplayRef={fairplayRef} className={classes.infoCards} />

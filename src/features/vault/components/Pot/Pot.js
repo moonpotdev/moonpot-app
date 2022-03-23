@@ -139,17 +139,9 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
           {pot.status === 'active' ? (
             <>
               {pot.hasZapIn ? (
-                <ZapPotDeposit
-                  id={id}
-                  onLearnMore={onFairplayLearnMore}
-                  variant={handleVariant(pot.vaultType)}
-                />
+                <ZapPotDeposit id={id} onLearnMore={onFairplayLearnMore} variant="teal" />
               ) : (
-                <PotDeposit
-                  id={id}
-                  onLearnMore={onFairplayLearnMore}
-                  variant={handleVariant(pot.vaultType)}
-                />
+                <PotDeposit id={id} onLearnMore={onFairplayLearnMore} variant="teal" />
               )}
             </>
           ) : null}
