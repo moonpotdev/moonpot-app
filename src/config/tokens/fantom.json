@@ -37,5 +37,30 @@
     "decimals": 18,
     "underlyingToken": "beFTM",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "TOMB",
+    "address": "0x6c021Ae822BEa943b2E66552bDe1D2696a53fbB7",
+    "type": "single",
+    "oracleId": "TOMB",
+    "decimals": 18
+  },
+  {
+    "symbol": "TOMB-FTM LP",
+    "address": "0x2A651563C9d3Af67aE0388a5c8F89b867038089e",
+    "type": "lp",
+    "oracleId": "tomb-tomb-ftm",
+    "decimals": 18,
+    "zap": "0xbff6176EF6f6638d1506E806353e06F3ef7c961b",
+    "lp": ["WFTM", "TOMB"]
+  },
+  {
+    "symbol": "moonTicketTOMB-FTM",
+    "address": "0x36e9277FA50CC8ea077C255Ac0D40C1A40e57851",
+    "type": "ticket",
+    "oracleId": "tomb-tomb-ftm",
+    "decimals": 18,
+    "underlyingToken": "TOMB-FTM LP",
+    "stakedMultiplier": 2
   }
 ]

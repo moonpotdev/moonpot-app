@@ -2,6 +2,7 @@
   {
     "id": "beftm",
     "name": "beFTM",
+    "defaultOrder": -80,
     "token": "beFTM",
     "tokenAddress": "0x7381eD41F6dE418DdE5e84B55590422a57917886",
     "tokenDecimals": 18,
@@ -32,7 +33,6 @@
     "withdrawFee": 0.0001,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x185647c55633A5706aAA3278132537565c925078",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [],
     "bonuses": [
@@ -42,5 +42,51 @@
         "display": "bonus"
       }
     ]
+  },
+  {
+    "id": "tomb-ftm",
+    "name": "TOMB-FTM LP",
+    "defaultOrder": -90,
+    "token": "TOMB-FTM LP",
+    "provider": "SpookySwap",
+    "tokenAddress": "0x2A651563C9d3Af67aE0388a5c8F89b867038089e",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketTOMB-FTM",
+    "rewardAddress": "0x36e9277FA50CC8ea077C255Ac0D40C1A40e57851",
+    "contractAddress": "0x22E8D98a3447223bE29F075769ed7987e0AD0d46",
+    "prizePoolAddress": "0x7455305a356365F64199aB0B5AAaa854cB91C117",
+    "prizeStrategyAddress": "0xb7a6322856001fb36143F9e64a28F672435db418",
+    "oracleId": "tomb-tomb-ftm",
+    "apyId": "tomb-tomb-ftm",
+    "vaultType": "lp",
+    "categories": ["main"],
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": true,
+    "hasZapOut": true,
+    "withdrawFee": 0.0001,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x27c77411074ba90cA35e6f92A79dAd577c05A746",
+    "sponsorToken": "TOMB",
+    "sponsors": [
+      {
+        "sponsorToken": "TOMB",
+        "sponsorOracleId": "TOMB",
+        "sponsorAddress": "0x6c021Ae822BEa943b2E66552bDe1D2696a53fbB7",
+        "sponsorTokenDecimals": 18
+      }
+    ],
+    "bonuses": []
   }
 ]
