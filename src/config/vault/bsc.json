@@ -2,6 +2,7 @@
   {
     "id": "pots",
     "name": "Ziggy's",
+    "defaultOrder": -100,
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
@@ -28,7 +29,6 @@
     "supportsClaimAllBonuses": false,
     "supportsPartialWithdraw": true,
     "infoCardStrategy": "ziggy",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
       {
@@ -75,7 +75,6 @@
     "supportsClaimAllBonuses": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
       {
@@ -138,7 +137,6 @@
     "supportsClaimAllBonuses": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xeffFD962696ac768c3C9C84e2D4CC1bC9C54983d",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
       {
@@ -195,7 +193,6 @@
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x1bBBf8910E5A074c7B62D891Dbab9f4af82C14D4",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
       {
@@ -249,7 +246,6 @@
     "hasZapOut": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xC34Ae91312A3c3F9420691922040a5DEe1698E52",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
       {
@@ -586,7 +582,6 @@
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xbFa24f7C2376c28407504Fb8512797dD8D316aBf",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [],
     "bonuses": [
@@ -637,7 +632,6 @@
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x3106d9B3d5e04ff5D575212140FAb1Cf17C8933F",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [],
     "bonuses": [
@@ -686,7 +680,6 @@
     "supportsClaimAllBonuses": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x6EB4F8975b15F34AdccFDE830087Fc8FdB006C36",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
       {
@@ -744,7 +737,6 @@
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x1417633bF9Fed6753e7504DF036c30F205D30e7E",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
       {
@@ -832,7 +824,6 @@
     "migrationLearnMoreUrl": "https://moonpot.com/alpha/news/ziggy-s-pot-redeployment/",
     "supportsClaimAllBonuses": true,
     "infoCardStrategy": "ziggy",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "CAKE",
     "sponsors": [
       {
@@ -920,7 +911,6 @@
     "status": "eol",
     "eolDrawNumber": 1,
     "infoCardStrategy": "ziggy",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "CAKE",
     "sponsors": [
       {
@@ -984,7 +974,6 @@
     "supportsClaimAllBonuses": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
       {
@@ -1044,7 +1033,6 @@
     "eolDrawNumber": 6,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
       {
@@ -1105,7 +1093,6 @@
     "eolDrawNumber": 1,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
-    "sponsorProjectName": "Beefy.Finance",
     "sponsorToken": "BIFI",
     "sponsors": [
       {
@@ -1403,7 +1390,6 @@
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x87F9A89B51dA28CE8653A700d362CDa9b9bA7d88",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
       {
@@ -1509,7 +1495,6 @@
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xb26642B6690E4c4c9A6dAd6115ac149c700C7dfE",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
       {
@@ -1564,7 +1549,6 @@
     "withdrawFee": 0,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x47a27220Db5458DB4b238fefCBb8178232cBFa5D",
-    "sponsorProjectName": "Moonpot",
     "sponsorToken": "POTS",
     "sponsors": [
       {

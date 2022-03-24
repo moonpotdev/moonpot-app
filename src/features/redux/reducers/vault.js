@@ -43,7 +43,7 @@ const initialPools = () => {
         !('interestBreakdown' in pool) ||
         !('interest' in pool.interestBreakdown) ||
         !pool.interestBreakdown.interest;
-      pool['defaultOrder'] = defaultOrder++;
+      pool['defaultOrder'] = pool.defaultOrder || defaultOrder++;
       pool.sponsors.forEach(sponsor => {
         sponsor.sponsorBalance = ZERO;
         sponsor.sponsorBalanceUsd = ZERO;
