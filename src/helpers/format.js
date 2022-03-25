@@ -156,3 +156,10 @@ export function bigNumberTruncate(number, maxDecimals) {
 
   return bn.decimalPlaces(maxDecimals, BigNumber.ROUND_DOWN);
 }
+
+export function slug(str) {
+  return str
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '-')
+    .replace(/-{2,}/g, '-');
+}

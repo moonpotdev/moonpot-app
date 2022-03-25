@@ -214,7 +214,7 @@ function fakeZapOutEstimate(potId, wantTokenAddress) {
 }
 
 export function createZapOutEstimate(potId, wantTokenAddress) {
-  if (potId === '4belt' || potId === 'beltbnb' || potId === 'ibalpaca') {
+  if (potId === '4belt' || potId === 'beltbnb' || potId === 'ibalpaca' || potId === 'g3crv') {
     return fakeZapOutEstimate(potId, wantTokenAddress);
   }
   const requestId = uniqid('out', potId);
