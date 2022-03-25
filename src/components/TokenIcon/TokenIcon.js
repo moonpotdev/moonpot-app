@@ -1,10 +1,17 @@
 import React, { memo } from 'react';
 import clsx from 'clsx';
+import { slug } from '../../helpers/format';
 import { makeStyles } from '@material-ui/core';
 import styles from './styles';
-import { slug } from '../../helpers/format';
 
 const useStyles = makeStyles(styles);
+
+function getTokenSrc(name) {
+  const tokenSlug = slug(name);
+  const asset = require(`../../images/tokens/${tokenSlug}.svg`);
+
+  return asset.default;
+}
 
 export const TokenIcon = memo(function TokenImage({ token, className }) {
   const classes = useStyles();
@@ -35,33 +42,15 @@ export const TokenIcon = memo(function TokenImage({ token, className }) {
   if (isTwoTokenLP) {
     return (
       <div className={classNames}>
-        <img
-          src={require(`../../images/tokens/${slug(token.lp[0])}.svg`).default}
-          alt=""
-          aria-hidden={true}
-          width={24}
-          height={24}
-        />
-        <img
-          src={require(`../../images/tokens/${slug(token.lp[1])}.svg`).default}
-          alt=""
-          aria-hidden={true}
-          width={24}
-          height={24}
-        />
+        <img src={getTokenSrc(token.lp[0])} alt="" aria-hidden={true} width={24} height={24} />
+        <img src={getTokenSrc(token.lp[1])} alt="" aria-hidden={true} width={24} height={24} />
       </div>
     );
   }
 
   return (
     <div className={classNames}>
-      <img
-        src={require(`../../images/tokens/${slug(token.symbol)}.svg`).default}
-        alt=""
-        aria-hidden={true}
-        width={24}
-        height={24}
-      />
+      <img src={getTokenSrc(token.symbol)} alt="" aria-hidden={true} width={24} height={24} />
     </div>
   );
 });

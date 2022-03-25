@@ -312,7 +312,7 @@ export function Pot({ id, variant, bottom, simple, oneColumn }) {
                 <TVL totalStakedUsd={pot.totalStakedUsd} />
               </DrawStat>
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={6}>
               <DrawStat i18nKey="pot.statDeposit">
                 <DepositWithOdds
                   contractAddress={pot.contractAddress}
@@ -326,7 +326,7 @@ export function Pot({ id, variant, bottom, simple, oneColumn }) {
             </Grid>
           </>
         ) : null}
-        <Grid item xs={simple ? 6 : 7}>
+        <Grid item xs={6}>
           <DrawStat
             i18nKey="pot.statInterest"
             tooltip={pot.isPrizeOnly ? null : <InterestTooltip pot={pot} />}
