@@ -21,6 +21,20 @@
     "decimals": 6
   },
   {
+    "symbol": "fUSDT",
+    "address": "0x049d68029688eAbF473097a2fC38ef61633A3C7A",
+    "type": "single",
+    "oracleId": "fUSDT",
+    "decimals": 6
+  },
+  {
+    "symbol": "DAI",
+    "address": "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
+    "type": "single",
+    "oracleId": "DAI",
+    "decimals": 18
+  },
+  {
     "symbol": "beFTM",
     "address": "0x7381eD41F6dE418DdE5e84B55590422a57917886",
     "type": "single",
@@ -61,6 +75,24 @@
     "oracleId": "tomb-tomb-ftm",
     "decimals": 18,
     "underlyingToken": "TOMB-FTM LP",
+    "stakedMultiplier": 2
+  },
+  {
+    "symbol": "g3CRV USD LP",
+    "address": "0xD02a30d33153877BC20e5721ee53DeDEE0422B2F",
+    "type": "lp",
+    "oracleId": "curve-ftm-geist",
+    "decimals": 18,
+    "zap": "0x1A8c7697070F04288059e866f0dDe81E97712D2b",
+    "lp": ["DAI", "USDC", "fUSDT"]
+  },
+  {
+    "symbol": "moonTicketCurveGeist",
+    "address": "0x941eD924E1ee2d6a016F5130b45346FD956F3fEC",
+    "type": "ticket",
+    "oracleId": "curve-ftm-geist",
+    "decimals": 18,
+    "underlyingToken": "g3CRV USD LP",
     "stakedMultiplier": 2
   }
 ]

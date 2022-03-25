@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
 import { Card } from '../Cards';
 import Countdown from '../Countdown';
-import { byDecimals, formatDecimals } from '../../helpers/format';
+import { byDecimals, formatDecimals, slug } from '../../helpers/format';
 import { InterestTooltip } from '../Tooltip/tooltip';
 import {
   translateToken,
@@ -25,13 +25,6 @@ import clsx from 'clsx';
 import { selectWalletAddress } from '../../features/wallet/selectors';
 
 const useStyles = makeStyles(styles);
-
-function slug(str) {
-  return str
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, '-')
-    .replace(/-{2,}/g, '-');
-}
 
 export const Logo = memo(function ({ icon, sponsorToken }) {
   const iconSlug = slug(icon);

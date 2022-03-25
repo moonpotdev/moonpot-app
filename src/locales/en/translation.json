@@ -474,7 +474,8 @@
     "userWonPrize": "You won a prize!"
   },
   "tokens": {
-    "4Belt USD LP": "USD Stablecoins"
+    "4Belt USD LP": "USD Stablecoins",
+    "g3CRV USD LP": "USD Stablecoins"
   },
   "claimableBonuses": {
     "explainer": [

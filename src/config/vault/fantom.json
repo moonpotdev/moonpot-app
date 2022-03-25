@@ -2,7 +2,7 @@
   {
     "id": "beftm",
     "name": "beFTM",
-    "defaultOrder": -80,
+    "defaultOrder": -70,
     "token": "beFTM",
     "tokenAddress": "0x7381eD41F6dE418DdE5e84B55590422a57917886",
     "tokenDecimals": 18,
@@ -46,7 +46,7 @@
   {
     "id": "tomb-ftm",
     "name": "TOMB-FTM LP",
-    "defaultOrder": -90,
+    "defaultOrder": -80,
     "token": "TOMB-FTM LP",
     "provider": "SpookySwap",
     "tokenAddress": "0x2A651563C9d3Af67aE0388a5c8F89b867038089e",
@@ -88,5 +88,51 @@
       }
     ],
     "bonuses": []
+  },
+  {
+    "id": "g3crv",
+    "name": "Curve USD",
+    "defaultOrder": -90,
+    "token": "g3CRV USD LP",
+    "provider": "Curve",
+    "tokenAddress": "0xD02a30d33153877BC20e5721ee53DeDEE0422B2F",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketCurveGeist",
+    "rewardAddress": "0x941eD924E1ee2d6a016F5130b45346FD956F3fEC",
+    "contractAddress": "0xB5ED77447edC6780760256628787d2Fff496AcA4",
+    "prizePoolAddress": "0x021d3Eff654b3500A5f9d3C8Cc4BC9C8098a22C4",
+    "prizeStrategyAddress": "0x68dfEfCaf3290DD13921D7c83A5005c0172B65Af",
+    "oracleId": "curve-ftm-geist",
+    "apyId": "curve-ftm-geist",
+    "vaultType": "main",
+    "categories": ["main"],
+    "featured": true,
+    "type": "g3crv",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": true,
+    "hasZapOut": true,
+    "withdrawFee": 0.0001,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xf710D90A1Bd702dAEa619eEbbe876e7085c2A1df",
+    "sponsorToken": "POTS",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
   }
 ]

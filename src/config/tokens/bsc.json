@@ -179,7 +179,6 @@
   },
   {
     "symbol": "4Belt USD LP",
-    "icon": "belt-lp",
     "address": "0x9cb73F20164e399958261c289Eb5F9846f4D1404",
     "type": "lp",
     "oracleId": "belt-4belt",
