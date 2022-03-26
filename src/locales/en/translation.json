@@ -427,7 +427,11 @@
       ]
     },
     "inYourWallet": "In your wallet",
-    "provider": "Liquidity provider"
+    "provider": "Liquidity provider",
+    "paused": {
+      "title": "Deposits Paused",
+      "defaultReason": "Please see Discord for more details."
+    }
   },
   "withdraw": {
     "token": "Withdraw {{token}}",

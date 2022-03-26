@@ -14,6 +14,7 @@ import { ZapPotWithdraw } from '../../../../components/PotWithdraw/ZapPotWithdra
 import { TooltipWithIcon } from '../../../../components/Tooltip/tooltip';
 import { WalletRequired } from '../../../../components/WalletRequired/WalletRequired';
 import { selectWalletAddress } from '../../../wallet/selectors';
+import { DepositsPaused } from '../../../../components/DepositsPaused';
 
 const useStyles = makeStyles(styles);
 
@@ -110,13 +111,17 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
       <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
         <WalletRequired network={pot.network}>
           {pot.status === 'active' ? (
-            <>
-              {pot.hasZapIn ? (
-                <ZapPotDeposit id={id} onLearnMore={onFairplayLearnMore} variant="teal" />
-              ) : (
-                <PotDeposit id={id} onLearnMore={onFairplayLearnMore} variant="teal" />
-              )}
-            </>
+            pot.depositsPaused ? (
+              <DepositsPaused reason={pot.depositsPausedReason} variant="teal" />
+            ) : (
+              <>
+                {pot.hasZapIn ? (
+                  <ZapPotDeposit id={id} onLearnMore={onFairplayLearnMore} variant="teal" />
+                ) : (
+                  <PotDeposit id={id} onLearnMore={onFairplayLearnMore} variant="teal" />
+                )}
+              </>
+            )
           ) : null}
         </WalletRequired>
       </CardAccordionItem>
