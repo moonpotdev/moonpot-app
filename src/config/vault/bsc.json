@@ -134,6 +134,8 @@
       "ziggyPrize": 5
     },
     "status": "active",
+    "depositsPaused": true,
+    "depositsPausedReason": "Underlying Beefy vault is being upgraded.",
     "supportsClaimAllBonuses": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xeffFD962696ac768c3C9C84e2D4CC1bC9C54983d",

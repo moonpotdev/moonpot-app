@@ -8,6 +8,7 @@ import { ZapPotWithdraw } from '../../../../../components/PotWithdraw/ZapPotWith
 import { ZapPotDeposit } from '../../../../../components/ZapPotDeposit/ZapPotDeposit';
 import { useSelector } from 'react-redux';
 import { WalletRequired } from '../../../../../components/WalletRequired/WalletRequired';
+import { DepositsPaused } from '../../../../../components/DepositsPaused';
 
 const ActiveLayout = function ({ item }) {
   const wallet = useSelector(state => state.wallet);
@@ -50,7 +51,9 @@ const ActiveLayout = function ({ item }) {
       <WalletRequired network={item.network}>
         {/*Deposit*/}
         <CardAccordionItem titleKey="pot.depositMore">
-          {item.hasZapIn ? (
+          {item.depositsPaused ? (
+            <DepositsPaused reason={item.depositsPausedReason} variant="purple" />
+          ) : item.hasZapIn ? (
             <ZapPotDeposit id={item.id} onLearnMore={null} variant="purple" />
           ) : (
             <PotDeposit id={item.id} onLearnMore={null} variant="purple" />
