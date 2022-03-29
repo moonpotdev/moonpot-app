@@ -7,8 +7,10 @@ import { useSelector } from 'react-redux';
 import { usePots } from '../../../../helpers/hooks';
 import { useTotalPrizeValue } from '../../../winners/apollo/total';
 import { ZERO } from '../../../../helpers/utils';
-import { FeaturedPotCard } from '../../../../components/FeaturedPotCard/FeaturedPotCard';
-import { FeaturedPotPlaceholderCard } from '../../../../components/FeaturedPotCard/FeaturedPotPlaceholderCard';
+import {
+  FeaturedPotCard,
+  FeaturedPotPlaceholderCard,
+} from '../../../../components/FeaturedPotCard';
 
 const useStyles = makeStyles(styles);
 
@@ -34,10 +36,10 @@ const StatsCard = memo(function StatsCards() {
   const classes = useStyles();
 
   // Holders Data
-  const cadets = useSelector(state => state.holders.cadets || 0);
+  /*const cadets = useSelector(state => state.holders.cadets || 0);
   const cadetsFormatted = cadets.toLocaleString(undefined, {
     maximumFractionDigits: 0,
-  });
+  });*/
 
   // Available Prizes Data
   const totalPrizesAvailable = useSelector(state =>
@@ -89,14 +91,14 @@ const StatsCard = memo(function StatsCards() {
             <div className={classes.statsCardValue}>${totalPrizesAvailableFormatted}</div>
           </div>
         </Grid>
-        <Grid item xs={6} className={classes.statsVertCenterOuter}>
+        {/*<Grid item xs={6} className={classes.statsVertCenterOuter}>
           <div className={classes.statsVertCenterInner}>
             <div className={classes.statsCardLabel}>
               <Translate i18nKey="header.cadets" />
             </div>
             <div className={classes.statsCardValue}>{cadetsFormatted}</div>
           </div>
-        </Grid>
+        </Grid>*/}
       </Grid>
       <img
         alt=""

@@ -85,10 +85,10 @@ const FooterStats = memo(function FooterStats() {
   const classes = useStyles();
 
   //Holders Data
-  const cadets = useSelector(state => state.holders.cadets || 0);
-  const cadetsFormatted = cadets.toLocaleString(undefined, {
-    maximumFractionDigits: 0,
-  });
+  // const cadets = useSelector(state => state.holders.cadets || 0);
+  // const cadetsFormatted = cadets.toLocaleString(undefined, {
+  //   maximumFractionDigits: 0,
+  // });
 
   //Buybacks Data
   const buybacksInPots = useSelector(state => state.buybacks.allTimeBuyback || 0);
@@ -110,12 +110,12 @@ const FooterStats = memo(function FooterStats() {
 
   const stats = useMemo(() => {
     return [
-      { label: t('footer.cadets'), value: cadetsFormatted },
+      // { label: t('footer.cadets'), value: cadetsFormatted },
       { label: t('footer.prizes'), value: '$' + totalFormatted },
       { label: t('footer.tvl'), value: '$' + tvl },
       { label: t('footer.buybacks'), value: '$' + buybacksInUsd },
     ];
-  }, [t, cadetsFormatted, totalFormatted, tvl, buybacksInUsd]);
+  }, [t, /*cadetsFormatted,*/ totalFormatted, tvl, buybacksInUsd]);
 
   return (
     <ul className={clsx(classes.stats)}>

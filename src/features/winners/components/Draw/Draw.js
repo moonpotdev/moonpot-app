@@ -38,25 +38,6 @@ const useTotalPrizeValue = function (winners) {
   }, [winners]);
 };
 
-const useDrawSponsor = function (depositTokenAddress, ticketTokenAddress, winners) {
-  return useMemo(() => {
-    const depositTokenAddressLower = depositTokenAddress.toLowerCase();
-    const ticketTokenAddressLower = ticketTokenAddress.toLowerCase();
-
-    // Return first token which isn't base token
-    for (const winner of winners) {
-      for (const { token } of winner.awards) {
-        const tokenAddress = token.toLowerCase();
-        if (tokenAddress !== depositTokenAddressLower && tokenAddress !== ticketTokenAddressLower) {
-          return tokensByNetworkAddress[network]?.[tokenAddress]?.symbol;
-        }
-      }
-    }
-
-    return null;
-  }, [depositTokenAddress, ticketTokenAddress, winners]);
-};
-
 function normalizeWinnings(awards, drawToken, ticketAddress, ticketPPFS, prices) {
   const tokens = {};
 
@@ -383,16 +364,12 @@ export const Draw = function ({ draw }) {
   );
   // console.log(draw.pot.id, winners);
   const totalPrizeValue = useTotalPrizeValue(winners);
-  const sponsorToken = useDrawSponsor(draw.pot.tokenAddress, draw.pot.rewardAddress, draw.winners);
 
   return (
     <Card variant="purpleMid">
       <Grid container spacing={2} className={classes.rowLogoWonTotal}>
         <Grid item xs="auto">
-          <Logo
-            icon={draw.pot.icon || draw.pot.id}
-            sponsorToken={sponsorToken || draw.pot.sponsorToken}
-          />
+          <Logo icon={draw.pot.icon || draw.pot.id} />
         </Grid>
         <Grid item xs="auto" className={classes.columnTitleValueWon}>
           <Title name={draw.pot.name} />

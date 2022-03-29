@@ -30,7 +30,7 @@ const Pot = function ({ id }) {
           style={{ marginBottom: '24px' }}
           onClick={() => history.push(`/pot/${pot.id}`)}
         >
-          <Logo icon={pot.icon || pot.id} sponsorToken={pot.sponsorToken} />
+          <Logo icon={pot.icon || pot.id} />
         </Grid>
         {/*Pot Title*/}
         <PotTitle item={pot} />
