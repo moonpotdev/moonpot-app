@@ -122,7 +122,7 @@ export const FeaturedPotCard = memo(function FeaturedPotCard({ pot }) {
           </div>
         </div>
         <div className={classes.cardImage}>
-          <Logo icon={pot.icon || pot.id} sponsorToken={pot.sponsorToken} />
+          <Logo icon={pot.icon || pot.id} />
         </div>
       </div>
       <div className={classes.cardBottom}>

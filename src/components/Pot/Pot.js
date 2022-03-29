@@ -26,20 +26,15 @@ import { selectWalletAddress } from '../../features/wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
-export const Logo = memo(function ({ icon, sponsorToken }) {
+export const Logo = memo(function ({ icon }) {
   const iconSlug = slug(icon);
-  const sponsorSlug = sponsorToken ? slug(sponsorToken) : 'unsponsored';
+  const src = getPotIconSrc(iconSlug, false);
 
-  const possibilities = [`${iconSlug}/${sponsorSlug}`, `${iconSlug}/unsponsored`];
-
-  for (const key of possibilities) {
-    const src = getPotIconSrc(key, false);
-    if (src) {
-      return <img src={src} alt="" width="90" height="90" aria-hidden={true} />;
-    }
+  if (src) {
+    return <img src={src} alt="" width="90" height="90" aria-hidden={true} />;
   }
 
-  throw new Error(`No pot icon available for ${iconSlug}/${sponsorSlug} or any fallbacks.`);
+  throw new Error(`No pot icon available for ${iconSlug}.`);
 });
 
 const Title = memo(function ({ name }) {
@@ -281,7 +276,7 @@ export function Pot({ id, variant, bottom, simple, oneColumn }) {
       <PotNetwork network={pot.network} />
       <Grid container spacing={2} className={classes.rowLogoWinTotal}>
         <Grid item xs="auto" onClick={() => history.push(`/pot/${pot.id}`)}>
-          <Logo icon={pot.icon || pot.id} sponsorToken={pot.sponsorToken} />
+          <Logo icon={pot.icon || pot.id} />
         </Grid>
         <Grid item xs="auto" className={classes.columnTitleWinTotal}>
           <Title name={pot.name} onClick={() => history.push(`/pot/${pot.id}`)} />

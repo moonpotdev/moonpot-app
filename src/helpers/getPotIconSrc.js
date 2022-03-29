@@ -1,8 +1,10 @@
-const potIconRequire = require.context('../images/pots', true, /\.svg$/);
+const potIconRequire = require.context('../images/pots', false, /\.svg$/);
 const potIcons = Object.fromEntries(
   potIconRequire.keys().map(path => [path.substring(2, path.lastIndexOf('.')), path])
 );
 const potIconCache = {};
+
+console.log(potIcons);
 
 export const getPotIconSrc = (key, throwOnError = true) => {
   if (key in potIconCache) {
@@ -15,7 +17,7 @@ export const getPotIconSrc = (key, throwOnError = true) => {
   }
 
   if (throwOnError) {
-    throw new Error(`Image required for '${key}' pot icon in 'images/vault'`);
+    throw new Error(`Image required for '${key}' pot icon in 'images/pots'`);
   }
 
   return null;

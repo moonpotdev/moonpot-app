@@ -35,9 +35,9 @@ export const GlobalDataLoader = memo(function GlobalDataLoader() {
     dispatch(reduxActions.buybacks.fetchBuybacks());
   }, [dispatch]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     dispatch(reduxActions.holders.fetchHolders());
-  }, [dispatch]);
+  }, [dispatch]);*/
 
   useEffect(() => {
     dispatch(fetchUniqueWinners());
