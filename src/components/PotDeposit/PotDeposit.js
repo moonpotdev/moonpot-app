@@ -76,12 +76,12 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const classes = useStyles();
   const pot = usePot(id);
   const address = useSelector(selectWalletAddress);
-  const balance = useTokenBalance(pot.token, pot.tokenDecimals);
+  const balance = useTokenBalance(pot.token, pot.tokenDecimals, pot.network);
   const stakeMax = useMemo(
     () => byDecimals(pot.stakeMax, pot.tokenDecimals),
     [pot.stakeMax, pot.tokenDecimals]
   );
-  const alreadyStaked = useDeposit(pot.contractAddress, pot.tokenDecimals, false);
+  const alreadyStaked = useDeposit(pot.contractAddress, pot.tokenDecimals, pot.network, false);
   const availableToStake = useMemo(
     () =>
       stakeMax.gt(ZERO)
@@ -90,7 +90,12 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
     [balance, stakeMax, alreadyStaked]
   );
   const hasTokenBalance = balance.gt(ZERO);
-  const allowance = useTokenAllowance(pot.contractAddress, pot.token, pot.tokenDecimals);
+  const allowance = useTokenAllowance(
+    pot.contractAddress,
+    pot.token,
+    pot.tokenDecimals,
+    pot.network
+  );
   const [inputValue, setInputValue] = useState('');
   const [depositAmount, setDepositAmount] = useState(() => ZERO);
   const [isDepositAll, setIsDepositAll] = useState(false);

@@ -15,9 +15,11 @@ import { selectWalletAddress } from '../../../../wallet/selectors';
 
 const useStyles = makeStyles(styles);
 
-const Play = memo(function ({ id, token, contractAddress, variant }) {
+const Play = memo(function ({ id, token, contractAddress, variant, network }) {
   const address = useSelector(selectWalletAddress);
-  const balance = useSelector(state => state.balance.tokens[contractAddress + ':total']?.balance);
+  const balance = useSelector(
+    state => state.balance.tokensByNetwork[network][contractAddress + ':total']?.balance
+  );
   const hasStaked = address && balance > 0;
   const translatedToken = useTranslatedToken(token);
 
@@ -97,7 +99,13 @@ const Bottom = function ({ id }) {
         </CardAccordionItem>
       </CardAccordionGroup>
       <div className={classes.rowPlay}>
-        <Play id={pot.id} token={pot.token} contractAddress={pot.contractAddress} variant="teal" />
+        <Play
+          id={pot.id}
+          token={pot.token}
+          contractAddress={pot.contractAddress}
+          network={pot.network}
+          variant="teal"
+        />
       </div>
       <div className={classes.rowOdds}>
         <NewDepositOdds

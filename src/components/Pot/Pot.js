@@ -210,9 +210,9 @@ const TVL = memo(function ({ totalStakedUsd }) {
   return '$0';
 });
 
-function useDepositOdds(ticketTotalSupply, winners, ticketToken, tokenDecimals) {
+function useDepositOdds(ticketTotalSupply, winners, ticketToken, tokenDecimals, network) {
   const address = useSelector(selectWalletAddress);
-  const depositedTickets = useTokenBalance(ticketToken, tokenDecimals);
+  const depositedTickets = useTokenBalance(ticketToken, tokenDecimals, network);
 
   return useMemo(() => {
     const totalTickets = byDecimals(ticketTotalSupply, tokenDecimals);
@@ -232,10 +232,11 @@ const DepositWithOdds = memo(function ({
   winners,
   ticketToken,
   tokenDecimals,
+  network,
 }) {
   const classes = useStyles();
-  const deposit = useDeposit(contractAddress, tokenDecimals);
-  const odds = useDepositOdds(ticketTotalSupply, winners, ticketToken, tokenDecimals);
+  const deposit = useDeposit(contractAddress, tokenDecimals, network);
+  const odds = useDepositOdds(ticketTotalSupply, winners, ticketToken, tokenDecimals, network);
 
   return (
     <div>
@@ -316,6 +317,7 @@ export function Pot({ id, variant, bottom, simple, oneColumn }) {
                   ticketToken={pot.rewardToken}
                   ticketTotalSupply={pot.totalTickets}
                   winners={pot.numberOfWinners}
+                  network={pot.network}
                 />
               </DrawStat>
             </Grid>

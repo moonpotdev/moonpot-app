@@ -97,7 +97,8 @@ const PotBonus = function ({ pot, buttonVariant = 'purple' }) {
     if (wallet.address) {
       const steps = [];
 
-      const tokenApproved = balance.tokens[item.token]?.allowance[item.contractAddress];
+      const tokenApproved =
+        balance.tokensByNetwork[item.network][item.token]?.allowance[item.contractAddress];
       if (!tokenApproved) {
         steps.push({
           step: 'approve',

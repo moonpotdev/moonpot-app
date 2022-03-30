@@ -137,60 +137,70 @@ const getBalances = async (pools, state, dispatch) => {
   }
 
   // Merge responses per network
-  let responses = [];
+  const responsesByNetwork = {};
   for (const network in multicall) {
     const [response] = await multicall[network].all([calls[network]]);
-    responses = [...responses, ...response];
+    responsesByNetwork[network] = response;
   }
 
   // New array for new state
-  const tokens = { ...state.balance.tokens };
+  const tokensByNetwork = { ...state.balance.tokensByNetwork };
 
   // Native balances
   for (const network in needsNativeBalance) {
     if (needsNativeBalance[network]) {
+      const tokens = { ...tokensByNetwork[network] };
       const balance = await web3[network].eth.getBalance(address);
       const symbol = networkByKey[network].nativeCurrency.symbol;
+
       tokens[symbol] = {
         ...tokens[symbol],
         balance: balance,
       };
+
+      tokensByNetwork[network] = tokens;
     }
   }
 
   // Build new state
-  for (const response of responses) {
-    if (response.amount !== undefined) {
-      tokens[response.token] = {
-        ...tokens[response.token],
-        balance: response.amount,
-        address: response.address,
-      };
+  for (const network in responsesByNetwork) {
+    const tokens = { ...tokensByNetwork[network] };
+
+    for (const response of responsesByNetwork[network]) {
+      if (response.amount !== undefined) {
+        tokens[response.token] = {
+          ...tokens[response.token],
+          balance: response.amount,
+          address: response.address,
+        };
+      }
+
+      if (response.allowance !== undefined) {
+        tokens[response.token] = {
+          ...tokens[response.token],
+          allowance: {
+            ...(tokens[response.token]?.allowance || {}),
+            [response.spender]: response.allowance,
+          },
+        };
+      }
+
+      if (response.timeleft !== undefined) {
+        tokens[response.token] = {
+          ...tokens[response.token],
+          timeleft: parseInt(response.timeleft || 0),
+          timeleftUpdated: Date.now() / 1000,
+        };
+      }
     }
 
-    if (response.allowance !== undefined) {
-      tokens[response.token] = {
-        ...tokens[response.token],
-        allowance: {
-          ...(tokens[response.token]?.allowance || {}),
-          [response.spender]: response.allowance,
-        },
-      };
-    }
-
-    if (response.timeleft !== undefined) {
-      tokens[response.token] = {
-        ...tokens[response.token],
-        timeleft: parseInt(response.timeleft || 0),
-        timeleftUpdated: Date.now() / 1000,
-      };
-    }
+    tokensByNetwork[network] = tokens;
   }
 
   dispatch({
     type: BALANCE_FETCH_BALANCES_DONE,
     payload: {
-      tokens: tokens,
+      tokensByNetwork: tokensByNetwork,
       lastUpdated: new Date().getTime(),
     },
   });

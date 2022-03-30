@@ -176,8 +176,12 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
     () => withdrawTokensBySymbol[selectedTokenSymbol],
     [withdrawTokensBySymbol, selectedTokenSymbol]
   );
-  const ticketBalance = useTokenBalance(pot.rewardToken, pot.tokenDecimals);
-  const userTotalBalance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);
+  const ticketBalance = useTokenBalance(pot.rewardToken, pot.tokenDecimals, pot.network);
+  const userTotalBalance = useTokenBalance(
+    pot.contractAddress + ':total',
+    pot.tokenDecimals,
+    pot.network
+  );
   const selectedNeedsZap = selectedToken.address.toLowerCase() !== pot.tokenAddress.toLowerCase();
   const [zapRequestId, setZapRequestId] = useState(null);
   const zapEstimate = useSelector(state => (zapRequestId ? state.zap[zapRequestId] ?? null : null));
@@ -202,9 +206,24 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
 
     return true;
   }, [address, userTotalBalance, selectedNeedsZap, zapEstimate]);
-  const potTicketAllowance = useTokenAllowance(potAddress, pot.rewardToken, pot.tokenDecimals);
-  const zapTicketAllowance = useTokenAllowance(pairToken.zap, pot.rewardToken, pot.tokenDecimals);
-  const zapLPAllowance = useTokenAllowance(pairToken.zap, pot.token, pot.tokenDecimals);
+  const potTicketAllowance = useTokenAllowance(
+    potAddress,
+    pot.rewardToken,
+    pot.tokenDecimals,
+    pot.network
+  );
+  const zapTicketAllowance = useTokenAllowance(
+    pairToken.zap,
+    pot.rewardToken,
+    pot.tokenDecimals,
+    pot.network
+  );
+  const zapLPAllowance = useTokenAllowance(
+    pairToken.zap,
+    pot.token,
+    pot.tokenDecimals,
+    pot.network
+  );
   const [steps, setSteps] = React.useState(() => ({
     modal: false,
     currentStep: -1,

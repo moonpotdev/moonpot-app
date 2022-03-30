@@ -4,8 +4,6 @@ const potIcons = Object.fromEntries(
 );
 const potIconCache = {};
 
-console.log(potIcons);
-
 export const getPotIconSrc = (key, throwOnError = true) => {
   if (key in potIconCache) {
     return potIconCache[key];

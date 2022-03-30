@@ -176,12 +176,14 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   );
   const balance = useTokenBalance(
     selectedTokenSymbol,
-    depositTokensBySymbol[selectedTokenSymbol].decimals
+    depositTokensBySymbol[selectedTokenSymbol].decimals,
+    pot.network
   );
   const potAllowance = useTokenAllowance(
     potAddress,
     selectedTokenSymbol,
-    depositTokensBySymbol[selectedTokenSymbol].decimals
+    depositTokensBySymbol[selectedTokenSymbol].decimals,
+    pot.network
   );
   const [inputValue, setInputValue] = useState('');
   const [depositAmount, setDepositAmount] = useState(() => ZERO);
@@ -212,7 +214,8 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const zapAllowance = useTokenAllowance(
     canDeposit && selectedNeedsZap ? zapEstimate.zapAddress : null,
     canDeposit && selectedNeedsZap ? zapEstimate.swapInToken.symbol : null,
-    canDeposit && selectedNeedsZap ? zapEstimate.swapInToken.decimals : null
+    canDeposit && selectedNeedsZap ? zapEstimate.swapInToken.decimals : null,
+    pot.network
   );
 
   useEffect(() => {

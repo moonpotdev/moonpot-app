@@ -2,7 +2,7 @@
   {
     "id": "beftm",
     "name": "beFTM",
-    "defaultOrder": -70,
+    "defaultOrder": -60,
     "token": "beFTM",
     "tokenAddress": "0x7381eD41F6dE418DdE5e84B55590422a57917886",
     "tokenDecimals": 18,
@@ -46,7 +46,7 @@
   {
     "id": "tomb-ftm",
     "name": "TOMB-FTM LP",
-    "defaultOrder": -80,
+    "defaultOrder": -70,
     "token": "TOMB-FTM LP",
     "provider": "SpookySwap",
     "tokenAddress": "0x2A651563C9d3Af67aE0388a5c8F89b867038089e",
@@ -92,7 +92,7 @@
   {
     "id": "g3crv",
     "name": "Curve USD",
-    "defaultOrder": -90,
+    "defaultOrder": -80,
     "token": "g3CRV USD LP",
     "provider": "Curve",
     "tokenAddress": "0xD02a30d33153877BC20e5721ee53DeDEE0422B2F",
@@ -126,6 +126,47 @@
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xf710D90A1Bd702dAEa619eEbbe876e7085c2A1df",
     "sponsorToken": "POTS",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "fantom-bifi",
+    "name": "BIFI",
+    "defaultOrder": -90,
+    "token": "BIFI",
+    "tokenAddress": "0xd6070ae98b8069de6B494332d1A1a81B6179D960",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBIFI",
+    "rewardAddress": "0x8A8049886eDaeD371dbC104618cDE81390135d03",
+    "contractAddress": "0x35ebb629b6e65Cb7705B5E0695982D206898f195",
+    "prizePoolAddress": "0xf275b5428AFCfFe053369989642df19Ae6219D34",
+    "prizeStrategyAddress": "0xd8Fa0027E242ea19152A20eF895d60d19A5936B3",
+    "oracleId": "BIFI",
+    "apyId": "fantom-bifi-maxi",
+    "vaultType": "main",
+    "categories": ["main"],
+    "featured": true,
+    "type": "single",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xbF07093ccd6adFC3dEB259C557b61E94c1F66945",
     "sponsors": [],
     "bonuses": [
       {

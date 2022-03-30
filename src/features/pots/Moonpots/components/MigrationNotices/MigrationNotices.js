@@ -13,7 +13,7 @@ const useStyles = makeStyles(styles);
 function MigrationNotice({ pot }) {
   const classes = useStyles();
   const { t, i18n } = useTranslation();
-  const balance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);
+  const balance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals, pot.network);
   const hasBalance = balance.gt(0);
 
   if (hasBalance) {
