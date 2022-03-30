@@ -54,8 +54,14 @@ export function useTotalPrize(awardBalanceUsd, totalSponsorBalanceUsd) {
   }, [awardBalanceUsd, totalSponsorBalanceUsd]);
 }
 
-export function useTokenBalance(tokenSymbol, tokenDecimals) {
-  const balance = useSelector(state => state.balance.tokens[tokenSymbol]?.balance || '0');
+export function useTokenBalance(tokenSymbol, tokenDecimals, network) {
+  if (!network) {
+    throw new Error('Missing network');
+  }
+
+  const balance = useSelector(
+    state => state.balance.tokensByNetwork[network]?.[tokenSymbol]?.balance || '0'
+  );
 
   return useMemo(() => {
     const bn = new BigNumber(balance);
@@ -64,9 +70,13 @@ export function useTokenBalance(tokenSymbol, tokenDecimals) {
   }, [balance, tokenDecimals]);
 }
 
-export function useTokenAllowance(spender, tokenSymbol, tokenDecimals) {
+export function useTokenAllowance(spender, tokenSymbol, tokenDecimals, network) {
+  if (!network) {
+    throw new Error('Missing network');
+  }
+
   const allowance = useSelector(
-    state => state.balance.tokens[tokenSymbol]?.allowance?.[spender] || 0
+    state => state.balance.tokensByNetwork[network]?.[tokenSymbol]?.allowance?.[spender] || 0
   );
 
   return useMemo(() => {
@@ -197,10 +207,14 @@ export function useImpersonate() {
   );
 }
 
-export function useDeposit(contractAddress, decimals, format = true) {
+export function useDeposit(contractAddress, decimals, network, format = true) {
+  if (!network) {
+    throw new Error('Missing network');
+  }
+
   const address = useSelector(selectWalletAddress);
   const balance256 = useSelector(
-    state => state.balance.tokens[contractAddress + ':total']?.balance
+    state => state.balance.tokensByNetwork[network][contractAddress + ':total']?.balance
   );
 
   return useMemo(() => {

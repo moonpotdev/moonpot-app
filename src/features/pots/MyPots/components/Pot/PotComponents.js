@@ -81,8 +81,14 @@ const Interest = function ({ baseApy, bonusApy, prizeOnly }) {
   );
 };
 
-const DepositedOdds = memo(function ({ ticketTotalSupply, winners, ticketToken, tokenDecimals }) {
-  const depositedTickets = useTokenBalance(ticketToken, tokenDecimals);
+const DepositedOdds = memo(function ({
+  ticketTotalSupply,
+  winners,
+  ticketToken,
+  tokenDecimals,
+  network,
+}) {
+  const depositedTickets = useTokenBalance(ticketToken, tokenDecimals, network);
 
   const odds = useMemo(() => {
     return investmentOdds(byDecimals(ticketTotalSupply, tokenDecimals), winners, depositedTickets);
@@ -96,7 +102,11 @@ export const PotInfoBlock = function ({ pot, active = true }) {
   const depositTokenPrice = useSelector(
     state => state.prices.byNetworkAddress[pot.network][pot.tokenAddress]
   );
-  const userBalance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);
+  const userBalance = useTokenBalance(
+    pot.contractAddress + ':total',
+    pot.tokenDecimals,
+    pot.network
+  );
   const { t } = useTranslation();
 
   return (
@@ -143,6 +153,7 @@ export const PotInfoBlock = function ({ pot, active = true }) {
                   winners={pot.numberOfWinners}
                   ticketToken={pot.rewardToken}
                   tokenDecimals={pot.tokenDecimals}
+                  network={pot.network}
                 />
               </Typography>
             </Grid>

@@ -75,7 +75,7 @@ const BonusAccordionItem = memo(function ({ pot }) {
 
 const WithdrawAccordionItem = memo(function ({ pot, onFairplayLearnMore }) {
   const address = useSelector(selectWalletAddress);
-  const depositBalance = useTokenBalance(pot.contractAddress + ':total', 18);
+  const depositBalance = useTokenBalance(pot.contractAddress + ':total', 18, pot.network);
   const hasDeposit = address && depositBalance.gt(0);
 
   return hasDeposit ? (

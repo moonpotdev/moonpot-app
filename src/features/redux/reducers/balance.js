@@ -15,8 +15,10 @@ import { networkByKey, networkKeys } from '../../../config/networks';
 const MAX_UINT256 = '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
 
 const initialTokens = (() => {
-  const tokens = [];
+  const initialTokensByNetwork = {};
+
   for (const networkKey of networkKeys) {
+    const tokens = {};
     const networkPools = potsByNetwork[networkKey];
     const nativeCurrency = networkByKey[networkKey].nativeCurrency;
     const nativeTokenSymbol = nativeCurrency.symbol;
@@ -92,13 +94,15 @@ const initialTokens = (() => {
         address: pot.contractAddress,
       };
     }
+
+    initialTokensByNetwork[networkKey] = tokens;
   }
 
-  return tokens;
+  return initialTokensByNetwork;
 })();
 
 const initialState = {
-  tokens: initialTokens,
+  tokensByNetwork: initialTokens,
   lastUpdated: 0,
   isBalancesLoading: false,
   isBalancesFirstTime: true,
@@ -110,7 +114,7 @@ const balanceReducer = createReducer(initialState, builder => {
       state.isBalancesLoading = state.isBalancesFirstTime;
     })
     .addCase(BALANCE_FETCH_BALANCES_DONE, (state, action) => {
-      state.tokens = action.payload.tokens;
+      state.tokensByNetwork = action.payload.tokensByNetwork;
       state.lastUpdated = action.payload.lastUpdated;
       state.isBalancesLoading = false;
       state.isBalancesFirstTime = false;

@@ -28,17 +28,23 @@ export const PotMigrate = function ({ item }) {
     items: [],
     finished: false,
   });
-  const userTotalBalance = useTokenBalance(item.contractAddress + ':total', item.tokenDecimals);
-  const ticketBalance = useTokenBalance(item.rewardToken, item.tokenDecimals);
+  const userTotalBalance = useTokenBalance(
+    item.contractAddress + ':total',
+    item.tokenDecimals,
+    item.network
+  );
+  const ticketBalance = useTokenBalance(item.rewardToken, item.tokenDecimals, item.network);
   const ticketWithdrawAllowance = useTokenAllowance(
     item.contractAddress,
     item.rewardToken,
-    item.tokenDecimals
+    item.tokenDecimals,
+    item.network
   );
   const tokenDepositAllowance = useTokenAllowance(
     item.migrationContractAddress,
     item.token,
-    item.tokenDecimals
+    item.tokenDecimals,
+    item.network
   );
 
   const [stepsItem, setStepsItem] = useState(null);

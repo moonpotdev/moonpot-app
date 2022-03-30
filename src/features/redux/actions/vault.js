@@ -150,7 +150,9 @@ function calculateZiggyPrediction(ziggy, others, pricesByNetworkAddress) {
     // Sum total of all sponsors USD
     ziggy.projectedTotalSponsorBalanceUsd =
       ziggy.totalSponsorBalanceUsd.plus(extraSponsorBalanceUsd);
-    ziggy.projectedTotalPrizeUsd = ziggy.totalPrizeUsd.plus(ziggy.projectedTotalSponsorBalanceUsd);
+    ziggy.projectedTotalPrizeUsd = ziggy.projectedAwardBalanceUsd.plus(
+      ziggy.projectedTotalSponsorBalanceUsd
+    );
   } else {
     ziggy.projectedTotalSponsorBalanceUsd = ziggy.totalSponsorBalanceUsd;
     ziggy.projectedSponsors = ziggy.sponsors;

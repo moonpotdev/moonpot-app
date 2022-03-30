@@ -69,7 +69,6 @@ function sortPots(pots, key, dir) {
     return pots.sort((a, b) => {
       const valueA = dir === 'asc' ? a[key] : b[key];
       const valueB = dir === 'asc' ? b[key] : a[key];
-
       return SORT_COMPARE_FUNCTIONS[key](valueA, valueB);
     });
   }
@@ -77,9 +76,12 @@ function sortPots(pots, key, dir) {
   return pots;
 }
 
-function getDeposited(pots, balances) {
+function getDeposited(pots, tokensByNetwork) {
   return Object.fromEntries(
-    pots.map(pot => [pot.id, (balances[pot.contractAddress + ':total']?.balance ?? '0') !== '0'])
+    pots.map(pot => [
+      pot.id,
+      (tokensByNetwork[pot.network][pot.contractAddress + ':total']?.balance ?? '0') !== '0',
+    ])
   );
 }
 
@@ -89,7 +91,7 @@ export const filterApply = createAsyncThunk('filter/apply', async (_, { getState
   const mode = selectFilterMode(state);
   console.log('Applying filter...', config);
   const pots = Object.values(state.vault.pools);
-  const deposited = getDeposited(pots, state.balance.tokens);
+  const deposited = getDeposited(pots, state.balance.tokensByNetwork);
 
   const filtered = pots.filter(pot => filterIncludePot(pot, deposited[pot.id], config, mode));
   const sorted = sortPots(

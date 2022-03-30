@@ -42,9 +42,9 @@ const Stat = function ({ label, children }) {
   );
 };
 
-const StatDeposited = memo(function ({ token, contractAddress, tokenDecimals }) {
+const StatDeposited = memo(function ({ token, contractAddress, tokenDecimals, network }) {
   const { t } = useTranslation();
-  const userTotalBalance = useTokenBalance(contractAddress + ':total', tokenDecimals);
+  const userTotalBalance = useTokenBalance(contractAddress + ':total', tokenDecimals, network);
   return <Stat label={t('pot.myToken', { token })}>{formatDecimals(userTotalBalance, 8)}</Stat>;
 });
 
@@ -58,11 +58,13 @@ const StatEarned = memo(function ({ bonus }) {
   );
 });
 
-const StatTimelock = memo(function ({ contractAddress }) {
+const StatTimelock = memo(function ({ contractAddress, network }) {
   const { t } = useTranslation();
-  const timeleft = useSelector(state => state.balance.tokens[contractAddress + ':fee'].timeleft);
+  const timeleft = useSelector(
+    state => state.balance.tokensByNetwork[network][contractAddress + ':fee'].timeleft
+  );
   const timeleftUpdatedAt = useSelector(
-    state => state.balance.tokens[contractAddress + ':fee'].timeleftUpdated
+    state => state.balance.tokensByNetwork[network][contractAddress + ':fee'].timeleftUpdated
   );
   const endsAt = (timeleftUpdatedAt + timeleft) * 1000;
   const timeLeft = Math.max(0, endsAt - Date.now());
@@ -80,15 +82,17 @@ const StatFee = memo(function ({
 }) {
   const { t } = useTranslation();
   const address = useSelector(selectWalletAddress);
-  const timeleft = useSelector(state => state.balance.tokens[contractAddress + ':fee'].timeleft);
+  const timeleft = useSelector(
+    state => state.balance.tokensByNetwork[network][contractAddress + ':fee'].timeleft
+  );
   const timeleftUpdatedAt = useSelector(
-    state => state.balance.tokens[contractAddress + ':fee'].timeleftUpdated
+    state => state.balance.tokensByNetwork[network][contractAddress + ':fee'].timeleftUpdated
   );
   const ticket = tokensByNetworkAddress[network][ticketAddress.toLowerCase()];
   const underlying = tokensByNetworkSymbol[network][ticket.underlyingToken];
   const ppfs = useSelector(state => state.prices.ppfs[network]?.[underlying.address] || 1);
   const endsAt = (timeleftUpdatedAt + timeleft) * 1000;
-  const ticketBalance = useTokenBalance(ticket.symbol, tokenDecimals);
+  const ticketBalance = useTokenBalance(ticket.symbol, tokenDecimals, network);
 
   const fairnessFee = useMemo(() => {
     const timeLeft = endsAt - Date.now();
@@ -129,11 +133,12 @@ export const Stats = function ({ id }) {
         token={pot.token}
         contractAddress={pot.contractAddress}
         tokenDecimals={pot.tokenDecimals}
+        network={pot.network}
       />
       <BonusStats id={id} />
       {pot.fairplayDuration > 0 ? (
         <>
-          <StatTimelock contractAddress={pot.contractAddress} />
+          <StatTimelock contractAddress={pot.contractAddress} network={pot.network} />
           <StatFee
             token={pot.token}
             network={pot.network}
@@ -230,17 +235,23 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
   const [partialWithdrawAmount, setPartialWithdrawAmount] = useState(() => ZERO);
   const [canWithdrawPartial, setCanWithdrawPartial] = useState(false);
   const address = useSelector(selectWalletAddress);
-  const totalBalance = useTokenBalance(pot.contractAddress + ':total', pot.tokenDecimals);
-  const ticketBalance = useTokenBalance(pot.rewardToken, pot.tokenDecimals);
+  const totalBalance = useTokenBalance(
+    pot.contractAddress + ':total',
+    pot.tokenDecimals,
+    pot.network
+  );
+  const ticketBalance = useTokenBalance(pot.rewardToken, pot.tokenDecimals, pot.network);
   const ticketAllowance = useTokenAllowance(
     pot.contractAddress,
     pot.rewardToken,
-    pot.tokenDecimals
+    pot.tokenDecimals,
+    pot.network
   );
   const mooTokenAllowance = useTokenAllowance(
     pot.contractAddress,
     pot.mooTokenAddress,
-    pot.tokenDecimals
+    pot.tokenDecimals,
+    pot.network
   );
   const [steps, setSteps] = React.useState(() => ({
     modal: false,
