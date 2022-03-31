@@ -424,6 +424,10 @@
       "beftm": [
         "beFTM is FTM perpetually locked in Beefy's Validator Node.",
         "ZAP lets you mint beFTM and deposit with just one transaction. beFTM will be bought from the market if under peg."
+      ],
+      "binspirit": [
+        "binSPIRIT is a wrapped SPIRIT token, allowing holders to earn maximized SpiritSwap protocol fees by locking SPIRIT.",
+        "ZAP lets you mint binSPIRIT and deposit with just one transaction. binSPIRIT will be bought from the market if under peg."
       ]
     },
     "inYourWallet": "In your wallet",
