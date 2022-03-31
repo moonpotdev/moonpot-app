@@ -2,7 +2,7 @@
   {
     "id": "beftm",
     "name": "beFTM",
-    "defaultOrder": -60,
+    "defaultOrder": -50,
     "token": "beFTM",
     "tokenAddress": "0x7381eD41F6dE418DdE5e84B55590422a57917886",
     "tokenDecimals": 18,
@@ -46,7 +46,7 @@
   {
     "id": "tomb-ftm",
     "name": "TOMB-FTM LP",
-    "defaultOrder": -70,
+    "defaultOrder": -60,
     "token": "TOMB-FTM LP",
     "provider": "SpookySwap",
     "tokenAddress": "0x2A651563C9d3Af67aE0388a5c8F89b867038089e",
@@ -92,7 +92,7 @@
   {
     "id": "g3crv",
     "name": "Curve USD",
-    "defaultOrder": -80,
+    "defaultOrder": -70,
     "token": "g3CRV USD LP",
     "provider": "Curve",
     "tokenAddress": "0xD02a30d33153877BC20e5721ee53DeDEE0422B2F",
@@ -138,7 +138,7 @@
   {
     "id": "fantom-bifi",
     "name": "BIFI",
-    "defaultOrder": -90,
+    "defaultOrder": -80,
     "token": "BIFI",
     "tokenAddress": "0xd6070ae98b8069de6B494332d1A1a81B6179D960",
     "tokenDecimals": 18,
@@ -168,6 +168,61 @@
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0xbF07093ccd6adFC3dEB259C557b61E94c1F66945",
     "sponsors": [],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "binspirit",
+    "name": "binSPIRIT",
+    "defaultOrder": -90,
+    "token": "binSPIRIT",
+    "tokenAddress": "0x44e314190D9E4cE6d4C0903459204F8E21ff940A",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketbinSpirit",
+    "rewardAddress": "0xf83EFEc1deb43f575c02f5Af566cA4ee67d3b10a",
+    "contractAddress": "0xecEf3F2Bc805C76798921fCD4B1AF7235965DF13",
+    "prizePoolAddress": "0x6Ed5582Ca0E033aEf06ea3f2Cd4Dd10F4C0C4B7C",
+    "prizeStrategyAddress": "0x283f6c3a5442dd867fDE89cff410547ac9701828",
+    "oracleId": "binSPIRIT",
+    "apyId": "beefy-binspirit",
+    "vaultType": "main",
+    "categories": ["main"],
+    "type": "single",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x7345a537A975d9Ca588eE631BEFdDfEF34fD5e8f",
+    "sponsorToken": "POTS",
+    "sponsors": [
+      {
+        "sponsorToken": "BIFI",
+        "sponsorOracleId": "BIFI",
+        "sponsorAddress": "0xd6070ae98b8069de6B494332d1A1a81B6179D960",
+        "sponsorTokenDecimals": 18
+      },
+      {
+        "sponsorToken": "SPIRIT",
+        "sponsorOracleId": "SPIRIT",
+        "sponsorAddress": "0x5Cc61A78F164885776AA610fb0FE1257df78E59B",
+        "sponsorTokenDecimals": 18
+      }
+    ],
     "bonuses": [
       {
         "id": 1,

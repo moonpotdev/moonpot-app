@@ -110,5 +110,30 @@
     "decimals": 18,
     "underlyingToken": "BIFI",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "SPIRIT",
+    "address": "0x5Cc61A78F164885776AA610fb0FE1257df78E59B",
+    "type": "single",
+    "oracleId": "SPIRIT",
+    "decimals": 18
+  },
+  {
+    "symbol": "binSPIRIT",
+    "address": "0x44e314190D9E4cE6d4C0903459204F8E21ff940A",
+    "type": "single",
+    "oracleId": "binSPIRIT",
+    "decimals": 18,
+    "zap": "0x078ee557fA3077edC4728022957fF9EbD7883e70",
+    "lp": ["SPIRIT"]
+  },
+  {
+    "symbol": "moonTicketbinSpirit",
+    "address": "0xf83EFEc1deb43f575c02f5Af566cA4ee67d3b10a",
+    "type": "ticket",
+    "oracleId": "binSPIRIT",
+    "decimals": 18,
+    "underlyingToken": "binSPIRIT",
+    "stakedMultiplier": 2
   }
 ]
