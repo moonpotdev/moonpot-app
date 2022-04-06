@@ -14,13 +14,13 @@ const styles = () => ({
   },
   card: {
     borderRadius: '16px',
-    boxSizing: 'border-box',
+    boxSizing: 'border-box' as const,
     padding: '24px',
     borderWidth: '2px',
     borderStyle: 'solid',
     display: 'flex',
-    flexDirection: 'column',
-    position: 'relative',
+    flexDirection: 'column' as const,
+    position: 'relative' as const,
   },
   title: {
     fontWeight: 500,
@@ -37,19 +37,19 @@ const styles = () => ({
     borderTop: 'solid 2px red',
     paddingTop: '16px',
     paddingBottom: '16px',
-    position: 'relative',
+    position: 'relative' as const,
     '&:last-child': {
       paddingBottom: '0',
     },
   },
   accordionItemTitle: {
     fontStyle: 'normal',
-    fontWeight: '700',
+    fontWeight: 700,
     fontFamily: 'Ubuntu',
     fontSize: '12px',
     lineHeight: '20px',
     letterSpacing: '1px',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as const,
     color: 'red',
     display: 'flex',
     justifyContent: 'space-between',
@@ -63,7 +63,7 @@ const styles = () => ({
   },
   accordionItemToggle: {
     cursor: 'pointer',
-    userSelect: 'none',
+    userSelect: 'none' as const,
     WebkitTapHighlightColor: 'transparent',
     '& > .MuiSvgIcon-root': {
       fontSize: '20px',
@@ -71,7 +71,7 @@ const styles = () => ({
   },
   accordionItemInner: {
     fontStyle: 'normal',
-    fontWeight: 'normal',
+    fontWeight: 'normal' as const,
     fontSize: '12px',
     lineHeight: '20px',
     letterSpacing: '0.2px',

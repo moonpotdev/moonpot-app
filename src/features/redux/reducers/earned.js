@@ -1,11 +1,11 @@
 import { EARNED_FETCH_EARNED_BEGIN, EARNED_FETCH_EARNED_DONE, EARNED_RESET } from '../constants';
 import { potsByNetwork } from '../../../config/vault';
 import { createReducer } from '@reduxjs/toolkit';
-import { networkKeys } from '../../../config/networks';
+import { networkIds } from '../../../config/networks';
 
 const initialEarned = (() => {
   const earned = [];
-  for (const networkKey of networkKeys) {
+  for (const networkKey of networkIds) {
     for (const pot of potsByNetwork[networkKey]) {
       earned[pot.id] = {};
       if ('bonuses' in pot && pot.bonuses.length) {

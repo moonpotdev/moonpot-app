@@ -1,7 +1,7 @@
 import { Web3 } from '../../../helpers/web3';
 import { hexToNumber, isHexStrict } from 'web3-utils';
 import { getModal } from '../modal';
-import { networkIdToKey, networkSetup } from '../../../config/networks';
+import { networkChainIdToId, networkSetup } from '../../../config/networks';
 
 export class WalletConnector {
   modal;
@@ -37,7 +37,7 @@ export class WalletConnector {
 
     if (this.options.onConnect) {
       this.options.onConnect({
-        network: networkIdToKey(networkId),
+        network: networkChainIdToId(networkId),
         address: accounts && accounts.length ? accounts[0] : null,
       });
     }
@@ -175,7 +175,7 @@ export class WalletConnector {
     this.chainChangedHandler = this.createEventHandler(id => {
       if (this.options.onNetworkChanged) {
         const chainId = this.maybeHexToNumber(id);
-        this.options.onNetworkChanged({ network: networkIdToKey(chainId) });
+        this.options.onNetworkChanged({ network: networkChainIdToId(chainId) });
       }
     });
 

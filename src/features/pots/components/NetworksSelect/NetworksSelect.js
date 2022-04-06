@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { networkKeys } from '../../../../config/networks';
+import { networkIds } from '../../../../config/networks';
 import { ReactComponent as LogoBsc } from '../../../../images/networks/bsc.svg';
 import { ReactComponent as LogoFantom } from '../../../../images/networks/fantom.svg';
 import styles from './styles';
@@ -30,7 +30,7 @@ export const NetworksSelect = memo(function NetworkSelect({ value, onChange, cla
 
   return (
     <div className={clsx(classes.box, className)}>
-      {networkKeys.map(key => (
+      {networkIds.map(key => (
         <label key={key} className={classes.label}>
           <input
             type="checkbox"

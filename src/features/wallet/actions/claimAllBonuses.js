@@ -1,7 +1,7 @@
 import { WALLET_ACTION, WALLET_ACTION_RESET } from '../../redux/constants';
 import { estimateGas } from './helpers';
 import potsClaimerAbi from '../../../config/abi/potsClaimer.json';
-import { networkByKey } from '../../../config/networks';
+import { networkById } from '../../../config/networks';
 import { getWalletWeb3 } from '../instances';
 
 export const claimAllBonuses = alsoClaimOtherTokens => {
@@ -10,7 +10,7 @@ export const claimAllBonuses = alsoClaimOtherTokens => {
     const state = getState();
     const { address, network } = state.wallet;
     const web3 = getWalletWeb3();
-    const contractAddress = networkByKey[network].claimAllBonusesAddress;
+    const contractAddress = networkById[network].claimAllBonusesAddress;
 
     if (network && address && contractAddress && web3) {
       const contract = new web3.eth.Contract(potsClaimerAbi, contractAddress);

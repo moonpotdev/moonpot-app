@@ -1,12 +1,17 @@
-import React, { memo } from 'react';
+import React, { memo, PropsWithChildren } from 'react';
 import clsx from 'clsx';
 import { Card, Cards } from '../Cards';
 import { makeStyles } from '@material-ui/core';
 import styles from './styles';
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles(styles as any); // TODO types
 
-export const TotalStat = memo(function ({ label, value, className }) {
+export type TotalStatProps = PropsWithChildren<{
+  label: string;
+  value: string;
+  className?: string;
+}>;
+export const TotalStat = memo(function ({ label, value, className }: TotalStatProps) {
   const classes = useStyles();
 
   return (

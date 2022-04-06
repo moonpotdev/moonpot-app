@@ -1,20 +1,22 @@
-const styles = theme => ({
+import { Theme } from '@material-ui/core';
+
+const styles = (theme: Theme) => ({
   rowLogoWonTotal: {
     marginBottom: `${24 - 8}px`,
-    flexWrap: 'nowrap',
+    flexWrap: 'nowrap' as const,
   },
   title: {
     color: '#EBF3F9',
     fontSize: '19px',
     lineHeight: '28px',
-    fontWeight: '500',
-    textAlign: 'right',
+    fontWeight: 500,
+    textAlign: 'right' as const,
     letterSpacing: '0.6px',
   },
   valueWon: {
     color: '#FFFFFF',
-    fontWeight: 'bold',
-    textAlign: 'right',
+    fontWeight: 'bold' as const,
+    textAlign: 'right' as const,
     fontSize: '24px',
     lineHeight: '32px',
     letterSpacing: '0.6px',
@@ -23,22 +25,22 @@ const styles = theme => ({
     },
   },
   columnTitleValueWon: {
-    flexGrow: '1',
+    flexGrow: 1,
   },
   wonTotalTokens: {
-    textAlign: 'right',
+    textAlign: 'right' as const,
     color: '#FAFAFC',
     fontSize: '12px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     '& > span': {
       color: '#FFFFFF',
-      fontWeight: 'bold',
+      fontWeight: 'bold' as const,
     },
   },
   userWonPrize: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row' as const,
     background: '#FAF9FB',
     border: '2px solid #E3DFEC',
     borderRadius: '4px',
@@ -51,7 +53,7 @@ const styles = theme => ({
   userWonPrizeIcon: {
     color: '#008F39',
     fontSize: '20px',
-    flexShrink: '0',
+    flexShrink: 0,
   },
   userWonPrizeText: {
     marginLeft: '10px',
@@ -60,14 +62,14 @@ const styles = theme => ({
     justifyContent: 'flex-start',
     marginBottom: `${20 - 8}px`,
     '& > .MuiGrid-item:nth-child(even)': {
-      textAlign: 'right',
+      textAlign: 'right' as const,
     },
   },
   perWinnerToken: {
     color: '#F3BA2E',
   },
   perWinnerValue: {
-    fontWeight: 'normal',
+    fontWeight: 'normal' as const,
   },
   rowWinners: {
     justifyContent: 'flex-start',
@@ -75,14 +77,14 @@ const styles = theme => ({
   },
   winnerAddress: {
     fontSize: '10px',
-    fontWeight: 'bold',
+    fontWeight: 'bold' as const,
     lineHeight: '20px',
     letterSpacing: '1px',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as const,
   },
   winnerStaked: {
     fontSize: '12px',
-    fontWeight: 'bold',
+    fontWeight: 'bold' as const,
     lineHeight: '20px',
     letterSpacing: '0.2px',
     color: '#FFFFFF',

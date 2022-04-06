@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { networkByKey } from '../config/networks';
+import { networkById } from '../config/networks';
 
 let trimReg = /(^\s*)|(\s*$)/g;
 
@@ -126,5 +126,5 @@ export function listJoin(list, emptyValue = '', sep = ', ', final = ' & ') {
 }
 
 export function getNetworkExplorerUrl(networkKey, path = '/') {
-  return networkByKey[networkKey].explorerUrl + path;
+  return networkById[networkKey].explorerUrl + path;
 }

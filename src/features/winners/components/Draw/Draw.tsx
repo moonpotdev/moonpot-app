@@ -1,8 +1,7 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, PropsWithChildren, useMemo } from 'react';
 import { Card, CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
 import { Grid, Link, makeStyles } from '@material-ui/core';
 import { Logo } from '../../../../components/Pot';
-import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { getUnderylingToken, tokensByNetworkAddress } from '../../../../config/tokens';
 import { DrawStat } from '../../../../components/DrawStat';
@@ -20,11 +19,16 @@ import clsx from 'clsx';
 import styles from './styles';
 import { Translate } from '../../../../components/Translate';
 import { selectWalletAddress } from '../../../wallet/selectors';
+import { useAppSelector } from '../../../../store';
+import { selectPotById } from '../../../data/selectors/pots';
+import { selectDrawById } from '../../../data/selectors/draws';
+import { DrawEntity } from '../../../data/entities/draws';
+import { ApiWinner } from '../../../data/apis/draws';
+import { NetworkEntity } from '../../../data/entities/network';
 
 const useStyles = makeStyles(styles);
-const network = 'bsc';
 
-const useTotalPrizeValue = function (winners) {
+const useTotalPrizeValue = function (winners: any) {
   return useMemo(() => {
     let sum = 0;
 
@@ -38,8 +42,15 @@ const useTotalPrizeValue = function (winners) {
   }, [winners]);
 };
 
-function normalizeWinnings(awards, drawToken, ticketAddress, ticketPPFS, prices) {
-  const tokens = {};
+function normalizeWinnings(
+  awards: any,
+  drawToken: any,
+  ticketAddress: any,
+  ticketPPFS: any,
+  prices: any,
+  network: any
+) {
+  const tokens: Record<string, any> = {};
 
   for (const { token, amount, tokenIds } of awards) {
     const isNFT = tokenIds && tokenIds.length > 0;
@@ -59,7 +70,7 @@ function normalizeWinnings(awards, drawToken, ticketAddress, ticketPPFS, prices)
       const underlyingToken = getUnderylingToken(tokenData);
       const price = new BigNumber(prices[underlyingToken.oracleId] || 0);
       const totalPrice = numericAmount.multipliedBy(price);
-      const symbol = underlyingToken.symbol;
+      const symbol = underlyingToken.symbol as string;
       const address = underlyingToken.address;
       const nftIds = isNFT ? tokenIds : [];
 
@@ -95,7 +106,13 @@ function normalizeWinnings(awards, drawToken, ticketAddress, ticketPPFS, prices)
   }));
 }
 
-function normalizeStaked(stakedAmount, ticketAddress, ticketPPFS, prices) {
+function normalizeStaked(
+  stakedAmount: any,
+  ticketAddress: any,
+  ticketPPFS: any,
+  prices: any,
+  network: any
+) {
   const ticketToken = tokensByNetworkAddress[network][ticketAddress.toLowerCase()];
   const underlyingToken = getUnderylingToken(ticketToken);
   const price = new BigNumber(prices[underlyingToken.oracleId] || 0);
@@ -110,19 +127,33 @@ function normalizeStaked(stakedAmount, ticketAddress, ticketPPFS, prices) {
   };
 }
 
-const useNormalizedWinners = function (winners, drawToken, ticketAddress, ticketPPFS) {
-  const prices = useSelector(state => state.prices.prices);
+const useNormalizedWinners = function (
+  winners: ApiWinner[],
+  drawToken: any,
+  ticketAddress: any,
+  ticketPPFS: BigNumber,
+  network: NetworkEntity['id']
+) {
+  const prices = useAppSelector(state => state.prices.prices);
 
   return useMemo(() => {
     return winners.map(winner => ({
       ...winner,
-      awards: normalizeWinnings(winner.awards, drawToken, ticketAddress, ticketPPFS, prices),
-      ...normalizeStaked(winner.staked, ticketAddress, ticketPPFS, prices),
+      awards: normalizeWinnings(
+        winner.awards,
+        drawToken,
+        ticketAddress,
+        ticketPPFS,
+        prices,
+        network
+      ),
+      ...normalizeStaked(winner.staked, ticketAddress, ticketPPFS, prices, network),
     }));
-  }, [winners, prices, drawToken, ticketPPFS, ticketAddress]);
+  }, [winners, prices, drawToken, ticketPPFS, ticketAddress, network]);
 };
 
-const Title = memo(function ({ name }) {
+// TODO: types
+const Title = memo(function ({ name }: any) {
   const classes = useStyles();
   return (
     <div className={classes.title}>
@@ -131,12 +162,14 @@ const Title = memo(function ({ name }) {
   );
 });
 
-const NFT = memo(function ({ address, id }) {
+// TODO: types
+const NFT = memo(function ({ address, id }: any) {
   // TODO
   return null;
 });
 
-const ValueWon = memo(function ({ currency, amount }) {
+// TODO: types
+const ValueWon = memo(function ({ currency, amount }: any) {
   const classes = useStyles();
   const amountFormatted = amount.toLocaleString(undefined, {
     maximumFractionDigits: 0,
@@ -149,63 +182,81 @@ const ValueWon = memo(function ({ currency, amount }) {
   );
 });
 
-const WonTokens = memo(function ({ winners }) {
+// TODO: types
+const WonTokens = memo(function ({ winners }: any) {
   const classes = useStyles();
   const allTokens = new Set();
 
-  winners.forEach(winner => winner.awards.forEach(award => allTokens.add(award.symbol)));
+  winners.forEach((winner: any) =>
+    winner.awards.forEach((award: any) => allTokens.add(award.symbol))
+  );
 
   return (
     <div className={classes.wonTotalTokens}>
       <Translate i18nKey="pot.winTotalTokensIn" />
-      <TransListJoin list={[...allTokens]} />
+      <TransListJoin list={Array.from(allTokens)} />
     </div>
   );
 });
 
-const DrawDate = memo(function ({ timestamp }) {
+// TODO: types
+const DrawDate = memo(function ({ timestamp }: any) {
   const date = new Date(timestamp * 1000);
   const formatter = new Intl.DateTimeFormat(undefined, { dateStyle: 'short' });
-  return formatter.format(date);
+  return <>{formatter.format(date)}</>;
 });
 
-const Players = memo(function ({ players }) {
-  return Number(players).toLocaleString(undefined, {
-    maximumFractionDigits: 0,
-  });
+// TODO: types
+const Players = memo(function ({ players }: any) {
+  return (
+    <>
+      {Number(players).toLocaleString(undefined, {
+        maximumFractionDigits: 0,
+      })}
+    </>
+  );
 });
 
-const PrizePerWinner = memo(function ({ winners }) {
+// TODO: types
+const PrizePerWinner = memo(function ({ winners }: any) {
   const classes = useStyles();
 
-  return Object.values(winners[0].awards).map(prize => {
-    return (
-      <div key={prize.symbol} className={classes.prizePerWinner}>
-        <span className={classes.perWinnerToken}>
-          {formatDecimals(prize.amount, 2)} {prize.symbol}
-        </span>{' '}
-        {prize.isNFT ? null : (
-          <span className={classes.perWinnerValue}>(${formatDecimals(prize.value, 2)})</span>
-        )}
-      </div>
-    );
-  });
+  return (
+    <>
+      {Object.values(winners[0].awards).map((prize: any) => {
+        return (
+          <div key={prize.symbol}>
+            <span className={classes.perWinnerToken}>
+              {formatDecimals(prize.amount, 2 as any)} {prize.symbol}
+            </span>{' '}
+            {prize.isNFT ? null : (
+              <span className={classes.perWinnerValue}>
+                (${formatDecimals(prize.value, 2 as any)})
+              </span>
+            )}
+          </div>
+        );
+      })}
+    </>
+  );
 });
 
-function getNftsFromAwards(awards) {
+// TODO: types
+function getNftsFromAwards(awards: any) {
   return awards
-    .filter(award => award.isNFT)
-    .map(award => award.nftIds.map(id => ({ address: award.address, id: id })))
+    .filter((award: any) => award.isNFT)
+    .map((award: any) => award.nftIds.map((id: any) => ({ address: award.address, id: id })))
     .flat();
 }
 
-const Winners = memo(function ({ network, tokenAddress, winners }) {
+// TODO: types
+const Winners = memo(function ({ network, tokenAddress, winners }: any) {
   const { t } = useTranslation();
   const classes = useStyles();
   const tokenData = tokensByNetworkAddress[network]?.[tokenAddress.toLowerCase()];
 
   const sortedWinners = useMemo(() => {
-    const entries = winners.map((winner, index) => {
+    const entries = winners.map((winner: any, index: any) => {
       return {
         id: winner.address + index,
         staked: winner.staked,
@@ -215,16 +266,17 @@ const Winners = memo(function ({ network, tokenAddress, winners }) {
       };
     });
 
-    return entries.sort((a, b) => (a.staked > b.staked) - (a.staked < b.staked));
+    // @ts-ignore
+    return entries.sort((a: any, b: any) => (a.staked > b.staked) - (a.staked < b.staked));
   }, [winners]);
 
   // console.log(sortedWinners);
 
   return (
     <Grid container spacing={2} className={classes.rowWinners}>
-      {sortedWinners.map(winner => {
-        const valueFormatted = formatDecimals(winner.value, 2);
-        const stakedFormatted = formatDecimals(winner.staked, 2);
+      {sortedWinners.map((winner: any) => {
+        const valueFormatted = formatDecimals(winner.value, 2 as any);
+        const stakedFormatted = formatDecimals(winner.staked, 2 as any);
 
         return (
           <Grid item xs={6} key={winner.id}>
@@ -234,7 +286,7 @@ const Winners = memo(function ({ network, tokenAddress, winners }) {
             </div>
             <div>(${valueFormatted})</div>
             {winner.nfts.length
-              ? winner.nfts.map(nft => (
+              ? winner.nfts.map((nft: any) => (
                   <NFT key={`${nft.address}#${nft.id}`} address={nft.address} id={nft.id} />
                 ))
               : null}
@@ -245,18 +297,15 @@ const Winners = memo(function ({ network, tokenAddress, winners }) {
   );
 });
 
-const UserWonDraw = memo(function ({ winners }) {
+const UserWonDraw = memo(function ({ winners }: any) {
   const classes = useStyles();
-  const address = useSelector(selectWalletAddress)?.toLowerCase();
+  const address = useAppSelector(selectWalletAddress)?.toLowerCase();
 
-  if (address && winners.find(winner => winner.address.toLowerCase() === address)) {
+  if (address && winners.find((winner: any) => winner.address.toLowerCase() === address)) {
     return (
       <div className={classes.userWonPrize}>
-        <ErrorOutline
-          className={clsx(classes.userWonPrizeItem, classes.userWonPrizeIcon)}
-          fontSize="inherit"
-        />
-        <div className={clsx(classes.userWonPrizeItem, classes.userWonPrizeText)}>
+        <ErrorOutline className={clsx(classes.userWonPrizeIcon)} fontSize="inherit" />
+        <div className={clsx(classes.userWonPrizeText)}>
           <Translate i18nKey="winners.userWonPrize" />
         </div>
       </div>
@@ -266,7 +315,7 @@ const UserWonDraw = memo(function ({ winners }) {
   return null;
 });
 
-const WonPrizeTokens = memo(function ({ totalPrizeValue, winners }) {
+const WonPrizeTokens = memo(function ({ totalPrizeValue, winners }: any) {
   return (
     <>
       <ValueWon currency="$" amount={totalPrizeValue} />
@@ -275,7 +324,7 @@ const WonPrizeTokens = memo(function ({ totalPrizeValue, winners }) {
   );
 });
 
-const WonPrizeNfts = memo(function ({ nfts }) {
+const WonPrizeNfts = memo(function ({ nfts }: any) {
   const classes = useStyles();
   const prizes = useMemo(() => listJoin(nfts, '???'), [nfts]);
 
@@ -286,7 +335,7 @@ const WonPrizeNfts = memo(function ({ nfts }) {
   );
 });
 
-const WonPrizeBoth = memo(function ({ nfts, totalPrizeValue, winners }) {
+const WonPrizeBoth = memo(function ({ nfts, totalPrizeValue, winners }: any) {
   const classes = useStyles();
   const amountFormatted = useMemo(
     () =>
@@ -311,7 +360,7 @@ const WonPrizeBoth = memo(function ({ nfts, totalPrizeValue, winners }) {
   );
 });
 
-function getNftName(network, address, id) {
+function getNftName(network: any, address: any, id: any) {
   const token = tokensByNetworkAddress[network]?.[address.toLowerCase()];
   if (token) {
     if (token.type === 'nft' && token.nfts) {
@@ -328,15 +377,18 @@ function getNftName(network, address, id) {
   return address + '#' + id;
 }
 
-const WonPrize = memo(function ({ network, totalPrizeValue, winners }) {
+const WonPrize = memo(function ({ network, totalPrizeValue, winners }: any) {
   const nftsWon = arrayUnique(
     winners
-      .map(winner =>
+      .map((winner: any) =>
         winner.awards
           .filter(
-            award => award.isNFT && award.address.toLowerCase() in tokensByNetworkAddress[network]
+            (award: any) =>
+              award.isNFT && award.address.toLowerCase() in tokensByNetworkAddress[network]
           )
-          .map(award => award.nftIds.map(id => getNftName(network, award.address, id)))
+          .map((award: any) =>
+            award.nftIds.map((id: any) => getNftName(network, award.address, id))
+          )
           .flat()
       )
       .flat()
@@ -353,46 +405,50 @@ const WonPrize = memo(function ({ network, totalPrizeValue, winners }) {
   return <WonPrizeTokens totalPrizeValue={totalPrizeValue} winners={winners} />;
 });
 
-export const Draw = function ({ draw }) {
+export type DrawProps = PropsWithChildren<{
+  id: DrawEntity['id'];
+}>;
+export const Draw = memo(function Draw({ id }: DrawProps) {
   const classes = useStyles();
-  // console.log(draw.pot.id, draw.winners);
+  const draw = useAppSelector(state => selectDrawById(state, id));
+  const pot = useAppSelector(state => selectPotById(state, draw.potId));
   const winners = useNormalizedWinners(
     draw.winners,
-    draw.pot.token,
-    draw.pot.rewardAddress,
-    draw.ppfs
+    pot.token,
+    pot.rewardAddress,
+    draw.ppfs,
+    draw.networkId
   );
-  // console.log(draw.pot.id, winners);
   const totalPrizeValue = useTotalPrizeValue(winners);
 
   return (
     <Card variant="purpleMid">
       <Grid container spacing={2} className={classes.rowLogoWonTotal}>
         <Grid item xs="auto">
-          <Logo icon={draw.pot.icon || draw.pot.id} />
+          {/* @ts-ignore */}
+          <Logo icon={pot.icon || pot.id} />
         </Grid>
         <Grid item xs="auto" className={classes.columnTitleValueWon}>
-          <Title name={draw.pot.name} />
-          <WonPrize
-            network={draw.pot.network}
-            winners={winners}
-            totalPrizeValue={totalPrizeValue}
-          />
+          <Title name={pot.name} />
+          <WonPrize network={pot.network} winners={winners} totalPrizeValue={totalPrizeValue} />
         </Grid>
       </Grid>
       <UserWonDraw winners={draw.winners} />
       <Grid container spacing={2} className={classes.rowDrawStats}>
         <Grid item xs={6}>
+          {/* @ts-ignore */}
           <DrawStat i18nKey="winners.drawDate">
             <DrawDate timestamp={draw.timestamp} />
           </DrawStat>
         </Grid>
         <Grid item xs={6}>
+          {/* @ts-ignore */}
           <DrawStat i18nKey="winners.players">
             <Players players={draw.totalPlayers} />
           </DrawStat>
         </Grid>
         <Grid item xs={12}>
+          {/* @ts-ignore */}
           <DrawStat i18nKey="winners.prizePerWinner">
             <PrizePerWinner winners={winners} />
           </DrawStat>
@@ -400,13 +456,9 @@ export const Draw = function ({ draw }) {
       </Grid>
       <CardAccordionGroup>
         <CardAccordionItem titleKey="winners.winners">
-          <Winners
-            network={draw.pot.network}
-            tokenAddress={draw.pot.tokenAddress}
-            winners={winners}
-          />
+          <Winners network={pot.network} tokenAddress={pot.tokenAddress} winners={winners} />
           <Link
-            href={getNetworkExplorerUrl(draw.network, `/tx/${draw.txHash}`)}
+            href={getNetworkExplorerUrl(draw.networkId, `/tx/${draw.txHash}`)}
             target="_blank"
             rel="noreferrer"
             className={classes.txLink}
@@ -417,4 +469,4 @@ export const Draw = function ({ draw }) {
       </CardAccordionGroup>
     </Card>
   );
-};
+});

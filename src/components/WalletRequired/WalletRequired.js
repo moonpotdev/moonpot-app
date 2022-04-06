@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectWalletStatus } from '../../features/wallet/selectors';
-import { networkByKey } from '../../config/networks';
+import { networkById } from '../../config/networks';
 import { useWalletConnected } from '../../features/wallet/hooks';
 import { Translate } from '../Translate';
 import { makeStyles } from '@material-ui/core';
@@ -80,7 +80,7 @@ const WalletSwitchNetworkButton = memo(function WalletConnectNetworkButton({ net
 
 const NotConnected = memo(function NotConnected({ target }) {
   const classes = useStyles();
-  const targetNetworkName = networkByKey?.[target]?.name;
+  const targetNetworkName = networkById?.[target]?.name;
   const key = targetNetworkName ? 'wallet.connectRequiredNetwork' : 'wallet.connectRequired';
 
   return (
@@ -95,8 +95,8 @@ const NotConnected = memo(function NotConnected({ target }) {
 
 const WrongNetwork = memo(function WrongNetwork({ target, current }) {
   const classes = useStyles();
-  const targetNetworkName = networkByKey[target].name;
-  const currentNetworkName = current ? networkByKey?.[current]?.name : null;
+  const targetNetworkName = networkById[target].name;
+  const currentNetworkName = current ? networkById?.[current]?.name : null;
   const connectedKey = currentNetworkName
     ? 'wallet.connectedToOther'
     : 'wallet.connectedToUnsupported';

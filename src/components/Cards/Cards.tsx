@@ -1,6 +1,6 @@
-import React, { forwardRef, useCallback, useState } from 'react';
+import React, { Component, forwardRef, PropsWithChildren, useCallback, useState } from 'react';
 import clsx from 'clsx';
-import { Collapse, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Collapse, Grid, GridJustification, makeStyles, Typography } from '@material-ui/core';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import styles from './styles';
 import { Translate } from '../Translate';
@@ -8,13 +8,18 @@ import { variantClass } from '../../helpers/utils';
 
 const useStyles = makeStyles(styles);
 
+export type CardsProps = PropsWithChildren<{
+  className?: string;
+  sameHeight?: boolean;
+  justifyContent?: GridJustification;
+}>;
 export function Cards({
   className,
   children,
   sameHeight = true,
   justifyContent = 'center',
   ...rest
-}) {
+}: CardsProps) {
   const classes = useStyles();
 
   return (
@@ -29,7 +34,12 @@ export function Cards({
   );
 }
 
-export const Card = forwardRef(function (
+export type CardProps = PropsWithChildren<{
+  variant: string;
+  className?: string;
+  oneColumn?: boolean;
+}>;
+export const Card = forwardRef<HTMLDivElement, CardProps>(function (
   { variant = 'tealLight', className, children, oneColumn = false, ...rest },
   ref
 ) {
@@ -55,7 +65,10 @@ export const Card = forwardRef(function (
   );
 });
 
-export function CardTitle({ className, children, ...rest }) {
+export type CardTitleProps = PropsWithChildren<{
+  className?: string;
+}>;
+export function CardTitle({ className, children, ...rest }: CardTitleProps) {
   const classes = useStyles();
 
   return (
@@ -65,12 +78,23 @@ export function CardTitle({ className, children, ...rest }) {
   );
 }
 
-export function CardAccordionGroup({ className, children }) {
+export type CardAccordionGroupProps = PropsWithChildren<{
+  className?: string;
+}>;
+export function CardAccordionGroup({ className, children }: CardAccordionGroupProps) {
   const classes = useStyles();
 
   return <div className={clsx(classes.accordionGroup, className)}>{children}</div>;
 }
 
+export type CardAccordionItemProps = PropsWithChildren<{
+  titleKey: string;
+  className?: string;
+  onChange?: any;
+  collapsable?: boolean;
+  startOpen?: boolean;
+  tooltip?: Component;
+}>;
 export function CardAccordionItem({
   titleKey,
   children,
@@ -79,7 +103,7 @@ export function CardAccordionItem({
   collapsable = true,
   startOpen = false,
   tooltip,
-}) {
+}: CardAccordionItemProps) {
   const classes = useStyles();
   const [isOpen, setOpen] = useState(startOpen);
   const toggleOpen = useCallback(() => {
@@ -99,7 +123,7 @@ export function CardAccordionItem({
     <div className={clsx(classes.accordionItem, className)}>
       <button
         className={clsx(classes.accordionItemTitle, { [classes.accordionItemToggle]: collapsable })}
-        onClick={collapsable ? toggleOpen : null}
+        onClick={collapsable ? toggleOpen : undefined}
         style={{ width: 'auto' }}
       >
         <Translate i18nKey={titleKey} />

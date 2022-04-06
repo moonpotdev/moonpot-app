@@ -1,11 +1,15 @@
-import React, { memo } from 'react';
+import React, { memo, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TotalStat } from '../../../../components/TotalStat';
 import { Card } from '../../../../components/Cards';
 import { useTotalPrizeValue } from '../../apollo/total';
 import { RouteLoading } from '../../../../components/RouteLoading';
 
-export const Total = memo(function ({ className }) {
+export type TotalProps = PropsWithChildren<{
+  className: string;
+}>;
+
+export const Total = memo(function ({ className }: TotalProps) {
   const { t } = useTranslation();
   const { loading, error, total } = useTotalPrizeValue();
 

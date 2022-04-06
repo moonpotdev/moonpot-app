@@ -1,8 +1,8 @@
-import { networkKeys } from '../networks';
+import { networkIds } from '../networks';
 import { indexBy } from '../../helpers/utils';
 
 export const tokensByNetwork = Object.fromEntries(
-  networkKeys.map(network => [
+  networkIds.map(network => [
     network,
     require(`./${network}.json`).map(token => ({ ...token, network })),
   ])

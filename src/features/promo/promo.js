@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useCallback, useEffect } from 'react';
 import styles from './styles';
 import { Container, makeStyles, Typography } from '@material-ui/core';
-import { Card } from '../../components/Cards/Cards';
+import { Card } from '../../components/Cards';
 import { PrimaryButton } from '../../components/Buttons/PrimaryButton';
 import { RouteLoading } from '../../components/RouteLoading';
 import { useTranslation } from 'react-i18next';
