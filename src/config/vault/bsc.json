@@ -133,7 +133,8 @@
       "ziggyInterest": 5,
       "ziggyPrize": 5
     },
-    "status": "active",
+    "status": "eol",
+    "eolDrawNumber": 15,
     "depositsPaused": true,
     "depositsPausedReason": "Underlying Beefy vault is being upgraded.",
     "supportsClaimAllBonuses": true,
