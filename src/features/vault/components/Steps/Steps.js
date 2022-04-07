@@ -1,18 +1,7 @@
-import {
-  Backdrop,
-  Box,
-  Button,
-  Fade,
-  Grid,
-  Link,
-  makeStyles,
-  Modal,
-  Typography,
-} from '@material-ui/core';
+import { Box, Button, Grid, Link, makeStyles, Modal, Typography } from '@material-ui/core';
 import React, { memo, useEffect } from 'react';
 import { OpenInNew, ErrorOutline, Close } from '@material-ui/icons';
 import { isEmpty } from '../../../../helpers/utils';
-import Loader from '../../../../components/loader';
 import styles from '../../styles';
 import { useSelector } from 'react-redux';
 import { networkByKey } from '../../../../config/networks';
@@ -28,7 +17,10 @@ const Steps = ({ item, steps, handleClose }) => {
   const calcProgressPosition = () => {
     if (steps.finished) {
       return '100%';
-    } else if (action.result === 'success_pending') {
+    } else if (
+      action.result === 'success_pending' &&
+      steps.currentStep === steps.items.length - 1
+    ) {
       return '75%';
     } else if (steps.items.length === 2 && steps.currentStep === 0) {
       return '25%';
@@ -78,6 +70,7 @@ const Steps = ({ item, steps, handleClose }) => {
       closeAfterTransition
       hideBackdrop={true}
       disableEnforceFocus={true}
+      disableScrollLock={true}
     >
       <Box className={classes.modalForeground}>
         {renderContent && (
@@ -132,13 +125,14 @@ const Steps = ({ item, steps, handleClose }) => {
                         }
                         target="_blank"
                       >
-                        View transaction <OpenInNew className={classes.linkIcon} />
+                        <Translate i18nKey="txModal.viewTransaction" />{' '}
+                        <OpenInNew className={classes.linkIcon} />
                       </Link>
                     </Box>
                   </Typography>
                 </Grid>
                 <Button onClick={handleClose} className={classes.closeButton}>
-                  Close
+                  <Translate i18nKey="txModal.close" />
                 </Button>
               </>
             ) : (
@@ -155,7 +149,7 @@ const Steps = ({ item, steps, handleClose }) => {
                           style={{ margin: 0, padding: 0, paddingLeft: 8 }}
                         >
                           <div style={{ display: 'flex' }}>
-                            Transaction Error
+                            <Translate i18nKey="txModal.error" />
                             <div onClick={handleClose} className={classes.closeBtn}>
                               <Close />
                             </div>
@@ -167,7 +161,7 @@ const Steps = ({ item, steps, handleClose }) => {
                       <Typography className={classes.errorArea}>{action.data.error}</Typography>
                     </Grid>
                     <Button onClick={handleClose} className={classes.closeButton}>
-                      Close
+                      <Translate i18nKey="txModal.close" />
                     </Button>
                   </>
                 ) : action && action.result === 'success_pending' ? (
@@ -179,7 +173,7 @@ const Steps = ({ item, steps, handleClose }) => {
                         className={classes.transactionConfirmations}
                       >
                         <div style={{ display: 'flex' }}>
-                          Confirmation Pending
+                          <Translate i18nKey="txModal.pending" />
                           <div onClick={handleClose} className={classes.closeBtn}>
                             <Close />
                           </div>
@@ -190,7 +184,7 @@ const Steps = ({ item, steps, handleClose }) => {
                       className={classes.confirmTransactionText}
                       id="transition-modal-description"
                     >
-                      Waiting for network to confirm transaction.
+                      <Translate i18nKey="txModal.waitingForNetwork" />
                     </Typography>
                   </>
                 ) : (
@@ -202,7 +196,8 @@ const Steps = ({ item, steps, handleClose }) => {
                         className={classes.transactionConfirmations}
                       >
                         <div style={{ display: 'flex' }}>
-                          {steps.currentStep}/{steps.items.length} Transactions Confirmed
+                          {steps.currentStep}/{steps.items.length}{' '}
+                          <Translate i18nKey={'txModal.confirmed'} />
                           <div onClick={handleClose} className={classes.closeBtn}>
                             <Close />
                           </div>
@@ -224,135 +219,6 @@ const Steps = ({ item, steps, handleClose }) => {
           </Grid>
         )}
       </Box>
-      {/* <Fade in={steps.modal}>
-        <Box className={classes.modalForeground}>
-          <Grid container className={classes.modalText}>
-            <div className={classes.progressContainer}>
-              <div className={classes.progress} />
-            </div>
-            {renderContent ? (
-              steps.finished ? (
-                <>
-                  {steps.items[steps.currentStep].step === 'deposit' ? (
-                    <React.Fragment>
-                      <Typography className={classes.stepsTitleText}>Deposit Successful!</Typography>
-                      <Typography className={classes.successfulDepositAmountText}>
-                        You have successfully deposited into {item.name} Pot.
-                      </Typography>
-                    </React.Fragment>
-                  ) : null}
-                  {steps.items[steps.currentStep].step === 'withdraw' ? (
-                    <React.Fragment>
-                      <Typography className={classes.stepsTitleText}>Withdraw Successful!</Typography>
-                      <Typography className={classes.successfulDepositAmountText}>
-                        You have successfully withdrawn from {item.name} Pot.
-                      </Typography>
-                    </React.Fragment>
-                  ) : null}
-                  {steps.items[steps.currentStep].step === 'reward' ? (
-                    <React.Fragment>
-                      <Typography className={classes.stepsTitleText}>Withdraw Successful!</Typography>
-                      <Typography className={classes.successfulDepositAmountText}>
-                        You have successfully withdrawn all of your bonus earnings from {item.name}{' '}
-                        Pot.
-                      </Typography>
-                    </React.Fragment>
-                  ) : null}
-                  {steps.items[steps.currentStep].step === 'compound' ? (
-                    <React.Fragment>
-                      <Typography className={classes.stepsTitleText}>Compound Successful!</Typography>
-                      <Typography className={classes.successfulDepositAmountText}>
-                        You have successfully compounded your bonus {item.token}
-                      </Typography>
-                    </React.Fragment>
-                  ) : null}
-                  {steps.items[steps.currentStep].step === 'claimAll' ? (
-                    <React.Fragment>
-                      <Typography className={classes.stepsTitleText}>Claim Successful!</Typography>
-                      <Typography className={classes.successfulDepositAmountText}>
-                        You have successfully claimed your bonus POTS
-                      </Typography>
-                    </React.Fragment>
-                  ) : null}
-                  <Box className={classes.viewMyMoonpots} textAlign={'center'}>
-                    <Button href={'/#/my-moonpots'} onClick={handleClose}>
-                      View My Moonpots
-                    </Button>
-                  </Box>
-                  <Box textAlign={'center'}>
-                    <Link
-                      className={classes.blockExplorerLink}
-                      href={
-                        networkByKey[item.network].explorerUrl +
-                        '/tx/' +
-                        action.data.receipt.transactionHash
-                      }
-                      target="_blank"
-                    >
-                      See transaction on Block Explorer <OpenInNew />
-                    </Link>
-                  </Box>
-                </>
-              ) : (
-                <React.Fragment>
-                  <>
-                    {action && action.result === 'error' ? (
-                      <Alert severity={'error'}>
-                        <AlertTitle>Error</AlertTitle>
-                        <Typography>{action.data.error}</Typography>
-                      </Alert>
-                    ) : action && action.result === 'success_pending' ? (
-                      <Alert severity={'info'}>
-                        <AlertTitle className={classes.pendingText}>Confirmation Pending</AlertTitle>
-                        <Typography className={classes.pendingText}>
-                          Waiting for network to confirm transaction...
-                        </Typography>
-                        <Box textAlign={'center'}>
-                          <Loader />
-                        </Box>
-                        <Box textAlign={'center'} mt={2}>
-                          <Link
-                            className={classes.blockExplorerLink}
-                            href={networkByKey[item.network].explorerUrl + '/tx/' + action.data.hash}
-                            target="_blank"
-                          >
-                            See transaction on Block Explorer <OpenInNew />
-                          </Link>
-                        </Box>
-                      </Alert>
-                    ) : (
-                      <>
-                        <Grid item>
-                          <Typography
-                            id="transition-modal-title"
-                            className={classes.transactionConfirmations}
-                          >
-                            {steps.currentStep}/{steps.items.length} Transactions Confirmed
-                          </Typography>
-                        </Grid>
-                        <Typography
-                          className={classes.confirmTransactionText}
-                          id="transition-modal-description"
-                        >
-                          {!isEmpty(steps.items[steps.currentStep])
-                            ? steps.items[steps.currentStep].message
-                            : ''}
-                        </Typography>
-                      </>
-                    )}
-                  </>
-                  {/* <Button variant={'outlined'} onClick={handleClose}>
-                    Close
-                  </Button> /*...
-                </React.Fragment>
-              )
-            ) : (
-              <Box className={classes.modalForeground} />
-            )}
-          </Grid>
-        </Box>
-      </Fade> 
-    */}
     </Modal>
   );
 };

@@ -576,9 +576,15 @@
     "withdrawConfirmed": "You have successfully withdrawn from {{pot}} Pot.",
     "compoundConfirmed": "You have successfully compounded for {{pot}} Pot.",
     "claimConfirmed": "You have successfully claimed your bouns tokens.",
-    "despositSuccess": "Deposit Success",
+    "depositSuccess": "Deposit Success",
     "withdrawSuccess": "Withdraw Success",
     "compoundSuccess": "Compound Success",
-    "claimSuccess": "Claim Success"
+    "claimSuccess": "Claim Success",
+    "viewTransaction": "View Transaction",
+    "close": "Close",
+    "error": "Transaction Error",
+    "pending": "Confirmation Pending",
+    "confirmed": "Transactions Confirmed",
+    "waitingForNetwork": "Waiting for network to confirm transaction."
   }
 }
