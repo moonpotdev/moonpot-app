@@ -13,7 +13,7 @@ import React, { memo, useEffect } from 'react';
 import { OpenInNew } from '@material-ui/icons';
 import { isEmpty } from '../../../../helpers/utils';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import Loader from '../../../../components/loader';
+import { Loader } from '../../../../components/Loader';
 import styles from '../../styles';
 import { useSelector } from 'react-redux';
 import { networkById } from '../../../../config/networks';

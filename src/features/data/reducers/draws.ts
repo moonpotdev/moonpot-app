@@ -1,6 +1,11 @@
-import { fetchDrawsForNetworkBefore } from '../actions/draws';
+import {
+  fetchDrawsForNetworkBefore,
+  fetchPrizeTotalsForNetwork,
+  fetchUniqueWinners,
+} from '../actions/draws';
 import { createSlice, Draft } from '@reduxjs/toolkit';
-import { DrawEntity } from '../entities/draws';
+import { DrawEntity, PotPrizeTotalsEntity } from '../entities/draws';
+import { NormalizedEntity } from '../utils/normalized-entity';
 
 export interface DrawsState {
   byId: {
@@ -13,6 +18,8 @@ export interface DrawsState {
   byPotId: {
     [address: string]: DrawEntity['id'][];
   };
+  totals: NormalizedEntity<PotPrizeTotalsEntity>;
+  uniqueWinners: number;
 }
 
 export const initialDrawsState: DrawsState = {
@@ -20,6 +27,11 @@ export const initialDrawsState: DrawsState = {
   allIds: [],
   byWinningAddress: {},
   byPotId: {},
+  totals: {
+    byId: {},
+    allIds: [],
+  },
+  uniqueWinners: 0,
 };
 
 function addDrawToState(state: Draft<DrawsState>, draw: DrawEntity) {
@@ -54,16 +66,43 @@ function addDrawsToState(state: Draft<DrawsState>, draws: DrawEntity[]) {
   }
 }
 
+function addTotalToState(state: Draft<DrawsState['totals']>, total: PotPrizeTotalsEntity) {
+  state.byId[total.id] = total;
+}
+
+function addTotalsToState(state: Draft<DrawsState>, totals: PotPrizeTotalsEntity[]) {
+  let added = false;
+  for (const total of totals) {
+    if (!(total.id in state.totals.byId)) {
+      addTotalToState(state.totals, total);
+      added = true;
+    }
+  }
+
+  if (added) {
+    state.totals.allIds = Object.keys(state.totals.byId);
+  }
+}
+
 export const drawsSlice = createSlice({
   name: 'draws',
   initialState: initialDrawsState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(fetchDrawsForNetworkBefore.fulfilled, (state, action) => {
-      if (action.payload.draws.length) {
-        addDrawsToState(state, action.payload.draws);
-      }
-    });
+    builder
+      .addCase(fetchDrawsForNetworkBefore.fulfilled, (state, action) => {
+        if (action.payload.draws.length) {
+          addDrawsToState(state, action.payload.draws);
+        }
+      })
+      .addCase(fetchPrizeTotalsForNetwork.fulfilled, (state, action) => {
+        if (action.payload.totals.length) {
+          addTotalsToState(state, action.payload.totals);
+        }
+      })
+      .addCase(fetchUniqueWinners.fulfilled, (state, action) => {
+        state.uniqueWinners = action.payload;
+      });
   },
 });
 

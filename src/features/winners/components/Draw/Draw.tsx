@@ -7,12 +7,7 @@ import { getUnderylingToken, tokensByNetworkAddress } from '../../../../config/t
 import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
-import {
-  arrayUnique,
-  formatAddressShort,
-  getNetworkExplorerUrl,
-  listJoin,
-} from '../../../../helpers/utils';
+import { formatAddressShort, getNetworkExplorerUrl, listJoin } from '../../../../helpers/utils';
 import { ErrorOutline } from '@material-ui/icons';
 import BigNumber from 'bignumber.js';
 import clsx from 'clsx';
@@ -23,12 +18,13 @@ import { useAppSelector } from '../../../../store';
 import { selectPotById } from '../../../data/selectors/pots';
 import { selectDrawById } from '../../../data/selectors/draws';
 import { DrawEntity } from '../../../data/entities/draws';
-import { ApiWinner } from '../../../data/apis/draws';
+import { ApiAward, ApiWinner } from '../../../data/apis/draws';
 import { NetworkEntity } from '../../../data/entities/network';
+import { uniq } from 'lodash';
 
 const useStyles = makeStyles(styles);
 
-const useTotalPrizeValue = function (winners: any) {
+const useTotalPrizeValue = function (winners: Winner[]) {
   return useMemo(() => {
     let sum = 0;
 
@@ -42,18 +38,37 @@ const useTotalPrizeValue = function (winners: any) {
   }, [winners]);
 };
 
+interface Winnings {
+  address: string;
+  symbol: string;
+  amount: number;
+  value: number;
+  isNFT: boolean;
+  nftIds: number[];
+}
+
 function normalizeWinnings(
-  awards: any,
-  drawToken: any,
-  ticketAddress: any,
-  ticketPPFS: any,
-  prices: any,
-  network: any
-) {
-  const tokens: Record<string, any> = {};
+  awards: ApiAward[],
+  drawToken: string,
+  ticketAddress: string,
+  ticketPPFS: BigNumber,
+  prices: Record<string, number>,
+  network: string
+): Winnings[] {
+  const tokens: Record<
+    string,
+    {
+      address: string;
+      symbol: string;
+      amount: BigNumber;
+      value: BigNumber;
+      isNFT: boolean;
+      nftIds: number[];
+    }
+  > = {};
 
   for (const { token, amount, tokenIds } of awards) {
-    const isNFT = tokenIds && tokenIds.length > 0;
+    const isNFT = !!(tokenIds && tokenIds.length > 0);
     const tokenData = tokensByNetworkAddress[network]?.[token.toLowerCase()];
 
     if (tokenData) {
@@ -107,11 +122,11 @@ function normalizeWinnings(
 }
 
 function normalizeStaked(
-  stakedAmount: any,
-  ticketAddress: any,
-  ticketPPFS: any,
-  prices: any,
-  network: any
+  stakedAmount: BigNumber,
+  ticketAddress: string,
+  ticketPPFS: BigNumber,
+  prices: Record<string, number>,
+  network: string
 ) {
   const ticketToken = tokensByNetworkAddress[network][ticketAddress.toLowerCase()];
   const underlyingToken = getUnderylingToken(ticketToken);
@@ -127,14 +142,21 @@ function normalizeStaked(
   };
 }
 
+interface Winner {
+  address: string;
+  stakedValue: number;
+  awards: Winnings[];
+  staked: number;
+}
+
 const useNormalizedWinners = function (
   winners: ApiWinner[],
-  drawToken: any,
-  ticketAddress: any,
+  drawToken: string,
+  ticketAddress: string,
   ticketPPFS: BigNumber,
   network: NetworkEntity['id']
-) {
-  const prices = useAppSelector(state => state.prices.prices);
+): Winner[] {
+  const prices: Record<string, number> = useAppSelector(state => state.prices.prices);
 
   return useMemo(() => {
     return winners.map(winner => ({
@@ -152,8 +174,10 @@ const useNormalizedWinners = function (
   }, [winners, prices, drawToken, ticketPPFS, ticketAddress, network]);
 };
 
-// TODO: types
-const Title = memo(function ({ name }: any) {
+type TitleProps = PropsWithChildren<{
+  name: string;
+}>;
+const Title = memo<TitleProps>(function ({ name }) {
   const classes = useStyles();
   return (
     <div className={classes.title}>
@@ -162,14 +186,20 @@ const Title = memo(function ({ name }: any) {
   );
 });
 
-// TODO: types
-const NFT = memo(function ({ address, id }: any) {
+type NFTProps = PropsWithChildren<{
+  address: string;
+  id: number;
+}>;
+const NFT = memo<NFTProps>(function ({ address, id }) {
   // TODO
   return null;
 });
 
-// TODO: types
-const ValueWon = memo(function ({ currency, amount }: any) {
+type ValueWonProps = PropsWithChildren<{
+  currency: string;
+  amount: number;
+}>;
+const ValueWon = memo<ValueWonProps>(function ({ currency, amount }) {
   const classes = useStyles();
   const amountFormatted = amount.toLocaleString(undefined, {
     maximumFractionDigits: 0,
@@ -182,14 +212,12 @@ const ValueWon = memo(function ({ currency, amount }: any) {
   );
 });
 
-// TODO: types
-const WonTokens = memo(function ({ winners }: any) {
+type WonTokensProps = PropsWithChildren<{ winners: Winner[] }>;
+const WonTokens = memo<WonTokensProps>(function ({ winners }) {
   const classes = useStyles();
   const allTokens = new Set();
 
-  winners.forEach((winner: any) =>
-    winner.awards.forEach((award: any) => allTokens.add(award.symbol))
-  );
+  winners.forEach(winner => winner.awards.forEach(award => allTokens.add(award.symbol)));
 
   return (
     <div className={classes.wonTotalTokens}>
@@ -199,15 +227,19 @@ const WonTokens = memo(function ({ winners }: any) {
   );
 });
 
-// TODO: types
-const DrawDate = memo(function ({ timestamp }: any) {
+type DrawDateProps = PropsWithChildren<{
+  timestamp: number;
+}>;
+const DrawDate = memo<DrawDateProps>(function ({ timestamp }) {
   const date = new Date(timestamp * 1000);
   const formatter = new Intl.DateTimeFormat(undefined, { dateStyle: 'short' });
   return <>{formatter.format(date)}</>;
 });
 
-// TODO: types
-const Players = memo(function ({ players }: any) {
+type PlayersProps = PropsWithChildren<{
+  players: number;
+}>;
+const Players = memo<PlayersProps>(function ({ players }) {
   return (
     <>
       {Number(players).toLocaleString(undefined, {
@@ -217,13 +249,13 @@ const Players = memo(function ({ players }: any) {
   );
 });
 
-// TODO: types
-const PrizePerWinner = memo(function ({ winners }: any) {
+type PrizePerWinnerProps = PropsWithChildren<{ winners: Winner[] }>;
+const PrizePerWinner = memo<PrizePerWinnerProps>(function ({ winners }) {
   const classes = useStyles();
 
   return (
     <>
-      {Object.values(winners[0].awards).map((prize: any) => {
+      {Object.values(winners[0].awards).map(prize => {
         return (
           <div key={prize.symbol}>
             <span className={classes.perWinnerToken}>
@@ -241,22 +273,25 @@ const PrizePerWinner = memo(function ({ winners }: any) {
   );
 });
 
-// TODO: types
-function getNftsFromAwards(awards: any) {
+function getNftsFromAwards(awards: Winner['awards']) {
   return awards
-    .filter((award: any) => award.isNFT)
-    .map((award: any) => award.nftIds.map((id: any) => ({ address: award.address, id: id })))
+    .filter(award => award.isNFT)
+    .map(award => award.nftIds.map(id => ({ address: award.address, id: id })))
     .flat();
 }
 
-// TODO: types
-const Winners = memo(function ({ network, tokenAddress, winners }: any) {
+type WinnersProps = PropsWithChildren<{
+  network: string;
+  tokenAddress: string;
+  winners: Winner[];
+}>;
+const Winners = memo<WinnersProps>(function ({ network, tokenAddress, winners }) {
   const { t } = useTranslation();
   const classes = useStyles();
   const tokenData = tokensByNetworkAddress[network]?.[tokenAddress.toLowerCase()];
 
   const sortedWinners = useMemo(() => {
-    const entries = winners.map((winner: any, index: any) => {
+    const entries = winners.map((winner, index) => {
       return {
         id: winner.address + index,
         staked: winner.staked,
@@ -267,14 +302,14 @@ const Winners = memo(function ({ network, tokenAddress, winners }: any) {
     });
 
     // @ts-ignore
-    return entries.sort((a: any, b: any) => (a.staked > b.staked) - (a.staked < b.staked));
+    return entries.sort((a, b) => (a.staked > b.staked) - (a.staked < b.staked));
   }, [winners]);
 
   // console.log(sortedWinners);
 
   return (
     <Grid container spacing={2} className={classes.rowWinners}>
-      {sortedWinners.map((winner: any) => {
+      {sortedWinners.map(winner => {
         const valueFormatted = formatDecimals(winner.value, 2 as any);
         const stakedFormatted = formatDecimals(winner.staked, 2 as any);
 
@@ -286,7 +321,7 @@ const Winners = memo(function ({ network, tokenAddress, winners }: any) {
             </div>
             <div>(${valueFormatted})</div>
             {winner.nfts.length
-              ? winner.nfts.map((nft: any) => (
+              ? winner.nfts.map(nft => (
                   <NFT key={`${nft.address}#${nft.id}`} address={nft.address} id={nft.id} />
                 ))
               : null}
@@ -297,11 +332,14 @@ const Winners = memo(function ({ network, tokenAddress, winners }: any) {
   );
 });
 
-const UserWonDraw = memo(function ({ winners }: any) {
+type UserWonDrawProps = PropsWithChildren<{
+  winners: ApiWinner[];
+}>;
+const UserWonDraw = memo<UserWonDrawProps>(function ({ winners }) {
   const classes = useStyles();
   const address = useAppSelector(selectWalletAddress)?.toLowerCase();
 
-  if (address && winners.find((winner: any) => winner.address.toLowerCase() === address)) {
+  if (address && winners.find(winner => winner.address.toLowerCase() === address)) {
     return (
       <div className={classes.userWonPrize}>
         <ErrorOutline className={clsx(classes.userWonPrizeIcon)} fontSize="inherit" />
@@ -315,7 +353,11 @@ const UserWonDraw = memo(function ({ winners }: any) {
   return null;
 });
 
-const WonPrizeTokens = memo(function ({ totalPrizeValue, winners }: any) {
+type WonPrizeTokensProps = PropsWithChildren<{
+  totalPrizeValue: number;
+  winners: Winner[];
+}>;
+const WonPrizeTokens = memo<WonPrizeTokensProps>(function ({ totalPrizeValue, winners }) {
   return (
     <>
       <ValueWon currency="$" amount={totalPrizeValue} />
@@ -324,7 +366,8 @@ const WonPrizeTokens = memo(function ({ totalPrizeValue, winners }: any) {
   );
 });
 
-const WonPrizeNfts = memo(function ({ nfts }: any) {
+type WonPrizeNftsProps = PropsWithChildren<{ nfts: string[] }>;
+const WonPrizeNfts = memo<WonPrizeNftsProps>(function ({ nfts }) {
   const classes = useStyles();
   const prizes = useMemo(() => listJoin(nfts, '???'), [nfts]);
 
@@ -335,7 +378,12 @@ const WonPrizeNfts = memo(function ({ nfts }: any) {
   );
 });
 
-const WonPrizeBoth = memo(function ({ nfts, totalPrizeValue, winners }: any) {
+type WonPrizeBothProps = PropsWithChildren<{
+  nfts: string[];
+  totalPrizeValue: number;
+  winners: Winner[];
+}>;
+const WonPrizeBoth = memo<WonPrizeBothProps>(function ({ nfts, totalPrizeValue, winners }) {
   const classes = useStyles();
   const amountFormatted = useMemo(
     () =>
@@ -360,7 +408,7 @@ const WonPrizeBoth = memo(function ({ nfts, totalPrizeValue, winners }: any) {
   );
 });
 
-function getNftName(network: any, address: any, id: any) {
+function getNftName(network: string, address: string, id: number): string {
   const token = tokensByNetworkAddress[network]?.[address.toLowerCase()];
   if (token) {
     if (token.type === 'nft' && token.nfts) {
@@ -377,24 +425,26 @@ function getNftName(network: any, address: any, id: any) {
   return address + '#' + id;
 }
 
-const WonPrize = memo(function ({ network, totalPrizeValue, winners }: any) {
-  const nftsWon = arrayUnique(
+type WonPrizeProps = PropsWithChildren<{
+  network: string;
+  totalPrizeValue: number;
+  winners: Winner[];
+}>;
+const WonPrize = memo<WonPrizeProps>(function ({ network, totalPrizeValue, winners }) {
+  const nftsWon = uniq(
     winners
-      .map((winner: any) =>
+      .map(winner =>
         winner.awards
           .filter(
-            (award: any) =>
-              award.isNFT && award.address.toLowerCase() in tokensByNetworkAddress[network]
+            award => award.isNFT && award.address.toLowerCase() in tokensByNetworkAddress[network]
           )
-          .map((award: any) =>
-            award.nftIds.map((id: any) => getNftName(network, award.address, id))
-          )
+          .map(award => award.nftIds.map(id => getNftName(network, award.address, id)))
           .flat()
       )
       .flat()
   );
-  const prizeNfts = totalPrizeValue <= 0 && nftsWon.length;
-  const prizeBoth = totalPrizeValue > 0 && nftsWon.length;
+  const prizeNfts = !!(totalPrizeValue <= 0 && nftsWon.length);
+  const prizeBoth = !!(totalPrizeValue > 0 && nftsWon.length);
 
   if (prizeNfts) {
     return <WonPrizeNfts nfts={nftsWon} />;

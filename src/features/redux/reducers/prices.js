@@ -2,8 +2,8 @@ import { createReducer } from '@reduxjs/toolkit';
 import { networkIds } from '../../../config/networks';
 
 const initialState = {
-  prices: [],
-  apy: [],
+  prices: {},
+  apy: {},
   ppfs: Object.fromEntries(networkIds.map(network => [network, {}])),
   byNetworkAddress: Object.fromEntries(networkIds.map(network => [network, {}])),
   lastUpdated: 0,

@@ -15,3 +15,6 @@ export const selectNetworkById = createSelector(
 );
 
 export const selectNetworkIds = (state: AppState) => state.entities.networks.allIds;
+
+export const selectHaveNetworksLoadedOnce = (state: AppState) =>
+  state.ui.dataLoader.global.networks.alreadyLoadedOnce;

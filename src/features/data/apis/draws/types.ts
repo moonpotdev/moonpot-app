@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js';
+import { NetworkEntity } from '../../entities/network';
 
 export interface ApiAward {
   amount: BigNumber;
@@ -26,4 +27,16 @@ export interface ApiPrizeDraw {
   totalPlayers: number;
   txHash: string;
   winners: ApiWinner[];
+}
+
+export interface ApiPrizePoolTotalAward {
+  token: string;
+  amount: string;
+}
+
+export interface ApiPrizeTotals {
+  id: string;
+  networkId: NetworkEntity['id'];
+  prizePool: string;
+  awards: ApiPrizePoolTotalAward[];
 }

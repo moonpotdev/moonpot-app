@@ -1,13 +1,15 @@
 import { AppThunk } from '../../../store';
 import { fetchNetworkConfigs } from './networks';
 import { selectNetworkIds } from '../selectors/networks';
-import { fetchDrawsForNetworkBefore } from './draws';
+import { fetchDrawsForNetworkBefore, fetchUniqueWinners } from './draws';
 
 export function initialGlobalLoader(): AppThunk {
   return async (dispatch, getState) => {
     const networksLoading = dispatch(fetchNetworkConfigs());
 
     await networksLoading;
+
+    dispatch(fetchUniqueWinners());
   };
 }
 

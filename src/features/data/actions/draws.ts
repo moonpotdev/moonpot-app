@@ -2,14 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { NetworkEntity } from '../entities/network';
 import { AppState } from '../../../store';
 import { selectNetworkById } from '../selectors/networks';
-import { ApiPrizeDraw, getDrawsApiForNetwork } from '../apis/draws';
+import { ApiPrizeDraw, ApiPrizeTotals, getDrawsApiForNetwork } from '../apis/draws';
 import { last } from 'lodash';
 import {
   selectPotById,
   selectPotIdByNetworkPrizePool,
   selectPotPrizePoolsByNetworkId,
 } from '../selectors/pots';
-import { DrawEntity } from '../entities/draws';
+import { DrawEntity, PotPrizeTotalsEntity } from '../entities/draws';
 
 interface fetchDrawsForNetworkBeforeParams {
   networkId: NetworkEntity['id'];
@@ -73,3 +73,65 @@ export const fetchDrawsForNetworkBefore = createAsyncThunk<
   // No draws found
   return { draws: [] };
 });
+
+interface fetchTotalPrizesForNetworkParams {
+  networkId: NetworkEntity['id'];
+}
+
+export interface fetchTotalPrizesForNetworkPayload {
+  totals: PotPrizeTotalsEntity[];
+}
+
+function mapPrizePoolTotalsToEntities(
+  totals: ApiPrizeTotals[],
+  networkId: NetworkEntity['id'],
+  state: AppState
+): PotPrizeTotalsEntity[] {
+  // Draws must have entry in config, and not be after the last draw at EOL.
+  const prizePools = selectPotPrizePoolsByNetworkId(state, networkId).map(address =>
+    address.toLowerCase()
+  );
+
+  return totals
+    .filter(total => prizePools.includes(total.prizePool))
+    .map(total => ({
+      ...total,
+      potId: selectPotIdByNetworkPrizePool(state, networkId, total.prizePool),
+    }));
+}
+
+export const fetchPrizeTotalsForNetwork = createAsyncThunk<
+  fetchTotalPrizesForNetworkPayload,
+  fetchTotalPrizesForNetworkParams,
+  { state: AppState }
+>('draws/fetchPrizeTotalsForNetwork', async ({ networkId }, { getState, dispatch }) => {
+  const state = getState();
+  const network = selectNetworkById(state, networkId);
+  const api = await getDrawsApiForNetwork(network);
+  const prizePools = selectPotPrizePoolsByNetworkId(state, networkId).map(address =>
+    address.toLowerCase()
+  );
+  const totals: ApiPrizeTotals[] = await api.fetchTotalPrizesForPrizePools(prizePools);
+
+  if (totals.length) {
+    const totalEntities = mapPrizePoolTotalsToEntities(totals, networkId, state);
+    return {
+      totals: totalEntities,
+    };
+  }
+
+  return {
+    totals: [],
+  };
+});
+
+export const fetchUniqueWinners = createAsyncThunk<number, void, { state: AppState }>(
+  'draws/fetchUniqueWinners',
+  async (_, { getState }) => {
+    const state = getState();
+    const network = selectNetworkById(state, 'bsc'); // TODO: endpoint only returns BSC so far
+    const api = await getDrawsApiForNetwork(network);
+
+    return await api.fetchUniqueWinnersCount();
+  }
+);

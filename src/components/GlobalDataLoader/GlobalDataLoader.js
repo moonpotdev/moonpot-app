@@ -2,7 +2,6 @@ import { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { load } from 'fathom-client';
 import reduxActions from '../../features/redux/actions';
-import { fetchUniqueWinners } from '../../features/winners/redux/unique';
 import { filterLoad } from '../../features/filter/load';
 import { selectFilterConfigLoaded } from '../../features/filter/selectors';
 import { initialGlobalLoader } from '../../features/data/actions/scenarios';
@@ -43,10 +42,6 @@ export const GlobalDataLoader = memo(function GlobalDataLoader() {
   /*useEffect(() => {
     dispatch(reduxActions.holders.fetchHolders());
   }, [dispatch]);*/
-
-  useEffect(() => {
-    dispatch(fetchUniqueWinners());
-  }, [dispatch]);
 
   useEffect(() => {
     if (!filterConfigLoaded) {

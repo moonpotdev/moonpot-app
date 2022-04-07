@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 export const queryTotalAwardForPrizePools = gql`
   query ($pools: [String!]) {
     prizePools(where: { id_in: $pools }) {
+      address
       totalAwards {
         token
         amount
@@ -11,13 +12,18 @@ export const queryTotalAwardForPrizePools = gql`
   }
 `;
 
+export interface QueryTotalPrizePool {
+  address: string;
+  totalAwards: QueryTotalAward[];
+}
+
+export interface QueryTotalAward {
+  token: string;
+  amount: string;
+}
+
 export interface QueryTotalAwardForPrizePoolsReturnType {
-  prizePools: {
-    totalAwards: {
-      token: string;
-      amount: string;
-    }[];
-  }[];
+  prizePools: QueryTotalPrizePool[];
 }
 
 export const queryPrizeDrawsBeforeDate = gql`

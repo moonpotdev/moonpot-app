@@ -15,6 +15,8 @@
     "learnMore": "Learn More",
     "moonpots": "Moonpots",
     "myPots": "My Pots",
+    "allDraws": "All Draws",
+    "myWinningDraws": "My Winning Draws",
     "sidePots": "Side",
     "nftPots": "NFT",
     "nextDraw": "Next Draw",
@@ -481,6 +483,19 @@
     "viewTransaction": "View Transaction",
     "userWonPrize": "You won a prize!"
   },
+  "noDrawsMatchFilter": {
+    "title": "No results found",
+    "text": ["Try changing your filters"],
+    "reset": "Reset Filters"
+  },
+  "noDrawsNotConnected": {
+    "title": "Oh snap!",
+    "text": ["You haven’t connected your wallet"]
+  },
+  "noDrawsNoWinners": {
+    "title": "Better luck next time!",
+    "text": ["No winning draws found for {{address}}"]
+  },
   "tokens": {
     "4Belt USD LP": "USD Stablecoins",
     "g3CRV USD LP": "USD Stablecoins"
@@ -570,5 +585,12 @@
         "Withdrawing your {{token}} will stop you earning interest on your {{token}}. This will make you ineligible for the next prize draw. You will need to manually deposit to be eligible again."
       ]
     }
+  },
+  "shrimp": {
+    "titles": {
+      "luckiest": "Luckiest Shrimp",
+      "hall": "Hall of Shrimp"
+    },
+    "content": "{{address}}... won {{won}} with {{deposited}} deposited"
   }
 }

@@ -5,12 +5,14 @@ import {
   QueryPrizeDrawsBeforeDateReturnType,
   queryTotalAwardForPrizePools,
   QueryTotalAwardForPrizePoolsReturnType,
+  QueryTotalPrizePool,
   queryWinningDrawsForAccountBeforeDate,
   QueryWinningDrawsForAccountBeforeDateReturnType,
 } from './queries';
-import { ApiPrizeDraw } from './types';
+import { ApiPrizeDraw, ApiPrizeTotals } from './types';
 import BigNumber from 'bignumber.js';
 import { uniqBy } from 'lodash';
+import axios from 'axios';
 
 export class DrawsAPI {
   private readonly graph: ApolloClient<NormalizedCacheObject>;
@@ -31,9 +33,16 @@ export class DrawsAPI {
     });
   }
 
-  async fetchTotalPrizesForPrizePools(
-    prizePools: string[]
-  ): Promise<QueryTotalAwardForPrizePoolsReturnType> {
+  transformPrizePoolTotal(pool: QueryTotalPrizePool): ApiPrizeTotals {
+    return {
+      id: `${this.networkId}-${pool.address}`,
+      networkId: this.networkId,
+      prizePool: pool.address,
+      awards: pool.totalAwards,
+    };
+  }
+
+  async fetchTotalPrizesForPrizePools(prizePools: string[]): Promise<ApiPrizeTotals[]> {
     const result = await this.graph.query<QueryTotalAwardForPrizePoolsReturnType>({
       query: queryTotalAwardForPrizePools,
       variables: {
@@ -41,9 +50,7 @@ export class DrawsAPI {
       },
     });
 
-    // TODO map to typed
-
-    return result.data;
+    return result.data.prizePools.map(pool => this.transformPrizePoolTotal(pool));
   }
 
   transformPrizeDraw(draw: QueryPrizeDraw): ApiPrizeDraw {
@@ -104,5 +111,21 @@ export class DrawsAPI {
     }
 
     return [];
+  }
+
+  async fetchUniqueWinnersCount(): Promise<number> {
+    const request = await axios.get('https://api.moonpot.com/winners/unique', {
+      timeout: 2000,
+    });
+
+    if (request.status !== 200) {
+      throw new Error(`fetchUniqueWinnersCount: invalid status ${request.status}`);
+    }
+
+    if (!request.data || !request.data.data || !('uniqueWinners' in request.data.data)) {
+      throw new Error(`fetchUniqueWinnersCount: malformed response`);
+    }
+
+    return Number(request.data.data.uniqueWinners);
   }
 }
