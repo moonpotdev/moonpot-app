@@ -570,5 +570,15 @@
         "Withdrawing your {{token}} will stop you earning interest on your {{token}}. This will make you ineligible for the next prize draw. You will need to manually deposit to be eligible again."
       ]
     }
+  },
+  "txModal": {
+    "depositConfirmed": "You have successfully deposited into {{pot}} Pot",
+    "withdrawConfirmed": "You have successfully withdrawn from {{pot}} Pot.",
+    "compoundConfirmed": "You have successfully compounded for {{pot}} Pot.",
+    "claimConfirmed": "You have successfully claimed your bouns tokens.",
+    "despositSuccess": "Deposit Success",
+    "withdrawSuccess": "Withdraw Success",
+    "compoundSuccess": "Compound Success",
+    "claimSuccess": "Claim Success"
   }
 }
