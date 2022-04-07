@@ -359,6 +359,7 @@ const styles = theme => ({
     fontWeight: 700,
     fontSize: '15px',
     lineHeight: '24px',
+    width: '100%',
   },
   stepsTitleText: {
     fontSize: '28px',
@@ -420,15 +421,15 @@ const styles = theme => ({
   },
   progress: {
     backgroundColor: '#59A662',
-    //width: '25%',
     height: '100%',
-    borderRadius: '4px 0 0 0',
+    transition: 'all .5s linear',
   },
   progressError: {
     backgroundColor: '#DC2C10',
     width: '100%',
     height: '100%',
     borderRadius: '4px 4px 0 0',
+    transition: 'all .5s linear',
   },
   errorTitle: {
     display: 'flex',
@@ -463,6 +464,11 @@ const styles = theme => ({
     height: '18px',
     width: '18px',
     verticalAlign: 'middle',
+  },
+  closeBtn: {
+    marginLeft: 'auto',
+    marginRight: 0,
+    cursor: 'pointer',
   },
 });
 

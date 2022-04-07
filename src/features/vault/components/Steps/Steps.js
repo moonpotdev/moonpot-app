@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React, { memo, useEffect } from 'react';
-import { OpenInNew, ErrorOutline } from '@material-ui/icons';
+import { OpenInNew, ErrorOutline, Close } from '@material-ui/icons';
 import { isEmpty } from '../../../../helpers/utils';
 import Loader from '../../../../components/loader';
 import styles from '../../styles';
@@ -34,6 +34,14 @@ const Steps = ({ item, steps, handleClose }) => {
       return '25%';
     } else {
       return '50%';
+    }
+  };
+
+  const calcProgressBorders = () => {
+    if (steps.finished) {
+      return '4px 4px 0 0';
+    } else {
+      return '4px 0 0 0';
     }
   };
 
@@ -79,7 +87,10 @@ const Steps = ({ item, steps, handleClose }) => {
               {action && action.result === 'error' ? (
                 <div className={classes.progressError} />
               ) : (
-                <div className={classes.progress} style={{ width: calcProgressPosition() }} />
+                <div
+                  className={classes.progress}
+                  style={{ width: calcProgressPosition(), borderRadius: calcProgressBorders() }}
+                />
               )}
             </div>
             {steps.finished ? (
@@ -92,10 +103,15 @@ const Steps = ({ item, steps, handleClose }) => {
                       className={classes.transactionConfirmations}
                       style={{ margin: 0, padding: 0, paddingLeft: 8 }}
                     >
-                      <Translate
-                        i18nKey={getSuccessTitle(steps.items[steps.currentStep].step)}
-                        values={{ pot: item.name }}
-                      />
+                      <div style={{ display: 'flex' }}>
+                        <Translate
+                          i18nKey={getSuccessTitle(steps.items[steps.currentStep].step)}
+                          values={{ pot: item.name }}
+                        />
+                        <div onClick={handleClose} className={classes.closeBtn}>
+                          <Close />
+                        </div>
+                      </div>
                     </Typography>
                   </div>
                 </Grid>
@@ -106,7 +122,7 @@ const Steps = ({ item, steps, handleClose }) => {
                       values={{ pot: item.name }}
                     />
                     <br />
-                    <Box style={{ paddingTop: 16 }}>
+                    <Box style={{ marginTop: 16 }}>
                       <Link
                         className={classes.blockExplorerLink}
                         href={
@@ -138,7 +154,12 @@ const Steps = ({ item, steps, handleClose }) => {
                           className={classes.transactionConfirmations}
                           style={{ margin: 0, padding: 0, paddingLeft: 8 }}
                         >
-                          Transaction Error
+                          <div style={{ display: 'flex' }}>
+                            Transaction Error
+                            <div onClick={handleClose} className={classes.closeBtn}>
+                              <Close />
+                            </div>
+                          </div>
                         </Typography>
                       </div>
                     </Grid>
@@ -157,7 +178,12 @@ const Steps = ({ item, steps, handleClose }) => {
                         id="transition-modal-title"
                         className={classes.transactionConfirmations}
                       >
-                        Confirmation Pending
+                        <div style={{ display: 'flex' }}>
+                          Confirmation Pending
+                          <div onClick={handleClose} className={classes.closeBtn}>
+                            <Close />
+                          </div>
+                        </div>
                       </Typography>
                     </Grid>
                     <Typography
@@ -175,7 +201,12 @@ const Steps = ({ item, steps, handleClose }) => {
                         id="transition-modal-title"
                         className={classes.transactionConfirmations}
                       >
-                        {steps.currentStep}/{steps.items.length} Transactions Confirmed
+                        <div style={{ display: 'flex' }}>
+                          {steps.currentStep}/{steps.items.length} Transactions Confirmed
+                          <div onClick={handleClose} className={classes.closeBtn}>
+                            <Close />
+                          </div>
+                        </div>
                       </Typography>
                     </Grid>
                     <Typography
