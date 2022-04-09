@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
-import { NoPotsCard } from '../NoPotsCard';
+import { NoPotsCard } from '../../../../components/NoPotsCard';
 import { WalletConnectButton } from '../../../../components/WalletRequired/WalletRequired';
 
 export const NoPotsNotConnected = memo(function NoPotsNotConnected() {

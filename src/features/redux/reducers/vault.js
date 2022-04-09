@@ -4,12 +4,12 @@ import { potsByNetwork } from '../../../config/vault';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
 import { ZERO } from '../../../helpers/utils';
 import { createReducer } from '@reduxjs/toolkit';
-import { networkKeys } from '../../../config/networks';
+import { networkIds } from '../../../config/networks';
 
 const initialPools = () => {
   const pools = {};
 
-  for (const networkKey of networkKeys) {
+  for (const networkKey of networkIds) {
     const networkPools = potsByNetwork[networkKey];
     let defaultOrder = 0;
 

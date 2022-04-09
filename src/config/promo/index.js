@@ -1,7 +1,7 @@
-import { networkKeys } from '../networks';
+import { networkIds } from '../networks';
 
 export const promosByNetwork = Object.fromEntries(
-  networkKeys.map(network => [
+  networkIds.map(network => [
     network,
     require(`./${network}.json`).map(promo => ({ ...promo, network })),
   ])

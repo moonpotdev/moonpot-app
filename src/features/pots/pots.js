@@ -7,7 +7,7 @@ import MoonpotsHero from './components/MoonpotsHero/MoonpotsHero';
 import { useDispatch } from 'react-redux';
 import { filterSetConfig } from '../filter/slice';
 import { RouteLoading } from '../../components/RouteLoading';
-import { networkKeys } from '../../config/networks';
+import { networkIds } from '../../config/networks';
 
 const Moonpots = React.lazy(() => import('./Moonpots/Moonpots'));
 const MyPots = React.lazy(() => import('./MyPots/MyPots'));
@@ -27,7 +27,7 @@ function useMaybeRedirect() {
       }
 
       if (network) {
-        changes['networks'] = Object.fromEntries(networkKeys.map(key => [key, key === network]));
+        changes['networks'] = Object.fromEntries(networkIds.map(key => [key, key === network]));
       }
 
       // Change filter config

@@ -13,7 +13,7 @@ import { createZapOutEstimate } from '../../features/redux/actions/zap';
 import { MigrationNotice, Stats, WithdrawSteps } from './PotWithdraw';
 import styles from './styles';
 import { formatDecimals } from '../../helpers/format';
-import { networkByKey } from '../../config/networks';
+import { networkById } from '../../config/networks';
 import { WalletRequired } from '../WalletRequired/WalletRequired';
 import { selectWalletAddress } from '../../features/wallet/selectors';
 import { approval, withdraw, zapOut } from '../../features/wallet/actions';
@@ -27,7 +27,7 @@ function useWithdrawTokens(network, lpAddress) {
     const tokens = [{ ...lpToken, isNative: false, isRemove: false }];
 
     if (supportsZap) {
-      const nativeCurrency = networkByKey[network].nativeCurrency;
+      const nativeCurrency = networkById[network].nativeCurrency;
       const nativeSymbol = nativeCurrency.symbol;
       const nativeWrappedToken =
         tokensByNetworkAddress[network][nativeCurrency.wrappedAddress.toLowerCase()];
@@ -140,7 +140,7 @@ function DropdownIcon(props) {
 
 function useUnwrappedTokensSymbols(network, tokens) {
   return useMemo(() => {
-    const nativeCurrency = networkByKey[network].nativeCurrency;
+    const nativeCurrency = networkById[network].nativeCurrency;
     const nativeSymbol = nativeCurrency.symbol;
     const nativeWrappedSymbol = nativeCurrency.wrappedSymbol;
 

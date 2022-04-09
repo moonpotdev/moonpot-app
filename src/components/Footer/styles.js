@@ -8,7 +8,9 @@ const styles = theme => ({
     width: '100%',
   },
   wrapperTop: {
-    marginBottom: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
   },
   footer: {
     marginTop: '40px',

@@ -6,7 +6,7 @@ export const styles = () => ({
     padding: '0 16px',
     color: '#ffffff',
     backgroundColor: '#262640',
-    maxWidth: '100%',
+    width: '100%',
     margin: '0 auto 32px auto',
     transition: 'background-color 0.4s ease',
     [`@media (min-width: ${HEADER_FULL_LOGO_WIDTH}px)`]: {

@@ -11,8 +11,6 @@ import { useImpersonate } from './helpers/hooks';
 import { GoogleAnalytics } from './googleAnalytics';
 import { GlobalDataLoader } from './components/GlobalDataLoader/GlobalDataLoader';
 
-require('dotenv').config();
-
 const Home = React.lazy(() => import(`./features/home`));
 const Pots = React.lazy(() => import(`./features/pots`));
 const Vault = React.lazy(() => import(`./features/vault`));

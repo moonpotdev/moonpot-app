@@ -13,10 +13,10 @@ import React, { memo, useEffect } from 'react';
 import { OpenInNew } from '@material-ui/icons';
 import { isEmpty } from '../../../../helpers/utils';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import Loader from '../../../../components/loader';
+import { Loader } from '../../../../components/Loader';
 import styles from '../../styles';
 import { useSelector } from 'react-redux';
-import { networkByKey } from '../../../../config/networks';
+import { networkById } from '../../../../config/networks';
 
 const useStyles = makeStyles(styles);
 
@@ -100,7 +100,7 @@ const Steps = ({ item, steps, handleClose }) => {
                   <Link
                     className={classes.blockExplorerLink}
                     href={
-                      networkByKey[item.network].explorerUrl +
+                      networkById[item.network].explorerUrl +
                       '/tx/' +
                       action.data.receipt.transactionHash
                     }
@@ -160,7 +160,7 @@ const Steps = ({ item, steps, handleClose }) => {
                       <Box textAlign={'center'} mt={2}>
                         <Link
                           className={classes.blockExplorerLink}
-                          href={networkByKey[item.network].explorerUrl + '/tx/' + action.data.hash}
+                          href={networkById[item.network].explorerUrl + '/tx/' + action.data.hash}
                           target="_blank"
                         >
                           See transaction on Block Explorer <OpenInNew />

@@ -2,9 +2,9 @@ import { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { load } from 'fathom-client';
 import reduxActions from '../../features/redux/actions';
-import { fetchUniqueWinners } from '../../features/winners/redux/unique';
 import { filterLoad } from '../../features/filter/load';
 import { selectFilterConfigLoaded } from '../../features/filter/selectors';
+import { initialGlobalLoader } from '../../features/data/actions/scenarios';
 
 function selectPricesLastUpdated(state) {
   return state.prices.lastUpdated;
@@ -19,6 +19,10 @@ export const GlobalDataLoader = memo(function GlobalDataLoader() {
   const pricesLastUpdated = useSelector(selectPricesLastUpdated);
   const potsLastUpdated = useSelector(selectPotsLastUpdated);
   const filterConfigLoaded = useSelector(selectFilterConfigLoaded);
+
+  useEffect(() => {
+    dispatch(initialGlobalLoader());
+  }, [dispatch]);
 
   useEffect(() => {
     load(process.env.REACT_APP_FATHOM_SITE_ID, {
@@ -38,10 +42,6 @@ export const GlobalDataLoader = memo(function GlobalDataLoader() {
   /*useEffect(() => {
     dispatch(reduxActions.holders.fetchHolders());
   }, [dispatch]);*/
-
-  useEffect(() => {
-    dispatch(fetchUniqueWinners());
-  }, [dispatch]);
 
   useEffect(() => {
     if (!filterConfigLoaded) {
