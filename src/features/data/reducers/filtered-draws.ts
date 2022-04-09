@@ -22,6 +22,7 @@ export const filteredDrawsSlice = createSlice({
   reducers: {
     reset: state => {
       state.mode = initialFilteredDrawsState.mode;
+      state.pots = [];
       for (const id in state.networks) {
         state.networks[id] = true;
       }
