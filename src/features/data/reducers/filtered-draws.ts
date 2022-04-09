@@ -7,11 +7,13 @@ export interface FilteredDrawsState {
   networks: {
     [key: NetworkEntity['id']]: boolean;
   };
+  pots: string[];
 }
 
 export const initialFilteredDrawsState: FilteredDrawsState = {
   mode: 'all',
   networks: {},
+  pots: [],
 };
 
 export const filteredDrawsSlice = createSlice({
@@ -31,6 +33,9 @@ export const filteredDrawsSlice = createSlice({
       for (const id in action.payload) {
         state.networks[id] = action.payload[id];
       }
+    },
+    setPots: (state, action: PayloadAction<string[]>) => {
+      state.pots = action.payload;
     },
   },
   extraReducers: builder => {

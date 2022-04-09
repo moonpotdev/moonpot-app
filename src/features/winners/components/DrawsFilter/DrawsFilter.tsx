@@ -6,10 +6,12 @@ import { filteredDrawsActions } from '../../../data/reducers/filtered-draws';
 import {
   selectFilteredDrawsMode,
   selectFilteredDrawsNetworks,
+  selectFilteredDrawsPots,
 } from '../../../data/selectors/filtered-draws';
 import { makeStyles } from '@material-ui/core';
 import styles from './styles';
 import { NetworksSelect } from '../../../../components/NetworksSelect';
+import { PotsSelect } from '../../../../components/PotsSelect';
 
 const useStyles = makeStyles(styles);
 
@@ -32,6 +34,7 @@ export const DrawsFilter = memo<DrawsFilterProps>(function DrawsFilter({ classNa
   const classes = useStyles();
   const mode = useAppSelector(selectFilteredDrawsMode);
   const networks = useAppSelector(selectFilteredDrawsNetworks);
+  const pots = useAppSelector(selectFilteredDrawsPots);
 
   const setMode = useCallback(
     mode => {
@@ -47,6 +50,13 @@ export const DrawsFilter = memo<DrawsFilterProps>(function DrawsFilter({ classNa
     [dispatch]
   );
 
+  const setPots = useCallback(
+    pots => {
+      dispatch(filteredDrawsActions.setPots(pots));
+    },
+    [dispatch]
+  );
+
   return (
     <Container className={className}>
       <div className={classes.bar}>
@@ -57,6 +67,7 @@ export const DrawsFilter = memo<DrawsFilterProps>(function DrawsFilter({ classNa
           onChange={setMode}
         />
         <NetworksSelect className={classes.networks} value={networks} onChange={setNetworks} />
+        <PotsSelect className={classes.pots} selected={pots} onChange={setPots} />
       </div>
     </Container>
   );

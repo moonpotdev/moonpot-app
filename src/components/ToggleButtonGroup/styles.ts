@@ -22,6 +22,8 @@ const styles = (theme: Theme) => ({
     cursor: 'pointer',
     outline: 'none',
     boxShadow: 'none',
+    flexGrow: 1,
+    flexShrink: 0,
     '&:hover': {
       backgroundColor: '#303050',
     },

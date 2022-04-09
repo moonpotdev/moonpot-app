@@ -138,7 +138,9 @@
     "sortBy": "Sort by:",
     "potStatus": "Pot Status:",
     "network": "Network:",
-    "all": "All"
+    "all": "All",
+    "pot": "Pot:",
+    "multipleSelected": "Multiple selected"
   },
   "list": {
     "one": "<span>{{item}}</span>",
