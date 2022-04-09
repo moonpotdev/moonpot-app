@@ -7,7 +7,12 @@ import { getUnderylingToken, tokensByNetworkAddress } from '../../../../config/t
 import { DrawStat } from '../../../../components/DrawStat';
 import { TransListJoin } from '../../../../components/TransListJoin';
 import { byDecimals, formatDecimals } from '../../../../helpers/format';
-import { formatAddressShort, getNetworkExplorerUrl, listJoin } from '../../../../helpers/utils';
+import {
+  formatAddressShort,
+  getNetworkExplorerUrl,
+  listJoin,
+  variantClass,
+} from '../../../../helpers/utils';
 import { ErrorOutline } from '@material-ui/icons';
 import BigNumber from 'bignumber.js';
 import clsx from 'clsx';
@@ -455,6 +460,24 @@ const WonPrize = memo<WonPrizeProps>(function ({ network, totalPrizeValue, winne
   return <WonPrizeTokens totalPrizeValue={totalPrizeValue} winners={winners} />;
 });
 
+type DrawNetworkProps = PropsWithChildren<{
+  network: string;
+}>;
+const DrawNetwork = memo<DrawNetworkProps>(function PotNetwork({ network }) {
+  const classes = useStyles();
+
+  return (
+    <div className={clsx(classes.network, variantClass(classes, 'network', network))}>
+      <img
+        src={require(`../../../../images/networks/${network}.svg`).default}
+        width="24"
+        height="24"
+        alt={network}
+      />
+    </div>
+  );
+});
+
 export type DrawProps = PropsWithChildren<{
   id: DrawEntity['id'];
 }>;
@@ -473,6 +496,7 @@ export const Draw = memo(function Draw({ id }: DrawProps) {
 
   return (
     <Card variant="purpleMid">
+      <DrawNetwork network={pot.network} />
       <Grid container spacing={2} className={classes.rowLogoWonTotal}>
         <Grid item xs="auto">
           {/* @ts-ignore */}

@@ -93,6 +93,35 @@ const styles = (theme: Theme) => ({
     color: '#F3BA2E',
     textDecoration: 'none',
   },
+  network: {
+    position: 'absolute' as const,
+    top: -2,
+    left: -2,
+    width: 34,
+    height: 34,
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderColor: 'inherit',
+    borderBottomRightRadius: '16px',
+    borderTopLeftRadius: '16px',
+    '& img': {
+      position: 'relative' as const,
+      zIndex: 1,
+      width: 24,
+      height: 24,
+      marginLeft: (30 - 24) / 2,
+      marginTop: (30 - 24) / 2,
+    },
+  },
+  networkBsc: {
+    backgroundColor: '#efb90c',
+  },
+  networkPolygon: {
+    backgroundColor: '#8247e4',
+  },
+  networkFantom: {
+    backgroundColor: '#1969FF',
+  },
 });
 
 export default styles;
