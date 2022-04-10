@@ -135,5 +135,37 @@
     "decimals": 18,
     "underlyingToken": "binSPIRIT",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "BASED-MAI LP",
+    "address": "0x7B5B3751550be4FF87aC6bda89533F7A0c9825B3",
+    "type": "lp",
+    "oracleId": "based-based-mai",
+    "decimals": 18,
+    "zap": "0xf3fd09edC86B9BD27d3A5bf8B829f9975d917586",
+    "lp": ["BASED", "MAI"]
+  },
+  {
+    "symbol": "BASED",
+    "address": "0x8D7d3409881b51466B483B11Ea1B8A03cdEd89ae",
+    "type": "single",
+    "oracleId": "BASED",
+    "decimals": 18
+  },
+  {
+    "symbol": "MAI",
+    "address": "0xfB98B335551a418cD0737375a2ea0ded62Ea213b",
+    "type": "single",
+    "oracleId": "MAI",
+    "decimals": 18
+  },
+  {
+    "symbol": "moonTicketBASED-MAI",
+    "address": "0xB7b736C1C2A93c836edf36BbCe38BA0c9dB974CA",
+    "type": "ticket",
+    "oracleId": "based-based-mai",
+    "decimals": 18,
+    "underlyingToken": "BASED-MAI LP",
+    "stakedMultiplier": 2
   }
 ]

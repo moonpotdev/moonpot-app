@@ -233,5 +233,51 @@
         "display": "bonus"
       }
     ]
+  },
+  {
+    "id": "based-mai",
+    "name": "BASED-MAI LP",
+    "provider": "TombSwap",
+    "addedAt": 1649692800,
+    "defaultOrder": -91,
+    "token": "BASED-MAI LP",
+    "tokenAddress": "0x7B5B3751550be4FF87aC6bda89533F7A0c9825B3",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBASED-MAI",
+    "rewardAddress": "0xB7b736C1C2A93c836edf36BbCe38BA0c9dB974CA",
+    "contractAddress": "0x0d257809216c901E454c509AB797252F0ffaEe48",
+    "prizePoolAddress": "0x45412d99d658C6DA856164588be9893fF0E38726",
+    "prizeStrategyAddress": "0x212D27e97B781524E741aB0e8c6083b2A36Cafe7",
+    "oracleId": "based-based-mai",
+    "apyId": "based-based-mai",
+    "vaultType": "main",
+    "categories": ["main"],
+    "featured": true,
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": true,
+    "hasZapOut": true,
+    "depositFee": 0.002,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x5Ddb9a342672ecEe80a028CE40500F16ba1Bca44",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 2,
+        "symbol": "BASED",
+        "display": "bonus"
+      }
+    ]
   }
 ]
