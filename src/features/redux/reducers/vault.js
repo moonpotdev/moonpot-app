@@ -11,7 +11,6 @@ const initialPools = () => {
 
   for (const networkKey of networkIds) {
     const networkPools = potsByNetwork[networkKey];
-    let defaultOrder = 0;
 
     for (const pool of networkPools) {
       pool['network'] = networkKey;
@@ -43,7 +42,9 @@ const initialPools = () => {
         !('interestBreakdown' in pool) ||
         !('interest' in pool.interestBreakdown) ||
         !pool.interestBreakdown.interest;
-      pool['defaultOrder'] = pool.defaultOrder || defaultOrder++;
+      pool['defaultOrder'] = pool.defaultOrder
+        ? Number.MAX_SAFE_INTEGER - pool.defaultOrder
+        : pool.addedAt || 0;
       pool.sponsors.forEach(sponsor => {
         sponsor.sponsorBalance = ZERO;
         sponsor.sponsorBalanceUsd = ZERO;

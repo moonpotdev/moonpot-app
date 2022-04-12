@@ -12,5 +12,5 @@ export const FILTER_NAMED_SORTS = {
   'next-draw': ['expiresAt', 'asc'],
   prize: ['projectedTotalPrizeUsd', 'desc'],
   apy: ['totalApy', 'desc'],
-  default: ['defaultOrder', 'asc'],
+  default: ['defaultOrder', 'desc'],
 };
