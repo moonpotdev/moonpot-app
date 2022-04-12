@@ -2,6 +2,7 @@
   {
     "id": "beftm",
     "name": "beFTM",
+    "addedAt": 1647993600,
     "defaultOrder": -50,
     "token": "beFTM",
     "tokenAddress": "0x7381eD41F6dE418DdE5e84B55590422a57917886",
@@ -47,6 +48,7 @@
   {
     "id": "tomb-ftm",
     "name": "TOMB-FTM LP",
+    "addedAt": 1648080000,
     "defaultOrder": -60,
     "token": "TOMB-FTM LP",
     "provider": "SpookySwap",
@@ -94,6 +96,7 @@
   {
     "id": "g3crv",
     "name": "Curve USD",
+    "addedAt": 1648166400,
     "defaultOrder": -70,
     "token": "g3CRV USD LP",
     "provider": "Curve",
@@ -140,6 +143,7 @@
   {
     "id": "fantom-bifi",
     "name": "BIFI",
+    "addedAt": 1648598400,
     "defaultOrder": -80,
     "token": "BIFI",
     "tokenAddress": "0xd6070ae98b8069de6B494332d1A1a81B6179D960",
@@ -181,6 +185,7 @@
   {
     "id": "binspirit",
     "name": "binSPIRIT",
+    "addedAt": 1648684800,
     "defaultOrder": -90,
     "token": "binSPIRIT",
     "tokenAddress": "0x44e314190D9E4cE6d4C0903459204F8E21ff940A",
