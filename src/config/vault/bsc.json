@@ -73,9 +73,8 @@
       "ziggyInterest": 5,
       "ziggyPrize": 5
     },
-    "status": "active",
-    "depositsPaused": true,
-    "depositsPausedReason": "Due to PancakeSwap changes, this pot will be retired after this draw, and a replacement CAKE pot will be released in the coming weeks.",
+    "status": "eol",
+    "eolDrawNumber": 24,
     "supportsClaimAllBonuses": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
