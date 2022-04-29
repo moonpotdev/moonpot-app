@@ -15,7 +15,7 @@ const useStyles = makeStyles(styles);
 // TODO move selectors to vault selectors file
 const selectFeaturedPots = createSelector(
   state => state.vault.pools,
-  pots => Object.values(pots).filter(pot => pot.featured)
+  pots => Object.values(pots).filter(pot => pot.featured && pot.status === 'active')
 );
 
 const selectUpcomingFeaturedPots = createSelector(selectFeaturedPots, pots =>
