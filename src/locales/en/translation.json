@@ -315,6 +315,25 @@
             }
           }
         },
+        "ziggyverse-dexterity-nft": {
+          "body": [
+            "The journey through the Ziggyverse continues. Collect and forge the mysterious tiles discovered by Ziggy on their travels. Use them in the future to mint exotic creatures for farming and battling."
+          ],
+          "rarities": {
+            "gold": {
+              "name": "Dexterity - Gold",
+              "rarity": "25 / 50"
+            },
+            "moonstone": {
+              "name": "Dexterity - Moonstone",
+              "rarity": "76 / 100"
+            },
+            "jade": {
+              "name": "Dexterity - Jade",
+              "rarity": "100 / 150"
+            }
+          }
+        },
         "nft-collections": {
           "body": [
             "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
