@@ -34,15 +34,14 @@
     "hasZapOut": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x5Ddb9a342672ecEe80a028CE40500F16ba1Bca44",
-    "sponsors": [
+    "sponsors": [],
+    "bonuses": [
       {
-        "sponsorToken": "ORKAN",
-        "sponsorOracleId": "ORKAN",
-        "sponsorAddress": "0xfB66e49e303A186a4c57414Ceeed651a7a78161a",
-        "sponsorTokenDecimals": 9
+        "id": 1,
+        "symbol": "ORKAN",
+        "display": "bonus"
       }
-    ],
-    "bonuses": []
+    ]
   },
   {
     "id": "beftm",
