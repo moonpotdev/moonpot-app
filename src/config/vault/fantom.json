@@ -1,5 +1,50 @@
 [
   {
+    "id": "orkan-ftm",
+    "name": "ORKAN-FTM LP",
+    "provider": "SpiritSwap",
+    "addedAt": 1651507200,
+    "token": "ORKAN-FTM LP",
+    "tokenAddress": "0x5A6880d3e9d715BEf5848c9749cea5F23a982A75",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketORKAN-FTM",
+    "rewardAddress": "0x81585588161bbf27549570253483A1CccF157040",
+    "contractAddress": "0xb336CF841C0a988a9442D0FDe6edf90008D33C32",
+    "prizePoolAddress": "0xDb7063212f07c96AA9140ac48c1EEa9f3B6Bb5A6",
+    "prizeStrategyAddress": "0xCd325cbD79E690f919Edd31a027466adBa06C93E",
+    "oracleId": "spirit-orkan-ftm",
+    "apyId": "spirit-orkan-ftm",
+    "vaultType": "main",
+    "categories": ["main"],
+    "featured": false,
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": true,
+    "hasZapOut": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x5Ddb9a342672ecEe80a028CE40500F16ba1Bca44",
+    "sponsors": [
+      {
+        "sponsorToken": "ORKAN",
+        "sponsorOracleId": "ORKAN",
+        "sponsorAddress": "0xfB66e49e303A186a4c57414Ceeed651a7a78161a",
+        "sponsorTokenDecimals": 9
+      }
+    ],
+    "bonuses": []
+  },
+  {
     "id": "beftm",
     "name": "beFTM",
     "addedAt": 1647993600,

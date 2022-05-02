@@ -167,5 +167,30 @@
     "decimals": 18,
     "underlyingToken": "BASED-MAI LP",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "ORKAN",
+    "address": "0xfB66e49e303A186a4c57414Ceeed651a7a78161a",
+    "type": "single",
+    "oracleId": "ORKAN",
+    "decimals": 9
+  },
+  {
+    "symbol": "ORKAN-FTM LP",
+    "address": "0x5A6880d3e9d715BEf5848c9749cea5F23a982A75",
+    "type": "lp",
+    "oracleId": "spirit-orkan-ftm",
+    "decimals": 18,
+    "zap": "0x4242522835DC11A800dcA74C9E4867adE413Bb2b",
+    "lp": ["WFTM", "ORKAN"]
+  },
+  {
+    "symbol": "moonTicketORKAN-FTM",
+    "address": "0x81585588161bbf27549570253483A1CccF157040",
+    "type": "ticket",
+    "oracleId": "spirit-orkan-ftm",
+    "decimals": 18,
+    "underlyingToken": "ORKAN-FTM LP",
+    "stakedMultiplier": 2
   }
 ]
