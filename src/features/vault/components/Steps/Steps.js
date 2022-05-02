@@ -40,8 +40,10 @@ const Steps = ({ item, steps, handleClose }) => {
   const getSuccessTitle = data => {
     if (data === 'deposit') {
       return 'txModal.depositSuccess';
-    } else if (data === 'withdraw' || data === 'reward') {
+    } else if (data === 'withdraw') {
       return 'txModal.withdrawSuccess';
+    } else if (data === 'reward') {
+      return 'txModal.rewardSuccess';
     } else if (data === 'compound') {
       return 'txModal.compoundSuccess';
     } else if (data === 'claimAll') {
@@ -52,8 +54,10 @@ const Steps = ({ item, steps, handleClose }) => {
   const getSuccessMessage = data => {
     if (data === 'deposit') {
       return 'txModal.depositConfirmed';
-    } else if (data === 'withdraw' || data === 'reward') {
+    } else if (data === 'withdraw') {
       return 'txModal.withdrawConfirmed';
+    } else if (data === 'reward') {
+      return 'txModal.rewardConfirmed';
     } else if (data === 'compound') {
       return 'txModal.compoundConfirmed';
     } else if (data === 'claimAll') {
