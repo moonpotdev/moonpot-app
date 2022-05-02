@@ -4,10 +4,8 @@ import { OpenInNew, ErrorOutline, Close } from '@material-ui/icons';
 import { isEmpty } from '../../../../helpers/utils';
 import styles from '../../styles';
 import { useSelector } from 'react-redux';
-import { networkByKey, networkById } from '../../../../config/networks';
+import { networkById } from '../../../../config/networks';
 import { Translate } from '../../../../components/Translate';
-import { Alert, AlertTitle } from '@material-ui/lab';
-import { Loader } from '../../../../components/Loader';
 
 const useStyles = makeStyles(styles);
 
@@ -125,7 +123,7 @@ const Steps = ({ item, steps, handleClose }) => {
                       <Link
                         className={classes.blockExplorerLink}
                         href={
-                          networkByKey[item.network].explorerUrl +
+                          networkById[item.network].explorerUrl +
                           '/tx/' +
                           action.data.receipt.transactionHash
                         }
