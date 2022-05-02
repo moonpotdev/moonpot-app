@@ -1,8 +1,8 @@
 import { groupBy } from '../../helpers/utils';
-import { networkKeys } from '../networks';
+import { networkIds } from '../networks';
 
 export const potsByNetwork = Object.fromEntries(
-  networkKeys.map(network => [
+  networkIds.map(network => [
     network,
     require(`./${network}.json`).map(pot => ({ ...pot, network })),
   ])

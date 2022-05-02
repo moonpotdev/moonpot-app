@@ -2,7 +2,7 @@
   {
     "id": "beftm",
     "name": "beFTM",
-    "defaultOrder": -50,
+    "addedAt": 1647993600,
     "token": "beFTM",
     "tokenAddress": "0x7381eD41F6dE418DdE5e84B55590422a57917886",
     "tokenDecimals": 18,
@@ -15,6 +15,7 @@
     "apyId": "beefy-beFTM",
     "vaultType": "main",
     "categories": ["main"],
+    "featured": true,
     "type": "single",
     "duration": 14,
     "fairplayDuration": 14,
@@ -46,7 +47,7 @@
   {
     "id": "tomb-ftm",
     "name": "TOMB-FTM LP",
-    "defaultOrder": -60,
+    "addedAt": 1648080000,
     "token": "TOMB-FTM LP",
     "provider": "SpookySwap",
     "tokenAddress": "0x2A651563C9d3Af67aE0388a5c8F89b867038089e",
@@ -60,6 +61,7 @@
     "apyId": "tomb-tomb-ftm",
     "vaultType": "lp",
     "categories": ["main"],
+    "featured": true,
     "type": "lp",
     "duration": 14,
     "fairplayDuration": 14,
@@ -92,7 +94,7 @@
   {
     "id": "g3crv",
     "name": "Curve USD",
-    "defaultOrder": -70,
+    "addedAt": 1648166400,
     "token": "g3CRV USD LP",
     "provider": "Curve",
     "tokenAddress": "0xD02a30d33153877BC20e5721ee53DeDEE0422B2F",
@@ -138,7 +140,7 @@
   {
     "id": "fantom-bifi",
     "name": "BIFI",
-    "defaultOrder": -80,
+    "addedAt": 1648598400,
     "token": "BIFI",
     "tokenAddress": "0xd6070ae98b8069de6B494332d1A1a81B6179D960",
     "tokenDecimals": 18,
@@ -179,7 +181,7 @@
   {
     "id": "binspirit",
     "name": "binSPIRIT",
-    "defaultOrder": -90,
+    "addedAt": 1648684800,
     "token": "binSPIRIT",
     "tokenAddress": "0x44e314190D9E4cE6d4C0903459204F8E21ff940A",
     "tokenDecimals": 18,
@@ -192,6 +194,7 @@
     "apyId": "beefy-binspirit",
     "vaultType": "main",
     "categories": ["main"],
+    "featured": true,
     "type": "single",
     "duration": 14,
     "fairplayDuration": 14,
@@ -227,6 +230,51 @@
       {
         "id": 1,
         "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
+    "id": "based-mai",
+    "name": "BASED-MAI LP",
+    "provider": "TombSwap",
+    "addedAt": 1649692800,
+    "token": "BASED-MAI LP",
+    "tokenAddress": "0x7B5B3751550be4FF87aC6bda89533F7A0c9825B3",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBASED-MAI",
+    "rewardAddress": "0xB7b736C1C2A93c836edf36BbCe38BA0c9dB974CA",
+    "contractAddress": "0x0d257809216c901E454c509AB797252F0ffaEe48",
+    "prizePoolAddress": "0x45412d99d658C6DA856164588be9893fF0E38726",
+    "prizeStrategyAddress": "0x212D27e97B781524E741aB0e8c6083b2A36Cafe7",
+    "oracleId": "based-based-mai",
+    "apyId": "based-based-mai",
+    "vaultType": "main",
+    "categories": ["main"],
+    "featured": true,
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": true,
+    "hasZapOut": true,
+    "depositFee": 0.002,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x5Ddb9a342672ecEe80a028CE40500F16ba1Bca44",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "BASED",
         "display": "bonus"
       }
     ]

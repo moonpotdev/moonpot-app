@@ -548,6 +548,21 @@
         "name": "Ziggyverse Intelligence NFT",
         "min": 191,
         "max": 290
+      },
+      {
+        "name": "Ziggyverse Dexterity NFT",
+        "min": 4019,
+        "max": 4068
+      },
+      {
+        "name": "Ziggyverse Dexterity NFT",
+        "min": 4069,
+        "max": 4168
+      },
+      {
+        "name": "Ziggyverse Dexterity NFT",
+        "min": 4169,
+        "max": 4318
       }
     ]
   },
@@ -721,5 +736,13 @@
     "type": "nft",
     "subtype": "erc1155",
     "decimals": 0
+  },
+  {
+    "symbol": "moonTicketZiggyVerseDexterity",
+    "address": "0xd282C7279028f4c5862D383988842ff479C491A6",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
   }
 ]

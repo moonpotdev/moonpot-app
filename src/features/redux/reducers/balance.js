@@ -10,17 +10,17 @@ import {
   tokensByNetworkSymbol,
 } from '../../../config/tokens';
 import { createReducer } from '@reduxjs/toolkit';
-import { networkByKey, networkKeys } from '../../../config/networks';
+import { networkById, networkIds } from '../../../config/networks';
 
 const MAX_UINT256 = '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
 
 const initialTokens = (() => {
   const initialTokensByNetwork = {};
 
-  for (const networkKey of networkKeys) {
+  for (const networkKey of networkIds) {
     const tokens = {};
     const networkPools = potsByNetwork[networkKey];
-    const nativeCurrency = networkByKey[networkKey].nativeCurrency;
+    const nativeCurrency = networkById[networkKey].nativeCurrency;
     const nativeTokenSymbol = nativeCurrency.symbol;
     const nativeWrappedTokenSymbol = nativeCurrency.wrappedSymbol;
     const zapAllowances = Object.fromEntries(

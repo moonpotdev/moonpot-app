@@ -11,7 +11,7 @@ import { byDecimals, convertAmountToRawNumber } from '../../../helpers/format';
 import gateManagerAbi from '../../../config/abi/gatemanager.json';
 import { MultiCall } from 'eth-multicall';
 import { getFairplayFeePercent, objectArrayFlatten } from '../../../helpers/utils';
-import { networkByKey } from '../../../config/networks';
+import { networkById } from '../../../config/networks';
 
 function fakeZapInEstimate(potId, depositAddress, depositAmount) {
   const requestId = uniqid('in', potId);
@@ -32,7 +32,7 @@ function fakeZapInEstimate(potId, depositAddress, depositAmount) {
       const state = getState();
       const pot = state.vault.pools[potId];
       const network = pot.network;
-      const wrappedNative = networkByKey[network].nativeCurrency.wrappedAddress;
+      const wrappedNative = networkById[network].nativeCurrency.wrappedAddress;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
       const isNative = !depositAddress;
       const swapInToken = isNative
@@ -82,7 +82,7 @@ export function createZapInEstimate(potId, depositAddress, depositAmount) {
       const pot = state.vault.pools[potId];
       const network = pot.network;
       const web3 = state.wallet.rpc[network];
-      const wrappedNative = networkByKey[network].nativeCurrency.wrappedAddress;
+      const wrappedNative = networkById[network].nativeCurrency.wrappedAddress;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
       const isNative = !depositAddress;
       const swapInToken = isNative
@@ -139,7 +139,7 @@ function fakeZapOutEstimate(potId, wantTokenAddress) {
       const withdrawFee = 'withdrawFee' in pot ? pot.withdrawFee : 0;
       const network = pot.network;
       const web3 = state.wallet.rpc[network];
-      const multicall = new MultiCall(web3, networkByKey[network].multicallAddress);
+      const multicall = new MultiCall(web3, networkById[network].multicallAddress);
       const address = state.wallet.address;
       const isRemoveOnly = potId === 'beltbnb' || potId === 'ibalpaca';
       const fairplayDuration = pot.fairplayDuration;
@@ -236,7 +236,7 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
       const withdrawFee = 'withdrawFee' in pot ? pot.withdrawFee : 0;
       const network = pot.network;
       const web3 = state.wallet.rpc[network];
-      const multicall = new MultiCall(web3, networkByKey[network].multicallAddress);
+      const multicall = new MultiCall(web3, networkById[network].multicallAddress);
       const address = state.wallet.address;
       const isRemoveOnly = !wantTokenAddress;
       const fairplayDuration = pot.fairplayDuration;

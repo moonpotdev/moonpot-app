@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { selectFilterConfig, selectFilterMode } from '../../../filter/selectors';
 import { filterSetConfig, filterSetMode } from '../../../filter/slice';
-import { NetworksSelect } from '../NetworksSelect';
+import { NetworksSelect } from '../../../../components/NetworksSelect';
 import SectionSelect from '../SectionSelect/SectionSelect';
 import clsx from 'clsx';
 import styles from './styles';

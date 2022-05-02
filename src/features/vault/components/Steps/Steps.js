@@ -4,8 +4,10 @@ import { OpenInNew, ErrorOutline, Close } from '@material-ui/icons';
 import { isEmpty } from '../../../../helpers/utils';
 import styles from '../../styles';
 import { useSelector } from 'react-redux';
-import { networkByKey } from '../../../../config/networks';
+import { networkByKey, networkById } from '../../../../config/networks';
 import { Translate } from '../../../../components/Translate';
+import { Alert, AlertTitle } from '@material-ui/lab';
+import { Loader } from '../../../../components/Loader';
 
 const useStyles = makeStyles(styles);
 

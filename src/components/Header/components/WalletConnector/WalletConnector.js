@@ -2,11 +2,11 @@ import React, { memo, useCallback, useEffect, useRef } from 'react';
 import { Button, makeStyles } from '@material-ui/core';
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import Loader from '../../../loader';
+import { Loader } from '../../../Loader';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import { walletConnect, walletDisconnect, walletInit } from '../../../../features/wallet/actions';
-import { networkByKey } from '../../../../config/networks';
+import { networkById } from '../../../../config/networks';
 import {
   selectWalletAddress,
   selectWalletNetwork,
@@ -25,7 +25,7 @@ const InnerConnected = memo(function InnerConnected({ networkKey, address }) {
     return 'No address connected';
   }
 
-  const network = networkByKey[networkKey];
+  const network = networkById[networkKey];
   return (
     <>
       <img

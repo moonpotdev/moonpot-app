@@ -1,6 +1,8 @@
 const listeners = { before: {}, after: {} };
 let nextId = 0;
 
+// TODO make this a middleware factory and have each slice export its own middleware to be added to the store
+
 export function eventsMiddleware(store) {
   return next => async action => {
     const stateBefore = store.getState();

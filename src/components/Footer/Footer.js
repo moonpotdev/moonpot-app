@@ -3,7 +3,6 @@ import * as React from 'react';
 import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useTotalPrizeValue } from '../../features/winners/apollo/total';
 import { ReactComponent as IconGithub } from '../../images/socials/github.svg';
 import { ReactComponent as IconTelegram } from '../../images/socials/telegram.svg';
 import { ReactComponent as IconDiscord } from '../../images/socials/discord.svg';
@@ -12,6 +11,7 @@ import { ReactComponent as IconYoutube } from '../../images/socials/youtube.svg'
 import { ReactComponent as IconFacebook } from '../../images/socials/facebook.svg';
 import styles from './styles';
 import clsx from 'clsx';
+import { useTotalPrizeValue } from '../../features/winners/hooks';
 
 const useStyles = makeStyles(styles);
 
@@ -103,7 +103,7 @@ const FooterStats = memo(function FooterStats() {
   });
 
   //Total Prize Data
-  const { total } = useTotalPrizeValue();
+  const total = useTotalPrizeValue();
   const totalFormatted = total.toLocaleString(undefined, {
     maximumFractionDigits: 0,
   });

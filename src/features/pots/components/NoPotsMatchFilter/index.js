@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { filterSetConfig } from '../../../filter/slice';
 import { FILTER_DEFAULT } from '../../../filter/constants';
 import { PrimaryButton } from '../../../../components/Buttons/PrimaryButton';
-import { NoPotsCard } from '../NoPotsCard';
+import { NoPotsCard } from '../../../../components/NoPotsCard';
 
 export const NoPotsMatchFilter = memo(function NoPotsMatchFilter() {
   const dispatch = useDispatch();

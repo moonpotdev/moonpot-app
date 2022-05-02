@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Cards, CardTitle } from './components/Cards/Cards';
+import { Card, Cards, CardTitle } from './components/Cards';
 import { Container, makeStyles, Typography } from '@material-ui/core';
 import ZiggyMaintenance from './images/ziggy/maintenance.svg';
 import { PrimaryButton } from './components/Buttons/PrimaryButton';

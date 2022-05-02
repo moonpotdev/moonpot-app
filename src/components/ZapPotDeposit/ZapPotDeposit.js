@@ -14,7 +14,7 @@ import { Translate } from '../Translate';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../config/tokens';
 import { createZapInEstimate } from '../../features/redux/actions/zap';
 import { useTranslation } from 'react-i18next';
-import { networkByKey } from '../../config/networks';
+import { networkById } from '../../config/networks';
 import { WalletRequired } from '../WalletRequired/WalletRequired';
 import { selectWalletAddress } from '../../features/wallet/selectors';
 import { approval, deposit, zapIn } from '../../features/wallet/actions';
@@ -77,7 +77,7 @@ function useDepositTokens(network, lpAddress) {
     const tokens = [{ ...lpToken, isNative: false }];
 
     if (supportsZap) {
-      const nativeCurrency = networkByKey[network].nativeCurrency;
+      const nativeCurrency = networkById[network].nativeCurrency;
       const nativeSymbol = nativeCurrency.symbol;
       const nativeDecimals = nativeCurrency.decimals;
       const nativeWrappedToken =

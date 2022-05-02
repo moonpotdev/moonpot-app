@@ -14,7 +14,7 @@ function initialRpc() {
   return Object.fromEntries(
     networks.map(network => {
       const rpcs = network.rpc;
-      return [network.key, new Web3(rpcs[~~(rpcs.length * Math.random())])];
+      return [network.id, new Web3(rpcs[~~(rpcs.length * Math.random())])];
     })
   );
 }

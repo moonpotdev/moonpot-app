@@ -4,7 +4,7 @@ import { MultiCall } from 'eth-multicall';
 import { compound, isEmpty, ZERO } from '../../../helpers/utils';
 import { byDecimals, formatTvl } from '../../../helpers/format';
 import { tokensByNetworkAddress, tokensByNetworkSymbol } from '../../../config/tokens';
-import { networkByKey } from '../../../config/networks';
+import { networkById } from '../../../config/networks';
 
 const gateManagerAbi = require('../../../config/abi/gatemanager.json');
 const ecr20Abi = require('../../../config/abi/erc20.json');
@@ -273,7 +273,7 @@ const getPools = async (items, state, dispatch) => {
   const mooToken = [];
 
   for (let key in web3) {
-    multicall[key] = new MultiCall(web3[key], networkByKey[key].multicallAddress);
+    multicall[key] = new MultiCall(web3[key], networkById[key].multicallAddress);
     calls[key] = [];
     sponsors[key] = [];
     strategy[key] = [];

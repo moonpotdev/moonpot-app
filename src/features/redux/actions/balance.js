@@ -5,7 +5,7 @@ import prizePoolAbi from '../../../config/abi/prizepool.json';
 import erc20Abi from '../../../config/abi/erc20.json';
 import gateManagerAbi from '../../../config/abi/gatemanager.json';
 import beefyVaultAbi from '../../../config/abi/beefyvault.json';
-import { networkByKey } from '../../../config/networks';
+import { networkById } from '../../../config/networks';
 
 const getBalances = async (pools, state, dispatch) => {
   const address = state.wallet.address;
@@ -16,7 +16,7 @@ const getBalances = async (pools, state, dispatch) => {
   const needsNativeBalance = {};
 
   for (const network in web3) {
-    multicall[network] = new MultiCall(web3[network], networkByKey[network].multicallAddress);
+    multicall[network] = new MultiCall(web3[network], networkById[network].multicallAddress);
     calls[network] = [];
     needsNativeBalance[network] = false;
   }
@@ -90,7 +90,7 @@ const getBalances = async (pools, state, dispatch) => {
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
 
       if (pairToken.zap) {
-        const nativeWrappedTokenSymbol = networkByKey[network].nativeCurrency.wrappedSymbol;
+        const nativeWrappedTokenSymbol = networkById[network].nativeCurrency.wrappedSymbol;
 
         // Allowance of zap to spend tickets
         calls[network].push({
@@ -151,7 +151,7 @@ const getBalances = async (pools, state, dispatch) => {
     if (needsNativeBalance[network]) {
       const tokens = { ...tokensByNetwork[network] };
       const balance = await web3[network].eth.getBalance(address);
-      const symbol = networkByKey[network].nativeCurrency.symbol;
+      const symbol = networkById[network].nativeCurrency.symbol;
 
       tokens[symbol] = {
         ...tokens[symbol],

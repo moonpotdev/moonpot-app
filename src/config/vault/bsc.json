@@ -2,7 +2,8 @@
   {
     "id": "pots",
     "name": "Ziggy's",
-    "defaultOrder": -100,
+    "addedAt": 1635379200,
+    "defaultOrder": 1,
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
@@ -46,8 +47,46 @@
     ]
   },
   {
+    "id": "ziggyverse-dexterity-nft",
+    "name": "Ziggyverse NFT",
+    "icon": "ziggyverse",
+    "token": "POTS",
+    "addedAt": 1651248000,
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketZiggyVerseDexterity",
+    "rewardAddress": "0xd282C7279028f4c5862D383988842ff479C491A6",
+    "contractAddress": "0x4682d07672b2cc860A562a4005b172441031632f",
+    "prizePoolAddress": "0xa247c04e09eab1ae0ebC1dcF934220Ad4e146B9d",
+    "prizeStrategyAddress": "0xe2969465e995644878E7725DfaFF05adA000ec12",
+    "oracleId": "POTS",
+    "apyId": "pots-pots",
+    "vaultType": "nft",
+    "categories": ["nft"],
+    "featured": true,
+    "duration": 1,
+    "fairplayDuration": 3,
+    "fairplayTicketFee": 0.05,
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "withdrawFee": 0,
+    "infoCards": ["nft-strategy", "nft-fairplay"],
+    "infoCardNftStrategyCollection": "https://galaxy.eco/moonpot/campaign/GC286UUVh6",
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "Ziggyverse Dexterity NFT",
+        "address": "0xb69743Ba5Ecb4bb47c2a7BF514cBFeB05dc14a4f",
+        "type": "erc721"
+      }
+    ],
+    "bonuses": []
+  },
+  {
     "id": "cake",
     "name": "CAKE",
+    "addedAt": 1636329600,
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
     "tokenDecimals": 18,
@@ -71,7 +110,8 @@
       "ziggyInterest": 5,
       "ziggyPrize": 5
     },
-    "status": "active",
+    "status": "eol",
+    "eolDrawNumber": 24,
     "supportsClaimAllBonuses": true,
     "infoCardStrategy": "beefy",
     "infoCardBeefyVaultAddress": "0x97e5d50Fe0632A95b9cf1853E744E02f7D816677",
@@ -110,6 +150,7 @@
   {
     "id": "bifi",
     "name": "BIFI",
+    "addedAt": 1631059200,
     "token": "BIFI",
     "tokenAddress": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
     "tokenDecimals": 18,
@@ -133,7 +174,8 @@
       "ziggyInterest": 5,
       "ziggyPrize": 5
     },
-    "status": "active",
+    "status": "eol",
+    "eolDrawNumber": 15,
     "depositsPaused": true,
     "depositsPausedReason": "Underlying Beefy vault is being upgraded.",
     "supportsClaimAllBonuses": true,
@@ -164,6 +206,7 @@
   {
     "id": "4belt",
     "name": "4Belt USD",
+    "addedAt": 1632528000,
     "token": "4Belt USD LP",
     "provider": "Belt",
     "tokenAddress": "0x9cb73F20164e399958261c289Eb5F9846f4D1404",
@@ -220,6 +263,7 @@
   {
     "id": "beltbnb",
     "name": "BNB",
+    "addedAt": 1636675200,
     "token": "beltBNB",
     "tokenAddress": "0xa8Bb71facdd46445644C277F9499Dd22f6F0A30C",
     "tokenDecimals": 18,
@@ -275,6 +319,7 @@
     "name": "Ziggyverse NFT",
     "icon": "ziggyverse",
     "token": "POTS",
+    "addedAt": 1647820800,
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
     "rewardToken": "moonTicketZiggyVerseIntelligence",
@@ -290,7 +335,8 @@
     "duration": 1,
     "fairplayDuration": 3,
     "fairplayTicketFee": 0.05,
-    "status": "active",
+    "status": "eol",
+    "eolDrawNumber": 67,
     "supportsClaimAllBonuses": false,
     "withdrawFee": 0,
     "infoCards": ["nft-strategy", "nft-fairplay"],
@@ -311,6 +357,7 @@
     "name": "Ziggyverse NFT",
     "icon": "ziggyverse",
     "token": "POTS",
+    "addedAt": 1641513600,
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
     "rewardToken": "moonTicketZiggyVerseStrength",
@@ -346,6 +393,7 @@
   {
     "id": "nft-collections",
     "name": "NFT Collections",
+    "addedAt": 1641427200,
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
     "tokenDecimals": 18,
@@ -381,6 +429,7 @@
   {
     "id": "binopoly",
     "name": "BINOPOLY",
+    "addedAt": 1642636800,
     "token": "BINO",
     "tokenAddress": "0xA2dF7a11baF8bB555E93b99684A2DE0f105eB592",
     "tokenDecimals": 18,
@@ -423,6 +472,7 @@
   {
     "id": "pacoca",
     "name": "PACOCA",
+    "addedAt": 1632787200,
     "token": "PACOCA",
     "tokenAddress": "0x55671114d774ee99D653D6C12460c780a67f1D18",
     "tokenDecimals": 18,
@@ -469,6 +519,7 @@
   {
     "id": "banana",
     "name": "BANANA",
+    "addedAt": 1629763200,
     "token": "BANANA",
     "tokenAddress": "0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95",
     "tokenDecimals": 18,
@@ -514,6 +565,7 @@
   {
     "id": "watch",
     "name": "WATCH",
+    "addedAt": 1636934400,
     "token": "WATCH",
     "tokenAddress": "0x7A9f28EB62C791422Aa23CeAE1dA9C847cBeC9b0",
     "tokenDecimals": 18,
@@ -553,6 +605,7 @@
   {
     "id": "pots-bnb",
     "name": "POTS-BNB LP",
+    "addedAt": 1631836800,
     "token": "POTS-BNB LP",
     "provider": "ApeSwap",
     "tokenAddress": "0xaa3FCBA2cf7c5f8c8f785A7180F5063144fE53c6",
@@ -602,6 +655,7 @@
   {
     "id": "pots-busd",
     "name": "POTS-BUSD LP",
+    "addedAt": 1631836800,
     "token": "POTS-BUSD LP",
     "provider": "PancakeSwap",
     "tokenAddress": "0xF90BAA331Cfd40F094476E752Bf272892170d399",
@@ -652,6 +706,7 @@
   {
     "id": "ibalpaca",
     "name": "ALPACA",
+    "addedAt": 1637539200,
     "token": "ibALPACA",
     "tokenAddress": "0xf1bE8ecC990cBcb90e166b71E368299f0116d421",
     "tokenDecimals": 18,
@@ -707,6 +762,7 @@
   {
     "id": "bifi-bnb",
     "name": "BIFI-BNB LP",
+    "addedAt": 1633737600,
     "token": "BIFI-BNB LP",
     "provider": "ApeSwap",
     "tokenAddress": "0xDDd3f9d5Bd347c55D18752c0C2075698EC657750",
@@ -764,6 +820,7 @@
   {
     "id": "side-cake",
     "name": "CAKE Side",
+    "addedAt": 1633910400,
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
     "tokenDecimals": 18,
@@ -802,6 +859,7 @@
   {
     "id": "pots-v2",
     "icon": "pots",
+    "addedAt": 1630972800,
     "name": "Ziggy's",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
@@ -894,6 +952,7 @@
   {
     "id": "pots-v1",
     "name": "Ziggy's",
+    "addedAt": 1629331200,
     "icon": "pots",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
@@ -949,6 +1008,7 @@
   {
     "id": "cake-v3",
     "name": "CAKE",
+    "addedAt": 1631059200,
     "icon": "cake",
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
@@ -1009,6 +1069,7 @@
   {
     "id": "cake-v2",
     "name": "CAKE",
+    "addedAt": 1627344000,
     "icon": "cake",
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
@@ -1069,6 +1130,7 @@
   {
     "id": "cake-v1",
     "name": "CAKE",
+    "addedAt": 1626652800,
     "icon": "cake",
     "token": "CAKE",
     "tokenAddress": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
@@ -1116,6 +1178,7 @@
   {
     "id": "xmas-pots",
     "name": "Ziggy's Xmas",
+    "addedAt": 1640131200,
     "theme": "xmas",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
@@ -1149,6 +1212,7 @@
   {
     "id": "xmas-moobifi",
     "name": "mooBIFI Xmas",
+    "addedAt": 1640131200,
     "theme": "xmas",
     "token": "mooBIFI",
     "tokenAddress": "0xf7069e41C57EcC5F122093811d8c75bdB5f7c14e",
@@ -1193,6 +1257,7 @@
   {
     "id": "xmas-moochristmasbeefy",
     "name": "mooChristmasBeefy Xmas",
+    "addedAt": 1640131200,
     "theme": "xmas",
     "token": "mooChristmasBeefy",
     "tokenAddress": "0xA1448795fc2489EadAF5e90d8c7d4cbdc8EF5D19",
@@ -1237,6 +1302,7 @@
   {
     "id": "ziggyverse-armour-nft",
     "name": "Ziggyverse NFT",
+    "addedAt": 1637712000,
     "icon": "ziggyverse",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
@@ -1274,6 +1340,7 @@
   {
     "id": "wings",
     "name": "WINGS",
+    "addedAt": 1638921600,
     "token": "WINGS",
     "tokenAddress": "0x0487b824c8261462F88940f97053E65bDb498446",
     "tokenDecimals": 18,
@@ -1315,6 +1382,7 @@
   {
     "id": "hotcross-busd-lp",
     "name": "HOTCROSS-BUSD LP",
+    "addedAt": 1639008000,
     "token": "HOTCROSS-BUSD LP",
     "provider": "ApeSwap",
     "tokenAddress": "0x3B9Aa711D1D90A4f8639f66C227881729a3317F2",
@@ -1363,6 +1431,7 @@
   {
     "id": "baby",
     "name": "BABY",
+    "addedAt": 1634601600,
     "token": "BABY",
     "tokenAddress": "0x53E562b9B7E5E94b81f10e96Ee70Ad06df3D2657",
     "tokenDecimals": 18,
@@ -1417,6 +1486,7 @@
   {
     "id": "dep-bnb",
     "name": "DEP-BNB LP",
+    "addedAt": 1638144000,
     "token": "DEP-BNB LP",
     "provider": "ApeSwap",
     "tokenAddress": "0x6518709dC42F70Dbf89934cA382F1d9dB26370e8",
@@ -1465,6 +1535,7 @@
   {
     "id": "cake-bnb",
     "name": "CAKE-BNB LP",
+    "addedAt": 1633737600,
     "token": "CAKE-BNB LP",
     "provider": "PancakeSwap",
     "tokenAddress": "0x0eD7e52944161450477ee417DE9Cd3a859b14fD0",
@@ -1522,6 +1593,7 @@
   {
     "id": "xblzd",
     "name": "xBLZD",
+    "addedAt": 1633392000,
     "token": "xBLZD",
     "tokenAddress": "0x9a946c3Cb16c08334b69aE249690C236Ebd5583E",
     "tokenDecimals": 18,
@@ -1576,6 +1648,7 @@
   {
     "id": "ziggyverse-agility-nft",
     "name": "Ziggyverse NFT",
+    "addedAt": 1639612800,
     "icon": "ziggyverse",
     "token": "POTS",
     "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",

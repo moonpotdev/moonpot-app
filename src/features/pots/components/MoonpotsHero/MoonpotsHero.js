@@ -5,12 +5,12 @@ import styles from './styles';
 import coins from '../../../../images/ziggy/coins.png';
 import { useSelector } from 'react-redux';
 import { usePots } from '../../../../helpers/hooks';
-import { useTotalPrizeValue } from '../../../winners/apollo/total';
 import { ZERO } from '../../../../helpers/utils';
 import {
   FeaturedPotCard,
   FeaturedPotPlaceholderCard,
 } from '../../../../components/FeaturedPotCard';
+import { useTotalPrizeValue } from '../../../winners/hooks';
 
 const useStyles = makeStyles(styles);
 
@@ -19,7 +19,10 @@ const NextFeaturedPotCountdown = memo(function NextFeaturedPotCountdown() {
   const nextFeaturedPot = useMemo(() => {
     const now = Date.now() / 1000;
     const eligible = Object.values(pots)
-      .filter(pot => pot.featured && pot.vaultType !== 'nft' && pot.expiresAt > now)
+      .filter(
+        pot =>
+          pot.featured && pot.status === 'active' && pot.vaultType !== 'nft' && pot.expiresAt > now
+      )
       .sort((a, b) => a.expiresAt - b.expiresAt);
 
     return eligible.length ? eligible[0] : null;
@@ -56,13 +59,13 @@ const StatsCard = memo(function StatsCards() {
   }, [totalPrizesAvailable]);
 
   // Total Prizes Data
-  const { total } = useTotalPrizeValue();
+  const total = useTotalPrizeValue();
   const totalFormatted = total.toLocaleString(undefined, {
     maximumFractionDigits: 0,
   });
 
   // Unique winners value
-  const uniqueWinners = useSelector(state => state.winners.unique.count || 0);
+  const uniqueWinners = useSelector(state => state.entities.draws.uniqueWinners || 0);
 
   return (
     <div className={classes.statsCard}>
