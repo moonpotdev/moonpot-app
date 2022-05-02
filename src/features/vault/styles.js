@@ -339,6 +339,7 @@ const styles = theme => ({
   },
   modalForeground: {
     width: 400,
+    maxWidth: '100%',
     fontWeight: 500,
     fontSize: '28px',
     lineHeight: '36px',
