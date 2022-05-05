@@ -26,7 +26,7 @@ export const zapOut = (
 
       if (isRemoveOnly) {
         const method = contract.methods.beamOut(potAddress, true);
-        const [estimateError, options] = await estimateGas(network, method, { from: address });
+        const [estimateError, options] = await estimateGas(web3, method, { from: address });
 
         if (estimateError) {
           dispatch({
@@ -88,7 +88,7 @@ export const zapOut = (
           swapOutAmountMinRaw,
           true
         );
-        const [estimateError, options] = await estimateGas(network, method, { from: address });
+        const [estimateError, options] = await estimateGas(web3, method, { from: address });
 
         if (estimateError) {
           dispatch({

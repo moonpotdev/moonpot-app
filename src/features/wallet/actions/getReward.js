@@ -13,7 +13,7 @@ export const getReward = (network, contractAddr) => {
     if (address && web3) {
       const contract = new web3.eth.Contract(gateManagerAbi, contractAddr);
       const method = contract.methods.getReward();
-      const [estimateError, options] = await estimateGas(network, method, { from: address });
+      const [estimateError, options] = await estimateGas(web3, method, { from: address });
 
       if (estimateError) {
         dispatch({

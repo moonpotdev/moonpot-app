@@ -15,7 +15,7 @@ export const withdraw = (network, contractAddr, amount, max) => {
 
       if (max) {
         const method = contract.methods.exitInstantly();
-        const [estimateError, options] = await estimateGas(network, method, { from: address });
+        const [estimateError, options] = await estimateGas(web3, method, { from: address });
 
         if (estimateError) {
           dispatch({
@@ -56,7 +56,7 @@ export const withdraw = (network, contractAddr, amount, max) => {
           });
       } else {
         const method = contract.methods.withdrawInstantlyFromMoonPotPrizePool(amount);
-        const [estimateError, options] = await estimateGas(network, method, { from: address });
+        const [estimateError, options] = await estimateGas(web3, method, { from: address });
 
         if (estimateError) {
           dispatch({

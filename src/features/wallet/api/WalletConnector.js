@@ -1,7 +1,7 @@
 import { Web3 } from '../../../helpers/web3';
-import { hexToNumber, isHexStrict } from 'web3-utils';
 import { getModal } from '../modal';
 import { networkChainIdToId, networkSetup } from '../../../config/networks';
+import { maybeHexToNumber } from '../../../helpers/utils';
 
 export class WalletConnector {
   modal;
@@ -74,7 +74,7 @@ export class WalletConnector {
           {
             name: 'getChainId',
             call: 'eth_chainId',
-            outputFormatter: this.maybeHexToNumber,
+            outputFormatter: maybeHexToNumber,
           },
         ],
       });
@@ -91,18 +91,6 @@ export class WalletConnector {
     const web3 = new Web3(provider);
     this.extendWeb3Functions(web3);
     return web3;
-  }
-
-  maybeHexToNumber(input) {
-    if (typeof input === 'number') {
-      return input;
-    }
-
-    if (typeof input === 'string') {
-      return isHexStrict(input) ? hexToNumber(input) : Number(input);
-    }
-
-    throw new Error(`${typeof input} "${input}" is not valid hex or number.`);
   }
 
   unsubscribeFromProvider() {
@@ -174,7 +162,7 @@ export class WalletConnector {
 
     this.chainChangedHandler = this.createEventHandler(id => {
       if (this.options.onNetworkChanged) {
-        const chainId = this.maybeHexToNumber(id);
+        const chainId = maybeHexToNumber(id);
         this.options.onNetworkChanged({ network: networkChainIdToId(chainId) });
       }
     });
