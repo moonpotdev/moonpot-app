@@ -15,7 +15,7 @@ export const deposit = (network, contractAddr, amount, max) => {
 
       if (max) {
         const method = contract.methods.depositAll('0x0000000000000000000000000000000000000000');
-        const [estimateError, options] = await estimateGas(network, method, { from: address });
+        const [estimateError, options] = await estimateGas(web3, method, { from: address });
 
         if (estimateError) {
           dispatch({
@@ -60,7 +60,7 @@ export const deposit = (network, contractAddr, amount, max) => {
           '0x0000000000000000000000000000000000000000'
         );
         console.log('deposit', contractAddr, amount, address);
-        const [estimateError, options] = await estimateGas(network, method, { from: address });
+        const [estimateError, options] = await estimateGas(web3, method, { from: address });
 
         if (estimateError) {
           dispatch({

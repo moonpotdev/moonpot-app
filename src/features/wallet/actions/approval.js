@@ -15,7 +15,7 @@ export const approval = (network, tokenAddr, spendingContractAddress) => {
       const contract = new web3.eth.Contract(erc20Abi, tokenAddr);
       const maxAmount = Web3.utils.toWei('8000000000', 'ether');
       const method = contract.methods.approve(spendingContractAddress, maxAmount);
-      const [estimateError, options] = await estimateGas(network, method, { from: address });
+      const [estimateError, options] = await estimateGas(web3, method, { from: address });
 
       if (estimateError) {
         dispatch({

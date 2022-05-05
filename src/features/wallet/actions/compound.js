@@ -13,7 +13,7 @@ export const compound = (network, contractAddr) => {
     if (address && web3) {
       const contract = new web3.eth.Contract(ziggyManagerMultiRewardsAbi, contractAddr);
       const method = contract.methods.compound();
-      const [estimateError, options] = await estimateGas(network, method, { from: address });
+      const [estimateError, options] = await estimateGas(web3, method, { from: address });
 
       if (estimateError) {
         dispatch({

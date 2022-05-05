@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { networkById } from '../config/networks';
+import { hexToNumber, isHexStrict } from 'web3-utils';
 
 let trimReg = /(^\s*)|(\s*$)/g;
 
@@ -127,4 +128,26 @@ export function listJoin(list, emptyValue = '', sep = ', ', final = ' & ') {
 
 export function getNetworkExplorerUrl(networkKey, path = '/') {
   return networkById[networkKey].explorerUrl + path;
+}
+
+export function maybeHexToNumber(input) {
+  if (typeof input === 'number') {
+    return input;
+  }
+
+  if (typeof input === 'string') {
+    return isHexStrict(input) ? hexToNumber(input) : Number(input);
+  }
+
+  throw new Error(`${typeof input} "${input}" is not valid hex or number.`);
+}
+
+/**
+ * @param {BigNumber[]} numbers
+ * @returns {BigNumber}
+ */
+export function medianOf(numbers) {
+  const sortedNumbers = numbers.slice().sort((a, b) => a.comparedTo(b));
+  const i = Math.floor((sortedNumbers.length - 1) / 2);
+  return sortedNumbers[i];
 }

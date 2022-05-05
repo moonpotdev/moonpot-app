@@ -18,7 +18,7 @@ export const claimAllBonuses = alsoClaimOtherTokens => {
       const method = alsoClaimOtherTokens
         ? contract.methods.claimAll()
         : contract.methods.claimAllPots();
-      const [estimateError, options] = await estimateGas(network, method, { from: address });
+      const [estimateError, options] = await estimateGas(web3, method, { from: address });
 
       if (estimateError) {
         dispatch({

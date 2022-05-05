@@ -28,7 +28,7 @@ export const zapIn = (
 
       if (isNative) {
         const method = contract.methods.beamInETH(potAddress, tokenAmountOutMinRaw);
-        const [estimateError, options] = await estimateGas(network, method, {
+        const [estimateError, options] = await estimateGas(web3, method, {
           from: address,
           value: depositAmountRaw,
         });
@@ -77,7 +77,7 @@ export const zapIn = (
           swapInToken.address,
           depositAmountRaw
         );
-        const [estimateError, options] = await estimateGas(network, method, { from: address });
+        const [estimateError, options] = await estimateGas(web3, method, { from: address });
 
         if (estimateError) {
           dispatch({
