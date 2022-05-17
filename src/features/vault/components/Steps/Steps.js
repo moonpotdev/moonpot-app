@@ -14,6 +14,10 @@ const Steps = ({ item, steps, handleClose }) => {
   const action = useSelector(state => state.wallet.action);
   const renderContent = steps.modal && item;
 
+  useEffect(() => {
+    console.log(steps);
+  }, [steps]);
+
   const calcProgressPosition = () => {
     if (steps.finished) {
       return '100%';
@@ -71,7 +75,6 @@ const Steps = ({ item, steps, handleClose }) => {
       aria-describedby="transition-modal-description"
       className={classes.modal}
       open={steps.modal}
-      closeAfterTransition
       hideBackdrop={true}
       disableEnforceFocus={true}
       disableScrollLock={true}
@@ -95,7 +98,7 @@ const Steps = ({ item, steps, handleClose }) => {
                 {/* Confirmation Dialogs */}
                 <Grid item>
                   <div className={classes.errorTitle}>
-                    <Typography
+                    <div
                       id="transition-modal-title"
                       className={classes.transactionConfirmations}
                       style={{ margin: 0, padding: 0, paddingLeft: 8 }}
@@ -109,11 +112,11 @@ const Steps = ({ item, steps, handleClose }) => {
                           <Close />
                         </div>
                       </div>
-                    </Typography>
+                    </div>
                   </div>
                 </Grid>
                 <Grid item>
-                  <Typography className={classes.successArea}>
+                  <div className={classes.successArea}>
                     <Translate
                       i18nKey={getSuccessMessage(steps.items[steps.currentStep].step)}
                       values={{ pot: item.name }}
@@ -133,7 +136,7 @@ const Steps = ({ item, steps, handleClose }) => {
                         <OpenInNew className={classes.linkIcon} />
                       </Link>
                     </Box>
-                  </Typography>
+                  </div>
                 </Grid>
                 <Button onClick={handleClose} className={classes.closeButton}>
                   <Translate i18nKey="txModal.close" />
@@ -147,7 +150,7 @@ const Steps = ({ item, steps, handleClose }) => {
                     <Grid item>
                       <div className={classes.errorTitle}>
                         <ErrorOutline style={{ fill: '#DC2C10' }} />
-                        <Typography
+                        <div
                           id="transition-modal-title"
                           className={classes.transactionConfirmations}
                           style={{ margin: 0, padding: 0, paddingLeft: 8 }}
@@ -158,7 +161,7 @@ const Steps = ({ item, steps, handleClose }) => {
                               <Close />
                             </div>
                           </div>
-                        </Typography>
+                        </div>
                       </div>
                     </Grid>
                     <Grid item>
@@ -172,17 +175,14 @@ const Steps = ({ item, steps, handleClose }) => {
                   <>
                     {/* Txn awaiting confirmation */}
                     <Grid item>
-                      <Typography
-                        id="transition-modal-title"
-                        className={classes.transactionConfirmations}
-                      >
+                      <div id="transition-modal-title" className={classes.transactionConfirmations}>
                         <div style={{ display: 'flex' }}>
                           <Translate i18nKey="txModal.pending" />
                           <div onClick={handleClose} className={classes.closeBtn}>
                             <Close />
                           </div>
                         </div>
-                      </Typography>
+                      </div>
                     </Grid>
                     <Typography
                       className={classes.confirmTransactionText}
@@ -195,10 +195,7 @@ const Steps = ({ item, steps, handleClose }) => {
                   <>
                     {/* Standard x/x txn flow */}
                     <Grid item>
-                      <Typography
-                        id="transition-modal-title"
-                        className={classes.transactionConfirmations}
-                      >
+                      <div id="transition-modal-title" className={classes.transactionConfirmations}>
                         <div style={{ display: 'flex' }}>
                           {steps.currentStep}/{steps.items.length}{' '}
                           <Translate i18nKey={'txModal.confirmed'} />
@@ -206,7 +203,7 @@ const Steps = ({ item, steps, handleClose }) => {
                             <Close />
                           </div>
                         </div>
-                      </Typography>
+                      </div>
                     </Grid>
                     <Typography
                       className={classes.confirmTransactionText}

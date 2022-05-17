@@ -376,13 +376,7 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
             />
           </div>
         ) : null}
-        <DepositSteps
-          pot={pot}
-          steps={steps}
-          setSteps={setSteps}
-          onClose={handleStepsClose}
-          onFinish={handleStepsClose}
-        />
+        <DepositSteps pot={pot} steps={steps} setSteps={setSteps} onClose={handleStepsClose} />
       </div>
       <div className={classes.fairplayNotice}>
         <Translate

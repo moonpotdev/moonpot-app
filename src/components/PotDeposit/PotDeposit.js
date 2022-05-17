@@ -201,13 +201,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
             />
           </div>
         ) : null}
-        <DepositSteps
-          pot={pot}
-          steps={steps}
-          setSteps={setSteps}
-          onClose={handleStepsClose}
-          onFinish={handleStepsClose}
-        />
+        <DepositSteps pot={pot} steps={steps} setSteps={setSteps} onClose={handleStepsClose} />
       </div>
       {stakeMax.gt(ZERO) ? (
         <div className={classes.maximumDepositNotice}>
