@@ -14,10 +14,6 @@ const Steps = ({ item, steps, handleClose }) => {
   const action = useSelector(state => state.wallet.action);
   const renderContent = steps.modal && item;
 
-  useEffect(() => {
-    console.log(steps);
-  }, [steps]);
-
   const calcProgressPosition = () => {
     if (steps.finished) {
       return '100%';
