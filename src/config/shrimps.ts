@@ -19,6 +19,7 @@ const shrimpsConfig: ShrimpsConfig = [
   { title: 'hall', address: '0xC36f1...fCdfe', won: '$993', deposited: '$50.59' },
   { title: 'hall', address: '0xc71ae...EfaB2', won: '$993', deposited: '$61.53' },
   { title: 'hall', address: '0xDF66e...C2641', won: '$1315', deposited: '$119.30' },
+  { title: 'hall', address: '0X8DC5...A3B9', won: '$45', deposited: '$8.33' },
 ];
 
 export default shrimpsConfig;
