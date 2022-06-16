@@ -192,5 +192,37 @@
     "decimals": 18,
     "underlyingToken": "ORKAN-FTM LP",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "sFTMx-FTM LP",
+    "address": "0xE67980fc955FECfDA8A92BbbFBCc9f0C4bE60A9A",
+    "type": "lp",
+    "oracleId": "boo-wftm-sftmx",
+    "decimals": 18,
+    "zap": "0xbff6176EF6f6638d1506E806353e06F3ef7c961b",
+    "lp": ["WFTM", "sFTMx"]
+  },
+  {
+    "symbol": "sFTMx",
+    "address": "0xd7028092c830b5C8FcE061Af2E593413EbbC1fc1",
+    "type": "single",
+    "oracleId": "sFTMx",
+    "decimals": 18
+  },
+  {
+    "symbol": "moonTicketStader",
+    "address": "0xe53fB3D7B6e9bD0f64Cde0C3efaEaEA0CC7Bf81e",
+    "type": "ticket",
+    "oracleId": "boo-wftm-sftmx",
+    "decimals": 18,
+    "underlyingToken": "sFTMx-FTM LP",
+    "stakedMultiplier": 2
+  },
+  {
+    "symbol": "SD",
+    "address": "0x412a13C109aC30f0dB80AD3Bd1DeFd5D0A6c0Ac6",
+    "type": "single",
+    "oracleId": "SD",
+    "decimals": 18
   }
 ]
