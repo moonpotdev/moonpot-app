@@ -1,5 +1,49 @@
 [
   {
+    "id": "sftmx-ftm",
+    "name": "sFTMx-FTM",
+    "provider": "SpookySwap",
+    "addedAt": 1655385338,
+    "token": "sFTMx-FTM LP",
+    "tokenAddress": "0xE67980fc955FECfDA8A92BbbFBCc9f0C4bE60A9A",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketStader",
+    "rewardAddress": "0xe53fB3D7B6e9bD0f64Cde0C3efaEaEA0CC7Bf81e",
+    "contractAddress": "0x947fd7aa70ef05F0A490c652a7c507aBadE5078B",
+    "prizePoolAddress": "0xa4190F960a4e924BB6deD0C5565641dE55db9f1D",
+    "prizeStrategyAddress": "0xCA51b15FBC8b73cCfadE80537A8aABdC9daAfefF",
+    "oracleId": "boo-wftm-sftmx",
+    "apyId": "boo-wftm-sftmx",
+    "vaultType": "main",
+    "categories": ["main"],
+    "featured": true,
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": true,
+    "hasZapOut": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x30E3154ce70660590FC8bBc1929Ce9236e66C50E",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "SD",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "orkan-ftm",
     "name": "ORKAN-FTM LP",
     "provider": "SpiritSwap",
