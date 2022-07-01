@@ -36,7 +36,7 @@ const networksConfig = {
     name: 'Fantom',
     chainId: 250,
     eip1559: false,
-    rpc: ['https://rpc.ftm.tools'],
+    rpc: ['https://rpc.ankr.com/fantom'],
     explorerUrl: 'https://ftmscan.com',
     drawsSubgraphEndpoint:
       'https://api.thegraph.com/subgraphs/name/moonpotdev/moonpot-draws-fantom',
