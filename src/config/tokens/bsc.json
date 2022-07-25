@@ -754,33 +754,33 @@
     "nfts": [
       {
         "name": "Ziggyverse Dexterity NFT",
-        "min": 178,
-        "max": 178
-      },
-      {
-        "name": "Ziggyverse Dexterity NFT",
-        "min": 182,
+        "min": 177,
         "max": 182
       },
       {
         "name": "Ziggyverse Dexterity NFT",
-        "min": 187,
+        "min": 186,
         "max": 187
       },
       {
         "name": "Ziggyverse Dexterity NFT",
-        "min": 191,
-        "max": 192
+        "min": 190,
+        "max": 193
       },
       {
         "name": "Ziggyverse Dexterity NFT",
-        "min": 200,
-        "max": 202
-      },
-      {
-        "name": "Ziggyverse Dexterity NFT",
-        "min": 204,
+        "min": 195,
         "max": 204
+      },
+      {
+        "name": "Ziggyverse Dexterity NFT",
+        "min": 206,
+        "max": 206
+      },
+      {
+        "name": "Ziggyverse Dexterity NFT",
+        "min": 208,
+        "max": 208
       }
     ]
   }
