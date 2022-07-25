@@ -523,7 +523,7 @@
     ]
   },
   {
-    "symbol": "Ziggyverse NFT",
+    "symbol": "Legacy Ziggyverse NFT",
     "address": "0xb69743Ba5Ecb4bb47c2a7BF514cBFeB05dc14a4f",
     "type": "nft",
     "subtype": "erc721",
@@ -744,5 +744,44 @@
     "decimals": 18,
     "underlyingToken": "POTS",
     "stakedMultiplier": 1
+  },
+  {
+    "symbol": "Ziggyverse NFT",
+    "address": "0x353eC0951D8fA71903C5d26236FfC1d5664BE9DE",
+    "type": "nft",
+    "subtype": "erc1155",
+    "decimals": 0,
+    "nfts": [
+      {
+        "name": "Ziggyverse Dexterity NFT",
+        "min": 178,
+        "max": 178
+      },
+      {
+        "name": "Ziggyverse Dexterity NFT",
+        "min": 182,
+        "max": 182
+      },
+      {
+        "name": "Ziggyverse Dexterity NFT",
+        "min": 187,
+        "max": 187
+      },
+      {
+        "name": "Ziggyverse Dexterity NFT",
+        "min": 191,
+        "max": 192
+      },
+      {
+        "name": "Ziggyverse Dexterity NFT",
+        "min": 200,
+        "max": 202
+      },
+      {
+        "name": "Ziggyverse Dexterity NFT",
+        "min": 204,
+        "max": 204
+      }
+    ]
   }
 ]

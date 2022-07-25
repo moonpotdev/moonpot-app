@@ -77,8 +77,8 @@
     "nfts": [
       {
         "name": "Ziggyverse Dexterity NFT",
-        "address": "0xb69743Ba5Ecb4bb47c2a7BF514cBFeB05dc14a4f",
-        "type": "erc721"
+        "address": "0x353eC0951D8fA71903C5d26236FfC1d5664BE9DE",
+        "type": "erc1155"
       }
     ],
     "bonuses": []
