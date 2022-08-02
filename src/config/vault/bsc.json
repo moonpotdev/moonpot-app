@@ -47,6 +47,49 @@
     ]
   },
   {
+    "id": "beltbtc",
+    "name": "BTC",
+    "addedAt": 1659363061,
+    "token": "beltBTC",
+    "tokenAddress": "0x51bd63F240fB13870550423D208452cA87c44444",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketbeltBTCB",
+    "rewardAddress": "0x035feA82C0aFE87Fbc970915D7c8A7A633671926",
+    "contractAddress": "0x81fdeC3bB0D4D0806f8a5Bc4034055B98170D8aa",
+    "prizePoolAddress": "0x137dDABAc490722aAe62b1AF6613EE510215E035",
+    "prizeStrategyAddress": "0x90beE47627D11c180CCd482cEB8388DCb34e87D6",
+    "oracleId": "belt-beltbtc",
+    "apyId": "belt-beltbtc",
+    "vaultType": "main",
+    "categories": ["main"],
+    "featured": true,
+    "type": "belt",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": true,
+    "hasZapOut": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xD411121C948Cff739857513E1ADF25ED448623f8",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "ziggyverse-dexterity-nft",
     "name": "Ziggyverse NFT",
     "icon": "ziggyverse",

@@ -783,5 +783,32 @@
         "max": 208
       }
     ]
+  },
+  {
+    "symbol": "beltBTC",
+    "address": "0x51bd63F240fB13870550423D208452cA87c44444",
+    "type": "lp",
+    "oracleId": "belt-beltbtc",
+    "decimals": 18,
+    "zap": "0x5b751211e170B7f0101952eb2355b111334280De",
+    "lp": ["BTCB"],
+    "lpDisplayOrder": ["BTCB"],
+    "lpLast": true
+  },
+  {
+    "symbol": "moonTicketbeltBTCB",
+    "address": "0x035feA82C0aFE87Fbc970915D7c8A7A633671926",
+    "type": "ticket",
+    "oracleId": "belt-beltbtc",
+    "decimals": 18,
+    "underlyingToken": "beltBTC",
+    "stakedMultiplier": 2
+  },
+  {
+    "symbol": "BTCB",
+    "address": "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
+    "type": "single",
+    "oracleId": "BTCB",
+    "decimals": 18
   }
 ]
