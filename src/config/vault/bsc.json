@@ -67,12 +67,12 @@
     "status": "active",
     "infoCards": ["nft-strategy", "nft-fairplay"],
     "infoCardNftStrategyCollection": "https://www.rareboard.com/apeheroes",
-    "infoCardNftCollectionName": "ApeHeroes",
+    "infoCardNftCollectionName": "Ape Heroes",
     "sponsors": [],
     "nftPrizeOnly": true,
     "nfts": [
       {
-        "name": "Ape Hero NFT",
+        "name": "Ape Heroes NFT",
         "address": "0xFc27bA34347AFccb2d386093b9671b53D2294a96",
         "type": "erc721",
         "slug": "ape-heroes",

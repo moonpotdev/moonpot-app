@@ -820,14 +820,14 @@
     "stakedMultiplier": 1
   },
   {
-    "symbol": "Ape Hero NFT",
+    "symbol": "Ape Heroes NFT",
     "address": "0xFc27bA34347AFccb2d386093b9671b53D2294a96",
     "type": "nft",
     "subtype": "erc721",
     "decimals": 0
   },
   {
-    "symbol": "Ape Villain NFT",
+    "symbol": "Ape Villains NFT",
     "address": "0x9C5d4Df600f4745Df5C3fa2FF998A632441Ce496",
     "type": "nft",
     "subtype": "erc721",
