@@ -810,5 +810,27 @@
     "type": "single",
     "oracleId": "BTCB",
     "decimals": 18
+  },
+  {
+    "symbol": "moonTicketNFTCollections",
+    "address": "0xc552db4b942C475094d95c78A20a3d966A89aA77",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
+  },
+  {
+    "symbol": "Ape Hero NFT",
+    "address": "0xFc27bA34347AFccb2d386093b9671b53D2294a96",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
+  },
+  {
+    "symbol": "Ape Villain NFT",
+    "address": "0x9C5d4Df600f4745Df5C3fa2FF998A632441Ce496",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
   }
 ]
