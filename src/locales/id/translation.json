@@ -226,6 +226,14 @@
             "Koleksi baru akan ditambahkan ke pot setelah semua NFT dari koleksi saat ini telah didistribusikan. Anda tidak perlu mengulang untuk mengikuti undian koleksi baru.",
             "Koleksi saat ini adalah {{collection}}"
           ]
+        },
+        "nft-collections-2": {
+          "body": [
+            "Stake hingga 100 $POTS untuk kesempatan memenangkan NFT setiap hari dari Koleksi NFT terbaik di Binance Smart Chain.",
+            "Setiap undian akan memilih satu pemenang untuk menerima satu NFT dari koleksi saat ini.",
+            "Koleksi baru akan ditambahkan ke pot setelah semua NFT dari koleksi saat ini telah didistribusikan. Anda tidak perlu mengulang untuk mengikuti undian koleksi baru.",
+            "Koleksi saat ini adalah {{collection}}"
+          ]
         }
       },
       "xmas-strategy": {

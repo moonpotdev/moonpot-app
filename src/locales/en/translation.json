@@ -341,6 +341,14 @@
             "A new collection will be added to the pot once all NFTs from the current collection have been distributed. You do not have to restake to enter the new collection's draw.",
             "The current collection is {{collection}}"
           ]
+        },
+        "nft-collections-2": {
+          "body": [
+            "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
+            "Each draw will pick one winner to receive a single NFT from the current collection.",
+            "A new collection will be added to the pot once all NFTs from the current collection have been distributed. You do not have to restake to enter the new collection's draw.",
+            "The current collection is {{collection}}"
+          ]
         }
       },
       "xmas-strategy": {

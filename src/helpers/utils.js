@@ -115,7 +115,9 @@ export function getFairplayFeePercent(secondsRemaining, days = 10, fee = 0.05) {
 }
 
 export function getApiCacheBuster() {
-  return Math.trunc(Date.now() / (1000 * 60));
+  const d = new Date();
+  d.setSeconds(0, 0);
+  return d.getTime();
 }
 
 export function listJoin(list, emptyValue = '', sep = ', ', final = ' & ') {

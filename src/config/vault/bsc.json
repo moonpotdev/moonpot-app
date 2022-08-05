@@ -47,6 +47,41 @@
     ]
   },
   {
+    "id": "nft-collections-2",
+    "name": "NFT Collections",
+    "addedAt": 1659710248,
+    "token": "POTS",
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketNFTCollections",
+    "rewardAddress": "0xc552db4b942C475094d95c78A20a3d966A89aA77",
+    "contractAddress": "0x34ea2F9fF738B3D5Ad5096A36F2214BF184f2198",
+    "prizePoolAddress": "0x9262a4e7025E02Bdf924fA27a0141142D2D5ad74",
+    "prizeStrategyAddress": "0xaadb8E62519eC0AB4B3EaE3FB59D679615c34aB7",
+    "oracleId": "POTS",
+    "vaultType": "nft",
+    "categories": ["nft"],
+    "duration": 1,
+    "fairplayDuration": 3,
+    "fairplayTicketFee": 0.05,
+    "status": "active",
+    "infoCards": ["nft-strategy", "nft-fairplay"],
+    "infoCardNftStrategyCollection": "https://www.rareboard.com/apeheroes",
+    "infoCardNftCollectionName": "Ape Heroes",
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "Ape Heroes NFT",
+        "address": "0xFc27bA34347AFccb2d386093b9671b53D2294a96",
+        "type": "erc721",
+        "slug": "ape-heroes",
+        "ids": [215, 222, 412, 2654]
+      }
+    ],
+    "bonuses": []
+  },
+  {
     "id": "beltbtc",
     "name": "BTC",
     "addedAt": 1659363061,
