@@ -334,6 +334,22 @@
             }
           }
         },
+        "ziggyverse-energy-nft": {
+          "body": [
+            "The Ziggyverse Energy Tile can be used within Ziggyverse to create Ziggmons. Collect all 6 Tiles to form your Ziggymon. Collect, Earn and Fight in the Ziggyverse!"
+          ],
+          "rarities": {
+            "gold": {
+              "name": "Energy - Gold"
+            },
+            "moonstone": {
+              "name": "Energy - Moonstone"
+            },
+            "jade": {
+              "name": "Energy - Jade"
+            }
+          }
+        },
         "nft-collections": {
           "body": [
             "Stake up to 100 $POTS for the chance to win NFTs daily from the best NFT Collections on Binance Smart Chain.",
