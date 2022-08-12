@@ -47,6 +47,43 @@
     ]
   },
   {
+    "id": "ziggyverse-energy-nft",
+    "name": "Ziggyverse NFT",
+    "icon": "ziggyverse",
+    "token": "POTS",
+    "addedAt": 1660308489,
+    "tokenAddress": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketZiggyVerseEnergy",
+    "rewardAddress": "0xfDD0A796eEdD8C6e89bda8F978f862a312bD2cAC",
+    "contractAddress": "0x5F9b0c26107E53123510186FEB1c0f0603a8FF16",
+    "prizePoolAddress": "0x4F074ba66b8E6Def4cFC6315104B2EA8b2a3Ad6E",
+    "prizeStrategyAddress": "0x602b976F4D210b6634De41e4AF422D20740a9FA9",
+    "oracleId": "POTS",
+    "apyId": "pots-pots",
+    "vaultType": "nft",
+    "categories": ["nft"],
+    "featured": true,
+    "duration": 1,
+    "fairplayDuration": 3,
+    "fairplayTicketFee": 0.05,
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "withdrawFee": 0,
+    "infoCards": ["nft-strategy", "nft-fairplay"],
+    "infoCardNftStrategyCollection": "https://ziggyverse.com",
+    "sponsors": [],
+    "nftPrizeOnly": true,
+    "nfts": [
+      {
+        "name": "Ziggyverse Energy NFT",
+        "address": "0x353eC0951D8fA71903C5d26236FfC1d5664BE9DE",
+        "type": "erc1155"
+      }
+    ],
+    "bonuses": []
+  },
+  {
     "id": "nft-collections-2",
     "name": "NFT Collections",
     "addedAt": 1659710248,
