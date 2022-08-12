@@ -108,7 +108,9 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
                   alt={item.name}
                 />
                 <div className={classes.nftShowcaseItemName}>{item.name}</div>
-                <div className={classes.nftShowcaseItemRarity}>{item.rarity}</div>
+                {item.rarity ? (
+                  <div className={classes.nftShowcaseItemRarity}>{item.rarity}</div>
+                ) : null}
               </Grid>
             ))}
           </Grid>
