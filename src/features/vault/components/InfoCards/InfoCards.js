@@ -121,7 +121,9 @@ const NFTStrategyInfoCard = memo(function ({ pot, classes, t, i18n }) {
                   <Grid item xs={4} className={classes.nftShowcaseItem} key={`${nft.slug}/${id}`}>
                     <img
                       src={
-                        require(`../../../../images/nfts/${pot.id}/${nft.slug}/${id}.png`).default
+                        require(`../../../../images/nfts/${pot.id}/${nft.slug}/${id}.${
+                          nft.imageType || 'png'
+                        }`).default
                       }
                       className={classes.nftShowcaseImg}
                       alt={nfts?.[`${nft.slug}/${id}`] ?? ''}
