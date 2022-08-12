@@ -66,17 +66,17 @@
     "fairplayTicketFee": 0.05,
     "status": "active",
     "infoCards": ["nft-strategy", "nft-fairplay"],
-    "infoCardNftStrategyCollection": "https://www.rareboard.com/apeheroes",
-    "infoCardNftCollectionName": "Ape Heroes",
+    "infoCardNftStrategyCollection": "https://www.rareboard.com/apevillains",
+    "infoCardNftCollectionName": "Ape Villains",
     "sponsors": [],
     "nftPrizeOnly": true,
     "nfts": [
       {
-        "name": "Ape Heroes NFT",
-        "address": "0xFc27bA34347AFccb2d386093b9671b53D2294a96",
+        "name": "Ape Villains NFT",
+        "address": "0x9C5d4Df600f4745Df5C3fa2FF998A632441Ce496",
         "type": "erc721",
-        "slug": "ape-heroes",
-        "ids": [215, 222, 412, 2654]
+        "slug": "ape-villains",
+        "ids": [1251, 2632, 2633, 2742]
       }
     ],
     "bonuses": []
