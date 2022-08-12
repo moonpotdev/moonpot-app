@@ -781,6 +781,11 @@
         "name": "Ziggyverse Dexterity NFT",
         "min": 208,
         "max": 208
+      },
+      {
+        "name": "Ziggyverse Energy NFT",
+        "min": 221,
+        "max": 252
       }
     ]
   },
@@ -832,6 +837,14 @@
     "type": "nft",
     "subtype": "erc721",
     "decimals": 0
+  },
+  {
+    "symbol": "moonTicketZiggyVerseEnergy",
+    "address": "0xfDD0A796eEdD8C6e89bda8F978f862a312bD2cAC",
+    "type": "ticket",
+    "decimals": 18,
+    "underlyingToken": "POTS",
+    "stakedMultiplier": 1
   },
   {
     "symbol": "Bored to Death NFT",
