@@ -104,12 +104,12 @@
     "status": "active",
     "infoCards": ["nft-strategy", "nft-fairplay"],
     "infoCardNftStrategyCollection": "https://www.rugzombie.io/nfts/104",
-    "infoCardNftCollectionName": "Bored to Death",
+    "infoCardNftCollectionName": "RugZombie",
     "sponsors": [],
     "nftPrizeOnly": true,
     "nfts": [
       {
-        "name": "Bored to Death NFT",
+        "name": "RugZombie NFT",
         "address": "0xA5482fb8647C5F496cF7f95955f41C8792947315",
         "type": "erc721",
         "slug": "bored-to-death",
