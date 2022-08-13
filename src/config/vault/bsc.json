@@ -103,17 +103,18 @@
     "fairplayTicketFee": 0.05,
     "status": "active",
     "infoCards": ["nft-strategy", "nft-fairplay"],
-    "infoCardNftStrategyCollection": "https://www.rareboard.com/apevillains",
-    "infoCardNftCollectionName": "Ape Villains",
+    "infoCardNftStrategyCollection": "https://www.rugzombie.io/nfts/104",
+    "infoCardNftCollectionName": "RugZombie",
     "sponsors": [],
     "nftPrizeOnly": true,
     "nfts": [
       {
-        "name": "Ape Villains NFT",
-        "address": "0x9C5d4Df600f4745Df5C3fa2FF998A632441Ce496",
+        "name": "RugZombie NFT",
+        "address": "0xA5482fb8647C5F496cF7f95955f41C8792947315",
         "type": "erc721",
-        "slug": "ape-villains",
-        "ids": [1251, 2632, 2633, 2742]
+        "slug": "bored-to-death",
+        "ids": [72, 73, 74, 75, 76, 77, 78, 79, 80],
+        "imageType": "jpg"
       }
     ],
     "bonuses": []
