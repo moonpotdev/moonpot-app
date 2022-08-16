@@ -47,6 +47,47 @@
     ]
   },
   {
+    "id": "bsw",
+    "name": "BSW",
+    "addedAt": 1660637302,
+    "token": "BSW",
+    "tokenAddress": "0x965F527D9159dCe6288a2219DB51fc6Eef120dD1",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBSW",
+    "rewardAddress": "0xA8dDE766c60a234f8F1F96Bd127b0D86178cdA80",
+    "contractAddress": "0xeE9d38Fad805f5811E7a36958E59b3215cDD006e",
+    "prizePoolAddress": "0x677f464C6D6260be26D0539fCb18935c13FDA2e5",
+    "prizeStrategyAddress": "0x5635CBf9873Ac4462725C25b30E37a6f46187823",
+    "oracleId": "BSW",
+    "apyId": "biswap-bsw",
+    "vaultType": "main",
+    "categories": ["main"],
+    "featured": true,
+    "type": "single",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x0BE6B4CAC0D586f474AA4e059CDc05Bc54f61B03",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "ziggyverse-energy-nft",
     "name": "Ziggyverse NFT",
     "icon": "ziggyverse",
