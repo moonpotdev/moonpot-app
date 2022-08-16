@@ -852,5 +852,21 @@
     "type": "nft",
     "subtype": "erc721",
     "decimals": 0
+  },
+  {
+    "symbol": "BSW",
+    "address": "0x965F527D9159dCe6288a2219DB51fc6Eef120dD1",
+    "type": "single",
+    "oracleId": "BSW",
+    "decimals": 18
+  },
+  {
+    "symbol": "moonTicketBSW",
+    "address": "0xA8dDE766c60a234f8F1F96Bd127b0D86178cdA80",
+    "type": "ticket",
+    "oracleId": "BSW",
+    "decimals": 18,
+    "underlyingToken": "BSW",
+    "stakedMultiplier": 2
   }
 ]
