@@ -144,18 +144,17 @@
     "fairplayTicketFee": 0.05,
     "status": "active",
     "infoCards": ["nft-strategy", "nft-fairplay"],
-    "infoCardNftStrategyCollection": "https://www.rugzombie.io/nfts/104",
-    "infoCardNftCollectionName": "RugZombie",
+    "infoCardNftStrategyCollection": "https://www.rareboard.com/oddblox",
+    "infoCardNftCollectionName": "Oddblox",
     "sponsors": [],
     "nftPrizeOnly": true,
     "nfts": [
       {
-        "name": "RugZombie NFT",
-        "address": "0xA5482fb8647C5F496cF7f95955f41C8792947315",
+        "name": "Oddblox NFT",
+        "address": "0xa1FaCbeE77125C4FD63ebeaaed43926C3338Ea04",
         "type": "erc721",
-        "slug": "bored-to-death",
-        "ids": [72, 73, 74, 75, 76, 77, 78, 79, 80],
-        "imageType": "jpg"
+        "slug": "oddblox",
+        "ids": [632, 633, 649, 655, 656]
       }
     ],
     "bonuses": []

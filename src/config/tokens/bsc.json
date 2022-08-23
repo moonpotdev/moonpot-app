@@ -868,5 +868,12 @@
     "decimals": 18,
     "underlyingToken": "BSW",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "Oddblox NFT",
+    "address": "0xa1FaCbeE77125C4FD63ebeaaed43926C3338Ea04",
+    "type": "nft",
+    "subtype": "erc721",
+    "decimals": 0
   }
 ]
