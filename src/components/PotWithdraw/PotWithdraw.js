@@ -230,6 +230,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
+  const token = tokensByNetworkAddress[pot.network][pot.tokenAddress.toLowerCase()];
   const [inputValue, setInputValue] = useState('');
   const [isPartialWithdrawAll, setIsPartialWithdrawAll] = useState(false);
   const [partialWithdrawAmount, setPartialWithdrawAmount] = useState(() => ZERO);
@@ -315,7 +316,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
           <div className={classes.inputHolder}>
             <TokenInput
               variant={variant}
-              token={pot.token}
+              token={token}
               value={inputValue}
               max={totalBalance}
               setValue={setInputValue}

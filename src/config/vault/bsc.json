@@ -47,6 +47,50 @@
     ]
   },
   {
+    "id": "bnb-bnbx",
+    "name": "BNB-BNBx LP",
+    "addedAt": 1661888470,
+    "token": "BNB-BNBx LP",
+    "provider": "Ellipsis",
+    "tokenAddress": "0x2E9a994C9a2F661AE685e8d08662dF00f862f4da",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketBNB-BNBx",
+    "rewardAddress": "0x0030b1A818D8e8BeC8c7087B29E6cd03f5509b6B",
+    "contractAddress": "0xe71170d95D53AaaE05A6975F21dd7b49d0cFFaC4",
+    "prizePoolAddress": "0x5059f06D0eB485C3e32c095Bc462e08881830D2c",
+    "prizeStrategyAddress": "0xb9770feDC63B0dBFdE4159f0E01cfCA61EE7951B",
+    "oracleId": "ellipsis-bnb-bnbx",
+    "apyId": "ellipsis-bnb-bnbx",
+    "vaultType": "lp",
+    "categories": ["main"],
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": true,
+    "hasZapOut": true,
+    "withdrawFee": 0,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0x5C9b83467Cb615b387F5Eb6E0c5AEf7AdD6d4195",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "bsw",
     "name": "BSW",
     "addedAt": 1660637302,

@@ -19,6 +19,7 @@ import BigNumber from 'bignumber.js';
 import { WalletRequired } from '../WalletRequired/WalletRequired';
 import { selectWalletAddress } from '../../features/wallet/selectors';
 import { approval, deposit } from '../../features/wallet/actions';
+import { tokensByNetworkAddress } from '../../config/tokens';
 
 const useStyles = makeStyles(styles);
 
@@ -75,6 +76,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const pot = usePot(id);
+  const token = tokensByNetworkAddress[pot.network][pot.tokenAddress.toLowerCase()];
   const address = useSelector(selectWalletAddress);
   const balance = useTokenBalance(pot.token, pot.tokenDecimals, pot.network);
   const stakeMax = useMemo(
@@ -166,7 +168,7 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
       <div className={classes.inputHolder}>
         <TokenInput
           variant={variant}
-          token={pot.token}
+          token={token}
           value={inputValue}
           max={availableToStake}
           setValue={setInputValue}

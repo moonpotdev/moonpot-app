@@ -59,7 +59,7 @@ function fakeZapInEstimate(potId, depositAddress, depositAmount) {
 }
 
 export function createZapInEstimate(potId, depositAddress, depositAmount) {
-  if (potId === 'beltbnb' || potId === 'beltbtc' || potId === 'ibalpaca') {
+  if (potId === 'beltbnb' || potId === 'beltbtc' || potId === 'ibalpaca' || potId === 'bnb-bnbx') {
     return fakeZapInEstimate(potId, depositAddress, depositAmount);
   }
 
@@ -141,7 +141,8 @@ function fakeZapOutEstimate(potId, wantTokenAddress) {
       const web3 = state.wallet.rpc[network];
       const multicall = new MultiCall(web3, networkById[network].multicallAddress);
       const address = state.wallet.address;
-      const isRemoveOnly = potId === 'beltbnb' || potId === 'ibalpaca' || potId === 'beltbtc';
+      const isRemoveOnly =
+        !wantTokenAddress || potId === 'beltbnb' || potId === 'ibalpaca' || potId === 'beltbtc';
       const fairplayDuration = pot.fairplayDuration;
       const fairplayTicketFee = pot.fairplayTicketFee;
       const pairToken = tokensByNetworkAddress[network][pot.tokenAddress.toLowerCase()];
@@ -190,25 +191,45 @@ function fakeZapOutEstimate(potId, wantTokenAddress) {
       const swapInAmountRaw = '1';
       const swapOutAmountRaw = '1';
 
-      dispatch({
-        type: ZAP_SWAP_ESTIMATE_COMPLETE,
-        payload: {
-          requestId,
-          potId,
-          isRemoveOnly,
-          zapAddress: pairToken.zap,
-          userTotalBalance: byDecimals(userTotalBalance, pot.tokenDecimals, true),
-          userWithdrawableBalance: byDecimals(userWithdrawableBalance, pot.tokenDecimals, true),
-          token0,
-          token1,
-          balance0: byDecimals(balance0, token0.decimals, true),
-          balance1: byDecimals(balance1, token1.decimals, true),
-          swapInToken,
-          swapOutToken,
-          swapInAmount: byDecimals(swapInAmountRaw, swapInToken.decimals, true),
-          swapOutAmount: byDecimals(swapOutAmountRaw, swapOutToken.decimals, true),
-        },
-      });
+      if (isRemoveOnly) {
+        // console.log('zap out', 'is remove only');
+        // withdraw lp from pot and withdraw tokens from lp as-is
+        dispatch({
+          type: ZAP_SWAP_ESTIMATE_COMPLETE,
+          payload: {
+            requestId,
+            potId,
+            isRemoveOnly,
+            zapAddress: pairToken.zap,
+            userTotalBalance: byDecimals(userTotalBalance, pot.tokenDecimals, true),
+            userWithdrawableBalance: byDecimals(userWithdrawableBalance, pot.tokenDecimals, true),
+            token0,
+            token1,
+            balance0: byDecimals(balance0, token0.decimals, true),
+            balance1: byDecimals(balance1, token1.decimals, true),
+          },
+        });
+      } else {
+        dispatch({
+          type: ZAP_SWAP_ESTIMATE_COMPLETE,
+          payload: {
+            requestId,
+            potId,
+            isRemoveOnly,
+            zapAddress: pairToken.zap,
+            userTotalBalance: byDecimals(userTotalBalance, pot.tokenDecimals, true),
+            userWithdrawableBalance: byDecimals(userWithdrawableBalance, pot.tokenDecimals, true),
+            token0,
+            token1,
+            balance0: byDecimals(balance0, token0.decimals, true),
+            balance1: byDecimals(balance1, token1.decimals, true),
+            swapInToken,
+            swapOutToken,
+            swapInAmount: byDecimals(swapInAmountRaw, swapInToken.decimals, true),
+            swapOutAmount: byDecimals(swapOutAmountRaw, swapOutToken.decimals, true),
+          },
+        });
+      }
     },
   ];
 }
@@ -219,7 +240,8 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
     potId === 'beltbnb' ||
     potId === 'ibalpaca' ||
     potId === 'g3crv' ||
-    potId === 'beltbtc'
+    potId === 'beltbtc' ||
+    potId === 'bnb-bnbx'
   ) {
     return fakeZapOutEstimate(potId, wantTokenAddress);
   }

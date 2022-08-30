@@ -875,5 +875,31 @@
     "type": "nft",
     "subtype": "erc721",
     "decimals": 0
+  },
+  {
+    "symbol": "BNBx",
+    "address": "0x1bdd3Cf7F79cfB8EdbB955f20ad99211551BA275",
+    "type": "single",
+    "oracleId": "BNBx",
+    "decimals": 18
+  },
+  {
+    "symbol": "BNB-BNBx LP",
+    "icon": "bnb-bnbx-lp",
+    "address": "0x2E9a994C9a2F661AE685e8d08662dF00f862f4da",
+    "type": "lp",
+    "oracleId": "ellipsis-bnb-bnbx",
+    "decimals": 18,
+    "zap": "0x3C7f397Ce9CB3BCbEc47130c82316bDDa14Ae9D1",
+    "lp": ["WBNB", "BNBx"]
+  },
+  {
+    "symbol": "moonTicketBNB-BNBx",
+    "address": "0x0030b1A818D8e8BeC8c7087B29E6cd03f5509b6B",
+    "type": "ticket",
+    "oracleId": "ellipsis-bnb-bnbx",
+    "decimals": 18,
+    "underlyingToken": "BNB-BNBx LP",
+    "stakedMultiplier": 2
   }
 ]
