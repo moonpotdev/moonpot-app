@@ -59,7 +59,7 @@ function fakeZapInEstimate(potId, depositAddress, depositAmount) {
 }
 
 export function createZapInEstimate(potId, depositAddress, depositAmount) {
-  if (potId === 'beltbnb' || potId === 'beltbtc' || potId === 'ibalpaca') {
+  if (potId === 'beltbnb' || potId === 'beltbtc' || potId === 'ibalpaca' || potId === 'bnb-bnbx') {
     return fakeZapInEstimate(potId, depositAddress, depositAmount);
   }
 
@@ -219,7 +219,8 @@ export function createZapOutEstimate(potId, wantTokenAddress) {
     potId === 'beltbnb' ||
     potId === 'ibalpaca' ||
     potId === 'g3crv' ||
-    potId === 'beltbtc'
+    potId === 'beltbtc' ||
+    potId === 'bnb-bnbx'
   ) {
     return fakeZapOutEstimate(potId, wantTokenAddress);
   }

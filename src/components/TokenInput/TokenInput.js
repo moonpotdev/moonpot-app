@@ -7,6 +7,7 @@ import { variantClass } from '../../helpers/utils';
 import clsx from 'clsx';
 import BigNumber from 'bignumber.js';
 import { MaxButton } from './MaxButton';
+import { TokenIcon } from '../TokenIcon';
 
 const MAX_DECIMALS = 8;
 const useStyles = makeStyles(styles);
@@ -25,7 +26,6 @@ export const TokenInput = function ({
 }) {
   const { t } = useTranslation();
   const classes = useStyles();
-  const tokenIcon = require(`../../images/tokens/${token.toLowerCase()}.svg`).default;
   const maxTruncated = useMemo(() => {
     return bigNumberTruncate(max, MAX_DECIMALS);
   }, [max]);
@@ -66,17 +66,7 @@ export const TokenInput = function ({
 
   return (
     <InputBase
-      startAdornment={
-        <img
-          src={tokenIcon}
-          alt=""
-          aria-hidden={true}
-          className={classes.token}
-          style={{ borderRadius: '12px' }}
-          width={24}
-          height={24}
-        />
-      }
+      startAdornment={<TokenIcon token={token} className={classes.token} />}
       className={clsx(classes.input, variantClass(classes, 'variant', variant), className)}
       placeholder={'0.0'}
       value={value}

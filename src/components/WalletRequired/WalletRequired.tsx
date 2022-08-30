@@ -141,8 +141,8 @@ const WrongNetwork = memo<WrongNetworkProps>(function WrongNetwork({ target, cur
 type WalletRequiredProps = PropsWithChildren<{
   network: string | null;
   networkRequired: boolean;
-  NotConnectedComponent: NamedExoticComponent<NotConnectedProps>;
-  WrongNetworkComponent: NamedExoticComponent<WrongNetworkProps>;
+  NotConnectedComponent?: NamedExoticComponent<NotConnectedProps>;
+  WrongNetworkComponent?: NamedExoticComponent<WrongNetworkProps>;
 }>;
 export const WalletRequired = memo<WalletRequiredProps>(function WalletRequired({
   network = null,
