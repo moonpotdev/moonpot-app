@@ -4,6 +4,7 @@ import { DrawsFilter } from '../DrawsFilter';
 import { makeStyles } from '@material-ui/core';
 import styles from './styles';
 import { WinningShrimps } from '../WinningShrimps';
+import ZiggyverseMint from '../../../pots/components/ZiggyverseMint/ZiggyverseMint';
 
 const useStyles = makeStyles(styles);
 
@@ -13,6 +14,7 @@ export const Draws = memo(function Draws() {
   return (
     <div className={classes.page}>
       <WinningShrimps className={classes.shrimps} />
+      <ZiggyverseMint />
       <DrawsFilter className={classes.filters} />
       <DrawsList />
     </div>

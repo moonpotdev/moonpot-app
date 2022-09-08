@@ -7,7 +7,7 @@ const styles = () => ({
     flexGrow: 1,
   },
   shrimps: {
-    marginBottom: '40px',
+    marginBottom: '32px',
   },
   filters: {
     marginTop: '32px',
