@@ -1,4 +1,4 @@
-import { Link, makeStyles } from '@material-ui/core';
+import { Grid, Link, makeStyles } from '@material-ui/core';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles';
@@ -20,6 +20,7 @@ import { WalletRequired } from '../WalletRequired/WalletRequired';
 import { selectWalletAddress } from '../../features/wallet/selectors';
 import { approval, deposit } from '../../features/wallet/actions';
 import { tokensByNetworkAddress } from '../../config/tokens';
+import { OpenInNew } from '@material-ui/icons';
 
 const useStyles = makeStyles(styles);
 
@@ -165,6 +166,41 @@ export const PotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
 
   return (
     <>
+      {pot.provider ? (
+        <Grid container className={classes.depositInfo}>
+          <Grid item xs={6}>
+            <div className={classes.label}>
+              <Translate i18nKey="deposit.inYourWallet" />
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <div className={classes.label} style={{ textAlign: 'right' }}>
+              {pot.provider ? <Translate i18nKey="deposit.provider" /> : null}
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <div className={classes.value}>
+              {formatDecimals(availableToStake)} {token.symbol}
+            </div>
+          </Grid>
+          <Grid item xs={6} style={{ textAlign: 'right' }}>
+            <div className={classes.value}>
+              {pot.providerUrl ? (
+                <a
+                  href={pot.providerUrl}
+                  className={classes.providerLink}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  {pot.provider} <OpenInNew fontSize="inherit" />
+                </a>
+              ) : (
+                pot.provider
+              )}
+            </div>
+          </Grid>
+        </Grid>
+      ) : null}
       <div className={classes.inputHolder}>
         <TokenInput
           variant={variant}
