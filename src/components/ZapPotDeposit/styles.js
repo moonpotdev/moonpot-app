@@ -36,6 +36,13 @@ const styles = theme => ({
     lineHeight: '24px',
     letterSpacing: '0.2px',
   },
+  providerLink: {
+    textDecoration: 'none',
+    color: 'inherit',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '4px',
+  },
 });
 
 export default styles;

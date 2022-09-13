@@ -19,6 +19,9 @@ const styles = theme => ({
     marginLeft: '14px',
     width: '24px',
     height: '24px',
+    flexShrink: 0,
+    flexGrow: 0,
+    flexBasis: '24px',
   },
   max: {
     marginRight: '8px',

@@ -47,6 +47,50 @@
     ]
   },
   {
+    "id": "cone-bnb",
+    "name": "CONE-BNB vLP",
+    "addedAt": 1663093812,
+    "token": "CONE-BNB vLP",
+    "provider": "Cone",
+    "providerUrl": "https://www.cone.exchange/liquidity/create?address=0x672cD8201CEB518F9E42526ef7bCFe5263F41951",
+    "tokenAddress": "0x672cD8201CEB518F9E42526ef7bCFe5263F41951",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketCONE-BNB",
+    "rewardAddress": "0x5325BF6608E6C07c33A6826017405f26C361a1E2",
+    "contractAddress": "0x5684ebd85d6a958Aa73d79e288e73C5661b8dF27",
+    "prizePoolAddress": "0xB9B07fc2195b1a96fA37393c01F3AE9E1BA19650",
+    "prizeStrategyAddress": "0x176Fd05ff9817C5c5684267F9b7E2a76B4d2E674",
+    "oracleId": "cone-cone-wbnb",
+    "apyId": "cone-cone-wbnb",
+    "vaultType": "main",
+    "categories": ["main"],
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": false,
+    "hasZapOut": false,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xCE125B4BC12Cd4C478679Db968089b038DF18969",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "bnb-bnbx",
     "name": "BNB-BNBx LP",
     "addedAt": 1661888470,

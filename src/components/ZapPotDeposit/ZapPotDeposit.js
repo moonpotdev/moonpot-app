@@ -18,6 +18,7 @@ import { networkById } from '../../config/networks';
 import { WalletRequired } from '../WalletRequired/WalletRequired';
 import { selectWalletAddress } from '../../features/wallet/selectors';
 import { approval, deposit, zapIn } from '../../features/wallet/actions';
+import { OpenInNew } from '@material-ui/icons';
 
 const useStyles = makeStyles(styles);
 
@@ -323,7 +324,22 @@ export const ZapPotDeposit = function ({ id, onLearnMore, variant = 'teal' }) {
           </div>
         </Grid>
         <Grid item xs={6} style={{ textAlign: 'right' }}>
-          {pot.provider ? <div className={classes.value}>{pot.provider}</div> : null}
+          {pot.provider ? (
+            <div className={classes.value}>
+              {pot.providerUrl ? (
+                <a
+                  href={pot.providerUrl}
+                  className={classes.providerLink}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  {pot.provider} <OpenInNew fontSize="inherit" />
+                </a>
+              ) : (
+                pot.provider
+              )}
+            </div>
+          ) : null}
         </Grid>
       </Grid>
       {/*<div style={{ border: 'solid 1px red', padding: '10px', margin: '15px 0' }}>*/}

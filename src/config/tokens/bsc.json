@@ -901,5 +901,29 @@
     "decimals": 18,
     "underlyingToken": "BNB-BNBx LP",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "CONE",
+    "address": "0xA60205802E1B5C6EC1CAFA3cAcd49dFeECe05AC9",
+    "type": "single",
+    "oracleId": "CONE",
+    "decimals": 18
+  },
+  {
+    "symbol": "CONE-BNB vLP",
+    "address": "0x672cD8201CEB518F9E42526ef7bCFe5263F41951",
+    "type": "lp",
+    "oracleId": "cone-cone-wbnb",
+    "decimals": 18,
+    "lp": ["CONE", "WBNB"]
+  },
+  {
+    "symbol": "moonTicketCONE-BNB",
+    "address": "0x5325BF6608E6C07c33A6826017405f26C361a1E2",
+    "type": "ticket",
+    "oracleId": "cone-cone-wbnb",
+    "decimals": 18,
+    "underlyingToken": "CONE-BNB vLP",
+    "stakedMultiplier": 2
   }
 ]
