@@ -925,5 +925,14 @@
     "decimals": 18,
     "underlyingToken": "CONE-BNB vLP",
     "stakedMultiplier": 2
+  },
+  {
+    "symbol": "moonTicketCakeBNB",
+    "address": "0xF9c80AcF03244653fdF7f6E58F174f25046EF78a",
+    "type": "ticket",
+    "oracleId": "Cake",
+    "decimals": 18,
+    "underlyingToken": "CAKE-BNB LP",
+    "stakedMultiplier": 2
   }
 ]
