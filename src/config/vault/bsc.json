@@ -47,6 +47,50 @@
     ]
   },
   {
+    "id": "cake-bnb-2",
+    "name": "CAKE-BNB LP",
+    "addedAt": 1664302755,
+    "token": "CAKE-BNB LP",
+    "provider": "PancakeSwap",
+    "tokenAddress": "0x0eD7e52944161450477ee417DE9Cd3a859b14fD0",
+    "tokenDecimals": 18,
+    "rewardToken": "moonTicketCakeBNB",
+    "rewardAddress": "0xF9c80AcF03244653fdF7f6E58F174f25046EF78a",
+    "contractAddress": "0x5A5dDa20753B1aDD10B7E566b9559274CbB36450",
+    "prizePoolAddress": "0x10CA0bc8aaD97040e319750F7b784041BAeFaba5",
+    "prizeStrategyAddress": "0xCbf86D5F7C8edb189e57FF3a2F09fCAd6657d787",
+    "oracleId": "cakev2-cake-bnb",
+    "apyId": "cakev2-cake-bnb",
+    "vaultType": "main",
+    "categories": ["main"],
+    "featured": true,
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": true,
+    "hasZapOut": true,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xb26642B6690E4c4c9A6dAd6115ac149c700C7dfE",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "cone-bnb",
     "name": "CONE-BNB vLP",
     "addedAt": 1663093812,
