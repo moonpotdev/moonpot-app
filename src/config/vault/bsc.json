@@ -162,7 +162,8 @@
       "ziggyPrize": 4,
       "treasury": 2
     },
-    "status": "active",
+    "status": "eol",
+    "eolDrawNumber": 2,
     "supportsClaimAllBonuses": false,
     "hasZapIn": true,
     "hasZapOut": true,
