@@ -74,30 +74,17 @@ const Bottom = function ({ id }) {
 
   return (
     <>
-      <CardAccordionGroup className={classes.rowPrizeSplit}>
-        <CardAccordionItem
-          titleKey={pot.isPrizeOnly ? 'pot.prizeSplit' : 'pot.prizeSplitProjected'}
-          tooltip={pot.isPrizeOnly ? null : <TooltipWithIcon i18nKey={'pot.prizeSplitToolTip'} />}
-          collapsable={true}
-        >
-          <Grid container>
-            <Grid item xs={3}>
-              <Translate i18nKey="pot.prizeSplitWinner" values={{ count: pot.numberOfWinners }} />
-            </Grid>
-            <Grid item xs={9} className={classes.prizeSplitValue}>
-              <PrizeSplit
-                baseToken={pot.token}
-                awardBalance={pot.projectedAwardBalance || pot.awardBalance}
-                awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
-                sponsors={pot.projectedSponsors || pot.sponsors}
-                numberOfWinners={pot.numberOfWinners}
-                nfts={pot.nfts}
-                nftPrizeOnly={pot.nftPrizeOnly}
-              />
-            </Grid>
-          </Grid>
-        </CardAccordionItem>
-      </CardAccordionGroup>
+      <div className={classes.rowPrizeSplit}>
+        <PrizeSplit
+          baseToken={pot.token}
+          awardBalance={pot.projectedAwardBalance || pot.awardBalance}
+          awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
+          sponsors={pot.projectedSponsors || pot.sponsors}
+          numberOfWinners={pot.numberOfWinners}
+          nfts={pot.nfts}
+          nftPrizeOnly={pot.nftPrizeOnly}
+        />
+      </div>
       <div className={classes.rowPlay}>
         <Play
           id={pot.id}
@@ -123,5 +110,5 @@ const Bottom = function ({ id }) {
 };
 
 export const Pot = function ({ id, variant }) {
-  return <BasePot id={id} variant={variant} bottom={<Bottom id={id} />} simple={true} />;
+  return <BasePot id={id} variant={variant} bottom={<Bottom id={id} />} simple={false} />;
 };

@@ -13,13 +13,13 @@ const styles = () => ({
   },
   title: {
     color: '#fff',
-    fontSize: '24px',
+    fontSize: '22px',
     lineHeight: '36px',
     fontWeight: 400,
     margin: '0 0 12px 0',
   },
   text: {
-    fontSize: '15px',
+    fontSize: '13px',
     color: '#fff',
     lineHeight: '24px',
     margin: '0 0 24px 0',

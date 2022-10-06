@@ -11,7 +11,7 @@ const styles = () => ({
   title: {
     color: '#F3BA2E',
     fontWeight: 700,
-    fontSize: '10px',
+    fontSize: '8px',
     lineHeight: '20px',
     textTransform: 'uppercase' as const,
     letterSpacing: '1px',
@@ -20,7 +20,7 @@ const styles = () => ({
   content: {
     color: '#fff',
     fontWeight: 400,
-    fontSize: '15px',
+    fontSize: '13px',
     fontStyle: 'italic',
     lineHeight: '24px',
     letterSpacing: '0.2px',

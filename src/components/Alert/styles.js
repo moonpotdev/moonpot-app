@@ -11,11 +11,11 @@ const styles = theme => ({
     width: 20,
     marginRight: 8,
     flex: '0 0 20px',
-    fontSize: '20px',
+    fontSize: '18px',
   },
   title: {
     fontWeight: 500,
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '20px',
     letterSpacing: '0.6px',
     marginBottom: 12,
@@ -24,7 +24,7 @@ const styles = theme => ({
     color: 'inherit',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     '& p': {
       color: 'inherit',

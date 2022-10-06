@@ -9,7 +9,7 @@ const styles = theme => ({
   },
   wallet: {
     fontWeight: 'bold',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     color: '#F3BA2E',
     border: '2px solid #F3BA2E',

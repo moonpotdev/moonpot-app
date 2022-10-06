@@ -20,7 +20,7 @@ const styles = theme => ({
   },
   title: {
     fontWeight: 700,
-    fontSize: '32px',
+    fontSize: '30px',
     lineHeight: '40px',
     color: '#5952B4',
     margin: '0 0 32px 0',

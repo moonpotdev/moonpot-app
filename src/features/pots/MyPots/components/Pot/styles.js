@@ -1,6 +1,6 @@
 const styles = theme => ({
   h1: {
-    fontSize: '22px',
+    fontSize: '20px',
     lineHeight: '34px',
     fontWeight: 400,
     color: '#ffffff',
@@ -27,7 +27,7 @@ const styles = theme => ({
   noActivePotsTitle: {
     color: '#585464',
     fontWeight: 400,
-    fontSize: '24px',
+    fontSize: '22px',
     lineHeight: '36px',
     marginBottom: '12px',
     marginTop: '24px',
@@ -35,7 +35,7 @@ const styles = theme => ({
   noActivePotsText: {
     color: '#585464',
     fontWeight: 400,
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
   },
   noActivePotsPlayButton: {
@@ -45,7 +45,7 @@ const styles = theme => ({
     borderRadius: '20px',
     width: '100%',
     fontWeight: 500,
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '17.24px',
     color: '#6753DB',
     marginTop: '32px',
@@ -73,7 +73,7 @@ const styles = theme => ({
       color: '#B6ADCC',
       fontStyle: 'normal',
       fontWeight: 500,
-      fontSize: '15px',
+      fontSize: '13px',
       lineHeight: '24px',
       letterSpacing: '0.2px',
     },
@@ -112,7 +112,7 @@ const styles = theme => ({
   },
   potUsdTop: {
     fontWeight: 700,
-    fontSize: '24px',
+    fontSize: '22px',
     lineHeight: '32px',
     letterSpacing: '0.6px',
     color: '#ffffff',
@@ -122,7 +122,7 @@ const styles = theme => ({
   },
   potUsd: {
     fontWeight: 700,
-    fontSize: '18px',
+    fontSize: '16px',
     lineHeight: '20px',
     letterSpacing: '0.6px',
     color: '#ffffff',
@@ -132,7 +132,7 @@ const styles = theme => ({
   },
   myPotsNextWeeklyDrawText: {
     fontWeight: 400,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     color: '#EBF3F9',
@@ -150,7 +150,7 @@ const styles = theme => ({
   myDetailsText: {
     color: '#EBF3F9',
     fontWeight: 400,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     textTransform: 'capitalize',
@@ -159,7 +159,7 @@ const styles = theme => ({
   myDetailsValue: {
     color: '#FFFFFF',
     fontWeight: 700,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     marginBottom: '16px',
@@ -171,7 +171,7 @@ const styles = theme => ({
   potsItemText: {
     color: '#EBF3F9',
     fontWeight: 400,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     textTransform: 'capitalize',
@@ -180,7 +180,7 @@ const styles = theme => ({
   potsItemValue: {
     color: '#FFFFFF',
     fontWeight: 700,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     margin: '12px 0',
@@ -192,7 +192,7 @@ const styles = theme => ({
   potsPrizeWinners: {
     color: '#FFFFFF',
     fontWeight: 500,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     margin: '12px 12px',
@@ -201,7 +201,7 @@ const styles = theme => ({
     },
   },
   potsPrizeWinnersTransaction: {
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     margin: '12px 12px',
@@ -210,14 +210,14 @@ const styles = theme => ({
   myPotsInfoText: {
     color: '#EBF3F9',
     fontWeight: 400,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
   },
   myPotsUpgradeText: {
     color: '#EBF3F9',
     fontWeight: 400,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     paddingBottom: '16px',
@@ -225,7 +225,7 @@ const styles = theme => ({
   learnMoreText: {
     color: '#F3BA2E',
     fontWeight: 400,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     paddingBottom: '8px',
@@ -241,7 +241,7 @@ const styles = theme => ({
   },
   depositMoreExtraInfo: {
     fontWeight: 400,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     color: '#EBF3F9',
@@ -249,7 +249,7 @@ const styles = theme => ({
   dividerText: {
     color: '#EBF3F9',
     fontWeight: 700,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '1px',
     textTransform: 'uppercase',
@@ -264,18 +264,18 @@ const styles = theme => ({
   split: {
     width: '118px',
     '& .MuiTypography-h1': {
-      fontSize: '20px',
-      fontFamily: 'Ubuntu',
+      fontSize: '18px',
+      fontFamily: 'Unbounded',
       fontWeight: 400,
       color: '#ffffff',
     },
     '& .MuiTypography-h2': {
-      fontSize: '12px',
+      fontSize: '10px',
       fontWeight: 700,
       color: '#ffffff',
     },
     '& .MuiTypography-h3': {
-      fontSize: '10px',
+      fontSize: '8px',
       fontWeight: 700,
       color: '#DFDDE7',
       letterSpacing: '0.6px',
@@ -293,17 +293,17 @@ const styles = theme => ({
     textAlign: 'center',
     '& .MuiTypography-body1': {
       paddingTop: '10px',
-      fontSize: '16px',
+      fontSize: '14px',
       fontWeight: 500,
       lineHeight: '22px',
       letterSpacing: '0.46px',
     },
   },
   explainerText: {
-    fontFamily: 'Ubuntu',
+    fontFamily: 'Unbounded',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     color: '#ECEAFB',
@@ -319,7 +319,7 @@ const styles = theme => ({
   },
   title: {
     color: '#EBF3F9',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     fontWeight: '500',
     textAlign: 'right',
@@ -329,18 +329,18 @@ const styles = theme => ({
   },
   interestValueApy: {
     color: '#F3BA2E',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     fontWeight: '700',
   },
   interestValueBaseApy: {
     textDecoration: 'line-through',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     fontWeight: '700',
   },
   interestValueApr: {
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     fontWeight: '700',
   },

@@ -1,10 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Translate } from '../Translate';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Fade, Grid, Tooltip, Typography } from '@material-ui/core';
 import { HelpOutline } from '@material-ui/icons';
 import styles from './styles';
+import { formatDecimals } from '../../helpers/format';
 
 const useStyles = makeStyles(styles);
 
@@ -12,7 +13,7 @@ const StyledTooltip = withStyles(theme => ({
   tooltip: {
     backgroundColor: '#373737',
     color: '#FFFFFF',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     fontWeight: 'normal',
     padding: '16px',
@@ -198,3 +199,44 @@ export function InterestTooltip({ pot }) {
     </>
   );
 }
+
+export const ProjectedPrizeTooltip = memo(function ({ prizes, numberOfWinners }) {
+  const classes = useStyles();
+
+  return (
+    <StyledTooltip
+      arrow
+      TransitionComponent={Fade}
+      title={<ProjectedPrizeTooltipContent prizes={prizes} numberOfWinners={numberOfWinners} />}
+      placement="top"
+      enterTouchDelay={0}
+      leaveTouchDelay={5000}
+    >
+      <HelpOutline fontSize="inherit" className={classes.icon} />
+    </StyledTooltip>
+  );
+});
+
+export const ProjectedPrizeTooltipContent = memo(function ({ prizes, numberOfWinners }) {
+  const classes = useStyles();
+  const { t } = useTranslation();
+
+  return (
+    <div className={classes.prizeTooltip}>
+      <div className={classes.prizeTooltipRow}>{t('pot.prizeSplitToolTip')}</div>
+      {prizes.map(([token, total]) => {
+        const tokens = formatDecimals(total.tokens.dividedBy(numberOfWinners), 2);
+        const usd = total.isNft ? null : formatDecimals(total.usd.dividedBy(numberOfWinners), 2);
+
+        return (
+          <div key={token} className={classes.prizeTooltipRow}>
+            <span>
+              {tokens} {token}
+            </span>{' '}
+            {total.isNft ? null : <>(${usd})</>}
+          </div>
+        );
+      })}
+    </div>
+  );
+});

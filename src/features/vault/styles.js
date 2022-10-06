@@ -2,7 +2,7 @@
 const styles = theme => ({
   mainTitle: {
     fontWeight: '500',
-    fontSize: '24px',
+    fontSize: '22px',
     lineHeight: '40px',
     textAlign: 'center',
     color: '#B4B3CC',
@@ -48,7 +48,7 @@ const styles = theme => ({
   },
   countdown: {
     fontWeight: 700,
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     letterSpacing: '0.2px',
     color: '#ffffff',
@@ -56,7 +56,7 @@ const styles = theme => ({
   },
   subTitle: {
     fontWeight: 700,
-    fontSize: '10px',
+    fontSize: '8px',
     lineHeight: '20px',
     color: '#EBF3F9',
     letterSpacing: '1px',
@@ -64,7 +64,7 @@ const styles = theme => ({
   },
   apy: {
     fontWeight: 700,
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     color: '#F3BA2E',
     textAlign: 'right',
@@ -76,14 +76,14 @@ const styles = theme => ({
   },
   earn: {
     fontWeight: 500,
-    fontSize: '10px',
+    fontSize: '8px',
     lineHeight: '12px',
     color: '#DFDDE7',
     letterSpacing: '0.6px',
   },
   potUsd: {
     fontWeight: 700,
-    fontSize: '18px',
+    fontSize: '16px',
     lineHeight: '20px',
     letterSpacing: '0.6px',
     color: '#ffffff',
@@ -93,7 +93,7 @@ const styles = theme => ({
   },
   potCrypto: {
     fontWeight: 400,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     color: '#EBF3F9',
@@ -105,14 +105,14 @@ const styles = theme => ({
   },
   potDataPoint: {
     fontWeight: 700,
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     color: '#ffffff',
     marginBottom: '20px',
   },
   prizeSplitText: {
     fontWeight: 700,
-    fontSize: '12px',
+    fontSize: '10px',
     fontStyle: 'Bold',
     letterSpacing: '1px',
     lineHeight: '145%',
@@ -122,7 +122,7 @@ const styles = theme => ({
   },
   prizeSplitWinners: {
     fontWeight: 400,
-    fontSize: '10px',
+    fontSize: '8px',
     lineHeight: '16px',
     letterSpacing: '0.2px',
     textTransform: 'capitalize',
@@ -131,7 +131,7 @@ const styles = theme => ({
   },
   prizeSplitValue: {
     fontWeight: 400,
-    fontSize: '10px',
+    fontSize: '8px',
     lineHeight: '16px',
     letterSpacing: '0.2px',
     color: '#FFF',
@@ -150,7 +150,7 @@ const styles = theme => ({
     '& .MuiInputBase-input': {
       fontWeight: 500,
       fontStyle: 'Medium',
-      fontSize: '15px',
+      fontSize: '13px',
       lineHeight: '24px',
       height: '100%',
       letterSpacing: '0.2px',
@@ -159,7 +159,7 @@ const styles = theme => ({
   },
   inputRoot: {
     fontWeight: 700,
-    fontSize: '20px',
+    fontSize: '18px',
     padding: '0 10px',
   },
   eolWithdrawWarningBox: {
@@ -171,7 +171,7 @@ const styles = theme => ({
   },
   eolWithdrawWarning: {
     color: '#333333',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
   },
   connectWalletBtn: {
@@ -181,7 +181,7 @@ const styles = theme => ({
     width: '100%',
     fontWeight: 700,
     fontStyle: 'Bold',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '139%',
     letterSpacing: '0.2px',
     color: '#345675',
@@ -189,7 +189,7 @@ const styles = theme => ({
   },
   fairplayDepositMessage: {
     color: '#EBF3F9',
-    fontSize: '10px',
+    fontSize: '8px',
     lineHeight: '16px',
     fontWeight: 400,
     letterSpacing: '0.2px',
@@ -208,13 +208,13 @@ const styles = theme => ({
   },
   timelockRemaining: {
     fontWeight: 700,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '14px',
     color: '#172734',
   },
   oddsPerDeposit: {
     fontWeight: 300,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '145%',
     textAlign: 'center',
     color: '#DFDDE7',
@@ -244,7 +244,7 @@ const styles = theme => ({
   },
   withdrawText: {
     fontWeight: 700,
-    fontSize: '12px',
+    fontSize: '10px',
     fontStyle: 'Bold',
     letterSpacing: '1px',
     lineHeight: '145%',
@@ -256,7 +256,7 @@ const styles = theme => ({
   withdrawItemText: {
     color: '#EBF3F9',
     fontWeight: 400,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '145%',
     letterSpacing: '0.2px',
     marginBottom: '16px',
@@ -264,7 +264,7 @@ const styles = theme => ({
   withdrawItemValue: {
     color: '#FFFFFF',
     fontWeight: 700,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '145%',
     fontStyle: 'Bold',
     letterSpacing: '0.2px',
@@ -272,7 +272,7 @@ const styles = theme => ({
   withdrawPenaltyWarning: {
     fontWeight: 300,
     fontStyle: 'Light',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '145%',
     color: '#EBF3F9',
     letterSpacing: '0.2px',
@@ -296,7 +296,7 @@ const styles = theme => ({
   infoTitle: {
     color: '#FAFAFC',
     fontWeight: 500,
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '20px',
     letterSpacing: '0.6px',
     marginBottom: '16px',
@@ -304,7 +304,7 @@ const styles = theme => ({
   infoSubHeader: {
     color: '#EBF3F9',
     fontWeight: 700,
-    fontSize: '10px',
+    fontSize: '8px',
     lineHeight: '16px',
     letterSpacing: '1px',
     textTransform: 'uppercase',
@@ -312,14 +312,14 @@ const styles = theme => ({
   infoMessage: {
     color: '#D9D9E8',
     fontWeight: 400,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '16px',
     letterSpacing: '0.2px',
   },
   infoDetail: {
     color: '#FAFAFC',
     fontWeight: 700,
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     paddingTop: '5px',
     paddingBottom: '20px',
@@ -342,7 +342,7 @@ const styles = theme => ({
     maxWidth: 500,
     fontWeight: 500,
     minHeight: '300px',
-    fontSize: '28px',
+    fontSize: '26px',
     lineHeight: '36px',
     letterSpacing: '0.6px',
     display: 'flex',
@@ -363,7 +363,7 @@ const styles = theme => ({
     marginBottom: '16px',
   },
   stepsTitleText: {
-    fontSize: '28px',
+    fontSize: '26px',
     lineHeight: '36px',
     letterSpacing: '0.6px',
     display: 'flex',
@@ -374,12 +374,12 @@ const styles = theme => ({
   pendingText: {
     color: '#A5A1B0',
     fontWeight: 400,
-    fontSize: '13px',
+    fontSize: '11px',
     lineHeight: '24px',
   },
   successfulDepositAmountText: {
     color: '#585464',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
   },
   confirmationImage: {
@@ -389,14 +389,14 @@ const styles = theme => ({
   confirmTransactionText: {
     color: '#585464',
     fontWeight: 400,
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
   },
   viewMyMoonpots: {
     backgroundColor: '#6753DB',
     borderRadius: '8px',
     fontWeight: 700,
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     letterSpacing: '0.2px',
     marginTop: '32px',
@@ -405,7 +405,7 @@ const styles = theme => ({
   blockExplorerLink: {
     color: '#585464',
     fontWeight: 400,
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     letterSpacing: '0.2px',
   },

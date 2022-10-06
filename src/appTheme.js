@@ -1,4 +1,5 @@
 import { createTheme } from '@material-ui/core/styles';
+import './fonts/unbounded/unbounded.css';
 
 const appTheme = () => {
   return createTheme({
@@ -25,7 +26,7 @@ const appTheme = () => {
       },
     },
     typography: {
-      fontFamily: `"Ubuntu", sans-serif`,
+      fontFamily: `"Unbounded", sans-serif`,
     },
     overrides: {
       MuiCssBaseline: {
@@ -64,7 +65,7 @@ const appTheme = () => {
           borderRadius: '20px',
           color: '#7F7FB3',
           fontWeight: 500,
-          fontSize: '15px',
+          fontSize: '13px',
           lineHeight: '17px',
         },
         outlinedPrimary: {
@@ -73,7 +74,7 @@ const appTheme = () => {
           borderRadius: '20px',
           color: '#F3BA2E',
           fontWeight: 500,
-          fontSize: '15px',
+          fontSize: '13px',
           lineHeight: '17px',
           '&:hover': {
             borderWidth: '2px',

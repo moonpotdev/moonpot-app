@@ -5,7 +5,7 @@ const styles = theme => ({
   },
   maximumDepositNotice: {
     marginTop: '8px',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     color: '#EBF3F9',
@@ -13,7 +13,7 @@ const styles = theme => ({
   },
   fairplayNotice: {
     marginTop: '8px',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     color: '#EBF3F9',
@@ -26,7 +26,7 @@ const styles = theme => ({
     marginBottom: '16px',
   },
   label: {
-    fontSize: '10px',
+    fontSize: '8px',
     fontStyle: 'normal',
     alignItems: 'center',
     fontWeight: 'bold',
@@ -35,7 +35,7 @@ const styles = theme => ({
     textTransform: 'uppercase',
   },
   value: {
-    fontSize: '15px',
+    fontSize: '13px',
     fontStyle: 'normal',
     fontWeight: 'bold',
     lineHeight: '24px',

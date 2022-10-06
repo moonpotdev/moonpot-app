@@ -1,6 +1,8 @@
 const styles = theme => ({
-  prizeSplitValue: {
-    textAlign: 'right',
+  rowPrizeSplit: {
+    borderTop: 'solid 2px #436F97',
+    paddingTop: '16px',
+    paddingBottom: '16px',
   },
 });
 

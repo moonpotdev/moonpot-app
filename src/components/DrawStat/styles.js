@@ -2,7 +2,7 @@ const styles = theme => ({
   statLabel: {
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: '10px',
+    fontSize: '8px',
     lineHeight: '20px',
     letterSpacing: '1px',
     textTransform: 'uppercase',
@@ -13,7 +13,7 @@ const styles = theme => ({
     color: '#FFFFFF',
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     letterSpacing: '0.2px',
   },

@@ -19,7 +19,7 @@ const styles = theme => ({
   },
   cardWin: {
     fontWeight: '700',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     color: '#EBF3F9',
     marginBottom: '16px',

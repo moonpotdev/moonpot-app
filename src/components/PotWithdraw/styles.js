@@ -7,7 +7,7 @@ const styles = theme => ({
   stat: {
     display: 'flex',
     alignItems: 'flex-start',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
   },
@@ -29,7 +29,7 @@ const styles = theme => ({
   },
   fairplayNotice: {
     marginTop: '8px',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     color: '#EBF3F9',

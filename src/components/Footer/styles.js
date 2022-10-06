@@ -35,7 +35,7 @@ const styles = theme => ({
     display: 'block',
     textDecoration: 'none',
     fontWeight: '500',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     '&:hover': {
       color: '#ffffff',
@@ -74,11 +74,11 @@ const styles = theme => ({
     padding: '4px 12px 4px 4px',
     color: '#FFFFFF',
     fontWeight: '500',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
   },
   statLabel: {
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     padding: '2px 8px',

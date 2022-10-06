@@ -1,6 +1,6 @@
 const styles = theme => ({
   poweredBy: {
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.01em',
     color: '#B4B2CC',

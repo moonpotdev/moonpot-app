@@ -7,7 +7,7 @@ const styles = theme => ({
   },
   label: {
     fontWeight: 'bold',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '1px',
     textTransform: 'uppercase',
@@ -15,7 +15,7 @@ const styles = theme => ({
   },
   value: {
     fontWeight: 500,
-    fontSize: '32px',
+    fontSize: '30px',
     lineHeight: '40px',
     color: '#F3BA2E',
   },

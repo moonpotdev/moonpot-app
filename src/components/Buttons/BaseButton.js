@@ -48,7 +48,7 @@ export const BaseButton = withStyles(theme => ({
     borderRadius: '8px',
     fontStyle: 'normal',
     fontWeight: '700',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     letterSpacing: '0.2px',
     padding: '0 12px',

@@ -18,37 +18,6 @@ import { DepositsPaused } from '../../../../components/DepositsPaused';
 
 const useStyles = makeStyles(styles);
 
-const PrizeSplitInner = memo(function ({
-  awardBalance,
-  awardBalanceUsd,
-  baseToken,
-  sponsors,
-  nfts,
-  nftPrizeOnly,
-  numberOfWinners,
-}) {
-  const classes = useStyles();
-
-  return (
-    <Grid container>
-      <Grid item xs={3}>
-        <Translate i18nKey="pot.prizeSplitWinner" values={{ count: numberOfWinners }} />
-      </Grid>
-      <Grid item xs={9} className={classes.prizeSplitValue}>
-        <PrizeSplit
-          baseToken={baseToken}
-          awardBalance={awardBalance}
-          awardBalanceUsd={awardBalanceUsd}
-          sponsors={sponsors}
-          numberOfWinners={numberOfWinners}
-          nfts={nfts}
-          nftPrizeOnly={nftPrizeOnly}
-        />
-      </Grid>
-    </Grid>
-  );
-});
-
 function handleButtonVariant(vaultType) {
   if (vaultType === 'main') {
     return 'teal';
@@ -91,23 +60,21 @@ const WithdrawAccordionItem = memo(function ({ pot, onFairplayLearnMore }) {
 
 const Bottom = function ({ id, onFairplayLearnMore, variant }) {
   const pot = usePot(id);
+  const classes = useStyles();
 
   return (
     <CardAccordionGroup>
-      <CardAccordionItem
-        titleKey={pot.isPrizeOnly ? 'pot.prizeSplit' : 'pot.prizeSplitProjected'}
-        tooltip={pot.isPrizeOnly ? null : <TooltipWithIcon i18nKey={'pot.prizeSplitToolTip'} />}
-      >
-        <PrizeSplitInner
+      <div className={classes.rowPrizeSplit}>
+        <PrizeSplit
           baseToken={pot.token}
           awardBalance={pot.projectedAwardBalance || pot.awardBalance}
           awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
           sponsors={pot.projectedSponsors || pot.sponsors}
-          nftPrizeOnly={pot.nftPrizeOnly}
-          nfts={pot.nfts}
           numberOfWinners={pot.numberOfWinners}
+          nfts={pot.nfts}
+          nftPrizeOnly={pot.nftPrizeOnly}
         />
-      </CardAccordionItem>
+      </div>
       <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
         <WalletRequired network={pot.network}>
           {pot.status === 'active' ? (
