@@ -9,7 +9,7 @@ const styles = () => ({
     backgroundColor: 'transparent',
     border: 'solid 2px #555590',
     borderRadius: '8px',
-    fontSize: '15px',
+    fontSize: '13px',
     fontWeight: 500,
     lineHeight: '24px',
     color: '#fff',
@@ -42,7 +42,7 @@ const styles = () => ({
     padding: '0',
     '& .MuiListItem-root': {
       color: '#fff',
-      fontSize: '15px',
+      fontSize: '13px',
       fontWeight: 500,
       lineHeight: '24px',
       padding: `8px ${24 - 2}px`,

@@ -7,7 +7,7 @@ const styles = (theme: Theme) => ({
   },
   title: {
     color: '#EBF3F9',
-    fontSize: '19px',
+    fontSize: '17px',
     lineHeight: '28px',
     fontWeight: 500,
     textAlign: 'right' as const,
@@ -17,7 +17,7 @@ const styles = (theme: Theme) => ({
     color: '#FFFFFF',
     fontWeight: 'bold' as const,
     textAlign: 'right' as const,
-    fontSize: '24px',
+    fontSize: '22px',
     lineHeight: '32px',
     letterSpacing: '0.6px',
     '& > span': {
@@ -30,7 +30,7 @@ const styles = (theme: Theme) => ({
   wonTotalTokens: {
     textAlign: 'right' as const,
     color: '#FAFAFC',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     '& > span': {
@@ -45,14 +45,14 @@ const styles = (theme: Theme) => ({
     border: '2px solid #E3DFEC',
     borderRadius: '4px',
     color: '#000000',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     padding: '10px',
     marginBottom: `20px`,
   },
   userWonPrizeIcon: {
     color: '#008F39',
-    fontSize: '20px',
+    fontSize: '18px',
     flexShrink: 0,
   },
   userWonPrizeText: {
@@ -76,14 +76,14 @@ const styles = (theme: Theme) => ({
     marginBottom: `${16 - 8}px`,
   },
   winnerAddress: {
-    fontSize: '10px',
+    fontSize: '8px',
     fontWeight: 'bold' as const,
     lineHeight: '20px',
     letterSpacing: '1px',
     textTransform: 'uppercase' as const,
   },
   winnerStaked: {
-    fontSize: '12px',
+    fontSize: '10px',
     fontWeight: 'bold' as const,
     lineHeight: '20px',
     letterSpacing: '0.2px',

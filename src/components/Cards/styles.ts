@@ -24,7 +24,7 @@ const styles = () => ({
   },
   title: {
     fontWeight: 500,
-    fontSize: '19px',
+    fontSize: '17px',
     lineHeight: '28px',
     letterSpacing: '0.6px',
     marginBottom: 24,
@@ -45,8 +45,8 @@ const styles = () => ({
   accordionItemTitle: {
     fontStyle: 'normal',
     fontWeight: 700,
-    fontFamily: 'Ubuntu',
-    fontSize: '12px',
+    fontFamily: 'Unbounded',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '1px',
     textTransform: 'uppercase' as const,
@@ -66,13 +66,13 @@ const styles = () => ({
     userSelect: 'none' as const,
     WebkitTapHighlightColor: 'transparent',
     '& > .MuiSvgIcon-root': {
-      fontSize: '20px',
+      fontSize: '18px',
     },
   },
   accordionItemInner: {
     fontStyle: 'normal',
     fontWeight: 'normal' as const,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     color: 'red',

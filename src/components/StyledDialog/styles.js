@@ -14,7 +14,7 @@ const styles = theme => ({
     padding: '24px',
   },
   titleText: {
-    fontSize: '24px',
+    fontSize: '22px',
     fontWeight: 'bold',
     letterSpacing: '0.6px',
     lineHeight: 1,

@@ -13,7 +13,7 @@ const styles = theme => ({
   },
   text: {
     position: 'relative',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     textAlign: 'center',
     color: '#333333',
@@ -32,7 +32,7 @@ const styles = theme => ({
     boxSizing: 'border-box',
     borderRadius: '20px',
     width: '100%',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '17px',
     fontWeight: '500',
     color: '#6753DB',

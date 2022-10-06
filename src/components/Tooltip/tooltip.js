@@ -12,7 +12,7 @@ const StyledTooltip = withStyles(theme => ({
   tooltip: {
     backgroundColor: '#373737',
     color: '#FFFFFF',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     fontWeight: 'normal',
     padding: '16px',

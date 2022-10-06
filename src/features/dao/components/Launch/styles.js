@@ -15,7 +15,7 @@ const styles = theme => ({
     },
     '& p': {
       color: '#DFDFEC',
-      fontSize: '15px',
+      fontSize: '13px',
       lineHeight: '24px',
       letterSpacing: '0.2px',
       marginBottom: 24,
@@ -37,7 +37,7 @@ const styles = theme => ({
   cardTitle: {
     color: '#FAFAFC',
     fontWeight: 500,
-    fontSize: '19px',
+    fontSize: '17px',
     lineHeight: '28px',
     letterSpacing: '0.6px',
     marginBottom: 24,
@@ -83,15 +83,15 @@ const styles = theme => ({
     flexShrink: '0',
     flexGrow: '0',
     flexBasis: '20px',
-    fontSize: '20px',
+    fontSize: '18px',
     lineHeight: '1',
   },
   requirementContent: {
     paddingLeft: 8,
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     '& p': {
-      fontSize: '15px',
+      fontSize: '13px',
       lineHeight: '24px',
       letterSpacing: '0',
       margin: '0 0 12px 0',
@@ -123,14 +123,14 @@ const styles = theme => ({
       margin: '24px 0',
       textAlign: 'center',
       fontWeight: 500,
-      fontSize: '24px',
+      fontSize: '22px',
       lineHeight: '28px',
       letterSpacing: '0.6px',
     },
   },
   eligibility: {
     '& p': {
-      fontSize: '12px',
+      fontSize: '10px',
       lineHeight: '20px',
       letterSpacing: '0.2px',
     },

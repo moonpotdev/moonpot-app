@@ -50,7 +50,7 @@ const styles = theme => ({
     },
   },
   earningLabel: {
-    fontSize: '10px',
+    fontSize: '8px',
     fontWeight: 'bold',
     lineHeight: '20px',
     letterSpacing: '1px',
@@ -58,7 +58,7 @@ const styles = theme => ({
   },
   earningValue: {
     fontWeight: 'bold',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     color: '#FAFAFC',
   },

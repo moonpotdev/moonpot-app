@@ -1,12 +1,12 @@
 const styles = theme => ({
   mainTitle: {
     textAlign: 'center',
-    fontSize: '36px',
+    fontSize: '34px',
     color: '#FFFFFF',
   },
   title: {
     textAlign: 'center',
-    fontSize: '24px',
+    fontSize: '22px',
     color: '#FFFFFF',
   },
   link: {

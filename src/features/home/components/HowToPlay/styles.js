@@ -20,7 +20,7 @@ const styles = theme => ({
   },
   title: {
     fontWeight: 700,
-    fontSize: '32px',
+    fontSize: '30px',
     lineHeight: '40px',
     color: '#5952B4',
     margin: '0 0 32px 0',
@@ -51,7 +51,7 @@ const styles = theme => ({
   },
   cardImage: {},
   cardTitle: {
-    fontSize: '24px',
+    fontSize: '22px',
     lineHeight: '21px',
     fontWeight: '700',
     letterSpacing: '0.6px',
@@ -59,7 +59,7 @@ const styles = theme => ({
     margin: '16px 0 16px 0',
   },
   cardText: {
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     opacity: '0.75',
     color: '#ffffff',

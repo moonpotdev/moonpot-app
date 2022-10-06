@@ -16,14 +16,14 @@ const styles = theme => ({
   },
   communityTitle: {
     fontWeight: 'normal',
-    fontSize: '24px',
+    fontSize: '22px',
     lineHeight: '36px',
     color: '#FFFFFF',
     marginBottom: '12px',
   },
   communityDescription: {
     fontWeight: 'normal',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     color: '#C7C3D5',
     letterSpacing: '0.2px',

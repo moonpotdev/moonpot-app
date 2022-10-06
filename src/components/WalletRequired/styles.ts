@@ -5,7 +5,7 @@ const styles = () => ({
     borderRadius: '6px',
     padding: '24px',
     textAlign: 'center' as const,
-    fontSize: '14px',
+    fontSize: '12px',
     width: '100%',
   },
   connectButton: {

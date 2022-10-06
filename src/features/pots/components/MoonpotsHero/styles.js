@@ -56,7 +56,7 @@ const styles = theme => ({
   },
   statsCardLabel: {
     fontWeight: 700,
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '14px',
     color: '#8585A6',
     marginBottom: '8px',
@@ -65,7 +65,7 @@ const styles = theme => ({
   },
   statsCardValue: {
     fontWeight: 700,
-    fontSize: '24px',
+    fontSize: '22px',
     lineHeight: '28px',
     color: '#FFFFFF',
     height: '28px',

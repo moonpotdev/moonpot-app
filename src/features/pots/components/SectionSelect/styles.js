@@ -15,7 +15,7 @@ const styles = theme => ({
     marginLeft: '-2px',
     border: 'none',
     height: '48px',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     width: 'auto',
     padding: '0 24px',

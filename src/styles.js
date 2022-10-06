@@ -8,7 +8,7 @@ const styles = () => ({
     color: '#FFFFFF',
     backgroundColor: 'transparent',
     fontWeight: 500,
-    fontSize: '21px',
+    fontSize: '19px',
     lineHeight: '24px',
     marginBottom: '32px',
   },

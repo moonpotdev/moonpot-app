@@ -73,7 +73,7 @@ export const styles = () => ({
     },
     '& .MuiSelect-root': {
       color: '#CDCDE4',
-      fontSize: '15px',
+      fontSize: '13px',
       letterSpacing: '0.6px',
     },
     '& .MuiSelect-icon': {
@@ -83,7 +83,7 @@ export const styles = () => ({
   navItem: {
     color: '#CDCDE4',
     fontWeight: '500',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     textDecoration: 'none',
     letterSpacing: '0.6px',
@@ -110,7 +110,7 @@ export const styles = () => ({
   },
   navbarPotsValue: {
     fontWeight: 'bold',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     letterSpacing: '0.2px',
     color: '#ffffff',
@@ -149,7 +149,7 @@ export const styles = () => ({
     },
     '& .MuiSelect-root': {
       color: '#fff',
-      fontSize: '21px',
+      fontSize: '19px',
     },
     '& .MuiSelect-icon': {
       color: '#fff',
@@ -158,7 +158,7 @@ export const styles = () => ({
   sidebarItem: {
     color: '#ffffff',
     fontWeight: '500',
-    fontSize: '21px',
+    fontSize: '19px',
     lineHeight: '24px',
     textDecoration: 'none',
     '&:hover, &:focus, &:active, &[data-active]': {
@@ -180,7 +180,7 @@ export const styles = () => ({
   },
   sidebarPotsLabel: {
     fontWeight: 'bold',
-    fontSize: '10px',
+    fontSize: '8px',
     lineHeight: '18px',
     letterSpacing: '1px',
     textTransform: 'uppercase',
@@ -188,7 +188,7 @@ export const styles = () => ({
   },
   sidebarPotsValue: {
     fontWeight: 'bold',
-    fontSize: '19px',
+    fontSize: '17px',
     lineHeight: '24px',
     letterSpacing: '0.2px',
     color: '#ffffff',

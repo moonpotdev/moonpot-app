@@ -1,6 +1,6 @@
 const styles = () => ({
   icon: {
-    fontSize: '20px',
+    fontSize: '18px',
     marginLeft: '5px',
     verticalAlign: 'middle',
   },

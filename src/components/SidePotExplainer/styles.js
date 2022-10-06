@@ -1,6 +1,6 @@
 const styles = theme => ({
   sidePotExplainer: {
-    fontSize: '15px',
+    fontSize: '13px',
     '& a': {
       color: '#F3BA2E',
       textDecoration: 'underline',
@@ -10,7 +10,7 @@ const styles = theme => ({
     color: '#F3BA2E',
     textDecoration: 'none',
     marginTop: '16px',
-    fontSize: '15px',
+    fontSize: '13px',
     '& .MuiSvgIcon-root': {
       verticalAlign: 'middle',
       marginLeft: '5px',

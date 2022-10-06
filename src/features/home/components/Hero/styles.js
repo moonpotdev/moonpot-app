@@ -25,7 +25,7 @@ const styles = theme => ({
     margin: '0 auto 0 0',
   },
   title: {
-    fontSize: '45px',
+    fontSize: '43px',
     fontWeight: '500',
     lineHeight: '56px',
     color: '#ffffff',
@@ -33,7 +33,7 @@ const styles = theme => ({
   },
   text: {
     margin: '24px 0 0 0',
-    fontSize: '19px',
+    fontSize: '17px',
     lineHeight: '32px',
     opacity: '0.8',
     color: '#ffffff',

@@ -16,7 +16,7 @@ const styles = (theme: Theme) => ({
     color: '#ffffff',
     fontFamily: theme.typography.fontFamily,
     fontWeight: 500,
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     background: 'transparent',
     cursor: 'pointer',

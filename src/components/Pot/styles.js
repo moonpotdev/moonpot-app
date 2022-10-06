@@ -37,7 +37,7 @@ const styles = theme => ({
   },
   title: {
     color: '#EBF3F9',
-    fontSize: '15px',
+    fontSize: '13px',
     lineHeight: '24px',
     fontWeight: '500',
     textAlign: 'right',
@@ -49,7 +49,7 @@ const styles = theme => ({
     color: '#FFFFFF',
     fontWeight: 'bold',
     textAlign: 'right',
-    fontSize: '24px',
+    fontSize: '22px',
     lineHeight: '32px',
     letterSpacing: '0.6px',
     '& > span': {
@@ -59,7 +59,7 @@ const styles = theme => ({
   winTotalTokens: {
     textAlign: 'right',
     color: '#FAFAFC',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     letterSpacing: '0.2px',
     '& > span': {
@@ -85,7 +85,7 @@ const styles = theme => ({
     },
   },
   depositOdds: {
-    fontSize: '12px',
+    fontSize: '10px',
     fontWeight: '400',
     '& span': {
       fontWeight: '700',
@@ -121,7 +121,7 @@ const styles = theme => ({
     marginTop: '8px',
     textAlign: 'center',
     fontWeight: '300',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     color: '#FFFFFF',
   },

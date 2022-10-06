@@ -12,7 +12,7 @@ const styles = theme => ({
     marginTop: '8px',
     textAlign: 'center',
     fontWeight: '300',
-    fontSize: '12px',
+    fontSize: '10px',
     lineHeight: '20px',
     color: '#FFFFFF',
   },
