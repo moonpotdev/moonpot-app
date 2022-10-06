@@ -4,7 +4,7 @@ import { Grid, makeStyles } from '@material-ui/core';
 import { Card } from '../Cards';
 import Countdown from '../Countdown';
 import { byDecimals, formatDecimals, slug } from '../../helpers/format';
-import { InterestTooltip } from '../Tooltip/tooltip';
+import { InterestTooltip, ProjectedPrizeTooltip } from '../Tooltip/tooltip';
 import {
   translateToken,
   useDeposit,
@@ -347,6 +347,7 @@ export const PrizeSplit = function ({
   nftPrizeOnly,
 }) {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   const allPrizes = {
     [baseToken]: {
@@ -395,28 +396,25 @@ export const PrizeSplit = function ({
   const allNfts = prizesOverZero.every(([, total]) => total.isNft);
 
   return (
-    <>
-      {allNfts ? null : (
-        <div className={classes.prizeSplitTotal}>
-          <Translate
-            i18nKey={numberOfWinners === 1 ? 'pot.amount' : 'pot.amountEach'}
-            values={{ symbol: '$', amount: formatDecimals(totalPrizeEach, 2, 2) }}
-          />
-        </div>
-      )}
-      {prizesOverZero.map(([token, total]) => {
-        const tokens = formatDecimals(total.tokens.dividedBy(numberOfWinners), 2);
-        const usd = total.isNft ? null : formatDecimals(total.usd.dividedBy(numberOfWinners), 2);
-
-        return (
-          <div key={token} className={classes.prizeSplitToken}>
-            <span>
-              {tokens} {token}
-            </span>{' '}
-            {total.isNft ? null : <>(${usd})</>}
+    <div className={classes.prizeSplit}>
+      {allNfts ? (
+        <>
+          <div className={classes.prizeSplitText}>
+            <Translate i18nKey="pot.prizeSplitWinners" values={{ count: numberOfWinners }} />
           </div>
-        );
-      })}
-    </>
+          <ProjectedPrizeTooltip prizes={prizesOverZero} numberOfWinners={numberOfWinners} />
+        </>
+      ) : (
+        <>
+          <div className={classes.prizeSplitText}>
+            <Translate
+              i18nKey="pot.prizeSplitWinnersOfAmount"
+              values={{ count: numberOfWinners, amount: formatDecimals(totalPrizeEach, 2, 2) }}
+            />
+          </div>
+          <ProjectedPrizeTooltip prizes={prizesOverZero} numberOfWinners={numberOfWinners} />
+        </>
+      )}
+    </div>
   );
 };

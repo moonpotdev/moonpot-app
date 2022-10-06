@@ -1,6 +1,6 @@
 const styles = theme => ({
   rowLogoWinTotal: {
-    marginBottom: `${24 - 8}px`,
+    marginBottom: `8px`,
     flexWrap: 'nowrap',
   },
   columnTitleWinTotal: {
@@ -101,6 +101,19 @@ const styles = theme => ({
   },
   interestValueApr: {
     fontWeight: 'normal',
+  },
+  prizeSplit: {
+    display: 'flex',
+    gap: '4px',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  prizeSplitText: {
+    textTransform: 'uppercase',
+    '& span': {
+      fontWeight: 'bold',
+      color: '#F3BA2E',
+    },
   },
   prizeSplitToken: {
     '& span': {
