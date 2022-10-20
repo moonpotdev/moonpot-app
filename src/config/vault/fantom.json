@@ -44,6 +44,51 @@
     ]
   },
   {
+    "id": "tricrypto",
+    "name": "USDT/BTC/ETH",
+    "addedAt": 1666292434,
+    "token": "crv3crypto",
+    "tokenAddress": "0x58e57cA18B7A47112b877E31929798Cd3D703b0f",
+    "tokenDecimals": 18,
+    "provider": "Curve",
+    "providerUrl": "https://ftm.curve.fi/tricrypto/deposit",
+    "rewardToken": "moonTicketcrv3crypto",
+    "rewardAddress": "0xcAd8cf11ffFd5AE0704cfE5D9300d410e6095034",
+    "contractAddress": "0x9ff89b230dA674599F62FcA62D7d00D4F7a63339",
+    "prizePoolAddress": "0xe4D9a9600b688417049fE81c73fE24D92d9E699F",
+    "prizeStrategyAddress": "0x5e2F0afAEA48ceB98D6f183A56680ea9CA316f59",
+    "oracleId": "curve-ftm-tricrypto",
+    "apyId": "curve-ftm-tricrypto",
+    "vaultType": "main",
+    "categories": ["main"],
+    "featured": true,
+    "type": "lp",
+    "duration": 14,
+    "fairplayDuration": 14,
+    "fairplayTicketFee": 0.05,
+    "interestBreakdown": {
+      "interest": 50,
+      "prize": 40,
+      "ziggyInterest": 4,
+      "ziggyPrize": 4,
+      "treasury": 2
+    },
+    "status": "active",
+    "supportsClaimAllBonuses": false,
+    "hasZapIn": false,
+    "hasZapOut": false,
+    "infoCardStrategy": "beefy",
+    "infoCardBeefyVaultAddress": "0xeeE5EA8949F622090CFc16d141305d5120DF8dA4",
+    "sponsors": [],
+    "bonuses": [
+      {
+        "id": 1,
+        "symbol": "POTS",
+        "display": "bonus"
+      }
+    ]
+  },
+  {
     "id": "orkan-ftm",
     "name": "ORKAN-FTM LP",
     "provider": "SpiritSwap",
