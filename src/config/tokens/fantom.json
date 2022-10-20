@@ -224,5 +224,36 @@
     "type": "single",
     "oracleId": "SD",
     "decimals": 18
+  },
+  {
+    "symbol": "crv3crypto",
+    "address": "0x58e57cA18B7A47112b877E31929798Cd3D703b0f",
+    "type": "lp",
+    "oracleId": "curve-ftm-tricrypto",
+    "decimals": 18,
+    "lp": ["USDT", "WBTC", "WETH"]
+  },
+  {
+    "symbol": "moonTicketcrv3crypto",
+    "address": "0xcAd8cf11ffFd5AE0704cfE5D9300d410e6095034",
+    "type": "ticket",
+    "oracleId": "curve-ftm-tricrypto",
+    "decimals": 18,
+    "underlyingToken": "crv3crypto",
+    "stakedMultiplier": 2
+  },
+  {
+    "symbol": "WBTC",
+    "address": "0x321162Cd933E2Be498Cd2267a90534A804051b11",
+    "type": "single",
+    "oracleId": "WBTC",
+    "decimals": 18
+  },
+  {
+    "symbol": "WETH",
+    "address": "0x74b23882a30290451A17c44f4F05243b6b58C76d",
+    "type": "single",
+    "oracleId": "WETH",
+    "decimals": 18
   }
 ]
