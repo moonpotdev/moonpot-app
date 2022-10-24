@@ -1,17 +1,15 @@
 import React, { memo, useMemo } from 'react';
 import { CardAccordionGroup, CardAccordionItem } from '../../../../components/Cards';
-import { Grid, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import { Pot as BasePot, PrizeSplit } from '../../../../components/Pot/Pot';
 import { ZapPotDeposit } from '../../../../components/ZapPotDeposit/ZapPotDeposit';
 import styles from './styles';
 import { PotDeposit } from '../../../../components/PotDeposit';
 import { PotWithdraw } from '../../../../components/PotWithdraw';
 import { useBonusesEarned, usePot, useTokenBalance } from '../../../../helpers/hooks';
-import { Translate } from '../../../../components/Translate';
 import PotBonus from '../../../pots/MyPots/components/Pot/PotBonus';
 import { useSelector } from 'react-redux';
 import { ZapPotWithdraw } from '../../../../components/PotWithdraw/ZapPotWithdraw';
-import { TooltipWithIcon } from '../../../../components/Tooltip/tooltip';
 import { WalletRequired } from '../../../../components/WalletRequired/WalletRequired';
 import { selectWalletAddress } from '../../../wallet/selectors';
 import { DepositsPaused } from '../../../../components/DepositsPaused';

@@ -347,7 +347,6 @@ export const PrizeSplit = function ({
   nftPrizeOnly,
 }) {
   const classes = useStyles();
-  const { t } = useTranslation();
 
   const allPrizes = {
     [baseToken]: {

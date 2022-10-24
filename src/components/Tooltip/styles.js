@@ -10,6 +10,9 @@ const styles = () => ({
     gap: '8px',
   },
   prizeTooltipRow: {},
+  interestTooltip: {
+    width: '300px',
+  },
 });
 
 export default styles;
