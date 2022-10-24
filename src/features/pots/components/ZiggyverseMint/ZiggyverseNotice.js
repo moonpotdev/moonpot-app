@@ -8,6 +8,11 @@ import ziggyverseMintMobile2x from '../../../../images/ziggy/ziggyverse-mint-mob
 
 const useStyles = makeStyles(styles);
 
+const ZiggyverseNotice = memo(function ZiggyverseNotice() {
+  return null;
+});
+
+// eslint-disable-next-line no-unused-vars
 const ZiggyverseMint = memo(function ZiggyverseMint() {
   const classes = useStyles();
 
@@ -41,4 +46,4 @@ const ZiggyverseMint = memo(function ZiggyverseMint() {
   );
 });
 
-export default ZiggyverseMint;
+export default ZiggyverseNotice;

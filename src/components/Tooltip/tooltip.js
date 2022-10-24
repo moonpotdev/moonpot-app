@@ -2,7 +2,7 @@ import React, { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Translate } from '../Translate';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { Fade, Grid, Tooltip, Typography } from '@material-ui/core';
+import { Fade, Grid, Tooltip } from '@material-ui/core';
 import { HelpOutline } from '@material-ui/icons';
 import styles from './styles';
 import { formatDecimals } from '../../helpers/format';
@@ -78,9 +78,9 @@ export function InterestTooltip({ pot }) {
   const bonuses = pot.bonuses;
 
   /*-----Create Bonus Token Text-----*/
-  var bonusCount = 0;
-  var bonusTokens = '';
-  for (var i in bonuses) {
+  let bonusCount = 0;
+  let bonusTokens = '';
+  for (let i in bonuses) {
     if (bonusCount > 0) {
       bonusTokens += ', ';
     }
@@ -97,92 +97,90 @@ export function InterestTooltip({ pot }) {
 
   const content = useMemo(() => {
     const text = (
-      <>
-        <div style={{ width: '300px' }}>
-          {/*Base APY*/}
-          <Grid container style={{ width: '100%' }}>
-            <Grid item xs={6}>
-              <Typography align={'left'}>
-                <Translate i18nKey="pot.tokenAPY" values={{ token: pot.token }} />
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography align={'right'} style={{ marginRight: '32px' }}>
-                {pot.apy.toFixed(2) + '%'}
-              </Typography>
-            </Grid>
-          </Grid>
-          {/*Bonus APR*/}
-          {pot.bonuses.map(bonus => (
-            <div key={bonus.id}>
-              {bonus.apr !== 0 ? (
-                <Grid container style={{ width: '100%' }} key={bonus.id}>
-                  <Grid item xs={6}>
-                    <Typography align={'left'}>
-                      {bonus.display === 'bonus' ? (
-                        <Translate i18nKey="pot.bonusTokenAPR" values={{ token: bonus.symbol }} />
-                      ) : (
-                        <Translate
-                          i18nKey="pot.superBoostTokenAPR"
-                          values={{ token: bonus.symbol }}
-                        />
-                      )}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography align={'right'} style={{ marginRight: '32px' }}>
-                      {bonus.apr.toFixed(2) + '%'}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              ) : null}
+      <div className={classes.interestTooltip}>
+        {/*Base APY*/}
+        <Grid container style={{ width: '100%' }}>
+          <Grid item xs={6}>
+            <div style={{ textAlign: 'left' }}>
+              <Translate i18nKey="pot.tokenAPY" values={{ token: pot.token }} />
             </div>
-          ))}
-          {/*Total APY*/}
-          <Grid container style={{ width: '100%' }}>
-            <Grid item xs={6}>
-              <Typography align={'left'} style={{ fontWeight: '700' }}>
-                <Translate i18nKey="pot.totalAPY" />
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography align={'right'} style={{ marginRight: '32px', fontWeight: '700' }}>
-                {totalApy.toFixed(2) + '%'}
-              </Typography>
-            </Grid>
           </Grid>
-          {/*Divider*/}
-          <Grid item xs={12}>
-            <div
-              style={{
-                width: 'calc(100% - 32px)',
-                marginTop: '8px',
-                marginBottom: '0',
-                borderBottom: '2px solid #4B4B4B',
-              }}
+          <Grid item xs={6}>
+            <div style={{ textAlign: 'right', marginRight: '32px' }}>
+              {pot.apy.toFixed(2) + '%'}
+            </div>
+          </Grid>
+        </Grid>
+        {/*Bonus APR*/}
+        {pot.bonuses.map(bonus => (
+          <div key={bonus.id}>
+            {bonus.apr !== 0 ? (
+              <Grid container style={{ width: '100%' }} key={bonus.id}>
+                <Grid item xs={6}>
+                  <div style={{ textAlign: 'left' }}>
+                    {bonus.display === 'bonus' ? (
+                      <Translate i18nKey="pot.bonusTokenAPR" values={{ token: bonus.symbol }} />
+                    ) : (
+                      <Translate
+                        i18nKey="pot.superBoostTokenAPR"
+                        values={{ token: bonus.symbol }}
+                      />
+                    )}
+                  </div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div style={{ textAlign: 'right', marginRight: '32px' }}>
+                    {bonus.apr.toFixed(2) + '%'}
+                  </div>
+                </Grid>
+              </Grid>
+            ) : null}
+          </div>
+        ))}
+        {/*Total APY*/}
+        <Grid container style={{ width: '100%' }}>
+          <Grid item xs={6}>
+            <div style={{ textAlign: 'left', fontWeight: '700' }}>
+              <Translate i18nKey="pot.totalAPY" />
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <div style={{ textAlign: 'right', marginRight: '32px', fontWeight: '700' }}>
+              {totalApy.toFixed(2) + '%'}
+            </div>
+          </Grid>
+        </Grid>
+        {/*Divider*/}
+        <Grid item xs={12}>
+          <div
+            style={{
+              width: 'calc(100% - 32px)',
+              marginTop: '8px',
+              marginBottom: '0',
+              borderBottom: '2px solid #4B4B4B',
+            }}
+          />
+        </Grid>
+        {/*Description*/}
+        <div style={{ marginRight: '32px', marginTop: '8px' }}>
+          {bonusTokens === '' ? (
+            <Translate
+              i18nKey="pot.tooltip.standardNoBoost"
+              values={{ token: pot.token, bonus: bonusTokens }}
             />
-          </Grid>
-          {/*Description*/}
-          <Typography style={{ marginRight: '32px', marginTop: '8px' }}>
-            {bonusTokens === '' ? (
-              <Translate
-                i18nKey="pot.tooltip.standardNoBoost"
-                values={{ token: pot.token, bonus: bonusTokens }}
-              />
-            ) : (
-              <Translate
-                i18nKey="pot.tooltip.standard"
-                values={{ token: pot.token, bonus: bonusTokens }}
-              />
-            )}
-          </Typography>
+          ) : (
+            <Translate
+              i18nKey="pot.tooltip.standard"
+              values={{ token: pot.token, bonus: bonusTokens }}
+            />
+          )}
         </div>
-      </>
+      </div>
     );
 
     return text;
     //eslint-disable-next-line
-  }, [pot.bonuses, pot.id]);
+  }, [pot.bonuses, pot.id, classes]);
 
   return (
     <>

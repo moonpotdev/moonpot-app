@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { filterSetConfig } from '../filter/slice';
 import { RouteLoading } from '../../components/RouteLoading';
 import { networkIds } from '../../config/networks';
-import ZiggyverseMint from './components/ZiggyverseMint/ZiggyverseMint';
+import ZiggyverseNotice from './components/ZiggyverseMint/ZiggyverseNotice';
 
 const Moonpots = React.lazy(() => import('./Moonpots/Moonpots'));
 const MyPots = React.lazy(() => import('./MyPots/MyPots'));
@@ -57,7 +57,7 @@ export const Pots = () => {
 
   return (
     <div className={classes.homeContainer}>
-      <ZiggyverseMint />
+      <ZiggyverseNotice />
       <MoonpotsHero />
       <div className={classes.backgroundWrapper}>
         <FilterBar selected={tab} />
