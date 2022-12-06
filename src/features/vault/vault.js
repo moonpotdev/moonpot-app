@@ -115,18 +115,22 @@ const Vault = () => {
     <div className="App">
       <VaultDataLoader id={id} />
       <Container maxWidth="lg">
-        <VaultTitle
-          className={classes.mainTitle}
-          token={pot.token}
-          nftPrizeOnly={pot.nftPrizeOnly}
-          isPrizeOnly={pot.isPrizeOnly}
-          nfts={pot.nfts}
-          bonusApy={pot.bonusApy}
-          baseApy={pot.apy}
-          totalSponsorBalanceUsd={pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd}
-          awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
-        />
-        <PoweredByBeefy className={classes.poweredBy} />
+        {pot.rewardToken ? (
+          <VaultTitle
+            className={classes.mainTitle}
+            token={pot.token}
+            nftPrizeOnly={pot.nftPrizeOnly}
+            isPrizeOnly={pot.isPrizeOnly}
+            nfts={pot.nfts}
+            bonusApy={pot.bonusApy}
+            baseApy={pot.apy}
+            totalSponsorBalanceUsd={
+              pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
+            }
+            awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
+          />
+        ) : null}
+        {pot.apyId ? <PoweredByBeefy className={classes.poweredBy} /> : null}
         {pot.categories.includes('side') ? <SidePotExplainer /> : null}
         <Pot
           id={id}

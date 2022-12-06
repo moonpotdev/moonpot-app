@@ -146,7 +146,6 @@ const Footer = memo(function Footer() {
           </li>
         ))}
       </ul>
-      <FooterStats />
       <ul className={clsx(classes.nav, classes.socials)}>
         {socialLinks.map(({ title, path, Icon }) => (
           <li key={path} className={classes.navItem}>

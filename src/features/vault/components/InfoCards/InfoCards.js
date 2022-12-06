@@ -51,17 +51,19 @@ const StrategyInfoCard = memo(function ({ pot, classes, t }) {
           </a>
         </p>
       ) : null}
-      <p>
-        <a
-          href={getNetworkExplorerUrl(pot.network, `/address/${pot.prizeStrategyAddress}`)}
-          rel="noreferrer"
-          target="_blank"
-          className={classes.link}
-        >
-          {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
-          <OpenInNew fontSize="inherit" />
-        </a>
-      </p>
+      {pot.prizeStrategyAddress ? (
+        <p>
+          <a
+            href={getNetworkExplorerUrl(pot.network, `/address/${pot.prizeStrategyAddress}`)}
+            rel="noreferrer"
+            target="_blank"
+            className={classes.link}
+          >
+            {t('pot.infocards.strategy.moonpotStrategyAddress', { name: pot.name })}{' '}
+            <OpenInNew fontSize="inherit" />
+          </a>
+        </p>
+      ) : null}
     </Card>
   );
 });

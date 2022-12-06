@@ -281,7 +281,7 @@ export const ZapPotWithdraw = function ({ id, onLearnMore, variant = 'green' }) 
           pending: false,
         });
       } else {
-        if (potTicketAllowance.lt(ticketBalance)) {
+        if (pot.rewardAddress && potTicketAllowance.lt(ticketBalance)) {
           steps.push({
             step: 'approve',
             message: 'Approval transactions happen once per pot',

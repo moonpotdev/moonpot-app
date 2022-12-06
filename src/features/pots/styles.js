@@ -1,5 +1,6 @@
 const styles = theme => ({
   homeContainer: {
+    marginTop: '-32px',
     marginBottom: '-40px', // remove footer margin since bg is different
   },
   backgroundWrapper: {

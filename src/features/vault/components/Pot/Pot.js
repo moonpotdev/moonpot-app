@@ -32,7 +32,13 @@ const BonusAccordionItem = memo(function ({ pot }) {
 
   return hasEarned ? (
     <CardAccordionItem
-      titleKey={pot.id === 'pots' ? 'pot.earnings' : 'pot.bonusEarnings'}
+      titleKey={
+        pot.id === 'final'
+          ? 'Your Distribution'
+          : pot.id === 'pots'
+          ? 'pot.earnings'
+          : 'pot.bonusEarnings'
+      }
       startOpen={true}
     >
       <PotBonus pot={pot} buttonVariant={handleButtonVariant(pot.vaultType)} />
@@ -62,17 +68,19 @@ const Bottom = function ({ id, onFairplayLearnMore, variant }) {
 
   return (
     <CardAccordionGroup>
-      <div className={classes.rowPrizeSplit}>
-        <PrizeSplit
-          baseToken={pot.token}
-          awardBalance={pot.projectedAwardBalance || pot.awardBalance}
-          awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
-          sponsors={pot.projectedSponsors || pot.sponsors}
-          numberOfWinners={pot.numberOfWinners}
-          nfts={pot.nfts}
-          nftPrizeOnly={pot.nftPrizeOnly}
-        />
-      </div>
+      {pot.rewardToken ? (
+        <div className={classes.rowPrizeSplit}>
+          <PrizeSplit
+            baseToken={pot.token}
+            awardBalance={pot.projectedAwardBalance || pot.awardBalance}
+            awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
+            sponsors={pot.projectedSponsors || pot.sponsors}
+            numberOfWinners={pot.numberOfWinners}
+            nfts={pot.nfts}
+            nftPrizeOnly={pot.nftPrizeOnly}
+          />
+        </div>
+      ) : null}
       <CardAccordionItem titleKey="pot.deposit" collapsable={false} startOpen={true}>
         <WalletRequired network={pot.network}>
           {pot.status === 'active' ? (

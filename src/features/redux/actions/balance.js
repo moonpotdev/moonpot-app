@@ -24,10 +24,16 @@ const getBalances = async (pools, state, dispatch) => {
   for (const id in pools) {
     const pot = pools[id];
     const network = pot.network;
-    const ticketContract = new web3[network].eth.Contract(erc20Abi, pot.rewardAddress);
-    const tokenContract = new web3[network].eth.Contract(erc20Abi, pot.tokenAddress);
+    const ticketContract = pot.rewardAddress
+      ? new web3[network].eth.Contract(erc20Abi, pot.rewardAddress)
+      : null;
+    const tokenContract = pot.tokenAddress
+      ? new web3[network].eth.Contract(erc20Abi, pot.tokenAddress)
+      : null;
     const gateContract = new web3[network].eth.Contract(gateManagerAbi, pot.contractAddress);
-    const prizePoolContract = new web3[network].eth.Contract(prizePoolAbi, pot.prizePoolAddress);
+    const prizePoolContract = pot.prizePoolAddress
+      ? new web3[network].eth.Contract(prizePoolAbi, pot.prizePoolAddress)
+      : null;
 
     // wallet balance of pot deposit token
     calls[network].push({
@@ -58,20 +64,24 @@ const getBalances = async (pools, state, dispatch) => {
     });
 
     // user balance of tickets + allowance of pot to spend tickets
-    calls[network].push({
-      amount: ticketContract.methods.balanceOf(address),
-      address: pot.rewardAddress,
-      allowance: ticketContract.methods.allowance(address, pot.contractAddress),
-      token: pot.rewardToken,
-      spender: pot.contractAddress,
-    });
+    if (ticketContract) {
+      calls[network].push({
+        amount: ticketContract.methods.balanceOf(address),
+        address: pot.rewardAddress,
+        allowance: ticketContract.methods.allowance(address, pot.contractAddress),
+        token: pot.rewardToken,
+        spender: pot.contractAddress,
+      });
+    }
 
     // fairplay time left
-    calls[network].push({
-      timeleft: prizePoolContract.methods.userFairPlayLockRemaining(address, pot.rewardAddress),
-      token: pot.contractAddress + ':fee',
-      address: pot.contractAddress,
-    });
+    if (prizePoolContract) {
+      calls[network].push({
+        timeleft: prizePoolContract.methods.userFairPlayLockRemaining(address, pot.rewardAddress),
+        token: pot.contractAddress + ':fee',
+        address: pot.contractAddress,
+      });
+    }
 
     // Ticket represents mooToken
     if ('mooTokenAddress' in pot && pot.mooTokenAddress) {
@@ -93,11 +103,13 @@ const getBalances = async (pools, state, dispatch) => {
         const nativeWrappedTokenSymbol = networkById[network].nativeCurrency.wrappedSymbol;
 
         // Allowance of zap to spend tickets
-        calls[network].push({
-          allowance: ticketContract.methods.allowance(address, pairToken.zap),
-          token: pot.rewardToken,
-          spender: pairToken.zap,
-        });
+        if (ticketContract) {
+          calls[network].push({
+            allowance: ticketContract.methods.allowance(address, pairToken.zap),
+            token: pot.rewardToken,
+            spender: pairToken.zap,
+          });
+        }
 
         // Allowance of zap to spend lp
         const lpContract = new web3[network].eth.Contract(erc20Abi, pot.tokenAddress);

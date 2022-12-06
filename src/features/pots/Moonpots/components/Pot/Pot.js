@@ -70,6 +70,14 @@ const Bottom = function ({ id }) {
   const classes = useStyles();
   const pot = usePot(id);
 
+  if (!pot.rewardAddress) {
+    return (
+      <PrimaryButton to={`/pot/${id}`} variant="teal" fullWidth={true}>
+        Deposit
+      </PrimaryButton>
+    );
+  }
+
   return (
     <>
       <div className={classes.rowPrizeSplit}>
