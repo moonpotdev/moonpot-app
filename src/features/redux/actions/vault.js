@@ -304,47 +304,56 @@ const getPools = async (items, state, dispatch) => {
     calls[pool.network].push(gateCall);
 
     // === Strategy
-    const strategyContract = new web3[pool.network].eth.Contract(
-      prizeStrategyAbi,
-      pool.prizeStrategyAddress
-    );
-    strategy[pool.network].push({
-      id: pool.id,
-      expiresAt: strategyContract.methods.prizePeriodEndAt(),
-      numberOfWinners: strategyContract.methods.numberOfWinners(),
-    });
-
-    // === Ticket
-    const ticketContract = new web3[pool.network].eth.Contract(ecr20Abi, pool.rewardAddress);
-    ticket[pool.network].push({
-      id: pool.id,
-      totalTickets: ticketContract.methods.totalSupply(),
-    });
-
-    // === Sponsor Tokens
-    for (const sponsor of pool.sponsors) {
-      const sponsorContract = new web3[pool.network].eth.Contract(ecr20Abi, sponsor.sponsorAddress);
-      sponsors[pool.network].push({
+    if (pool.prizeStrategyAddress) {
+      const strategyContract = new web3[pool.network].eth.Contract(
+        prizeStrategyAbi,
+        pool.prizeStrategyAddress
+      );
+      strategy[pool.network].push({
         id: pool.id,
-        sponsorToken: sponsor.sponsorToken,
-        sponsorBalance: sponsorContract.methods.balanceOf(pool.prizePoolAddress),
+        expiresAt: strategyContract.methods.prizePeriodEndAt(),
+        numberOfWinners: strategyContract.methods.numberOfWinners(),
       });
     }
 
-    // === PrizePool
-    const prizePoolContract = new web3[pool.network].eth.Contract(
-      prizePoolAbi,
-      pool.prizePoolAddress
-    );
+    // === Ticket
+    if (pool.rewardAddress) {
+      const ticketContract = new web3[pool.network].eth.Contract(ecr20Abi, pool.rewardAddress);
+      ticket[pool.network].push({
+        id: pool.id,
+        totalTickets: ticketContract.methods.totalSupply(),
+      });
+    }
 
-    prizePool[pool.network].push({
-      id: pool.id,
-      prizePoolBalance: prizePoolContract.methods.balance(),
-    });
+    // === Sponsor Tokens
+    if (pool.prizePoolAddress) {
+      for (const sponsor of pool.sponsors) {
+        const sponsorContract = new web3[pool.network].eth.Contract(
+          ecr20Abi,
+          sponsor.sponsorAddress
+        );
+        sponsors[pool.network].push({
+          id: pool.id,
+          sponsorToken: sponsor.sponsorToken,
+          sponsorBalance: sponsorContract.methods.balanceOf(pool.prizePoolAddress),
+        });
+      }
+
+      // === PrizePool
+      const prizePoolContract = new web3[pool.network].eth.Contract(
+        prizePoolAbi,
+        pool.prizePoolAddress
+      );
+
+      prizePool[pool.network].push({
+        id: pool.id,
+        prizePoolBalance: prizePoolContract.methods.balance(),
+      });
+    }
   }
 
   const promises = [];
-  const groups = [calls, strategy, sponsors, ticket, prizePool, mooToken];
+  const groups = [calls, strategy, sponsors, ticket, prizePool, mooToken].filter(c => !!c);
   for (const network in multicall) {
     for (const group of groups) {
       if (group[network] && group[network].length) {

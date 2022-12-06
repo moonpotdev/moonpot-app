@@ -30,6 +30,7 @@ const bonusStatLabels = {
   bonus: 'withdraw.myBonusToken',
   superBoost: 'withdraw.mySuperBoostToken',
   earned: 'withdraw.myEarnedToken',
+  distribution: 'withdraw.myDistribution',
 };
 
 const Stat = function ({ label, children }) {
@@ -266,7 +267,7 @@ export const PotWithdraw = function ({ id, onLearnMore, variant = 'teal' }) {
   const handleWithdraw = () => {
     const steps = [];
     if (address && totalBalance.gt(0)) {
-      if (ticketAllowance.lt(ticketBalance) || ticketAllowance.lte(0)) {
+      if (pot.rewardToken && (ticketAllowance.lt(ticketBalance) || ticketAllowance.lte(0))) {
         steps.push({
           step: 'approve',
           message: 'Approval transactions happen once per pot.',

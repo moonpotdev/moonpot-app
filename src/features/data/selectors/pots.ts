@@ -29,7 +29,7 @@ export const selectPotIdByNetworkPrizePool = createSelector(
   (state: AppState, networkId: NetworkEntity['id']) => selectPotsByNetworkId(state, networkId),
   (_: AppState, _2: NetworkEntity['id'], prizePool: string) => prizePool.toLowerCase(),
   (pots, prizePool): string => {
-    const pot = pots.find((pool: PotEntity) => pool.prizePoolAddress.toLowerCase() === prizePool);
+    const pot = pots.find((pool: PotEntity) => pool.prizePoolAddress?.toLowerCase() === prizePool);
     if (pot === undefined) {
       throw new Error(`No pot found with prize pool ${prizePool}`);
     }
@@ -41,6 +41,8 @@ export const selectPotIdByNetworkPrizePool = createSelector(
 export const selectPotPrizePoolsByNetworkId = createSelector(
   (state: AppState, networkId: NetworkEntity['id']) => selectPotsByNetworkId(state, networkId),
   (pools: PotEntity[]): string[] => {
-    return pools.map(pool => pool.prizePoolAddress as string);
+    return pools
+      .filter(pool => !!pool.prizePoolAddress)
+      .map(pool => pool.prizePoolAddress as string);
   }
 );

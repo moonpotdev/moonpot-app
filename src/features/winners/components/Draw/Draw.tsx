@@ -496,7 +496,7 @@ export const Draw = memo(function Draw({ id }: DrawProps) {
 
   return (
     <Card variant="purpleMid">
-      <DrawNetwork network={pot.network} />
+      <DrawNetwork network={pot.network} /> {draw.drawNumber}
       <Grid container spacing={2} className={classes.rowLogoWonTotal}>
         <Grid item xs="auto">
           {/* @ts-ignore */}

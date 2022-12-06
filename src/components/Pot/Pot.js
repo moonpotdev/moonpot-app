@@ -252,6 +252,23 @@ const DepositWithOdds = memo(function ({
   );
 });
 
+const DepositWithoutOdds = memo(function ({
+  depositToken,
+  contractAddress,
+  tokenDecimals,
+  network,
+}) {
+  const deposit = useDeposit(contractAddress, tokenDecimals, network);
+
+  return (
+    <div>
+      <div>
+        {deposit} {depositToken}
+      </div>
+    </div>
+  );
+});
+
 export const PotNetwork = memo(function PotNetwork({ network }) {
   const classes = useStyles();
 
@@ -281,57 +298,74 @@ export function Pot({ id, variant, bottom, simple, oneColumn }) {
         </Grid>
         <Grid item xs="auto" className={classes.columnTitleWinTotal}>
           <Title name={pot.name} onClick={() => history.push(`/pot/${pot.id}`)} />
-          <WinFeature
-            awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
-            totalSponsorBalanceUsd={
-              pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
-            }
-            sponsors={pot.sponsors}
-            nfts={pot.nfts}
-            depositToken={pot.token}
-            nftPrizeOnly={pot.nftPrizeOnly}
-          />
+          {pot.rewardToken ? (
+            <WinFeature
+              awardBalanceUsd={pot.projectedAwardBalanceUsd || pot.awardBalanceUsd}
+              totalSponsorBalanceUsd={
+                pot.projectedTotalSponsorBalanceUsd || pot.totalSponsorBalanceUsd
+              }
+              sponsors={pot.sponsors}
+              nfts={pot.nfts}
+              depositToken={pot.token}
+              nftPrizeOnly={pot.nftPrizeOnly}
+            />
+          ) : null}
         </Grid>
       </Grid>
-      <Grid container spacing={2} className={classes.rowDrawStats}>
-        <Grid item xs={simple ? 6 : 7}>
-          <DrawStatNextDraw duration={pot.duration}>
-            <Countdown until={pot.expiresAt * 1000}>
-              <Translate i18nKey="pot.statNextDrawCountdownFinished" />
-            </Countdown>
-          </DrawStatNextDraw>
+      {pot.rewardToken ? (
+        <Grid container spacing={2} className={classes.rowDrawStats}>
+          <Grid item xs={simple ? 6 : 7}>
+            <DrawStatNextDraw duration={pot.duration}>
+              <Countdown until={pot.expiresAt * 1000}>
+                <Translate i18nKey="pot.statNextDrawCountdownFinished" />
+              </Countdown>
+            </DrawStatNextDraw>
+          </Grid>
+          {!simple ? (
+            <>
+              <Grid item xs={5}>
+                <DrawStat i18nKey="pot.statTVL">
+                  <TVL totalStakedUsd={pot.totalStakedUsd} />
+                </DrawStat>
+              </Grid>
+              <Grid item xs={6}>
+                <DrawStat i18nKey="pot.statDeposit">
+                  <DepositWithOdds
+                    contractAddress={pot.contractAddress}
+                    depositToken={pot.token}
+                    tokenDecimals={pot.tokenDecimals}
+                    ticketToken={pot.rewardToken}
+                    ticketTotalSupply={pot.totalTickets}
+                    winners={pot.numberOfWinners}
+                    network={pot.network}
+                  />
+                </DrawStat>
+              </Grid>
+            </>
+          ) : null}
+          <Grid item xs={6}>
+            <DrawStat
+              i18nKey="pot.statInterest"
+              tooltip={pot.isPrizeOnly ? null : <InterestTooltip pot={pot} />}
+            >
+              <Interest baseApy={pot.apy} bonusApy={pot.bonusApy} prizeOnly={pot.isPrizeOnly} />
+            </DrawStat>
+          </Grid>
         </Grid>
-        {!simple ? (
-          <>
-            <Grid item xs={5}>
-              <DrawStat i18nKey="pot.statTVL">
-                <TVL totalStakedUsd={pot.totalStakedUsd} />
-              </DrawStat>
-            </Grid>
-            <Grid item xs={6}>
-              <DrawStat i18nKey="pot.statDeposit">
-                <DepositWithOdds
-                  contractAddress={pot.contractAddress}
-                  depositToken={pot.token}
-                  tokenDecimals={pot.tokenDecimals}
-                  ticketToken={pot.rewardToken}
-                  ticketTotalSupply={pot.totalTickets}
-                  winners={pot.numberOfWinners}
-                  network={pot.network}
-                />
-              </DrawStat>
-            </Grid>
-          </>
-        ) : null}
-        <Grid item xs={6}>
-          <DrawStat
-            i18nKey="pot.statInterest"
-            tooltip={pot.isPrizeOnly ? null : <InterestTooltip pot={pot} />}
-          >
-            <Interest baseApy={pot.apy} bonusApy={pot.bonusApy} prizeOnly={pot.isPrizeOnly} />
-          </DrawStat>
+      ) : (
+        <Grid container spacing={2} className={classes.rowDrawStats}>
+          <Grid item xs={12}>
+            <DrawStat i18nKey="pot.statDeposit">
+              <DepositWithoutOdds
+                contractAddress={pot.contractAddress}
+                depositToken={pot.token}
+                tokenDecimals={pot.tokenDecimals}
+                network={pot.network}
+              />
+            </DrawStat>
+          </Grid>
         </Grid>
-      </Grid>
+      )}
       {bottom ? bottom : null}
     </Card>
   );

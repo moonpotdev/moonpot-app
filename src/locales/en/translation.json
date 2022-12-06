@@ -234,6 +234,9 @@
           "binopoly": [
             "The very first Play-to-Earn capital operation game built on BSC. Anyone can purchase and hold virtual land and cities to build a world of their own. Players may earn BINO tokens from purchasing or renting land plots and properties within various in-game scenarios.",
             "This strategy deposits your {{token}} tokens in a Moonpot {{token}} vault, which autocompounds your {{token}} tokens from a fixed supply of {{token}} provided by the Binopoly team."
+          ],
+          "final": [
+            "As voted for by the community, the remaining Moonpot Treasury will be distributed in BNB over 2 weeks, pro-rata to all POTS stakers in this pot."
           ]
         },
         "beefyVaultAddress": "Beefy.Finance Vault Address",
@@ -496,6 +499,7 @@
     "myEarnedToken": "My Earned {{token}}",
     "myBonusToken": "My Bonus {{token}}",
     "mySuperBoostToken": "My Super Boost {{token}}",
+    "myDistribution": "My Distribution {{token}}",
     "fairplayNotice": "Fairplay Timelock rules apply.",
     "withdrawFeeNotice": "Withdraw fee of {{percent}}% applies.",
     "zapExplainer": "Withdraw {{token}} or ZAP⚡ out to {{tokens}}"
@@ -508,7 +512,8 @@
     "potsExplainer": "You will continue to earn {{tokens}} until the end of the draw. You can claim as many times as you like.",
     "compoundExplainer": "Compounding more {{token}} will increase your Fairness Fee and Fairplay Timelock proportionally to the amount deposited. This fee reduces every second after you deposit. You won't pay any additional Fairness Fees on your older deposits.",
     "compoundBonusToken": "Compound Bonus {{token}}",
-    "withdrawBonusTokens": "Withdraw Bonus {{tokens}}"
+    "withdrawBonusTokens": "Withdraw Bonus {{tokens}}",
+    "withdrawTokens": "Withdraw {{tokens}}"
   },
   "wallet": {
     "connect": "Connect Wallet",

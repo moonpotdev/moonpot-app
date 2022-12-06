@@ -41,10 +41,7 @@ const PotBonus = function ({ pot, buttonVariant = 'purple' }) {
     () => bonuses.find(bonus => bonus.earned > 0) !== undefined,
     [bonuses]
   );
-  const compoundableBonus = useMemo(
-    () => bonuses.find(bonus => bonus.id === 0 && bonus.earned > 0),
-    [bonuses]
-  );
+  const compoundableBonus = undefined;
   const canCompound = compoundableBonus !== undefined;
   const earnedTokens = useMemo(
     () =>
@@ -171,13 +168,15 @@ const PotBonus = function ({ pot, buttonVariant = 'purple' }) {
               </Grid>
             ))
         : null}
-      <Grid item xs={12} className={classes.bonusExplainerRow}>
-        <Typography className={classes.explainerText}>
-          {pot.id === 'pots'
-            ? t('bonus.potsExplainer', { tokens: activeTokens })
-            : t('bonus.bonusExplainer', { tokens: activeTokens })}
-        </Typography>
-      </Grid>
+      {pot.rewardToken ? (
+        <Grid item xs={12} className={classes.bonusExplainerRow}>
+          <Typography className={classes.explainerText}>
+            {pot.id === 'pots'
+              ? t('bonus.potsExplainer', { tokens: activeTokens })
+              : t('bonus.bonusExplainer', { tokens: activeTokens })}
+          </Typography>
+        </Grid>
+      ) : null}
       <WalletRequired network={pot.network} networkRequired={true}>
         {canCompound ? (
           <Grid item xs={12} className={classes.bonusCompoundRow}>
@@ -201,7 +200,9 @@ const PotBonus = function ({ pot, buttonVariant = 'purple' }) {
             fullWidth={true}
             disabled={!canWithdrawBonus}
           >
-            {t('bonus.withdrawBonusTokens', { tokens: earnedTokens })}
+            {t(pot.rewardToken ? 'bonus.withdrawBonusTokens' : 'bonus.withdrawTokens', {
+              tokens: earnedTokens,
+            })}
           </SecondaryButton>
         </Grid>
       </WalletRequired>

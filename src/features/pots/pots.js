@@ -3,12 +3,10 @@ import { makeStyles } from '@material-ui/core';
 import styles from './styles';
 import { useHistory, useParams } from 'react-router';
 import FilterBar from './components/FilterBar';
-import MoonpotsHero from './components/MoonpotsHero/MoonpotsHero';
 import { useDispatch } from 'react-redux';
 import { filterSetConfig } from '../filter/slice';
 import { RouteLoading } from '../../components/RouteLoading';
 import { networkIds } from '../../config/networks';
-import ZiggyverseNotice from './components/ZiggyverseMint/ZiggyverseNotice';
 
 const Moonpots = React.lazy(() => import('./Moonpots/Moonpots'));
 const MyPots = React.lazy(() => import('./MyPots/MyPots'));
@@ -57,8 +55,6 @@ export const Pots = () => {
 
   return (
     <div className={classes.homeContainer}>
-      <ZiggyverseNotice />
-      <MoonpotsHero />
       <div className={classes.backgroundWrapper}>
         <FilterBar selected={tab} />
         <Suspense fallback={<RouteLoading />}>

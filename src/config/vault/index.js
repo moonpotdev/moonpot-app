@@ -1,4 +1,3 @@
-import { groupBy } from '../../helpers/utils';
 import { networkIds } from '../networks';
 
 export const potsByNetwork = Object.fromEntries(
@@ -9,13 +8,6 @@ export const potsByNetwork = Object.fromEntries(
 );
 
 export const potsAll = Object.values(potsByNetwork).flat();
-
-export const potsByNetworkPrizePoolAddress = Object.fromEntries(
-  Object.entries(potsByNetwork).map(([network, pots]) => [
-    network,
-    groupBy(pots, 'prizePoolAddress', k => k.toLowerCase()),
-  ])
-);
 
 export const potsByNetworkSupportingClaimAllBonuses = Object.fromEntries(
   Object.entries(potsByNetwork).map(([network, pots]) => [

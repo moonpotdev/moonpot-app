@@ -22,8 +22,8 @@ const initialPools = () => {
       pool['expiresAt'] = 0;
       pool['fairplayFee'] =
         pool.fairplayTicketFee /
-        (tokensByNetworkAddress[pool.network][pool.rewardAddress.toLowerCase()].stakedMultiplier ||
-          1);
+        (tokensByNetworkAddress[pool.network]?.[pool.rewardAddress?.toLowerCase()]
+          ?.stakedMultiplier || 1);
       pool['prizePoolBalance'] = '0';
       pool['awardBalance'] = ZERO;
       pool['awardBalanceUsd'] = ZERO;
